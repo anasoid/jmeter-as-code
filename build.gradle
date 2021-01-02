@@ -1,0 +1,178 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'org.owasp:dependency-check-gradle:6.0.2'
+    }
+}
+
+// 3rd party plugin repositories can be configured in settings.gradle
+plugins {
+    id "io.spring.dependency-management" version "1.0.6.RELEASE"
+    id "org.sonarqube" version "3.0"
+    id 'jacoco'
+
+}
+
+// Apply the java plugin to add support for Java
+apply plugin: 'org.owasp.dependencycheck'
+
+
+allprojects {
+    apply plugin: 'java'
+    apply plugin: "jacoco"
+
+
+    group = 'org.anasoid.jmeter-as-code'
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+
+
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+
+    jacoco {
+        toolVersion = '0.8.5'
+    }
+
+
+    ext.gradleScriptDir = "${rootProject.projectDir}/gradle"
+    apply from: "${gradleScriptDir}/ide.gradle"
+
+
+}
+
+
+subprojects {
+
+    apply plugin: 'checkstyle'
+    apply plugin: 'pmd'
+    apply plugin: 'maven-publish'
+    apply plugin: "jacoco"
+
+
+    publishing {
+        publications {
+            mavenJava(MavenPublication) {
+                from components.java
+
+            }
+        }
+    }
+    System.setProperty( "org.checkstyle.google.suppressionfilter.config", rootProject.projectDir.toString()+"/config/checkstyle/checkstyle-suppressions.xml" )
+    checkstyle {
+
+        configFile = rootProject.file('config/checkstyle/google_checks.xml')
+        toolVersion "8.35"
+        ignoreFailures = false
+        maxErrors = 0
+        maxWarnings = 0
+
+    }
+    pmd {
+        consoleOutput = true
+        sourceSets = [sourceSets.main]
+        ruleSetFiles = files("${rootProject.projectDir}/config/pmd/pmd.xml")
+        ruleSets = []
+    }
+
+    jacocoTestReport {
+
+        reports {
+            html.enabled = true
+            xml.enabled = true
+            csv.enabled = false
+        }
+        onlyIf = {
+            true
+        }
+
+    }
+    test {
+        useJUnitPlatform()
+        testLogging {
+            events "passed", "skipped", "failed"
+        }
+        // listen to events in the test execution lifecycle
+        beforeTest { descriptor ->
+            logger.lifecycle("Running test: " + descriptor)
+        }
+    }
+
+
+    dependencies {
+
+        // SLF4J as a facade over Log4j2 required dependencies
+        implementation("org.apache.logging.log4j:log4j-api:$log4j2Version")
+        implementation("org.apache.logging.log4j:log4j-core:$log4j2Version")
+        implementation("org.apache.logging.log4j:log4j-slf4j-impl:$log4j2Version")
+        // Bridges from other logging implementations to SLF4J. Be careful not to bridge SLF4J itself to
+        implementation("org.slf4j:jul-to-slf4j:$slf4jVersion")
+        implementation("org.slf4j:jcl-over-slf4j:$slf4jVersion")
+        implementation("org.slf4j:log4j-over-slf4j:$slf4jVersion")
+
+        //Apache common
+        implementation("org.apache.commons:commons-lang3:$commonsLangVersion")
+
+        testImplementation("org.junit.jupiter:junit-jupiter-api:$junitVersion")
+        testImplementation("org.junit.jupiter:junit-jupiter-params:$junitVersion")
+        testImplementation("commons-io:commons-io:$commonsIoVersion")
+        testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junitVersion")
+    }
+
+
+}
+
+
+task codeCoverageReport(type: JacocoReport) {
+
+    // Gather execution data from all subprojects
+    executionData fileTree(project.rootDir.absolutePath).include("**/build/jacoco/*.exec")
+
+    // Add all relevant sourcesets from the subprojects
+    subprojects.each {
+        sourceSets it.sourceSets.main
+    }
+    afterEvaluate { // (optional) : to exclude classes / packages from coverage
+        classDirectories.from = files(classDirectories.files.collect {
+            fileTree(
+                    dir: it,
+                    exclude: ['org/anasoid/impexia/csv/opencsv/**'])
+        })
+    }
+    reports {
+        xml.enabled true
+        html.enabled true
+        csv.enabled false
+    }
+}
+test {
+    finalizedBy codeCoverageReport // report is always generated after tests run
+}
+// always run the tests before generating the report
+codeCoverageReport.dependsOn {
+    subprojects*.test
+}
+
+sonarqube {
+    properties {
+        property "sonar.coverage.jacoco.xmlReportPaths", "${rootDir}/build/reports/jacoco/codeCoverageReport/codeCoverageReport.xml"
+    }
+}
+ext {
+    linkHomepage = 'https://github.com/anasoid/jmeter-as-code'
+    linkIssue = 'https://github.com/anasoid/jmeter-as-code/issues'
+    linkScmUrl = 'https://github.com/anasoid/jmeter-as-code'
+
+
+}
+
+
+
+
+
+
+
