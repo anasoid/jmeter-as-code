@@ -9,7 +9,7 @@
 
 rootProject.name = 'jmeter-as-code'
 include 'jmeter-as-code-core'
-
+include 'jmeter-as-code-plugin'
 
 rootProject.children.each {project ->
 	project.buildFileName = "${project.name}.gradle"

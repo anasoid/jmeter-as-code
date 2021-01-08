@@ -62,7 +62,7 @@ subprojects {
             }
         }
     }
-    System.setProperty( "org.checkstyle.google.suppressionfilter.config", rootProject.projectDir.toString()+"/config/checkstyle/checkstyle-suppressions.xml" )
+    System.setProperty("org.checkstyle.google.suppressionfilter.config", rootProject.projectDir.toString() + "/config/checkstyle/checkstyle-suppressions.xml")
     checkstyle {
 
         configFile = rootProject.file('config/checkstyle/google_checks.xml')
@@ -114,7 +114,26 @@ subprojects {
         implementation("org.slf4j:jcl-over-slf4j:$slf4jVersion")
         implementation("org.slf4j:log4j-over-slf4j:$slf4jVersion")
 
+
+        //JMETER
+        implementation("org.apache.jmeter:ApacheJMeter_java:$jmeterVersion") {
+            exclude group: 'org.apache.jmeter', module: 'bom'
+        }
+        implementation("org.apache.jmeter:ApacheJMeter_http:$jmeterVersion") {
+            exclude group: 'org.apache.jmeter', module: 'bom'
+        }
+
+        //LOMBOCK
+        compileOnly 'org.projectlombok:lombok:1.18.16'
+        annotationProcessor 'org.projectlombok:lombok:1.18.16'
+
+        testCompileOnly 'org.projectlombok:lombok:1.18.16'
+        testAnnotationProcessor 'org.projectlombok:lombok:1.18.16'
+
+
         //Apache common
+        implementation 'com.github.tomakehurst:wiremock:2.27.2'
+
         implementation("org.apache.commons:commons-lang3:$commonsLangVersion")
 
         testImplementation("org.junit.jupiter:junit-jupiter-api:$junitVersion")

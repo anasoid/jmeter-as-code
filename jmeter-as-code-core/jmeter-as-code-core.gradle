@@ -8,4 +8,10 @@ plugins {
 
 dependencies {
 
+    implementation(project(":jmeter-as-code-plugin"))
+
+    implementation("commons-beanutils:commons-beanutils:$commonsBeanutilsVersion")
+
+
+
 }
