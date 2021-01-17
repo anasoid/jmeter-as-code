@@ -3,7 +3,6 @@ package org.anasoid.jmeter.as.code.core.wrapper.jmeter.threads;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
-import org.anasoid.jmeter.as.code.core.wrapper.converter.annotation.AutoConvert;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.control.GenericControllerWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.gui.JMeterGUIWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.samplers.AbstractSamplerWrapper;
@@ -26,7 +25,6 @@ public abstract class AbstractThreadGroupWrapper<
   private @Getter Integer numThreads = 1;
 
   @JmcProperty(AbstractThreadGroup.MAIN_CONTROLLER)
-  @AutoConvert(false)
   protected @Getter GenericControllerWrapper samplerController;
 
   public abstract static class AbstractThreadGroupWrapperBuilder<

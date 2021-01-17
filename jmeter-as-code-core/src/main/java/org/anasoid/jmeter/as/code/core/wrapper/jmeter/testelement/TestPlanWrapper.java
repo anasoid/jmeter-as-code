@@ -26,7 +26,6 @@ import java.util.List;
 import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
-import org.anasoid.jmeter.as.code.core.wrapper.converter.annotation.AutoConvert;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.config.ArgumentWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.config.ArgumentsWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.gui.JMeterGUIWrapper;
@@ -52,40 +51,20 @@ public class TestPlanWrapper extends AbstractTestElementWrapper<TestPlan>
   @Getter
   private boolean tearDownOnShutdown;
 
-  @Getter
-  @AutoConvert(false)
-  @Default
-  @XStreamOmitField
-  private List<ArgumentWrapper> arguments = new ArrayList<>();
+  @Getter @Default @XStreamOmitField private List<ArgumentWrapper> arguments = new ArrayList<>();
 
   @JmcProperty("TestPlan.user_defined_variables")
-
   protected ArgumentsWrapper getArgument() {
     return ArgumentsWrapper.builder().addArguments(arguments).build();
   }
 
-  @Getter
-  @AutoConvert(false)
-  @XStreamOmitField
-  //@JmcProperty("TestPlan.user_defined_variables")
+  @Getter @XStreamOmitField
+  // @JmcProperty("TestPlan.user_defined_variables")
   private ArgumentsWrapper argumentsWrapper;
 
   @Override
   public void init() {
-   argumentsWrapper = ArgumentsWrapper.builder().addArguments(arguments).build();
-  }
-
-  @Override
-  protected TestPlan internalConvert() {
-    TestPlan testPlan = super.internalConvert();
     argumentsWrapper = ArgumentsWrapper.builder().addArguments(arguments).build();
-    testPlan.setUserDefinedVariables(argumentsWrapper.convert());
-    return testPlan;
-  }
-
-  @Override
-  public TestPlan newTarget() {
-    return new TestPlan();
   }
 
   @Override

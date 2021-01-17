@@ -12,23 +12,17 @@ import java.util.List;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
-import org.anasoid.jmeter.as.code.core.wrapper.converter.ConvertUtils;
-import org.anasoid.jmeter.as.code.core.wrapper.converter.Converter;
-import org.anasoid.jmeter.as.code.core.wrapper.converter.annotation.AutoConvert;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.gui.JMeterGUIWrapper;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcAsAttribute;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcMethodAlias;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
 import org.anasoid.jmeter.as.code.core.xstream.converters.TestElementConverter;
 import org.apache.jmeter.testelement.AbstractTestElement;
-import org.apache.jmeter.testelement.TestElement;
 import org.apache.jmeter.testelement.TestPlan;
-import org.apache.jorphan.collections.HashTree;
 
 @SuperBuilder(setterPrefix = "with")
 @XStreamConverter(value = TestElementConverter.class)
-public abstract class AbstractTestElementWrapper<T extends AbstractTestElement>
-    implements Converter<T> {
+public abstract class AbstractTestElementWrapper<T extends AbstractTestElement> {
 
   @XStreamAsAttribute
   @XStreamAlias("testname")
@@ -42,7 +36,6 @@ public abstract class AbstractTestElementWrapper<T extends AbstractTestElement>
   @XStreamAsAttribute @Builder.Default @Getter private boolean enabled = true;
 
   @Getter
-  @AutoConvert(false)
   @Builder.Default
   @XStreamAlias("hashTree")
   @XStreamOmitField
@@ -68,52 +61,6 @@ public abstract class AbstractTestElementWrapper<T extends AbstractTestElement>
   public abstract Class<T> getTestClass();
 
   public void init() {}
-
-  @Override
-  public T convert() {
-    beforeconvert();
-    T dest = internalConvert();
-    afterConvert(dest);
-    return dest;
-  }
-
-  public HashTree convertAll() {
-    HashTree me = new HashTree();
-    HashTree childTree = me.add(convert());
-    for (AbstractTestElementWrapper testElement : childs) {
-      testElement.convertAll(childTree);
-    }
-    return me;
-  }
-
-  protected void convertAll(HashTree parent) {
-    HashTree childTree = parent.add(convert());
-    for (AbstractTestElementWrapper testElement : childs) {
-      testElement.convertAll(childTree);
-    }
-  }
-
-  protected T internalConvert() {
-    T destination = newTarget();
-    destination.setProperty(TestElement.TEST_CLASS, getTestClass().getName());
-    if (this instanceof JMeterGUIWrapper) {
-      destination.setProperty(
-          TestElement.GUI_CLASS, ((JMeterGUIWrapper) this).getGuiClass().getName());
-    }
-    try {
-      ConvertUtils.copyProperties(destination, this);
-    } catch (IllegalAccessException
-        | InvocationTargetException
-        | NoSuchMethodException
-        | NoSuchFieldException e) {
-      throw new RuntimeException(e);
-    }
-    return destination;
-  }
-
-  protected void beforeconvert() {}
-
-  protected void afterConvert(T dest) {}
 
   public abstract static class AbstractTestElementWrapperBuilder<
       T extends AbstractTestElement,

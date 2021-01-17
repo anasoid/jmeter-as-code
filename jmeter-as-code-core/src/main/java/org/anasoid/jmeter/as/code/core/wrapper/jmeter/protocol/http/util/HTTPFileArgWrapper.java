@@ -34,14 +34,4 @@ public class HTTPFileArgWrapper extends AbstractTestElementWrapper<HTTPFileArg> 
   public Class<HTTPFileArg> getTestClass() {
     return HTTPFileArg.class;
   }
-
-  @Override
-  public HTTPFileArg convert() {
-    return super.convert();
-  }
-
-  @Override
-  public HTTPFileArg newTarget() {
-    return new HTTPFileArg();
-  }
 }

@@ -13,11 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * @author : anas
- * Date :   07-Jan-2021
+ * Date :   05-Jan-2021
  */
 
-package org.anasoid.jmeter.as.code.core.wrapper;
+package org.anasoid.jmeter.as.code.core.xstream.annotations;
 
-public class ApplicationTest {
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
+
+@Target({FIELD, TYPE})
+@Retention(RUNTIME)
+public @interface JmcMandatory {
+
+  /** Used only on Type, to specify field */
+  String[] fields() default {};
 }

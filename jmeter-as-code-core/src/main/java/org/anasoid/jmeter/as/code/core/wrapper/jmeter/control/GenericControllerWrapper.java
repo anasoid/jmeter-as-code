@@ -1,6 +1,5 @@
 package org.anasoid.jmeter.as.code.core.wrapper.jmeter.control;
 
-import lombok.Getter;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.gui.JMeterGUIWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.samplers.AbstractSamplerWrapper;
@@ -12,17 +11,6 @@ import org.apache.jmeter.control.gui.AbstractControllerGui;
 public abstract class GenericControllerWrapper<
         T extends GenericController, G extends AbstractControllerGui>
     extends AbstractTestElementWrapper<T> implements JMeterGUIWrapper<G> {
-
-  @Override
-  public T convert() {
-    return super.convert();
-  }
-
-  @Override
-  public void afterConvert(T dest) {
-    super.afterConvert(dest);
-    dest.initialize();
-  }
 
   public abstract static class GenericControllerWrapperBuilder<
           T extends GenericController,

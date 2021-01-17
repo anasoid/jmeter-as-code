@@ -51,7 +51,6 @@ public class ArgumentWrapper extends AbstractTestElementWrapper<Argument> {
   @JmcProperty(Argument.DESCRIPTION)
   private @Getter String description;
 
-
   @JmcProperty(Argument.ARG_NAME)
   public String getNameStr() {
     return name;
@@ -65,15 +64,5 @@ public class ArgumentWrapper extends AbstractTestElementWrapper<Argument> {
   @Override
   public Class<Argument> getTestClass() {
     return Argument.class;
-  }
-
-  @Override
-  public Argument convert() {
-    return super.convert();
-  }
-
-  @Override
-  public Argument newTarget() {
-    return new Argument();
   }
 }

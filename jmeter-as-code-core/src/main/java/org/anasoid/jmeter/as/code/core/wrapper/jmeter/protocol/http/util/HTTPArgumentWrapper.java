@@ -33,14 +33,4 @@ public class HTTPArgumentWrapper extends AbstractTestElementWrapper<HTTPArgument
   public Class<HTTPArgument> getTestClass() {
     return HTTPArgument.class;
   }
-
-  @Override
-  public HTTPArgument convert() {
-    return super.convert();
-  }
-
-  @Override
-  public HTTPArgument newTarget() {
-    return new HTTPArgument();
-  }
 }

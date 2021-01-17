@@ -26,16 +26,6 @@ public class LoopControllerWrapper
   }
 
   @Override
-  public LoopController convert() {
-    return super.convert();
-  }
-
-  @Override
-  public LoopController newTarget() {
-    return new LoopController();
-  }
-
-  @Override
   public Class<LoopControlPanel> getGuiClass() {
     return LoopControlPanel.class;
   }

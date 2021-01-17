@@ -37,14 +37,4 @@ public class HTTPSamplerProxyWrapper
   public Class<HTTPSamplerProxy> getTestClass() {
     return HTTPSamplerProxy.class;
   }
-
-  @Override
-  public HTTPSamplerProxy convert() {
-    return super.convert();
-  }
-
-  @Override
-  public HTTPSamplerProxy newTarget() {
-    return new HTTPSamplerProxy();
-  }
 }

@@ -22,9 +22,10 @@ import java.util.List;
 import lombok.Getter;
 import lombok.Singular;
 import lombok.experimental.SuperBuilder;
-import org.anasoid.jmeter.as.code.core.wrapper.converter.annotation.Mandatory;
+
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.protocol.http.util.HTTPArgumentWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.protocol.http.util.HTTPFileArgWrapper;
+import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcMandatory;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
 import org.apache.jmeter.protocol.http.sampler.HTTPSamplerBase;
 import org.apache.jmeter.samplers.gui.AbstractSamplerGui;
@@ -38,7 +39,8 @@ public abstract class HTTPSamplerBaseWrapper<
   private @Getter String domain;
 
   @JmcProperty(HTTPSamplerBase.PATH)
-  private @Mandatory @Getter String path;
+  private @JmcMandatory
+  @Getter String path;
 
   @JmcProperty(HTTPSamplerBase.PORT)
   private @Getter Integer port;
@@ -108,11 +110,4 @@ public abstract class HTTPSamplerBaseWrapper<
 
   @Singular private List<HTTPFileArgWrapper> hTTPFiles;
   @Singular private List<HTTPArgumentWrapper> arguments;
-
-  // setIpSourceType(int value)
-
-  @Override
-  public T convert() {
-    return super.convert();
-  }
 }

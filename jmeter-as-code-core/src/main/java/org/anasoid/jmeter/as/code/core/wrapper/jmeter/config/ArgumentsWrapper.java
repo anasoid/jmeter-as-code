@@ -24,7 +24,6 @@ import java.util.List;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
-import org.anasoid.jmeter.as.code.core.wrapper.converter.annotation.AutoConvert;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.gui.JMeterGUIWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AbstractTestElementWrapper;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcCollection;
@@ -36,7 +35,6 @@ public class ArgumentsWrapper extends AbstractTestElementWrapper<Arguments>
     implements JMeterGUIWrapper<ArgumentsPanel> {
 
   @Getter
-  @AutoConvert(false)
   @Builder.Default
   @JmcCollection(Arguments.ARGUMENTS)
   private List<ArgumentWrapper> arguments = new ArrayList<>();
@@ -44,20 +42,6 @@ public class ArgumentsWrapper extends AbstractTestElementWrapper<Arguments>
   @Override
   public Class<Arguments> getTestClass() {
     return Arguments.class;
-  }
-
-  @Override
-  public Arguments convert() {
-    Arguments result = super.convert();
-    for (ArgumentWrapper argument : arguments) {
-      result.addArgument(argument.convert());
-    }
-    return result;
-  }
-
-  @Override
-  public Arguments newTarget() {
-    return new Arguments();
   }
 
   @Override

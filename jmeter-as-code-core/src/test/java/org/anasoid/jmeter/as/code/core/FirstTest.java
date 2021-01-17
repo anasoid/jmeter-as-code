@@ -1,7 +1,11 @@
 package org.anasoid.jmeter.as.code.core;
 
+import com.thoughtworks.xstream.XStream;
 import java.io.File;
-import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.Writer;
+import org.anasoid.jmeter.as.code.core.wrapper.ScriptWrapper;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.control.LoopControllerWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.samplers.HTTPSamplerProxyWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestPlanWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.threads.ThreadGroupWrapper;
@@ -41,7 +45,6 @@ public class FirstTest {
       // level
       JMeterUtils.initLocale();
 
-
       // First HTTP Sampler - open example.com
       HTTPSamplerProxyWrapper examplecomSamplerWrapper =
           HTTPSamplerProxyWrapper.builder()
@@ -80,18 +83,23 @@ public class FirstTest {
               .withName("Create JMeter Script From Java Code")
               .addChild(threadGroupWrapper)
               .build();
+      ScriptWrapper script = new ScriptWrapper().setTesPlan(testPlanWrapper);
 
+      // NEW
 
-      // Construct Test Plan from previously initialized elements
-      // JMeter Test Plan, basically JOrphan HashTree
-      HashTree testPlanTree = testPlanWrapper.convertAll();
-
-
-
-      // save generated test plan to JMeter's .jmx file format
-      SaveService.saveTree(
-          testPlanTree, new FileOutputStream(jmeterWork + slash + "exampleWrapper.jmx"));
-
+      Writer wr = new FileWriter(jmeterWork + slash + "exampleWrapper.jmx");
+      XStream xStream = new XStream();
+      xStream.aliasSystemAttribute(null, "class");
+      xStream.alias("hashTree", HashTree.class);
+      xStream.processAnnotations(
+          new Class[] {
+            LoopControllerWrapper.class,
+            HTTPSamplerProxyWrapper.class,
+            TestPlanWrapper.class,
+            ThreadGroupWrapper.class,
+            ScriptWrapper.class
+          });
+      xStream.toXML(script, wr);
       // add Summarizer output to get test progress in stdout like:
       // summary =      2 in   1.3s =    1.5/s Avg:   631 Min:   290 Max:   973 Err:     0 (0.00%)
       Summariser summer = null;
@@ -104,6 +112,8 @@ public class FirstTest {
       String logFile = jmeterWork + slash + "exampleWrapper.jtl";
       ResultCollector logger = new ResultCollector(summer);
       logger.setFilename(logFile);
+      HashTree testPlanTree =
+          SaveService.loadTree(new File(jmeterWork + slash + "exampleWrapper.jmx"));
       testPlanTree.add(testPlanTree.getArray()[0], logger);
 
       // Run Test Plan
