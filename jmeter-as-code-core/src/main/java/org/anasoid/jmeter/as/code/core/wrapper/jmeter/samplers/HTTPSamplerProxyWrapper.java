@@ -18,11 +18,13 @@
 
 package org.anasoid.jmeter.as.code.core.wrapper.jmeter.samplers;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
 import lombok.experimental.SuperBuilder;
 import org.apache.jmeter.protocol.http.control.gui.HttpTestSampleGui;
 import org.apache.jmeter.protocol.http.sampler.HTTPSamplerProxy;
 
 @SuperBuilder(setterPrefix = "with")
+@XStreamAlias("HTTPSamplerProxy")
 public class HTTPSamplerProxyWrapper
     extends HTTPSamplerBaseWrapper<HTTPSamplerProxy, HttpTestSampleGui> {
 

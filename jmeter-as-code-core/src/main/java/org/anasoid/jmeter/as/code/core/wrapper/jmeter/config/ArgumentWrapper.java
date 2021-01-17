@@ -18,16 +18,49 @@
 
 package org.anasoid.jmeter.as.code.core.wrapper.jmeter.config;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import lombok.Builder;
+import lombok.Builder.Default;
+import lombok.Getter;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AbstractTestElementWrapper;
+import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcElement;
+import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
 import org.apache.jmeter.config.Argument;
 
-@SuperBuilder
+@SuperBuilder(setterPrefix = "with")
+@JmcElement
 public class ArgumentWrapper extends AbstractTestElementWrapper<Argument> {
 
-  private String value;
-  private String metadata;
-  private String description;
+  @XStreamAsAttribute
+  @XStreamAlias("name")
+  @Getter
+  private String name;
+
+  @XStreamOmitField @Builder.Default @Getter private boolean enabled = true;
+
+  @JmcProperty(Argument.VALUE)
+  private @Getter String value;
+
+  @JmcProperty(Argument.METADATA)
+  @Default
+  private @Getter String metadata = "=";
+
+  @JmcProperty(Argument.DESCRIPTION)
+  private @Getter String description;
+
+
+  @JmcProperty(Argument.ARG_NAME)
+  public String getNameStr() {
+    return name;
+  }
+
+  @Override
+  public String getTestClassAsString() {
+    return null;
+  }
 
   @Override
   public Class<Argument> getTestClass() {

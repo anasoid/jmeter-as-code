@@ -18,34 +18,67 @@
 
 package org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmeter.as.code.core.wrapper.converter.annotation.AutoConvert;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.config.ArgumentWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.config.ArgumentsWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.gui.JMeterGUIWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.threads.AbstractThreadGroupWrapper;
+import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
 import org.apache.jmeter.control.gui.TestPlanGui;
 import org.apache.jmeter.testelement.TestPlan;
 
 @SuperBuilder(setterPrefix = "with")
+@XStreamAlias("TestPlan")
 public class TestPlanWrapper extends AbstractTestElementWrapper<TestPlan>
     implements JMeterGUIWrapper<TestPlanGui> {
 
+  @JmcProperty("TestPlan.functional_mode")
+  @Getter
+  private boolean functionalMode;
+
+  @JmcProperty("TestPlan.serialize_threadgroups")
+  @Getter
+  private boolean serialized;
+
+  @JmcProperty("TestPlan.tearDown_on_shutdown")
+  @Getter
+  private boolean tearDownOnShutdown;
+
   @Getter
   @AutoConvert(false)
+  @Default
+  @XStreamOmitField
+  private List<ArgumentWrapper> arguments = new ArrayList<>();
+
+  @JmcProperty("TestPlan.user_defined_variables")
+
+  protected ArgumentsWrapper getArgument() {
+    return ArgumentsWrapper.builder().addArguments(arguments).build();
+  }
+
+  @Getter
+  @AutoConvert(false)
+  @XStreamOmitField
+  //@JmcProperty("TestPlan.user_defined_variables")
   private ArgumentsWrapper argumentsWrapper;
 
   @Override
-  protected void beforeconvert() {
-    super.beforeconvert();
-    if (argumentsWrapper == null) {
-      argumentsWrapper = ArgumentsWrapper.builder().build();
-    }
+  public void init() {
+   argumentsWrapper = ArgumentsWrapper.builder().addArguments(arguments).build();
   }
 
   @Override
   protected TestPlan internalConvert() {
-    TestPlan testPlan= super.internalConvert();
+    TestPlan testPlan = super.internalConvert();
+    argumentsWrapper = ArgumentsWrapper.builder().addArguments(arguments).build();
     testPlan.setUserDefinedVariables(argumentsWrapper.convert());
     return testPlan;
   }
@@ -71,6 +104,35 @@ public class TestPlanWrapper extends AbstractTestElementWrapper<TestPlan>
 
     public B addChild(AbstractThreadGroupWrapper child) {
       return super.addChild(child);
+    }
+
+    protected B withArguments(ArgumentWrapper child) {
+      return self();
+    }
+
+    public B addArguments(Collection<ArgumentWrapper> arguments) {
+      if (!this.arguments$set) {
+        this.arguments$value = new ArrayList<>();
+      }
+      this.arguments$value.addAll(arguments);
+      this.arguments$set = true;
+
+      return self();
+    }
+
+    public B addArgument(String name, String value) {
+      addArgument(ArgumentWrapper.builder().withName(name).withValue(value).build());
+      return self();
+    }
+
+    public B addArgument(ArgumentWrapper argument) {
+      if (!this.arguments$set) {
+        this.arguments$value = new ArrayList<>();
+      }
+      this.arguments$value.add(argument);
+      this.arguments$set = true;
+
+      return self();
     }
   }
 }

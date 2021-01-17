@@ -84,7 +84,11 @@ public class ConvertUtils {
     if (!autoConvert(source, name)) {
       return;
     }
-    if ("class".equals(name) || "guiClass".equals(name) || "testClass".equals(name)) {
+    if ("class".equals(name)
+        || "guiClass".equals(name)
+        || "testClass".equals(name)
+        || "testClassAsString".equals(name)
+        || "guiClassAsString".equals(name)) {
       return;
     }
 

@@ -5,13 +5,10 @@ import java.io.FileOutputStream;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.samplers.HTTPSamplerProxyWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestPlanWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.threads.ThreadGroupWrapper;
-import org.apache.jmeter.control.gui.TestPlanGui;
 import org.apache.jmeter.engine.StandardJMeterEngine;
 import org.apache.jmeter.reporters.ResultCollector;
 import org.apache.jmeter.reporters.Summariser;
 import org.apache.jmeter.save.SaveService;
-import org.apache.jmeter.testelement.TestElement;
-import org.apache.jmeter.testelement.TestPlan;
 import org.apache.jmeter.util.JMeterUtils;
 import org.apache.jorphan.collections.HashTree;
 import org.junit.jupiter.api.Test;
@@ -69,8 +66,9 @@ public class FirstTest {
       ThreadGroupWrapper threadGroupWrapper =
           ThreadGroupWrapper.builder()
               .withName("Example Thread Group")
-              .withNumThreads(1)
-              .withRampUp(1)
+              .withNumThreads(2)
+              .withRampUp(7)
+              .withDelay(9l)
               .withLoops(3)
               .addChild(examplecomSamplerWrapper)
               .addChild(blazemetercomSamplerWrapper)

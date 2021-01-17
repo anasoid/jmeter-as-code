@@ -1,5 +1,9 @@
 package org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
+import com.thoughtworks.xstream.annotations.XStreamConverter;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -12,25 +16,58 @@ import org.anasoid.jmeter.as.code.core.wrapper.converter.ConvertUtils;
 import org.anasoid.jmeter.as.code.core.wrapper.converter.Converter;
 import org.anasoid.jmeter.as.code.core.wrapper.converter.annotation.AutoConvert;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.gui.JMeterGUIWrapper;
+import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcAsAttribute;
+import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcMethodAlias;
+import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
+import org.anasoid.jmeter.as.code.core.xstream.converters.TestElementConverter;
 import org.apache.jmeter.testelement.AbstractTestElement;
 import org.apache.jmeter.testelement.TestElement;
+import org.apache.jmeter.testelement.TestPlan;
 import org.apache.jorphan.collections.HashTree;
 
 @SuperBuilder(setterPrefix = "with")
+@XStreamConverter(value = TestElementConverter.class)
 public abstract class AbstractTestElementWrapper<T extends AbstractTestElement>
     implements Converter<T> {
 
-  @Getter private String name;
-  @Getter private String comment;
-  @Builder.Default @Getter private boolean enabled = true;
+  @XStreamAsAttribute
+  @XStreamAlias("testname")
+  @Getter
+  private String name;
+
+  @JmcProperty(TestPlan.COMMENTS)
+  @Getter
+  private String comment;
+
+  @XStreamAsAttribute @Builder.Default @Getter private boolean enabled = true;
 
   @Getter
   @AutoConvert(false)
   @Builder.Default
+  @XStreamAlias("hashTree")
+  @XStreamOmitField
   private List<AbstractTestElementWrapper> childs = new ArrayList<>();
 
   /** Test Class used by Jmeter TestElement.TEST_CLASS @See TestElement */
+  @JmcMethodAlias("testclass")
+  @JmcAsAttribute
+  public String getTestClassAsString() {
+    return getTestClass().getSimpleName();
+  }
+  /** Test Class used by Jmeter TestElement.TEST_CLASS @See TestElement */
+  @JmcMethodAlias("guiclass")
+  @JmcAsAttribute
+  public String getGuiClassAsString() {
+    if (this instanceof JMeterGUIWrapper) {
+      JMeterGUIWrapper gui = (JMeterGUIWrapper) this;
+      return gui.getGuiClass().getSimpleName();
+    }
+    return null;
+  }
+  /** Test Class used by Jmeter TestElement.TEST_CLASS @See TestElement */
   public abstract Class<T> getTestClass();
+
+  public void init() {}
 
   @Override
   public T convert() {
