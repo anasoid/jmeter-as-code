@@ -68,6 +68,7 @@ public class XstreamTest {
             .withContinueForever(false)
             .addChild(examplecomSamplerWrapper)
             .addChild(blazemetercomSamplerWrapper)
+            .addChild(blazemetercomSamplerWrapper)
             .build();
 
     // Test Plan
@@ -86,6 +87,7 @@ public class XstreamTest {
 
     Writer wr = new FileWriter(System.getProperty("user.dir") + "/build/jmeter/xtream.jmx");
     XStream xStream = new XStream();
+    xStream.setMode(XStream.NO_REFERENCES);
     xStream.aliasSystemAttribute(null, "class");
     xStream.alias("hashTree",HashTree.class);
     xStream.processAnnotations(

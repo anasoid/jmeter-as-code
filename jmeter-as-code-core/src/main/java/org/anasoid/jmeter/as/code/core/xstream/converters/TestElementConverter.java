@@ -42,12 +42,17 @@ import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcAsAttribute;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcCollection;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcMethodAlias;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
+import org.anasoid.jmeter.as.code.core.xstream.io.JmcHierarchicalStreamWriter;
 
 public class TestElementConverter implements Converter {
+  boolean inElementConversion = false;
 
   @Override
   public void marshal(Object source, HierarchicalStreamWriter writer, MarshallingContext context) {
 
+    if (!(writer instanceof JmcHierarchicalStreamWriter)) {
+      writer = new JmcHierarchicalStreamWriter(writer);
+    }
     init(source);
     List<Field> allFields = getFields(source);
     List<Field> attributeField = getAttributeFields(allFields);
@@ -77,6 +82,7 @@ public class TestElementConverter implements Converter {
         if (!shouldSkip(source, field)) {
           field.setAccessible(true);
           if (isProperty(field)) {
+
             convertProperty(
                 field.get(source), field.getAnnotation(JmcProperty.class).value(), writer, context);
           } else if (isCollection(field)) {
@@ -114,12 +120,13 @@ public class TestElementConverter implements Converter {
 
   protected void appendChild(
       Object source, HierarchicalStreamWriter writer, MarshallingContext context) {
+    if (inElementConversion) {
+
+      return;
+    }
     if (source instanceof AbstractTestElementWrapper) {
+
       List<AbstractTestElementWrapper> childs = ((AbstractTestElementWrapper) source).getChilds();
-      String currentPath = ((ReferencingMarshallingContext) context).currentPath().toString();
-      if (currentPath.contains("/elementProp") || currentPath.contains("/collectionProp")) {
-        return;
-      }
       writer.endNode();
       writer.startNode("hashTree");
       for (AbstractTestElementWrapper child : childs) {
@@ -175,6 +182,11 @@ public class TestElementConverter implements Converter {
 
   protected void convertProperty(
       Object value, String name, HierarchicalStreamWriter writer, MarshallingContext context) {
+    boolean changed = false;
+    if (!inElementConversion) {
+      inElementConversion = true;
+      changed = true;
+    }
 
     writer.startNode(getPropertyAlias(value));
     writer.addAttribute("name", name);
@@ -184,6 +196,9 @@ public class TestElementConverter implements Converter {
     }
     context.convertAnother(value);
     writer.endNode();
+    if (changed) {
+      inElementConversion = false;
+    }
   }
 
   protected void convertCollection(
@@ -193,7 +208,11 @@ public class TestElementConverter implements Converter {
       MarshallingContext context) {
 
     writer.startNode("collectionProp");
-
+    boolean changed = false;
+    if (!inElementConversion) {
+      inElementConversion = true;
+      changed = true;
+    }
     writer.addAttribute("name", annotation.value());
     if (value instanceof AbstractTestElementWrapper) {
       AbstractTestElementWrapper testElement = (AbstractTestElementWrapper) value;
@@ -214,6 +233,9 @@ public class TestElementConverter implements Converter {
     }
 
     writer.endNode();
+    if (changed) {
+      inElementConversion = false;
+    }
   }
 
   protected List<Method> getMethods(Object source) {

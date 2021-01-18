@@ -75,6 +75,7 @@ public class FirstTest {
               .withLoops(3)
               .addChild(examplecomSamplerWrapper)
               .addChild(blazemetercomSamplerWrapper)
+              .addChild(blazemetercomSamplerWrapper)
               .build();
 
       // Test Plan
@@ -89,6 +90,7 @@ public class FirstTest {
 
       Writer wr = new FileWriter(jmeterWork + slash + "exampleWrapper.jmx");
       XStream xStream = new XStream();
+      xStream.setMode(XStream.NO_REFERENCES);
       xStream.aliasSystemAttribute(null, "class");
       xStream.alias("hashTree", HashTree.class);
       xStream.processAnnotations(
@@ -109,6 +111,7 @@ public class FirstTest {
       }
 
       // Store execution results into a .jtl file
+      /**
       String logFile = jmeterWork + slash + "exampleWrapper.jtl";
       ResultCollector logger = new ResultCollector(summer);
       logger.setFilename(logFile);
@@ -118,13 +121,14 @@ public class FirstTest {
 
       // Run Test Plan
       jmeter.configure(testPlanTree);
-      jmeter.run();
+      //jmeter.run();
 
       System.out.println(
           "Test completed. See " + jmeterWork + slash + "example.jtl file for results");
       System.out.println(
           "JMeter .jmx script is available at " + jmeterWork + slash + "exampleWrapper.jmx");
       return;
+       */
     }
 
     System.err.println("jmeter.home property is not set or pointing to incorrect location");
