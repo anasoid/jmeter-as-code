@@ -57,6 +57,11 @@ public class ArgumentsWrapper extends AbstractTestElementWrapper<Arguments>
       return super.addChild(child);
     }
 
+    /**
+     * Add arguments. Each argument consists of a name/value pair, as well as (optional) metadata.
+     *
+     * @param arguments List of arguments.
+     */
     public B addArguments(Collection<ArgumentWrapper> arguments) {
       if (!this.arguments$set) {
         this.arguments$value = new ArrayList<>();
@@ -67,6 +72,11 @@ public class ArgumentsWrapper extends AbstractTestElementWrapper<Arguments>
       return self();
     }
 
+    /**
+     * Add arguments. Each argument consists of a name/value pair, as well as (optional) metadata.
+     *
+     * @param argument argument. to be add
+     */
     public B addArgument(ArgumentWrapper argument) {
       if (!this.arguments$set) {
         this.arguments$value = new ArrayList<>();

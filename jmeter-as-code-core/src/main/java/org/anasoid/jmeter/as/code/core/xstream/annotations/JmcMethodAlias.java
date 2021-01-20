@@ -24,10 +24,11 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+/** Annotation used to define a field alias. */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 @Documented
 public @interface JmcMethodAlias {
-  /** The name of the class or field alias. */
-  public String value();
+  /** The name of field alias. */
+  String value();
 }

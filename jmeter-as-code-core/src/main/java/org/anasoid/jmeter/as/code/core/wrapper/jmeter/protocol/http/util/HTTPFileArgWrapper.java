@@ -18,6 +18,7 @@
 
 package org.anasoid.jmeter.as.code.core.wrapper.jmeter.protocol.http.util;
 
+import lombok.Getter;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AbstractTestElementWrapper;
 import org.apache.jmeter.protocol.http.util.HTTPFileArg;
@@ -25,10 +26,10 @@ import org.apache.jmeter.protocol.http.util.HTTPFileArg;
 @SuperBuilder(setterPrefix = "with")
 public class HTTPFileArgWrapper extends AbstractTestElementWrapper<HTTPFileArg> {
 
-  private String path;
-  private String paramName;
-  private String mimeType;
-  private String header;
+  @Getter private String path;
+  @Getter private String paramName;
+  @Getter private String mimeType;
+  @Getter private String header;
 
   @Override
   public Class<HTTPFileArg> getTestClass() {

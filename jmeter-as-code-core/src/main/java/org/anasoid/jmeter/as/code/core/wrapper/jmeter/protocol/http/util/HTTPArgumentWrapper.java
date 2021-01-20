@@ -18,6 +18,7 @@
 
 package org.anasoid.jmeter.as.code.core.wrapper.jmeter.protocol.http.util;
 
+import lombok.Getter;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AbstractTestElementWrapper;
 import org.apache.jmeter.protocol.http.util.HTTPArgument;
@@ -25,9 +26,9 @@ import org.apache.jmeter.protocol.http.util.HTTPArgument;
 @SuperBuilder(setterPrefix = "with")
 public class HTTPArgumentWrapper extends AbstractTestElementWrapper<HTTPArgument> {
 
-  private String contentType;
-  private Boolean useEquals;
-  private Boolean alreadyEncoded;
+  @Getter String contentType;
+  @Getter private Boolean useEquals;
+  @Getter private Boolean alreadyEncoded;
 
   @Override
   public Class<HTTPArgument> getTestClass() {

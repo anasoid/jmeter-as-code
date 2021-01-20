@@ -5,7 +5,8 @@
   "https://checkstyle.org/dtds/suppressions_1_2.dtd">
 
 <suppressions>
-  <suppress  files=".*Test\.java" message=".*has incorrect indentation level 4, expected level should be 6.*" />
+  <suppress  files="org/anasoid/jmeter/as/code/core/wrapper/.*\.java" message=".*must contain no more than '2' consecutive capital letters.*" />
+  <suppress  files="org/anasoid/jmeter/as/code/core/wrapper/.*\.java" message=".*Member name '.*' must match pattern.*" />
 
 
 </suppressions>

@@ -17,15 +17,13 @@ package org.anasoid.jmeter.as.code.core.xstream.annotations;
  * Date :   14-Jan-2021
  */
 
-import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
+/** Defines that a field should be serialized as an element &#x3C;elementProp .../&#x3E; */
 @Target({TYPE})
 @Retention(RUNTIME)
-public @interface JmcElement {
-
-}
+public @interface JmcElement {}

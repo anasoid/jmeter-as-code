@@ -24,10 +24,15 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
+/** Defines that a field should be serialized as an collection.
+ * &#x3C;collectionProp .../&#x3E;
+ * */
 @Target({FIELD})
 @Retention(RUNTIME)
 public @interface JmcCollection {
-  public String value();
 
-
+  /**
+   * attribute 'name' value.
+   */
+  String value();
 }

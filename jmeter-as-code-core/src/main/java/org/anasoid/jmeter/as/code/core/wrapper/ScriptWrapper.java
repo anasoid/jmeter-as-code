@@ -27,16 +27,22 @@ import org.anasoid.jmeter.as.code.core.xstream.converters.TestElementConverter;
 
 @XStreamAlias("jmeterTestPlan")
 @XStreamConverter(TestElementConverter.class)
+@SuppressWarnings("PMD.FinalFieldCouldBeStatic")
 public class ScriptWrapper {
-  @XStreamAsAttribute private String version = "1.2";
-  @XStreamAsAttribute private String jmeter = "5.3";
-  @XStreamAsAttribute private String properties = "5.0";
+  @XStreamAsAttribute private final String version = "1.2"; // NOSONAR
+  @XStreamAsAttribute private final String jmeter = "5.3"; // NOSONAR
+  @XStreamAsAttribute private final String properties = "5.0"; // NOSONAR
 
   @XStreamAlias("hashTree")
-  List testPlan;
+  List<TestPlanWrapper> testPlan;
 
+  /**
+   * Set main test Plan.
+   *
+   * @param testPlanWrapper test plan.
+   */
   public ScriptWrapper setTesPlan(TestPlanWrapper testPlanWrapper) {
-    testPlan=new ArrayList();
+    testPlan = new ArrayList<>();
     testPlan.add(testPlanWrapper);
     return this;
   }
@@ -53,7 +59,7 @@ public class ScriptWrapper {
     return properties;
   }
 
-  public List getTestPlan() {
+  public List<TestPlanWrapper> getTestPlan() {
     return testPlan;
   }
 }

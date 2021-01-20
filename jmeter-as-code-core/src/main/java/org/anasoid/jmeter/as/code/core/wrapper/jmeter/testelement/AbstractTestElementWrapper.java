@@ -17,8 +17,9 @@ import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcAsAttribute;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcMethodAlias;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
 import org.anasoid.jmeter.as.code.core.xstream.converters.TestElementConverter;
+import org.anasoid.jmeter.as.code.core.xstream.exceptions.ConversionException;
 import org.apache.jmeter.testelement.AbstractTestElement;
-import org.apache.jmeter.testelement.TestPlan;
+import org.apache.jmeter.testelement.TestElement;
 
 @SuperBuilder(setterPrefix = "with")
 @XStreamConverter(value = TestElementConverter.class)
@@ -29,7 +30,7 @@ public abstract class AbstractTestElementWrapper<T extends AbstractTestElement> 
   @Getter
   private String name;
 
-  @JmcProperty(TestPlan.COMMENTS)
+  @JmcProperty(TestElement.COMMENTS)
   @Getter
   private String comment;
 
@@ -39,7 +40,7 @@ public abstract class AbstractTestElementWrapper<T extends AbstractTestElement> 
   @Builder.Default
   @XStreamAlias("hashTree")
   @XStreamOmitField
-  private List<AbstractTestElementWrapper> childs = new ArrayList<>();
+  private List<AbstractTestElementWrapper<?>> childs = new ArrayList<>();
 
   /** Test Class used by Jmeter TestElement.TEST_CLASS @See TestElement */
   @JmcMethodAlias("testclass")
@@ -47,27 +48,30 @@ public abstract class AbstractTestElementWrapper<T extends AbstractTestElement> 
   public String getTestClassAsString() {
     return getTestClass().getSimpleName();
   }
+
   /** Test Class used by Jmeter TestElement.TEST_CLASS @See TestElement */
   @JmcMethodAlias("guiclass")
   @JmcAsAttribute
   public String getGuiClassAsString() {
     if (this instanceof JMeterGUIWrapper) {
-      JMeterGUIWrapper gui = (JMeterGUIWrapper) this;
+      JMeterGUIWrapper<?> gui = (JMeterGUIWrapper) this;
       return gui.getGuiClass().getSimpleName();
     }
     return null;
   }
+
   /** Test Class used by Jmeter TestElement.TEST_CLASS @See TestElement */
   public abstract Class<T> getTestClass();
 
   public void init() {}
 
+  @SuppressWarnings("PMD.AbstractClassWithoutAbstractMethod")
   public abstract static class AbstractTestElementWrapperBuilder<
       T extends AbstractTestElement,
       C extends AbstractTestElementWrapper<T>,
       B extends AbstractTestElementWrapperBuilder<T, C, B>> {
 
-    protected B withChilds(Collection<AbstractTestElementWrapper> childs) {
+    protected B withChilds(Collection<AbstractTestElementWrapper<?>> childs) {
       if (!this.childs$set) {
         this.childs$value = new ArrayList<>();
       }
@@ -77,7 +81,7 @@ public abstract class AbstractTestElementWrapper<T extends AbstractTestElement> 
       return self();
     }
 
-    protected B withChild(AbstractTestElementWrapper child) {
+    protected B withChild(AbstractTestElementWrapper<?> child) {
       if (!this.childs$set) {
         this.childs$value = new ArrayList<>();
       }
@@ -87,27 +91,28 @@ public abstract class AbstractTestElementWrapper<T extends AbstractTestElement> 
       return self();
     }
 
-    public B addChilds(List<AbstractTestElementWrapper> childs) {
-      for (AbstractTestElementWrapper testElement : childs) {
+    /**
+     * Add Test element tree children.
+     *
+     * @param childs list of child.
+     */
+    public B addChilds(List<AbstractTestElementWrapper<?>> childs) {
+      for (AbstractTestElementWrapper<?> testElement : childs) {
         try {
           Method method = this.getClass().getMethod("addChild", AbstractTestElementWrapper.class);
           method.invoke(this, testElement);
 
         } catch (NoSuchMethodException e) {
-          throw new IllegalArgumentException("Illegal argument Type of  : " + testElement);
-        } catch (IllegalAccessException e) {
+          throw new IllegalArgumentException("Illegal argument Type of  : " + testElement, e);
+        } catch (IllegalAccessException | InvocationTargetException e) {
           // Should Not Happen
-          throw new RuntimeException(e);
-
-        } catch (InvocationTargetException e) {
-          // Should Not Happen
-          throw new RuntimeException(e);
+          throw new ConversionException(e);
         }
       }
       return self();
     }
 
-    public B addChild(AbstractTestElementWrapper child) {
+    public B addChild(AbstractTestElementWrapper<?> child) {
       return this.withChild(child);
     }
   }

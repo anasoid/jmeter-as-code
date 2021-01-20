@@ -7,6 +7,7 @@ import org.apache.jmeter.samplers.AbstractSampler;
 import org.apache.jmeter.samplers.gui.AbstractSamplerGui;
 
 @SuperBuilder(setterPrefix = "with")
+@SuppressWarnings("PMD.AbstractClassWithoutAnyMethod")
 public abstract class AbstractSamplerWrapper<
         T extends AbstractSampler, G extends AbstractSamplerGui>
     extends AbstractTestElementWrapper<T> implements JMeterGUIWrapper<G> {}

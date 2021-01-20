@@ -77,18 +77,24 @@ public class TestPlanWrapper extends AbstractTestElementWrapper<TestPlan>
     return TestPlan.class;
   }
 
+  @SuppressWarnings("PMD.UselessOverridingMethod")
   public abstract static class TestPlanWrapperBuilder<
           C extends TestPlanWrapper, B extends TestPlanWrapperBuilder<C, B>>
       extends AbstractTestElementWrapper.AbstractTestElementWrapperBuilder<TestPlan, C, B> {
 
-    public B addChild(AbstractThreadGroupWrapper child) {
+    public B addChild(AbstractThreadGroupWrapper<?, ?> child) { // NOSONAR
       return super.addChild(child);
     }
 
-    protected B withArguments(ArgumentWrapper child) {
+    protected B withArguments(ArgumentWrapper child) { // NOSONAR
       return self();
     }
 
+    /**
+     * Add arguments. Each argument consists of a name/value pair, as well as (optional) metadata.
+     *
+     * @param arguments List of arguments.
+     */
     public B addArguments(Collection<ArgumentWrapper> arguments) {
       if (!this.arguments$set) {
         this.arguments$value = new ArrayList<>();
@@ -99,11 +105,22 @@ public class TestPlanWrapper extends AbstractTestElementWrapper<TestPlan>
       return self();
     }
 
+    /**
+     * Add argument, consists of a name/value pair, default metadata is '='.
+     *
+     * @param name name.
+     * @param value value.
+     */
     public B addArgument(String name, String value) {
       addArgument(ArgumentWrapper.builder().withName(name).withValue(value).build());
       return self();
     }
 
+    /**
+     * Add arguments. Each argument consists of a name/value pair, as well as (optional) metadata.
+     *
+     * @param argument argument. to be add
+     */
     public B addArgument(ArgumentWrapper argument) {
       if (!this.arguments$set) {
         this.arguments$value = new ArrayList<>();

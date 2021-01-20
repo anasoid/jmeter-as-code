@@ -1,4 +1,4 @@
-package org.anasoid.jmeter.as.code.core.xstream;/*
+/*
  * Copyright 2020-2021 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License")
@@ -13,9 +13,24 @@ package org.anasoid.jmeter.as.code.core.xstream;/*
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * @author : anas
- * Date :   15-Jan-2021
+ * Date :   20-Jan-2021
  */
 
-public class ConverterUtils {
+package org.anasoid.jmeter.as.code.core.xstream.exceptions;
 
+public class ConversionException extends RuntimeException {
+
+  static final long serialVersionUID = -7034897186545466939L;
+
+  public ConversionException(String message) {
+    super(message);
+  }
+
+  public ConversionException(Throwable cause) {
+    super(cause);
+  }
+
+  public ConversionException(String message, Throwable cause) {
+    super(message, cause);
+  }
 }

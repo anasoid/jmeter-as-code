@@ -25,10 +25,11 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
+/** Defines that a list field of type, or field should not be null when serialized. */
 @Target({FIELD, TYPE})
 @Retention(RUNTIME)
 public @interface JmcMandatory {
 
-  /** Used only on Type, to specify field */
+  /** list of names of fields to be filled before conversion. */
   String[] fields() default {};
 }

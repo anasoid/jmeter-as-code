@@ -12,6 +12,7 @@ import org.apache.jmeter.threads.AbstractThreadGroup;
 import org.apache.jmeter.threads.gui.AbstractThreadGroupGui;
 
 @SuperBuilder(setterPrefix = "with")
+@SuppressWarnings("PMD.AbstractClassWithoutAnyMethod")
 public abstract class AbstractThreadGroupWrapper<
         T extends AbstractThreadGroup, G extends AbstractThreadGroupGui>
     extends AbstractTestElementWrapper<T> implements JMeterGUIWrapper<G> {
@@ -25,8 +26,9 @@ public abstract class AbstractThreadGroupWrapper<
   private @Getter Integer numThreads = 1;
 
   @JmcProperty(AbstractThreadGroup.MAIN_CONTROLLER)
-  protected @Getter GenericControllerWrapper samplerController;
+  protected @Getter GenericControllerWrapper<?, ?> samplerController;
 
+  @SuppressWarnings("PMD")
   public abstract static class AbstractThreadGroupWrapperBuilder<
           T extends AbstractThreadGroup,
           G extends AbstractThreadGroupGui,
@@ -34,16 +36,16 @@ public abstract class AbstractThreadGroupWrapper<
           B extends AbstractThreadGroupWrapper.AbstractThreadGroupWrapperBuilder<T, G, C, B>>
       extends AbstractTestElementWrapper.AbstractTestElementWrapperBuilder<T, C, B> {
 
-    private B withSamplerController(GenericControllerWrapper controller) {
+    private B withSamplerController(GenericControllerWrapper<?, ?> controller) { // NOSONAR
       // hide samplerController
       return self();
     }
 
-    public B addChild(AbstractSamplerWrapper child) {
+    public B addChild(AbstractSamplerWrapper<?, ?> child) { // NOSONAR
       return super.addChild(child);
     }
 
-    public B addChild(GenericControllerWrapper child) {
+    public B addChild(GenericControllerWrapper<?, ?> child) { // NOSONAR
       return super.addChild(child);
     }
   }

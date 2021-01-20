@@ -24,10 +24,11 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-@Target({FIELD,METHOD})
+@Target({FIELD, METHOD})
 @Retention(RUNTIME)
 public @interface JmcProperty {
-  public String value();
+  /** attribute 'name' value. */
+  String value();
   /** A possible default implementation if the annotated type is an interface. */
-  public Class<?> type() default Void.class; // Use Void to denote as Null
+  Class<?> type() default Void.class; // Use Void to denote as Null
 }

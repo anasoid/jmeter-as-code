@@ -20,9 +20,7 @@ package org.anasoid.jmeter.as.code.core.wrapper.jmeter.samplers;
 
 import java.util.List;
 import lombok.Getter;
-import lombok.Singular;
 import lombok.experimental.SuperBuilder;
-
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.protocol.http.util.HTTPArgumentWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.protocol.http.util.HTTPFileArgWrapper;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcMandatory;
@@ -31,6 +29,7 @@ import org.apache.jmeter.protocol.http.sampler.HTTPSamplerBase;
 import org.apache.jmeter.samplers.gui.AbstractSamplerGui;
 
 @SuperBuilder(setterPrefix = "with")
+@SuppressWarnings({"PMD.TooManyFields", "PMD.AbstractClassWithoutAnyMethod"})
 public abstract class HTTPSamplerBaseWrapper<
         T extends HTTPSamplerBase, G extends AbstractSamplerGui>
     extends AbstractSamplerWrapper<T, G> {
@@ -39,9 +38,8 @@ public abstract class HTTPSamplerBaseWrapper<
   private @Getter String domain;
 
   @JmcProperty(HTTPSamplerBase.PATH)
-  private @JmcMandatory
-  @Getter String path;
-
+  private @JmcMandatory @Getter String path;
+  /** Define HTTP port. */
   @JmcProperty(HTTPSamplerBase.PORT)
   private @Getter Integer port;
 
@@ -108,6 +106,6 @@ public abstract class HTTPSamplerBaseWrapper<
   @JmcProperty(HTTPSamplerBase.IMAGE_PARSER)
   private @Getter Boolean imageParser;
 
-  @Singular private List<HTTPFileArgWrapper> hTTPFiles;
-  @Singular private List<HTTPArgumentWrapper> arguments;
+  @Getter private List<HTTPFileArgWrapper> hTTPFiles;
+  @Getter private List<HTTPArgumentWrapper> arguments;
 }
