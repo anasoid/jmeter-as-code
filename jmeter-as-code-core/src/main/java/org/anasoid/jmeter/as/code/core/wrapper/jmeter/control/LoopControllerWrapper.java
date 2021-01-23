@@ -11,11 +11,14 @@ import org.apache.jmeter.control.gui.LoopControlPanel;
 public class LoopControllerWrapper
     extends GenericControllerWrapper<LoopController, LoopControlPanel> {
 
+  /**
+   * Infinite.
+   */
   @JmcProperty("LoopController.continue_forever")
   @Builder.Default
   @Getter
   Boolean continueForever = false;
-
+  /** Loop Count. */
   @JmcProperty(LoopController.LOOPS)
   @Getter
   private Integer loops;

@@ -19,8 +19,12 @@
 package org.anasoid.jmeter.as.code.core.wrapper.jmeter.samplers;
 
 import java.util.List;
+import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
+import org.anasoid.jmeter.as.code.core.wrapper.jmc.samplers.HttpMethod;
+import org.anasoid.jmeter.as.code.core.wrapper.jmc.samplers.Implementation;
+import org.anasoid.jmeter.as.code.core.wrapper.jmc.samplers.IpSourceType;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.protocol.http.util.HTTPArgumentWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.protocol.http.util.HTTPFileArgWrapper;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcMandatory;
@@ -34,78 +38,140 @@ public abstract class HTTPSamplerBaseWrapper<
         T extends HTTPSamplerBase, G extends AbstractSamplerGui>
     extends AbstractSamplerWrapper<T, G> {
 
+  /** Server Name or IP. */
   @JmcProperty(HTTPSamplerBase.DOMAIN)
-  private @Getter String domain;
-
+  @Getter
+  private final String domain;
+  /** Path. */
   @JmcProperty(HTTPSamplerBase.PATH)
-  private @JmcMandatory @Getter String path;
-  /** Define HTTP port. */
+  @JmcMandatory
+  @Getter
+  private final String path;
+
+  /** Port Number. */
   @JmcProperty(HTTPSamplerBase.PORT)
-  private @Getter Integer port;
+  @Getter
+  private final Integer port;
+
+  /** Protocol [http]. */
+  @JmcProperty(HTTPSamplerBase.PROTOCOL)
+  @Getter
+  private final String protocol;
 
   @JmcProperty(HTTPSamplerBase.CONTENT_ENCODING)
-  private @Getter String contentEncoding;
+  @Getter
+  private final String contentEncoding;
 
+  /** HTTP Method. */
   @JmcProperty(HTTPSamplerBase.METHOD)
-  private @Getter String method;
+  @Getter
+  private final HttpMethod method;
 
   @JmcProperty(HTTPSamplerBase.IMPLEMENTATION)
-  private @Getter String implementation;
+  @Getter
+  private final Implementation implementation;
 
-  @JmcProperty(HTTPSamplerBase.EMBEDDED_URL_RE)
-  private @Getter String embeddedUrlRE;
+  /** Source Address Type. */
+  @JmcProperty(HTTPSamplerBase.IP_SOURCE_TYPE)
+  @Getter
+  private final IpSourceType ipSourceType;
 
-  @JmcProperty(HTTPSamplerBase.EMBEDDED_URL_EXCLUDE_RE)
-  private @Getter String embeddedUrlExcludeRE;
+  /** Source IP Address. */
+  @JmcProperty(HTTPSamplerBase.IP_SOURCE)
+  @Getter
+  private final String ipSource;
 
+  /** Proxy scheme. */
   @JmcProperty(HTTPSamplerBase.PROXYSCHEME)
-  private @Getter String proxyScheme;
-
+  @Getter
+  private final String proxyScheme;
+  /** Proxy host. */
   @JmcProperty(HTTPSamplerBase.PROXYHOST)
-  private @Getter String proxyHost;
+  @Getter
+  private final String proxyHost;
 
   @JmcProperty(HTTPSamplerBase.PROXYPORT)
-  private @Getter Integer proxyPortInt;
-
+  @Getter
+  private final Integer proxyPortInt;
+  /** Proxy user. */
   @JmcProperty(HTTPSamplerBase.PROXYUSER)
-  private @Getter String proxyUser;
+  @Getter
+  private final String proxyUser;
 
+  /** Proxy pass. */
   @JmcProperty(HTTPSamplerBase.PROXYPASS)
-  private @Getter String proxyPass;
+  @Getter
+  private final String proxyPass;
 
+  /** Connect Timeouts (milliseconds). */
   @JmcProperty(HTTPSamplerBase.CONNECT_TIMEOUT)
-  private @Getter Integer connectTimeout;
+  @Getter
+  private final Integer connectTimeout;
 
+  /** Response Timeouts (milliseconds). */
   @JmcProperty(HTTPSamplerBase.RESPONSE_TIMEOUT)
-  private @Getter Integer responseTimeout;
+  @Getter
+  private final Integer responseTimeout;
 
+  /** Follow redirects. */
   @JmcProperty(HTTPSamplerBase.FOLLOW_REDIRECTS)
-  private @Getter Boolean followRedirects;
+  @Getter
+  private final Boolean followRedirects;
 
+  /** Redirect Automatically. */
+  @JmcProperty(HTTPSamplerBase.AUTO_REDIRECTS)
+  @Getter
+  private final Boolean autoRedirects;
+
+  /** Use KeepAlive. */
   @JmcProperty(HTTPSamplerBase.USE_KEEPALIVE)
-  private @Getter Boolean useKeepAlive;
+  @Getter
+  private final Boolean useKeepAlive;
 
+  /** Use multipart/form-data. */
   @JmcProperty(HTTPSamplerBase.DO_MULTIPART_POST)
-  private @Getter Boolean doMultipartPost;
+  @Getter
+  private final Boolean doMultipartPost;
 
+  /** Browser-compatible headers. */
   @JmcProperty(HTTPSamplerBase.BROWSER_COMPATIBLE_MULTIPART)
-  private @Getter Boolean doBrowserCompatibleMultipart;
+  @Getter
+  private final Boolean doBrowserCompatibleMultipart;
 
-  @JmcProperty(HTTPSamplerBase.MONITOR)
-  private @Getter Boolean monitor;
-
+  /** Save response as MD5 hash. */
   @JmcProperty(HTTPSamplerBase.MD5)
-  private @Getter Boolean md5;
+  @Getter
+  private final Boolean md5;
 
   @JmcProperty(HTTPSamplerBase.POST_BODY_RAW)
-  private @Getter Boolean postBodyRaw;
+  @Getter
+  private final Boolean postBodyRaw;
 
+  /** Embedded Resources from HTML Files: Concurrent pool for parallel download. */
+  @JmcProperty(HTTPSamplerBase.CONCURRENT_POOL)
+  @Default
+  @Getter
+  private Integer concurentPool = HTTPSamplerBase.CONCURRENT_POOL_SIZE;
+
+  /** Embedded Resources from HTML Files: URLs must match. */
+  @JmcProperty(HTTPSamplerBase.EMBEDDED_URL_RE)
+  @Getter
+  private final String embeddedUrlRE;
+
+  /** Embedded Resources from HTML Files: URLs must not match. */
+  @JmcProperty(HTTPSamplerBase.EMBEDDED_URL_EXCLUDE_RE)
+  @Getter
+  private final String embeddedUrlExcludeRE;
+
+  /** Embedded Resources from HTML Files: Parallel downloads. */
   @JmcProperty(HTTPSamplerBase.CONCURRENT_DWN)
-  private @Getter Boolean concurrentDwn;
+  @Getter
+  private final Boolean concurrentDwn;
 
   @JmcProperty(HTTPSamplerBase.IMAGE_PARSER)
-  private @Getter Boolean imageParser;
+  @Getter
+  private final Boolean imageParser;
 
-  @Getter private List<HTTPFileArgWrapper> hTTPFiles;
-  @Getter private List<HTTPArgumentWrapper> arguments;
+  @Getter private final List<HTTPFileArgWrapper> hTTPFiles;
+  @Getter private final List<HTTPArgumentWrapper> arguments;
 }

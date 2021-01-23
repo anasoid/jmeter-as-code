@@ -25,15 +25,24 @@ import org.apache.jmeter.testelement.TestElement;
 @XStreamConverter(value = TestElementConverter.class)
 public abstract class AbstractTestElementWrapper<T extends AbstractTestElement> {
 
+  /**
+   * Name.
+   */
   @XStreamAsAttribute
   @XStreamAlias("testname")
   @Getter
   private String name;
 
+  /**
+   * Comments.
+   */
   @JmcProperty(TestElement.COMMENTS)
   @Getter
   private String comment;
 
+  /**
+   * enabled.
+   */
   @XStreamAsAttribute @Builder.Default @Getter private boolean enabled = true;
 
   @Getter
@@ -112,7 +121,11 @@ public abstract class AbstractTestElementWrapper<T extends AbstractTestElement> 
       return self();
     }
 
-    public B addChild(AbstractTestElementWrapper<?> child) {
+    /**
+     * Add testElement as child in tree.
+     * @param child child.
+     */
+    protected B addChild(AbstractTestElementWrapper<?> child) {
       return this.withChild(child);
     }
   }

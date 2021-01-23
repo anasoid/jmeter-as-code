@@ -140,7 +140,11 @@ public class TestElementConverter implements Converter {
       AbstractTestElementWrapper<?> testElement = (AbstractTestElementWrapper) value;
       writer.addAttribute(ATTRIBUTE_ELEMENT_TYPE, testElement.getTestClass().getSimpleName());
     }
-    context.convertAnother(value);
+    if (value.getClass().isEnum()) {
+      context.convertAnother(value.toString());
+    } else {
+      context.convertAnother(value);
+    }
     writer.endNode();
     if (changed) {
       inElementConversion = false;

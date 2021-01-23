@@ -39,14 +39,16 @@ import org.apache.jmeter.testelement.TestPlan;
 public class TestPlanWrapper extends AbstractTestElementWrapper<TestPlan>
     implements JMeterGUIWrapper<TestPlanGui> {
 
+  /** Functional Test Mode (i.e. save Response Data and Sampler Data) */
   @JmcProperty("TestPlan.functional_mode")
   @Getter
   private boolean functionalMode;
 
+  /** Run Thread Groups consecutively (i.e. one at a time). */
   @JmcProperty("TestPlan.serialize_threadgroups")
   @Getter
   private boolean serialized;
-
+  /** Run tearDown Thread Groups after shutdown of main threads. */
   @JmcProperty("TestPlan.tearDown_on_shutdown")
   @Getter
   private boolean tearDownOnShutdown;

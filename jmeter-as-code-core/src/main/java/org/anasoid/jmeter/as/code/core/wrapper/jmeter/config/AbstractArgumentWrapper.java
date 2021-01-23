@@ -16,36 +16,49 @@
  * Date :   04-Jan-2021
  */
 
-package org.anasoid.jmeter.as.code.core.wrapper.jmeter.protocol.http.util;
+package org.anasoid.jmeter.as.code.core.wrapper.jmeter.config;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import lombok.Builder;
+import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AbstractTestElementWrapper;
+import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcElement;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
-import org.apache.jmeter.protocol.http.util.HTTPFileArg;
+import org.apache.jmeter.config.Argument;
 
 @SuperBuilder(setterPrefix = "with")
-public class HTTPFileArgWrapper extends AbstractTestElementWrapper<HTTPFileArg> {
+@JmcElement
+public abstract class AbstractArgumentWrapper<T extends Argument>
+    extends AbstractTestElementWrapper<T> {
 
-  @JmcProperty("File.path")
-  public String getPath() {
-    return path;
+  @XStreamAsAttribute
+  @XStreamAlias("name")
+  @Getter
+  private String name;
+
+  @XStreamOmitField @Builder.Default @Getter private boolean enabled = true;
+
+  @JmcProperty(Argument.VALUE)
+  private @Getter String value;
+
+  @JmcProperty(Argument.METADATA)
+  @Default
+  private @Getter String metadata = "=";
+
+  @JmcProperty(Argument.DESCRIPTION)
+  private @Getter String description;
+
+  @JmcProperty(Argument.ARG_NAME)
+  public String getNameStr() {
+    return name;
   }
 
-  /** File path. */
-  @XStreamOmitField private String path;
-  /** Parameter name. */
-  @JmcProperty("File.paramname")
-  @Getter
-  private String paramName;
-  /** MIME Type?. */
-  @JmcProperty("File.mimetype")
-  @Getter
-  private String mimeType;
-
   @Override
-  public Class<HTTPFileArg> getTestClass() {
-    return HTTPFileArg.class;
+  public String getTestClassAsString() {
+    return null;
   }
 }

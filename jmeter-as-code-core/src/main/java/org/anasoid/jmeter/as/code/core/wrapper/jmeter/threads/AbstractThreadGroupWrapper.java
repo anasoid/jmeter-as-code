@@ -3,6 +3,7 @@ package org.anasoid.jmeter.as.code.core.wrapper.jmeter.threads;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
+import org.anasoid.jmeter.as.code.core.wrapper.jmc.threads.OnSampleError;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.control.GenericControllerWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.gui.JMeterGUIWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.samplers.AbstractSamplerWrapper;
@@ -17,14 +18,22 @@ public abstract class AbstractThreadGroupWrapper<
         T extends AbstractThreadGroup, G extends AbstractThreadGroupGui>
     extends AbstractTestElementWrapper<T> implements JMeterGUIWrapper<G> {
 
+  /** Action to be taken after a Sampler error. */
+  @JmcProperty(AbstractThreadGroup.ON_SAMPLE_ERROR)
+  @Builder.Default
+  private @Getter OnSampleError onSampleError = OnSampleError.ON_SAMPLE_ERROR_CONTINUE;
+
+  /** Same user on each iteration. */
   @JmcProperty(AbstractThreadGroup.IS_SAME_USER_ON_NEXT_ITERATION)
   @Builder.Default
   private @Getter Boolean isSameUserOnNextIteration = true;
 
+  /** Number of Threads (users). */
   @JmcProperty(AbstractThreadGroup.NUM_THREADS)
   @Builder.Default
   private @Getter Integer numThreads = 1;
 
+  /** the sampler controller. */
   @JmcProperty(AbstractThreadGroup.MAIN_CONTROLLER)
   protected @Getter GenericControllerWrapper<?, ?> samplerController;
 
@@ -41,10 +50,20 @@ public abstract class AbstractThreadGroupWrapper<
       return self();
     }
 
+    /**
+     * Add testElement as child in tree.
+     *
+     * @param child child.
+     */
     public B addChild(AbstractSamplerWrapper<?, ?> child) { // NOSONAR
       return super.addChild(child);
     }
 
+    /**
+     * Add testElement as child in tree.
+     *
+     * @param child child.
+     */
     public B addChild(GenericControllerWrapper<?, ?> child) { // NOSONAR
       return super.addChild(child);
     }

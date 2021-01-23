@@ -13,21 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * @author : anas
- * Date :   04-Jan-2021
+ * Date :   22-Jan-2021
  */
 
-package org.anasoid.jmeter.as.code.core.wrapper.jmeter.config;
+package org.anasoid.jmeter.as.code.core.wrapper.jmc.samplers;
 
-import lombok.experimental.SuperBuilder;
-import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcElement;
-import org.apache.jmeter.config.Argument;
-
-@SuperBuilder(setterPrefix = "with")
-@JmcElement
-public class ArgumentWrapper extends AbstractArgumentWrapper<Argument> {
-
-  @Override
-  public Class<Argument> getTestClass() {
-    return Argument.class;
-  }
+/** HTTP Client Implementation. */
+public enum Implementation {
+  HttpClient4, // NOSONAR
+  Java // NOSONAR
 }

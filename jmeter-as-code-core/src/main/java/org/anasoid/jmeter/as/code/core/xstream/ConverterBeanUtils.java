@@ -169,6 +169,9 @@ public final class ConverterBeanUtils {
   /** get Propetry Alias (intProp,stringProp,longProp .. ). */
   public static String getPropertyAlias(Object value) {
 
+    if (value.getClass().isEnum()) {
+      return "stringProp";
+    }
     if (value instanceof Integer) {
       return "intProp";
     } else if (value instanceof String) {

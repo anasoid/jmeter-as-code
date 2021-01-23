@@ -13,21 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * @author : anas
- * Date :   04-Jan-2021
+ * Date :   22-Jan-2021
  */
 
-package org.anasoid.jmeter.as.code.core.wrapper.jmeter.config;
+package org.anasoid.jmeter.as.code.core.wrapper.jmc.samplers;
 
-import lombok.experimental.SuperBuilder;
-import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcElement;
-import org.apache.jmeter.config.Argument;
+public enum IpSourceType {
+  Hostname(1), // NOSONAR
+  Device(1), // NOSONAR
+  IPV4(2), // NOSONAR
+  IPV6(3); // NOSONAR
 
-@SuperBuilder(setterPrefix = "with")
-@JmcElement
-public class ArgumentWrapper extends AbstractArgumentWrapper<Argument> {
+  public final Integer value;
+
+  private IpSourceType(Integer value) {
+    this.value = value;
+  }
 
   @Override
-  public Class<Argument> getTestClass() {
-    return Argument.class;
+  public String toString() {
+    return value.toString();
   }
 }

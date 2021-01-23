@@ -23,6 +23,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.Writer;
 import org.anasoid.jmeter.as.code.core.wrapper.ScriptWrapper;
+import org.anasoid.jmeter.as.code.core.wrapper.jmc.samplers.HttpMethod;
+import org.anasoid.jmeter.as.code.core.wrapper.jmc.threads.OnSampleError;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.control.LoopControllerWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.samplers.HTTPSamplerProxyWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestPlanWrapper;
@@ -64,7 +66,7 @@ class FirstTest {
             .withDomain("example.com")
             .withPort(80)
             .withPath("/")
-            .withMethod("GET")
+            .withMethod(HttpMethod.GET)
             .withName("Open example.com")
             .build();
 
@@ -74,7 +76,7 @@ class FirstTest {
             .withDomain("blazemeter.com")
             .withPort(80)
             .withPath("/")
-            .withMethod("GET")
+            .withMethod(HttpMethod.GET)
             .withName("Open blazemeter.com")
             .build();
 
@@ -86,6 +88,7 @@ class FirstTest {
             .withDelay(9L)
             .withRampUp(7)
             .withLoops(7)
+            .withOnSampleError(OnSampleError.ON_SAMPLE_ERROR_STOPTHREAD)
             .withContinueForever(false)
             .addChild(examplecomSamplerWrapper)
             .addChild(blazemetercomSamplerWrapper)
