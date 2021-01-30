@@ -152,7 +152,7 @@ public class TestElementConverter implements Converter {
   }
 
   @SuppressWarnings("PMD.NPathComplexity")
-  protected void convertCollection( // NOSONAR
+  protected void convertCollection(
       Object value,
       JmcCollection annotation,
       HierarchicalStreamWriter writer,

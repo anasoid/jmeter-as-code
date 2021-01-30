@@ -218,7 +218,7 @@ public abstract class HTTPSamplerBaseWrapper<
       if (!CollectionUtils.isEmpty(arguments$value)) {
         throw new ConversionException("can't set body and arguments on sampler");
       }
-      addArgument("",body);
+      addArgument("", body);
       this.body = body;
       withPostBodyRaw(true);
       return self();
