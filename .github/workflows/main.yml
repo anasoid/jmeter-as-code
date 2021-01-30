@@ -42,18 +42,18 @@ jobs:
         run: URL="https://downloads.apache.org//jmeter/binaries/$JMETER_FILE.tgz" \
           if [ ! -d  ~/.jmeter ] \
           then \
-          mkdir  ~/.jmeter ; \
-          echo "Creating folder .jmeter" ; \
+          mkdir  ~/.jmeter  \
+          echo "Creating folder .jmeter"  \
           fi \
           if [ -f  ~/.jmeter/$JMETER_FILE.txt ] \
           then \
-          echo "Using from cache" ; \
+          echo "Using from cache"  \
           else \
           curl $URL --output  ~/.jmeter/$JMETER_FILE.tgz \
           tar -xvzf ~/.jmeter/$JMETER_FILE.tgz   -C ~/.jmeter/ \
           mv  ~/.jmeter/$JMETER_FILE ~/.jmeter/jmeter \
           ls -la $JMETER_HOME \
-          echo "update" >  ~/.jmeter/${JMETER_FILE}.txt \
+          echo "update" >  ~/.jmeter/$JMETER_FILE.txt \
           fi \
 
 
