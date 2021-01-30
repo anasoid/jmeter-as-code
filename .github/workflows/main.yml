@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       JMETER_HOME: ~/.jmeter/jmeter
+      JMETER_FILE: apache-jmeter-5.4.1
     steps:
       - uses: actions/checkout@v2
       - name: Set up JDK 11
@@ -38,15 +39,14 @@ jobs:
 
 
       - name: Download Jmeter
-        run: jmeterFile="apache-jmeter-5.4.1" \
-          URL="https://downloads.apache.org//jmeter/binaries/$jmeterFile.tgz" \
-          if [ -f $jmeterFile.txt ] then \
+        run: URL="https://downloads.apache.org//jmeter/binaries/${JMETER_FILE}.tgz" \
+          if [ -f  ~/.jmeter/${JMETER_FILE}.txt ] then \
           echo "Using from cache" \
           else \
           curl   $URL --output  ~/.jmeter/$jmeterFile \
           tar -xvzf ~/.jmeter/$jmeterFile.tgz -C $JMETER_HOME  \
           ls -la JMETER_HOME  \
-          echo "update" >  $jmeterFile.txt \
+          echo "update" >  ~/.jmeter/${JMETER_FILE}.txt \
           fi \
 
 
