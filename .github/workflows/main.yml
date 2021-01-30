@@ -40,7 +40,7 @@ jobs:
 
       - name: Download Jmeter
         run: URL="https://downloads.apache.org//jmeter/binaries/$JMETER_FILE.tgz" \
-          if [ -f  ~/.jmeter/$JMETER_FILE.txt ] then \
+          if [ -f  ~/.jmeter/$JMETER_FILE.txt ]; then \
           echo "Using from cache" \
           else \
           curl   $URL --output  ~/.jmeter/$JMETER_FILE.tgz \
