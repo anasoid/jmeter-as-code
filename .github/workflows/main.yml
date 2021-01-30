@@ -1,62 +1,78 @@
 # This workflow will build a Java project with Gradle
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
 
-name: Java CI with Gradle
+name: Build & Test
 
-on: [push, pull_request]
+on: [ push, pull_request ]
 
 jobs:
   build:
 
     runs-on: ubuntu-latest
-
+    env:
+      JMETER_HOME: ~/.jmeter/jmeter
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up JDK 11
-      uses: actions/setup-java@v1
-      with:
-        java-version: 11
+      - uses: actions/checkout@v2
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
 
-    - uses: actions/cache@v2
-      with:
-        path: |
-          ~/.gradle/caches
-          ~/.gradle/wrapper
-          ~/.gradle/dependency-check-data
-        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
-        restore-keys: |
-          ${{ runner.os }}-gradle-
+      - uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+            ~/.gradle/dependency-check-data
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
 
-    - uses: actions/cache@v2
-      with:
-        path: |
-          ~/.sonar
-        key: ${{ runner.os }}-sonar-${{ hashFiles('**/*.gradle*') }}
-        restore-keys: |
-          ${{ runner.os }}-sonar-
+      - uses: actions/cache@v2
+        with:
+          path: |
+            ~/.sonar
+          key: ${{ runner.os }}-sonar-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-sonar-
 
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
 
-    - name: dependencyCheck
-      run: ./gradlew dependencyCheckAggregate
+      - name: Download Jmeter
+        run: jmeterFile="apache-jmeter-5.4.1" \
+          URL="https://downloads.apache.org//jmeter/binaries/$jmeterFile.tgz" \
+          if [ -f $jmeterFile.txt ];then \
+          echo "Using from cache" \
+          else \
+          if [ "${CIRCLE_NODE_TOTAL:-1}" -gt "1" ];then \
+          curl   $URL --output  ~/.jmeter/$jmeterFile \
+          tar -xvzf ~/.jmeter/$jmeterFile.tgz -C $JMETER_HOME  \
+          ls -la JMETER_HOME  \
+          echo "update" >  $jmeterFile.txt \
+          fi \
 
-    - name: Build with Gradle
-      run: ./gradlew build
 
-    - name: Sonar check
-      run: ./gradlew  --stacktrace  sonarqube -Dsonar.organization=anasoid-org -Dsonar.projectKey=anasoid_jmeter-as-code  -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
 
-    - name: Publish Test Report
-      uses: mikepenz/action-junit-report@v1
-      with:
-        report_paths: '**/build/test-results/test/TEST-*.xml'
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: dependencyCheck
+        run: ./gradlew dependencyCheckAggregate
 
-    - uses: actions/upload-artifact@v2
-      with:
-        name: reports
-        path: '**/build/reports/**'
+      - name: Build with Gradle
+        run: ./gradlew build
+
+      - name: Sonar check
+        run: ./gradlew  --stacktrace  sonarqube -Dsonar.organization=anasoid-org -Dsonar.projectKey=anasoid_jmeter-as-code  -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+      - name: Publish Test Report
+        uses: mikepenz/action-junit-report@v1
+        with:
+          report_paths: '**/build/test-results/test/TEST-*.xml'
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: reports
+          path: '**/build/reports/**'
