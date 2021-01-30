@@ -19,18 +19,20 @@
 package org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import lombok.Builder.Default;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.config.ArgumentWrapper;
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.config.ArgumentsWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.gui.JMeterGUIWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.threads.AbstractThreadGroupWrapper;
+import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcCollection;
+import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcEmptyAllowed;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
+import org.apache.jmeter.config.Arguments;
+import org.apache.jmeter.config.gui.ArgumentsPanel;
 import org.apache.jmeter.control.gui.TestPlanGui;
 import org.apache.jmeter.testelement.TestPlan;
 
@@ -53,21 +55,17 @@ public class TestPlanWrapper extends AbstractTestElementWrapper<TestPlan>
   @Getter
   private boolean tearDownOnShutdown;
 
-  @Getter @Default @XStreamOmitField private List<ArgumentWrapper> arguments = new ArrayList<>();
-
-  @JmcProperty("TestPlan.user_defined_variables")
-  protected ArgumentsWrapper getArgument() {
-    return ArgumentsWrapper.builder().addArguments(arguments).build();
-  }
-
-  @Getter @XStreamOmitField
-  // @JmcProperty("TestPlan.user_defined_variables")
-  private ArgumentsWrapper argumentsWrapper;
-
-  @Override
-  public void init() {
-    argumentsWrapper = ArgumentsWrapper.builder().addArguments(arguments).build();
-  }
+  @JmcCollection(
+      value = Arguments.ARGUMENTS,
+      withElementProp = true,
+      name = "TestPlan.user_defined_variables",
+      elementType = Arguments.class,
+      guiclass = ArgumentsPanel.class,
+      testclass = Arguments.class)
+  @Builder.Default
+  @Getter
+  @JmcEmptyAllowed
+  private List<ArgumentWrapper> arguments = new ArrayList<>();
 
   @Override
   public Class<TestPlanGui> getGuiClass() {

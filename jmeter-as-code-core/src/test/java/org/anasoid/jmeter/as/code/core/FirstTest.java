@@ -84,6 +84,25 @@ class FirstTest {
             .withName("Open blazemeter.com")
             .build();
 
+    // Second HTTP Sampler - open blazemeter.com
+    HTTPSamplerProxyWrapper bodySamplerWrapper =
+        HTTPSamplerProxyWrapper.builder()
+            .withDomain("blazemeter.com")
+            .withPort(80)
+            .withPath("/")
+            .withBody("BBBBBBBBBBBB")
+            .withName("body blazemeter.com")
+            .build();
+
+    HTTPSamplerProxyWrapper argSamplerWrapper =
+        HTTPSamplerProxyWrapper.builder()
+            .withDomain("blazemeter.com")
+            .withPort(80)
+            .withPath("/")
+            .addArgument("ppppp", "vvvvvvvvv")
+            .withName("argument blazemeter.com")
+            .build();
+
     // Thread Group
     ThreadGroupWrapper threadGroupWrapper =
         ThreadGroupWrapper.builder()
@@ -97,14 +116,16 @@ class FirstTest {
             .addChild(examplecomSamplerWrapper)
             .addChild(blazemetercomSamplerWrapper)
             .addChild(blazemetercomSamplerWrapper)
+            .addChild(bodySamplerWrapper)
+            .addChild(argSamplerWrapper)
             .build();
 
     // Test Plan
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
             .withName("Create JMeter Script From Java Code")
-            //.addArgument("testplanArg1", "valuearg1")
-            //.addArgument("testplanArg2", "valuearg2")
+            // .addArgument("testplanArg1", "valuearg1")
+            // .addArgument("testplanArg2", "valuearg2")
             .addChild(threadGroupWrapper)
             .build();
 
