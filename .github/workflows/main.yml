@@ -40,10 +40,9 @@ jobs:
       - name: Download Jmeter
         run: jmeterFile="apache-jmeter-5.4.1" \
           URL="https://downloads.apache.org//jmeter/binaries/$jmeterFile.tgz" \
-          if [ -f $jmeterFile.txt ];then \
+          if [ -f $jmeterFile.txt ] then \
           echo "Using from cache" \
           else \
-          if [ "${CIRCLE_NODE_TOTAL:-1}" -gt "1" ];then \
           curl   $URL --output  ~/.jmeter/$jmeterFile \
           tar -xvzf ~/.jmeter/$jmeterFile.tgz -C $JMETER_HOME  \
           ls -la JMETER_HOME  \
