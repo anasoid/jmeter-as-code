@@ -34,10 +34,13 @@ import java.util.Map;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AbstractTestElementWrapper;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcAsAttribute;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcCollection;
+import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcEmptyAllowed;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcMethodAlias;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
+import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcSkipDefault;
 import org.anasoid.jmeter.as.code.core.xstream.exceptions.ConversionException;
 
+@SuppressWarnings("PMD.GodClass")
 public final class ConverterBeanUtils {
 
   private ConverterBeanUtils() {}
@@ -170,7 +173,7 @@ public final class ConverterBeanUtils {
   public static String getPropertyAlias(Object value) {
 
     if (value.getClass().isEnum()) {
-      return "stringProp";
+      return getPropertyAlias(getEnumValue(value));
     }
     if (value instanceof Integer) {
       return "intProp";
@@ -187,6 +190,16 @@ public final class ConverterBeanUtils {
     throw new IllegalStateException("Unknowen properties type for :" + value);
   }
 
+  /** get num value. call value() method if present, else call toString. */
+  public static Object getEnumValue(Object object) {
+
+    try {
+      return object.getClass().getMethod("value").invoke(object);
+    } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+      return object.toString();
+    }
+  }
+
   /** Should skip field from XML conversion. */
   public static boolean shouldSkip(Object source, AccessibleObject field) {
 
@@ -197,7 +210,14 @@ public final class ConverterBeanUtils {
     if (value == null) {
       return true;
     }
-    return (value instanceof Collection && ((Collection<?>) value).isEmpty());
+    JmcSkipDefault jmcSkipDefault = field.getAnnotation(JmcSkipDefault.class);
+    if ((jmcSkipDefault != null) && (jmcSkipDefault.value().equals(value.toString()))) {
+      return true;
+    }
+
+    return (value instanceof Collection
+        && ((Collection<?>) value).isEmpty()
+        && field.getAnnotation(JmcEmptyAllowed.class) == null);
   }
 
   /** filter Fields to be converted as attribute on XML. */

@@ -24,6 +24,8 @@ import java.io.FileWriter;
 import java.io.Writer;
 import org.anasoid.jmeter.as.code.core.wrapper.ScriptWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmc.samplers.HttpMethod;
+import org.anasoid.jmeter.as.code.core.wrapper.jmc.samplers.Implementation;
+import org.anasoid.jmeter.as.code.core.wrapper.jmc.samplers.IpSourceType;
 import org.anasoid.jmeter.as.code.core.wrapper.jmc.threads.OnSampleError;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.control.LoopControllerWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.samplers.HTTPSamplerProxyWrapper;
@@ -77,6 +79,8 @@ class FirstTest {
             .withPort(80)
             .withPath("/")
             .withMethod(HttpMethod.GET)
+            .withImplementation(Implementation.HttpClient4)
+            .withIpSourceType(IpSourceType.IPV4)
             .withName("Open blazemeter.com")
             .build();
 
@@ -99,8 +103,8 @@ class FirstTest {
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
             .withName("Create JMeter Script From Java Code")
-            .addArgument("testplanArg1", "valuearg1")
-            .addArgument("testplanArg2", "valuearg2")
+            //.addArgument("testplanArg1", "valuearg1")
+            //.addArgument("testplanArg2", "valuearg2")
             .addChild(threadGroupWrapper)
             .build();
 

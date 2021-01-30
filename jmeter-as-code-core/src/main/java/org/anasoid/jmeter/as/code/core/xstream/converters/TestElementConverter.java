@@ -141,7 +141,7 @@ public class TestElementConverter implements Converter {
       writer.addAttribute(ATTRIBUTE_ELEMENT_TYPE, testElement.getTestClass().getSimpleName());
     }
     if (value.getClass().isEnum()) {
-      context.convertAnother(value.toString());
+      context.convertAnother(ConverterBeanUtils.getEnumValue(value));
     } else {
       context.convertAnother(value);
     }
@@ -151,12 +151,30 @@ public class TestElementConverter implements Converter {
     }
   }
 
+  @SuppressWarnings("PMD.NPathComplexity")
   protected void convertCollection(
       Object value,
       JmcCollection annotation,
       HierarchicalStreamWriter writer,
       MarshallingContext context) {
-
+    if (annotation.withElementProp()) {
+      writer.startNode("elementProp");
+      if (!annotation.name().isBlank()) {
+        writer.addAttribute("name", annotation.name());
+      }
+      if (!annotation.elementType().equals(Void.class)) {
+        writer.addAttribute("elementType", annotation.elementType().getSimpleName());
+      }
+      if (!annotation.guiclass().equals(Void.class)) {
+        writer.addAttribute("guiclass", annotation.guiclass().getSimpleName());
+      }
+      if (!annotation.testclass().equals(Void.class)) {
+        writer.addAttribute("testclass", annotation.testclass().getSimpleName());
+      }
+      if (annotation.enabled()) {
+        writer.addAttribute("enabled", "true");
+      }
+    }
     writer.startNode("collectionProp");
     boolean changed = false;
     if (!inElementConversion) {
@@ -183,6 +201,9 @@ public class TestElementConverter implements Converter {
     }
 
     writer.endNode();
+    if (annotation.withElementProp()) {
+      writer.endNode();
+    }
     if (changed) {
       inElementConversion = false;
     }

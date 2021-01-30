@@ -18,7 +18,9 @@
 
 package org.anasoid.jmeter.as.code.core.wrapper.jmeter.samplers;
 
+import java.util.ArrayList;
 import java.util.List;
+import lombok.Builder;
 import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
@@ -27,9 +29,15 @@ import org.anasoid.jmeter.as.code.core.wrapper.jmc.samplers.Implementation;
 import org.anasoid.jmeter.as.code.core.wrapper.jmc.samplers.IpSourceType;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.protocol.http.util.HTTPArgumentWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.protocol.http.util.HTTPFileArgWrapper;
+import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcCollection;
+import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcEmptyAllowed;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcMandatory;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
+import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcSkipDefault;
+import org.apache.jmeter.config.Arguments;
+import org.apache.jmeter.protocol.http.gui.HTTPArgumentsPanel;
 import org.apache.jmeter.protocol.http.sampler.HTTPSamplerBase;
+import org.apache.jmeter.protocol.http.util.HTTPFileArgs;
 import org.apache.jmeter.samplers.gui.AbstractSamplerGui;
 
 @SuperBuilder(setterPrefix = "with")
@@ -74,6 +82,7 @@ public abstract class HTTPSamplerBaseWrapper<
   /** Source Address Type. */
   @JmcProperty(HTTPSamplerBase.IP_SOURCE_TYPE)
   @Getter
+  @JmcSkipDefault("0")
   private final IpSourceType ipSourceType;
 
   /** Source IP Address. */
@@ -172,6 +181,23 @@ public abstract class HTTPSamplerBaseWrapper<
   @Getter
   private final Boolean imageParser;
 
-  @Getter private final List<HTTPFileArgWrapper> hTTPFiles;
-  @Getter private final List<HTTPArgumentWrapper> arguments;
+  @JmcCollection(
+      value = HTTPSamplerBase.ARGUMENTS,
+      withElementProp = true,
+      name = "HTTPsampler.Arguments",
+      elementType = Arguments.class,
+      guiclass = HTTPArgumentsPanel.class,
+      testclass = Arguments.class)
+  @Builder.Default
+  @Getter
+  @JmcEmptyAllowed
+  private final List<HTTPArgumentWrapper> arguments = new ArrayList<>();
+
+  @JmcCollection(
+      value = "HTTPFileArgs.files",
+      withElementProp = true,
+      name = "HTTPsampler.Files",
+      elementType = HTTPFileArgs.class)
+  @Getter
+  private final List<HTTPFileArgWrapper> hTTPFiles;
 }

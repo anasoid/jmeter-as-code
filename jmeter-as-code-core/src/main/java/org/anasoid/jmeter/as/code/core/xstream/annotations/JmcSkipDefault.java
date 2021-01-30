@@ -1,3 +1,4 @@
+package org.anasoid.jmeter.as.code.core.xstream.annotations;
 /*
  * Copyright 2020-2021 the original author or authors.
  *
@@ -13,29 +14,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * @author : anas
- * Date :   22-Jan-2021
+ * Date :   14-Jan-2021
  */
 
-package org.anasoid.jmeter.as.code.core.wrapper.jmc.samplers;
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-public enum IpSourceType {
-  Hostname(0), // NOSONAR
-  Device(1), // NOSONAR
-  IPV4(2), // NOSONAR
-  IPV6(3); // NOSONAR
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
 
-  public final Integer value;
-
-  public Integer value() {
-    return value;
-  }
-
-  private IpSourceType(Integer value) {
-    this.value = value;
-  }
-
-  @Override
-  public String toString() {
-    return value.toString();
-  }
+/** Skip serialize attribute if equal value. */
+@Target({FIELD, METHOD})
+@Retention(RUNTIME)
+public @interface JmcSkipDefault {
+  /** Default Value. */
+  String value();
 }

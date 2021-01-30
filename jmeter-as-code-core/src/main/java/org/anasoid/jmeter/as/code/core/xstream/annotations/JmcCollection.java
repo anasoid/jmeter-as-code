@@ -24,15 +24,29 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-/** Defines that a field should be serialized as an collection.
- * &#x3C;collectionProp .../&#x3E;
- * */
+/** Defines that a field should be serialized as an collection. &#x3C;collectionProp .../&#x3E; */
 @Target({FIELD})
 @Retention(RUNTIME)
 public @interface JmcCollection {
 
-  /**
-   * attribute 'name' value.
-   */
+  /** attribute 'name' value. */
   String value();
+
+  /** add Parent tag elementProp. */
+  boolean withElementProp() default false;
+
+  /** name tag on elementProp. only when withElementProp is true. */
+  String name() default "";
+
+  /** elementType tag on elementProp. only when withElementProp is true. */
+  Class<?> elementType() default Void.class;
+
+  /** guiclass tag on elementProp. only when withElementProp is true. */
+  Class<?> guiclass() default Void.class;
+
+  /** testclass tag on elementProp. only when withElementProp is true. */
+  Class<?> testclass() default Void.class;
+
+  /** enabled tag on elementProp. only when withElementProp is true. */
+  boolean enabled() default true;
 }
