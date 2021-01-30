@@ -44,6 +44,8 @@ jobs:
           then \
           mkdir  ~/.jmeter  \
           echo "Creating folder .jmeter"  \
+          else \
+          echo "Found folder .jmeter"  \
           fi \
           if [ -f  ~/.jmeter/$JMETER_FILE.txt ] \
           then \
