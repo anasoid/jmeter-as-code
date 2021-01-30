@@ -22,7 +22,6 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import lombok.Builder;
 import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
@@ -187,6 +186,8 @@ public abstract class HTTPSamplerBaseWrapper<
 
   @Getter @XStreamOmitField private final String body;
 
+  @Getter
+  @Default
   @JmcCollection(
       value = Arguments.ARGUMENTS,
       withElementProp = true,
@@ -194,8 +195,6 @@ public abstract class HTTPSamplerBaseWrapper<
       elementType = Arguments.class,
       guiclass = HTTPArgumentsPanel.class,
       testclass = Arguments.class)
-  @Builder.Default
-  @Getter
   @JmcEmptyAllowed
   private final List<HTTPArgumentWrapper> arguments = new ArrayList<>();
 
@@ -214,20 +213,20 @@ public abstract class HTTPSamplerBaseWrapper<
           B extends HTTPSamplerBaseWrapperBuilder<T, G, C, B>>
       extends AbstractSamplerWrapper.AbstractSamplerWrapperBuilder<T, G, C, B> {
 
-    private boolean useBody;
-
     /** set body. */
     public B withBody(String body) {
       if (!CollectionUtils.isEmpty(arguments$value)) {
         throw new ConversionException("can't set body and arguments on sampler");
       }
-      addArgument(HTTPArgumentWrapper.builder().withName("").withValue(body).build());
-      useBody = true;
+      addArgument("",body);
+      this.body = body;
+      withPostBodyRaw(true);
       return self();
     }
 
-    public B withPath(String path) {
-      this.path = path;
+    /** set body. */
+    protected B withPostBodyRaw(Boolean postBodyRaw) {
+      this.postBodyRaw = postBodyRaw;
       return self();
     }
 
@@ -244,7 +243,7 @@ public abstract class HTTPSamplerBaseWrapper<
      * @param arguments List of arguments.
      */
     public B addArguments(Collection<HTTPArgumentWrapper> arguments) {
-      if (useBody) {
+      if (Boolean.TRUE.equals(postBodyRaw)) {
         throw new ConversionException("can't set arguments with body on sampler");
       }
       if (!this.arguments$set) {
@@ -273,7 +272,7 @@ public abstract class HTTPSamplerBaseWrapper<
      * @param argument argument. to be add
      */
     public B addArgument(HTTPArgumentWrapper argument) {
-      if (useBody) {
+      if (Boolean.TRUE.equals(postBodyRaw)) {
         throw new ConversionException("can't set arguments with body on sampler");
       }
       if (!this.arguments$set) {

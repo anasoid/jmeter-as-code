@@ -152,7 +152,7 @@ public class TestElementConverter implements Converter {
   }
 
   @SuppressWarnings("PMD.NPathComplexity")
-  protected void convertCollection(
+  protected void convertCollection( // NOSONAR
       Object value,
       JmcCollection annotation,
       HierarchicalStreamWriter writer,
@@ -163,7 +163,7 @@ public class TestElementConverter implements Converter {
         writer.addAttribute("name", annotation.name());
       }
       if (!annotation.elementType().equals(Void.class)) {
-        writer.addAttribute("elementType", annotation.elementType().getSimpleName());
+        writer.addAttribute(ATTRIBUTE_ELEMENT_TYPE, annotation.elementType().getSimpleName());
       }
       if (!annotation.guiclass().equals(Void.class)) {
         writer.addAttribute("guiclass", annotation.guiclass().getSimpleName());

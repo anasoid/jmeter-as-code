@@ -19,13 +19,14 @@ package org.anasoid.jmeter.as.code.core.xstream.annotations;
  */
 
 import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 /** Defines that a field should be serialized as an collection. &#x3C;collectionProp .../&#x3E; */
-@Target({FIELD})
+@Target({FIELD,METHOD})
 @Retention(RUNTIME)
 public @interface JmcCollection {
 
