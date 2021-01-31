@@ -206,6 +206,7 @@ public abstract class HTTPSamplerBaseWrapper<
   @Getter
   private final List<HTTPFileArgWrapper> filesArguments;
 
+  @SuppressWarnings("PMD.AccessorMethodGeneration")
   public abstract static class HTTPSamplerBaseWrapperBuilder<
           T extends HTTPSamplerBase,
           G extends AbstractSamplerGui,

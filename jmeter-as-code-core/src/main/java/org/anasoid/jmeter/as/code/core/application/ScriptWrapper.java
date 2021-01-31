@@ -1,4 +1,4 @@
-package org.anasoid.jmeter.as.code.core.wrapper;
+package org.anasoid.jmeter.as.code.core.application;
 /*
  * Copyright 2020-2021 the original author or authors.
  *
@@ -24,14 +24,18 @@ import java.util.ArrayList;
 import java.util.List;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestPlanWrapper;
 import org.anasoid.jmeter.as.code.core.xstream.converters.TestElementConverter;
+import org.apache.jmeter.save.SaveService;
+import org.apache.jmeter.util.JMeterUtils;
 
 @XStreamAlias("jmeterTestPlan")
 @XStreamConverter(TestElementConverter.class)
 @SuppressWarnings("PMD.FinalFieldCouldBeStatic")
-public class ScriptWrapper {
-  @XStreamAsAttribute private final String version = "1.2"; // NOSONAR
-  @XStreamAsAttribute private final String jmeter = "5.3"; // NOSONAR
-  @XStreamAsAttribute private final String properties = "5.0"; // NOSONAR
+class ScriptWrapper {
+  @XStreamAsAttribute private final String version = SaveService.getVERSION(); // NOSONAR
+  @XStreamAsAttribute private final String jmeter = JMeterUtils.getJMeterVersion(); // NOSONAR
+
+  @XStreamAsAttribute
+  private final String properties = "5.0"; // NOSONAR
 
   @XStreamAlias("hashTree")
   List<TestPlanWrapper> testPlan;

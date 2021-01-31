@@ -18,21 +18,18 @@
 
 package org.anasoid.jmeter.as.code.core;
 
-import com.thoughtworks.xstream.XStream;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.Writer;
-import org.anasoid.jmeter.as.code.core.wrapper.ScriptWrapper;
+import org.anasoid.jmeter.as.code.core.application.ApplicationTest;
 import org.anasoid.jmeter.as.code.core.wrapper.jmc.samplers.HttpMethod;
 import org.anasoid.jmeter.as.code.core.wrapper.jmc.samplers.Implementation;
 import org.anasoid.jmeter.as.code.core.wrapper.jmc.samplers.IpSourceType;
 import org.anasoid.jmeter.as.code.core.wrapper.jmc.threads.OnSampleError;
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.control.LoopControllerWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.samplers.HTTPSamplerProxyWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestPlanWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.threads.ThreadGroupWrapper;
 import org.apache.commons.io.FileUtils;
-import org.apache.jorphan.collections.HashTree;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -49,18 +46,6 @@ class FirstTest {
 
     System.out.println(destination);
     Writer wr = new FileWriter(destination); // NOPMD
-    XStream xstream = new XStream();
-    xstream.setMode(XStream.NO_REFERENCES);
-    xstream.aliasSystemAttribute(null, "class");
-    xstream.alias("hashTree", HashTree.class);
-    xstream.processAnnotations(
-        new Class[] {
-          LoopControllerWrapper.class,
-          HTTPSamplerProxyWrapper.class,
-          TestPlanWrapper.class,
-          ThreadGroupWrapper.class,
-          ScriptWrapper.class
-        });
 
     // First HTTP Sampler - open example.com
     HTTPSamplerProxyWrapper examplecomSamplerWrapper =
@@ -129,8 +114,8 @@ class FirstTest {
             .addChild(threadGroupWrapper)
             .build();
 
-    ScriptWrapper script = new ScriptWrapper().setTesPlan(testPlanWrapper);
-    xstream.toXML(script, wr);
+    ApplicationTest applicationTest = new ApplicationTest(testPlanWrapper);
+    applicationTest.toJmx(wr);
     Assertions.assertTrue(true);
   }
 }
