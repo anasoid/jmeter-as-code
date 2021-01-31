@@ -39,7 +39,7 @@ jobs:
 
 
       - name: Download Jmeter
-        run: ~/.github/scripts/download-jmeter.sh
+        run: ~/work/.github/scripts/download-jmeter.sh
 
 
       - name: Grant execute permission for gradlew
