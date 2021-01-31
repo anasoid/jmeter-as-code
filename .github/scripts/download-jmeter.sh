@@ -23,6 +23,7 @@ else
     rm -rf ~/.jmeter/jmeter/docs
     rm -rf ~/.jmeter/jmeter/printable_docs
     rm -rf ~/.jmeter/jmeter/licenses
+    rm -rf ~/.jmeter/$JMETER_FILE.tgz
     ls -la ~/.jmeter/jmeter
     echo "update" >  ~/.jmeter/$JMETER_FILE.txt
 fi
