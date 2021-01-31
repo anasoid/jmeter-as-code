@@ -4,9 +4,9 @@ set -e
 
 
 URL="https://downloads.apache.org//jmeter/binaries/$JMETER_FILE.tgz"
-if [ ! -d  ~/.jmeter/jmeter ]
+if [ ! -d  ~/.jmeter ]
 then
-   mkdir -pv ~/.jmeter/jmeter
+   mkdir -pv ~/.jmeter
    echo "Creating folder .jmeter"
 else
    echo "Found folder .jmeter"
@@ -18,6 +18,7 @@ then
 else
     curl $URL --output  ~/.jmeter/$JMETER_FILE.tgz
     tar -xzf ~/.jmeter/$JMETER_FILE.tgz   -C ~/.jmeter/
+    ls -la ~/.jmeter
     mv  ~/.jmeter/$JMETER_FILE ~/.jmeter/jmeter
     ls -la $JMETER_HOME
     echo "update" >  ~/.jmeter/$JMETER_FILE.txt
