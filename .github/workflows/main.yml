@@ -37,6 +37,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-sonar-
 
+      - uses: actions/cache@v2
+        with:
+          path: |
+            ~/.jmeter
+          key: jmeter-$JMETER_FILE
 
       - name: chmod  download-jmeter
         run: chmod +x ~/work/jmeter-as-code/jmeter-as-code/.github/scripts/download-jmeter.sh
