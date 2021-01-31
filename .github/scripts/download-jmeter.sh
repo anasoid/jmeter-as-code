@@ -20,6 +20,9 @@ else
     tar -xzf ~/.jmeter/$JMETER_FILE.tgz   -C ~/.jmeter/
     ls -la ~/.jmeter
     mv  -v ~/.jmeter/$JMETER_FILE ~/.jmeter/jmeter
+    rm -rf ~/.jmeter/jmeter/docs
+    rm -rf ~/.jmeter/jmeter/printable_docs
+    rm -rf ~/.jmeter/jmeter/licenses
     ls -la ~/.jmeter/jmeter
     echo "update" >  ~/.jmeter/$JMETER_FILE.txt
 fi
