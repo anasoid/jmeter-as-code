@@ -19,7 +19,7 @@ else
     curl $URL --output  ~/.jmeter/$JMETER_FILE.tgz
     tar -xzf ~/.jmeter/$JMETER_FILE.tgz   -C ~/.jmeter/
     ls -la ~/.jmeter
-    mv  ~/.jmeter/$JMETER_FILE ~/.jmeter/jmeter
-    ls -la $JMETER_HOME
+    mv  -v ~/.jmeter/$JMETER_FILE ~/.jmeter/jmeter
+    ls -la ~/.jmeter/jmeter
     echo "update" >  ~/.jmeter/$JMETER_FILE.txt
 fi
