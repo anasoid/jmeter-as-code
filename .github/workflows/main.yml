@@ -38,10 +38,11 @@ jobs:
             ${{ runner.os }}-sonar-
 
 
-      - name: Download Jmeter
-        run: chmod +x ~/work/jmeter-as-code/jmeter-as-code/.github/scripts/download-jmeter.sh \
-            ~/work/jmeter-as-code/jmeter-as-code/.github/scripts/download-jmeter.sh
+      - name: chmod  download-jmeter
+        run: chmod +x ~/work/jmeter-as-code/jmeter-as-code/.github/scripts/download-jmeter.sh
 
+      - name: Download Jmeter
+        run: ~/work/jmeter-as-code/jmeter-as-code/.github/scripts/download-jmeter.sh
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
