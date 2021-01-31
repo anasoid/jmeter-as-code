@@ -6,7 +6,7 @@ set -e
 URL="https://downloads.apache.org//jmeter/binaries/$JMETER_FILE.tgz"
 if [ ! -d  ~/.jmeter/jmeter ]
 then
-   mkdir -p ~/.jmeter/jmeter
+   mkdir -pv ~/.jmeter/jmeter
    echo "Creating folder .jmeter"
 else
    echo "Found folder .jmeter"
