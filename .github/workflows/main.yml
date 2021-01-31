@@ -48,6 +48,7 @@ jobs:
 
       - name: chmod  download-jmeter
         run: chmod +x ~/work/jmeter-as-code/jmeter-as-code/.github/scripts/download-jmeter.sh
+
       - name: Download Jmeter
         run: ~/work/jmeter-as-code/jmeter-as-code/.github/scripts/download-jmeter.sh
 
