@@ -29,7 +29,6 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import org.anasoid.jmeter.as.code.core.wrapper.ScriptWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AbstractTestElementWrapper;
 import org.anasoid.jmeter.as.code.core.xstream.ConverterBeanUtils;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcCollection;
@@ -218,6 +217,6 @@ public class TestElementConverter implements Converter {
   public boolean canConvert(Class type) {
 
     return AbstractTestElementWrapper.class.isAssignableFrom(type)
-        || ScriptWrapper.class.isAssignableFrom(type);
+        || "ScriptWrapper".equals(type.getClass().getSimpleName());
   }
 }
