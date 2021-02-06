@@ -11,6 +11,7 @@ dependencies {
     implementation(project(":jmeter-as-code-plugin"))
 
     implementation("commons-beanutils:commons-beanutils:$commonsBeanutilsVersion")
+    implementation("io.github.classgraph:classgraph:$classgraphVersion")
 
 
 

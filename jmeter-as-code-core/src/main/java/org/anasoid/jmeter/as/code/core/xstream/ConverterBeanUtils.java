@@ -32,6 +32,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AbstractTestElementWrapper;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.property.JMeterProperty;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcAsAttribute;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcCollection;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcEmptyAllowed;
@@ -176,16 +177,22 @@ public final class ConverterBeanUtils {
       return getPropertyAlias(getEnumValue(value));
     }
     if (value instanceof Integer) {
-      return "intProp";
+      return JMeterProperty.INTEGER.value();
     } else if (value instanceof String) {
-      return "stringProp";
+      return JMeterProperty.STRING.value();
     } else if (value instanceof Long) {
-      return "longProp";
+      return JMeterProperty.LONG.value();
     } else if (value instanceof Boolean) {
-      return "boolProp";
+      return JMeterProperty.BOOL.value();
+
+    } else if (value instanceof Float) {
+      return JMeterProperty.FLOAT.value();
+
+    } else if (value instanceof Double) {
+      return JMeterProperty.DOUBLE.value();
 
     } else if (value instanceof AbstractTestElementWrapper) {
-      return "elementProp";
+      return JMeterProperty.ELEMENT.value();
     }
     throw new IllegalStateException("Unknowen properties type for :" + value);
   }
