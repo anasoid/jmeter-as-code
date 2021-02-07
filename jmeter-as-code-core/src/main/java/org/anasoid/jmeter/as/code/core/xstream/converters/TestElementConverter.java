@@ -181,10 +181,7 @@ public class TestElementConverter implements Converter {
       changed = true;
     }
     writer.addAttribute("name", annotation.value());
-    if (value instanceof AbstractTestElementWrapper) {
-      AbstractTestElementWrapper<?> testElement = (AbstractTestElementWrapper) value;
-      writer.addAttribute(ATTRIBUTE_ELEMENT_TYPE, testElement.getTestClass().getSimpleName());
-    }
+
     Collection<?> values = (Collection) value;
     if (values != null) {
       for (Object object : values) {

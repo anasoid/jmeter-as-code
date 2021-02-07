@@ -25,22 +25,20 @@ import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
 import org.apache.jmeter.control.LoopController;
 import org.apache.jmeter.control.gui.LoopControlPanel;
 
-@SuperBuilder(setterPrefix = "with")
+@SuperBuilder(setterPrefix = "with", toBuilder = true)
 public class SubChildTestingElementWrapperTesting
     extends ChildTestElementWrapperTesting<LoopController, LoopControlPanel> {
 
-  /** Infinite. */
   @JmcProperty("child.field")
   @Builder.Default
   @Getter
   String overField = "subSuper";
-  /** Infinite. */
-  @JmcProperty("subChild.childBoolean")
+
+  @JmcProperty("subChild.bb1")
   @Builder.Default
   @Getter
-  Boolean childBoolean = false;
+  Boolean bb1 = false;
 
-  /** Loop Count. */
   @JmcProperty("subChild.method")
   public String getMethod() {
     return "me";

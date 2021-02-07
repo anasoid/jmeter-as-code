@@ -35,7 +35,7 @@ import org.apache.jmeter.config.Argument;
  *
  * @see Argument
  */
-@SuperBuilder(setterPrefix = "with")
+@SuperBuilder(setterPrefix = "with", toBuilder = true)
 @JmcElement
 public abstract class AbstractArgumentWrapper<T extends Argument>
     extends AbstractTestElementWrapper<T> {

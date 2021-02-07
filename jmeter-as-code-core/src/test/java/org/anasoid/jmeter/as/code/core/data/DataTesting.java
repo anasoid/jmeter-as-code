@@ -20,6 +20,7 @@ package org.anasoid.jmeter.as.code.core.data;
 
 import org.anasoid.jmeter.as.code.core.application.ApplicationTest;
 import org.anasoid.jmeter.as.code.core.application.ApplicationTestUtilsForTesting;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.config.ArgumentWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.test.ParentTestElementWrapperTesting;
 import org.anasoid.jmeter.as.code.core.wrapper.test.SubChildTestingElementWrapperTesting;
 
@@ -29,12 +30,18 @@ public final class DataTesting {
   private DataTesting() {}
 
   /** get default test Data. */
-  public static ApplicationTest getDefautTest() {
+  public static ApplicationTest getDefautApplicationTest() {
+
+    return ApplicationTestUtilsForTesting.getApplicationTest(getDefautTestElement());
+  }
+
+  /** get default ApplicationTest test Data. */
+  public static ParentTestElementWrapperTesting getDefautTestElement() {
 
     // First sub
     SubChildTestingElementWrapperTesting subChildTestElementWrapperTesting =
         SubChildTestingElementWrapperTesting.builder()
-            .withChildBoolean(true)
+            .withBb1(true)
             .withField("f")
             .withName("sub1")
             .build();
@@ -42,7 +49,7 @@ public final class DataTesting {
     // second sub
     SubChildTestingElementWrapperTesting subChildTestElementWrapperTesting2 =
         SubChildTestingElementWrapperTesting.builder()
-            .withChildBoolean(true)
+            .withBb1(true)
             .withField("f")
             .withName("sub2")
             .build();
@@ -54,10 +61,12 @@ public final class DataTesting {
             .withBb1(false)
             .withIi1(1)
             .withLl1(2L)
+            .withField("field")
+            .addArgument(ArgumentWrapper.builder().withName("param").withValue("value").build())
             .addChild(subChildTestElementWrapperTesting)
             .addChild(subChildTestElementWrapperTesting2)
             .build();
 
-    return ApplicationTestUtilsForTesting.getApplicationTest(parentTestElementWrapperTesting);
+    return parentTestElementWrapperTesting;
   }
 }

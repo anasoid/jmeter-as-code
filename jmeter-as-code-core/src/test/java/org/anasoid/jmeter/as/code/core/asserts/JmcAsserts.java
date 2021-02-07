@@ -44,7 +44,7 @@ public final class JmcAsserts {
 
   /** get instance with xpathRoot = "/jmeterTestPlan/hashTree" . */
   public static JmcAsserts get() {
-    if (instance == null) {
+    if (instance == null) { // NOPMD
       instance = new JmcAsserts();
     }
     return instance;
@@ -75,7 +75,7 @@ public final class JmcAsserts {
   /**
    * assert not has Xpath.
    *
-   * @param xpath
+   * @param xpath relative xpath.
    */
   public void assertNotHasXPath(String content, String xpath) {
     assertThat(content, not(hasXPath(getFullXpath(xpath))));
@@ -126,7 +126,7 @@ public final class JmcAsserts {
    * @param xpath relative xpath.
    * @param lastNode last node name, to be add to xpath.
    * @param attribute attribute key.
-   * @param value attribut value to be checked.
+   * @param value attribute value to be checked.
    */
   public void assertXPathNodeAttributeValue(
       String content, String xpath, String lastNode, String attribute, String value) {
@@ -138,7 +138,7 @@ public final class JmcAsserts {
    *
    * @param xpath relative xpath.
    * @param attribute attribute key.
-   * @param value attribut value to be checked.
+   * @param value attribute value to be checked.
    */
   public void assertXPathAttributeValue(
       String content, String xpath, String attribute, String value) {
@@ -218,6 +218,16 @@ public final class JmcAsserts {
   }
 
   /**
+   * check is longProp not present with name is present.
+   *
+   * @param xpath relative xpath.
+   * @param name attribute name value to be filtred by.
+   */
+  public void assertNotHasXPathPropLong(String content, String xpath, String name) {
+    assertNotHasXPathProp(content, xpath, JMeterProperty.LONG.value(), name);
+  }
+
+  /**
    * Assert has xpath with property name.
    *
    * @param xpath relative xpath.
@@ -225,8 +235,9 @@ public final class JmcAsserts {
    * @param name attribute name value.
    */
   public void assertHasXPathProp(String content, String xpath, String property, String name) {
-    assertHasXPath(content, xpath + "/" + property + "[@name'" + name + "']");
+    assertHasXPath(content, xpath + "/" + property + "[@name='" + name + "']");
   }
+
   /**
    * Assert not has xpath with property name.
    *
@@ -235,6 +246,6 @@ public final class JmcAsserts {
    * @param name attribute name value.
    */
   public void assertNotHasXPathProp(String content, String xpath, String property, String name) {
-    assertNotHasXPath(content, xpath + "/" + property + "[@name'" + name + "']");
+    assertNotHasXPath(content, xpath + "/" + property + "[@name='" + name + "']");
   }
 }

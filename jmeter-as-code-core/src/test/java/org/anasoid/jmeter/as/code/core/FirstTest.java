@@ -57,35 +57,35 @@ class FirstTest {
             .withName("Open example.com")
             .build();
 
-    // Second HTTP Sampler - open blazemeter.com
-    HTTPSamplerProxyWrapper blazemetercomSamplerWrapper =
+    // Second HTTP Sampler - open https://github.com
+    HTTPSamplerProxyWrapper githubcomSamplerWrapper =
         HTTPSamplerProxyWrapper.builder()
-            .withDomain("blazemeter.com")
+            .withDomain("github.com")
             .withPort(80)
             .withPath("/")
             .withMethod(HttpMethod.GET)
             .withImplementation(Implementation.HttpClient4)
             .withIpSourceType(IpSourceType.IPV4)
-            .withName("Open blazemeter.com")
+            .withName("Open github.com")
             .build();
 
-    // Second HTTP Sampler - open blazemeter.com
+    // Second HTTP Sampler - open github.com
     HTTPSamplerProxyWrapper bodySamplerWrapper =
         HTTPSamplerProxyWrapper.builder()
-            .withDomain("blazemeter.com")
+            .withDomain("github.com")
             .withPort(80)
             .withPath("/")
             .withBody("BBBBBBBBBBBB")
-            .withName("body blazemeter.com")
+            .withName("body github.com")
             .build();
 
     HTTPSamplerProxyWrapper argSamplerWrapper =
         HTTPSamplerProxyWrapper.builder()
-            .withDomain("blazemeter.com")
+            .withDomain("github.com")
             .withPort(80)
             .withPath("/")
             .addArgument("ppppp", "vvvvvvvvv")
-            .withName("argument blazemeter.com")
+            .withName("argument github.com")
             .build();
 
     // Thread Group
@@ -99,8 +99,8 @@ class FirstTest {
             .withOnSampleError(OnSampleError.ON_SAMPLE_ERROR_STOPTHREAD)
             .withContinueForever(false)
             .addChild(examplecomSamplerWrapper)
-            .addChild(blazemetercomSamplerWrapper)
-            .addChild(blazemetercomSamplerWrapper)
+            .addChild(githubcomSamplerWrapper)
+            .addChild(githubcomSamplerWrapper)
             .addChild(bodySamplerWrapper)
             .addChild(argSamplerWrapper)
             .build();

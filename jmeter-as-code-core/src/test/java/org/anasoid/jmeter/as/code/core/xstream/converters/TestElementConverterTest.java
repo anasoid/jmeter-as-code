@@ -22,8 +22,12 @@ import java.io.IOException;
 import java.io.StringWriter;
 import org.anasoid.jmeter.as.code.core.AbstractJmcTest;
 import org.anasoid.jmeter.as.code.core.application.ApplicationTest;
+import org.anasoid.jmeter.as.code.core.application.ApplicationTestUtilsForTesting;
 import org.anasoid.jmeter.as.code.core.asserts.JmcAsserts;
 import org.anasoid.jmeter.as.code.core.data.DataTesting;
+import org.anasoid.jmeter.as.code.core.wrapper.test.ParentTestElementWrapperTesting;
+import org.anasoid.jmeter.as.code.core.xstream.exceptions.ConversionMandatoryException;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -36,13 +40,60 @@ class TestElementConverterTest extends AbstractJmcTest {
   @Test
   void firstTest() throws IOException {
 
-    ApplicationTest applicationTest = DataTesting.getDefautTest();
+    ApplicationTest applicationTest = DataTesting.getDefautApplicationTest();
     StringWriter wr = new StringWriter(); // NOPMD
     applicationTest.toJmx(wr);
     String content = wr.toString();
     println("content :" + content);
     JmcAsserts.get().assertXPathPropInt(content, "/parent", "Parent.ii1", "1");
-    JmcAsserts.get()
-        .assertXPathValue(content, "/parent/boolProp/@name", "TestPlan.functional_mode");
+    JmcAsserts.get().assertXPathValue(content, "/parent/boolProp/@name", "Parent.bb1");
+  }
+
+  @Test
+  void defaultValueTest() throws IOException {
+
+    // Thread Group
+    ParentTestElementWrapperTesting parentTestElementWrapperTesting =
+        ParentTestElementWrapperTesting.builder()
+            .withName("Parent")
+            .withBb1(false)
+            .withIi1(1)
+            .withLl1(2L)
+            .build();
+
+    ApplicationTest applicationTest =
+        ApplicationTestUtilsForTesting.getApplicationTest(parentTestElementWrapperTesting);
+    StringWriter wr = new StringWriter(); // NOPMD
+    applicationTest.toJmx(wr);
+    String content = wr.toString();
+    println("content :" + content);
+    JmcAsserts.get().assertNotHasXPathPropLong(content, "/parent", "Parent.defaultLong");
+
+    ApplicationTest applicationTest2 =
+        ApplicationTestUtilsForTesting.getApplicationTest(
+            parentTestElementWrapperTesting.toBuilder().withDefaultLong(20L).build());
+    StringWriter wr2 = new StringWriter(); // NOPMD
+    applicationTest2.toJmx(wr2);
+    String content2 = wr2.toString();
+    println("content2 :" + content2);
+    JmcAsserts.get().assertHasXPathPropLong(content2, "/parent", "Parent.defaultLong");
+  }
+
+  @Test
+  void mandatoryTest() throws IOException {
+
+    // Thread Group
+    ParentTestElementWrapperTesting parentTestElementWrapperTesting =
+        ParentTestElementWrapperTesting.builder().withBb1(false).withIi1(1).withLl1(2L).build();
+
+    ApplicationTest applicationTest =
+        ApplicationTestUtilsForTesting.getApplicationTest(parentTestElementWrapperTesting);
+    StringWriter wr = new StringWriter(); // NOPMD
+    try {
+      applicationTest.toJmx(wr);
+      Assertions.fail("Should fail need mandatory field name");
+    } catch (ConversionMandatoryException e) {
+      // Nothing
+    }
   }
 }

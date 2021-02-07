@@ -19,10 +19,12 @@
 package org.anasoid.jmeter.as.code.core.wrapper.test;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import lombok.Builder;
+import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.config.ArgumentWrapper;
@@ -30,29 +32,69 @@ import org.anasoid.jmeter.as.code.core.wrapper.jmeter.gui.JMeterGUIWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AbstractTestElementWrapper;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcCollection;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcEmptyAllowed;
+import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcMandatory;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
+import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcSkipDefault;
 import org.apache.jmeter.config.Arguments;
 import org.apache.jmeter.config.gui.ArgumentsPanel;
 import org.apache.jmeter.control.gui.TestPlanGui;
 import org.apache.jmeter.testelement.TestPlan;
 
-@SuperBuilder(setterPrefix = "with")
+@SuperBuilder(setterPrefix = "with", toBuilder = true)
 @XStreamAlias("parent")
 public class ParentTestElementWrapperTesting extends AbstractTestElementWrapper<TestPlan>
     implements JMeterGUIWrapper<TestPlanGui> {
 
+  /** Name. */
+  @XStreamAsAttribute
+  @XStreamAlias("testname")
+  @Getter
+  @JmcMandatory
+  private String name;
+
   /** Functional Test Mode (i.e. save Response Data and Sampler Data) */
-  @JmcProperty("TestPlan.functional_mode")
+  @JmcProperty("Parent.bb1")
   @Getter
   private boolean bb1;
 
   @JmcProperty("Parent.ii1")
   @Getter
   private Integer ii1;
-  /** Run tearDown Thread Groups after shutdown of main threads. */
+
   @JmcProperty("Parent.ll1")
   @Getter
   private Long ll1;
+
+  @JmcProperty("Parent.defaultLong")
+  @Getter
+  @JmcSkipDefault("10")
+  @Default
+  private Long defaultLong = 10L;
+
+  @JmcProperty("Parent.method")
+  public String getMethod() {
+    return "method";
+  }
+
+  @Getter
+  @XStreamAlias("field")
+  private String field;
+
+  @JmcProperty("Parent.ff1")
+  @Getter
+  @Default
+  private Float ff1 = 10F;
+
+  @JmcProperty("Parent.dd1")
+  @Getter
+  @Default
+  private Double dd1 = 10D;
+
+  @JmcProperty("Parent.argument")
+  @Getter
+  @Default
+  private SubChildTestingElementWrapperTesting child =
+      SubChildTestingElementWrapperTesting.builder().withEnabled(true).build();
 
   @JmcCollection(
       value = Arguments.ARGUMENTS,
@@ -86,7 +128,7 @@ public class ParentTestElementWrapperTesting extends AbstractTestElementWrapper<
       return super.addChild(child);
     }
 
-    protected B withArguments(ArgumentWrapper child) { // NOSONAR
+    protected B withArguments(List<ArgumentWrapper> child) { // NOSONAR
       return self();
     }
 
@@ -102,17 +144,6 @@ public class ParentTestElementWrapperTesting extends AbstractTestElementWrapper<
       this.arguments$value.addAll(arguments);
       this.arguments$set = true;
 
-      return self();
-    }
-
-    /**
-     * Add argument, consists of a name/value pair, default metadata is '='.
-     *
-     * @param name name.
-     * @param value value.
-     */
-    public B addArgument(String name, String value) {
-      addArgument(ArgumentWrapper.builder().withName(name).withValue(value).build());
       return self();
     }
 

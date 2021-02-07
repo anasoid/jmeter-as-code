@@ -13,21 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * @author : anas
- * Date :   04-Jan-2021
+ * Date :   06-Feb-2021
  */
 
-package org.anasoid.jmeter.as.code.core.wrapper.jmeter.config;
+package org.anasoid.jmeter.as.code.core.xstream.exceptions;
 
-import lombok.experimental.SuperBuilder;
-import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcElement;
-import org.apache.jmeter.config.Argument;
+import java.lang.reflect.AccessibleObject;
 
-@SuperBuilder(setterPrefix = "with", toBuilder = true)
-@JmcElement
-public class ArgumentWrapper extends AbstractArgumentWrapper<Argument> {
+public class ConversionMandatoryException extends ConversionException {
 
-  @Override
-  public Class<Argument> getTestClass() {
-    return Argument.class;
+  static final long serialVersionUID = -703454586545466939L;
+
+  public ConversionMandatoryException(Object source, AccessibleObject field) {
+    super("Field (" + field + ") is mandatory on " + source.toString());
   }
 }

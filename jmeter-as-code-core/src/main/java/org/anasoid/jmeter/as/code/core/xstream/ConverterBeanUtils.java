@@ -36,10 +36,12 @@ import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.property.JMete
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcAsAttribute;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcCollection;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcEmptyAllowed;
+import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcMandatory;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcMethodAlias;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcSkipDefault;
 import org.anasoid.jmeter.as.code.core.xstream.exceptions.ConversionException;
+import org.anasoid.jmeter.as.code.core.xstream.exceptions.ConversionMandatoryException;
 
 @SuppressWarnings("PMD.GodClass")
 public final class ConverterBeanUtils {
@@ -151,25 +153,6 @@ public final class ConverterBeanUtils {
     return null;
   }
 
-  /** get Alias of field. */
-  public static String getFieldAlias(Field field) {
-
-    XStreamAlias annotation = field.getAnnotation(XStreamAlias.class);
-
-    if (annotation != null) {
-      return annotation.value();
-    }
-    return field.getName();
-  }
-
-  /** get Alias of method. */
-  public static String getMethodAlias(Method method) {
-
-    JmcMethodAlias annotation = method.getAnnotation(JmcMethodAlias.class);
-
-    return annotation.value();
-  }
-
   /** get Propetry Alias (intProp,stringProp,longProp .. ). */
   public static String getPropertyAlias(Object value) {
 
@@ -215,6 +198,9 @@ public final class ConverterBeanUtils {
     }
     Object value = getValue(field, source);
     if (value == null) {
+      if (field.getAnnotation(JmcMandatory.class) != null) {
+        throw new ConversionMandatoryException(source, field);
+      }
       return true;
     }
     JmcSkipDefault jmcSkipDefault = field.getAnnotation(JmcSkipDefault.class);
