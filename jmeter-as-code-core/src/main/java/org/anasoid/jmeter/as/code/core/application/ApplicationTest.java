@@ -18,12 +18,12 @@
 
 package org.anasoid.jmeter.as.code.core.application;
 
-import com.google.common.io.Files;
 import com.thoughtworks.xstream.XStream;
 import io.github.classgraph.ClassGraph;
 import io.github.classgraph.ClassInfoList;
 import io.github.classgraph.ScanResult;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
@@ -77,7 +77,7 @@ public class ApplicationTest {
    * @throws IOException – If an I/O error occurs.
    */
   public void toJmx(File file) throws IOException {
-    this.toJmx(Files.newWriter(file, StandardCharsets.UTF_8));
+    this.toJmx(new FileWriter(file, StandardCharsets.UTF_8));
   }
 
   protected ScriptWrapper createScript() {

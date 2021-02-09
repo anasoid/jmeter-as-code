@@ -3,7 +3,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'org.owasp:dependency-check-gradle:6.0.2'
+        classpath 'org.owasp:dependency-check-gradle:6.1.0'
     }
 }
 
@@ -134,7 +134,6 @@ subprojects {
 
 
         //Apache common
-        implementation 'com.github.tomakehurst:wiremock:2.27.2'
 
         implementation("org.apache.commons:commons-lang3:$commonsLangVersion")
 
@@ -145,6 +144,7 @@ subprojects {
 
         testImplementation("org.xmlunit:xmlunit-core:$xmlunitVersion")
         testImplementation("org.xmlunit:xmlunit-matchers:$xmlunitVersion")
+        testImplementation("com.github.tomakehurst:wiremock:$wiremockVersion")
     }
 
 
