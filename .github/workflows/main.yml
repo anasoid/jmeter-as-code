@@ -35,7 +35,7 @@ jobs:
         with:
           path: |
             ~/.sonar
-          key: ${{ runner.os }}-sonar-${{ hashFiles('**/*.gradle*') }}
+          key: ${{ runner.os }}-sonar-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('gradle.properties') }}
           restore-keys: |
             ${{ runner.os }}-sonar-
 
