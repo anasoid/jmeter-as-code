@@ -20,23 +20,40 @@ package org.anasoid.jmeter.as.code.core.application;
 
 import com.google.common.io.Files;
 import com.thoughtworks.xstream.XStream;
+import io.github.classgraph.ClassGraph;
+import io.github.classgraph.ClassInfoList;
+import io.github.classgraph.ScanResult;
 import java.io.File;
 import java.io.IOException;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.control.LoopControllerWrapper;
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.samplers.HTTPSamplerProxyWrapper;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AbstractTestElementWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestPlanWrapper;
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.threads.ThreadGroupWrapper;
 import org.apache.jorphan.collections.HashTree;
 
 /** Main application for Test. */
 public class ApplicationTest {
 
+  private static List<Class<?>> listClazz;
   private final TestPlanWrapper testPlanWrapper;
+  private final AbstractTestElementWrapper<?> testElement;
+  private boolean testMode;
 
+  @SuppressWarnings("PMD.NullAssignment")
   public ApplicationTest(TestPlanWrapper testPlanWrapper) {
     this.testPlanWrapper = testPlanWrapper;
+    this.testElement = null;
+  }
+
+  /** Only for Test. */
+  @SuppressWarnings("PMD.NullAssignment")
+  protected ApplicationTest(AbstractTestElementWrapper<?> testElement) {
+    this.testElement = testElement;
+    this.testPlanWrapper = null;
+    testMode = true;
   }
 
   /**
@@ -46,7 +63,7 @@ public class ApplicationTest {
    * @throws IOException – If an I/O error occurs.
    */
   public void toJmx(Writer out) throws IOException {
-    ScriptWrapper script = new ScriptWrapper().setTesPlan(testPlanWrapper);
+    ScriptWrapper script = createScript();
     try (out) {
       out.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + System.lineSeparator());
       getXstream().toXML(script, out);
@@ -63,19 +80,51 @@ public class ApplicationTest {
     this.toJmx(Files.newWriter(file, StandardCharsets.UTF_8));
   }
 
+  protected ScriptWrapper createScript() {
+    ScriptWrapper script;
+    if (testMode) {
+      script = new ScriptWrapper().setTesPlan(testElement);
+    } else {
+      script = new ScriptWrapper().setTesPlan(testPlanWrapper);
+    }
+
+    return script;
+  }
+
   private XStream getXstream() {
     XStream xstream = new XStream();
     xstream.setMode(XStream.NO_REFERENCES);
     xstream.aliasSystemAttribute(null, "class");
     xstream.alias("hashTree", HashTree.class);
-    xstream.processAnnotations(
-        new Class[] {
-          LoopControllerWrapper.class,
-          HTTPSamplerProxyWrapper.class,
-          TestPlanWrapper.class,
-          ThreadGroupWrapper.class,
-          ScriptWrapper.class
-        });
+    List<Class<?>> clazzs = new ArrayList<>();
+    clazzs.add(ScriptWrapper.class);
+    clazzs.addAll(getProcessClazz());
+    Class<?>[] clazzArray = new Class[clazzs.size()];
+    clazzArray = clazzs.toArray(clazzArray);
+    xstream.processAnnotations(clazzArray);
     return xstream;
+  }
+
+  @SuppressWarnings("PMD.AvoidSynchronizedAtMethodLevel")
+  private static synchronized List<Class<?>> getProcessClazz() {
+    if (listClazz == null) {
+      try (ScanResult scanResult =
+          new ClassGraph()
+              .enableClassInfo()
+              .rejectJars(
+                  "gradle-*.jar",
+                  "junit-*.jar",
+                  "log4j-*.jar",
+                  "ApacheJMeter_*-*.jar",
+                  "groovy-*.jar",
+                  "commons-*.jar",
+                  "wiremock-*.jar")
+              .scan()) {
+        ClassInfoList classInfoList =
+            scanResult.getSubclasses(AbstractTestElementWrapper.class.getName());
+        listClazz = classInfoList.stream().map(c -> c.loadClass(true)).collect(Collectors.toList());
+      }
+    }
+    return listClazz;
   }
 }

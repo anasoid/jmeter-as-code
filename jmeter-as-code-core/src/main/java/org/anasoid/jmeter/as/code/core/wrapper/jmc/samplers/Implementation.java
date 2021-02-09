@@ -18,7 +18,11 @@
 
 package org.anasoid.jmeter.as.code.core.wrapper.jmc.samplers;
 
+import com.thoughtworks.xstream.annotations.XStreamConverter;
+import com.thoughtworks.xstream.converters.enums.EnumToStringConverter;
+
 /** HTTP Client Implementation. */
+@XStreamConverter(value = EnumToStringConverter.class)
 public enum Implementation {
   HttpClient4, // NOSONAR
   Java // NOSONAR

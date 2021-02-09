@@ -18,7 +18,11 @@
 
 package org.anasoid.jmeter.as.code.core.wrapper.jmc.threads;
 
+import com.thoughtworks.xstream.annotations.XStreamConverter;
+import com.thoughtworks.xstream.converters.enums.EnumToStringConverter;
+
 /** Thread group on Sample Error type. */
+@XStreamConverter(value = EnumToStringConverter.class)
 public enum OnSampleError {
 
   /** Continue, i.e. ignore sampler errors */

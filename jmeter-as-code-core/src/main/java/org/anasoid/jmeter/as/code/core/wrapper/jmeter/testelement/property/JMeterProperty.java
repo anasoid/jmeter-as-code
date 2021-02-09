@@ -13,33 +13,38 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * @author : anas
- * Date :   22-Jan-2021
+ * Date :   06-Feb-2021
  */
 
-package org.anasoid.jmeter.as.code.core.wrapper.jmc.samplers;
+package org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.property;
 
-import com.thoughtworks.xstream.annotations.XStreamConverter;
-import com.thoughtworks.xstream.converters.enums.EnumToStringConverter;
+public enum JMeterProperty {
+  INTEGER("intProp"),
 
-@XStreamConverter(value = EnumToStringConverter.class)
-public enum IpSourceType {
-  Hostname(0), // NOSONAR
-  Device(1), // NOSONAR
-  IPV4(2), // NOSONAR
-  IPV6(3); // NOSONAR
+  STRING("stringProp"),
 
-  public final Integer value;
+  BOOL("boolProp"),
 
-  public Integer value() {
-    return value;
+  LONG("longProp"),
+
+  FLOAT("floatProp"),
+
+  DOUBLE("doubleProp"),
+
+  ELEMENT("elementProp");
+
+  public final String value;
+
+  private JMeterProperty(String value) {
+    this.value = value;
   }
 
-  private IpSourceType(Integer value) {
-    this.value = value;
+  public String value() {
+    return value;
   }
 
   @Override
   public String toString() {
-    return value.toString();
+    return value;
   }
 }

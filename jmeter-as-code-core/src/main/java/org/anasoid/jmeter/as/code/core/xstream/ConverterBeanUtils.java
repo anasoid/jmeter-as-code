@@ -32,13 +32,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AbstractTestElementWrapper;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.property.JMeterProperty;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcAsAttribute;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcCollection;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcEmptyAllowed;
+import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcMandatory;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcMethodAlias;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcSkipDefault;
 import org.anasoid.jmeter.as.code.core.xstream.exceptions.ConversionException;
+import org.anasoid.jmeter.as.code.core.xstream.exceptions.ConversionMandatoryException;
 
 @SuppressWarnings("PMD.GodClass")
 public final class ConverterBeanUtils {
@@ -150,25 +153,6 @@ public final class ConverterBeanUtils {
     return null;
   }
 
-  /** get Alias of field. */
-  public static String getFieldAlias(Field field) {
-
-    XStreamAlias annotation = field.getAnnotation(XStreamAlias.class);
-
-    if (annotation != null) {
-      return annotation.value();
-    }
-    return field.getName();
-  }
-
-  /** get Alias of method. */
-  public static String getMethodAlias(Method method) {
-
-    JmcMethodAlias annotation = method.getAnnotation(JmcMethodAlias.class);
-
-    return annotation.value();
-  }
-
   /** get Propetry Alias (intProp,stringProp,longProp .. ). */
   public static String getPropertyAlias(Object value) {
 
@@ -176,16 +160,22 @@ public final class ConverterBeanUtils {
       return getPropertyAlias(getEnumValue(value));
     }
     if (value instanceof Integer) {
-      return "intProp";
+      return JMeterProperty.INTEGER.value();
     } else if (value instanceof String) {
-      return "stringProp";
+      return JMeterProperty.STRING.value();
     } else if (value instanceof Long) {
-      return "longProp";
+      return JMeterProperty.LONG.value();
     } else if (value instanceof Boolean) {
-      return "boolProp";
+      return JMeterProperty.BOOL.value();
+
+    } else if (value instanceof Float) {
+      return JMeterProperty.FLOAT.value();
+
+    } else if (value instanceof Double) {
+      return JMeterProperty.DOUBLE.value();
 
     } else if (value instanceof AbstractTestElementWrapper) {
-      return "elementProp";
+      return JMeterProperty.ELEMENT.value();
     }
     throw new IllegalStateException("Unknowen properties type for :" + value);
   }
@@ -208,6 +198,9 @@ public final class ConverterBeanUtils {
     }
     Object value = getValue(field, source);
     if (value == null) {
+      if (field.getAnnotation(JmcMandatory.class) != null) {
+        throw new ConversionMandatoryException(source, field);
+      }
       return true;
     }
     JmcSkipDefault jmcSkipDefault = field.getAnnotation(JmcSkipDefault.class);

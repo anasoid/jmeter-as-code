@@ -22,6 +22,7 @@ import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 import com.thoughtworks.xstream.annotations.XStreamConverter;
 import java.util.ArrayList;
 import java.util.List;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AbstractTestElementWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestPlanWrapper;
 import org.anasoid.jmeter.as.code.core.xstream.converters.TestElementConverter;
 import org.apache.jmeter.save.SaveService;
@@ -34,11 +35,10 @@ class ScriptWrapper {
   @XStreamAsAttribute private final String version = SaveService.getVERSION(); // NOSONAR
   @XStreamAsAttribute private final String jmeter = JMeterUtils.getJMeterVersion(); // NOSONAR
 
-  @XStreamAsAttribute
-  private final String properties = "5.0"; // NOSONAR
+  @XStreamAsAttribute private final String properties = "5.0"; // NOSONAR
 
   @XStreamAlias("hashTree")
-  List<TestPlanWrapper> testPlan;
+  List<AbstractTestElementWrapper<?>> testPlan;
 
   /**
    * Set main test Plan.
@@ -48,6 +48,13 @@ class ScriptWrapper {
   public ScriptWrapper setTesPlan(TestPlanWrapper testPlanWrapper) {
     testPlan = new ArrayList<>();
     testPlan.add(testPlanWrapper);
+    return this;
+  }
+
+  /** Only for Test. */
+  protected ScriptWrapper setTesPlan(AbstractTestElementWrapper<?> testElement) {
+    testPlan = new ArrayList<>();
+    testPlan.add(testElement);
     return this;
   }
 
@@ -63,7 +70,7 @@ class ScriptWrapper {
     return properties;
   }
 
-  public List<TestPlanWrapper> getTestPlan() {
+  public List<AbstractTestElementWrapper<?>> getTestPlan() { // NOSONAR
     return testPlan;
   }
 }

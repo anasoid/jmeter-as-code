@@ -39,7 +39,7 @@ import org.anasoid.jmeter.as.code.core.xstream.exceptions.ConversionException;
 import org.apache.jmeter.testelement.AbstractTestElement;
 import org.apache.jmeter.testelement.TestElement;
 
-@SuperBuilder(setterPrefix = "with")
+@SuperBuilder(setterPrefix = "with", toBuilder = true)
 @XStreamConverter(value = TestElementConverter.class)
 public abstract class AbstractTestElementWrapper<T extends AbstractTestElement> {
 

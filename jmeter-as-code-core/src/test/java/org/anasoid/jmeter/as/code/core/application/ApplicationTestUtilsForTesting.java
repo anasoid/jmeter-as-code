@@ -13,33 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * @author : anas
- * Date :   22-Jan-2021
+ * Date :   05-Feb-2021
  */
 
-package org.anasoid.jmeter.as.code.core.wrapper.jmc.samplers;
+package org.anasoid.jmeter.as.code.core.application;
 
-import com.thoughtworks.xstream.annotations.XStreamConverter;
-import com.thoughtworks.xstream.converters.enums.EnumToStringConverter;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AbstractTestElementWrapper;
 
-@XStreamConverter(value = EnumToStringConverter.class)
-public enum IpSourceType {
-  Hostname(0), // NOSONAR
-  Device(1), // NOSONAR
-  IPV4(2), // NOSONAR
-  IPV6(3); // NOSONAR
+/** Utils to generate test with non TestPlan Element. */
+public final class ApplicationTestUtilsForTesting {
 
-  public final Integer value;
+  private ApplicationTestUtilsForTesting() {}
 
-  public Integer value() {
-    return value;
-  }
+  public static final ApplicationTest getApplicationTest(AbstractTestElementWrapper testElement) {
 
-  private IpSourceType(Integer value) {
-    this.value = value;
-  }
-
-  @Override
-  public String toString() {
-    return value.toString();
+    return new ApplicationTest(testElement);
   }
 }

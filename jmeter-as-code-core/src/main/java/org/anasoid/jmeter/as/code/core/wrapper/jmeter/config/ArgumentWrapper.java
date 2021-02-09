@@ -22,7 +22,7 @@ import lombok.experimental.SuperBuilder;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcElement;
 import org.apache.jmeter.config.Argument;
 
-@SuperBuilder(setterPrefix = "with")
+@SuperBuilder(setterPrefix = "with", toBuilder = true)
 @JmcElement
 public class ArgumentWrapper extends AbstractArgumentWrapper<Argument> {
 

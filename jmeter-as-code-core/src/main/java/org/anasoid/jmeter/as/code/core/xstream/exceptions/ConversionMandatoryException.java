@@ -13,33 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * @author : anas
- * Date :   22-Jan-2021
+ * Date :   06-Feb-2021
  */
 
-package org.anasoid.jmeter.as.code.core.wrapper.jmc.samplers;
+package org.anasoid.jmeter.as.code.core.xstream.exceptions;
 
-import com.thoughtworks.xstream.annotations.XStreamConverter;
-import com.thoughtworks.xstream.converters.enums.EnumToStringConverter;
+import java.lang.reflect.AccessibleObject;
 
-@XStreamConverter(value = EnumToStringConverter.class)
-public enum IpSourceType {
-  Hostname(0), // NOSONAR
-  Device(1), // NOSONAR
-  IPV4(2), // NOSONAR
-  IPV6(3); // NOSONAR
+public class ConversionMandatoryException extends ConversionException {
 
-  public final Integer value;
+  static final long serialVersionUID = -703454586545466939L;
 
-  public Integer value() {
-    return value;
-  }
-
-  private IpSourceType(Integer value) {
-    this.value = value;
-  }
-
-  @Override
-  public String toString() {
-    return value.toString();
+  public ConversionMandatoryException(Object source, AccessibleObject field) {
+    super("Field (" + field + ") is mandatory on " + source.toString());
   }
 }
