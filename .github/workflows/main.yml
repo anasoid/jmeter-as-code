@@ -26,7 +26,7 @@ jobs:
             ~/.gradle/caches
             ~/.gradle/wrapper
             ~/.gradle/dependency-check-data
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('gradle.properties') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
 
@@ -35,7 +35,7 @@ jobs:
         with:
           path: |
             ~/.sonar
-          key: ${{ runner.os }}-sonar-${{ hashFiles('**/*.gradle*') }}
+          key: ${{ runner.os }}-sonar-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('gradle.properties') }}
           restore-keys: |
             ${{ runner.os }}-sonar-
 
