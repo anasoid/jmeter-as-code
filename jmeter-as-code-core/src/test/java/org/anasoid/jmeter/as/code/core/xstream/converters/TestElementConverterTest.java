@@ -38,6 +38,54 @@ import org.junit.jupiter.api.Test;
 class TestElementConverterTest extends AbstractJmcTest {
 
   @Test
+  void testProp() throws IOException {
+
+    ApplicationTest applicationTest = DataTesting.getDefautApplicationTest();
+    StringWriter wr = new StringWriter(); // NOPMD
+    applicationTest.toJmx(wr);
+    String content = wr.toString();
+    println("content :" + content);
+
+    JmcAsserts.get().assertXPathValue(content, "/parent/boolProp/@name", "Parent.bb1");
+
+    JmcAsserts.get().assertXPathPropInt(content, "/parent", "Parent.ii1", "1");
+    JmcAsserts.get().assertXPathPropBool(content, "/parent", "Parent.bb1", "false");
+    JmcAsserts.get().assertXPathPropLong(content, "/parent", "Parent.ll1", "2");
+    JmcAsserts.get().assertXPathPropFloat(content, "/parent", "Parent.ff1", "10.0");
+    JmcAsserts.get().assertXPathPropDouble(content, "/parent", "Parent.dd1", "10.0");
+  }
+
+  @Test
+  void testCollection() throws IOException {
+
+    ApplicationTest applicationTest = DataTesting.getDefautApplicationTest();
+    StringWriter wr = new StringWriter(); // NOPMD
+    applicationTest.toJmx(wr);
+    String content = wr.toString();
+    String elementPropPath = "/parent/elementProp[@name='Parent.arguments']";
+    JmcAsserts.get().assertXPathValue(content, elementPropPath + "/@elementType", "Arguments");
+    JmcAsserts.get().assertXPathValue(content, elementPropPath + "/@guiclass", "ArgumentsPanel");
+    JmcAsserts.get().assertXPathValue(content, elementPropPath + "/@testclass", "Arguments");
+  }
+
+  @Test
+  void testAttribute() throws IOException {
+
+    ApplicationTest applicationTest = DataTesting.getDefautApplicationTest();
+    StringWriter wr = new StringWriter(); // NOPMD
+    applicationTest.toJmx(wr);
+    String content = wr.toString();
+    String elementPropPath = "/parent/elementProp[@name='Parent.child']";
+    JmcAsserts.get().assertXPathPropBool(content, elementPropPath, "subChild.bb1", "false");
+    JmcAsserts.get().assertXPathPropString(content, elementPropPath, "child.field", "subSuper");
+    JmcAsserts.get()
+        .assertXPathPropString(content, elementPropPath, "child.onSampleError", "continue");
+    JmcAsserts.get().assertXPathPropString(content, elementPropPath, "subChild.method", "me");
+    JmcAsserts.get().assertXPathValue(content, elementPropPath + "/fieldChild", "super");
+    JmcAsserts.get().assertXPathValue(content, elementPropPath + "/onSampleError2", "stoptest");
+  }
+
+  @Test
   void firstTest() throws IOException {
 
     ApplicationTest applicationTest = DataTesting.getDefautApplicationTest();
@@ -45,7 +93,6 @@ class TestElementConverterTest extends AbstractJmcTest {
     applicationTest.toJmx(wr);
     String content = wr.toString();
     println("content :" + content);
-    JmcAsserts.get().assertXPathPropInt(content, "/parent", "Parent.ii1", "1");
     JmcAsserts.get().assertXPathValue(content, "/parent/boolProp/@name", "Parent.bb1");
   }
 

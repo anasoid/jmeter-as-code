@@ -40,7 +40,6 @@ public abstract class ChildTestElementWrapperTesting<
   @Getter
   String field = "super";
 
-  @JmcProperty("child.field")
   @Builder.Default
   @Getter
   @XStreamAlias("fieldChild")

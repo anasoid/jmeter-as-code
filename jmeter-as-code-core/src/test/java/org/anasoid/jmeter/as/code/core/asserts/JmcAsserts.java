@@ -191,9 +191,30 @@ public final class JmcAsserts {
     assertXPathProp(content, xpath, JMeterProperty.LONG.value(), name, value);
   }
 
+  /**
+   * check value and name of floatProp.
+   *
+   * @param xpath relative xpath.
+   * @param name attribute name value to be checked.
+   * @param value value to be checked.
+   */
+  public void assertXPathPropFloat(String content, String xpath, String name, String value) {
+    assertXPathProp(content, xpath, JMeterProperty.FLOAT.value(), name, value);
+  }
+
+  /**
+   * check value and name of doubleProp.
+   *
+   * @param xpath relative xpath.
+   * @param name attribute name value to be checked.
+   * @param value value to be checked.
+   */
+  public void assertXPathPropDouble(String content, String xpath, String name, String value) {
+    assertXPathProp(content, xpath, JMeterProperty.DOUBLE.value(), name, value);
+  }
+
   public void assertXPathProp(
       String content, String xpath, String property, String name, String value) {
-    assertXPathNodeAttributeValue(content, xpath, property, "name", name);
     assertXPathFindAttributeValue(content, xpath + "/" + property, "name", name, value);
   }
 

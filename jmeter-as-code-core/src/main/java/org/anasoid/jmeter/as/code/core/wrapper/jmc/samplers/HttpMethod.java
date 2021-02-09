@@ -18,7 +18,11 @@
 
 package org.anasoid.jmeter.as.code.core.wrapper.jmc.samplers;
 
+import com.thoughtworks.xstream.annotations.XStreamConverter;
+import com.thoughtworks.xstream.converters.enums.EnumToStringConverter;
+
 /** HTTP Method. */
+@XStreamConverter(value = EnumToStringConverter.class)
 public enum HttpMethod {
   GET,
   POST,
@@ -38,6 +42,4 @@ public enum HttpMethod {
   REPORT,
   MKCALENDAR,
   SEARCH
-
-
 }

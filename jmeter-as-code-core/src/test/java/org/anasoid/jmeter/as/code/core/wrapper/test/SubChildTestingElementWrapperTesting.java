@@ -32,7 +32,7 @@ public class SubChildTestingElementWrapperTesting
   @JmcProperty("child.field")
   @Builder.Default
   @Getter
-  String overField = "subSuper";
+  String field = "subSuper";
 
   @JmcProperty("subChild.bb1")
   @Builder.Default

@@ -90,7 +90,7 @@ public class ParentTestElementWrapperTesting extends AbstractTestElementWrapper<
   @Default
   private Double dd1 = 10D;
 
-  @JmcProperty("Parent.argument")
+  @JmcProperty("Parent.child")
   @Getter
   @Default
   private SubChildTestingElementWrapperTesting child =

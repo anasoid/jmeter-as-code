@@ -18,6 +18,10 @@
 
 package org.anasoid.jmeter.as.code.core.wrapper.jmc.samplers;
 
+import com.thoughtworks.xstream.annotations.XStreamConverter;
+import com.thoughtworks.xstream.converters.enums.EnumToStringConverter;
+
+@XStreamConverter(value = EnumToStringConverter.class)
 public enum IpSourceType {
   Hostname(0), // NOSONAR
   Device(1), // NOSONAR
