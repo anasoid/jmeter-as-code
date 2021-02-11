@@ -10,7 +10,7 @@ jobs:
 
     runs-on: ubuntu-latest
     env:
-      JMETER_HOME: ~/.jmeter/jmeter
+      JMETER_HOME: /home/runner/.jmeter/jmeter
       JMETER_FILE: apache-jmeter-5.4.1
     steps:
       - uses: actions/checkout@v2
