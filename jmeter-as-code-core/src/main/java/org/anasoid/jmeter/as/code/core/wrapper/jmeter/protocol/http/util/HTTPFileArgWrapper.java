@@ -25,7 +25,7 @@ import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AbstractTestEl
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
 import org.apache.jmeter.protocol.http.util.HTTPFileArg;
 
-@SuperBuilder(setterPrefix = "with")
+@SuperBuilder(setterPrefix = "with", toBuilder = true)
 public class HTTPFileArgWrapper extends AbstractTestElementWrapper<HTTPFileArg> {
 
   @JmcProperty("File.path")

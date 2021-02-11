@@ -22,20 +22,19 @@ import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 import com.thoughtworks.xstream.annotations.XStreamConverter;
 import java.util.ArrayList;
 import java.util.List;
+import org.anasoid.jmeter.as.code.core.config.JmcConfig;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AbstractTestElementWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestPlanWrapper;
 import org.anasoid.jmeter.as.code.core.xstream.converters.TestElementConverter;
-import org.apache.jmeter.save.SaveService;
-import org.apache.jmeter.util.JMeterUtils;
 
 @XStreamAlias("jmeterTestPlan")
 @XStreamConverter(TestElementConverter.class)
 @SuppressWarnings("PMD.FinalFieldCouldBeStatic")
 class ScriptWrapper {
-  @XStreamAsAttribute private final String version = SaveService.getVERSION(); // NOSONAR
-  @XStreamAsAttribute private final String jmeter = JMeterUtils.getJMeterVersion(); // NOSONAR
 
-  @XStreamAsAttribute private final String properties = "5.0"; // NOSONAR
+  @XStreamAsAttribute private final String version = JmcConfig.getVersion(); // NOSONAR
+  @XStreamAsAttribute private final String jmeter = JmcConfig.getJMeterVersion(); // NOSONAR
+  @XStreamAsAttribute private final String properties = JmcConfig.getPropertiesVersion(); // NOSONAR
 
   @XStreamAlias("hashTree")
   List<AbstractTestElementWrapper<?>> testPlan;

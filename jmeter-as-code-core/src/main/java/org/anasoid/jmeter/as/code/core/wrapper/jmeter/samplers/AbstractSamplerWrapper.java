@@ -24,7 +24,7 @@ import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AbstractTestEl
 import org.apache.jmeter.samplers.AbstractSampler;
 import org.apache.jmeter.samplers.gui.AbstractSamplerGui;
 
-@SuperBuilder(setterPrefix = "with")
+@SuperBuilder(setterPrefix = "with", toBuilder = true)
 @SuppressWarnings("PMD.AbstractClassWithoutAnyMethod")
 public abstract class AbstractSamplerWrapper<
         T extends AbstractSampler, G extends AbstractSamplerGui>

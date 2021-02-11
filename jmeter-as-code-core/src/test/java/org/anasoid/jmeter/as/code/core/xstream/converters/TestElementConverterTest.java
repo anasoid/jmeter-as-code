@@ -47,12 +47,12 @@ class TestElementConverterTest extends AbstractJmcTest {
     println("content :" + content);
 
     JmcAsserts.get().assertXPathValue(content, "/parent/boolProp/@name", "Parent.bb1");
-
-    JmcAsserts.get().assertXPathPropInt(content, "/parent", "Parent.ii1", "1");
-    JmcAsserts.get().assertXPathPropBool(content, "/parent", "Parent.bb1", "false");
-    JmcAsserts.get().assertXPathPropLong(content, "/parent", "Parent.ll1", "2");
-    JmcAsserts.get().assertXPathPropFloat(content, "/parent", "Parent.ff1", "10.0");
-    JmcAsserts.get().assertXPathPropDouble(content, "/parent", "Parent.dd1", "10.0");
+    String parentKey = "/parent";
+    JmcAsserts.get().assertXPathPropInt(content, parentKey, "Parent.ii1", "1");
+    JmcAsserts.get().assertXPathPropBool(content, parentKey, "Parent.bb1", "false");
+    JmcAsserts.get().assertXPathPropLong(content, parentKey, "Parent.ll1", "2");
+    JmcAsserts.get().assertXPathPropFloat(content, parentKey, "Parent.ff1", "10.0");
+    JmcAsserts.get().assertXPathPropDouble(content, parentKey, "Parent.dd1", "10.0");
   }
 
   @Test

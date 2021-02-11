@@ -29,7 +29,7 @@ import org.apache.jmeter.control.gui.AbstractControllerGui;
  * Wrapper for AbstractTestElementWrapper.
  * @see AbstractTestElementWrapper
  */
-@SuperBuilder(setterPrefix = "with")
+@SuperBuilder(setterPrefix = "with", toBuilder = true)
 @SuppressWarnings("PMD.AbstractClassWithoutAnyMethod")
 public abstract class GenericControllerWrapper<
         T extends GenericController, G extends AbstractControllerGui>

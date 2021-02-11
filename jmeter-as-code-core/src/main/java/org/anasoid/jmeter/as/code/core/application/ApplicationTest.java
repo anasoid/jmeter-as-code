@@ -33,15 +33,63 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AbstractTestElementWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestPlanWrapper;
+import org.apache.jmeter.engine.StandardJMeterEngine;
+import org.apache.jmeter.save.SaveService;
+import org.apache.jmeter.util.JMeterUtils;
 import org.apache.jorphan.collections.HashTree;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /** Main application for Test. */
 public class ApplicationTest {
 
+  private static final Logger LOG = LoggerFactory.getLogger(ApplicationTest.class);
+  private static final String SLASH = System.getProperty("file.separator");
+  private static boolean initialized;
   private static List<Class<?>> listClazz;
   private final TestPlanWrapper testPlanWrapper;
   private final AbstractTestElementWrapper<?> testElement;
   private boolean testMode;
+
+  static {
+    LOG.info("ApplicationTest Initialization");
+    init();
+  }
+
+  private static void init() {
+    String jmeterHomeKey = "JMETER_HOME";
+    String jmeterHomePath = System.getProperty(jmeterHomeKey);
+    if (jmeterHomePath == null) {
+      jmeterHomePath = System.getenv(jmeterHomeKey);
+    }
+    if (jmeterHomePath != null && new File(jmeterHomePath).exists()) {
+      File jmeterHome = new File(jmeterHomePath);
+      File jmeterProperties =
+          new File(jmeterHome.getPath() + SLASH + "bin" + SLASH + "jmeter.properties");
+      if (jmeterProperties.exists()) {
+
+        // JMeter initialization (properties, log levels, locale, etc)
+        JMeterUtils.setJMeterHome(jmeterHome.getPath());
+        JMeterUtils.loadJMeterProperties(jmeterProperties.getPath());
+        JMeterUtils.initLocale();
+        initialized = true;
+      } else {
+        LOG.error(
+            "Jmeter is not correctly configured, missing jmeter.properties, on : {}",
+            jmeterProperties);
+      }
+    } else {
+      LOG.error(
+          "Jmeter is not correctly configured $JMTER_HOME is not correct : {}",
+          System.getProperty(jmeterHomeKey));
+    }
+  }
+
+  private static void isInit() {
+    if (!initialized) {
+      throw new IllegalStateException("Jmeter is not correctly initialized");
+    }
+  }
 
   @SuppressWarnings("PMD.NullAssignment")
   public ApplicationTest(TestPlanWrapper testPlanWrapper) {
@@ -90,6 +138,26 @@ public class ApplicationTest {
     }
 
     return script;
+  }
+
+  /**
+   * Execute test.
+   *
+   * @throws IOException – If an I/O error occurs.
+   */
+  public void run() throws IOException {
+    isInit();
+    StandardJMeterEngine jmeter = new StandardJMeterEngine();
+
+    File tmp = File.createTempFile("run_jmeter_", ".jmx");
+    LOG.info("Run tmp file : {}", tmp);
+    this.toJmx(Files.newBufferedWriter(Paths.get(tmp.getPath()), StandardCharsets.UTF_8));
+
+    HashTree testPlanTree = SaveService.loadTree(tmp);
+
+    // Run Test Plan
+    jmeter.configure(testPlanTree);
+    jmeter.run();
   }
 
   private XStream getXstream() {
