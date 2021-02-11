@@ -30,14 +30,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-V1
 
-      - name: Cache Sonar
-        uses: actions/cache@v2
-        with:
-          path: |
-            ~/.sonar
-          key: ${{ runner.os }}-sonar-V1-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('gradle.properties') }}
-          restore-keys: |
-            ${{ runner.os }}-sonar-V1
 
 
       - name: Grant execute permission for gradlew
@@ -45,12 +37,6 @@ jobs:
 
       - name: dependencyCheck
         run: ./gradlew dependencyCheckAggregate
-
-      - name: Sonar check
-        run: ./gradlew  --stacktrace  sonarqube -Dsonar.organization=anasoid-org -Dsonar.projectKey=anasoid_jmeter-as-code  -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
 
       - name: Publish artifact Test Report
