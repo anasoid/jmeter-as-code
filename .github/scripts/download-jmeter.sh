@@ -15,6 +15,7 @@ fi
 if [ -f  ~/.jmeter/$JMETER_FILE.txt ]
 then
     echo "Using from cache"
+    ls -la ~/.jmeter/jmeter
 else
     curl $URL --output  ~/.jmeter/$JMETER_FILE.tgz
     tar -xzf ~/.jmeter/$JMETER_FILE.tgz   -C ~/.jmeter/

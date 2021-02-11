@@ -23,7 +23,7 @@ import lombok.experimental.SuperBuilder;
 import org.apache.jmeter.protocol.http.control.gui.HttpTestSampleGui;
 import org.apache.jmeter.protocol.http.sampler.HTTPSamplerProxy;
 
-@SuperBuilder(setterPrefix = "with")
+@SuperBuilder(setterPrefix = "with", toBuilder = true)
 @XStreamAlias("HTTPSamplerProxy")
 public class HTTPSamplerProxyWrapper
     extends HTTPSamplerBaseWrapper<HTTPSamplerProxy, HttpTestSampleGui> {

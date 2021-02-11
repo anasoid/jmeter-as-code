@@ -116,6 +116,7 @@ class FirstTest {
 
     ApplicationTest applicationTest = new ApplicationTest(testPlanWrapper);
     applicationTest.toJmx(wr);
+    applicationTest.run();
     Assertions.assertTrue(true);
   }
 }
