@@ -72,7 +72,7 @@ jobs:
         uses: EnricoMi/publish-unit-test-result-action@v1
         if:   always() && github.event_name != 'pull_request'
         with:
-          report_paths: '**/build/test-results/test/TEST-*.xml'
+          files: '**/build/test-results/test/TEST-*.xml'
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish artifact Test Report
