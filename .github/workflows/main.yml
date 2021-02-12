@@ -69,8 +69,8 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
       - name: Publish Test Report
-        uses: mikepenz/action-junit-report@v1
-        if: always()
+        uses: EnricoMi/publish-unit-test-result-action@v1
+        if:   always() && github.event_name != 'pull_request'
         with:
           report_paths: '**/build/test-results/test/TEST-*.xml'
           github_token: ${{ secrets.GITHUB_TOKEN }}
