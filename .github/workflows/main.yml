@@ -8,7 +8,7 @@ on: [ push, pull_request ]
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     env:
       JMETER_HOME: /home/runner/.jmeter/jmeter
       JMETER_FILE: apache-jmeter-5.4.1
