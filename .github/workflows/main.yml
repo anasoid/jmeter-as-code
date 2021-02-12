@@ -8,7 +8,7 @@ on: [ push, pull_request ]
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     env:
       JMETER_HOME: /home/runner/.jmeter/jmeter
       JMETER_FILE: apache-jmeter-5.4.1
@@ -27,10 +27,9 @@ jobs:
           path: |
             ~/.gradle/caches
             ~/.gradle/wrapper
-            ~/.gradle/dependency-check-data
-          key: ${{ runner.os }}-gradle-V1-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('gradle.properties') }}
+          key: ${{ runner.os }}-gradle-main-V1-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('gradle.properties') }}
           restore-keys: |
-            ${{ runner.os }}-gradle-V1
+            ${{ runner.os }}-gradle-main-V1
 
       - name: Cache Sonar
         uses: actions/cache@v2
@@ -57,23 +56,23 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: dependencyCheck
-        run: ./gradlew dependencyCheckAggregate
-
       - name: Build with Gradle
-        run: ./gradlew build
+        run: ./gradlew --console=verbose -x test build
+
+      - name: Test with Gradle
+        run: ./gradlew --console=verbose test
 
       - name: Sonar check
-        run: ./gradlew  --stacktrace  sonarqube -Dsonar.organization=anasoid-org -Dsonar.projectKey=anasoid_jmeter-as-code  -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+        run: ./gradlew  --console=verbose --stacktrace  sonarqube -Dsonar.organization=anasoid-org -Dsonar.projectKey=anasoid_jmeter-as-code  -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
       - name: Publish Test Report
-        uses: mikepenz/action-junit-report@v1
-        if: always()
+        uses: EnricoMi/publish-unit-test-result-action@v1
+        if:   always() && github.event_name != 'pull_request'
         with:
-          report_paths: '**/build/test-results/test/TEST-*.xml'
+          files: '**/build/test-results/test/TEST-*.xml'
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish artifact Test Report
