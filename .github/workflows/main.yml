@@ -57,10 +57,13 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build with Gradle
-        run: ./gradlew build
+        run: ./gradlew --console=verbose -x test build
+
+      - name: Test with Gradle
+        run: ./gradlew --console=verbose test
 
       - name: Sonar check
-        run: ./gradlew  --stacktrace  sonarqube -Dsonar.organization=anasoid-org -Dsonar.projectKey=anasoid_jmeter-as-code  -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+        run: ./gradlew  --console=verbose --stacktrace  sonarqube -Dsonar.organization=anasoid-org -Dsonar.projectKey=anasoid_jmeter-as-code  -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

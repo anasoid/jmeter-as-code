@@ -36,7 +36,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: dependencyCheck
-        run: ./gradlew dependencyCheckAggregate
+        run: ./gradlew --console=verbose dependencyCheckAggregate
 
 
       - name: Publish artifact Test Report
