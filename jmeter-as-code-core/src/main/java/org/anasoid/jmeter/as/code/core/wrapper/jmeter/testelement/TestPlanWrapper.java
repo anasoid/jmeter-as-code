@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import lombok.Builder;
+import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.config.ArgumentWrapper;
@@ -31,6 +32,7 @@ import org.anasoid.jmeter.as.code.core.wrapper.jmeter.threads.AbstractThreadGrou
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcCollection;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcEmptyAllowed;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
+import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcSkipDefault;
 import org.apache.jmeter.config.Arguments;
 import org.apache.jmeter.config.gui.ArgumentsPanel;
 import org.apache.jmeter.control.gui.TestPlanGui;
@@ -52,13 +54,25 @@ public class TestPlanWrapper extends AbstractTestElementWrapper<TestPlan>
   private boolean serialized;
   /** Run tearDown Thread Groups after shutdown of main threads. */
   @JmcProperty("TestPlan.tearDown_on_shutdown")
+  @JmcSkipDefault("false")
   @Getter
-  private boolean tearDownOnShutdown;
+  @Default
+  private boolean tearDownOnShutdown = true;
+
+  /**
+   * Set the classpath for the test plan. If the classpath is made up from more then one path, the
+   * parts must be separated with CLASSPATH_SEPARATOR.
+   */
+  @JmcProperty("TestPlan.user_define_classpath")
+  @Getter
+  @Default
+  private String testPlanClasspath = "";
 
   @JmcCollection(
       value = Arguments.ARGUMENTS,
       withElementProp = true,
       name = "TestPlan.user_defined_variables",
+      testname = "User Defined Variables",
       elementType = Arguments.class,
       guiclass = ArgumentsPanel.class,
       testclass = Arguments.class)

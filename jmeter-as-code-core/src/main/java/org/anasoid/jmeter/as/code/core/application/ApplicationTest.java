@@ -182,8 +182,10 @@ public class ApplicationTest {
               .enableClassInfo()
               .rejectJars(
                   "gradle-*.jar",
+                  "kotlin-*.jar",
                   "junit-*.jar",
                   "log4j-*.jar",
+                  "jetty-*.jar",
                   "ApacheJMeter_*-*.jar",
                   "groovy-*.jar",
                   "commons-*.jar",

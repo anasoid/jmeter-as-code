@@ -39,6 +39,9 @@ public @interface JmcCollection {
   /** name tag on elementProp. only when withElementProp is true. */
   String name() default "";
 
+  /** name tag on elementProp. only when withElementProp is true. */
+  String testname() default "";
+
   /** elementType tag on elementProp. only when withElementProp is true. */
   Class<?> elementType() default Void.class;
 
