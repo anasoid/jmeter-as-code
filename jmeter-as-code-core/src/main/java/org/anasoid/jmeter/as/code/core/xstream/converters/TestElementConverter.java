@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AbstractTestElementWrapper;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.property.JMeterProperty;
 import org.anasoid.jmeter.as.code.core.xstream.ConverterBeanUtils;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcCollection;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
@@ -157,9 +158,12 @@ public class TestElementConverter implements Converter {
       HierarchicalStreamWriter writer,
       MarshallingContext context) {
     if (annotation.withElementProp()) {
-      writer.startNode("elementProp");
+      writer.startNode(JMeterProperty.ELEMENT.value);
       if (!annotation.name().isBlank()) {
         writer.addAttribute("name", annotation.name());
+      }
+      if (!annotation.testname().isBlank()) {
+        writer.addAttribute("testname", annotation.testname());
       }
       if (!annotation.elementType().equals(Void.class)) {
         writer.addAttribute(ATTRIBUTE_ELEMENT_TYPE, annotation.elementType().getSimpleName());
@@ -185,7 +189,7 @@ public class TestElementConverter implements Converter {
     Collection<?> values = (Collection) value;
     if (values != null) {
       for (Object object : values) {
-        writer.startNode("elementProp");
+        writer.startNode(JMeterProperty.ELEMENT.value);
 
         if (object instanceof AbstractTestElementWrapper) {
           AbstractTestElementWrapper<?> testElement = (AbstractTestElementWrapper) object;

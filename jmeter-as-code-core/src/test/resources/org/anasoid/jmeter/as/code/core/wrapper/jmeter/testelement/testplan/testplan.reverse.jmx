@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.4.1">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Reverse Plan" enabled="true">
+      <stringProp name="TestPlan.comments">Comments</stringProp>
+      <boolProp name="TestPlan.functional_mode">true</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">true</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments">
+          <elementProp name="uservar1" elementType="Argument">
+            <stringProp name="Argument.name">uservar1</stringProp>
+            <stringProp name="Argument.value">uservar1-value</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+        </collectionProp>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath">/classpath.jar</stringProp>
+    </TestPlan>
+    <hashTree/>
+  </hashTree>
+</jmeterTestPlan>

@@ -52,7 +52,8 @@ public abstract class AbstractTestElementWrapper<T extends AbstractTestElement> 
   /** Comments. */
   @JmcProperty(TestElement.COMMENTS)
   @Getter
-  private String comment;
+  @Builder.Default
+  private String comment = "";
 
   /** enabled. */
   @XStreamAsAttribute @Builder.Default @Getter private boolean enabled = true;

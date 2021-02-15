@@ -47,6 +47,9 @@ public abstract class AbstractArgumentWrapper<T extends Argument>
 
   @XStreamOmitField @Builder.Default @Getter private boolean enabled = true;
 
+  /** Comments. */
+  @XStreamOmitField @Getter private String comment;
+
   @JmcProperty(Argument.VALUE)
   private @Getter String value;
 

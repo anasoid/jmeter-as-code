@@ -18,8 +18,21 @@
 
 package org.anasoid.jmeter.as.code.core;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import javax.xml.transform.Source;
+import org.anasoid.jmeter.as.code.core.application.ApplicationTest;
+import org.anasoid.jmeter.as.code.core.test.utils.xmlunit.JmcNodeMatcher;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestPlanWrapper;
+import org.apache.commons.io.FileUtils;
+import org.junit.jupiter.api.Test;
+import org.xmlunit.builder.DiffBuilder;
 import org.xmlunit.builder.Input;
+import org.xmlunit.diff.Diff;
 
 @SuppressWarnings("PMD.AbstractClassWithoutAbstractMethod")
 public abstract class AbstractJmcTest {
@@ -30,5 +43,49 @@ public abstract class AbstractJmcTest {
 
   protected void println(String content) {
     System.out.println(content); // NOPMD
+  }
+
+  /**
+   * save testplan to tmp file.
+   * @return conetnat as string.
+   */
+  protected String toTmpFile(TestPlanWrapper testPlanWrapper, String tmpFilename)
+      throws IOException {
+
+    ApplicationTest applicationTest = new ApplicationTest(testPlanWrapper);
+    Path tmpPath = Files.createTempFile(tmpFilename, ".jmx");
+
+    applicationTest.toJmx(tmpPath.toFile());
+
+    String wrapperContent = Files.readString(tmpPath);
+    println("content :" + wrapperContent);
+
+    return wrapperContent;
+  }
+
+  /**
+   * read file  from resource as string.
+   * @param resource resource path.
+   * @return file content as string.
+   */
+  protected String readFile(String resource) throws IOException {
+    URL url = this.getClass().getClassLoader().getResource(resource);
+
+    return FileUtils.readFileToString(new File(url.getFile()), StandardCharsets.UTF_8);
+  }
+
+  /**
+   * Compare Xml content.
+   * @return diff.
+   */
+  protected Diff campare(String expected, String toTest) throws IOException {
+
+    Diff myDiff =
+        DiffBuilder.compare(expected)
+            .withTest(toTest)
+            .withNodeMatcher(new JmcNodeMatcher())
+            .checkForSimilar()
+            .build();
+    return myDiff;
   }
 }
