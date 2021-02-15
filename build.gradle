@@ -160,13 +160,6 @@ task codeCoverageReport(type: JacocoReport) {
     subprojects.each {
         sourceSets it.sourceSets.main
     }
-    afterEvaluate { // (optional) : to exclude classes / packages from coverage
-        classDirectories.from = files(classDirectories.files.collect {
-            fileTree(
-                    dir: it,
-                    exclude: ['org/anasoid/impexia/csv/opencsv/**'])
-        })
-    }
     reports {
         xml.enabled true
         html.enabled true
