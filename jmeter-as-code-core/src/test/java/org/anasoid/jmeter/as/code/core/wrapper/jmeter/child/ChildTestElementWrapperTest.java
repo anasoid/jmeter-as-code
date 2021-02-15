@@ -59,7 +59,6 @@ class ChildTestElementWrapperTest {
         .withName("Parent")
         .addChilds(Arrays.asList(sub))
         .build();
-    Assertions.
   }
 
   @Test
