@@ -120,15 +120,28 @@ public abstract class AbstractTestElementWrapper<T extends AbstractTestElement> 
      */
     public B addChilds(List<AbstractTestElementWrapper<?>> childs) {
       for (AbstractTestElementWrapper<?> testElement : childs) {
-        try {
-          Method method = this.getClass().getMethod("addChild", AbstractTestElementWrapper.class);
-          method.invoke(this, testElement);
+        boolean found = false;
+        try { // NOSONAR
+          Method method;
+          Class<?> clazz = testElement.getClass();
+          while (clazz != AbstractTestElementWrapper.class) { // NOSONAR
+            try { // NOSONAR
+              method = this.getClass().getMethod("addChild", clazz);
+            } catch (NoSuchMethodException e) {
+              clazz = clazz.getSuperclass();
+              continue;
+            }
+            method.invoke(this, testElement);
+            found = true;
+            break; // NOPMD
+          }
 
-        } catch (NoSuchMethodException e) {
-          throw new IllegalArgumentException("Illegal argument Type of  : " + testElement, e);
         } catch (IllegalAccessException | InvocationTargetException e) {
           // Should Not Happen
           throw new ConversionException(e);
+        }
+        if (!found) {
+          throw new IllegalArgumentException("Illegal argument Type of  : " + testElement);
         }
       }
       return self();
