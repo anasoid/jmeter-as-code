@@ -81,7 +81,8 @@ public class ApplicationTest {
     } else {
       LOG.error(
           "Jmeter is not correctly configured $JMETER_HOME is not correct : {} , {}",
-          System.getProperty(jmeterHomeKey), System.getenv(jmeterHomeKey));
+          System.getProperty(jmeterHomeKey),
+          System.getenv(jmeterHomeKey));
     }
   }
 

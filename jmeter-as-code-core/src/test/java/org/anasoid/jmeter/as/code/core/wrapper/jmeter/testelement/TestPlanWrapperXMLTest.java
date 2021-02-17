@@ -20,6 +20,7 @@ package org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement;
 
 import java.io.IOException;
 import org.anasoid.jmeter.as.code.core.AbstractJmcTest;
+import org.anasoid.jmeter.as.code.core.test.utils.xmlunit.JmcXmlComparator;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.config.ArgumentWrapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -36,7 +37,7 @@ class TestPlanWrapperXMLTest extends AbstractJmcTest {
     TestPlanWrapper testPlanWrapper = TestPlanWrapper.builder().withName("Test Plan").build();
     String wrapperContent = toTmpFile(testPlanWrapper, "testplan_");
     String expectedContent = readFile(PARENT_PATH + "/testplan.default.jmx");
-    Diff myDiff = campare(expectedContent, wrapperContent);
+    Diff myDiff = JmcXmlComparator.compare(expectedContent, wrapperContent);
     Assertions.assertFalse(myDiff.hasDifferences(), "Testplan not identical " + myDiff);
   }
 
@@ -56,7 +57,7 @@ class TestPlanWrapperXMLTest extends AbstractJmcTest {
             .build();
     String wrapperContent = toTmpFile(testPlanWrapper, "testplan_reverse_");
     String expectedContent = readFile(PARENT_PATH + "/testplan.reverse.jmx");
-    Diff myDiff = campare(expectedContent, wrapperContent);
+    Diff myDiff = JmcXmlComparator.compare(expectedContent, wrapperContent);
     Assertions.assertFalse(myDiff.hasDifferences(), "Testplan not identical " + myDiff);
   }
 }

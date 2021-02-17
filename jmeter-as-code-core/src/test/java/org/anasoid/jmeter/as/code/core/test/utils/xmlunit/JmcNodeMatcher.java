@@ -21,13 +21,12 @@ package org.anasoid.jmeter.as.code.core.test.utils.xmlunit;
 import com.google.common.collect.FluentIterable;
 import java.util.Comparator;
 import java.util.Map;
-import java.util.Objects;
-import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.xmlunit.diff.DefaultNodeMatcher;
 
+/** xmlunit Node Matcher for comparison. Order node to ignore node order for comparison. */
 public class JmcNodeMatcher extends DefaultNodeMatcher {
   @Override
   public Iterable<Map.Entry<Node, Node>> match(

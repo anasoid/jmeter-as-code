@@ -43,6 +43,7 @@ import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcSkipDefault;
 import org.anasoid.jmeter.as.code.core.xstream.exceptions.ConversionException;
 import org.anasoid.jmeter.as.code.core.xstream.exceptions.ConversionMandatoryException;
 
+/** Convert wrapper to Jmeter CLasses utils. */
 @SuppressWarnings("PMD.GodClass")
 public final class ConverterBeanUtils {
 

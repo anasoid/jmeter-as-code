@@ -65,7 +65,7 @@ class FirstTest {
             .withPath("/")
             .withMethod(HttpMethod.GET)
             .withImplementation(Implementation.HttpClient4)
-            .withIpSourceType(IpSourceType.IPV4)
+            .withIpSourceType(IpSourceType.DEVICE_IPV4)
             .withName("Open github.com")
             .build();
 

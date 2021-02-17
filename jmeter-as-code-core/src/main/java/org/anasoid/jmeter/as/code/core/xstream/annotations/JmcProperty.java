@@ -24,6 +24,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
+/** Annotation to specify that field should be serialize as property tag. */
 @Target({FIELD, METHOD})
 @Retention(RUNTIME)
 public @interface JmcProperty {

@@ -20,6 +20,9 @@ package org.anasoid.jmeter.as.code.core.xstream.exceptions;
 
 import java.lang.reflect.AccessibleObject;
 
+/**
+ * Error when Mandatory field.
+ */
 public class ConversionMandatoryException extends ConversionException {
 
   static final long serialVersionUID = -703454586545466939L;

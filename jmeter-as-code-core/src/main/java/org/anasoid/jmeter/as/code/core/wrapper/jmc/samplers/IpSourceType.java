@@ -21,12 +21,17 @@ package org.anasoid.jmeter.as.code.core.wrapper.jmc.samplers;
 import com.thoughtworks.xstream.annotations.XStreamConverter;
 import com.thoughtworks.xstream.converters.enums.EnumToStringConverter;
 
+/**
+ * Enumeretaion for IpSource.
+ *
+ * @see org.apache.jmeter.protocol.http.sampler.HTTPSamplerBase.SourceType
+ */
 @XStreamConverter(value = EnumToStringConverter.class)
 public enum IpSourceType {
   Hostname(0), // NOSONAR
-  Device(1), // NOSONAR
-  IPV4(2), // NOSONAR
-  IPV6(3); // NOSONAR
+  DEVICE(1), // NOSONAR
+  DEVICE_IPV4(2), // NOSONAR
+  DEVICE_IPV6(3); // NOSONAR
 
   public final Integer value;
 

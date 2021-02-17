@@ -25,6 +25,11 @@ import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AbstractTestEl
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
 import org.apache.jmeter.protocol.http.util.HTTPFileArg;
 
+/**
+ * Wrapper for HTTPFileArg.
+ *
+ * @see HTTPFileArg
+ */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 public class HTTPFileArgWrapper extends AbstractTestElementWrapper<HTTPFileArg> {
 

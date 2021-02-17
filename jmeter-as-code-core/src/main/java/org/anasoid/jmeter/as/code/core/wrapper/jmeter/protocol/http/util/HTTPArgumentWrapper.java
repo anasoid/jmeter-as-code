@@ -24,6 +24,11 @@ import org.anasoid.jmeter.as.code.core.wrapper.jmeter.config.AbstractArgumentWra
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
 import org.apache.jmeter.protocol.http.util.HTTPArgument;
 
+/**
+ * Wrapper for HTTPArgument.
+ *
+ * @see HTTPArgument
+ */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 public class HTTPArgumentWrapper extends AbstractArgumentWrapper<HTTPArgument> {
 

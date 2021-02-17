@@ -25,6 +25,7 @@ import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
 import org.apache.jmeter.control.LoopController;
 import org.apache.jmeter.control.gui.LoopControlPanel;
 
+/** Wrapper for testing. Child Element. */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 public class SubChildTestingElementWrapperTesting
     extends ChildTestElementWrapperTesting<LoopController, LoopControlPanel> {
