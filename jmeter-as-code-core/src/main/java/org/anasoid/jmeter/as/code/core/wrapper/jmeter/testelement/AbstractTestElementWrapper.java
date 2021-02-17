@@ -39,6 +39,11 @@ import org.anasoid.jmeter.as.code.core.xstream.exceptions.ConversionException;
 import org.apache.jmeter.testelement.AbstractTestElement;
 import org.apache.jmeter.testelement.TestElement;
 
+/**
+ * Wrapper for AbstractTestElement.
+ *
+ * @see AbstractTestElement
+ */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 @XStreamConverter(value = TestElementConverter.class)
 public abstract class AbstractTestElementWrapper<T extends AbstractTestElement> {
@@ -82,11 +87,12 @@ public abstract class AbstractTestElementWrapper<T extends AbstractTestElement> 
     return null;
   }
 
-  /** Test Class used by Jmeter TestElement.TEST_CLASS @See TestElement */
+  /** Test Class used by Jmeter TestElement.TEST_CLASS. @See TestElement. */
   public abstract Class<T> getTestClass();
 
   public void init() {}
 
+  /** Builder. */
   @SuppressWarnings("PMD.AbstractClassWithoutAbstractMethod")
   public abstract static class AbstractTestElementWrapperBuilder<
       T extends AbstractTestElement,

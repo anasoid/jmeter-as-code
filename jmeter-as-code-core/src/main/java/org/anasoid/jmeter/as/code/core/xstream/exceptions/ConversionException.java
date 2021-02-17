@@ -18,6 +18,7 @@
 
 package org.anasoid.jmeter.as.code.core.xstream.exceptions;
 
+/** Conversion exception. */
 public class ConversionException extends RuntimeException {
 
   static final long serialVersionUID = -7034897186545466939L;

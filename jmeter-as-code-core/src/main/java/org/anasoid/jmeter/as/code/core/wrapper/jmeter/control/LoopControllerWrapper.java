@@ -25,6 +25,11 @@ import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
 import org.apache.jmeter.control.LoopController;
 import org.apache.jmeter.control.gui.LoopControlPanel;
 
+/**
+ * Wrapper for LoopController.
+ *
+ * @see LoopController
+ */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 public class LoopControllerWrapper
     extends GenericControllerWrapper<LoopController, LoopControlPanel> {

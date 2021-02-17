@@ -27,6 +27,7 @@ import org.apache.jmeter.control.gui.AbstractControllerGui;
 
 /**
  * Wrapper for AbstractTestElementWrapper.
+ *
  * @see AbstractTestElementWrapper
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
@@ -35,6 +36,7 @@ public abstract class GenericControllerWrapper<
         T extends GenericController, G extends AbstractControllerGui>
     extends AbstractTestElementWrapper<T> implements JMeterGUIWrapper<G> {
 
+  /** Builder. */
   @SuppressWarnings("PMD.UselessOverridingMethod")
   public abstract static class GenericControllerWrapperBuilder<
           T extends GenericController,

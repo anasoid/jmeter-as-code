@@ -18,6 +18,7 @@
 
 package org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.property;
 
+/** Enumeration representing Jmeter property types. */
 public enum JMeterProperty {
   INTEGER("intProp"),
 

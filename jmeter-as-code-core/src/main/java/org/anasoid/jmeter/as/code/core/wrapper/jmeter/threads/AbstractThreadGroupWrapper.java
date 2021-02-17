@@ -30,6 +30,11 @@ import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
 import org.apache.jmeter.threads.AbstractThreadGroup;
 import org.apache.jmeter.threads.gui.AbstractThreadGroupGui;
 
+/**
+ * Wrapper for AbstractThreadGroup.
+ *
+ * @see AbstractThreadGroup
+ */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 @SuppressWarnings("PMD.AbstractClassWithoutAnyMethod")
 public abstract class AbstractThreadGroupWrapper<
@@ -55,6 +60,7 @@ public abstract class AbstractThreadGroupWrapper<
   @JmcProperty(AbstractThreadGroup.MAIN_CONTROLLER)
   protected @Getter GenericControllerWrapper<?, ?> samplerController;
 
+  /** Builder. */
   @SuppressWarnings("PMD")
   public abstract static class AbstractThreadGroupWrapperBuilder<
           T extends AbstractThreadGroup,

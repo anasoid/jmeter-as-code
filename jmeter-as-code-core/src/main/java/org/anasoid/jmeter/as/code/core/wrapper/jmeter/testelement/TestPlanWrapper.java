@@ -38,6 +38,11 @@ import org.apache.jmeter.config.gui.ArgumentsPanel;
 import org.apache.jmeter.control.gui.TestPlanGui;
 import org.apache.jmeter.testelement.TestPlan;
 
+/**
+ * Wrapper for TestPlan.
+ *
+ * @see TestPlan
+ */
 @SuperBuilder(setterPrefix = "with")
 @XStreamAlias("TestPlan")
 public class TestPlanWrapper extends AbstractTestElementWrapper<TestPlan>
@@ -91,6 +96,7 @@ public class TestPlanWrapper extends AbstractTestElementWrapper<TestPlan>
     return TestPlan.class;
   }
 
+  /** Builder. */
   @SuppressWarnings("PMD.UselessOverridingMethod")
   public abstract static class TestPlanWrapperBuilder<
           C extends TestPlanWrapper, B extends TestPlanWrapperBuilder<C, B>>

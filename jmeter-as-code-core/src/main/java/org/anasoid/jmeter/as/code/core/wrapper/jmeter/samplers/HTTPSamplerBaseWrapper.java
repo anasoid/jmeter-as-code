@@ -43,6 +43,11 @@ import org.apache.jmeter.protocol.http.sampler.HTTPSamplerBase;
 import org.apache.jmeter.protocol.http.util.HTTPFileArgs;
 import org.apache.jmeter.samplers.gui.AbstractSamplerGui;
 
+/**
+ * Wrapper for HTTPSamplerBase.
+ *
+ * @see HTTPSamplerBase
+ */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 @SuppressWarnings({"PMD.TooManyFields", "PMD.AbstractClassWithoutAnyMethod"})
 public abstract class HTTPSamplerBaseWrapper<
@@ -206,6 +211,7 @@ public abstract class HTTPSamplerBaseWrapper<
   @Getter
   private final List<HTTPFileArgWrapper> filesArguments;
 
+  /** Builder. */
   @SuppressWarnings("PMD.AccessorMethodGeneration")
   public abstract static class HTTPSamplerBaseWrapperBuilder<
           T extends HTTPSamplerBase,

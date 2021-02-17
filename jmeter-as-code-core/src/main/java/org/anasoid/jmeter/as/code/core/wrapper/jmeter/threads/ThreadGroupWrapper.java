@@ -28,6 +28,11 @@ import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
 import org.apache.jmeter.threads.ThreadGroup;
 import org.apache.jmeter.threads.gui.ThreadGroupGui;
 
+/**
+ * Wrapper for ThreadGroup.
+ *
+ * @see ThreadGroup
+ */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 @XStreamAlias("ThreadGroup")
 public class ThreadGroupWrapper extends AbstractThreadGroupWrapper<ThreadGroup, ThreadGroupGui> {

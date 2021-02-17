@@ -29,6 +29,7 @@ import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
 import org.apache.jmeter.control.GenericController;
 import org.apache.jmeter.control.gui.AbstractControllerGui;
 
+/** Wrapper for testing. abstract child Element. */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 @SuppressWarnings("PMD.AbstractClassWithoutAnyMethod")
 public abstract class ChildTestElementWrapperTesting<

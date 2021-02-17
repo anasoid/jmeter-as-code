@@ -13,26 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * @author : anas
- * Date :   04-Jan-2021
+ * Date :   17-Feb-2021
  */
 
-package org.anasoid.jmeter.as.code.core.wrapper.jmeter.config;
+package org.anasoid.jmeter.as.code.core.test.utils.xmlunit;
 
-import lombok.experimental.SuperBuilder;
-import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcElement;
-import org.apache.jmeter.config.Argument;
+import org.w3c.dom.Node;
+import org.xmlunit.util.Predicate;
 
-/**
- * Wrapper for Argument.
- *
- * @see Argument
- */
-@SuperBuilder(setterPrefix = "with", toBuilder = true)
-@JmcElement
-public class ArgumentWrapper extends AbstractArgumentWrapper<Argument> {
+/** Default Node filter to filter node to not be tested. */
+public class JmcNodeFilter implements Predicate<Node> {
 
   @Override
-  public Class<Argument> getTestClass() {
-    return Argument.class;
+  public boolean test(Node toTest) {
+    return true;
   }
 }

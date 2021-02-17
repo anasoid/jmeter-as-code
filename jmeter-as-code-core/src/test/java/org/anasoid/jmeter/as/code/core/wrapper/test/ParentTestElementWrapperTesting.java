@@ -40,6 +40,7 @@ import org.apache.jmeter.config.gui.ArgumentsPanel;
 import org.apache.jmeter.control.gui.TestPlanGui;
 import org.apache.jmeter.testelement.TestPlan;
 
+/** Wrapper for testing. Parent Element. */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 @XStreamAlias("parent")
 public class ParentTestElementWrapperTesting extends AbstractTestElementWrapper<TestPlan>
@@ -118,6 +119,7 @@ public class ParentTestElementWrapperTesting extends AbstractTestElementWrapper<
     return TestPlan.class;
   }
 
+  /** Builder. */
   @SuppressWarnings("PMD.UselessOverridingMethod")
   public abstract static class ParentTestElementWrapperTestingBuilder<
           C extends ParentTestElementWrapperTesting,

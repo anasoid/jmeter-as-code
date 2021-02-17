@@ -21,6 +21,7 @@ package org.anasoid.jmeter.as.code.core.config;
 import org.apache.jmeter.save.SaveService;
 import org.apache.jmeter.util.JMeterUtils;
 
+/** Jmc Config to have access to all JMC configuration and Jmeter configuration. */
 public final class JmcConfig {
 
   private JmcConfig() {}

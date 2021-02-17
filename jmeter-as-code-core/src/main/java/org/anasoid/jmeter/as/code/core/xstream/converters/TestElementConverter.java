@@ -35,6 +35,9 @@ import org.anasoid.jmeter.as.code.core.xstream.ConverterBeanUtils;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcCollection;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
 
+/**
+ * Main xstream converter.
+ */
 public class TestElementConverter implements Converter {
 
   public static final String ATTRIBUTE_ELEMENT_TYPE = "elementType";
