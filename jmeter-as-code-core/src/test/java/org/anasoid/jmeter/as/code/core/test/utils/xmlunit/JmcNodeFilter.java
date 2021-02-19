@@ -18,14 +18,37 @@
 
 package org.anasoid.jmeter.as.code.core.test.utils.xmlunit;
 
+import java.util.ArrayList;
+import java.util.List;
+import org.anasoid.jmeter.as.code.core.test.utils.xmlunit.filter.JmcXmlFilterNode;
 import org.w3c.dom.Node;
 import org.xmlunit.util.Predicate;
 
 /** Default Node filter to filter node to not be tested. */
 public class JmcNodeFilter implements Predicate<Node> {
 
+  List<JmcXmlFilterNode> filters = new ArrayList<>();
+
+  public JmcNodeFilter() {}
+
+  /**
+   * list filters.
+   *
+   * @param filters list filters.
+   */
+  public JmcNodeFilter(List<JmcXmlFilterNode> filters) {
+    if (filters != null) {
+      this.filters.addAll(filters);
+    }
+  }
+
   @Override
   public boolean test(Node toTest) {
+    for (JmcXmlFilterNode filter : filters) {
+      if (filter.filter(toTest)) {
+        return false;
+      }
+    }
     return true;
   }
 }

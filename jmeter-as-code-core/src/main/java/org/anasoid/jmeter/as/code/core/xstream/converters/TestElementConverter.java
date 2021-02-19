@@ -35,9 +35,7 @@ import org.anasoid.jmeter.as.code.core.xstream.ConverterBeanUtils;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcCollection;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
 
-/**
- * Main xstream converter.
- */
+/** Main xstream converter. */
 public class TestElementConverter implements Converter {
 
   public static final String ATTRIBUTE_ELEMENT_TYPE = "elementType";
@@ -71,7 +69,11 @@ public class TestElementConverter implements Converter {
         Object value = ConverterBeanUtils.getValue(accessibleObject, source);
         if (ConverterBeanUtils.isProperty(accessibleObject)) {
           convertProperty(
-              value, accessibleObject.getAnnotation(JmcProperty.class).value(), writer, context);
+              value,
+              accessibleObject.getAnnotation(JmcProperty.class).value(),
+              accessibleObject.getAnnotation(JmcProperty.class).type(),
+              writer,
+              context);
         } else if (ConverterBeanUtils.isCollection(accessibleObject)) {
 
           JmcCollection annotation = accessibleObject.getAnnotation(JmcCollection.class);
@@ -130,23 +132,31 @@ public class TestElementConverter implements Converter {
   }
 
   protected void convertProperty(
-      Object value, String name, HierarchicalStreamWriter writer, MarshallingContext context) {
+      Object value,
+      String name,
+      Class<?> clazz,
+      HierarchicalStreamWriter writer,
+      MarshallingContext context) {
     boolean changed = false;
     if (!inElementConversion) {
       inElementConversion = true;
       changed = true;
     }
 
-    writer.startNode(ConverterBeanUtils.getPropertyAlias(value));
+    writer.startNode(ConverterBeanUtils.getPropertyAlias(value, clazz));
     writer.addAttribute("name", name);
     if (value instanceof AbstractTestElementWrapper) {
       AbstractTestElementWrapper<?> testElement = (AbstractTestElementWrapper) value;
       writer.addAttribute(ATTRIBUTE_ELEMENT_TYPE, testElement.getTestClass().getSimpleName());
     }
-    if (value.getClass().isEnum()) {
-      context.convertAnother(ConverterBeanUtils.getEnumValue(value));
+    if (value != null) {
+      if (value.getClass().isEnum()) {
+        context.convertAnother(ConverterBeanUtils.getEnumValue(value));
+      } else {
+        context.convertAnother(value);
+      }
     } else {
-      context.convertAnother(value);
+      context.convertAnother("");
     }
     writer.endNode();
     if (changed) {

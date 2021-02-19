@@ -52,7 +52,7 @@ public abstract class AbstractThreadGroupWrapper<
   private @Getter Boolean isSameUserOnNextIteration = true;
 
   /** Number of Threads (users). */
-  @JmcProperty(AbstractThreadGroup.NUM_THREADS)
+  @JmcProperty(value = AbstractThreadGroup.NUM_THREADS, type = String.class)
   @Builder.Default
   private @Getter Integer numThreads = 1;
 

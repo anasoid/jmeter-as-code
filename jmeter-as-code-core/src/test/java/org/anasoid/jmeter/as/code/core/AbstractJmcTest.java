@@ -72,4 +72,17 @@ public abstract class AbstractJmcTest {
 
     return FileUtils.readFileToString(new File(url.getFile()), StandardCharsets.UTF_8);
   }
+
+  /**
+   * Extract XML tag by node name.
+   *
+   * @param content source.
+   * @param node node name.
+   */
+  protected String getFragmentSingleNode(String content, String node) {
+    String startTag = "<" + node;
+    String endTag = "</" + node + ">";
+    String cleanStart = content.substring(content.indexOf(startTag));
+    return cleanStart.substring(0, cleanStart.indexOf(endTag) + endTag.length());
+  }
 }

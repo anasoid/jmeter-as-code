@@ -93,7 +93,7 @@ class FirstTest {
         ThreadGroupWrapper.builder()
             .withName("Example Thread Group")
             .withNumThreads(1)
-            .withDelay(9L)
+            .withDelay(9)
             .withRampUp(7)
             .withLoops(7)
             .withOnSampleError(OnSampleError.ON_SAMPLE_ERROR_STOPTHREAD)
