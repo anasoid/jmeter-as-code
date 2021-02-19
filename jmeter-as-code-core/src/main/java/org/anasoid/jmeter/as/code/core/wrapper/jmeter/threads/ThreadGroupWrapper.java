@@ -21,10 +21,13 @@ package org.anasoid.jmeter.as.code.core.wrapper.jmeter.threads;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import lombok.Builder;
+import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.control.LoopControllerWrapper;
+import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcNullAllowed;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
+import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcSkipDefault;
 import org.apache.jmeter.threads.ThreadGroup;
 import org.apache.jmeter.threads.gui.ThreadGroupGui;
 
@@ -39,19 +42,34 @@ public class ThreadGroupWrapper extends AbstractThreadGroupWrapper<ThreadGroup, 
 
   /** Specify Thread lifetime. */
   @JmcProperty(ThreadGroup.SCHEDULER)
-  private @Getter Boolean scheduler;
+  @Default
+  @Getter
+  private Boolean scheduler = false;
+
+  /** Specify Thread lifetime. */
+  @JmcProperty(ThreadGroup.DELAYED_START)
+  @Default
+  @Getter
+  @JmcSkipDefault("false")
+  private Boolean delayedStartup = false;
 
   /** Duration (seconds). */
-  @JmcProperty(ThreadGroup.DURATION)
-  private @Getter Long duration;
+  @JmcProperty(value = ThreadGroup.DURATION, type = String.class)
+  @Getter
+  @JmcNullAllowed
+  private Integer duration;
 
   /** Startup delay (seconds). */
-  @JmcProperty(ThreadGroup.DELAY)
-  private @Getter Long delay;
+  @JmcProperty(value = ThreadGroup.DELAY, type = String.class)
+  @Getter
+  @JmcNullAllowed
+  private Integer delay;
 
   /** Ramp-up period (seconds). */
-  @JmcProperty(ThreadGroup.RAMP_TIME)
-  private @Builder.Default @Getter Integer rampUp = 1;
+  @JmcProperty(value = ThreadGroup.RAMP_TIME, type = String.class)
+  @Getter
+  @Builder.Default
+  private Integer rampUp = 1;
 
   /**
    * In spite of the name, this is actually used to determine if the loop controller is repeatable.
@@ -67,11 +85,15 @@ public class ThreadGroupWrapper extends AbstractThreadGroupWrapper<ThreadGroup, 
 
   @Override
   public void init() {
-    samplerController =
-        LoopControllerWrapper.builder()
-            .withLoops(loops)
-            .withContinueForever(continueForever)
-            .build();
+    LoopControllerWrapper.LoopControllerWrapperBuilder samplerControllerBuilder =
+        LoopControllerWrapper.builder().withName("Loop Controller").withContinueForever(false);
+    if (Boolean.TRUE.equals(continueForever)) {
+      samplerControllerBuilder.withLoops(-1);
+    } else {
+      samplerControllerBuilder.withLoops(loops);
+    }
+
+    samplerController = samplerControllerBuilder.build();
   }
 
   @Override

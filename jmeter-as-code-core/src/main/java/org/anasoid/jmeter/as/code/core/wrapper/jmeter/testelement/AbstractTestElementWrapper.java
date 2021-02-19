@@ -34,6 +34,7 @@ import org.anasoid.jmeter.as.code.core.wrapper.jmeter.gui.JMeterGUIWrapper;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcAsAttribute;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcMethodAlias;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
+import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcSkipDefault;
 import org.anasoid.jmeter.as.code.core.xstream.converters.TestElementConverter;
 import org.anasoid.jmeter.as.code.core.xstream.exceptions.ConversionException;
 import org.apache.jmeter.testelement.AbstractTestElement;
@@ -58,6 +59,7 @@ public abstract class AbstractTestElementWrapper<T extends AbstractTestElement> 
   @JmcProperty(TestElement.COMMENTS)
   @Getter
   @Builder.Default
+  @JmcSkipDefault("")
   private String comment = "";
 
   /** enabled. */

@@ -40,7 +40,7 @@ public class LoopControllerWrapper
   @Getter
   Boolean continueForever = false;
   /** Loop Count. */
-  @JmcProperty(LoopController.LOOPS)
+  @JmcProperty(value = LoopController.LOOPS)
   @Getter
   private Integer loops;
 

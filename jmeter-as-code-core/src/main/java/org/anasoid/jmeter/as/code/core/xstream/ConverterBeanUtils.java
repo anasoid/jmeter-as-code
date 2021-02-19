@@ -38,6 +38,7 @@ import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcCollection;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcEmptyAllowed;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcMandatory;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcMethodAlias;
+import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcNullAllowed;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcSkipDefault;
 import org.anasoid.jmeter.as.code.core.xstream.exceptions.ConversionException;
@@ -154,25 +155,25 @@ public final class ConverterBeanUtils {
     return null;
   }
 
-  /** get Propetry Alias (intProp,stringProp,longProp .. ). */
-  public static String getPropertyAlias(Object value) {
-
-    if (value.getClass().isEnum()) {
-      return getPropertyAlias(getEnumValue(value));
+  /** get Property Alias (intProp,stringProp,longProp .. ). */
+  public static String getPropertyAlias(Object value, Class<?> clazz) {
+    Class<?> ppClazz = (clazz == Void.class) ? value.getClass() : clazz;
+    if ((value != null) && (value.getClass().isEnum())) {
+      return getPropertyAlias(getEnumValue(value), clazz);
     }
-    if (value instanceof Integer) {
+    if (ppClazz == Integer.class) {
       return JMeterProperty.INTEGER.value();
-    } else if (value instanceof String) {
+    } else if (ppClazz == String.class) {
       return JMeterProperty.STRING.value();
-    } else if (value instanceof Long) {
+    } else if (ppClazz == Long.class) {
       return JMeterProperty.LONG.value();
-    } else if (value instanceof Boolean) {
+    } else if (ppClazz == Boolean.class) {
       return JMeterProperty.BOOL.value();
 
-    } else if (value instanceof Float) {
+    } else if (ppClazz == Float.class) {
       return JMeterProperty.FLOAT.value();
 
-    } else if (value instanceof Double) {
+    } else if (ppClazz == Double.class) {
       return JMeterProperty.DOUBLE.value();
 
     } else if (value instanceof AbstractTestElementWrapper) {
@@ -199,6 +200,9 @@ public final class ConverterBeanUtils {
     }
     Object value = getValue(field, source);
     if (value == null) {
+      if (field.getAnnotation(JmcNullAllowed.class) != null) {
+        return false;
+      }
       if (field.getAnnotation(JmcMandatory.class) != null) {
         throw new ConversionMandatoryException(source, field);
       }

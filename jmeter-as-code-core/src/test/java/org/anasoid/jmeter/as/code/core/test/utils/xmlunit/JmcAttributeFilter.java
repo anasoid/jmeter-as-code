@@ -18,34 +18,38 @@
 
 package org.anasoid.jmeter.as.code.core.test.utils.xmlunit;
 
-import org.junit.platform.commons.util.StringUtils;
+import java.util.Arrays;
+import java.util.List;
+import org.anasoid.jmeter.as.code.core.test.utils.xmlunit.filter.JmcXmlFilterAttr;
+import org.anasoid.jmeter.as.code.core.test.utils.xmlunit.filter.attr.JmeterOnTestPlanFilter;
 import org.w3c.dom.Attr;
 import org.xmlunit.util.Predicate;
 
 /** Default attributes filter, to filter attributes to not be tested. */
 public class JmcAttributeFilter implements Predicate<Attr> {
 
-  @Override
-  public boolean test(Attr toTest) {
-    if (isJmeterOnTestPlan(toTest)) {
-      return false;
-    }
-    return true;
-  }
+  List<JmcXmlFilterAttr> filters = Arrays.asList(new JmeterOnTestPlanFilter());
+
+  public JmcAttributeFilter() {}
 
   /**
-   * Ignore jmeter attribute on testplan to not be impacted by changing jmeter version.
+   * list filters.
    *
-   * @param toTest attribute to Test.
-   * @return true to ignore.
+   * @param filters list filters.
    */
-  private boolean isJmeterOnTestPlan(Attr toTest) {
-    if ("jmeter".equals(toTest.getName())
-        && StringUtils.isNotBlank(toTest.getValue())
-        && toTest.getOwnerElement() != null
-        && "jmeterTestPlan".equals(toTest.getOwnerElement().getLocalName())) {
-      return true;
+  public JmcAttributeFilter(List<JmcXmlFilterAttr> filters) {
+    if (filters != null) {
+      this.filters.addAll(filters);
     }
-    return false;
+  }
+
+  @Override
+  public boolean test(Attr toTest) {
+    for (JmcXmlFilterAttr filter : filters) {
+      if (filter.filter(toTest)) {
+        return false;
+      }
+    }
+    return true;
   }
 }
