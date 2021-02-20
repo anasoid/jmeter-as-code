@@ -24,6 +24,7 @@ import java.util.HashMap;
 import java.util.Map;
 import org.anasoid.jmeter.as.code.core.AbstractJmcTest;
 import org.anasoid.jmeter.as.code.core.test.utils.xmlunit.JmcXmlComparator;
+import org.anasoid.jmeter.as.code.core.test.utils.xmlunit.filter.AttributesFilterManager;
 import org.anasoid.jmeter.as.code.core.test.utils.xmlunit.filter.node.NodeByAttributesFilter;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.config.ArgumentWrapper;
 import org.junit.jupiter.api.Assertions;
@@ -43,7 +44,10 @@ class TestPlanWrapperXMLTest extends AbstractJmcTest {
     String expectedContent = readFile(PARENT_PATH + "/testplan.default.jmx");
     Diff myDiff =
         JmcXmlComparator.compare(
-            expectedContent, wrapperContent, null, Arrays.asList(getNodeByAttributesFilter()));
+            expectedContent,
+            wrapperContent,
+            null,
+            Arrays.asList(AttributesFilterManager.getCommentFilter()));
     Assertions.assertFalse(myDiff.hasDifferences(), "Testplan not identical " + myDiff);
   }
 
@@ -67,11 +71,5 @@ class TestPlanWrapperXMLTest extends AbstractJmcTest {
     Assertions.assertFalse(myDiff.hasDifferences(), "Testplan not identical " + myDiff);
   }
 
-  private NodeByAttributesFilter getNodeByAttributesFilter() {
 
-    Map<String, String> map = new HashMap<>();
-    map.put("name", "TestPlan.comments");
-    NodeByAttributesFilter filter = new NodeByAttributesFilter("stringProp", "TestPlan", map);
-    return filter;
-  }
 }

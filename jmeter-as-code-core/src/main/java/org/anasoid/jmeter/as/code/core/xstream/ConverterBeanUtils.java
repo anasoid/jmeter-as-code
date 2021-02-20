@@ -30,6 +30,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AbstractTestElementWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.property.JMeterProperty;
@@ -43,10 +44,14 @@ import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcSkipDefault;
 import org.anasoid.jmeter.as.code.core.xstream.exceptions.ConversionException;
 import org.anasoid.jmeter.as.code.core.xstream.exceptions.ConversionMandatoryException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /** Convert wrapper to Jmeter CLasses utils. */
 @SuppressWarnings("PMD.GodClass")
 public final class ConverterBeanUtils {
+
+  private static final Logger LOG = LoggerFactory.getLogger(ConverterBeanUtils.class);
 
   private ConverterBeanUtils() {}
 
@@ -121,10 +126,22 @@ public final class ConverterBeanUtils {
   public static Object getValue(AccessibleObject field, Object source) {
 
     field.setAccessible(true); // NOSONAR
-    try {
+    try { // NOSONAR
       if (field instanceof Field) {
 
-        return ((Field) field).get(source);
+        String fieldName = ((Field) field).getName();
+        String getMethodName =
+            "get"
+                + fieldName.substring(0, 1).toUpperCase(Locale.ROOT)
+                + fieldName.substring(1, fieldName.length());
+
+        try { // NOSONAR
+          Method getMethod = source.getClass().getMethod(getMethodName);
+          return getMethod.invoke(source);
+        } catch (NoSuchMethodException e) {
+          LOG.warn("Getter not found for field {} on {}", ((Field) field).getName(), source);
+          return ((Field) field).get(source);
+        }
 
       } else if (field instanceof Method) {
 

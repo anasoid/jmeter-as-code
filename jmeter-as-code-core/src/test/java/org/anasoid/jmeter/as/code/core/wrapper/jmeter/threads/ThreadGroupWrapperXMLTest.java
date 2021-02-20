@@ -19,10 +19,12 @@
 package org.anasoid.jmeter.as.code.core.wrapper.jmeter.threads;
 
 import java.io.IOException;
+import java.util.Arrays;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
 import org.anasoid.jmeter.as.code.core.AbstractJmcTest;
 import org.anasoid.jmeter.as.code.core.test.utils.xmlunit.JmcXmlComparator;
+import org.anasoid.jmeter.as.code.core.test.utils.xmlunit.filter.AttributesFilterManager;
 import org.anasoid.jmeter.as.code.core.wrapper.jmc.threads.OnSampleError;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestPlanWrapper;
 import org.apache.jmeter.control.LoopController;
@@ -59,6 +61,28 @@ class ThreadGroupWrapperXMLTest extends AbstractJmcTest {
   }
 
   @Test
+  void testFullDefault()
+      throws IOException, XPathExpressionException, SAXException, ParserConfigurationException {
+
+    TestPlanWrapper testPlanWrapper =
+        TestPlanWrapper.builder()
+            .withName("Test Plan")
+            .addChild(ThreadGroupWrapper.builder().withName("Thread Group").build())
+            .build();
+    String wrapperContent = toTmpFile(testPlanWrapper, "testplan_");
+    String expectedContent = readFile(PARENT_PATH + "/threadgroup.default.jmx");
+    Diff diff =
+        JmcXmlComparator.compare(
+            expectedContent,
+            wrapperContent,
+            null,
+            Arrays.asList(AttributesFilterManager.getCommentFilter()));
+    Assertions.assertFalse(
+        JmcXmlComparator.hasDifferences(diff, LoopController.LOOPS),
+        "theadGroup  not identical " + diff);
+  }
+
+  @Test
   void testReverse()
       throws IOException, XPathExpressionException, SAXException, ParserConfigurationException {
 
@@ -88,6 +112,4 @@ class ThreadGroupWrapperXMLTest extends AbstractJmcTest {
         JmcXmlComparator.hasDifferences(diff, LoopController.LOOPS),
         "theadGroup  not identical " + diff);
   }
-
-
 }
