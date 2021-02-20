@@ -126,7 +126,7 @@ public final class ConverterBeanUtils {
   public static Object getValue(AccessibleObject field, Object source) {
 
     field.setAccessible(true); // NOSONAR
-    try {
+    try { // NOSONAR
       if (field instanceof Field) {
 
         String fieldName = ((Field) field).getName();
@@ -135,12 +135,11 @@ public final class ConverterBeanUtils {
                 + fieldName.substring(0, 1).toUpperCase(Locale.ROOT)
                 + fieldName.substring(1, fieldName.length());
 
-        try {
+        try { // NOSONAR
           Method getMethod = source.getClass().getMethod(getMethodName);
           return getMethod.invoke(source);
         } catch (NoSuchMethodException e) {
-          LOG.warn(
-              "Getter not found for field {} on {}", ((Field) field).getName(), source.toString());
+          LOG.warn("Getter not found for field {} on {}", ((Field) field).getName(), source);
           return ((Field) field).get(source);
         }
 
