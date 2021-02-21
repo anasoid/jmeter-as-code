@@ -172,11 +172,33 @@ public final class ConverterBeanUtils {
     return null;
   }
 
+  /**
+   * get Property class type.
+   *
+   */
+  public static Class<?> getPropertyType(AccessibleObject accessibleObject) {
+
+    JmcProperty jmcProperty = accessibleObject.getAnnotation(JmcProperty.class);
+    Class<?> clazz = jmcProperty.asString() ? String.class : jmcProperty.type();
+    if (clazz != Void.class) {
+      return clazz;
+    }
+    if (accessibleObject instanceof Field) {
+      return ((Field) accessibleObject).getType();
+    }
+    if (accessibleObject instanceof Method) {
+      return ((Method) accessibleObject).getReturnType();
+    }
+    throw new IllegalStateException("Unknown accessibleObject type :" + accessibleObject);
+  }
+
   /** get Property Alias (intProp,stringProp,longProp .. ). */
   public static String getPropertyAlias(Object value, Class<?> clazz) {
     Class<?> ppClazz = (clazz == Void.class) ? value.getClass() : clazz;
     if ((value != null) && (value.getClass().isEnum())) {
-      return getPropertyAlias(getEnumValue(value), clazz);
+      Object enumValue = getEnumValue(value);
+      return getPropertyAlias(
+          enumValue, (clazz == Void.class || clazz.isEnum()) ? enumValue.getClass() : clazz);
     }
     if (ppClazz == Integer.class) {
       return JMeterProperty.INTEGER.value();
@@ -184,7 +206,7 @@ public final class ConverterBeanUtils {
       return JMeterProperty.STRING.value();
     } else if (ppClazz == Long.class) {
       return JMeterProperty.LONG.value();
-    } else if (ppClazz == Boolean.class) {
+    } else if (ppClazz == Boolean.class || ppClazz == boolean.class) {
       return JMeterProperty.BOOL.value();
 
     } else if (ppClazz == Float.class) {
@@ -196,7 +218,7 @@ public final class ConverterBeanUtils {
     } else if (value instanceof AbstractTestElementWrapper) {
       return JMeterProperty.ELEMENT.value();
     }
-    throw new IllegalStateException("Unknowen properties type for :" + value);
+    throw new IllegalStateException("Unknown properties type for :" + value);
   }
 
   /** get num value. call value() method if present, else call toString. */

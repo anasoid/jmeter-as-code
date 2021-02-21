@@ -68,12 +68,7 @@ public class TestElementConverter implements Converter {
       if (!ConverterBeanUtils.shouldSkip(source, accessibleObject)) {
         Object value = ConverterBeanUtils.getValue(accessibleObject, source);
         if (ConverterBeanUtils.isProperty(accessibleObject)) {
-          convertProperty(
-              value,
-              accessibleObject.getAnnotation(JmcProperty.class).value(),
-              accessibleObject.getAnnotation(JmcProperty.class).type(),
-              writer,
-              context);
+          convertProperty(value, accessibleObject, writer, context);
         } else if (ConverterBeanUtils.isCollection(accessibleObject)) {
 
           JmcCollection annotation = accessibleObject.getAnnotation(JmcCollection.class);
@@ -133,17 +128,21 @@ public class TestElementConverter implements Converter {
 
   protected void convertProperty(
       Object value,
-      String name,
-      Class<?> clazz,
+      AccessibleObject accessibleObject,
       HierarchicalStreamWriter writer,
       MarshallingContext context) {
+    JmcProperty jmcProperty = accessibleObject.getAnnotation(JmcProperty.class);
+    String name = jmcProperty.value();
+
     boolean changed = false;
     if (!inElementConversion) {
       inElementConversion = true;
       changed = true;
     }
 
-    writer.startNode(ConverterBeanUtils.getPropertyAlias(value, clazz));
+    writer.startNode(
+        ConverterBeanUtils.getPropertyAlias(
+            value, ConverterBeanUtils.getPropertyType(accessibleObject)));
     writer.addAttribute("name", name);
     if (value instanceof AbstractTestElementWrapper) {
       AbstractTestElementWrapper<?> testElement = (AbstractTestElementWrapper) value;
@@ -206,7 +205,9 @@ public class TestElementConverter implements Converter {
 
         if (object instanceof AbstractTestElementWrapper) {
           AbstractTestElementWrapper<?> testElement = (AbstractTestElementWrapper) object;
-          writer.addAttribute(ATTRIBUTE_ELEMENT_TYPE, testElement.getTestClass().getSimpleName());
+          if (testElement.getTestClass() != null) {
+            writer.addAttribute(ATTRIBUTE_ELEMENT_TYPE, testElement.getTestClass().getSimpleName());
+          }
         }
         context.convertAnother(object);
         writer.endNode();

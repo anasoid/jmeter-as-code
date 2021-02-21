@@ -18,6 +18,7 @@
 
 package org.anasoid.jmeter.as.code.core.wrapper.jmeter.protocol.http.util;
 
+import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.config.AbstractArgumentWrapper;
@@ -35,11 +36,13 @@ public class HTTPArgumentWrapper extends AbstractArgumentWrapper<HTTPArgument> {
   /** URL Encode. */
   @JmcProperty("HTTPArgument.always_encode")
   @Getter
-  private String alwaysEncoded;
+  @Default
+  private Boolean alwaysEncoded = Boolean.FALSE;
   /** Include equals. */
   @JmcProperty("HTTPArgument.use_equals")
   @Getter
-  private Boolean useEquals;
+  @Default
+  private Boolean useEquals = true;
   /** Content-Type. */
   @JmcProperty("HTTPArgument.content_type")
   @Getter

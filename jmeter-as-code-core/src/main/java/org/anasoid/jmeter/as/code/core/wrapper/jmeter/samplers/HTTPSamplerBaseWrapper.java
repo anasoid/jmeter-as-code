@@ -20,6 +20,7 @@ package org.anasoid.jmeter.as.code.core.wrapper.jmeter.samplers;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import lombok.Builder.Default;
@@ -33,6 +34,7 @@ import org.anasoid.jmeter.as.code.core.wrapper.jmeter.protocol.http.util.HTTPFil
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcCollection;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcEmptyAllowed;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcMandatory;
+import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcNullAllowed;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcSkipDefault;
 import org.anasoid.jmeter.as.code.core.xstream.exceptions.ConversionException;
@@ -54,9 +56,18 @@ public abstract class HTTPSamplerBaseWrapper<
         T extends HTTPSamplerBase, G extends AbstractSamplerGui>
     extends AbstractSamplerWrapper<T, G> {
 
+  @Override
+  public void init() {
+    super.init();
+    if (autoRedirects) {
+      followRedirects = false;
+    }
+  }
+
   /** Server Name or IP. */
   @JmcProperty(HTTPSamplerBase.DOMAIN)
   @Getter
+  @JmcNullAllowed
   private final String domain;
   /** Path. */
   @JmcProperty(HTTPSamplerBase.PATH)
@@ -65,30 +76,34 @@ public abstract class HTTPSamplerBaseWrapper<
   private final String path;
 
   /** Port Number. */
-  @JmcProperty(HTTPSamplerBase.PORT)
+  @JmcProperty(value = HTTPSamplerBase.PORT, asString = true)
   @Getter
+  @JmcNullAllowed
   private final Integer port;
 
   /** Protocol [http]. */
-  @JmcProperty(HTTPSamplerBase.PROTOCOL)
+  @JmcProperty(value = HTTPSamplerBase.PROTOCOL, asString = true)
   @Getter
+  @JmcNullAllowed
   private final String protocol;
 
-  @JmcProperty(HTTPSamplerBase.CONTENT_ENCODING)
+  @JmcProperty(value = HTTPSamplerBase.CONTENT_ENCODING, asString = true)
   @Getter
+  @JmcNullAllowed
   private final String contentEncoding;
 
   /** HTTP Method. */
   @JmcProperty(HTTPSamplerBase.METHOD)
   @Getter
-  private final HttpMethod method;
+  @Default
+  private final HttpMethod method = HttpMethod.GET;
 
   @JmcProperty(HTTPSamplerBase.IMPLEMENTATION)
   @Getter
   private final Implementation implementation;
 
   /** Source Address Type. */
-  @JmcProperty(HTTPSamplerBase.IP_SOURCE_TYPE)
+  @JmcProperty(value = HTTPSamplerBase.IP_SOURCE_TYPE)
   @Getter
   @JmcSkipDefault("0")
   private final IpSourceType ipSourceType;
@@ -107,9 +122,9 @@ public abstract class HTTPSamplerBaseWrapper<
   @Getter
   private final String proxyHost;
 
-  @JmcProperty(HTTPSamplerBase.PROXYPORT)
+  @JmcProperty(value = HTTPSamplerBase.PROXYPORT, asString = true)
   @Getter
-  private final Integer proxyPortInt;
+  private final Integer proxyPort;
   /** Proxy user. */
   @JmcProperty(HTTPSamplerBase.PROXYUSER)
   @Getter
@@ -121,34 +136,40 @@ public abstract class HTTPSamplerBaseWrapper<
   private final String proxyPass;
 
   /** Connect Timeouts (milliseconds). */
-  @JmcProperty(HTTPSamplerBase.CONNECT_TIMEOUT)
+  @JmcProperty(value = HTTPSamplerBase.CONNECT_TIMEOUT, asString = true)
   @Getter
+  @JmcNullAllowed
   private final Integer connectTimeout;
 
   /** Response Timeouts (milliseconds). */
-  @JmcProperty(HTTPSamplerBase.RESPONSE_TIMEOUT)
+  @JmcProperty(value = HTTPSamplerBase.RESPONSE_TIMEOUT, asString = true)
   @Getter
+  @JmcNullAllowed
   private final Integer responseTimeout;
 
   /** Follow redirects. */
   @JmcProperty(HTTPSamplerBase.FOLLOW_REDIRECTS)
   @Getter
-  private final Boolean followRedirects;
+  @Default
+  private Boolean followRedirects = Boolean.TRUE;
 
   /** Redirect Automatically. */
   @JmcProperty(HTTPSamplerBase.AUTO_REDIRECTS)
   @Getter
-  private final Boolean autoRedirects;
+  @Default
+  private final Boolean autoRedirects = Boolean.FALSE;
 
   /** Use KeepAlive. */
   @JmcProperty(HTTPSamplerBase.USE_KEEPALIVE)
   @Getter
-  private final Boolean useKeepAlive;
+  @Default
+  private final Boolean useKeepAlive = Boolean.TRUE;
 
   /** Use multipart/form-data. */
   @JmcProperty(HTTPSamplerBase.DO_MULTIPART_POST)
   @Getter
-  private final Boolean doMultipartPost;
+  @Default
+  private final Boolean doMultipartPost = Boolean.FALSE;
 
   /** Browser-compatible headers. */
   @JmcProperty(HTTPSamplerBase.BROWSER_COMPATIBLE_MULTIPART)
@@ -165,14 +186,16 @@ public abstract class HTTPSamplerBaseWrapper<
   private final Boolean postBodyRaw;
 
   /** Embedded Resources from HTML Files: Concurrent pool for parallel download. */
-  @JmcProperty(HTTPSamplerBase.CONCURRENT_POOL)
+  @JmcProperty(value = HTTPSamplerBase.CONCURRENT_POOL, asString = true)
   @Default
   @Getter
+  @JmcSkipDefault("6")
   private Integer concurrentPool = HTTPSamplerBase.CONCURRENT_POOL_SIZE;
 
   /** Embedded Resources from HTML Files: URLs must match. */
-  @JmcProperty(HTTPSamplerBase.EMBEDDED_URL_RE)
+  @JmcProperty(value = HTTPSamplerBase.EMBEDDED_URL_RE, asString = true)
   @Getter
+  @JmcNullAllowed
   private final String embeddedUrlRE;
 
   /** Embedded Resources from HTML Files: URLs must not match. */
@@ -199,7 +222,8 @@ public abstract class HTTPSamplerBaseWrapper<
       name = "HTTPsampler.Arguments",
       elementType = Arguments.class,
       guiclass = HTTPArgumentsPanel.class,
-      testclass = Arguments.class)
+      testclass = Arguments.class,
+      testname = "User Defined Variables")
   @JmcEmptyAllowed
   private final List<HTTPArgumentWrapper> arguments = new ArrayList<>();
 
@@ -207,7 +231,8 @@ public abstract class HTTPSamplerBaseWrapper<
       value = "HTTPFileArgs.files",
       withElementProp = true,
       name = "HTTPsampler.Files",
-      elementType = HTTPFileArgs.class)
+      elementType = HTTPFileArgs.class,
+      enabled = false)
   @Getter
   private final List<HTTPFileArgWrapper> filesArguments;
 
@@ -241,6 +266,36 @@ public abstract class HTTPSamplerBaseWrapper<
     protected B withArguments(List<HTTPArgumentWrapper> arguments) {
       this.arguments$value = arguments;
       this.arguments$set = true;
+      return self();
+    }
+
+    /** hide method , generated by Lombok. */
+    protected B withFilesArguments(List<HTTPFileArgWrapper> filesArguments) {
+      this.filesArguments = filesArguments;
+      return self();
+    }
+
+    /**
+     * Add file arguments.
+     *
+     * @param filesArguments List of HTTPFileArgWrapper.
+     */
+    public B addFileArguments(Collection<HTTPFileArgWrapper> filesArguments) {
+      if (this.filesArguments == null) {
+        this.filesArguments = new ArrayList<>();
+      }
+      this.filesArguments.addAll(filesArguments);
+
+      return self();
+    }
+
+    /**
+     * Add file argument.
+     *
+     * @param filesArgument HTTPFileArgWrapper.
+     */
+    public B addFileArgument(HTTPFileArgWrapper filesArgument) {
+      addFileArguments(Arrays.asList(filesArgument));
       return self();
     }
 

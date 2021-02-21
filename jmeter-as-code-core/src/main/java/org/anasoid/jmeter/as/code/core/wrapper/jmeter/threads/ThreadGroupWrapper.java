@@ -54,19 +54,19 @@ public class ThreadGroupWrapper extends AbstractThreadGroupWrapper<ThreadGroup, 
   private Boolean delayedStartup = false;
 
   /** Duration (seconds). */
-  @JmcProperty(value = ThreadGroup.DURATION, type = String.class)
+  @JmcProperty(value = ThreadGroup.DURATION, asString = true)
   @Getter
   @JmcNullAllowed
   private Integer duration;
 
   /** Startup delay (seconds). */
-  @JmcProperty(value = ThreadGroup.DELAY, type = String.class)
+  @JmcProperty(value = ThreadGroup.DELAY, asString = true)
   @Getter
   @JmcNullAllowed
   private Integer delay;
 
   /** Ramp-up period (seconds). */
-  @JmcProperty(value = ThreadGroup.RAMP_TIME, type = String.class)
+  @JmcProperty(value = ThreadGroup.RAMP_TIME, asString = true)
   @Getter
   @Builder.Default
   private Integer rampUp = 1;

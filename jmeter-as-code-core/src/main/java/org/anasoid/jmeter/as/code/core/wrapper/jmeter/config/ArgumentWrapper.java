@@ -19,7 +19,6 @@
 package org.anasoid.jmeter.as.code.core.wrapper.jmeter.config;
 
 import lombok.experimental.SuperBuilder;
-import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcElement;
 import org.apache.jmeter.config.Argument;
 
 /**
@@ -28,7 +27,6 @@ import org.apache.jmeter.config.Argument;
  * @see Argument
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
-@JmcElement
 public class ArgumentWrapper extends AbstractArgumentWrapper<Argument> {
 
   @Override

@@ -26,7 +26,6 @@ import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AbstractTestElementWrapper;
-import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcElement;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
 import org.apache.jmeter.config.Argument;
 
@@ -36,7 +35,6 @@ import org.apache.jmeter.config.Argument;
  * @see Argument
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
-@JmcElement
 public abstract class AbstractArgumentWrapper<T extends Argument>
     extends AbstractTestElementWrapper<T> {
 
