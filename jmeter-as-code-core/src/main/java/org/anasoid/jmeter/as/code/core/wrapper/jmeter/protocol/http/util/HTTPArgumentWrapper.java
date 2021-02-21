@@ -18,10 +18,12 @@
 
 package org.anasoid.jmeter.as.code.core.wrapper.jmeter.protocol.http.util;
 
+import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.config.AbstractArgumentWrapper;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.jmeter.protocol.http.util.HTTPArgument;
 
 /**
@@ -35,11 +37,13 @@ public class HTTPArgumentWrapper extends AbstractArgumentWrapper<HTTPArgument> {
   /** URL Encode. */
   @JmcProperty("HTTPArgument.always_encode")
   @Getter
-  private String alwaysEncoded;
+  @Default
+  private Boolean alwaysEncoded = Boolean.FALSE;
   /** Include equals. */
   @JmcProperty("HTTPArgument.use_equals")
   @Getter
-  private Boolean useEquals;
+  @Default
+  private Boolean useEquals = true;
   /** Content-Type. */
   @JmcProperty("HTTPArgument.content_type")
   @Getter
@@ -48,5 +52,12 @@ public class HTTPArgumentWrapper extends AbstractArgumentWrapper<HTTPArgument> {
   @Override
   public Class<HTTPArgument> getTestClass() {
     return HTTPArgument.class;
+  }
+
+  @Override
+  public void init() {
+    if (StringUtils.isNotEmpty(getValue())) {
+      useEquals = true;
+    }
   }
 }

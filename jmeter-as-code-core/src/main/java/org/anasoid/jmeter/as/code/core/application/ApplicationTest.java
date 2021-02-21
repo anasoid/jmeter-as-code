@@ -112,11 +112,16 @@ public class ApplicationTest {
    * @param out Destination output.
    * @throws IOException – If an I/O error occurs.
    */
-  public void toJmx(Writer out) throws IOException {
+  public AbstractTestElementWrapper toJmx(Writer out) throws IOException { // NOSONAR
     ScriptWrapper script = createScript();
     try (out) {
       out.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + System.lineSeparator());
       getXstream().toXML(script, out);
+    }
+    if (testMode) {
+      return testElement;
+    } else {
+      return testPlanWrapper;
     }
   }
 
@@ -126,16 +131,16 @@ public class ApplicationTest {
    * @param file Destination output.
    * @throws IOException – If an I/O error occurs.
    */
-  public void toJmx(File file) throws IOException {
-    this.toJmx(Files.newBufferedWriter(Paths.get(file.getPath()), StandardCharsets.UTF_8));
+  public AbstractTestElementWrapper toJmx(File file) throws IOException { // NOSONAR
+    return this.toJmx(Files.newBufferedWriter(Paths.get(file.getPath()), StandardCharsets.UTF_8));
   }
 
   protected ScriptWrapper createScript() {
     ScriptWrapper script;
     if (testMode) {
-      script = new ScriptWrapper().setTesPlan(testElement);
+      script = new ScriptWrapper().setTestPlan(testElement);
     } else {
-      script = new ScriptWrapper().setTesPlan(testPlanWrapper);
+      script = new ScriptWrapper().setTestPlan(testPlanWrapper);
     }
 
     return script;

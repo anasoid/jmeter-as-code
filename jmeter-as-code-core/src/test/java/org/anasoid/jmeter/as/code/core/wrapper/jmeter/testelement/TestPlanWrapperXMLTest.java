@@ -20,12 +20,9 @@ package org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement;
 
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 import org.anasoid.jmeter.as.code.core.AbstractJmcTest;
 import org.anasoid.jmeter.as.code.core.test.utils.xmlunit.JmcXmlComparator;
 import org.anasoid.jmeter.as.code.core.test.utils.xmlunit.filter.AttributesFilterManager;
-import org.anasoid.jmeter.as.code.core.test.utils.xmlunit.filter.node.NodeByAttributesFilter;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.config.ArgumentWrapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -70,6 +67,4 @@ class TestPlanWrapperXMLTest extends AbstractJmcTest {
     Diff myDiff = JmcXmlComparator.compare(expectedContent, wrapperContent);
     Assertions.assertFalse(myDiff.hasDifferences(), "Testplan not identical " + myDiff);
   }
-
-
 }

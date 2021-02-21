@@ -40,38 +40,35 @@ public class JmcNodeMatcher extends DefaultNodeMatcher {
   }
 
   private static final Comparator<Node> COMPARATOR_NODE =
-      new Comparator<Node>() {
-        @Override
-        public int compare(Node node1, Node node2) {
-          int nameResult = StringUtils.compare(node1.getLocalName(), node2.getLocalName());
+      (node1, node2) -> {
+        int nameResult = StringUtils.compare(node1.getLocalName(), node2.getLocalName());
 
-          if (nameResult != 0) {
-            return nameResult;
-          }
-          NamedNodeMap namedNodeMap1 = node1.getAttributes();
-          NamedNodeMap namedNodeMap2 = node2.getAttributes();
-          if (namedNodeMap1 == null && namedNodeMap2 == null) {
-            return 0;
-          } else if (namedNodeMap1 == null) {
-            return 1;
-          } else if (namedNodeMap2 == null) {
-            return -1;
-          }
-
-          int size1 = namedNodeMap1.getLength();
-          int size2 = namedNodeMap2.getLength();
-          if (size1 != size2) {
-            return Integer.valueOf(size1).compareTo(Integer.valueOf(size2));
-          }
-          for (int i = 0; i < size1; i++) {
-            Node subNode1 = namedNodeMap1.item(i);
-            Node subNode2 = namedNodeMap2.item(i);
-            int subResult = StringUtils.compare(subNode1.getNodeValue(), subNode2.getNodeValue());
-            if (subResult != 0) {
-              return subResult;
-            }
-          }
-          return 0;
+        if (nameResult != 0) {
+          return nameResult;
         }
+        NamedNodeMap namedNodeMap1 = node1.getAttributes();
+        NamedNodeMap namedNodeMap2 = node2.getAttributes();
+        if (namedNodeMap1 == null && namedNodeMap2 == null) {
+          return 0;
+        } else if (namedNodeMap1 == null) {
+          return 1;
+        } else if (namedNodeMap2 == null) {
+          return -1;
+        }
+
+        int size1 = namedNodeMap1.getLength();
+        int size2 = namedNodeMap2.getLength();
+        if (size1 != size2) {
+          return Integer.valueOf(size1).compareTo(Integer.valueOf(size2));
+        }
+        for (int i = 0; i < size1; i++) {
+          Node subNode1 = namedNodeMap1.item(i);
+          Node subNode2 = namedNodeMap2.item(i);
+          int subResult = StringUtils.compare(subNode1.getNodeValue(), subNode2.getNodeValue());
+          if (subResult != 0) {
+            return subResult;
+          }
+        }
+        return 0;
       };
 }

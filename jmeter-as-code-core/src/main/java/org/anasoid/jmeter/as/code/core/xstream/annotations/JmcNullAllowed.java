@@ -24,7 +24,10 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-/** Null allowed on field, to be serialized as empty. */
+/**
+ * Null allowed on field, to be serialized as empty. if used with JmcProperty , jmcproperty should
+ * have type or asString to identify type when is null
+ */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD, ElementType.FIELD})
 @Documented

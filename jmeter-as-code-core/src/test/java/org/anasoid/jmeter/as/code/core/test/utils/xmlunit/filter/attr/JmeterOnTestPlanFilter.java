@@ -27,12 +27,9 @@ public class JmeterOnTestPlanFilter implements JmcXmlFilterAttr {
 
   @Override
   public boolean filter(Attr attr) {
-    if ("jmeter".equals(attr.getName())
+    return ("jmeter".equals(attr.getName())
         && StringUtils.isNotBlank(attr.getValue())
         && attr.getOwnerElement() != null
-        && "jmeterTestPlan".equals(attr.getOwnerElement().getLocalName())) {
-      return true;
-    }
-    return false;
+        && "jmeterTestPlan".equals(attr.getOwnerElement().getLocalName()));
   }
 }

@@ -44,14 +44,14 @@ class ScriptWrapper {
    *
    * @param testPlanWrapper test plan.
    */
-  public ScriptWrapper setTesPlan(TestPlanWrapper testPlanWrapper) {
+  public ScriptWrapper setTestPlan(TestPlanWrapper testPlanWrapper) {
     testPlan = new ArrayList<>();
     testPlan.add(testPlanWrapper);
     return this;
   }
 
   /** Only for Test. */
-  protected ScriptWrapper setTesPlan(AbstractTestElementWrapper<?> testElement) {
+  protected ScriptWrapper setTestPlan(AbstractTestElementWrapper<?> testElement) {
     testPlan = new ArrayList<>();
     testPlan.add(testElement);
     return this;

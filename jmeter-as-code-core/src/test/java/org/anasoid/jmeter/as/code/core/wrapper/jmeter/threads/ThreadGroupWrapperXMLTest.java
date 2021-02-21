@@ -20,8 +20,6 @@ package org.anasoid.jmeter.as.code.core.wrapper.jmeter.threads;
 
 import java.io.IOException;
 import java.util.Arrays;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.XPathExpressionException;
 import org.anasoid.jmeter.as.code.core.AbstractJmcTest;
 import org.anasoid.jmeter.as.code.core.test.utils.xmlunit.JmcXmlComparator;
 import org.anasoid.jmeter.as.code.core.test.utils.xmlunit.filter.AttributesFilterManager;
@@ -30,7 +28,6 @@ import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestPlanWrappe
 import org.apache.jmeter.control.LoopController;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.xml.sax.SAXException;
 import org.xmlunit.diff.Diff;
 
 class ThreadGroupWrapperXMLTest extends AbstractJmcTest {
@@ -38,38 +35,35 @@ class ThreadGroupWrapperXMLTest extends AbstractJmcTest {
   private static final String PARENT_PATH =
       "org/anasoid/jmeter/as/code/core/wrapper/jmeter/threads";
 
-  private static final String FRAGMENT_XPATH = "/jmeterTestPlan/hashTree";
   private static final String NODE_NAME = "ThreadGroup";
 
   @Test
-  void testDefault()
-      throws IOException, XPathExpressionException, SAXException, ParserConfigurationException {
+  void testDefault() throws IOException {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
             .withName("Test Plan")
             .addChild(ThreadGroupWrapper.builder().withName("Thread Group").build())
             .build();
-    String wrapperContent = toTmpFile(testPlanWrapper, "testplan_");
-    String wrapperContentFragement = getFragmentSingleNode(wrapperContent, NODE_NAME);
+    String wrapperContent = toTmpFile(testPlanWrapper, "threadgroup_");
+    String wrapperContentFragment = getFragmentSingleNode(wrapperContent, NODE_NAME);
     String expectedContent = readFile(PARENT_PATH + "/threadgroup.default.jmx");
-    String expectedContentFragement = getFragmentSingleNode(expectedContent, NODE_NAME);
-    Diff diff = JmcXmlComparator.compare(expectedContentFragement, wrapperContentFragement);
+    String expectedContentFragment = getFragmentSingleNode(expectedContent, NODE_NAME);
+    Diff diff = JmcXmlComparator.compare(expectedContentFragment, wrapperContentFragment);
     Assertions.assertFalse(
         JmcXmlComparator.hasDifferences(diff, LoopController.LOOPS),
         "theadGroup  not identical " + diff);
   }
 
   @Test
-  void testFullDefault()
-      throws IOException, XPathExpressionException, SAXException, ParserConfigurationException {
+  void testFullDefault() throws IOException {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
             .withName("Test Plan")
             .addChild(ThreadGroupWrapper.builder().withName("Thread Group").build())
             .build();
-    String wrapperContent = toTmpFile(testPlanWrapper, "testplan_");
+    String wrapperContent = toTmpFile(testPlanWrapper, "threadgroup_");
     String expectedContent = readFile(PARENT_PATH + "/threadgroup.default.jmx");
     Diff diff =
         JmcXmlComparator.compare(
@@ -83,8 +77,7 @@ class ThreadGroupWrapperXMLTest extends AbstractJmcTest {
   }
 
   @Test
-  void testReverse()
-      throws IOException, XPathExpressionException, SAXException, ParserConfigurationException {
+  void testReverse() throws IOException {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
@@ -103,11 +96,11 @@ class ThreadGroupWrapperXMLTest extends AbstractJmcTest {
                     .withIsSameUserOnNextIteration(false)
                     .build())
             .build();
-    String wrapperContent = toTmpFile(testPlanWrapper, "testplan_");
-    String wrapperContentFragement = getFragmentSingleNode(wrapperContent, NODE_NAME);
+    String wrapperContent = toTmpFile(testPlanWrapper, "threadgroup_");
+    String wrapperContentFragment = getFragmentSingleNode(wrapperContent, NODE_NAME);
     String expectedContent = readFile(PARENT_PATH + "/threadgroup.reverse.jmx");
-    String expectedContentFragement = getFragmentSingleNode(expectedContent, NODE_NAME);
-    Diff diff = JmcXmlComparator.compare(expectedContentFragement, wrapperContentFragement);
+    String expectedContentFragment = getFragmentSingleNode(expectedContent, NODE_NAME);
+    Diff diff = JmcXmlComparator.compare(expectedContentFragment, wrapperContentFragment);
     Assertions.assertFalse(
         JmcXmlComparator.hasDifferences(diff, LoopController.LOOPS),
         "theadGroup  not identical " + diff);

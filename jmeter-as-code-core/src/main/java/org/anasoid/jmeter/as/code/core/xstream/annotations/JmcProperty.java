@@ -32,4 +32,7 @@ public @interface JmcProperty {
   String value();
   /** A possible default implementation if the annotated type is an interface. */
   Class<?> type() default Void.class; // Use Void to denote as Null
+
+  /** Serialze property as string. */
+  boolean asString() default false;
 }

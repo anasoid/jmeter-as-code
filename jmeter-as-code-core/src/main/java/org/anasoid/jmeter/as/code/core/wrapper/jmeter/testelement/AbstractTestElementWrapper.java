@@ -75,7 +75,10 @@ public abstract class AbstractTestElementWrapper<T extends AbstractTestElement> 
   @JmcMethodAlias("testclass")
   @JmcAsAttribute
   public String getTestClassAsString() {
-    return getTestClass().getSimpleName();
+    if (getTestClass() != null) {
+      return getTestClass().getSimpleName();
+    }
+    return null;
   }
 
   /** Test Class used by Jmeter TestElement.TEST_CLASS @See TestElement */

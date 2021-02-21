@@ -77,12 +77,17 @@ public abstract class AbstractJmcTest {
    * Extract XML tag by node name.
    *
    * @param content source.
-   * @param node node name.
+   * @param nodes list of hierarchical node name.
    */
-  protected String getFragmentSingleNode(String content, String node) {
-    String startTag = "<" + node;
-    String endTag = "</" + node + ">";
-    String cleanStart = content.substring(content.indexOf(startTag));
-    return cleanStart.substring(0, cleanStart.indexOf(endTag) + endTag.length());
+  protected String getFragmentSingleNode(String content, String... nodes) {
+    String result = content;
+    for (int i = 0; i < nodes.length; i++) {
+      String node = nodes[i];
+      String startTag = "<" + node;
+      String endTag = "</" + node + ">";
+      String cleanStart = content.substring(content.indexOf(startTag));
+      result = cleanStart.substring(0, cleanStart.indexOf(endTag) + endTag.length());
+    }
+    return result;
   }
 }
