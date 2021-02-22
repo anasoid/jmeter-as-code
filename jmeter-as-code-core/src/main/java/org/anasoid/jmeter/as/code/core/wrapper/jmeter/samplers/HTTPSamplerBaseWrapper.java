@@ -39,6 +39,7 @@ import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcNullAllowed;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcSkipDefault;
 import org.anasoid.jmeter.as.code.core.xstream.exceptions.ConversionException;
+import org.anasoid.jmeter.as.code.core.xstream.exceptions.ConversionIllegalStateException;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.jmeter.config.Arguments;
 import org.apache.jmeter.protocol.http.gui.HTTPArgumentsPanel;
@@ -56,14 +57,6 @@ import org.apache.jmeter.samplers.gui.AbstractSamplerGui;
 public abstract class HTTPSamplerBaseWrapper<
         T extends HTTPSamplerBase, G extends AbstractSamplerGui>
     extends AbstractSamplerWrapper<T, G> {
-
-  @Override
-  public void init() {
-    super.init();
-    if (autoRedirects) {
-      followRedirects = false;
-    }
-  }
 
   /** Server Name or IP. */
   @JmcProperty(HTTPSamplerBase.DOMAIN)
@@ -213,8 +206,6 @@ public abstract class HTTPSamplerBaseWrapper<
   @Getter
   private final Boolean imageParser;
 
-  @Getter @XStreamOmitField private final String body;
-
   @Getter @Default @XStreamOmitField
   private final List<HTTPArgumentWrapper> arguments = new ArrayList<>();
 
@@ -272,7 +263,7 @@ public abstract class HTTPSamplerBaseWrapper<
   private final List<HTTPFileArgWrapper> filesArguments;
 
   /** Builder. */
-  @SuppressWarnings("PMD.AccessorMethodGeneration")
+  @SuppressWarnings({"PMD.AccessorMethodGeneration", "PMD.TooManyMethods"})
   public abstract static class HTTPSamplerBaseWrapperBuilder<
           T extends HTTPSamplerBase,
           G extends AbstractSamplerGui,
@@ -287,7 +278,6 @@ public abstract class HTTPSamplerBaseWrapper<
       }
       addArgument(
           HTTPArgumentWrapper.builder().withName("").withValue(body).withUseEquals(null).build());
-      this.body = body;
       withPostBodyRaw(true);
       return self();
     }
@@ -295,6 +285,27 @@ public abstract class HTTPSamplerBaseWrapper<
     /** set body. */
     protected B withPostBodyRaw(Boolean postBodyRaw) {
       this.postBodyRaw = postBodyRaw;
+      return self();
+    }
+
+    /** set autoRedirects. */
+    public B withAutoRedirects(Boolean autoRedirects) {
+      this.autoRedirects$value = autoRedirects;
+      this.autoRedirects$set = true;
+      if (Boolean.TRUE.equals(autoRedirects)) {
+        withFollowRedirects(false);
+      }
+      return self();
+    }
+
+    /** set followRedirects. */
+    public B withFollowRedirects(Boolean followRedirects) {
+      if (Boolean.TRUE.equals(this.followRedirects$value)
+          && Boolean.TRUE.equals(this.autoRedirects$value)) {
+        throw new ConversionException("can't set followRedirects  and autoRedirects");
+      }
+      this.followRedirects$value = followRedirects;
+      this.followRedirects$set = true;
       return self();
     }
 
@@ -342,7 +353,7 @@ public abstract class HTTPSamplerBaseWrapper<
      */
     public B addArguments(Collection<HTTPArgumentWrapper> arguments) {
       if (Boolean.TRUE.equals(postBodyRaw)) {
-        throw new ConversionException("can't set arguments with body on sampler");
+        throw new ConversionIllegalStateException("can't set arguments with body on sampler");
       }
       if (!this.arguments$set) {
         this.arguments$value = new ArrayList<>();
@@ -371,7 +382,7 @@ public abstract class HTTPSamplerBaseWrapper<
      */
     public B addArgument(HTTPArgumentWrapper argument) {
       if (Boolean.TRUE.equals(postBodyRaw)) {
-        throw new ConversionException("can't set arguments with body on sampler");
+        throw new ConversionIllegalStateException("can't set arguments with body on sampler");
       }
       if (!this.arguments$set) {
         this.arguments$value = new ArrayList<>();
