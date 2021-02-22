@@ -139,6 +139,20 @@ public final class ConverterBeanUtils {
           Method getMethod = source.getClass().getMethod(getMethodName);
           return getMethod.invoke(source);
         } catch (NoSuchMethodException e) {
+          if (Boolean.class.equals(((Field) field).getType())
+              || boolean.class.equals(((Field) field).getType())) {
+            getMethodName =
+                "is"
+                    + fieldName.substring(0, 1).toUpperCase(Locale.ROOT)
+                    + fieldName.substring(1, fieldName.length());
+            try { // NOSONAR
+              Method getMethod = source.getClass().getMethod(getMethodName);
+              return getMethod.invoke(source);
+            } catch (NoSuchMethodException ex) {
+              LOG.warn("Getter not found for field {} on {}", ((Field) field).getName(), source);
+              return ((Field) field).get(source);
+            }
+          }
           LOG.warn("Getter not found for field {} on {}", ((Field) field).getName(), source);
           return ((Field) field).get(source);
         }
@@ -172,10 +186,7 @@ public final class ConverterBeanUtils {
     return null;
   }
 
-  /**
-   * get Property class type.
-   *
-   */
+  /** get Property class type. */
   public static Class<?> getPropertyType(AccessibleObject accessibleObject) {
 
     JmcProperty jmcProperty = accessibleObject.getAnnotation(JmcProperty.class);

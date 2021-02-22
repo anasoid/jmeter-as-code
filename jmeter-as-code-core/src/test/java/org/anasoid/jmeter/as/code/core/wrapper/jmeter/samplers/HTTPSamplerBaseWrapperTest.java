@@ -20,6 +20,7 @@ package org.anasoid.jmeter.as.code.core.wrapper.jmeter.samplers;
 
 import java.io.IOException;
 import java.io.StringWriter;
+import java.util.Arrays;
 import org.anasoid.jmeter.as.code.core.AbstractJmcTest;
 import org.anasoid.jmeter.as.code.core.application.ApplicationTest;
 import org.anasoid.jmeter.as.code.core.application.ApplicationTestUtilsForTesting;
@@ -30,6 +31,9 @@ import org.junit.jupiter.api.Test;
 
 class HTTPSamplerBaseWrapperTest extends AbstractJmcTest {
 
+  private static final String ARG = "arg";
+  private static final String VAL = "value";
+
   @Test
   void testFollowRedirectsDefaultTrue() throws IOException {
     HTTPSamplerProxyWrapper httpSampler =
@@ -39,6 +43,23 @@ class HTTPSamplerBaseWrapperTest extends AbstractJmcTest {
     StringWriter wr = new StringWriter(); // NOPMD
     HTTPSamplerProxyWrapper httpSamplerAfter = (HTTPSamplerProxyWrapper) applicationTest.toJmx(wr);
     Assertions.assertTrue(httpSampler.getFollowRedirects());
+
+    httpSampler =
+        HTTPSamplerProxyWrapper.builder()
+            .withPath("")
+            .withFollowRedirects(false)
+            .withAutoRedirects(false)
+            .build();
+    Assertions.assertFalse(httpSampler.getFollowRedirects());
+    Assertions.assertFalse(httpSampler.getAutoRedirects());
+    httpSampler =
+        HTTPSamplerProxyWrapper.builder()
+            .withPath("")
+            .withFollowRedirects(false)
+            .withAutoRedirects(true)
+            .build();
+    Assertions.assertFalse(httpSampler.getFollowRedirects());
+    Assertions.assertTrue(httpSampler.getAutoRedirects());
   }
 
   @Test
@@ -73,15 +94,58 @@ class HTTPSamplerBaseWrapperTest extends AbstractJmcTest {
   }
 
   @Test
+  void testargsWithBodyFail() throws IOException {
+    try {
+      HTTPSamplerProxyWrapper httpSampler =
+          HTTPSamplerProxyWrapper.builder()
+              .withName("param")
+              .withPath("")
+              .addArgument(ARG, VAL)
+              .withBody("body")
+              .build();
+      Assertions.fail();
+    } catch (ConversionIllegalStateException e) {
+      Assertions.assertTrue(e.getMessage().contains("body"));
+    }
+  }
+
+  @Test
+  void testFolowRedirectAndAutoRedirectFails() throws IOException {
+    try {
+      HTTPSamplerProxyWrapper httpSampler =
+          HTTPSamplerProxyWrapper.builder()
+              .withPath("")
+              .withAutoRedirects(true)
+              .withFollowRedirects(true)
+              .build();
+      Assertions.fail();
+    } catch (ConversionIllegalStateException e) {
+      Assertions.assertTrue(e.getMessage().contains("followRedirects  and autoRedirects"));
+    }
+    try {
+      HTTPSamplerProxyWrapper httpSampler =
+          HTTPSamplerProxyWrapper.builder()
+              .withPath("")
+              .withFollowRedirects(true)
+              .withAutoRedirects(true)
+              .build();
+      Assertions.fail();
+    } catch (ConversionIllegalStateException e) {
+      Assertions.assertTrue(e.getMessage().contains("followRedirects  and autoRedirects"));
+    }
+  }
+
+  @Test
   void testAddArgument() throws IOException {
+    // ADD DIRECT
     HTTPSamplerProxyWrapper httpsampler =
-        HTTPSamplerProxyWrapper.builder().withPath("").addArgument("arg", "value").build();
+        HTTPSamplerProxyWrapper.builder().withPath("").addArgument(ARG, VAL).build();
     ApplicationTest applicationTest =
         ApplicationTestUtilsForTesting.getApplicationTest(httpsampler);
     StringWriter wr = new StringWriter(); // NOPMD
     HTTPSamplerProxyWrapper httpSamplerAfter = (HTTPSamplerProxyWrapper) applicationTest.toJmx(wr);
-    HTTPArgumentWrapper argument = httpsampler.getArguments().get(0);
-    Assertions.assertEquals("arg", argument.getName());
-    Assertions.assertEquals("value", argument.getValue());
+    HTTPArgumentWrapper argument = httpSamplerAfter.getArguments().get(0);
+    Assertions.assertEquals(ARG, argument.getName());
+    Assertions.assertEquals(VAL, argument.getValue());
   }
 }
