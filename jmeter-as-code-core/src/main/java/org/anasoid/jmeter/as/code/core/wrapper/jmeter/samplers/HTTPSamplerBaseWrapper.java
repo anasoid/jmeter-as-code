@@ -38,7 +38,6 @@ import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcMethodAlias;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcNullAllowed;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcSkipDefault;
-import org.anasoid.jmeter.as.code.core.xstream.exceptions.ConversionException;
 import org.anasoid.jmeter.as.code.core.xstream.exceptions.ConversionIllegalStateException;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.jmeter.config.Arguments;
@@ -274,7 +273,7 @@ public abstract class HTTPSamplerBaseWrapper<
     /** set body. */
     public B withBody(String body) {
       if (!CollectionUtils.isEmpty(arguments$value)) {
-        throw new ConversionException("can't set body and arguments on sampler");
+        throw new ConversionIllegalStateException("can't set body and arguments on sampler");
       }
       addArgument(
           HTTPArgumentWrapper.builder().withName("").withValue(body).withUseEquals(null).build());
@@ -290,6 +289,12 @@ public abstract class HTTPSamplerBaseWrapper<
 
     /** set autoRedirects. */
     public B withAutoRedirects(Boolean autoRedirects) {
+      if (Boolean.TRUE.equals(autoRedirects)
+          && Boolean.TRUE.equals(this.followRedirects$value)
+          && this.followRedirects$set) {
+        throw new ConversionIllegalStateException(
+            "can't set to true followRedirects  and autoRedirects");
+      }
       this.autoRedirects$value = autoRedirects;
       this.autoRedirects$set = true;
       if (Boolean.TRUE.equals(autoRedirects)) {
@@ -300,9 +305,9 @@ public abstract class HTTPSamplerBaseWrapper<
 
     /** set followRedirects. */
     public B withFollowRedirects(Boolean followRedirects) {
-      if (Boolean.TRUE.equals(this.followRedirects$value)
-          && Boolean.TRUE.equals(this.autoRedirects$value)) {
-        throw new ConversionException("can't set followRedirects  and autoRedirects");
+      if (Boolean.TRUE.equals(followRedirects) && Boolean.TRUE.equals(this.autoRedirects$value)) {
+        throw new ConversionIllegalStateException(
+            "can't set to true followRedirects  and autoRedirects");
       }
       this.followRedirects$value = followRedirects;
       this.followRedirects$set = true;
@@ -381,16 +386,7 @@ public abstract class HTTPSamplerBaseWrapper<
      * @param argument argument. to be add
      */
     public B addArgument(HTTPArgumentWrapper argument) {
-      if (Boolean.TRUE.equals(postBodyRaw)) {
-        throw new ConversionIllegalStateException("can't set arguments with body on sampler");
-      }
-      if (!this.arguments$set) {
-        this.arguments$value = new ArrayList<>();
-      }
-      this.arguments$value.add(argument);
-      this.arguments$set = true;
-
-      return self();
+      return addArguments(Arrays.asList(argument));
     }
   }
 }
