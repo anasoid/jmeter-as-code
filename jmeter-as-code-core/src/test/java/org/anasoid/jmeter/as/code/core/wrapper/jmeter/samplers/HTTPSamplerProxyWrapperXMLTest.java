@@ -68,6 +68,32 @@ class HTTPSamplerProxyWrapperXMLTest extends AbstractJmcTest {
   }
 
   @Test
+  void testBody() throws IOException {
+
+    TestPlanWrapper testPlanWrapper =
+        TestPlanWrapper.builder()
+            .withName("Test Plan")
+            .addChild(
+                ThreadGroupWrapper.builder()
+                    .withName("Thread Group")
+                    .addChild(
+                        HTTPSamplerProxyWrapper.builder()
+                            .withName("HTTP Request")
+                            .withPath("")
+                            .withBody("body")
+                            .build())
+                    .build())
+            .build();
+    String wrapperContent = toTmpFile(testPlanWrapper, "httpsampler_");
+    String wrapperContentFragment = getFragmentSingleNode(wrapperContent, NODE_NAME);
+    String expectedContent = readFile(PARENT_PATH + "/httpsampler.body.jmx");
+    String expectedContentFragment = getFragmentSingleNode(expectedContent, NODE_NAME);
+    Diff diff = JmcXmlComparator.compare(expectedContentFragment, wrapperContentFragment);
+    Assertions.assertFalse(
+        JmcXmlComparator.hasDifferences(diff), "httpsampler  not identical " + diff);
+  }
+
+  @Test
   void testFullDefault() throws IOException {
 
     TestPlanWrapper testPlanWrapper =

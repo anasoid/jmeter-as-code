@@ -34,6 +34,7 @@ import org.anasoid.jmeter.as.code.core.wrapper.jmeter.protocol.http.util.HTTPFil
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcCollection;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcEmptyAllowed;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcMandatory;
+import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcMethodAlias;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcNullAllowed;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcSkipDefault;
@@ -214,8 +215,14 @@ public abstract class HTTPSamplerBaseWrapper<
 
   @Getter @XStreamOmitField private final String body;
 
-  @Getter
-  @Default
+  @Getter @Default @XStreamOmitField
+  private final List<HTTPArgumentWrapper> arguments = new ArrayList<>();
+
+  /**
+   * Arguments format when User Defined Variables.
+   *
+   * @return list of arguments.
+   */
   @JmcCollection(
       value = Arguments.ARGUMENTS,
       withElementProp = true,
@@ -224,8 +231,36 @@ public abstract class HTTPSamplerBaseWrapper<
       guiclass = HTTPArgumentsPanel.class,
       testclass = Arguments.class,
       testname = "User Defined Variables")
+  @JmcMethodAlias("arguments")
   @JmcEmptyAllowed
-  private final List<HTTPArgumentWrapper> arguments = new ArrayList<>();
+  protected final List<HTTPArgumentWrapper> getArgumentsUser() {
+    if (!Boolean.TRUE.equals(postBodyRaw)) {
+      return arguments;
+    } else {
+      return null;
+    }
+  }
+
+  /**
+   * Arguments format when body is used.
+   *
+   * @return list of arguments (One argument with empty name).
+   */
+  @JmcCollection(
+      value = Arguments.ARGUMENTS,
+      withElementProp = true,
+      name = "HTTPsampler.Arguments",
+      elementType = Arguments.class,
+      enabled = false)
+  @JmcMethodAlias("arguments")
+  @JmcEmptyAllowed
+  protected final List<HTTPArgumentWrapper> getArgumentsBody() {
+    if (Boolean.TRUE.equals(postBodyRaw)) {
+      return arguments;
+    } else {
+      return null;
+    }
+  }
 
   @JmcCollection(
       value = "HTTPFileArgs.files",
@@ -250,7 +285,8 @@ public abstract class HTTPSamplerBaseWrapper<
       if (!CollectionUtils.isEmpty(arguments$value)) {
         throw new ConversionException("can't set body and arguments on sampler");
       }
-      addArgument("", body);
+      addArgument(
+          HTTPArgumentWrapper.builder().withName("").withValue(body).withUseEquals(null).build());
       this.body = body;
       withPostBodyRaw(true);
       return self();
