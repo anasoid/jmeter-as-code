@@ -27,6 +27,7 @@ import lombok.Getter;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AbstractTestElementWrapper;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
+import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcSkipDefault;
 import org.apache.jmeter.config.Argument;
 
 /**
@@ -59,6 +60,7 @@ public abstract class AbstractArgumentWrapper<T extends Argument>
   private @Getter String description;
 
   @JmcProperty(Argument.ARG_NAME)
+  @JmcSkipDefault("")
   public String getNameStr() {
     return name;
   }
