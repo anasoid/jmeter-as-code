@@ -28,6 +28,11 @@ import org.anasoid.jmeter.as.code.core.xstream.exceptions.ConversionIllegalState
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Test for HTTPSamplerBaseWrapper.
+ *
+ * @see HTTPSamplerBaseWrapper
+ */
 class HTTPSamplerBaseWrapperTest extends AbstractJmcTest {
 
   private static final String ARG = "arg";
