@@ -29,7 +29,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AbstractTestElementWrapper;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestElementWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.property.JMeterProperty;
 import org.anasoid.jmeter.as.code.core.xstream.ConverterBeanUtils;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcCollection;
@@ -71,7 +71,8 @@ public class TestElementConverter implements Converter {
           convertProperty(value, accessibleObject, writer, context);
         } else if (ConverterBeanUtils.isCollection(accessibleObject)) {
 
-          JmcCollection annotation = accessibleObject.getAnnotation(JmcCollection.class);
+          JmcCollection annotation =
+              ConverterBeanUtils.getAnnotation(accessibleObject, JmcCollection.class);
           convertCollection(value, annotation, writer, context);
         } else {
           convertField(value, ConverterBeanUtils.getAlias(accessibleObject), writer, context);
@@ -88,13 +89,12 @@ public class TestElementConverter implements Converter {
 
       return;
     }
-    if (source instanceof AbstractTestElementWrapper) {
+    if (source instanceof TestElementWrapper) {
 
-      List<AbstractTestElementWrapper<?>> childs =
-          ((AbstractTestElementWrapper) source).getChilds();
+      List<TestElementWrapper<?>> childs = ((TestElementWrapper) source).getChilds();
       writer.endNode();
       writer.startNode("hashTree");
-      for (AbstractTestElementWrapper<?> child : childs) {
+      for (TestElementWrapper<?> child : childs) {
         writer.startNode(child.getTestClassAsString());
         context.convertAnother(child);
         writer.endNode();
@@ -104,8 +104,8 @@ public class TestElementConverter implements Converter {
 
   protected void init(Object source) {
 
-    if (source instanceof AbstractTestElementWrapper) {
-      ((AbstractTestElementWrapper) source).init();
+    if (source instanceof TestElementWrapper) {
+      ((TestElementWrapper) source).init();
     }
   }
 
@@ -131,7 +131,7 @@ public class TestElementConverter implements Converter {
       AccessibleObject accessibleObject,
       HierarchicalStreamWriter writer,
       MarshallingContext context) {
-    JmcProperty jmcProperty = accessibleObject.getAnnotation(JmcProperty.class);
+    JmcProperty jmcProperty = ConverterBeanUtils.getAnnotation(accessibleObject, JmcProperty.class);
     String name = jmcProperty.value();
 
     boolean changed = false;
@@ -144,8 +144,8 @@ public class TestElementConverter implements Converter {
         ConverterBeanUtils.getPropertyAlias(
             value, ConverterBeanUtils.getPropertyType(accessibleObject)));
     writer.addAttribute("name", name);
-    if (value instanceof AbstractTestElementWrapper) {
-      AbstractTestElementWrapper<?> testElement = (AbstractTestElementWrapper) value;
+    if (value instanceof TestElementWrapper) {
+      TestElementWrapper<?> testElement = (TestElementWrapper) value;
       writer.addAttribute(ATTRIBUTE_ELEMENT_TYPE, testElement.getTestClass().getSimpleName());
     }
     if (value != null) {
@@ -203,8 +203,8 @@ public class TestElementConverter implements Converter {
       for (Object object : values) {
         writer.startNode(JMeterProperty.ELEMENT.value);
 
-        if (object instanceof AbstractTestElementWrapper) {
-          AbstractTestElementWrapper<?> testElement = (AbstractTestElementWrapper) object;
+        if (object instanceof TestElementWrapper) {
+          TestElementWrapper<?> testElement = (TestElementWrapper) object;
           if (testElement.getTestClass() != null) {
             writer.addAttribute(ATTRIBUTE_ELEMENT_TYPE, testElement.getTestClass().getSimpleName());
           }
@@ -231,7 +231,7 @@ public class TestElementConverter implements Converter {
   @Override
   public boolean canConvert(Class type) {
 
-    return AbstractTestElementWrapper.class.isAssignableFrom(type)
+    return TestElementWrapper.class.isAssignableFrom(type)
         || "ScriptWrapper".equals(type.getClass().getSimpleName());
   }
 }

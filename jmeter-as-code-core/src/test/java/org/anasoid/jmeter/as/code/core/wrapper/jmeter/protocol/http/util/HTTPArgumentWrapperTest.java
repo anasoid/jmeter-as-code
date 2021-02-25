@@ -23,13 +23,8 @@ import java.io.StringWriter;
 import org.anasoid.jmeter.as.code.core.AbstractJmcTest;
 import org.anasoid.jmeter.as.code.core.application.ApplicationTest;
 import org.anasoid.jmeter.as.code.core.application.ApplicationTestUtilsForTesting;
-import org.anasoid.jmeter.as.code.core.test.utils.xmlunit.JmcXmlComparator;
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.samplers.HTTPSamplerProxyWrapper;
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestPlanWrapper;
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.threads.ThreadGroupWrapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.xmlunit.diff.Diff;
 
 class HTTPArgumentWrapperTest extends AbstractJmcTest {
 

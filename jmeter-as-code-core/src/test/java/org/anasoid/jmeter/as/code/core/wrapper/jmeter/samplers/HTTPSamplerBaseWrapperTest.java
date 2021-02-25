@@ -20,7 +20,6 @@ package org.anasoid.jmeter.as.code.core.wrapper.jmeter.samplers;
 
 import java.io.IOException;
 import java.io.StringWriter;
-import java.util.Arrays;
 import org.anasoid.jmeter.as.code.core.AbstractJmcTest;
 import org.anasoid.jmeter.as.code.core.application.ApplicationTest;
 import org.anasoid.jmeter.as.code.core.application.ApplicationTestUtilsForTesting;
@@ -42,7 +41,7 @@ class HTTPSamplerBaseWrapperTest extends AbstractJmcTest {
         ApplicationTestUtilsForTesting.getApplicationTest(httpSampler);
     StringWriter wr = new StringWriter(); // NOPMD
     HTTPSamplerProxyWrapper httpSamplerAfter = (HTTPSamplerProxyWrapper) applicationTest.toJmx(wr);
-    Assertions.assertTrue(httpSampler.getFollowRedirects());
+    Assertions.assertTrue(httpSamplerAfter.getFollowRedirects());
 
     httpSampler =
         HTTPSamplerProxyWrapper.builder()
@@ -74,7 +73,7 @@ class HTTPSamplerBaseWrapperTest extends AbstractJmcTest {
         ApplicationTestUtilsForTesting.getApplicationTest(httpSampler);
     StringWriter wr = new StringWriter(); // NOPMD
     HTTPSamplerProxyWrapper httpSamplerAfter = (HTTPSamplerProxyWrapper) applicationTest.toJmx(wr);
-    Assertions.assertFalse(httpSampler.getFollowRedirects());
+    Assertions.assertFalse(httpSamplerAfter.getFollowRedirects());
   }
 
   @Test
