@@ -140,11 +140,15 @@ subprojects {
         testImplementation("org.junit.jupiter:junit-jupiter-api:$junitVersion")
         testImplementation("org.junit.jupiter:junit-jupiter-params:$junitVersion")
         testImplementation("commons-io:commons-io:$commonsIoVersion")
+        testImplementation("org.assertj:assertj-core:$assertjCore")
+
         testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junitVersion")
 
         testImplementation("org.xmlunit:xmlunit-core:$xmlunitVersion")
         testImplementation("org.xmlunit:xmlunit-matchers:$xmlunitVersion")
         testImplementation("com.github.tomakehurst:wiremock:$wiremockVersion")
+        testImplementation("ru.lanwen.wiremock:wiremock-junit5:$wiremockJunit5Version")
+
     }
 
 

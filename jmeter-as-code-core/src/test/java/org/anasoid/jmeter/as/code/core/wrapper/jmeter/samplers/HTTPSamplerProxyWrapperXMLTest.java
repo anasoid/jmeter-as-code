@@ -35,6 +35,11 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.xmlunit.diff.Diff;
 
+/**
+ * Test for HTTPSamplerProxyWrapper based on XML result comparison.
+ *
+ * @see HTTPSamplerProxyWrapper
+ */
 class HTTPSamplerProxyWrapperXMLTest extends AbstractJmcTest {
 
   private static final String PARENT_PATH =
