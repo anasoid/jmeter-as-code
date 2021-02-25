@@ -19,17 +19,11 @@
 package org.anasoid.jmeter.as.code.core.wrapper.jmeter.protocol.http.util;
 
 import java.io.IOException;
-import java.util.Arrays;
 import org.anasoid.jmeter.as.code.core.AbstractJmcTest;
 import org.anasoid.jmeter.as.code.core.test.utils.xmlunit.JmcXmlComparator;
-import org.anasoid.jmeter.as.code.core.test.utils.xmlunit.filter.AttributesFilterManager;
-import org.anasoid.jmeter.as.code.core.wrapper.jmc.samplers.HttpMethod;
-import org.anasoid.jmeter.as.code.core.wrapper.jmc.samplers.Implementation;
-import org.anasoid.jmeter.as.code.core.wrapper.jmc.samplers.IpSourceType;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.samplers.HTTPSamplerProxyWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestPlanWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.threads.ThreadGroupWrapper;
-import org.apache.jmeter.control.LoopController;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.xmlunit.diff.Diff;

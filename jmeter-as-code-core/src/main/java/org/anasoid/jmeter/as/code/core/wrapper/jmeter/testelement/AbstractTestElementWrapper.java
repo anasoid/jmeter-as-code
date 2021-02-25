@@ -32,6 +32,7 @@ import lombok.Getter;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.gui.JMeterGUIWrapper;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcAsAttribute;
+import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcInherited;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcMethodAlias;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcSkipDefault;
@@ -47,7 +48,8 @@ import org.apache.jmeter.testelement.TestElement;
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 @XStreamConverter(value = TestElementConverter.class)
-public abstract class AbstractTestElementWrapper<T extends AbstractTestElement> {
+public abstract class AbstractTestElementWrapper<T extends AbstractTestElement>
+    implements TestElementWrapper<T> {
 
   /** Name. */
   @XStreamAsAttribute
@@ -65,15 +67,15 @@ public abstract class AbstractTestElementWrapper<T extends AbstractTestElement> 
   /** enabled. */
   @XStreamAsAttribute @Builder.Default @Getter private boolean enabled = true;
 
-  @Getter
-  @Builder.Default
-  @XStreamAlias("hashTree")
-  @XStreamOmitField
-  private List<AbstractTestElementWrapper<?>> childs = new ArrayList<>();
+  @Builder.Default @XStreamOmitField private List<TestElementWrapper<?>> childs = new ArrayList<>();
 
-  /** Test Class used by Jmeter TestElement.TEST_CLASS @See TestElement */
-  @JmcMethodAlias("testclass")
-  @JmcAsAttribute
+  @Override
+  public List<TestElementWrapper<?>> getChilds() {
+    return childs;
+  }
+
+  @JmcInherited
+  @Override
   public String getTestClassAsString() {
     if (getTestClass() != null) {
       return getTestClass().getSimpleName();
@@ -92,9 +94,7 @@ public abstract class AbstractTestElementWrapper<T extends AbstractTestElement> 
     return null;
   }
 
-  /** Test Class used by Jmeter TestElement.TEST_CLASS. @See TestElement. */
-  public abstract Class<T> getTestClass();
-
+  @Override
   public void init() {}
 
   /** Builder. */
@@ -104,7 +104,7 @@ public abstract class AbstractTestElementWrapper<T extends AbstractTestElement> 
       C extends AbstractTestElementWrapper<T>,
       B extends AbstractTestElementWrapperBuilder<T, C, B>> {
 
-    protected B withChilds(Collection<AbstractTestElementWrapper<?>> childs) {
+    protected B withChilds(Collection<TestElementWrapper<?>> childs) {
       if (!this.childs$set) {
         this.childs$value = new ArrayList<>();
       }
@@ -114,7 +114,7 @@ public abstract class AbstractTestElementWrapper<T extends AbstractTestElement> 
       return self();
     }
 
-    protected B withChild(AbstractTestElementWrapper<?> child) {
+    protected B withChild(TestElementWrapper<?> child) {
       if (!this.childs$set) {
         this.childs$value = new ArrayList<>();
       }
@@ -129,13 +129,13 @@ public abstract class AbstractTestElementWrapper<T extends AbstractTestElement> 
      *
      * @param childs list of child.
      */
-    public B addChilds(List<AbstractTestElementWrapper<?>> childs) {
-      for (AbstractTestElementWrapper<?> testElement : childs) {
+    public B addChilds(List<TestElementWrapper<?>> childs) {
+      for (TestElementWrapper<?> testElement : childs) {
         boolean found = false;
         try { // NOSONAR
           Method method;
           Class<?> clazz = testElement.getClass();
-          while (clazz != AbstractTestElementWrapper.class) { // NOSONAR
+          while (clazz != Object.class) { // NOSONAR
             try { // NOSONAR
               method = this.getClass().getMethod("addChild", clazz);
             } catch (NoSuchMethodException e) {
@@ -163,7 +163,7 @@ public abstract class AbstractTestElementWrapper<T extends AbstractTestElement> 
      *
      * @param child child.
      */
-    protected B addChild(AbstractTestElementWrapper<?> child) {
+    protected B addChild(TestElementWrapper<?> child) {
       return this.withChild(child);
     }
   }

@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AbstractTestElementWrapper;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestElementWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestPlanWrapper;
 import org.apache.jmeter.engine.StandardJMeterEngine;
 import org.apache.jmeter.save.SaveService;
@@ -112,7 +113,7 @@ public class ApplicationTest {
    * @param out Destination output.
    * @throws IOException – If an I/O error occurs.
    */
-  public AbstractTestElementWrapper toJmx(Writer out) throws IOException { // NOSONAR
+  public TestElementWrapper toJmx(Writer out) throws IOException { // NOSONAR
     ScriptWrapper script = createScript();
     try (out) {
       out.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + System.lineSeparator());
@@ -131,7 +132,7 @@ public class ApplicationTest {
    * @param file Destination output.
    * @throws IOException – If an I/O error occurs.
    */
-  public AbstractTestElementWrapper toJmx(File file) throws IOException { // NOSONAR
+  public TestElementWrapper toJmx(File file) throws IOException { // NOSONAR
     return this.toJmx(Files.newBufferedWriter(Paths.get(file.getPath()), StandardCharsets.UTF_8));
   }
 
