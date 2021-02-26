@@ -55,8 +55,8 @@ public class HTTPArgumentWrapper extends AbstractArgumentWrapper<HTTPArgument> {
   }
 
   @Override
-  public void init() {
-    super.init();
+  public void internalInit() {
+    super.internalInit();
     if (useEquals != null && StringUtils.isNotEmpty(getValue())) {
       useEquals = true;
     }

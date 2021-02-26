@@ -84,7 +84,8 @@ public class ThreadGroupWrapper extends AbstractThreadGroupWrapper<ThreadGroup, 
   @XStreamOmitField private @Builder.Default @Getter Integer loops = 1;
 
   @Override
-  public void init() {
+  public void internalInit() {
+    super.internalInit();
     LoopControllerWrapper.LoopControllerWrapperBuilder samplerControllerBuilder =
         LoopControllerWrapper.builder().withName("Loop Controller").withContinueForever(false);
     if (Boolean.TRUE.equals(continueForever)) {
