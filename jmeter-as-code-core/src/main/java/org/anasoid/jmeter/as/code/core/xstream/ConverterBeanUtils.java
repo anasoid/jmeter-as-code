@@ -27,7 +27,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -69,8 +68,7 @@ public final class ConverterBeanUtils {
     Map<String, Method> result = new HashMap<>(); // NOPMD
     Class<?> item = source.getClass();
     for (Class<?> clazz : getSuperClasses(item)) {
-      List<Method> methods = Arrays.asList(clazz.getDeclaredMethods());
-      for (Method method : methods) {
+      for (Method method : clazz.getDeclaredMethods()) {
         JmcMethodAlias jmcMethodAlias = getAnnotation(method, JmcMethodAlias.class);
         JmcProperty jmcProperty = getAnnotation(method, JmcProperty.class);
         JmcInherited jmcInherited = method.getAnnotation(JmcInherited.class);
@@ -97,8 +95,7 @@ public final class ConverterBeanUtils {
     Map<String, Field> result = new HashMap<>(); // NOPMD
     Class<?> clazz = source.getClass();
     for (Class<?> sclazz : getSuperClasses(clazz)) {
-      List<Field> fields = Arrays.asList(sclazz.getDeclaredFields());
-      for (Field field : fields) {
+      for (Field field : sclazz.getDeclaredFields()) {
         if (!result.containsKey(field.getName())) {
           result.put(field.getName(), field);
         }
@@ -108,9 +105,9 @@ public final class ConverterBeanUtils {
   }
 
   /** is field/method will be converted as property. */
-  public static boolean isProperty(AccessibleObject field) {
+  public static boolean isProperty(AccessibleObject accessibleObject) {
 
-    JmcProperty annotation = getAnnotation(field, JmcProperty.class);
+    JmcProperty annotation = getAnnotation(accessibleObject, JmcProperty.class);
 
     return (annotation != null);
   }
@@ -118,11 +115,11 @@ public final class ConverterBeanUtils {
   /** is field/method will be converted as property. */
   @SuppressWarnings({"PMD.EmptyCatchBlock", "PMD.AvoidDeeplyNestedIfStmts"})
   public static <T extends Annotation> T getAnnotation(
-      AccessibleObject field, Class<T> annotation) {
+      AccessibleObject accessibleObject, Class<T> annotation) {
 
-    if (field instanceof Method) {
-      Method method = (Method) field;
-      JmcInherited jmcInherited = field.getAnnotation(JmcInherited.class);
+    if (accessibleObject instanceof Method) {
+      Method method = (Method) accessibleObject;
+      JmcInherited jmcInherited = accessibleObject.getAnnotation(JmcInherited.class);
       if (jmcInherited != null) {
         boolean first = true;
         for (Class<?> clazz : getSuperClasses(method.getDeclaringClass())) {
@@ -148,7 +145,7 @@ public final class ConverterBeanUtils {
         }
       }
     }
-    return field.getAnnotation(annotation);
+    return accessibleObject.getAnnotation(annotation);
   }
 
   /**
@@ -184,9 +181,7 @@ public final class ConverterBeanUtils {
 
         String fieldName = ((Field) field).getName();
         String getMethodName =
-            "get"
-                + fieldName.substring(0, 1).toUpperCase(Locale.ROOT)
-                + fieldName.substring(1, fieldName.length());
+            "get" + fieldName.substring(0, 1).toUpperCase(Locale.ROOT) + fieldName.substring(1);
 
         try { // NOSONAR
           Method getMethod = source.getClass().getMethod(getMethodName);
@@ -195,9 +190,7 @@ public final class ConverterBeanUtils {
           if (Boolean.class.equals(((Field) field).getType())
               || boolean.class.equals(((Field) field).getType())) {
             getMethodName =
-                "is"
-                    + fieldName.substring(0, 1).toUpperCase(Locale.ROOT)
-                    + fieldName.substring(1, fieldName.length());
+                "is" + fieldName.substring(0, 1).toUpperCase(Locale.ROOT) + fieldName.substring(1);
             try { // NOSONAR
               Method getMethod = source.getClass().getMethod(getMethodName);
               return getMethod.invoke(source);
@@ -222,19 +215,19 @@ public final class ConverterBeanUtils {
   }
 
   /** get Alias of field or Method. */
-  public static String getAlias(AccessibleObject field) {
+  public static String getAlias(AccessibleObject accessibleObject) {
 
-    XStreamAlias annotationXstream = getAnnotation(field, XStreamAlias.class);
+    XStreamAlias annotationXstream = getAnnotation(accessibleObject, XStreamAlias.class);
 
     if (annotationXstream != null) {
       return annotationXstream.value();
     }
-    JmcMethodAlias annotationJmc = getAnnotation(field, JmcMethodAlias.class);
+    JmcMethodAlias annotationJmc = getAnnotation(accessibleObject, JmcMethodAlias.class);
     if (annotationJmc != null) {
       return annotationJmc.value();
     }
-    if (field instanceof Field) {
-      return ((Field) field).getName();
+    if (accessibleObject instanceof Field) {
+      return ((Field) accessibleObject).getName();
     }
     return null;
   }
@@ -296,40 +289,46 @@ public final class ConverterBeanUtils {
   }
 
   /** Should skip field from XML conversion. */
-  public static boolean shouldSkip(Object source, AccessibleObject field) {
+  public static boolean shouldSkip(Object source, AccessibleObject accessibleObject) {
 
-    if (getAnnotation(field, XStreamOmitField.class) != null) {
+    if (getAnnotation(accessibleObject, XStreamOmitField.class) != null) {
       return true;
     }
-    Object value = getValue(field, source);
+    Object value = getValue(accessibleObject, source);
     if (value == null) {
-      if (getAnnotation(field, JmcNullAllowed.class) != null) {
+      if (getAnnotation(accessibleObject, JmcNullAllowed.class) != null) {
         return false;
       }
-      if (getAnnotation(field, JmcMandatory.class) != null) {
-        throw new ConversionMandatoryException(source, field);
+      if (getAnnotation(accessibleObject, JmcMandatory.class) != null) {
+        throw new ConversionMandatoryException(source, accessibleObject);
       }
       return true;
     }
-    JmcSkipDefault jmcSkipDefault = getAnnotation(field, JmcSkipDefault.class);
+    JmcSkipDefault jmcSkipDefault = getAnnotation(accessibleObject, JmcSkipDefault.class);
     if ((jmcSkipDefault != null) && (jmcSkipDefault.value().equals(value.toString()))) {
       return true;
     }
 
     return (value instanceof Collection
         && ((Collection<?>) value).isEmpty()
-        && getAnnotation(field, JmcEmptyAllowed.class) == null);
+        && getAnnotation(accessibleObject, JmcEmptyAllowed.class) == null);
   }
 
   /** filter Fields to be converted as attribute on XML. */
   public static List<AccessibleObject> getAttributeOnly(List<AccessibleObject> accessibleObjects) {
     List<AccessibleObject> result = new ArrayList<>();
     for (AccessibleObject accessibleObject : accessibleObjects) {
-      if (getAnnotation(accessibleObject, XStreamAsAttribute.class) != null
-          || getAnnotation(accessibleObject, JmcAsAttribute.class) != null) {
+      if (isAttribute(accessibleObject)) {
         result.add(accessibleObject);
       }
     }
     return result;
+  }
+
+  /** is field/method will be converted as attribute. */
+  public static boolean isAttribute(AccessibleObject accessibleObject) {
+
+    return (getAnnotation(accessibleObject, XStreamAsAttribute.class) != null
+        || getAnnotation(accessibleObject, JmcAsAttribute.class) != null);
   }
 }

@@ -24,8 +24,6 @@ import com.thoughtworks.xstream.converters.UnmarshallingContext;
 import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 import java.lang.reflect.AccessibleObject;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -38,49 +36,54 @@ import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
 /** Main xstream converter. */
 public class TestElementConverter implements Converter {
 
-  public static final String ATTRIBUTE_ELEMENT_TYPE = "elementType";
   private boolean inElementConversion;
 
   @Override
   public void marshal(Object source, HierarchicalStreamWriter writer, MarshallingContext context) {
 
     init(source);
-    List<Field> allFields = ConverterBeanUtils.getFields(source);
-    List<Method> methods = ConverterBeanUtils.getMethods(source);
 
     List<AccessibleObject> allFieldsMethods = new ArrayList<>();
-    allFieldsMethods.addAll(allFields);
-    allFieldsMethods.addAll(methods);
+    allFieldsMethods.addAll(ConverterBeanUtils.getFields(source));
+    allFieldsMethods.addAll(ConverterBeanUtils.getMethods(source));
+
     List<AccessibleObject> attributes = ConverterBeanUtils.getAttributeOnly(allFieldsMethods);
     List<AccessibleObject> nonAttributes = new ArrayList<>(allFieldsMethods);
     nonAttributes.removeAll(attributes);
 
+    // first convert attributes
     for (AccessibleObject accessibleObject : attributes) {
-      if (!ConverterBeanUtils.shouldSkip(source, accessibleObject)) {
-        Object value = ConverterBeanUtils.getValue(accessibleObject, source);
-        convertAttributeField(
-            value, ConverterBeanUtils.getAlias(accessibleObject), writer, context);
-      }
+      convertField(source, accessibleObject, writer, context);
+    }
+    // second convert non attributes
+    for (AccessibleObject accessibleObject : nonAttributes) {
+      convertField(source, accessibleObject, writer, context);
     }
 
-    for (AccessibleObject accessibleObject : nonAttributes) {
+    appendChild(source, writer, context);
+  }
 
-      if (!ConverterBeanUtils.shouldSkip(source, accessibleObject)) {
-        Object value = ConverterBeanUtils.getValue(accessibleObject, source);
+  /** Convert field/method. */
+  protected void convertField(
+      Object source,
+      AccessibleObject accessibleObject,
+      HierarchicalStreamWriter writer,
+      MarshallingContext context) {
+    if (!ConverterBeanUtils.shouldSkip(source, accessibleObject)) {
+      Object value = ConverterBeanUtils.getValue(accessibleObject, source);
+      if (ConverterBeanUtils.isAttribute(accessibleObject)) {
+        convertAttributeField(value, accessibleObject, writer, context);
+      } else {
         if (ConverterBeanUtils.isProperty(accessibleObject)) {
           convertProperty(value, accessibleObject, writer, context);
         } else if (ConverterBeanUtils.isCollection(accessibleObject)) {
 
-          JmcCollection annotation =
-              ConverterBeanUtils.getAnnotation(accessibleObject, JmcCollection.class);
-          convertCollection(value, annotation, writer, context);
+          convertCollection(value, accessibleObject, writer, context);
         } else {
-          convertField(value, ConverterBeanUtils.getAlias(accessibleObject), writer, context);
+          convertChildField(value, accessibleObject, writer, context);
         }
       }
     }
-
-    appendChild(source, writer, context);
   }
 
   protected void appendChild(
@@ -111,16 +114,19 @@ public class TestElementConverter implements Converter {
 
   protected void convertAttributeField(
       Object value,
-      String alias,
+      AccessibleObject accessibleObject,
       HierarchicalStreamWriter writer,
       MarshallingContext context) { // NOSONAR
-
+    String alias = ConverterBeanUtils.getAlias(accessibleObject);
     writer.addAttribute(alias, value.toString());
   }
 
-  protected void convertField(
-      Object value, String alias, HierarchicalStreamWriter writer, MarshallingContext context) {
-
+  protected void convertChildField(
+      Object value,
+      AccessibleObject accessibleObject,
+      HierarchicalStreamWriter writer,
+      MarshallingContext context) {
+    String alias = ConverterBeanUtils.getAlias(accessibleObject);
     writer.startNode(alias);
     context.convertAnother(value);
     writer.endNode();
@@ -146,7 +152,8 @@ public class TestElementConverter implements Converter {
     writer.addAttribute("name", name);
     if (value instanceof TestElementWrapper) {
       TestElementWrapper<?> testElement = (TestElementWrapper) value;
-      writer.addAttribute(ATTRIBUTE_ELEMENT_TYPE, testElement.getTestClass().getSimpleName());
+      writer.addAttribute(
+          ConvertConstant.ATTRIBUTE_ELEMENT_TYPE, testElement.getTestClass().getSimpleName());
     }
     if (value != null) {
       if (value.getClass().isEnum()) {
@@ -166,9 +173,11 @@ public class TestElementConverter implements Converter {
   @SuppressWarnings("PMD.NPathComplexity")
   protected void convertCollection(
       Object value,
-      JmcCollection annotation,
+      AccessibleObject accessibleObject,
       HierarchicalStreamWriter writer,
       MarshallingContext context) {
+    JmcCollection annotation =
+        ConverterBeanUtils.getAnnotation(accessibleObject, JmcCollection.class);
     if (annotation.withElementProp()) {
       writer.startNode(JMeterProperty.ELEMENT.value);
       if (!annotation.name().isBlank()) {
@@ -178,7 +187,8 @@ public class TestElementConverter implements Converter {
         writer.addAttribute("testname", annotation.testname());
       }
       if (!annotation.elementType().equals(Void.class)) {
-        writer.addAttribute(ATTRIBUTE_ELEMENT_TYPE, annotation.elementType().getSimpleName());
+        writer.addAttribute(
+            ConvertConstant.ATTRIBUTE_ELEMENT_TYPE, annotation.elementType().getSimpleName());
       }
       if (!annotation.guiclass().equals(Void.class)) {
         writer.addAttribute("guiclass", annotation.guiclass().getSimpleName());
@@ -206,7 +216,8 @@ public class TestElementConverter implements Converter {
         if (object instanceof TestElementWrapper) {
           TestElementWrapper<?> testElement = (TestElementWrapper) object;
           if (testElement.getTestClass() != null) {
-            writer.addAttribute(ATTRIBUTE_ELEMENT_TYPE, testElement.getTestClass().getSimpleName());
+            writer.addAttribute(
+                ConvertConstant.ATTRIBUTE_ELEMENT_TYPE, testElement.getTestClass().getSimpleName());
           }
         }
         context.convertAnother(object);
