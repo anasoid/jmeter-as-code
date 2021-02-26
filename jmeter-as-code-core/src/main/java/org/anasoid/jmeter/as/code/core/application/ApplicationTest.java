@@ -22,8 +22,12 @@ import com.thoughtworks.xstream.XStream;
 import io.github.classgraph.ClassGraph;
 import io.github.classgraph.ClassInfoList;
 import io.github.classgraph.ScanResult;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -34,6 +38,7 @@ import java.util.stream.Collectors;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AbstractTestElementWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestElementWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestPlanWrapper;
+import org.anasoid.jmeter.as.code.core.xstream.exceptions.ConversionException;
 import org.apache.jmeter.engine.StandardJMeterEngine;
 import org.apache.jmeter.save.SaveService;
 import org.apache.jmeter.util.JMeterUtils;
@@ -49,7 +54,7 @@ public class ApplicationTest {
   private static boolean initialized;
   private static List<Class<?>> listClazz;
   private final TestPlanWrapper testPlanWrapper;
-  private final AbstractTestElementWrapper<?> testElement;
+  private final TestElementWrapper<?> testElement;
   private boolean testMode;
 
   static {
@@ -122,7 +127,7 @@ public class ApplicationTest {
     if (testMode) {
       return testElement;
     } else {
-      return testPlanWrapper;
+      return script.getTestPlan().get(0);
     }
   }
 
@@ -141,10 +146,24 @@ public class ApplicationTest {
     if (testMode) {
       script = new ScriptWrapper().setTestPlan(testElement);
     } else {
-      script = new ScriptWrapper().setTestPlan(testPlanWrapper);
+
+      try {
+        script = new ScriptWrapper().setTestPlan(clone(testPlanWrapper));
+      } catch (IOException | ClassNotFoundException e) {
+        throw new ConversionException(e);
+      }
     }
 
     return script;
+  }
+
+  private TestPlanWrapper clone(TestPlanWrapper in) throws IOException, ClassNotFoundException {
+    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    ObjectOutputStream oos = new ObjectOutputStream(baos);
+    oos.writeObject(in);
+    ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+    ObjectInputStream ois = new ObjectInputStream(bais);
+    return (TestPlanWrapper) ois.readObject();
   }
 
   /**

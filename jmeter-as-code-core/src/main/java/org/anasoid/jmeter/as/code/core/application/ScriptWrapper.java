@@ -23,7 +23,7 @@ import com.thoughtworks.xstream.annotations.XStreamConverter;
 import java.util.ArrayList;
 import java.util.List;
 import org.anasoid.jmeter.as.code.core.config.JmcConfig;
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AbstractTestElementWrapper;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestElementWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestPlanWrapper;
 import org.anasoid.jmeter.as.code.core.xstream.converters.TestElementConverter;
 
@@ -37,7 +37,7 @@ class ScriptWrapper {
   @XStreamAsAttribute private final String properties = JmcConfig.getPropertiesVersion(); // NOSONAR
 
   @XStreamAlias("hashTree")
-  List<AbstractTestElementWrapper<?>> testPlan;
+  List<TestElementWrapper<?>> testPlan;
 
   /**
    * Set main test Plan.
@@ -51,7 +51,7 @@ class ScriptWrapper {
   }
 
   /** Only for Test. */
-  protected ScriptWrapper setTestPlan(AbstractTestElementWrapper<?> testElement) {
+  protected ScriptWrapper setTestPlan(TestElementWrapper<?> testElement) {
     testPlan = new ArrayList<>();
     testPlan.add(testElement);
     return this;
@@ -69,7 +69,7 @@ class ScriptWrapper {
     return properties;
   }
 
-  public List<AbstractTestElementWrapper<?>> getTestPlan() { // NOSONAR
+  public List<TestElementWrapper<?>> getTestPlan() { // NOSONAR
     return testPlan;
   }
 }
