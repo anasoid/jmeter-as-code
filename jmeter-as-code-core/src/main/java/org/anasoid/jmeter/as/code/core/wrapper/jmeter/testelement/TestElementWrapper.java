@@ -18,13 +18,14 @@
 
 package org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement;
 
+import java.io.Serializable;
 import java.util.List;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcAsAttribute;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcMethodAlias;
 import org.apache.jmeter.testelement.TestElement;
 
 /** Main TestElementWrapper Interface. */
-public interface TestElementWrapper<T extends TestElement> {
+public interface TestElementWrapper<T extends TestElement> extends Serializable {
 
   /** Init wrapper before conversion. */
   void init();

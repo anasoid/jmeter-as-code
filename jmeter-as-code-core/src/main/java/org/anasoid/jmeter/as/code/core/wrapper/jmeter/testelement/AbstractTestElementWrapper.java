@@ -51,6 +51,8 @@ import org.apache.jmeter.testelement.TestElement;
 public abstract class AbstractTestElementWrapper<T extends AbstractTestElement>
     implements TestElementWrapper<T> {
 
+  @XStreamOmitField private boolean isInitialized;
+
   /** Name. */
   @XStreamAsAttribute
   @XStreamAlias("testname")
@@ -95,7 +97,14 @@ public abstract class AbstractTestElementWrapper<T extends AbstractTestElement>
   }
 
   @Override
-  public void init() {}
+  public final void init() {
+    if (!isInitialized) {
+      internalInit();
+      isInitialized = true;
+    }
+  }
+
+  protected void internalInit() {}
 
   /** Builder. */
   @SuppressWarnings("PMD.AbstractClassWithoutAbstractMethod")
