@@ -29,6 +29,7 @@ import lombok.experimental.SuperBuilder;
 import org.anasoid.jmeter.as.code.core.wrapper.jmc.samplers.HttpMethod;
 import org.anasoid.jmeter.as.code.core.wrapper.jmc.samplers.Implementation;
 import org.anasoid.jmeter.as.code.core.wrapper.jmc.samplers.IpSourceType;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.config.ConfigTestElementWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.protocol.http.util.HTTPArgumentWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.protocol.http.util.HTTPFileArgWrapper;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcCollection;
@@ -367,6 +368,11 @@ public abstract class HTTPSamplerBaseWrapper<
       this.arguments$set = true;
 
       return self();
+    }
+
+    @SuppressWarnings("PMD.UselessOverridingMethod")
+    public B addChild(ConfigTestElementWrapper child) { // NOSONAR
+      return super.addChild(child);
     }
 
     /**

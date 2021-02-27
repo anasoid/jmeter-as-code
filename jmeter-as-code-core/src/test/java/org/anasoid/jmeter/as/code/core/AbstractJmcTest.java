@@ -86,7 +86,11 @@ public abstract class AbstractJmcTest {
       String startTag = "<" + node;
       String endTag = "</" + node + ">";
       String cleanStart = content.substring(content.indexOf(startTag));
-      result = cleanStart.substring(0, cleanStart.indexOf(endTag) + endTag.length());
+      if (cleanStart.contains(endTag)) {
+        result = cleanStart.substring(0, cleanStart.indexOf(endTag) + endTag.length());
+      } else {
+        result = cleanStart.substring(0, cleanStart.indexOf("/>") + 2);
+      }
     }
     return result;
   }
