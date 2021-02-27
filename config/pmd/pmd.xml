@@ -14,6 +14,8 @@
     <exclude name="DataClass"/>
     <exclude name="LawOfDemeter"/>
     <exclude name="LoosePackageCoupling"/>
+    <exclude name="AbstractClassWithoutAnyMethod"/>
+
 
     <!-- Duplicate from sonar -->
     <exclude name="ExcessiveParameterList"/>
@@ -31,7 +33,7 @@
     <exclude name="BeanMembersShouldSerialize"/>
     <exclude name="DataflowAnomalyAnalysis"/>
     <exclude name="UseLocaleWithCaseConversions"/>
-	<exclude name="MissingSerialVersionUID"/>
+    <exclude name="MissingSerialVersionUID"/>
 
     <!-- Duplicate from sonar -->
     <exclude name="ReturnEmptyArrayRatherThanNull"/>
