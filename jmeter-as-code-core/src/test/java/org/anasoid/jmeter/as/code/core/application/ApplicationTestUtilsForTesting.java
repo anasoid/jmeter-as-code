@@ -18,14 +18,14 @@
 
 package org.anasoid.jmeter.as.code.core.application;
 
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AbstractTestElementWrapper;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestElementWrapper;
 
 /** Utils to generate test with non TestPlan Element. */
 public final class ApplicationTestUtilsForTesting {
 
   private ApplicationTestUtilsForTesting() {}
 
-  public static final ApplicationTest getApplicationTest(AbstractTestElementWrapper testElement) {
+  public static final ApplicationTest getApplicationTest(TestElementWrapper testElement) {
 
     return new ApplicationTest(testElement);
   }

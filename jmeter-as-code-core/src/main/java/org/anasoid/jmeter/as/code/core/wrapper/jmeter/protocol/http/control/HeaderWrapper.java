@@ -19,11 +19,10 @@
 package org.anasoid.jmeter.as.code.core.wrapper.jmeter.protocol.http.control;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
-import lombok.Builder;
 import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AbstractTestElementWrapper;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.basic.AbstractBasicTestElementWrapper;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcAsAttribute;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcMethodAlias;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
@@ -35,7 +34,7 @@ import org.apache.jmeter.protocol.http.control.Header;
  * @see Header
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
-public class HeaderWrapper extends AbstractTestElementWrapper<Header> {
+public class HeaderWrapper extends AbstractBasicTestElementWrapper<Header> {
 
   @XStreamOmitField private static final long serialVersionUID = -4068882490947271216L;
 
@@ -43,11 +42,6 @@ public class HeaderWrapper extends AbstractTestElementWrapper<Header> {
   @Getter
   @Default
   private String name = "";
-
-  @XStreamOmitField @Builder.Default @Getter private boolean enabled = true;
-
-  /** Comments. */
-  @XStreamOmitField @Getter private String comment;
 
   @JmcProperty("Header.value")
   @Default
