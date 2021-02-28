@@ -13,53 +13,41 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * @author : anas
- * Date :   04-Jan-2021
+ * Date :   27-Feb-2021
  */
 
-package org.anasoid.jmeter.as.code.core.wrapper.jmeter.config;
+package org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.basic;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
-import lombok.Builder.Default;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.basic.AbstractBasicTestElementWrapper;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcSkipDefault;
-import org.apache.jmeter.config.Argument;
+import org.apache.jmeter.testelement.AbstractTestElement;
+import org.apache.jmeter.testelement.TestElement;
 
 /**
- * Wrapper for Argument.
- *
- * @see Argument
+ * Class represent a node without Children. Comment attribute (name , comment, enabled) are present.
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
-public abstract class AbstractArgumentWrapper<T extends Argument>
+public abstract class AbstractBasicChildTestElementWrapper<T extends AbstractTestElement>
     extends AbstractBasicTestElementWrapper<T> {
 
+  /** Name. */
   @XStreamAsAttribute
-  @XStreamAlias("name")
+  @XStreamAlias("testname")
   @Getter
   private String name;
 
-  @JmcProperty(Argument.VALUE)
-  private @Getter String value;
-
-  @JmcProperty(Argument.METADATA)
-  @Default
-  private @Getter String metadata = "=";
-
-  @JmcProperty(Argument.DESCRIPTION)
-  private @Getter String description;
-
-  @JmcProperty(Argument.ARG_NAME)
+  /** Comments. */
+  @JmcProperty(TestElement.COMMENTS)
+  @Getter
+  @Builder.Default
   @JmcSkipDefault("")
-  public String getNameProperty() {
-    return name;
-  }
+  private String comment = "";
 
-  @Override
-  public String getTestClassAsString() {
-    return null;
-  }
+  /** enabled. */
+  @XStreamAsAttribute @Builder.Default @Getter private boolean enabled = true;
 }

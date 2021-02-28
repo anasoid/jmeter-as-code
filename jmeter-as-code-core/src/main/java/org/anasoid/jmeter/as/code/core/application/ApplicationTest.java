@@ -106,7 +106,7 @@ public class ApplicationTest {
 
   /** Only for Test. */
   @SuppressWarnings("PMD.NullAssignment")
-  protected ApplicationTest(AbstractTestElementWrapper<?> testElement) {
+  protected ApplicationTest(TestElementWrapper<?> testElement) {
     this.testElement = testElement;
     this.testPlanWrapper = null;
     testMode = true;

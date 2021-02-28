@@ -97,10 +97,12 @@ public class TestElementConverter implements Converter {
       List<TestElementWrapper<?>> childs = ((TestElementWrapper) source).getChilds();
       writer.endNode();
       writer.startNode("hashTree");
-      for (TestElementWrapper<?> child : childs) {
-        writer.startNode(child.getTestClassAsString());
-        context.convertAnother(child);
-        writer.endNode();
+      if (childs != null) {
+        for (TestElementWrapper<?> child : childs) {
+          writer.startNode(child.getTestClassAsString());
+          context.convertAnother(child);
+          writer.endNode();
+        }
       }
     }
   }

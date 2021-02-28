@@ -19,10 +19,9 @@
 package org.anasoid.jmeter.as.code.core.wrapper.jmeter.protocol.http.util;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AbstractTestElementWrapper;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.basic.AbstractBasicTestElementWrapper;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcAsAttribute;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcMethodAlias;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
@@ -34,16 +33,11 @@ import org.apache.jmeter.protocol.http.util.HTTPFileArg;
  * @see HTTPFileArg
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
-public class HTTPFileArgWrapper extends AbstractTestElementWrapper<HTTPFileArg> {
+public class HTTPFileArgWrapper extends AbstractBasicTestElementWrapper<HTTPFileArg> {
 
-  @XStreamOmitField @Builder.Default @Getter private boolean enabled = true;
-
-  @XStreamOmitField private String name; // NOPMD
-
-  @JmcProperty("File.path")
   @JmcAsAttribute
   @JmcMethodAlias("name")
-  public String getPath() {
+  public String getPathAsAttribute() {
     return path;
   }
 
@@ -59,7 +53,7 @@ public class HTTPFileArgWrapper extends AbstractTestElementWrapper<HTTPFileArg> 
   private String mimeType;
 
   @JmcProperty("File.path")
-  public String getNameStr() {
+  public String getPathProperty() {
     return path;
   }
 
