@@ -8,7 +8,8 @@ An API that give access t full Jmeter feature as code, All designed object in GU
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=anasoid_jmeter-as-code&metric=coverage)](https://sonarcloud.io/dashboard?id=anasoid_jmeter-as-code)
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=anasoid_jmeter-as-code&metric=ncloc)](https://sonarcloud.io/dashboard?id=anasoid_jmeter-as-code)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=anasoid_jmeter-as-code&metric=security_rating)](https://sonarcloud.io/dashboard?id=anasoid_jmeter-as-code)
-
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=anasoid_jmeter-as-code&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=anasoid_jmeter-as-code)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=anasoid_jmeter-as-code&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=anasoid_jmeter-as-code)
 ### Usage example
 A build script example:
 ````java
