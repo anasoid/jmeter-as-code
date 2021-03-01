@@ -251,7 +251,7 @@ public final class ConverterBeanUtils {
 
   /** get Property Alias (intProp,stringProp,longProp .. ). */
   public static String getPropertyAlias(Object value, Class<?> clazz) {
-    Class<?> ppClazz = (clazz == Void.class) ? value.getClass() : clazz;
+    Class<?> ppClazz = (clazz == Void.class && value != null) ? value.getClass() : clazz;
     if ((value != null) && (value.getClass().isEnum())) {
       Object enumValue = getEnumValue(value);
       return getPropertyAlias(
