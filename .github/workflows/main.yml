@@ -47,6 +47,9 @@ jobs:
             ~/.jmeter
           key: jmeter2-$JMETER_FILE
 
+      - name: printenv
+        run: printenv
+
       - name: chmod  download-jmeter
         run: chmod +x ~/work/jmeter-as-code/jmeter-as-code/.github/scripts/download-jmeter.sh
 
