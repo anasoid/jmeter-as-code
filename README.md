@@ -11,7 +11,7 @@ An API that give access t full Jmeter feature as code, All designed object in GU
 
 ### Usage example
 A build script example:
-````
+````java
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
             .withName("Test Plan")
