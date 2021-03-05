@@ -34,6 +34,12 @@ import org.xmlunit.builder.Input;
 @SuppressWarnings("PMD.AbstractClassWithoutAbstractMethod")
 public abstract class AbstractJmcTest {
 
+  protected static final String DEFAULT_TEST_PLAN = "Test Plan";
+
+  protected static final String DEFAULT_HTTP_REQUEST = "HTTP Request";
+
+  protected static final String DEFAULT_THREAD_GROUP = "Thread Group";
+
   protected Source getSource(String content) {
     return Input.fromString(content).build();
   }
@@ -68,7 +74,7 @@ public abstract class AbstractJmcTest {
    * @return file content as string.
    */
   protected String readFile(String resource) throws IOException {
-    URL url = this.getClass().getClassLoader().getResource(resource);
+    URL url = this.getClass().getClassLoader().getResource(resource); // NOPMD
 
     return FileUtils.readFileToString(new File(url.getFile()), StandardCharsets.UTF_8);
   }
@@ -81,8 +87,7 @@ public abstract class AbstractJmcTest {
    */
   protected String getFragmentSingleNode(String content, String... nodes) {
     String result = content;
-    for (int i = 0; i < nodes.length; i++) {
-      String node = nodes[i];
+    for (String node : nodes) {
       String startTag = "<" + node;
       String endTag = "</" + node + ">";
       String cleanStart = content.substring(content.indexOf(startTag));
