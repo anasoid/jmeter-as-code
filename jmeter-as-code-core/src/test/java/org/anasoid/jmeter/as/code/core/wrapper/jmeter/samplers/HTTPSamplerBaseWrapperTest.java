@@ -84,13 +84,13 @@ class HTTPSamplerBaseWrapperTest extends AbstractJmcTest {
   @Test
   void testBodyWithArgsFail() throws IOException {
     try {
-      HTTPSamplerProxyWrapper httpSampler =
-          HTTPSamplerProxyWrapper.builder()
-              .withName("param")
-              .withPath("")
-              .withBody("body")
-              .addArgument("arg", "value")
-              .build();
+
+      HTTPSamplerProxyWrapper.builder()
+          .withName("param")
+          .withPath("")
+          .withBody("body")
+          .addArgument("arg", "value")
+          .build();
       Assertions.fail();
     } catch (ConversionIllegalStateException e) {
       Assertions.assertTrue(e.getMessage().contains("body"));
@@ -100,13 +100,13 @@ class HTTPSamplerBaseWrapperTest extends AbstractJmcTest {
   @Test
   void testargsWithBodyFail() throws IOException {
     try {
-      HTTPSamplerProxyWrapper httpSampler =
-          HTTPSamplerProxyWrapper.builder()
-              .withName("param")
-              .withPath("")
-              .addArgument(ARG, VAL)
-              .withBody("body")
-              .build();
+
+      HTTPSamplerProxyWrapper.builder()
+          .withName("param")
+          .withPath("")
+          .addArgument(ARG, VAL)
+          .withBody("body")
+          .build();
       Assertions.fail();
     } catch (ConversionIllegalStateException e) {
       Assertions.assertTrue(e.getMessage().contains("body"));
@@ -116,23 +116,23 @@ class HTTPSamplerBaseWrapperTest extends AbstractJmcTest {
   @Test
   void testFolowRedirectAndAutoRedirectFails() throws IOException {
     try {
-      HTTPSamplerProxyWrapper httpSampler =
-          HTTPSamplerProxyWrapper.builder()
-              .withPath("")
-              .withAutoRedirects(true)
-              .withFollowRedirects(true)
-              .build();
+
+      HTTPSamplerProxyWrapper.builder()
+          .withPath("")
+          .withAutoRedirects(true)
+          .withFollowRedirects(true)
+          .build();
       Assertions.fail();
     } catch (ConversionIllegalStateException e) {
       Assertions.assertTrue(e.getMessage().contains("followRedirects  and autoRedirects"));
     }
     try {
-      HTTPSamplerProxyWrapper httpSampler =
-          HTTPSamplerProxyWrapper.builder()
-              .withPath("")
-              .withFollowRedirects(true)
-              .withAutoRedirects(true)
-              .build();
+
+      HTTPSamplerProxyWrapper.builder()
+          .withPath("")
+          .withFollowRedirects(true)
+          .withAutoRedirects(true)
+          .build();
       Assertions.fail();
     } catch (ConversionIllegalStateException e) {
       Assertions.assertTrue(e.getMessage().contains("followRedirects  and autoRedirects"));
