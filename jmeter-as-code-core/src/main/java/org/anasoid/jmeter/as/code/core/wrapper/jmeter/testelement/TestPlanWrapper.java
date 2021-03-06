@@ -27,6 +27,7 @@ import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.config.ArgumentWrapper;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.config.ConfigTestElementWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.gui.JMeterGUIWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.threads.AbstractThreadGroupWrapper;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcCollection;
@@ -102,7 +103,21 @@ public class TestPlanWrapper extends AbstractTestElementWrapper<TestPlan>
           C extends TestPlanWrapper, B extends TestPlanWrapperBuilder<C, B>>
       extends AbstractTestElementWrapper.AbstractTestElementWrapperBuilder<TestPlan, C, B> {
 
+    /**
+     * Add ThreadGroup as child in tree.
+     *
+     * @param child child.
+     */
     public B addChild(AbstractThreadGroupWrapper<?, ?> child) { // NOSONAR
+      return super.addChild(child);
+    }
+
+    /**
+     * Add confElement as child in tree.
+     *
+     * @param child child.
+     */
+    public B addChild(ConfigTestElementWrapper<?, ?> child) { // NOSONAR
       return super.addChild(child);
     }
 

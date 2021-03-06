@@ -22,6 +22,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmeter.as.code.core.wrapper.jmc.threads.OnSampleError;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.config.ConfigTestElementWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.control.GenericControllerWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.gui.JMeterGUIWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.samplers.AbstractSamplerWrapper;
@@ -80,6 +81,15 @@ public abstract class AbstractThreadGroupWrapper<
      * @param child child.
      */
     public B addChild(AbstractSamplerWrapper<?, ?> child) { // NOSONAR
+      return super.addChild(child);
+    }
+
+    /**
+     * Add confElement as child in tree.
+     *
+     * @param child child.
+     */
+    public B addChild(ConfigTestElementWrapper<?, ?> child) { // NOSONAR
       return super.addChild(child);
     }
 
