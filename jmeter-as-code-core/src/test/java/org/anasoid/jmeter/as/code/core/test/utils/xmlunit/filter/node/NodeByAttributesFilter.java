@@ -38,7 +38,7 @@ public class NodeByAttributesFilter implements JmcXmlFilterNode {
   public NodeByAttributesFilter(String node, Map<String, String> attributes) {
     this.node = node;
     this.attributes = attributes;
-    this.parent = null;
+    this.parent = null; // NOPMD
   }
 
   /**
