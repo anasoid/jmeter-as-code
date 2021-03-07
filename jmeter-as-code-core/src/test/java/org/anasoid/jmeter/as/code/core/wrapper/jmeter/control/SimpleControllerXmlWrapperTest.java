@@ -27,12 +27,12 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.xmlunit.diff.Diff;
 
-class OnceOnlyControllerXmlWrapper extends AbstractJmcTest {
+class SimpleControllerXmlWrapperTest extends AbstractJmcTest {
 
   private static final String PARENT_PATH =
       "org/anasoid/jmeter/as/code/core/wrapper/jmeter/control";
 
-  private static final String NODE_NAME = "OnceOnlyController";
+  private static final String NODE_NAME = "GenericController";
 
   @Test
   void testDefault() throws IOException {
@@ -44,8 +44,8 @@ class OnceOnlyControllerXmlWrapper extends AbstractJmcTest {
                 ThreadGroupWrapper.builder()
                     .withName("Thread Group")
                     .addChild(
-                        OnceOnlyControllerWrapper.builder()
-                            .withName("Once Only Controller")
+                        SimpleControllerWrapper.builder()
+                            .withName("Simple Controller")
                             .build())
                     .build())
             .build();
