@@ -27,12 +27,12 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.xmlunit.diff.Diff;
 
-class SimpleControllerXmlWrapper extends AbstractJmcTest {
+class RandomOrderControllerXmlWrapperTest extends AbstractJmcTest {
 
   private static final String PARENT_PATH =
       "org/anasoid/jmeter/as/code/core/wrapper/jmeter/control";
 
-  private static final String NODE_NAME = "GenericController";
+  private static final String NODE_NAME = "RandomOrderController";
 
   @Test
   void testDefault() throws IOException {
@@ -44,8 +44,8 @@ class SimpleControllerXmlWrapper extends AbstractJmcTest {
                 ThreadGroupWrapper.builder()
                     .withName("Thread Group")
                     .addChild(
-                        SimpleControllerWrapper.builder()
-                            .withName("Simple Controller")
+                        RandomOrderControllerWrapper.builder()
+                            .withName("Random Order Controller")
                             .build())
                     .build())
             .build();

@@ -34,7 +34,7 @@ import org.xmlunit.diff.Diff;
  *
  * @see HttpDefaultsWrapper
  */
-class HttpDefaultsXMLWrapper extends AbstractJmcTest {
+class HttpDefaultsXMLWrapperTest extends AbstractJmcTest {
 
   private static final String PARENT_PATH =
       "org/anasoid/jmeter/as/code/core/wrapper/jmeter/protocol/http/config";
