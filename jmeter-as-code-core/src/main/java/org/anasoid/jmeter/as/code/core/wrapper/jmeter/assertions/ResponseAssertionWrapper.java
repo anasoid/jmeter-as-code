@@ -41,6 +41,7 @@ import org.apache.jmeter.testelement.property.CollectionProperty;
  * @see ResponseAssertion
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@SuppressWarnings("PMD.RedundantFieldInitializer")
 public class ResponseAssertionWrapper
     extends AbstractScopedAssertionWrapper<ResponseAssertion, AssertionGui> {
 
@@ -66,9 +67,9 @@ public class ResponseAssertionWrapper
 
   @Getter @XStreamOmitField @Default private MatchingRule matchingRule = MatchingRule.SUBSTRING;
 
-  @Getter @XStreamOmitField @Default private boolean not; // NOSONAR
+  @Getter @XStreamOmitField @Default private boolean not = false; // NOSONAR
 
-  @Getter @XStreamOmitField @Default private boolean or; // NOSONAR
+  @Getter @XStreamOmitField @Default private boolean or = false; // NOSONAR
 
   @Getter @Default @XStreamOmitField private List<String> patterns = new ArrayList<>();
 

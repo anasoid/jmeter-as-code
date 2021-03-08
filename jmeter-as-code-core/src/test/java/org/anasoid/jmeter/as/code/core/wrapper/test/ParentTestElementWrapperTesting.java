@@ -127,7 +127,7 @@ public class ParentTestElementWrapperTesting extends AbstractTestElementWrapper<
       extends AbstractTestElementWrapper.AbstractTestElementWrapperBuilder<TestPlan, C, B> {
 
     public B addChild(ChildTestElementWrapperTesting<?, ?> child) { // NOSONAR
-      return super.addChild(child);
+      return withChild(child);
     }
 
     protected B withArguments(List<ArgumentWrapper> child) { // NOSONAR
