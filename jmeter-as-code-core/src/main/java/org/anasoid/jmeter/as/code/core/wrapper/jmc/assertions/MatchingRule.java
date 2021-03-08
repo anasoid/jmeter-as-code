@@ -13,41 +13,38 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * @author : anas
- * Date :   06-Feb-2021
+ * Date :   08-Mar-2021
  */
 
-package org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.property;
+package org.anasoid.jmeter.as.code.core.wrapper.jmc.assertions;
 
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.JmeterConstants.JmeterProperty;
+/** Indicates how the text being tested is checked against the pattern. */
+public enum MatchingRule {
 
-/** Enumeration representing Jmeter property types. */
-public enum JMeterProperty {
-  INTEGER(JmeterProperty.INTEGER_PROP),
+  /** true if the whole text matches the regular expression pattern. */
+  MATCH(1),
 
-  STRING(JmeterProperty.STRING_PROP),
+  /** true if the text contains the regular expression pattern. */
+  CONTAINS(1 << 1),
 
-  BOOL(JmeterProperty.BOOL_PROP),
+  /** true if the whole text equals the pattern string (case-sensitive). */
+  EQUALS(1 << 3),
 
-  LONG(JmeterProperty.LONG_PROP),
+  /** true if the text contains the pattern string (case-sensitive). */
+  SUBSTRING(1 << 4);
 
-  FLOAT(JmeterProperty.FLOAT_PROP),
+  public final int value;
 
-  DOUBLE(JmeterProperty.DOUBLE_PROP),
-
-  ELEMENT(JmeterProperty.ELEMENT_PROP);
-
-  public final String value;
-
-  private JMeterProperty(String value) {
+  private MatchingRule(int value) {
     this.value = value;
   }
 
-  public String value() {
+  public int value() {
     return value;
   }
 
   @Override
   public String toString() {
-    return value;
+    return String.valueOf(value);
   }
 }

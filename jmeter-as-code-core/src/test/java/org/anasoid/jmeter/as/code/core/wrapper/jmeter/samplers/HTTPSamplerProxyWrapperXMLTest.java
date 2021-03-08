@@ -53,10 +53,10 @@ class HTTPSamplerProxyWrapperXMLTest extends AbstractJmcTest {
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
             .withName(DEFAULT_TEST_PLAN)
-            .addChild(
+            .addThread(
                 ThreadGroupWrapper.builder()
                     .withName(DEFAULT_THREAD_GROUP)
-                    .addChild(
+                    .addSampler(
                         HTTPSamplerProxyWrapper.builder()
                             .withName(DEFAULT_HTTP_REQUEST)
                             .withPath("")
@@ -78,10 +78,10 @@ class HTTPSamplerProxyWrapperXMLTest extends AbstractJmcTest {
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
             .withName(DEFAULT_TEST_PLAN)
-            .addChild(
+            .addThread(
                 ThreadGroupWrapper.builder()
                     .withName(DEFAULT_THREAD_GROUP)
-                    .addChild(
+                    .addSampler(
                         HTTPSamplerProxyWrapper.builder()
                             .withName(DEFAULT_HTTP_REQUEST)
                             .withPath("")
@@ -104,10 +104,10 @@ class HTTPSamplerProxyWrapperXMLTest extends AbstractJmcTest {
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
             .withName(DEFAULT_TEST_PLAN)
-            .addChild(
+            .addThread(
                 ThreadGroupWrapper.builder()
                     .withName(DEFAULT_THREAD_GROUP)
-                    .addChild(
+                    .addSampler(
                         HTTPSamplerProxyWrapper.builder()
                             .withName(DEFAULT_HTTP_REQUEST)
                             .withPath("")
@@ -133,10 +133,10 @@ class HTTPSamplerProxyWrapperXMLTest extends AbstractJmcTest {
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
             .withName(DEFAULT_TEST_PLAN)
-            .addChild(
+            .addThread(
                 ThreadGroupWrapper.builder()
                     .withName(DEFAULT_THREAD_GROUP)
-                    .addChild(
+                    .addSampler(
                         HTTPSamplerProxyWrapper.builder()
                             .withName(DEFAULT_HTTP_REQUEST)
                             .withComment("comment")

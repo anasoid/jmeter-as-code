@@ -19,9 +19,6 @@
 package org.anasoid.jmeter.as.code.core.application;
 
 import com.thoughtworks.xstream.XStream;
-import io.github.classgraph.ClassGraph;
-import io.github.classgraph.ClassInfoList;
-import io.github.classgraph.ScanResult;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -32,10 +29,6 @@ import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AbstractTestElementWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestElementWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestPlanWrapper;
 import org.anasoid.jmeter.as.code.core.xstream.exceptions.ConversionException;
@@ -52,7 +45,7 @@ public class ApplicationTest {
   private static final Logger LOG = LoggerFactory.getLogger(ApplicationTest.class);
   private static final String SLASH = System.getProperty("file.separator");
   private static boolean initialized;
-  private static List<Class<?>> listClazz;
+
   private final TestPlanWrapper testPlanWrapper;
   private final TestElementWrapper<?> testElement;
   private boolean testMode;
@@ -187,41 +180,7 @@ public class ApplicationTest {
   }
 
   private XStream getXstream() {
-    XStream xstream = new XStream();
-    xstream.setMode(XStream.NO_REFERENCES);
-    xstream.aliasSystemAttribute(null, "class");
-    xstream.alias("hashTree", HashTree.class);
-    List<Class<?>> clazzs = new ArrayList<>();
-    clazzs.add(ScriptWrapper.class);
-    clazzs.addAll(getProcessClazz());
-    Class<?>[] clazzArray = new Class[clazzs.size()];
-    clazzArray = clazzs.toArray(clazzArray);
-    xstream.processAnnotations(clazzArray);
+    XStream xstream = new JmcXstream();
     return xstream;
-  }
-
-  @SuppressWarnings("PMD.AvoidSynchronizedAtMethodLevel")
-  private static synchronized List<Class<?>> getProcessClazz() {
-    if (listClazz == null) {
-      try (ScanResult scanResult =
-          new ClassGraph()
-              .enableClassInfo()
-              .rejectJars(
-                  "gradle-*.jar",
-                  "kotlin-*.jar",
-                  "junit-*.jar",
-                  "log4j-*.jar",
-                  "jetty-*.jar",
-                  "ApacheJMeter_*-*.jar",
-                  "groovy-*.jar",
-                  "commons-*.jar",
-                  "wiremock-*.jar")
-              .scan()) {
-        ClassInfoList classInfoList =
-            scanResult.getSubclasses(AbstractTestElementWrapper.class.getName());
-        listClazz = classInfoList.stream().map(c -> c.loadClass(true)).collect(Collectors.toList());
-      }
-    }
-    return listClazz;
   }
 }

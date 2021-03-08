@@ -80,7 +80,7 @@ public abstract class AbstractThreadGroupWrapper<
      *
      * @param child child.
      */
-    public B addChild(AbstractSamplerWrapper<?, ?> child) { // NOSONAR
+    public B addSampler(AbstractSamplerWrapper<?, ?> child) { // NOSONAR
       return super.addChild(child);
     }
 
@@ -89,7 +89,7 @@ public abstract class AbstractThreadGroupWrapper<
      *
      * @param child child.
      */
-    public B addChild(ConfigTestElementWrapper<?, ?> child) { // NOSONAR
+    public B addConfig(ConfigTestElementWrapper<?, ?> child) { // NOSONAR
       return super.addChild(child);
     }
 
@@ -98,7 +98,7 @@ public abstract class AbstractThreadGroupWrapper<
      *
      * @param child child.
      */
-    public B addChild(GenericControllerWrapper<?, ?> child) { // NOSONAR
+    public B addController(GenericControllerWrapper<?, ?> child) { // NOSONAR
       return super.addChild(child);
     }
   }

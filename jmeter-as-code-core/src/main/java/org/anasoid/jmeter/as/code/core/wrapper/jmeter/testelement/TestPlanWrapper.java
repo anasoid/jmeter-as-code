@@ -108,7 +108,12 @@ public class TestPlanWrapper extends AbstractTestElementWrapper<TestPlan>
      *
      * @param child child.
      */
-    public B addChild(AbstractThreadGroupWrapper<?, ?> child) { // NOSONAR
+    public B addThread(AbstractThreadGroupWrapper<?, ?> child) { // NOSONAR
+      return super.addChild(child);
+    }
+
+    /** Add Assertion. */
+    public B addAssertion(AssertionWrapper child) { // NOSONAR
       return super.addChild(child);
     }
 
@@ -117,7 +122,7 @@ public class TestPlanWrapper extends AbstractTestElementWrapper<TestPlan>
      *
      * @param child child.
      */
-    public B addChild(ConfigTestElementWrapper<?, ?> child) { // NOSONAR
+    public B addConfig(ConfigTestElementWrapper<?, ?> child) { // NOSONAR
       return super.addChild(child);
     }
 

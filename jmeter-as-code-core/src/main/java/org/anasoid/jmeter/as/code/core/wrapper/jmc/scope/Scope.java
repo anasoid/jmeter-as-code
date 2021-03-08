@@ -13,32 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * @author : anas
- * Date :   06-Feb-2021
+ * Date :   08-Mar-2021
  */
 
-package org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.property;
+package org.anasoid.jmeter.as.code.core.wrapper.jmc.scope;
 
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.JmeterConstants.JmeterProperty;
+/** Scope of scoped test element. */
+public enum Scope {
 
-/** Enumeration representing Jmeter property types. */
-public enum JMeterProperty {
-  INTEGER(JmeterProperty.INTEGER_PROP),
+  /** Sub-samples only - only applies to the sub-samples. */
+  CHILDREN("children"),
 
-  STRING(JmeterProperty.STRING_PROP),
+  /** Main sample and sub-samples - applies to both. */
+  ALL("all"),
 
-  BOOL(JmeterProperty.BOOL_PROP),
+  /** Main sample only - only applies to the main sample. Default. */
+  PARENT("parent"),
 
-  LONG(JmeterProperty.LONG_PROP),
-
-  FLOAT(JmeterProperty.FLOAT_PROP),
-
-  DOUBLE(JmeterProperty.DOUBLE_PROP),
-
-  ELEMENT(JmeterProperty.ELEMENT_PROP);
+  /** Use Jmeter Variable. */
+  VARIABLE("variable");
 
   public final String value;
 
-  private JMeterProperty(String value) {
+  private Scope(String value) {
     this.value = value;
   }
 

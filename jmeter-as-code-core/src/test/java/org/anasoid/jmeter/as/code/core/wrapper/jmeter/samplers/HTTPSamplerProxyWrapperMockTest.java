@@ -46,15 +46,15 @@ class HTTPSamplerProxyWrapperMockTest extends AbstractHttpMockJmcTest {
     ThreadGroupWrapper threadGroup =
         ThreadGroupWrapper.builder()
             .withName("Example Thread Group")
-            .addChild(sampler)
-            .addChild(sampler)
+            .addSampler(sampler)
+            .addSampler(sampler)
             .build();
 
     // Test Plan
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
             .withName("Create JMeter Script From Java Code")
-            .addChild(threadGroup)
+            .addThread(threadGroup)
             .build();
 
     ApplicationTest applicationTest = new ApplicationTest(testPlanWrapper);

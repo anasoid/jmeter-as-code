@@ -40,10 +40,10 @@ class RecordingControllerXmlWrapperTest extends AbstractJmcTest {
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
             .withName("Test Plan")
-            .addChild(
+            .addThread(
                 ThreadGroupWrapper.builder()
                     .withName("Thread Group")
-                    .addChild(
+                    .addController(
                         RecordingControllerWrapper.builder()
                             .withName("Recording Controller")
                             .build())

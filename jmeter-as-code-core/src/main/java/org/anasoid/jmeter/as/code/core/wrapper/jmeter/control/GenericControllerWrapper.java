@@ -45,7 +45,7 @@ public abstract class GenericControllerWrapper<
           B extends GenericControllerWrapperBuilder<T, G, C, B>>
       extends AbstractTestElementWrapper.AbstractTestElementWrapperBuilder<T, C, B> {
 
-    public B addChild(AbstractSamplerWrapper<?, ?> child) { // NOSONAR
+    public B addSampler(AbstractSamplerWrapper<?, ?> child) { // NOSONAR
       return super.addChild(child);
     }
   }

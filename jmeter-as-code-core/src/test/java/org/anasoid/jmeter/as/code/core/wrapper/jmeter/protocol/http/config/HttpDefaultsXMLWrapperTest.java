@@ -47,7 +47,7 @@ class HttpDefaultsXMLWrapperTest extends AbstractJmcTest {
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
             .withName(DEFAULT_TEST_PLAN)
-            .addChild(HttpDefaultsWrapper.builder().withName("HTTP Request Defaults").build())
+            .addConfig(HttpDefaultsWrapper.builder().withName("HTTP Request Defaults").build())
             .build();
     String wrapperContent = toTmpFile(testPlanWrapper, "httpconfig_");
     String wrapperContentFragment = getFragmentSingleNode(wrapperContent, NODE_NAME);
@@ -64,7 +64,7 @@ class HttpDefaultsXMLWrapperTest extends AbstractJmcTest {
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
             .withName(DEFAULT_TEST_PLAN)
-            .addChild(
+            .addConfig(
                 HttpDefaultsWrapper.builder()
                     .withName("HTTP Request Defaults")
                     .withBody("body")
@@ -85,7 +85,7 @@ class HttpDefaultsXMLWrapperTest extends AbstractJmcTest {
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
             .withName(DEFAULT_TEST_PLAN)
-            .addChild(
+            .addConfig(
                 HttpDefaultsWrapper.builder()
                     .withName("HTTP Request Defaults")
                     .withComment("comment")

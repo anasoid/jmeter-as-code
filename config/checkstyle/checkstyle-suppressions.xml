@@ -6,7 +6,7 @@
 
 <suppressions>
   <suppress  files=".*\.java" message=".*Abbreviation in name '.*' must contain no more than '1' consecutive capital letters" />
-  <suppress  files=".*/core/application/.*ApplicationTest\.java" message="new' has incorrect indentation level 10, expected level should be 12" />
+  <suppress  files=".*/core/application/.*JmcXstream\.java" message="new' has incorrect indentation level 10, expected level should be 12" />
 
 
 </suppressions>

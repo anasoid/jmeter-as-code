@@ -43,7 +43,7 @@ class ThreadGroupWrapperXMLTest extends AbstractJmcTest {
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
             .withName("Test Plan")
-            .addChild(ThreadGroupWrapper.builder().withName("Thread Group").build())
+            .addThread(ThreadGroupWrapper.builder().withName("Thread Group").build())
             .build();
     String wrapperContent = toTmpFile(testPlanWrapper, "threadgroup_");
     String wrapperContentFragment = getFragmentSingleNode(wrapperContent, NODE_NAME);
@@ -61,7 +61,7 @@ class ThreadGroupWrapperXMLTest extends AbstractJmcTest {
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
             .withName("Test Plan")
-            .addChild(ThreadGroupWrapper.builder().withName("Thread Group").build())
+            .addThread(ThreadGroupWrapper.builder().withName("Thread Group").build())
             .build();
     String wrapperContent = toTmpFile(testPlanWrapper, "threadgroup_");
     String expectedContent = readFile(PARENT_PATH + "/threadgroup.default.jmx");
@@ -82,7 +82,7 @@ class ThreadGroupWrapperXMLTest extends AbstractJmcTest {
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
             .withName("Test Plan")
-            .addChild(
+            .addThread(
                 ThreadGroupWrapper.builder()
                     .withName("Thread Group Reverse")
                     .withOnSampleError(OnSampleError.ON_SAMPLE_ERROR_STOPTEST)
