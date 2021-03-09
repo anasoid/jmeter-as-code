@@ -16,7 +16,7 @@
  * Date :   09-Mar-2021
  */
 
-package org.anasoid.jmeter.as.code.core.dsl;
+package org.anasoid.jmeter.as.code.core.dsl.threads;
 
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.threads.ThreadGroupWrapper;
 
@@ -53,19 +53,5 @@ public final class ThreadGroupDsl {
       String name, int numThreads, int rampUp, int loops) {
 
     return threadGroupBuilder(name).withNumThreads(numThreads).withRampUp(rampUp).withLoops(loops);
-  }
-
-  /**
-   * Get ThreadGroupWrapper .
-   *
-   * @param name threadGroup name.
-   * @param numThreads number of Threads.
-   * @param rampUp Ramp-up period (seconds).
-   * @param loops number of loops.
-   * @return wrapper.
-   */
-  public static ThreadGroupWrapper http(String name, int numThreads, int rampUp, int loops) {
-
-    return threadGroupBuilder(name, numThreads, rampUp, loops).build();
   }
 }

@@ -16,7 +16,7 @@
  * Date :   09-Mar-2021
  */
 
-package org.anasoid.jmeter.as.code.core.dsl;
+package org.anasoid.jmeter.as.code.core.dsl.samplers;
 
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.samplers.HTTPSamplerProxyWrapper;
 

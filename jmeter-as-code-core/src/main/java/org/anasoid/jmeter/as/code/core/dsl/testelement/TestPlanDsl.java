@@ -16,7 +16,7 @@
  * Date :   09-Mar-2021
  */
 
-package org.anasoid.jmeter.as.code.core.dsl;
+package org.anasoid.jmeter.as.code.core.dsl.testelement;
 
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestPlanWrapper;
 
@@ -49,16 +49,5 @@ public final class TestPlanDsl {
   public static TestPlanWrapper.TestPlanWrapperBuilder<?, ?> testPlanBuilder(String name) {
 
     return testPlanBuilder().withName(name);
-  }
-
-  /**
-   * Get TestPlan sampler with name and path.
-   *
-   * @param name sampler name.
-   * @return testPlan.
-   */
-  public static TestPlanWrapper http(String name) {
-
-    return testPlanBuilder(name).build();
   }
 }
