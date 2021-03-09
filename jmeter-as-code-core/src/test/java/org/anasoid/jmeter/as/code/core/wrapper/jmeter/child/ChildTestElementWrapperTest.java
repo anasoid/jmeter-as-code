@@ -42,42 +42,4 @@ class ChildTestElementWrapperTest {
 
     ParentTestElementWrapperTesting.builder().withName("Parent").addChild(sub).build();
   }
-
-  @Test
-  void testChildList() {
-    // second sub
-    SubChildTestingElementWrapperTesting sub =
-        SubChildTestingElementWrapperTesting.builder()
-            .withBb1(true)
-            .withField("f")
-            .withName("sub")
-            .build();
-
-    // Parent Group
-
-    ParentTestElementWrapperTesting.builder()
-        .withName("Parent")
-        .addChilds(Arrays.asList(sub))
-        .build();
-  }
-
-  @Test
-  @SuppressWarnings("PMD.EmptyCatchBlock")
-  void testChildListFailed() {
-    // second sub
-    ParentTestElementWrapperTesting sub =
-        ParentTestElementWrapperTesting.builder().withName("sub").build();
-
-    // Parent Group
-    try {
-
-      ParentTestElementWrapperTesting.builder()
-          .withName("Parent")
-          .addChilds(Arrays.asList(sub))
-          .build();
-      Assertions.fail();
-    } catch (IllegalArgumentException e) {
-      // Nothing
-    }
-  }
 }

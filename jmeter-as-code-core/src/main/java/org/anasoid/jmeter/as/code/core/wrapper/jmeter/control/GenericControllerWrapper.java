@@ -18,6 +18,8 @@
 
 package org.anasoid.jmeter.as.code.core.wrapper.jmeter.control;
 
+import java.util.Arrays;
+import java.util.List;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.gui.JMeterGUIWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.samplers.AbstractSamplerWrapper;
@@ -45,8 +47,17 @@ public abstract class GenericControllerWrapper<
           B extends GenericControllerWrapperBuilder<T, G, C, B>>
       extends AbstractTestElementWrapper.AbstractTestElementWrapperBuilder<T, C, B> {
 
-    public B addSampler(AbstractSamplerWrapper<?, ?> child) { // NOSONAR
-      return super.addChild(child);
+    /** Add sampler. */
+    public B addSampler(AbstractSamplerWrapper<?, ?> sampler) { // NOSONAR
+      return addSamplers(Arrays.asList(sampler));
+    }
+
+    /** Add samplers as child in tree. */
+    public B addSamplers(List<AbstractSamplerWrapper<?, ?>> samplers) { // NOSONAR
+      for (AbstractSamplerWrapper<?, ?> sampler : samplers) {
+        withChild(sampler);
+      }
+      return self();
     }
   }
 }

@@ -180,7 +180,6 @@ public class ApplicationTest {
   }
 
   private XStream getXstream() {
-    XStream xstream = new JmcXstream();
-    return xstream;
+    return new JmcXstream();
   }
 }

@@ -19,10 +19,8 @@
 package org.anasoid.jmeter.as.code.core.wrapper.jmeter.samplers;
 
 import lombok.experimental.SuperBuilder;
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.config.ConfigTestElementWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.gui.JMeterGUIWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AbstractTestElementWrapper;
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AssertionWrapper;
 import org.apache.jmeter.samplers.AbstractSampler;
 import org.apache.jmeter.samplers.gui.AbstractSamplerGui;
 
@@ -45,14 +43,6 @@ public abstract class AbstractSamplerWrapper<
           B extends AbstractSamplerWrapperBuilder<T, G, C, B>>
       extends AbstractTestElementWrapper.AbstractTestElementWrapperBuilder<T, C, B> {
 
-    /** Add Assertion. */
-    public B addAssertion(AssertionWrapper child) { // NOSONAR
-      return super.addChild(child);
-    }
 
-    /** Add configElement as child in tree. */
-    public B addConfig(ConfigTestElementWrapper<?, ?> child) { // NOSONAR
-      return super.addChild(child);
-    }
   }
 }

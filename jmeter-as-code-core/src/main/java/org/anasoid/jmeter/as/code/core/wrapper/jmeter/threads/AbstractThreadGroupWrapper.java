@@ -18,11 +18,12 @@
 
 package org.anasoid.jmeter.as.code.core.wrapper.jmeter.threads;
 
+import java.util.Arrays;
+import java.util.List;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmeter.as.code.core.wrapper.jmc.threads.OnSampleError;
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.config.ConfigTestElementWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.control.GenericControllerWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.gui.JMeterGUIWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.samplers.AbstractSamplerWrapper;
@@ -53,9 +54,9 @@ public abstract class AbstractThreadGroupWrapper<
   private @Getter Boolean isSameUserOnNextIteration = true;
 
   /** Number of Threads (users). */
-  @JmcProperty(value = AbstractThreadGroup.NUM_THREADS, asString = true)
+  @JmcProperty(value = AbstractThreadGroup.NUM_THREADS)
   @Builder.Default
-  private @Getter Integer numThreads = 1;
+  private @Getter String numThreadsAsVar = "1";
 
   /** the sampler controller. */
   @JmcProperty(AbstractThreadGroup.MAIN_CONTROLLER)
@@ -70,36 +71,40 @@ public abstract class AbstractThreadGroupWrapper<
           B extends AbstractThreadGroupWrapper.AbstractThreadGroupWrapperBuilder<T, G, C, B>>
       extends AbstractTestElementWrapper.AbstractTestElementWrapperBuilder<T, C, B> {
 
+    /** set number of Threads. */
+    public B withNumThreads(int numThreads) {
+      return withNumThreadsAsVar(String.valueOf(numThreads));
+    }
+
     private B withSamplerController(GenericControllerWrapper<?, ?> controller) { // NOSONAR
       // hide samplerController
       return self();
     }
 
-    /**
-     * Add testElement as child in tree.
-     *
-     * @param child child.
-     */
-    public B addSampler(AbstractSamplerWrapper<?, ?> child) { // NOSONAR
-      return super.addChild(child);
+    /** Add sampler. */
+    public B addSampler(AbstractSamplerWrapper<?, ?> sampler) { // NOSONAR
+      return addSamplers(Arrays.asList(sampler));
     }
 
-    /**
-     * Add confElement as child in tree.
-     *
-     * @param child child.
-     */
-    public B addConfig(ConfigTestElementWrapper<?, ?> child) { // NOSONAR
-      return super.addChild(child);
+    /** Add samplers as child in tree. */
+    public B addSamplers(List<AbstractSamplerWrapper<?, ?>> samplers) { // NOSONAR
+      for (AbstractSamplerWrapper<?, ?> sampler : samplers) {
+        withChild(sampler);
+      }
+      return self();
     }
 
-    /**
-     * Add testElement as child in tree.
-     *
-     * @param child child.
-     */
-    public B addController(GenericControllerWrapper<?, ?> child) { // NOSONAR
-      return super.addChild(child);
+    /** Add Controller. */
+    public B addController(GenericControllerWrapper<?, ?> controller) { // NOSONAR
+      return addControllers(Arrays.asList(controller));
+    }
+
+    /** Add Controllers as child in tree. */
+    public B addControllers(List<GenericControllerWrapper<?, ?>> controllers) { // NOSONAR
+      for (GenericControllerWrapper<?, ?> controller : controllers) {
+        withChild(controller);
+      }
+      return self();
     }
   }
 }
