@@ -30,8 +30,8 @@ class ThreadGroupDslTest {
     ThreadGroupWrapper threadGroup = ThreadGroupDsl.threadGroupBuilder("name", 10, 20, 30).build();
 
     Assertions.assertEquals("name", threadGroup.getName());
-    Assertions.assertEquals(10, threadGroup.getNumThreads());
-    Assertions.assertEquals(20, threadGroup.getRampUp());
+    Assertions.assertEquals("10", threadGroup.getNumThreadsAsVar());
+    Assertions.assertEquals("20", threadGroup.getRampUpAsVar());
     Assertions.assertEquals(30, threadGroup.getLoops());
   }
 }
