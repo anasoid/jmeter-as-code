@@ -21,6 +21,7 @@ package org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.gui.JMeterGUIWrapper;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.basic.AbstractBasicChildTestElementWrapper;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
 import org.apache.jmeter.gui.AbstractScopedJMeterGuiComponent;
 import org.apache.jmeter.testelement.AbstractScopedTestElement;
@@ -33,7 +34,7 @@ import org.apache.jmeter.testelement.AbstractScopedTestElement;
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 public abstract class AbstractScopedTestElementWrapper<
         T extends AbstractScopedTestElement, G extends AbstractScopedJMeterGuiComponent>
-    extends AbstractTestElementWrapper<T> implements JMeterGUIWrapper<G> {
+    extends AbstractBasicChildTestElementWrapper<T> implements JMeterGUIWrapper<G> {
 
   @JmcProperty("Scope.variable")
   @Getter

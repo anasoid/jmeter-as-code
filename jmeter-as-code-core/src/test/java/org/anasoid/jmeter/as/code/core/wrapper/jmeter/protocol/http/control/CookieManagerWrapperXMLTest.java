@@ -49,7 +49,7 @@ class CookieManagerWrapperXMLTest extends AbstractJmcTest {
                         HTTPSamplerProxyWrapper.builder()
                             .withName("HTTP Request")
                             .withPath("")
-                            .addChild(
+                            .addConfig(
                                 CookieManagerWrapper.builder()
                                     .withName("HTTP Cookie Manager")
                                     .build())
@@ -78,7 +78,7 @@ class CookieManagerWrapperXMLTest extends AbstractJmcTest {
                         HTTPSamplerProxyWrapper.builder()
                             .withName("HTTP Request")
                             .withPath("")
-                            .addChild(
+                            .addConfig(
                                 CookieManagerWrapper.builder()
                                     .withName("HTTP Cookie Manager")
                                     .withClearEachIteration(true)

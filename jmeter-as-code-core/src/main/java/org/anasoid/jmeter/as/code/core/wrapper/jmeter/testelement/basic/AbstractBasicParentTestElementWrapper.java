@@ -19,15 +19,15 @@
 package org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.basic;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import lombok.Builder;
 import lombok.experimental.SuperBuilder;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.config.ConfigTestElementWrapper;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AssertionWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestElementWrapper;
-import org.anasoid.jmeter.as.code.core.xstream.exceptions.ConversionException;
 import org.apache.jmeter.testelement.AbstractTestElement;
 
 /** Class represent a node with Children. */
@@ -63,47 +63,30 @@ public abstract class AbstractBasicParentTestElementWrapper<T extends AbstractTe
       return self();
     }
 
-    /**
-     * Add Test element tree children.
-     *
-     * @param childs list of child.
-     */
-    public B addChilds(List<TestElementWrapper<?>> childs) {
-      for (TestElementWrapper<?> testElement : childs) {
-        boolean found = false;
-        try { // NOSONAR
-          Method method;
-          Class<?> clazz = testElement.getClass();
-          while (clazz != Object.class) { // NOSONAR
-            try { // NOSONAR
-              method = this.getClass().getMethod("addChild", clazz);
-            } catch (NoSuchMethodException e) {
-              clazz = clazz.getSuperclass();
-              continue;
-            }
-            method.invoke(this, testElement);
-            found = true;
-            break; // NOPMD
-          }
+    /** Add Assertion. */
+    public B addAssertion(AssertionWrapper<?> assertion) {
+      return addAssertions(Arrays.asList(assertion));
+    }
 
-        } catch (IllegalAccessException | InvocationTargetException e) {
-          // Should Not Happen
-          throw new ConversionException(e);
-        }
-        if (!found) {
-          throw new IllegalArgumentException("Illegal argument Type of  : " + testElement);
-        }
+    /** Add Assertions as child in tree. */
+    public B addAssertions(List<AssertionWrapper<?>> assertions) {
+      for (AssertionWrapper<?> assertion : assertions) {
+        withChild(assertion);
       }
       return self();
     }
 
-    /**
-     * Add testElement as child in tree.
-     *
-     * @param child child.
-     */
-    protected B addChild(TestElementWrapper<?> child) {
-      return this.withChild(child);
+    /** Add configElement as child in tree. */
+    public B addConfig(ConfigTestElementWrapper<?, ?> config) { // NOSONAR
+      return addConfigs(Arrays.asList(config));
+    }
+
+    /** Add configElements as child in tree. */
+    public B addConfigs(List<ConfigTestElementWrapper<?, ?>> childs) { // NOSONAR
+      for (ConfigTestElementWrapper<?, ?> config : childs) {
+        withChild(config);
+      }
+      return self();
     }
   }
 }
