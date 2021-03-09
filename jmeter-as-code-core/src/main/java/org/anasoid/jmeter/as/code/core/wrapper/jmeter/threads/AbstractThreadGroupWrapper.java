@@ -53,9 +53,9 @@ public abstract class AbstractThreadGroupWrapper<
   private @Getter Boolean isSameUserOnNextIteration = true;
 
   /** Number of Threads (users). */
-  @JmcProperty(value = AbstractThreadGroup.NUM_THREADS, asString = true)
+  @JmcProperty(value = AbstractThreadGroup.NUM_THREADS)
   @Builder.Default
-  private @Getter Integer numThreads = 1;
+  private @Getter String numThreadsAsVar = "1";
 
   /** the sampler controller. */
   @JmcProperty(AbstractThreadGroup.MAIN_CONTROLLER)
@@ -69,6 +69,11 @@ public abstract class AbstractThreadGroupWrapper<
           C extends AbstractThreadGroupWrapper<T, G>,
           B extends AbstractThreadGroupWrapper.AbstractThreadGroupWrapperBuilder<T, G, C, B>>
       extends AbstractTestElementWrapper.AbstractTestElementWrapperBuilder<T, C, B> {
+
+    /** set number of Threads. */
+    public B withNumThreads(int numThreads) {
+      return withNumThreadsAsVar(String.valueOf(numThreads));
+    }
 
     private B withSamplerController(GenericControllerWrapper<?, ?> controller) { // NOSONAR
       // hide samplerController

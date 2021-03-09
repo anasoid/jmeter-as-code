@@ -236,9 +236,9 @@ public final class ConverterBeanUtils {
   public static Class<?> getPropertyType(AccessibleObject accessibleObject) {
 
     JmcProperty jmcProperty = getAnnotation(accessibleObject, JmcProperty.class);
-    Class<?> clazz = jmcProperty.asString() ? String.class : jmcProperty.type();
-    if (clazz != Void.class) {
-      return clazz;
+
+    if (jmcProperty.type() != Void.class) {
+      return jmcProperty.type();
     }
     if (accessibleObject instanceof Field) {
       return ((Field) accessibleObject).getType();

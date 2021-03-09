@@ -54,22 +54,22 @@ public class ThreadGroupWrapper extends AbstractThreadGroupWrapper<ThreadGroup, 
   private Boolean delayedStartup = false;
 
   /** Duration (seconds). */
-  @JmcProperty(value = ThreadGroup.DURATION, asString = true)
+  @JmcProperty(value = ThreadGroup.DURATION)
   @Getter
   @JmcNullAllowed
-  private Integer duration;
+  private String durationAsVar;
 
   /** Startup delay (seconds). */
-  @JmcProperty(value = ThreadGroup.DELAY, asString = true)
+  @JmcProperty(value = ThreadGroup.DELAY)
   @Getter
   @JmcNullAllowed
-  private Integer delay;
+  private String delayAsVar;
 
   /** Ramp-up period (seconds). */
-  @JmcProperty(value = ThreadGroup.RAMP_TIME, asString = true)
+  @JmcProperty(value = ThreadGroup.RAMP_TIME)
   @Getter
   @Builder.Default
-  private Integer rampUp = 1;
+  private String rampUpAsVar = "1";
 
   /**
    * In spite of the name, this is actually used to determine if the loop controller is repeatable.
@@ -86,7 +86,7 @@ public class ThreadGroupWrapper extends AbstractThreadGroupWrapper<ThreadGroup, 
   @Override
   public void internalInit() {
     super.internalInit();
-    LoopControllerWrapper.LoopControllerWrapperBuilder samplerControllerBuilder =
+    LoopControllerWrapper.LoopControllerWrapperBuilder<?, ?> samplerControllerBuilder =
         LoopControllerWrapper.builder().withName("Loop Controller").withContinueForever(false);
     if (Boolean.TRUE.equals(continueForever)) {
       samplerControllerBuilder.withLoops(-1);
@@ -95,6 +95,28 @@ public class ThreadGroupWrapper extends AbstractThreadGroupWrapper<ThreadGroup, 
     }
 
     samplerController = samplerControllerBuilder.build();
+  }
+
+  /** builder. */
+  public abstract static class ThreadGroupWrapperBuilder<
+          C extends ThreadGroupWrapper, B extends ThreadGroupWrapperBuilder<C, B>>
+      extends AbstractThreadGroupWrapper.AbstractThreadGroupWrapperBuilder<
+          ThreadGroup, ThreadGroupGui, C, B> {
+
+    /** set rampUp. */
+    public B withRampUp(int rampUp) {
+      return withRampUpAsVar(String.valueOf(rampUp));
+    }
+
+    /** set duration. */
+    public B withDuration(int duration) {
+      return withDurationAsVar(String.valueOf(duration));
+    }
+
+    /** set delay. */
+    public B withDelay(int delay) {
+      return withDelayAsVar(String.valueOf(delay));
+    }
   }
 
   @Override
