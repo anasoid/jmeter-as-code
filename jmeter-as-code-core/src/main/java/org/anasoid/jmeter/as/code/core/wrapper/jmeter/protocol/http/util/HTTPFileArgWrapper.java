@@ -37,23 +37,23 @@ public class HTTPFileArgWrapper extends AbstractBasicTestElementWrapper<HTTPFile
 
   @JmcAsAttribute
   @JmcMethodAlias("name")
-  public String getPathAsAttribute() {
+  protected String getPathAsAttribute() {
     return path;
   }
 
   /** File path. */
-  @XStreamOmitField private String path;
+  @XStreamOmitField @Getter private String path;
   /** Parameter name. */
   @JmcProperty("File.paramname")
   @Getter
-  private String paramName;
+  private String name;
   /** MIME Type?. */
   @JmcProperty("File.mimetype")
   @Getter
   private String mimeType;
 
   @JmcProperty("File.path")
-  public String getPathProperty() {
+  protected String getPathProperty() {
     return path;
   }
 

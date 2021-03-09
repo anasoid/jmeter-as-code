@@ -174,7 +174,7 @@ class HTTPSamplerProxyWrapperXMLTest extends AbstractJmcTest {
                                     .build())
                             .addFileArgument(
                                 HTTPFileArgWrapper.builder()
-                                    .withParamName("file")
+                                    .withName("file")
                                     .withPath("filepath")
                                     .withMimeType("image/png")
                                     .build())

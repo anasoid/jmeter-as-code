@@ -50,7 +50,7 @@ class HTTPFileArgWrapperXMLTest extends AbstractJmcTest {
                             .withPath("")
                             .addFileArgument(
                                 HTTPFileArgWrapper.builder()
-                                    .withParamName("file")
+                                    .withName("file")
                                     .withPath("filepath")
                                     .withMimeType("image/png")
                                     .build())
