@@ -126,9 +126,8 @@ public class TestPlanWrapper extends AbstractTestElementWrapper<TestPlan>
       return super.addChild(child);
     }
 
-    protected B withArguments(ArgumentWrapper child) { // NOSONAR
-      return self();
-    }
+    /** Hide Lombok function. */
+    private void withArguments() {} // NOSONAR
 
     /**
      * Add arguments. Each argument consists of a name/value pair, as well as (optional) metadata.
