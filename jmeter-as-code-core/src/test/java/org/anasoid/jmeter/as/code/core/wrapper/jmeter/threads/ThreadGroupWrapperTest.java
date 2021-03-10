@@ -30,6 +30,6 @@ class ThreadGroupWrapperTest extends AbstractJmcTest {
     ThreadGroupWrapper threadGroupWrapper =
         ThreadGroupWrapper.builder().withLoops(10).withContinueForever(true).build();
     Assertions.assertTrue(threadGroupWrapper.getContinueForever());
-    Assertions.assertEquals(10, threadGroupWrapper.getLoops());
+    Assertions.assertEquals("10", threadGroupWrapper.getLoopsAsVar());
   }
 }

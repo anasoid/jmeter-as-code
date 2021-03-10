@@ -32,6 +32,6 @@ class ThreadGroupDslTest {
     Assertions.assertEquals("name", threadGroup.getName());
     Assertions.assertEquals("10", threadGroup.getNumThreadsAsVar());
     Assertions.assertEquals("20", threadGroup.getRampUpAsVar());
-    Assertions.assertEquals(30, threadGroup.getLoops());
+    Assertions.assertEquals("30", threadGroup.getLoopsAsVar());
   }
 }

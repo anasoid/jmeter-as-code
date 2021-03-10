@@ -71,6 +71,8 @@ public class ThreadGroupWrapper extends AbstractThreadGroupWrapper<ThreadGroup, 
   @Builder.Default
   private String rampUpAsVar = "1";
 
+  /** loops number. */
+  @XStreamOmitField private @Builder.Default @Getter String loopsAsVar = "1";
   /**
    * In spite of the name, this is actually used to determine if the loop controller is repeatable.
    * The value is only used in nextIsNull() when the loop end condition has been detected: If
@@ -80,8 +82,6 @@ public class ThreadGroupWrapper extends AbstractThreadGroupWrapper<ThreadGroup, 
    * not be repeated. However, it's not clear that a Thread Group could ever be repeated.
    */
   @XStreamOmitField private @Builder.Default @Getter Boolean continueForever = false;
-  /** loops number. */
-  @XStreamOmitField private @Builder.Default @Getter Integer loops = 1;
 
   @Override
   public void internalInit() {
@@ -91,7 +91,7 @@ public class ThreadGroupWrapper extends AbstractThreadGroupWrapper<ThreadGroup, 
     if (Boolean.TRUE.equals(continueForever)) {
       samplerControllerBuilder.withLoops(-1);
     } else {
-      samplerControllerBuilder.withLoops(loops);
+      samplerControllerBuilder.withLoopsAsVar(loopsAsVar);
     }
 
     samplerController = samplerControllerBuilder.build();
@@ -116,6 +116,11 @@ public class ThreadGroupWrapper extends AbstractThreadGroupWrapper<ThreadGroup, 
     /** set delay. */
     public B withDelay(int delay) {
       return withDelayAsVar(String.valueOf(delay));
+    }
+
+    /** set loops. */
+    public B withLoops(int loops) {
+      return withLoopsAsVar(String.valueOf(loops));
     }
   }
 
