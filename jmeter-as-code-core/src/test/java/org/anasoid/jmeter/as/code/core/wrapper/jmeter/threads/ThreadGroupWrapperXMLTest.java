@@ -51,8 +51,7 @@ class ThreadGroupWrapperXMLTest extends AbstractJmcTest {
     String expectedContentFragment = getFragmentSingleNode(expectedContent, NODE_NAME);
     Diff diff = JmcXmlComparator.compare(expectedContentFragment, wrapperContentFragment);
     Assertions.assertFalse(
-        JmcXmlComparator.hasDifferences(diff, LoopController.LOOPS),
-        "theadGroup  not identical " + diff);
+        JmcXmlComparator.hasDifferences(diff), "theadGroup  not identical " + diff);
   }
 
   @Test
@@ -72,8 +71,7 @@ class ThreadGroupWrapperXMLTest extends AbstractJmcTest {
             null,
             Arrays.asList(AttributesFilterManager.getCommentFilter()));
     Assertions.assertFalse(
-        JmcXmlComparator.hasDifferences(diff, LoopController.LOOPS),
-        "theadGroup  not identical " + diff);
+        JmcXmlComparator.hasDifferences(diff), "theadGroup  not identical " + diff);
   }
 
   @Test

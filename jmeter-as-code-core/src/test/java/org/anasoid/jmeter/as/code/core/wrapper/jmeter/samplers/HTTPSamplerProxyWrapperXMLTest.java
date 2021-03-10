@@ -123,8 +123,7 @@ class HTTPSamplerProxyWrapperXMLTest extends AbstractJmcTest {
             null,
             Arrays.asList(AttributesFilterManager.getCommentFilter()));
     Assertions.assertFalse(
-        JmcXmlComparator.hasDifferences(diff, LoopController.LOOPS),
-        "httpsampler  not identical " + diff);
+        JmcXmlComparator.hasDifferences(diff), "httpsampler  not identical " + diff);
   }
 
   @Test

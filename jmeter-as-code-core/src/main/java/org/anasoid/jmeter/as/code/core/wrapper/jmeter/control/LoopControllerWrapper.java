@@ -42,7 +42,19 @@ public class LoopControllerWrapper
   /** Loop Count. */
   @JmcProperty(value = LoopController.LOOPS)
   @Getter
-  private Integer loops;
+  private String loopsAsVar;
+
+  /** Builder. */
+  public abstract static class LoopControllerWrapperBuilder<
+          C extends LoopControllerWrapper, B extends LoopControllerWrapperBuilder<C, B>>
+      extends GenericControllerWrapper.GenericControllerWrapperBuilder<
+          LoopController, LoopControlPanel, C, B> {
+
+    /** set loops. */
+    public B withLoops(int loops) {
+      return withLoopsAsVar(String.valueOf(loops));
+    }
+  }
 
   @Override
   public Class<LoopController> getTestClass() {
