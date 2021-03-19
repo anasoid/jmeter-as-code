@@ -22,6 +22,7 @@ import java.util.Arrays;
 import java.util.List;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmeter.as.code.core.wrapper.jmc.threads.OnSampleError;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.control.GenericControllerWrapper;
@@ -46,17 +47,17 @@ public abstract class AbstractThreadGroupWrapper<
   /** Action to be taken after a Sampler error. */
   @JmcProperty(AbstractThreadGroup.ON_SAMPLE_ERROR)
   @Builder.Default
-  private @Getter OnSampleError onSampleError = OnSampleError.ON_SAMPLE_ERROR_CONTINUE;
+  private @Getter @Setter OnSampleError onSampleError = OnSampleError.ON_SAMPLE_ERROR_CONTINUE;
 
   /** Same user on each iteration. */
   @JmcProperty(AbstractThreadGroup.IS_SAME_USER_ON_NEXT_ITERATION)
   @Builder.Default
-  private @Getter Boolean isSameUserOnNextIteration = true;
+  private @Getter @Setter Boolean isSameUserOnNextIteration = true;
 
   /** Number of Threads (users). */
   @JmcProperty(value = AbstractThreadGroup.NUM_THREADS)
   @Builder.Default
-  private @Getter String numThreadsAsVar = "1";
+  private @Getter @Setter String numThreadsAsVar = "1";
 
   /** the sampler controller. */
   @JmcProperty(AbstractThreadGroup.MAIN_CONTROLLER)

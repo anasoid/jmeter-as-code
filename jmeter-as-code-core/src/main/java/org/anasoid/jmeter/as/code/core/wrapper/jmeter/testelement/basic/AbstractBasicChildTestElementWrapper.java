@@ -22,6 +22,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcSkipDefault;
@@ -39,15 +40,17 @@ public abstract class AbstractBasicChildTestElementWrapper<T extends AbstractTes
   @XStreamAsAttribute
   @XStreamAlias("testname")
   @Getter
+  @Setter
   private String name;
 
   /** Comments. */
   @JmcProperty(TestElement.COMMENTS)
   @Getter
+  @Setter
   @Builder.Default
   @JmcSkipDefault("")
   private String comment = "";
 
   /** enabled. */
-  @XStreamAsAttribute @Builder.Default @Getter private boolean enabled = true;
+  @XStreamAsAttribute @Builder.Default @Getter @Setter private boolean enabled = true;
 }

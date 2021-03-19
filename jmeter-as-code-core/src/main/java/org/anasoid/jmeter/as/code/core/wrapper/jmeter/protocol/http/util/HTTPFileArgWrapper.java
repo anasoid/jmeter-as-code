@@ -20,6 +20,7 @@ package org.anasoid.jmeter.as.code.core.wrapper.jmeter.protocol.http.util;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.basic.AbstractBasicTestElementWrapper;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcAsAttribute;
@@ -42,14 +43,16 @@ public class HTTPFileArgWrapper extends AbstractBasicTestElementWrapper<HTTPFile
   }
 
   /** File path. */
-  @XStreamOmitField @Getter private String path;
+  @XStreamOmitField @Getter @Setter private String path;
   /** Parameter name. */
   @JmcProperty("File.paramname")
   @Getter
+  @Setter
   private String name;
   /** MIME Type?. */
   @JmcProperty("File.mimetype")
   @Getter
+  @Setter
   private String mimeType;
 
   @JmcProperty("File.path")

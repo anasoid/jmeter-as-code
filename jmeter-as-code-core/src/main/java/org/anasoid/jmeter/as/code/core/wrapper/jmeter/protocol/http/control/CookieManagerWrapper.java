@@ -24,6 +24,7 @@ import java.util.Arrays;
 import java.util.List;
 import lombok.Builder.Default;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmeter.as.code.core.wrapper.jmc.http.client.config.CookiePolicy;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.config.ConfigTestElementWrapper;
@@ -46,16 +47,19 @@ public class CookieManagerWrapper extends ConfigTestElementWrapper<CookieManager
 
   @JmcProperty("CookieManager.clearEachIteration")
   @Getter
+  @Setter
   @Default
   private Boolean clearEachIteration = false;
 
   @JmcProperty("CookieManager.controlledByThreadGroup")
   @Getter
+  @Setter
   @Default
   private Boolean controlledByThreadGroup = false;
 
   @JmcProperty("CookieManager.policy")
   @Getter
+  @Setter
   @Default
   @JmcSkipDefault("standard")
   private CookiePolicy policy = CookiePolicy.STANDARD;
