@@ -19,11 +19,20 @@
 package org.anasoid.jmeter.as.code.core.wrapper.jmeter.threads;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import org.anasoid.jmeter.as.code.core.AbstractJmcTest;
+import org.anasoid.jmeter.as.code.core.test.utils.SetterTestUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class ThreadGroupWrapperTest extends AbstractJmcTest {
+
+  @Test
+  void testSetter()
+      throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    SetterTestUtils.testSetter(ThreadGroupWrapper.builder().build());
+  }
+
   @Test
   void testParam() throws IOException {
 

@@ -51,17 +51,20 @@ public class TestPlanWrapper extends AbstractTestElementWrapper<TestPlan>
 
   /** Functional Test Mode (i.e. save Response Data and Sampler Data) */
   @JmcProperty("TestPlan.functional_mode")
-  @Getter @Setter
+  @Getter
+  @Setter
   private boolean functionalMode;
 
   /** Run Thread Groups consecutively (i.e. one at a time). */
   @JmcProperty("TestPlan.serialize_threadgroups")
-  @Getter @Setter
+  @Getter
+  @Setter
   private boolean serialized;
   /** Run tearDown Thread Groups after shutdown of main threads. */
   @JmcProperty("TestPlan.tearDown_on_shutdown")
   @JmcSkipDefault("false")
-  @Getter @Setter
+  @Getter
+  @Setter
   @Default
   private boolean tearDownOnShutdown = true;
 
@@ -70,7 +73,8 @@ public class TestPlanWrapper extends AbstractTestElementWrapper<TestPlan>
    * parts must be separated with CLASSPATH_SEPARATOR.
    */
   @JmcProperty("TestPlan.user_define_classpath")
-  @Getter @Setter
+  @Getter
+  @Setter
   @Default
   private String testPlanClasspath = "";
 
@@ -84,7 +88,6 @@ public class TestPlanWrapper extends AbstractTestElementWrapper<TestPlan>
       testclass = Arguments.class)
   @Builder.Default
   @Getter
-  @Setter
   @JmcEmptyAllowed
   private List<ArgumentWrapper> arguments = new ArrayList<>();
 

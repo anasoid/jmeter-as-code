@@ -20,9 +20,11 @@ package org.anasoid.jmeter.as.code.core.wrapper.jmeter.samplers;
 
 import java.io.IOException;
 import java.io.StringWriter;
+import java.lang.reflect.InvocationTargetException;
 import org.anasoid.jmeter.as.code.core.AbstractJmcTest;
 import org.anasoid.jmeter.as.code.core.application.ApplicationTest;
 import org.anasoid.jmeter.as.code.core.application.ApplicationTestUtilsForTesting;
+import org.anasoid.jmeter.as.code.core.test.utils.SetterTestUtils;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.protocol.http.util.HTTPArgumentWrapper;
 import org.anasoid.jmeter.as.code.core.xstream.exceptions.ConversionIllegalStateException;
 import org.junit.jupiter.api.Assertions;
@@ -37,6 +39,12 @@ class HTTPSamplerBaseWrapperTest extends AbstractJmcTest {
 
   private static final String ARG = "arg";
   private static final String VAL = "value";
+
+  @Test
+  void testSetter()
+      throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    SetterTestUtils.testSetter(HTTPSamplerProxyWrapper.builder().build());
+  }
 
   @Test
   void testFollowRedirectsDefaultTrue() throws IOException {

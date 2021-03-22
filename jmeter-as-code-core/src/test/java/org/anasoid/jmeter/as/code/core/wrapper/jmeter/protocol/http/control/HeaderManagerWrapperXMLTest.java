@@ -19,8 +19,11 @@
 package org.anasoid.jmeter.as.code.core.wrapper.jmeter.protocol.http.control;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import org.anasoid.jmeter.as.code.core.AbstractJmcTest;
+import org.anasoid.jmeter.as.code.core.test.utils.SetterTestUtils;
 import org.anasoid.jmeter.as.code.core.test.utils.xmlunit.JmcXmlComparator;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.protocol.http.config.HttpDefaultsWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.samplers.HTTPSamplerProxyWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestPlanWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.threads.ThreadGroupWrapper;
@@ -34,6 +37,12 @@ class HeaderManagerWrapperXMLTest extends AbstractJmcTest {
       "org/anasoid/jmeter/as/code/core/wrapper/jmeter/protocol/http/control";
 
   private static final String NODE_NAME = "HeaderManager";
+
+  @Test
+  void testSetter()
+      throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    SetterTestUtils.testSetter(HeaderManagerWrapper.builder().build());
+  }
 
   @Test
   void testDefault() throws IOException {

@@ -19,7 +19,9 @@
 package org.anasoid.jmeter.as.code.core.wrapper.jmeter.control;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import org.anasoid.jmeter.as.code.core.AbstractJmcTest;
+import org.anasoid.jmeter.as.code.core.test.utils.SetterTestUtils;
 import org.anasoid.jmeter.as.code.core.test.utils.xmlunit.JmcXmlComparator;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestPlanWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.threads.ThreadGroupWrapper;
@@ -33,6 +35,12 @@ class RandomOrderControllerXmlWrapperTest extends AbstractJmcTest {
       "org/anasoid/jmeter/as/code/core/wrapper/jmeter/control";
 
   private static final String NODE_NAME = "RandomOrderController";
+
+  @Test
+  void testSetter()
+      throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    SetterTestUtils.testSetter(RandomOrderControllerWrapper.builder().build());
+  }
 
   @Test
   void testDefault() throws IOException {
