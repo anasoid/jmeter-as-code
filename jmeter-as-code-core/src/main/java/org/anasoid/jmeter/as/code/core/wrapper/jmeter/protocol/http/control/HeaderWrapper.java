@@ -21,6 +21,7 @@ package org.anasoid.jmeter.as.code.core.wrapper.jmeter.protocol.http.control;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import lombok.Builder.Default;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.basic.AbstractBasicTestElementWrapper;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcAsAttribute;
@@ -40,12 +41,13 @@ public class HeaderWrapper extends AbstractBasicTestElementWrapper<Header> {
 
   @JmcProperty("Header.name")
   @Getter
+  @Setter
   @Default
   private String name = "";
 
   @JmcProperty("Header.value")
   @Default
-  private @Getter String value = "";
+  private @Getter @Setter String value = "";
 
   @Override
   public Class<Header> getTestClass() {

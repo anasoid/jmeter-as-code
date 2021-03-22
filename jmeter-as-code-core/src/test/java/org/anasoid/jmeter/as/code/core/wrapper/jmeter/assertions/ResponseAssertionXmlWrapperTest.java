@@ -19,11 +19,14 @@
 package org.anasoid.jmeter.as.code.core.wrapper.jmeter.assertions;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import org.anasoid.jmeter.as.code.core.AbstractJmcTest;
+import org.anasoid.jmeter.as.code.core.test.utils.SetterTestUtils;
 import org.anasoid.jmeter.as.code.core.test.utils.xmlunit.JmcXmlComparator;
 import org.anasoid.jmeter.as.code.core.wrapper.jmc.assertions.AssertionField;
 import org.anasoid.jmeter.as.code.core.wrapper.jmc.assertions.MatchingRule;
 import org.anasoid.jmeter.as.code.core.wrapper.jmc.scope.Scope;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.control.RandomOrderControllerWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestPlanWrapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -35,6 +38,12 @@ class ResponseAssertionXmlWrapperTest extends AbstractJmcTest {
       "org/anasoid/jmeter/as/code/core/wrapper/jmeter/assertions";
 
   private static final String NODE_NAME = "ResponseAssertion";
+
+  @Test
+  void testSetter()
+      throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    SetterTestUtils.testSetter(ResponseAssertionWrapper.builder().build());
+  }
 
   @Test
   void testDefault() throws IOException {

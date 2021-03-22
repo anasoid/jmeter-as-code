@@ -22,6 +22,7 @@ import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import lombok.Builder.Default;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.basic.AbstractBasicTestElementWrapper;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcAsAttribute;
@@ -40,30 +41,35 @@ public class CookieWrapper extends AbstractBasicTestElementWrapper<Cookie> {
 
   @XStreamOmitField private static final long serialVersionUID = -4068882490947271216L;
 
-  @XStreamAsAttribute @Getter @JmcMandatory private String name;
+  @XStreamAsAttribute @Getter @Setter @JmcMandatory private String name;
 
   @JmcProperty("Cookie.value")
   @Getter
+  @Setter
   @JmcMandatory
   private String value;
 
   @JmcProperty("Cookie.domain")
   @Getter
+  @Setter
   @Default
   private String domain = "";
 
   @JmcProperty("Cookie.path")
   @Getter
+  @Setter
   @Default
   private String path = "";
 
   @JmcProperty("Cookie.secure")
   @Getter
+  @Setter
   @Default
   private Boolean secure = false;
 
   @JmcProperty(value = "Cookie.expires", type = Long.class)
   @Getter
+  @Setter
   @Default
   private Integer expires = 0;
 

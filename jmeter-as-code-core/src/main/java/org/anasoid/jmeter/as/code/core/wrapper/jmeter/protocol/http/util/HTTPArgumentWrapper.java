@@ -20,6 +20,7 @@ package org.anasoid.jmeter.as.code.core.wrapper.jmeter.protocol.http.util;
 
 import lombok.Builder.Default;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.config.AbstractArgumentWrapper;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
@@ -37,16 +38,19 @@ public class HTTPArgumentWrapper extends AbstractArgumentWrapper<HTTPArgument> {
   /** URL Encode. */
   @JmcProperty("HTTPArgument.always_encode")
   @Getter
+  @Setter
   @Default
   private Boolean alwaysEncoded = Boolean.FALSE;
   /** Include equals. */
   @JmcProperty("HTTPArgument.use_equals")
   @Getter
+  @Setter
   @Default
   private Boolean useEquals = true;
   /** Content-Type. */
   @JmcProperty("HTTPArgument.content_type")
   @Getter
+  @Setter
   private String contentType;
 
   @Override

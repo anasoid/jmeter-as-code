@@ -19,8 +19,10 @@
 package org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import org.anasoid.jmeter.as.code.core.AbstractJmcTest;
+import org.anasoid.jmeter.as.code.core.test.utils.SetterTestUtils;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.config.ArgumentWrapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -29,6 +31,12 @@ class TestPlanWrapperTest extends AbstractJmcTest {
 
   private static final String ARG_NAME = "uservar1";
   private static final String ARG_VALUE = "uservar1-value";
+
+  @Test
+  void testSetter()
+      throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    SetterTestUtils.testSetter(TestPlanWrapper.builder().build());
+  }
 
   @Test
   void testArgumentsAddOne() throws IOException {

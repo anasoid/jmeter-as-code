@@ -19,7 +19,9 @@
 package org.anasoid.jmeter.as.code.core.wrapper.jmeter.protocol.http.util;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import org.anasoid.jmeter.as.code.core.AbstractJmcTest;
+import org.anasoid.jmeter.as.code.core.test.utils.SetterTestUtils;
 import org.anasoid.jmeter.as.code.core.test.utils.xmlunit.JmcXmlComparator;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.samplers.HTTPSamplerProxyWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestPlanWrapper;
@@ -34,6 +36,12 @@ class HTTPFileArgWrapperXMLTest extends AbstractJmcTest {
       "org/anasoid/jmeter/as/code/core/wrapper/jmeter/protocol/http/utils";
 
   private static final String NODE_NAME = "elementProp";
+
+  @Test
+  void testSetter()
+      throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    SetterTestUtils.testSetter(HTTPFileArgWrapper.builder().build());
+  }
 
   @Test
   void testDefault() throws IOException {

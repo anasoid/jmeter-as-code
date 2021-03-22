@@ -19,6 +19,7 @@
 package org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement;
 
 import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmeter.as.code.core.wrapper.jmc.scope.Scope;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
@@ -37,7 +38,7 @@ public abstract class AbstractScopedAssertionWrapper<
     extends AbstractScopedTestElementWrapper<T, G> implements AssertionWrapper<T> {
 
   @JmcProperty("Assertion.scope")
-  @Getter
+  @Getter @Setter
   @JmcSkipDefault("all")
   private Scope scope;
 }

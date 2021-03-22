@@ -19,7 +19,9 @@
 package org.anasoid.jmeter.as.code.core.wrapper.jmeter.control;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import org.anasoid.jmeter.as.code.core.AbstractJmcTest;
+import org.anasoid.jmeter.as.code.core.test.utils.SetterTestUtils;
 import org.anasoid.jmeter.as.code.core.test.utils.xmlunit.JmcXmlComparator;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestPlanWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.threads.ThreadGroupWrapper;
@@ -28,6 +30,12 @@ import org.junit.jupiter.api.Test;
 import org.xmlunit.diff.Diff;
 
 class OnceOnlyControllerXmlWrapperTest extends AbstractJmcTest {
+
+  @Test
+  void testSetter()
+      throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    SetterTestUtils.testSetter(OnceOnlyControllerWrapper.builder().build());
+  }
 
   private static final String PARENT_PATH =
       "org/anasoid/jmeter/as/code/core/wrapper/jmeter/control";

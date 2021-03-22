@@ -40,6 +40,8 @@ import org.apache.jmeter.threads.gui.ThreadGroupGui;
 @XStreamAlias("ThreadGroup")
 public class ThreadGroupWrapper extends AbstractThreadGroupWrapper<ThreadGroup, ThreadGroupGui> {
 
+  @XStreamOmitField private static final long serialVersionUID = -5025050304929170782L;
+
   /** Specify Thread lifetime. */
   @JmcProperty(ThreadGroup.SCHEDULER)
   @Default
