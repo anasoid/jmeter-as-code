@@ -57,6 +57,12 @@ class ScriptWrapper {
     return this;
   }
 
+  /** getTestPlan. */
+  protected TestElementWrapper<?> getTestPlan() {
+
+    return testPlan.get(0);
+  }
+
   public String getVersion() {
     return version;
   }
@@ -67,9 +73,5 @@ class ScriptWrapper {
 
   public String getProperties() {
     return properties;
-  }
-
-  public List<TestElementWrapper<?>> getTestPlan() { // NOSONAR
-    return testPlan;
   }
 }

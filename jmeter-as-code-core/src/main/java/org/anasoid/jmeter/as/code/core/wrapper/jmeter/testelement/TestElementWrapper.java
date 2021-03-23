@@ -20,6 +20,7 @@ package org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcAsAttribute;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcMethodAlias;
 import org.apache.jmeter.testelement.TestElement;
@@ -44,4 +45,10 @@ public interface TestElementWrapper<T extends TestElement> extends Serializable 
    * @return list of child.
    */
   List<TestElementWrapper<?>> getChilds();
+
+  /**
+   * Get Tags. set of tags to categorize eleemnt, this field are not part of Jmeter and will not be
+   * persisted.
+   */
+  Set<String> getTags();
 }
