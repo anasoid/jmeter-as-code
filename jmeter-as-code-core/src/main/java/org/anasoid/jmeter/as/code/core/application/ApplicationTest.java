@@ -29,9 +29,15 @@ import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import org.anasoid.jmeter.as.code.core.application.interceptors.PrepareInterceptor;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestElementWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestPlanWrapper;
 import org.anasoid.jmeter.as.code.core.xstream.exceptions.ConversionException;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.jmeter.engine.StandardJMeterEngine;
 import org.apache.jmeter.save.SaveService;
 import org.apache.jmeter.util.JMeterUtils;
@@ -48,6 +54,9 @@ public class ApplicationTest {
 
   private final TestPlanWrapper testPlanWrapper;
   private final TestElementWrapper<?> testElement;
+
+  private final List<PrepareInterceptor> prepareInterceptors;
+
   private boolean testMode;
 
   static {
@@ -91,18 +100,42 @@ public class ApplicationTest {
     }
   }
 
-  @SuppressWarnings("PMD.NullAssignment")
+  /**
+   * create application test.
+   *
+   * @param testPlanWrapper test plan.
+   */
   public ApplicationTest(TestPlanWrapper testPlanWrapper) {
+    this(testPlanWrapper, new ArrayList<>());
+  }
+
+  /**
+   * create application test.
+   *
+   * @param testPlanWrapper test plan.
+   * @param prepareInterceptors interceptors.
+   */
+  @SuppressWarnings("PMD.NullAssignment")
+  public ApplicationTest(
+      TestPlanWrapper testPlanWrapper, List<PrepareInterceptor> prepareInterceptors) {
     this.testPlanWrapper = testPlanWrapper;
     this.testElement = null;
+    this.prepareInterceptors = prepareInterceptors;
   }
 
   /** Only for Test. */
   @SuppressWarnings("PMD.NullAssignment")
-  protected ApplicationTest(TestElementWrapper<?> testElement) {
+  protected ApplicationTest(
+      TestElementWrapper<?> testElement, List<PrepareInterceptor> prepareInterceptors) {
     this.testElement = testElement;
     this.testPlanWrapper = null;
+    this.prepareInterceptors = prepareInterceptors;
     testMode = true;
+  }
+
+  /** Only for Test. */
+  protected ApplicationTest(TestElementWrapper<?> testElement) {
+    this(testElement, new ArrayList<>());
   }
 
   /**
@@ -120,7 +153,7 @@ public class ApplicationTest {
     if (testMode) {
       return testElement;
     } else {
-      return script.getTestPlan().get(0);
+      return script.getTestPlan();
     }
   }
 
@@ -146,8 +179,32 @@ public class ApplicationTest {
         throw new ConversionException(e);
       }
     }
-
+    prepare(script);
     return script;
+  }
+
+  protected void prepare(ScriptWrapper script) {
+    Set<TestElementWrapper<?>> history = new HashSet<>();
+    if (CollectionUtils.isNotEmpty(prepareInterceptors)) {
+      prepare(script.getTestPlan(), history);
+    }
+  }
+
+  private void prepare(TestElementWrapper<?> testElement, Set<TestElementWrapper<?>> history) {
+    if (!history.contains(testElement)) {
+
+      for (PrepareInterceptor interceptor : prepareInterceptors) {
+        if (interceptor.support(testElement)) {
+          interceptor.prepare(testElement);
+        }
+      }
+      history.add(testElement);
+      if (CollectionUtils.isNotEmpty(testElement.getChilds())) {
+        for (TestElementWrapper<?> childElement : testElement.getChilds()) {
+          prepare(childElement, history);
+        }
+      }
+    }
   }
 
   private TestPlanWrapper clone(TestPlanWrapper in) throws IOException, ClassNotFoundException {
