@@ -25,6 +25,7 @@ import java.util.List;
 import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
+import org.anasoid.jmeter.as.code.core.application.validator.annotations.JmcChildrenTypes;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.config.ConfigTestElementWrapper;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcCollection;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcEmptyAllowed;
@@ -37,6 +38,7 @@ import org.apache.jmeter.protocol.http.gui.HeaderPanel;
  * @see HeaderManager
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@JmcChildrenTypes(type = {HeaderWrapper.class})
 public class HeaderManagerWrapper extends ConfigTestElementWrapper<HeaderManager, HeaderPanel> {
 
   @XStreamOmitField private static final long serialVersionUID = 8482403319301067878L;

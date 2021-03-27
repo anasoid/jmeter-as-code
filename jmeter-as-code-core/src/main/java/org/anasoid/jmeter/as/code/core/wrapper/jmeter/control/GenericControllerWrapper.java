@@ -21,6 +21,7 @@ package org.anasoid.jmeter.as.code.core.wrapper.jmeter.control;
 import java.util.Arrays;
 import java.util.List;
 import lombok.experimental.SuperBuilder;
+import org.anasoid.jmeter.as.code.core.application.validator.annotations.JmcChildrenTypes;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.gui.JMeterGUIWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.samplers.AbstractSamplerWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AbstractTestElementWrapper;
@@ -34,6 +35,7 @@ import org.apache.jmeter.control.gui.AbstractControllerGui;
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 @SuppressWarnings("PMD.AbstractClassWithoutAnyMethod")
+@JmcChildrenTypes(type = {AbstractSamplerWrapper.class})
 public abstract class GenericControllerWrapper<
         T extends GenericController, G extends AbstractControllerGui>
     extends AbstractTestElementWrapper<T> implements JMeterGUIWrapper<G> {

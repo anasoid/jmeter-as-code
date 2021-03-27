@@ -25,6 +25,7 @@ import java.util.Collection;
 import java.util.List;
 import lombok.Builder;
 import lombok.experimental.SuperBuilder;
+import org.anasoid.jmeter.as.code.core.application.validator.annotations.JmcChildrenTypes;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.config.ConfigTestElementWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AssertionWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestElementWrapper;
@@ -32,6 +33,7 @@ import org.apache.jmeter.testelement.AbstractTestElement;
 
 /** Class represent a node with Children. */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@JmcChildrenTypes(type = {AssertionWrapper.class, ConfigTestElementWrapper.class})
 public abstract class AbstractBasicParentTestElementWrapper<T extends AbstractTestElement>
     extends AbstractBasicTestElementWrapper<T> {
 
