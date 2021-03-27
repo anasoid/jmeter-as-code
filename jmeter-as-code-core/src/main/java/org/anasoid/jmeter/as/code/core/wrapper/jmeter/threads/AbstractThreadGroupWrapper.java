@@ -24,6 +24,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import org.anasoid.jmeter.as.code.core.application.validator.annotations.JmcChildrenTypes;
 import org.anasoid.jmeter.as.code.core.wrapper.jmc.threads.OnSampleError;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.control.GenericControllerWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.gui.JMeterGUIWrapper;
@@ -40,6 +41,7 @@ import org.apache.jmeter.threads.gui.AbstractThreadGroupGui;
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 @SuppressWarnings("PMD.AbstractClassWithoutAnyMethod")
+@JmcChildrenTypes(type = {GenericControllerWrapper.class, AbstractSamplerWrapper.class})
 public abstract class AbstractThreadGroupWrapper<
         T extends AbstractThreadGroup, G extends AbstractThreadGroupGui>
     extends AbstractTestElementWrapper<T> implements JMeterGUIWrapper<G> {

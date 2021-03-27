@@ -34,6 +34,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import org.anasoid.jmeter.as.code.core.application.interceptors.PrepareInterceptor;
+import org.anasoid.jmeter.as.code.core.application.validator.NodeValidatorManager;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestElementWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestPlanWrapper;
 import org.anasoid.jmeter.as.code.core.xstream.exceptions.ConversionException;
@@ -180,14 +181,12 @@ public class ApplicationTest {
       }
     }
     prepare(script);
+    validate(script);
     return script;
   }
 
-  protected void prepare(ScriptWrapper script) {
-    Set<TestElementWrapper<?>> history = new HashSet<>();
-    if (CollectionUtils.isNotEmpty(prepareInterceptors)) {
-      prepare(script.getTestPlan(), history);
-    }
+  protected void validate(ScriptWrapper script) {
+    NodeValidatorManager.validate(script.getTestPlan());
   }
 
   private void prepare(TestElementWrapper<?> testElement, Set<TestElementWrapper<?>> history) {
@@ -204,6 +203,13 @@ public class ApplicationTest {
           prepare(childElement, history);
         }
       }
+    }
+  }
+
+  protected void prepare(ScriptWrapper script) {
+    Set<TestElementWrapper<?>> history = new HashSet<>();
+    if (CollectionUtils.isNotEmpty(prepareInterceptors)) {
+      prepare(script.getTestPlan(), history);
     }
   }
 

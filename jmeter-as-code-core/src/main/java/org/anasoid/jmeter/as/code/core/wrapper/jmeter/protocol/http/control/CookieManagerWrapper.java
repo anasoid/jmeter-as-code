@@ -26,6 +26,7 @@ import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import org.anasoid.jmeter.as.code.core.application.validator.annotations.JmcChildrenTypes;
 import org.anasoid.jmeter.as.code.core.wrapper.jmc.http.client.config.CookiePolicy;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.config.ConfigTestElementWrapper;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcCollection;
@@ -41,6 +42,7 @@ import org.apache.jmeter.protocol.http.gui.CookiePanel;
  * @see CookieManager
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@JmcChildrenTypes(type = {CookieWrapper.class})
 public class CookieManagerWrapper extends ConfigTestElementWrapper<CookieManager, CookiePanel> {
 
   @XStreamOmitField private static final long serialVersionUID = 8482403319301067878L;
