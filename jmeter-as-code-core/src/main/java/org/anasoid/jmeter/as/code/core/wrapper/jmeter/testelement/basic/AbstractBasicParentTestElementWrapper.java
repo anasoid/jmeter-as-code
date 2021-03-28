@@ -29,6 +29,7 @@ import org.anasoid.jmeter.as.code.core.application.validator.annotations.JmcChil
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.config.ConfigTestElementWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AssertionWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestElementWrapper;
+import org.anasoid.jmeter.as.code.core.wrapper.template.JmcTemplate;
 import org.apache.jmeter.testelement.AbstractTestElement;
 
 /** Class represent a node with Children. */
@@ -65,9 +66,22 @@ public abstract class AbstractBasicParentTestElementWrapper<T extends AbstractTe
       return self();
     }
 
-    /** Add Assertion. */
+    /**
+     * Add Assertion.
+     *
+     * @param assertion assertion.
+     */
     public B addAssertion(AssertionWrapper<?> assertion) {
       return addAssertions(Arrays.asList(assertion));
+    }
+
+    /**
+     * Add Assertion.
+     *
+     * @param assertion template assertion.
+     */
+    public <E extends AssertionWrapper<?>> B addAssertion(JmcTemplate<E> assertion) {
+      return addAssertion(assertion.generate());
     }
 
     /** Add Assertions as child in tree. */
@@ -81,6 +95,15 @@ public abstract class AbstractBasicParentTestElementWrapper<T extends AbstractTe
     /** Add configElement as child in tree. */
     public B addConfig(ConfigTestElementWrapper<?, ?> config) { // NOSONAR
       return addConfigs(Arrays.asList(config));
+    }
+
+    /**
+     * Add configElement as child in tree.
+     *
+     * @param config template config.
+     */
+    public <E extends ConfigTestElementWrapper<?, ?>> B addConfig(JmcTemplate<E> config) {
+      return addConfig(config.generate());
     }
 
     /** Add configElements as child in tree. */

@@ -30,6 +30,7 @@ import org.anasoid.jmeter.as.code.core.wrapper.jmeter.control.GenericControllerW
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.gui.JMeterGUIWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.samplers.AbstractSamplerWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AbstractTestElementWrapper;
+import org.anasoid.jmeter.as.code.core.wrapper.template.JmcTemplate;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
 import org.apache.jmeter.threads.AbstractThreadGroup;
 import org.apache.jmeter.threads.gui.AbstractThreadGroupGui;
@@ -89,6 +90,11 @@ public abstract class AbstractThreadGroupWrapper<
       return addSamplers(Arrays.asList(sampler));
     }
 
+    /** Add sampler. */
+    public <E extends AbstractSamplerWrapper<?, ?>> B addSampler(JmcTemplate<E> template) {
+      return addSampler(template.generate());
+    }
+
     /** Add samplers as child in tree. */
     public B addSamplers(List<AbstractSamplerWrapper<?, ?>> samplers) { // NOSONAR
       for (AbstractSamplerWrapper<?, ?> sampler : samplers) {
@@ -100,6 +106,11 @@ public abstract class AbstractThreadGroupWrapper<
     /** Add Controller. */
     public B addController(GenericControllerWrapper<?, ?> controller) { // NOSONAR
       return addControllers(Arrays.asList(controller));
+    }
+
+    /** Add Controller. */
+    public <E extends GenericControllerWrapper<?, ?>> B addControllers(JmcTemplate<E> template) {
+      return addController(template.generate());
     }
 
     /** Add Controllers as child in tree. */

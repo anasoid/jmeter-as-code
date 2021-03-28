@@ -29,6 +29,7 @@ import lombok.experimental.SuperBuilder;
 import org.anasoid.jmeter.as.code.core.application.validator.annotations.JmcChildrenTypes;
 import org.anasoid.jmeter.as.code.core.wrapper.jmc.http.client.config.CookiePolicy;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.config.ConfigTestElementWrapper;
+import org.anasoid.jmeter.as.code.core.wrapper.template.JmcTemplate;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcCollection;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcEmptyAllowed;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
@@ -104,6 +105,11 @@ public class CookieManagerWrapper extends ConfigTestElementWrapper<CookieManager
     /** Add cookie. */
     public B addCookie(CookieWrapper cookies) {
       return this.addCookies(Arrays.asList(cookies));
+    }
+
+    /** Add cookie. */
+    public <T extends CookieWrapper> B addCookie(JmcTemplate<T> template) {
+      return addCookie(template.generate());
     }
 
     /**
