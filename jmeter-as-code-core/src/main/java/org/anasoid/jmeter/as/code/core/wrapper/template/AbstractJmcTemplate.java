@@ -25,25 +25,18 @@ import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.basic.Abstract
  * Abstract template to generate test element.
  *
  * @param <W> testElement.
- * @param <B> testElement Builder.
  */
-public abstract class AbstractJmcTemplate<
-        W extends AbstractBasicTestElementWrapper<?>,
-        B extends AbstractBasicTestElementWrapperBuilder<?, W, B>>
+public abstract class AbstractJmcTemplate<W extends AbstractBasicTestElementWrapper<?>>
     implements JmcTemplate<W> {
 
-  protected abstract B init();
+  protected abstract AbstractBasicTestElementWrapperBuilder<?, W, ?> init();
 
-  protected void prepare(B builder) {}
-
-  protected W transform(W in) {
-    return in;
-  }
+  protected void prepare(AbstractBasicTestElementWrapperBuilder<?, W, ?> builder) {}
 
   @Override
-  public W generate() {
-    B b = init();
+  public final W generate() {
+    AbstractBasicTestElementWrapperBuilder<?, W, ?> b = init();
     prepare(b);
-    return transform(b.build());
+    return b.build();
   }
 }
