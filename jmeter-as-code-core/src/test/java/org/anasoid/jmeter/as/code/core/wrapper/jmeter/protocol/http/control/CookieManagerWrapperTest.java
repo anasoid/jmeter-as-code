@@ -25,6 +25,9 @@ import org.anasoid.jmeter.as.code.core.AbstractJmcTest;
 import org.anasoid.jmeter.as.code.core.application.ApplicationTest;
 import org.anasoid.jmeter.as.code.core.application.ApplicationTestUtilsForTesting;
 import org.anasoid.jmeter.as.code.core.test.utils.SetterTestUtils;
+import org.anasoid.jmeter.as.code.core.wrapper.JmcWrapperBuilder;
+import org.anasoid.jmeter.as.code.core.wrapper.template.AbstractJmcTemplate;
+import org.anasoid.jmeter.as.code.core.wrapper.test.ParentTestElementWrapperTesting;
 import org.anasoid.jmeter.as.code.core.xstream.exceptions.ConversionMandatoryException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -74,6 +77,31 @@ class CookieManagerWrapperTest extends AbstractJmcTest {
       Assertions.fail();
     } catch (ConversionMandatoryException e) {
       // Nothing
+    }
+  }
+
+  @Test
+  void testAddConfigTemplate() throws IOException {
+
+    // Thread Group
+    ParentTestElementWrapperTesting parentTestElementWrapperTesting =
+        ParentTestElementWrapperTesting.builder()
+            .withName("Parent")
+            .withField("field")
+            .addConfig(new MyConfig())
+            .build();
+
+    Assertions.assertEquals(
+        "Cookie Manager",
+        ((CookieManagerWrapper) parentTestElementWrapperTesting.getChilds().get(0)).getName());
+  }
+
+  class MyConfig extends AbstractJmcTemplate<CookieManagerWrapper> {
+
+    @Override
+    protected JmcWrapperBuilder<CookieManagerWrapper> init() {
+      return (JmcWrapperBuilder<CookieManagerWrapper>)
+          CookieManagerWrapper.builder().withName("Cookie Manager");
     }
   }
 }

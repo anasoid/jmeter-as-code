@@ -31,6 +31,7 @@ import org.anasoid.jmeter.as.code.core.application.validator.annotations.JmcChil
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.config.ArgumentWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.gui.JMeterGUIWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.threads.AbstractThreadGroupWrapper;
+import org.anasoid.jmeter.as.code.core.wrapper.template.JmcTemplate;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcCollection;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcEmptyAllowed;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
@@ -116,6 +117,15 @@ public class TestPlanWrapper extends AbstractTestElementWrapper<TestPlan>
      */
     public B addThread(AbstractThreadGroupWrapper<?, ?> child) { // NOSONAR
       return super.withChild(child);
+    }
+
+    /**
+     * Add ThreadGroup as child in tree.
+     *
+     * @param template ThreadGroup template.
+     */
+    public <T extends AbstractThreadGroupWrapper<?, ?>> B addThread(JmcTemplate<T> template) {
+      return addThread(template.generate());
     }
 
     /** Hide Lombok function. */

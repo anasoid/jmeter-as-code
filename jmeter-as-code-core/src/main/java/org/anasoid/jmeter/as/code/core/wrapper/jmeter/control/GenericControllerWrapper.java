@@ -25,6 +25,7 @@ import org.anasoid.jmeter.as.code.core.application.validator.annotations.JmcChil
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.gui.JMeterGUIWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.samplers.AbstractSamplerWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AbstractTestElementWrapper;
+import org.anasoid.jmeter.as.code.core.wrapper.template.JmcTemplate;
 import org.apache.jmeter.control.GenericController;
 import org.apache.jmeter.control.gui.AbstractControllerGui;
 
@@ -52,6 +53,11 @@ public abstract class GenericControllerWrapper<
     /** Add sampler. */
     public B addSampler(AbstractSamplerWrapper<?, ?> sampler) { // NOSONAR
       return addSamplers(Arrays.asList(sampler));
+    }
+
+    /** Add sampler. */
+    public <E extends AbstractSamplerWrapper<?, ?>> B addSampler(JmcTemplate<E> template) {
+      return addSampler(template.generate());
     }
 
     /** Add samplers as child in tree. */

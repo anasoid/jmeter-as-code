@@ -18,10 +18,13 @@
 
 package org.anasoid.jmeter.as.code.core.wrapper.jmeter.threads;
 
-import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import org.anasoid.jmeter.as.code.core.AbstractJmcTest;
 import org.anasoid.jmeter.as.code.core.test.utils.SetterTestUtils;
+import org.anasoid.jmeter.as.code.core.wrapper.JmcWrapperBuilder;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.control.SimpleControllerWrapper;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.samplers.HTTPSamplerProxyWrapper;
+import org.anasoid.jmeter.as.code.core.wrapper.template.AbstractJmcTemplate;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -34,11 +37,51 @@ class ThreadGroupWrapperTest extends AbstractJmcTest {
   }
 
   @Test
-  void testParam() throws IOException {
+  void testParam() {
 
     ThreadGroupWrapper threadGroupWrapper =
         ThreadGroupWrapper.builder().withLoops(10).withContinueForever(true).build();
     Assertions.assertTrue(threadGroupWrapper.getContinueForever());
     Assertions.assertEquals("10", threadGroupWrapper.getLoopsAsVar());
+  }
+
+  @Test
+  void testAddSamplerTemplate() {
+
+    // Thread Group
+    ThreadGroupWrapper threadGroupWrapper =
+        ThreadGroupWrapper.builder().withName("Parent").addSampler(new MySampler()).build();
+
+    Assertions.assertEquals(
+        "sampler", ((HTTPSamplerProxyWrapper) threadGroupWrapper.getChilds().get(0)).getName());
+  }
+
+  @Test
+  void testAddControllerTemplate() {
+
+    // Thread Group
+    ThreadGroupWrapper threadGroupWrapper =
+        ThreadGroupWrapper.builder().withName("Parent").addController(new MyController()).build();
+
+    Assertions.assertEquals(
+        "controller", ((SimpleControllerWrapper) threadGroupWrapper.getChilds().get(0)).getName());
+  }
+
+  class MySampler extends AbstractJmcTemplate<HTTPSamplerProxyWrapper> {
+
+    @Override
+    protected JmcWrapperBuilder<HTTPSamplerProxyWrapper> init() {
+      return (JmcWrapperBuilder<HTTPSamplerProxyWrapper>)
+          HTTPSamplerProxyWrapper.builder().withName("sampler");
+    }
+  }
+
+  class MyController extends AbstractJmcTemplate<SimpleControllerWrapper> {
+
+    @Override
+    protected JmcWrapperBuilder<SimpleControllerWrapper> init() {
+      return (JmcWrapperBuilder<SimpleControllerWrapper>)
+          SimpleControllerWrapper.builder().withName("controller");
+    }
   }
 }

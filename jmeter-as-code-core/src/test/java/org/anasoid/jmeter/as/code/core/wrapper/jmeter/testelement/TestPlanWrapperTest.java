@@ -23,7 +23,11 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import org.anasoid.jmeter.as.code.core.AbstractJmcTest;
 import org.anasoid.jmeter.as.code.core.test.utils.SetterTestUtils;
+import org.anasoid.jmeter.as.code.core.wrapper.JmcWrapperBuilder;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.config.ArgumentWrapper;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.threads.ThreadGroupWrapper;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.threads.ThreadGroupWrapper.ThreadGroupWrapperBuilder;
+import org.anasoid.jmeter.as.code.core.wrapper.template.AbstractJmcTemplate;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -69,5 +73,33 @@ class TestPlanWrapperTest extends AbstractJmcTest {
         TestPlanWrapper.builder().addArgument(ARG_NAME, ARG_VALUE).build();
     Assertions.assertEquals(ARG_NAME, testPlanWrapper.getArguments().get(0).getName());
     Assertions.assertEquals(ARG_VALUE, testPlanWrapper.getArguments().get(0).getValue());
+  }
+
+  @Test
+  void testAddThreadTemplate() throws IOException {
+
+    // Thread Group
+    TestPlanWrapper testPlanWrapper =
+        TestPlanWrapper.builder().withName("Parent").addThread(new MyThread()).build();
+
+    Assertions.assertEquals(
+        "thread", ((ThreadGroupWrapper) testPlanWrapper.getChilds().get(0)).getName());
+    Assertions.assertEquals(
+        "100", ((ThreadGroupWrapper) testPlanWrapper.getChilds().get(0)).getDelayAsVar());
+  }
+
+  class MyThread extends AbstractJmcTemplate<ThreadGroupWrapper> {
+
+    @Override
+    protected JmcWrapperBuilder<ThreadGroupWrapper> init() {
+      return (JmcWrapperBuilder<ThreadGroupWrapper>)
+          ThreadGroupWrapper.builder().withName("thread");
+    }
+
+    @Override
+    protected void prepare(JmcWrapperBuilder<ThreadGroupWrapper> builder) {
+      ThreadGroupWrapperBuilder threadGroupWrapperBuilder = (ThreadGroupWrapperBuilder) builder;
+      threadGroupWrapperBuilder.withDelay(100);
+    }
   }
 }
