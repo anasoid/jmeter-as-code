@@ -18,8 +18,8 @@
 
 package org.anasoid.jmeter.as.code.core.wrapper.template;
 
+import org.anasoid.jmeter.as.code.core.wrapper.JmcWrapperBuilder;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.basic.AbstractBasicTestElementWrapper;
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.basic.AbstractBasicTestElementWrapper.AbstractBasicTestElementWrapperBuilder;
 
 /**
  * Abstract template to generate test element.
@@ -29,14 +29,25 @@ import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.basic.Abstract
 public abstract class AbstractJmcTemplate<W extends AbstractBasicTestElementWrapper<?>>
     implements JmcTemplate<W> {
 
-  protected abstract AbstractBasicTestElementWrapperBuilder<?, W, ?> init();
+  /**
+   * Init builder, and customize it.
+   *
+   * @return builder.
+   */
+  protected abstract JmcWrapperBuilder<W> init();
 
-  protected void prepare(AbstractBasicTestElementWrapperBuilder<?, W, ?> builder) {}
+  /**
+   * Prepare build to custom more attributes.
+   *
+   * @param builder input is returned by method init().
+   */
+  protected void prepare(JmcWrapperBuilder<W> builder) {}
 
   @Override
   public final W generate() {
-    AbstractBasicTestElementWrapperBuilder<?, W, ?> b = init();
+    JmcWrapperBuilder<W> b = init();
     prepare(b);
-    return b.build();
+    W result = b.build();
+    return result;
   }
 }

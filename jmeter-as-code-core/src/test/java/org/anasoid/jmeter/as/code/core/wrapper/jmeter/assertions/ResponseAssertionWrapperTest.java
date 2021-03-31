@@ -20,7 +20,7 @@ package org.anasoid.jmeter.as.code.core.wrapper.jmeter.assertions;
 
 import java.io.IOException;
 import org.anasoid.jmeter.as.code.core.AbstractJmcTest;
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.assertions.ResponseAssertionWrapper.ResponseAssertionWrapperBuilder;
+import org.anasoid.jmeter.as.code.core.wrapper.JmcWrapperBuilder;
 import org.anasoid.jmeter.as.code.core.wrapper.template.AbstractJmcTemplate;
 import org.anasoid.jmeter.as.code.core.wrapper.test.ParentTestElementWrapperTesting;
 import org.junit.jupiter.api.Assertions;
@@ -47,8 +47,9 @@ class ResponseAssertionWrapperTest extends AbstractJmcTest {
   class MyAssertion extends AbstractJmcTemplate<ResponseAssertionWrapper> {
 
     @Override
-    protected ResponseAssertionWrapperBuilder init() {
-      return ResponseAssertionWrapper.builder().withName("Response Assertion");
+    protected JmcWrapperBuilder<ResponseAssertionWrapper> init() {
+      return (JmcWrapperBuilder<ResponseAssertionWrapper>)
+          ResponseAssertionWrapper.builder().withName("Response Assertion");
     }
   }
 }

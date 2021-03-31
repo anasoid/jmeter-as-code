@@ -27,7 +27,6 @@ import lombok.Getter;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmeter.as.code.core.application.validator.annotations.JmcChildrenTypes;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.config.ConfigTestElementWrapper;
-import org.anasoid.jmeter.as.code.core.wrapper.template.JmcTemplate;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcCollection;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcEmptyAllowed;
 import org.apache.jmeter.protocol.http.control.HeaderManager;
@@ -83,11 +82,6 @@ public class HeaderManagerWrapper extends ConfigTestElementWrapper<HeaderManager
     /** Add header. */
     public B addHeader(HeaderWrapper headers) {
       return this.addHeaders(Arrays.asList(headers));
-    }
-
-    /** Add header. */
-    public <T extends HeaderWrapper> B addHeader(JmcTemplate<T> template) {
-      return addHeader(template.generate());
     }
 
     /**

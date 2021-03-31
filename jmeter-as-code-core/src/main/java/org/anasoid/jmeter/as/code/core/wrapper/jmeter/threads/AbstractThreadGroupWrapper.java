@@ -109,6 +109,12 @@ public abstract class AbstractThreadGroupWrapper<
     }
 
     /** Add Controller. */
+    public <E extends GenericControllerWrapper<?, ?>> B addController(
+        JmcTemplate<E> template) { // NOSONAR
+      return addController(template.generate());
+    }
+
+    /** Add Controller. */
     public <E extends GenericControllerWrapper<?, ?>> B addControllers(JmcTemplate<E> template) {
       return addController(template.generate());
     }
