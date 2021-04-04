@@ -23,8 +23,10 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -33,11 +35,11 @@ import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestElementWra
 import org.anasoid.jmeter.as.code.core.xstream.converters.TestElementConverter;
 import org.anasoid.jmeter.as.code.core.xstream.exceptions.ConversionException;
 import org.apache.commons.io.FileUtils;
-import org.apache.jmeter.testelement.TestElement;
+import org.apache.commons.lang3.StringUtils;
 
 /** Abstract JmX Include element. */
 @XStreamConverter(value = TestElementConverter.class)
-public class AbstractJmxIncludeWrapper<T extends TestElement> implements TestElementWrapper<T> {
+public class AbstractJmxIncludeWrapper<T> implements TestElementWrapper<T> {
 
   private static Pattern regex =
       Pattern.compile(
@@ -48,7 +50,7 @@ public class AbstractJmxIncludeWrapper<T extends TestElement> implements TestEle
           Pattern.DOTALL);
 
   private final String path;
-  private Map<String, String> params;
+  private Map<String, String> params = new HashMap<>(); // NOPMD
 
   public AbstractJmxIncludeWrapper(@NonNull String path) {
     this.path = path;
@@ -56,7 +58,7 @@ public class AbstractJmxIncludeWrapper<T extends TestElement> implements TestEle
 
   public AbstractJmxIncludeWrapper(@NonNull String path, Map<String, String> params) {
     this.path = path;
-    this.params = params;
+    this.params.putAll(params);
   }
 
   public String getPath() {
@@ -69,7 +71,31 @@ public class AbstractJmxIncludeWrapper<T extends TestElement> implements TestEle
 
   public String toXml() throws IOException {
     String raw = readFile(path);
-    return cleanup(raw);
+    return replaceParam(cleanup(raw));
+  }
+
+  /**
+   * replace parameters.
+   *
+   * @param raw raw content.
+   */
+  protected String replaceParam(String raw) {
+
+    String result = raw;
+    for (Entry<String, String> entry : params.entrySet()) {
+      result = StringUtils.replace(result, getParam(entry.getKey()), entry.getValue());
+    }
+    return result;
+  }
+
+  /**
+   * get Param format.
+   *
+   * @param key key of parameter.
+   */
+  protected String getParam(String key) {
+
+    return "${jmc." + key + "}";
   }
 
   /**
@@ -77,7 +103,7 @@ public class AbstractJmxIncludeWrapper<T extends TestElement> implements TestEle
    *
    * @param raw raw content.
    */
-  protected String cleanup(String raw) throws IOException {
+  protected String cleanup(String raw) {
 
     Matcher regexMatcher = regex.matcher(raw);
     String result = null;

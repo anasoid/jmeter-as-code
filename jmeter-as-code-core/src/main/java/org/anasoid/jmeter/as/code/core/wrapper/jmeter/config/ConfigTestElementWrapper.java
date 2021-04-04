@@ -33,4 +33,4 @@ import org.apache.jmeter.config.gui.AbstractConfigGui;
 public abstract class ConfigTestElementWrapper<
         T extends ConfigTestElement, G extends AbstractConfigGui>
     extends AbstractBasicChildTestElementWrapper<T>
-    implements JMeterGUIWrapper<G>, ConfigElementWrapper {}
+    implements JMeterGUIWrapper<G>, ConfigElementWrapper<T> {}

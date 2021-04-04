@@ -39,7 +39,7 @@ import org.apache.jmeter.control.gui.AbstractControllerGui;
 @JmcChildrenTypes(type = {AbstractSamplerWrapper.class})
 public abstract class GenericControllerWrapper<
         T extends GenericController, G extends AbstractControllerGui>
-    extends AbstractTestElementWrapper<T> implements JMeterGUIWrapper<G> {
+    extends AbstractTestElementWrapper<T> implements JMeterGUIWrapper<G>, ControllerWrapper<T> {
 
   /** Builder. */
   @SuppressWarnings("PMD.UselessOverridingMethod")
@@ -64,6 +64,24 @@ public abstract class GenericControllerWrapper<
     public B addSamplers(List<AbstractSamplerWrapper<?, ?>> samplers) { // NOSONAR
       for (AbstractSamplerWrapper<?, ?> sampler : samplers) {
         withChild(sampler);
+      }
+      return self();
+    }
+
+    /** Add Controller. */
+    public B addController(ControllerWrapper<?> controller) { // NOSONAR
+      return addControllers(Arrays.asList(controller));
+    }
+
+    /** Add Controller. */
+    public <E extends ControllerWrapper<?>> B addController(JmcTemplate<E> template) { // NOSONAR
+      return addController(template.generate());
+    }
+
+    /** Add Controllers as child in tree. */
+    public B addControllers(List<ControllerWrapper<?>> controllers) { // NOSONAR
+      for (ControllerWrapper<?> controller : controllers) {
+        withChild(controller);
       }
       return self();
     }

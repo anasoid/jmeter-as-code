@@ -26,9 +26,9 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmeter.as.code.core.application.validator.annotations.JmcChildrenTypes;
 import org.anasoid.jmeter.as.code.core.wrapper.jmc.threads.OnSampleError;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.control.ControllerWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.control.GenericControllerWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.gui.JMeterGUIWrapper;
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.samplers.SamplerWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.samplers.SamplerWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AbstractTestElementWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.template.JmcTemplate;
@@ -46,7 +46,7 @@ import org.apache.jmeter.threads.gui.AbstractThreadGroupGui;
 @JmcChildrenTypes(type = {GenericControllerWrapper.class, SamplerWrapper.class})
 public abstract class AbstractThreadGroupWrapper<
         T extends AbstractThreadGroup, G extends AbstractThreadGroupGui>
-    extends AbstractTestElementWrapper<T> implements JMeterGUIWrapper<G> {
+    extends AbstractTestElementWrapper<T> implements JMeterGUIWrapper<G>, ThreadWrapper<T> {
 
   /** Action to be taken after a Sampler error. */
   @JmcProperty(AbstractThreadGroup.ON_SAMPLE_ERROR)
@@ -105,24 +105,18 @@ public abstract class AbstractThreadGroupWrapper<
     }
 
     /** Add Controller. */
-    public B addController(GenericControllerWrapper<?, ?> controller) { // NOSONAR
+    public B addController(ControllerWrapper<?> controller) { // NOSONAR
       return addControllers(Arrays.asList(controller));
     }
 
     /** Add Controller. */
-    public <E extends GenericControllerWrapper<?, ?>> B addController(
-        JmcTemplate<E> template) { // NOSONAR
-      return addController(template.generate());
-    }
-
-    /** Add Controller. */
-    public <E extends GenericControllerWrapper<?, ?>> B addControllers(JmcTemplate<E> template) {
+    public <E extends ControllerWrapper<?>> B addController(JmcTemplate<E> template) { // NOSONAR
       return addController(template.generate());
     }
 
     /** Add Controllers as child in tree. */
-    public B addControllers(List<GenericControllerWrapper<?, ?>> controllers) { // NOSONAR
-      for (GenericControllerWrapper<?, ?> controller : controllers) {
+    public B addControllers(List<ControllerWrapper<?>> controllers) { // NOSONAR
+      for (ControllerWrapper<?> controller : controllers) {
         withChild(controller);
       }
       return self();

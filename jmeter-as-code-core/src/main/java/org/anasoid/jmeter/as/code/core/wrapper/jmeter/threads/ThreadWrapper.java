@@ -16,14 +16,15 @@
  * Date :   27-Feb-2021
  */
 
-package org.anasoid.jmeter.as.code.core.wrapper.jmeter.config;
+package org.anasoid.jmeter.as.code.core.wrapper.jmeter.threads;
 
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestElementWrapper;
 import org.apache.jmeter.config.ConfigElement;
+import org.apache.jmeter.threads.AbstractThreadGroup;
 
 /**
  * Wrapper for ConfigElement.
  *
- * @see org.apache.jmeter.config.ConfigElement
+ * @see ConfigElement
  */
-public interface ConfigElementWrapper<T extends ConfigElement> extends TestElementWrapper<T> {}
+public interface ThreadWrapper<T extends AbstractThreadGroup> extends TestElementWrapper<T> {}

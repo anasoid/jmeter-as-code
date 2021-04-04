@@ -18,11 +18,9 @@
 
 package org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement;
 
-import org.apache.jmeter.testelement.TestElement;
-
 /**
  * Wrapper for Assertion.
  *
  * @see org.apache.jmeter.assertions.Assertion
  */
-public interface AssertionWrapper<T extends TestElement> extends TestElementWrapper<T> {}
+public interface AssertionWrapper<T> extends TestElementWrapper<T> {}

@@ -31,6 +31,7 @@ import org.anasoid.jmeter.as.code.core.application.validator.annotations.JmcChil
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.config.ArgumentWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.gui.JMeterGUIWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.threads.AbstractThreadGroupWrapper;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.threads.ThreadWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.template.JmcTemplate;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcCollection;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcEmptyAllowed;
@@ -115,7 +116,7 @@ public class TestPlanWrapper extends AbstractTestElementWrapper<TestPlan>
      *
      * @param child child.
      */
-    public B addThread(AbstractThreadGroupWrapper<?, ?> child) { // NOSONAR
+    public B addThread(ThreadWrapper<?> child) { // NOSONAR
       return super.withChild(child);
     }
 
@@ -124,7 +125,7 @@ public class TestPlanWrapper extends AbstractTestElementWrapper<TestPlan>
      *
      * @param template ThreadGroup template.
      */
-    public <T extends AbstractThreadGroupWrapper<?, ?>> B addThread(JmcTemplate<T> template) {
+    public <T extends ThreadWrapper<?>> B addThread(JmcTemplate<T> template) {
       return addThread(template.generate());
     }
 

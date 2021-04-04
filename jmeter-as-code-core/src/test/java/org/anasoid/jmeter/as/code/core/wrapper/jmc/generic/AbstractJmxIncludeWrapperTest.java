@@ -1,7 +1,9 @@
 package org.anasoid.jmeter.as.code.core.wrapper.jmc.generic;
 
+import com.google.common.collect.Maps;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Map;
 import org.anasoid.jmeter.as.code.core.AbstractJmcTest;
 import org.anasoid.jmeter.as.code.core.test.utils.xmlunit.JmcXmlComparator;
 import org.anasoid.jmeter.as.code.core.test.utils.xmlunit.filter.AttributesFilterManager;
@@ -57,6 +59,59 @@ class AbstractJmxIncludeWrapperTest extends AbstractJmcTest {
             null,
             Arrays.asList(AttributesFilterManager.getCommentFilter()));
     Assertions.assertFalse(
+        JmcXmlComparator.hasDifferences(diff), "httpsampler  not identical " + diff);
+  }
+
+  @Test
+  void testOneNodeParam() throws IOException {
+
+    TestPlanWrapper testPlanWrapper =
+        TestPlanWrapper.builder()
+            .withName(DEFAULT_TEST_PLAN)
+            .addThread(
+                ThreadGroupWrapper.builder()
+                    .withName(DEFAULT_THREAD_GROUP)
+                    .addSampler(
+                        new SamplerJmxIncludeWrapper(
+                            PARENT_PATH + "/node.http.sampler.param.jmx", Map.of("path", "mypath")))
+                    .build())
+            .build();
+    String wrapperContent = toTmpFile(testPlanWrapper, "httpsampler_");
+    String expectedContent = readFile(PARENT_PATH + "/main.jmx");
+    Diff diff =
+        JmcXmlComparator.compare(
+            expectedContent,
+            wrapperContent,
+            null,
+            Arrays.asList(AttributesFilterManager.getCommentFilter()));
+    Assertions.assertFalse(
+        JmcXmlComparator.hasDifferences(diff), "httpsampler  not identical " + diff);
+  }
+
+  @Test
+  void testOneNodeParamFail() throws IOException {
+
+    TestPlanWrapper testPlanWrapper =
+        TestPlanWrapper.builder()
+            .withName(DEFAULT_TEST_PLAN)
+            .addThread(
+                ThreadGroupWrapper.builder()
+                    .withName(DEFAULT_THREAD_GROUP)
+                    .addSampler(
+                        new SamplerJmxIncludeWrapper(
+                            PARENT_PATH + "/node.http.sampler.param.jmx",
+                            Map.of("path", "mypaths")))
+                    .build())
+            .build();
+    String wrapperContent = toTmpFile(testPlanWrapper, "httpsampler_");
+    String expectedContent = readFile(PARENT_PATH + "/main.jmx");
+    Diff diff =
+        JmcXmlComparator.compare(
+            expectedContent,
+            wrapperContent,
+            null,
+            Arrays.asList(AttributesFilterManager.getCommentFilter()));
+    Assertions.assertTrue(
         JmcXmlComparator.hasDifferences(diff), "httpsampler  not identical " + diff);
   }
 

@@ -13,17 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * @author : anas
- * Date :   27-Feb-2021
+ * Date :   04-Apr-2021
  */
 
-package org.anasoid.jmeter.as.code.core.wrapper.jmeter.config;
+package org.anasoid.jmeter.as.code.core.wrapper.jmeter.control;
 
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestElementWrapper;
-import org.apache.jmeter.config.ConfigElement;
+import org.apache.jmeter.control.Controller;
 
 /**
- * Wrapper for ConfigElement.
+ * Controller Wrapper.
  *
- * @see org.apache.jmeter.config.ConfigElement
+ * @see Controller
  */
-public interface ConfigElementWrapper<T extends ConfigElement> extends TestElementWrapper<T> {}
+public interface ControllerWrapper<T extends Controller> extends TestElementWrapper<T> {}
