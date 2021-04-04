@@ -23,17 +23,24 @@ import com.thoughtworks.xstream.converters.MarshallingContext;
 import com.thoughtworks.xstream.converters.UnmarshallingContext;
 import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
+import java.io.IOException;
 import java.lang.reflect.AccessibleObject;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import org.anasoid.jmeter.as.code.core.wrapper.jmc.generic.AbstractJmxIncludeWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestElementWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.property.JMeterProperty;
 import org.anasoid.jmeter.as.code.core.xstream.ConverterBeanUtils;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcCollection;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
+import org.anasoid.jmeter.as.code.core.xstream.exceptions.ConversionException;
+import org.anasoid.jmeter.as.code.core.xstream.io.xml.JmcXstreamWriter;
 
 /** Main xstream converter. */
+@SuppressWarnings("PMD.TooManyMethods")
 public class TestElementConverter implements Converter {
 
   private boolean inElementConversion;
@@ -98,12 +105,42 @@ public class TestElementConverter implements Converter {
       writer.endNode();
       writer.startNode("hashTree");
       if (childs != null) {
+        int i = 0;
         for (TestElementWrapper<?> child : childs) {
-          writer.startNode(child.getTestClassAsString());
-          context.convertAnother(child);
-          writer.endNode();
+
+          if (child instanceof AbstractJmxIncludeWrapper) {
+            include((AbstractJmxIncludeWrapper) child, writer, i);
+          } else {
+            writer.startNode(child.getTestClassAsString());
+            context.convertAnother(child);
+            writer.endNode();
+          }
+          i++;
         }
       }
+    }
+  }
+
+  private void include(
+      AbstractJmxIncludeWrapper includeWrapper, HierarchicalStreamWriter writer, int count) {
+
+    try {
+      Method method = includeWrapper.getClass().getMethod("toXml");
+      String result = (String) method.invoke(includeWrapper);
+      if (writer instanceof JmcXstreamWriter) {
+        JmcXstreamWriter jmcXstreamWriter = (JmcXstreamWriter) writer;
+        if (count == 0) {
+          jmcXstreamWriter.setValue("");
+        }
+        jmcXstreamWriter.writeRaw("\n");
+        jmcXstreamWriter.writeRaw(result);
+      }
+
+    } catch (NoSuchMethodException
+        | IllegalAccessException
+        | InvocationTargetException
+        | IOException e) {
+      throw new ConversionException(e);
     }
   }
 

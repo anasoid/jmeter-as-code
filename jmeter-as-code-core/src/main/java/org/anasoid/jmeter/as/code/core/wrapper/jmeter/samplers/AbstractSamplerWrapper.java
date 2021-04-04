@@ -33,7 +33,7 @@ import org.apache.jmeter.samplers.gui.AbstractSamplerGui;
 @SuppressWarnings("PMD.AbstractClassWithoutAnyMethod")
 public abstract class AbstractSamplerWrapper<
         T extends AbstractSampler, G extends AbstractSamplerGui>
-    extends AbstractTestElementWrapper<T> implements JMeterGUIWrapper<G> {
+    extends AbstractTestElementWrapper<T> implements JMeterGUIWrapper<G>, SamplerWrapper<T> {
 
   /** Builder. */
   public abstract static class AbstractSamplerWrapperBuilder<
@@ -41,8 +41,5 @@ public abstract class AbstractSamplerWrapper<
           G extends AbstractSamplerGui,
           C extends AbstractSamplerWrapper<T, G>,
           B extends AbstractSamplerWrapperBuilder<T, G, C, B>>
-      extends AbstractTestElementWrapper.AbstractTestElementWrapperBuilder<T, C, B> {
-
-
-  }
+      extends AbstractTestElementWrapper.AbstractTestElementWrapperBuilder<T, C, B> {}
 }
