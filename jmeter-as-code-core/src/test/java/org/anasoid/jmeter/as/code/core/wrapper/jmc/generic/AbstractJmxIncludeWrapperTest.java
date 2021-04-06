@@ -47,7 +47,9 @@ class AbstractJmxIncludeWrapperTest extends AbstractJmcTest {
                 ThreadGroupWrapper.builder()
                     .withName(DEFAULT_THREAD_GROUP)
                     .addSampler(
-                        new SamplerJmxIncludeWrapper(PARENT_PATH + "/node.http.sampler.jmx"))
+                        SamplerJmxIncludeWrapper.builder()
+                            .withPath(PARENT_PATH + "/node.http.sampler.jmx")
+                            .build())
                     .build())
             .build();
     String wrapperContent = toTmpFile(testPlanWrapper, "httpsampler_");
@@ -72,8 +74,10 @@ class AbstractJmxIncludeWrapperTest extends AbstractJmcTest {
                 ThreadGroupWrapper.builder()
                     .withName(DEFAULT_THREAD_GROUP)
                     .addSampler(
-                        new SamplerJmxIncludeWrapper(
-                            PARENT_PATH + "/node.http.sampler.param.jmx", Map.of("path", "mypath")))
+                        SamplerJmxIncludeWrapper.builder()
+                            .withPath(PARENT_PATH + "/node.http.sampler.param.jmx")
+                            .withParams(Map.of("path", "mypath"))
+                            .build())
                     .build())
             .build();
     String wrapperContent = toTmpFile(testPlanWrapper, "httpsampler_");
@@ -98,9 +102,10 @@ class AbstractJmxIncludeWrapperTest extends AbstractJmcTest {
                 ThreadGroupWrapper.builder()
                     .withName(DEFAULT_THREAD_GROUP)
                     .addSampler(
-                        new SamplerJmxIncludeWrapper(
-                            PARENT_PATH + "/node.http.sampler.param.jmx",
-                            Map.of("path", "mypaths")))
+                        SamplerJmxIncludeWrapper.builder()
+                            .withPath(PARENT_PATH + "/node.http.sampler.param.jmx")
+                            .withParams(Map.of("path", "mypaths"))
+                            .build())
                     .build())
             .build();
     String wrapperContent = toTmpFile(testPlanWrapper, "httpsampler_");
@@ -127,7 +132,9 @@ class AbstractJmxIncludeWrapperTest extends AbstractJmcTest {
                     .addSampler(
                         HTTPSamplerProxyWrapper.builder().withName("first").withPath("").build())
                     .addSampler(
-                        new SamplerJmxIncludeWrapper(PARENT_PATH + "/node.http.sampler.jmx"))
+                        SamplerJmxIncludeWrapper.builder()
+                            .withPath(PARENT_PATH + "/node.http.sampler.jmx")
+                            .build())
                     .build())
             .build();
     String wrapperContent = toTmpFile(testPlanWrapper, "httpsampler_");
@@ -152,7 +159,9 @@ class AbstractJmxIncludeWrapperTest extends AbstractJmcTest {
                 ThreadGroupWrapper.builder()
                     .withName(DEFAULT_THREAD_GROUP)
                     .addSampler(
-                        new SamplerJmxIncludeWrapper(PARENT_PATH + "/node.http.sampler.jmx"))
+                        SamplerJmxIncludeWrapper.builder()
+                            .withPath(PARENT_PATH + "/node.http.sampler.jmx")
+                            .build())
                     .addSampler(
                         HTTPSamplerProxyWrapper.builder().withName("first").withPath("").build())
                     .build())

@@ -18,22 +18,14 @@
 
 package org.anasoid.jmeter.as.code.core.wrapper.jmeter.samplers;
 
-import java.util.Map;
-import lombok.NonNull;
+import lombok.experimental.SuperBuilder;
 import org.anasoid.jmeter.as.code.core.wrapper.jmc.generic.AbstractJmxIncludeWrapper;
 import org.apache.jmeter.samplers.Sampler;
 
 /** Sample Include Jmx. */
+@SuperBuilder(setterPrefix = "with", toBuilder = true)
 public class SamplerJmxIncludeWrapper extends AbstractJmxIncludeWrapper<Sampler>
     implements SamplerWrapper<Sampler> {
 
   private static final long serialVersionUID = -8017246349372467904L;
-
-  public SamplerJmxIncludeWrapper(@NonNull String path) {
-    super(path);
-  }
-
-  public SamplerJmxIncludeWrapper(String path, Map<String, String> params) {
-    super(path, params);
-  }
 }

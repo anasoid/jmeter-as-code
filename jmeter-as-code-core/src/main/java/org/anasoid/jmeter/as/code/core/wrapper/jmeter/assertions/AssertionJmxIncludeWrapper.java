@@ -18,23 +18,15 @@
 
 package org.anasoid.jmeter.as.code.core.wrapper.jmeter.assertions;
 
-import java.util.Map;
-import lombok.NonNull;
+import lombok.experimental.SuperBuilder;
 import org.anasoid.jmeter.as.code.core.wrapper.jmc.generic.AbstractJmxIncludeWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AssertionWrapper;
 import org.apache.jmeter.assertions.Assertion;
 
 /** Assertion Include Jmx. */
+@SuperBuilder(setterPrefix = "with", toBuilder = true)
 public class AssertionJmxIncludeWrapper extends AbstractJmxIncludeWrapper<Assertion>
     implements AssertionWrapper<Assertion> {
 
   private static final long serialVersionUID = -8017246349372467904L;
-
-  public AssertionJmxIncludeWrapper(@NonNull String path) {
-    super(path);
-  }
-
-  public AssertionJmxIncludeWrapper(String path, Map<String, String> params) {
-    super(path, params);
-  }
 }

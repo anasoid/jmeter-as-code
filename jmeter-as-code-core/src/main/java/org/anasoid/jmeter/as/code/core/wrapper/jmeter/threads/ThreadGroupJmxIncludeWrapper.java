@@ -18,22 +18,14 @@
 
 package org.anasoid.jmeter.as.code.core.wrapper.jmeter.threads;
 
-import java.util.Map;
-import lombok.NonNull;
+import lombok.experimental.SuperBuilder;
 import org.anasoid.jmeter.as.code.core.wrapper.jmc.generic.AbstractJmxIncludeWrapper;
 import org.apache.jmeter.threads.AbstractThreadGroup;
 
 /** AbstractThreadGroup Include Jmx. */
+@SuperBuilder(setterPrefix = "with", toBuilder = true)
 public class ThreadGroupJmxIncludeWrapper extends AbstractJmxIncludeWrapper<AbstractThreadGroup>
     implements ThreadWrapper<AbstractThreadGroup> {
 
   private static final long serialVersionUID = -8017246349372467904L;
-
-  public ThreadGroupJmxIncludeWrapper(@NonNull String path) {
-    super(path);
-  }
-
-  public ThreadGroupJmxIncludeWrapper(String path, Map<String, String> params) {
-    super(path, params);
-  }
 }

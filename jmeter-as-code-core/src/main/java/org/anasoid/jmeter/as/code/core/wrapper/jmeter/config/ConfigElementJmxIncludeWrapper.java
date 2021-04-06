@@ -18,22 +18,14 @@
 
 package org.anasoid.jmeter.as.code.core.wrapper.jmeter.config;
 
-import java.util.Map;
-import lombok.NonNull;
+import lombok.experimental.SuperBuilder;
 import org.anasoid.jmeter.as.code.core.wrapper.jmc.generic.AbstractJmxIncludeWrapper;
 import org.apache.jmeter.config.ConfigElement;
 
 /** ConfigElement Include Jmx. */
+@SuperBuilder(setterPrefix = "with", toBuilder = true)
 public class ConfigElementJmxIncludeWrapper extends AbstractJmxIncludeWrapper<ConfigElement>
     implements ConfigElementWrapper<ConfigElement> {
 
   private static final long serialVersionUID = -8017246349372467904L;
-
-  public ConfigElementJmxIncludeWrapper(@NonNull String path) {
-    super(path);
-  }
-
-  public ConfigElementJmxIncludeWrapper(String path, Map<String, String> params) {
-    super(path, params);
-  }
 }
