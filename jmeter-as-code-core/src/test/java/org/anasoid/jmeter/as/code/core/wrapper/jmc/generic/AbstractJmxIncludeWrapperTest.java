@@ -1,6 +1,5 @@
 package org.anasoid.jmeter.as.code.core.wrapper.jmc.generic;
 
-import com.google.common.collect.Maps;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Map;
@@ -11,6 +10,8 @@ import org.anasoid.jmeter.as.code.core.wrapper.jmeter.samplers.HTTPSamplerProxyW
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.samplers.SamplerJmxIncludeWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestPlanWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.threads.ThreadGroupWrapper;
+import org.anasoid.jmeter.as.code.core.wrapper.test.ParamSamplerJmxIncludeWrapperTesting;
+import org.anasoid.jmeter.as.code.core.xstream.exceptions.ConversionException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.xmlunit.diff.Diff;
@@ -90,6 +91,54 @@ class AbstractJmxIncludeWrapperTest extends AbstractJmcTest {
             Arrays.asList(AttributesFilterManager.getCommentFilter()));
     Assertions.assertFalse(
         JmcXmlComparator.hasDifferences(diff), "httpsampler  not identical " + diff);
+  }
+
+  @Test
+  void testOneNodeParamAttribute() throws IOException {
+
+    TestPlanWrapper testPlanWrapper =
+        TestPlanWrapper.builder()
+            .withName(DEFAULT_TEST_PLAN)
+            .addThread(
+                ThreadGroupWrapper.builder()
+                    .withName(DEFAULT_THREAD_GROUP)
+                    .addSampler(ParamSamplerJmxIncludeWrapperTesting.builder().build())
+                    .build())
+            .build();
+    String wrapperContent = toTmpFile(testPlanWrapper, "httpsampler_");
+    String expectedContent = readFile(PARENT_PATH + "/main.jmx");
+    Diff diff =
+        JmcXmlComparator.compare(
+            expectedContent,
+            wrapperContent,
+            null,
+            Arrays.asList(AttributesFilterManager.getCommentFilter()));
+    Assertions.assertFalse(
+        JmcXmlComparator.hasDifferences(diff), "httpsampler  not identical " + diff);
+  }
+
+  @Test
+  void testOneNodeParamAttributeFailPath() throws IOException {
+
+    TestPlanWrapper testPlanWrapper =
+        TestPlanWrapper.builder()
+            .withName(DEFAULT_TEST_PLAN)
+            .addThread(
+                ThreadGroupWrapper.builder()
+                    .withName(DEFAULT_THREAD_GROUP)
+                    .addSampler(
+                        ParamSamplerJmxIncludeWrapperTesting.builder()
+                            .withPath(PARENT_PATH + "/node.http.sampler.jmx")
+                            .build())
+                    .build())
+            .build();
+    try {
+      toTmpFile(testPlanWrapper, "httpsampler_");
+      Assertions.fail();
+    } catch (ConversionException e) {
+      Assertions.assertTrue(
+          e.getCause().getCause().getMessage().contains("is provided and  getDefaultPath "));
+    }
   }
 
   @Test

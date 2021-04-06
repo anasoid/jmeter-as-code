@@ -122,9 +122,10 @@ public class TestElementConverter implements Converter {
   }
 
   private void include(
-      AbstractJmxIncludeWrapper includeWrapper, HierarchicalStreamWriter writer, int count) {
+      AbstractJmxIncludeWrapper<?> includeWrapper, HierarchicalStreamWriter writer, int count) {
 
     try {
+      includeWrapper.init();
       Method method = includeWrapper.getClass().getMethod("toXml");
       String result = (String) method.invoke(includeWrapper);
       if (writer instanceof JmcXstreamWriter) {
@@ -282,6 +283,6 @@ public class TestElementConverter implements Converter {
   public boolean canConvert(Class type) {
 
     return TestElementWrapper.class.isAssignableFrom(type)
-        || "ScriptWrapper".equals(type.getClass().getSimpleName());
+        || "ScriptWrapper".equals(type.getClass().getSimpleName()); // NOSONAR
   }
 }

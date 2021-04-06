@@ -21,6 +21,7 @@ package org.anasoid.jmeter.as.code.core.wrapper.jmc.generic;
 import com.thoughtworks.xstream.annotations.XStreamConverter;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
@@ -32,7 +33,10 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import lombok.NonNull;
+import lombok.SneakyThrows;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestElementWrapper;
+import org.anasoid.jmeter.as.code.core.xstream.ConverterBeanUtils;
+import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcParam;
 import org.anasoid.jmeter.as.code.core.xstream.converters.TestElementConverter;
 import org.anasoid.jmeter.as.code.core.xstream.exceptions.ConversionException;
 import org.apache.commons.collections.MapUtils;
@@ -55,9 +59,9 @@ public abstract class AbstractJmxIncludeWrapper<T> implements TestElementWrapper
   private boolean isInitialized;
 
   private String path = getDefaultPath();
-  private Map<String, String> params; // NOPMD
+  private Map<String, String> params = new HashMap<>(); // NOPMD
 
-  protected static String getDefaultPath() {
+  protected String getDefaultPath() {
     return null;
   }
 
@@ -74,7 +78,12 @@ public abstract class AbstractJmxIncludeWrapper<T> implements TestElementWrapper
     this.params = new HashMap<>(params);
   }
 
+  /** Convert object to Xml. */
   public String toXml() throws IOException {
+    if (getDefaultPath() != null && !getDefaultPath().equals(path)) {
+      throw new ConversionException(
+          "Path [" + path + "]+ is provided and  getDefaultPath  for :" + this);
+    }
     String raw = readFile(path);
     return replaceParam(cleanup(raw));
   }
@@ -91,11 +100,13 @@ public abstract class AbstractJmxIncludeWrapper<T> implements TestElementWrapper
    */
   protected String replaceParam(String raw) {
 
-    if (MapUtils.isEmpty(params)) {
+    Map<String, String> allParam = new HashMap<>(params);
+    allParam.putAll(getFieldParam());
+    if (MapUtils.isEmpty(allParam)) {
       return raw;
     }
     String result = raw;
-    for (Entry<String, String> entry : params.entrySet()) {
+    for (Entry<String, String> entry : allParam.entrySet()) {
       result = StringUtils.replace(result, getParam(entry.getKey()), entry.getValue());
     }
     return result;
@@ -138,6 +149,37 @@ public abstract class AbstractJmxIncludeWrapper<T> implements TestElementWrapper
       throw new ConversionException("Resource not found : " + resource);
     }
     return FileUtils.readFileToString(new File(url.getFile()), StandardCharsets.UTF_8);
+  }
+
+  /**
+   * get All Param field on object with value.
+   *
+   * @return list all field.
+   */
+  @SneakyThrows
+  private Map<String, String> getFieldParam() {
+    Map<String, String> result = new HashMap<>(); // NOPMD
+    Class<?> clazz = this.getClass();
+    for (Class<?> sclazz : ConverterBeanUtils.getSuperClasses(clazz)) {
+      for (Field field : sclazz.getDeclaredFields()) {
+        if (!result.containsKey(field.getName())) {
+          JmcParam jmcParam = field.getAnnotation(JmcParam.class);
+          if (jmcParam != null) {
+            String key = field.getName();
+            if (!"".equals(jmcParam.value())) { // NOPMD
+              key = jmcParam.value();
+            }
+            field.setAccessible(true);
+            Object value = field.get(this);
+            if (value == null) { // NOPMD
+              throw new ConversionException("Null value for " + field.getName() + "on " + this);
+            }
+            result.put(key, value.toString());
+          }
+        }
+      }
+    }
+    return result;
   }
 
   @Override
@@ -185,7 +227,7 @@ public abstract class AbstractJmxIncludeWrapper<T> implements TestElementWrapper
     private Set<String> tagsValue;
     private boolean tagsSet;
 
-    private Map<String, String> params;
+    private Map<String, String> params = new HashMap<>();
 
     @SuppressWarnings("PMD.AccessorMethodGeneration")
     private static <T> void $fillValuesFromInstanceIntoBuilder(
@@ -221,7 +263,7 @@ public abstract class AbstractJmxIncludeWrapper<T> implements TestElementWrapper
       return self();
     }
 
-    public B withParams(Map<String, String> params) {
+    protected B withParams(Map<String, String> params) {
       this.params = params;
       return self();
     }
@@ -251,7 +293,7 @@ public abstract class AbstractJmxIncludeWrapper<T> implements TestElementWrapper
     if (b.pathSet) {
       this.path = b.pathValue;
     } else {
-      this.path = getDefaultPath();
+      this.path = getDefaultPath(); // NOPMD
     }
     if (b.tagsSet) {
       this.tags = b.tagsValue;
