@@ -51,9 +51,8 @@ public abstract class AbstractJmxIncludeWrapper<T> implements TestElementWrapper
 
   private static final Pattern REGEX =
       Pattern.compile(
-          "<jmeterTestPlan +[a-zA-Z]*=\".{3,5}\" "
-              + "+[a-zA-Z]*=\".{3,5}\" +[a-zA-Z]*=\".{3,5}\" *>"
-              + "[\\s]*<hashTree>[\\s]*(<.+?>)[\\s]*"
+          "<jmeterTestPlan\\s+(:?[a-zA-Z]+=\".{3,5}\"\\s*){3}>[\\s]*<hashTree>"
+              + "[\\s]*(?<node>\\<.+?\\>)[\\s]*"
               + "</hashTree>[\\s]*</jmeterTestPlan>",
           Pattern.DOTALL);
 
@@ -134,7 +133,11 @@ public abstract class AbstractJmxIncludeWrapper<T> implements TestElementWrapper
     Matcher regexMatcher = REGEX.matcher(raw);
     String result;
     if (regexMatcher.find()) {
-      result = regexMatcher.group(1);
+      result = regexMatcher.group("node");
+      if (result == null) {
+        throw new ConversionException("Format incorrect for node : " + raw);
+      }
+
     } else {
       throw new ConversionException("Format incorrect for node : " + raw);
     }
