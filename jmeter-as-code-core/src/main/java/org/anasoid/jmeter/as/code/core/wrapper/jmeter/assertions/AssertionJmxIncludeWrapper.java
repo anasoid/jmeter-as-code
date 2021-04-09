@@ -13,17 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * @author : anas
- * Date :   27-Feb-2021
+ * Date :   03-Apr-2021
  */
 
-package org.anasoid.jmeter.as.code.core.wrapper.jmeter.config;
+package org.anasoid.jmeter.as.code.core.wrapper.jmeter.assertions;
 
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestElementWrapper;
-import org.apache.jmeter.config.ConfigElement;
+import lombok.experimental.SuperBuilder;
+import org.anasoid.jmeter.as.code.core.wrapper.jmc.generic.AbstractJmxIncludeWrapper;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AssertionWrapper;
+import org.apache.jmeter.assertions.Assertion;
 
-/**
- * Wrapper for ConfigElement.
- *
- * @see org.apache.jmeter.config.ConfigElement
- */
-public interface ConfigElementWrapper<T extends ConfigElement> extends TestElementWrapper<T> {}
+/** Assertion Include Jmx. */
+@SuperBuilder(setterPrefix = "with", toBuilder = true)
+public class AssertionJmxIncludeWrapper extends AbstractJmxIncludeWrapper<Assertion>
+    implements AssertionWrapper<Assertion> {
+
+  private static final long serialVersionUID = -8017246349372467904L;
+}

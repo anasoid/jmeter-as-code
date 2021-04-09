@@ -13,24 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * @author : anas
- * Date :   27-Feb-2021
+ * Date :   03-Apr-2021
  */
 
-package org.anasoid.jmeter.as.code.core.wrapper.jmeter.config;
+package org.anasoid.jmeter.as.code.core.wrapper.jmeter.control;
 
 import lombok.experimental.SuperBuilder;
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.gui.JMeterGUIWrapper;
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.basic.AbstractBasicChildTestElementWrapper;
-import org.apache.jmeter.config.ConfigTestElement;
-import org.apache.jmeter.config.gui.AbstractConfigGui;
+import org.anasoid.jmeter.as.code.core.wrapper.jmc.generic.AbstractParentJmxIncludeWrapper;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AssertionWrapper;
+import org.apache.jmeter.assertions.Assertion;
 
-/**
- * Wrapper for ConfigTestElement.
- *
- * @see ConfigTestElement
- */
+/** Assertion Include Jmx. */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
-public abstract class ConfigTestElementWrapper<
-        T extends ConfigTestElement, G extends AbstractConfigGui>
-    extends AbstractBasicChildTestElementWrapper<T>
-    implements JMeterGUIWrapper<G>, ConfigElementWrapper<T> {}
+public class ControllerJmxIncludeWrapper extends AbstractParentJmxIncludeWrapper<Assertion>
+    implements AssertionWrapper<Assertion> {
+
+  private static final long serialVersionUID = -8017246349372467904L;
+}

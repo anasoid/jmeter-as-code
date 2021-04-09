@@ -23,10 +23,9 @@ import java.util.List;
 import java.util.Set;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcAsAttribute;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcMethodAlias;
-import org.apache.jmeter.testelement.TestElement;
 
 /** Main TestElementWrapper Interface. */
-public interface TestElementWrapper<T extends TestElement> extends Serializable {
+public interface TestElementWrapper<T> extends Serializable {
 
   /** Init wrapper before conversion. */
   void init();

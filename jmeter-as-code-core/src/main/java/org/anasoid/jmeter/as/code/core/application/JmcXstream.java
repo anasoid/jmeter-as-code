@@ -27,6 +27,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AbstractTestElementWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.property.JMeterProperty;
+import org.anasoid.jmeter.as.code.core.xstream.io.xml.JmcXppDriver;
 import org.apache.jmeter.save.converters.MultiPropertyConverter;
 import org.apache.jmeter.save.converters.StringPropertyConverter;
 import org.apache.jmeter.testelement.property.CollectionProperty;
@@ -39,7 +40,7 @@ public class JmcXstream extends XStream {
 
   /** constructor. */
   public JmcXstream() {
-
+    super(new JmcXppDriver());
     this.setMode(XStream.NO_REFERENCES);
     this.aliasSystemAttribute(null, "class");
     this.alias("hashTree", HashTree.class);

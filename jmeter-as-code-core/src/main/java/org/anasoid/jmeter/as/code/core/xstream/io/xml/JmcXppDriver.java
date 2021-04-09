@@ -13,17 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * @author : anas
- * Date :   27-Feb-2021
+ * Date :   04-Apr-2021
  */
 
-package org.anasoid.jmeter.as.code.core.wrapper.jmeter.config;
+package org.anasoid.jmeter.as.code.core.xstream.io.xml;
 
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestElementWrapper;
-import org.apache.jmeter.config.ConfigElement;
+import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
+import com.thoughtworks.xstream.io.xml.XppDriver;
+import java.io.Writer;
 
-/**
- * Wrapper for ConfigElement.
- *
- * @see org.apache.jmeter.config.ConfigElement
- */
-public interface ConfigElementWrapper<T extends ConfigElement> extends TestElementWrapper<T> {}
+/** Xstream Jmc Driver. */
+public class JmcXppDriver extends XppDriver {
+
+  @Override
+  public HierarchicalStreamWriter createWriter(Writer out) {
+    return new JmcXstreamWriter(out, this.getNameCoder());
+  }
+}

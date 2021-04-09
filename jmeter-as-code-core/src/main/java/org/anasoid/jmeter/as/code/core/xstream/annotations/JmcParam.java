@@ -1,3 +1,5 @@
+package org.anasoid.jmeter.as.code.core.xstream.annotations;
+
 /*
  * Copyright 2020-2021 the original author or authors.
  *
@@ -13,17 +15,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * @author : anas
- * Date :   27-Feb-2021
+ * Date :   17-Jan-2021
  */
 
-package org.anasoid.jmeter.as.code.core.wrapper.jmeter.config;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestElementWrapper;
-import org.apache.jmeter.config.ConfigElement;
-
-/**
- * Wrapper for ConfigElement.
- *
- * @see org.apache.jmeter.config.ConfigElement
- */
-public interface ConfigElementWrapper<T extends ConfigElement> extends TestElementWrapper<T> {}
+/** Annotation used to define a field as param in template. */
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.FIELD)
+@Documented
+public @interface JmcParam {
+  /** The name of param. */
+  String value() default "";
+}

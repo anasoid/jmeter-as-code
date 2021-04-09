@@ -13,24 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * @author : anas
- * Date :   27-Feb-2021
+ * Date :   06-Apr-2021
  */
 
-package org.anasoid.jmeter.as.code.core.wrapper.jmeter.config;
+package org.anasoid.jmeter.as.code.core.wrapper.test;
 
 import lombok.experimental.SuperBuilder;
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.gui.JMeterGUIWrapper;
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.basic.AbstractBasicChildTestElementWrapper;
-import org.apache.jmeter.config.ConfigTestElement;
-import org.apache.jmeter.config.gui.AbstractConfigGui;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.samplers.SamplerJmxIncludeWrapper;
+import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcParam;
 
-/**
- * Wrapper for ConfigTestElement.
- *
- * @see ConfigTestElement
- */
+/** for testing . */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
-public abstract class ConfigTestElementWrapper<
-        T extends ConfigTestElement, G extends AbstractConfigGui>
-    extends AbstractBasicChildTestElementWrapper<T>
-    implements JMeterGUIWrapper<G>, ConfigElementWrapper<T> {}
+public class ParamSamplerJmxIncludeWrapperTesting extends SamplerJmxIncludeWrapper {
+
+  private static final String PARENT_PATH =
+      "org/anasoid/jmeter/as/code/core/wrapper/jmeter/jmc/generic";
+
+  @Override
+  protected String getDefaultPath() {
+    return PARENT_PATH + "/node.http.sampler.param.jmx";
+  }
+
+  @JmcParam("path")
+  private static String myPath = "mypath";
+}

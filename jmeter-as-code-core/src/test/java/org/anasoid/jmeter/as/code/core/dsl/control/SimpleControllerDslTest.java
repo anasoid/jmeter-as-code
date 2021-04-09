@@ -64,12 +64,50 @@ class SimpleControllerDslTest {
         ((HTTPSamplerProxyWrapper) simpleControllerWrapper.getChilds().get(0)).getName());
   }
 
+  @Test
+  void testAddController() {
+
+    // Thread Group
+    SimpleControllerWrapper simpleControllerWrapper =
+        SimpleControllerWrapper.builder()
+            .withName("Parent")
+            .addController(SimpleControllerWrapper.builder().withName("child").build())
+            .build();
+
+    Assertions.assertEquals(
+        "child", ((SimpleControllerWrapper) simpleControllerWrapper.getChilds().get(0)).getName());
+  }
+
+  @Test
+  void testAddControllerTemplate() {
+
+    // Thread Group
+    SimpleControllerWrapper simpleControllerWrapper =
+        SimpleControllerWrapper.builder()
+            .withName("Parent")
+            .addController(new MyController())
+            .build();
+
+    Assertions.assertEquals(
+        "controller",
+        ((SimpleControllerWrapper) simpleControllerWrapper.getChilds().get(0)).getName());
+  }
+
   class MySampler extends AbstractJmcTemplate<HTTPSamplerProxyWrapper> {
 
     @Override
     protected JmcWrapperBuilder<HTTPSamplerProxyWrapper> init() {
       return (JmcWrapperBuilder<HTTPSamplerProxyWrapper>)
           HTTPSamplerProxyWrapper.builder().withName("sampler");
+    }
+  }
+
+  class MyController extends AbstractJmcTemplate<SimpleControllerWrapper> {
+
+    @Override
+    protected JmcWrapperBuilder<SimpleControllerWrapper> init() {
+      return (JmcWrapperBuilder<SimpleControllerWrapper>)
+          SimpleControllerWrapper.builder().withName("controller");
     }
   }
 }

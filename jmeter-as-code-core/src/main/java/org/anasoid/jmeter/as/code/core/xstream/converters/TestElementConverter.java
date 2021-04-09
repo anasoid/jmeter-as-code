@@ -23,17 +23,25 @@ import com.thoughtworks.xstream.converters.MarshallingContext;
 import com.thoughtworks.xstream.converters.UnmarshallingContext;
 import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
+import java.io.IOException;
 import java.lang.reflect.AccessibleObject;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import org.anasoid.jmeter.as.code.core.wrapper.jmc.generic.AbstractJmxIncludeWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestElementWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.property.JMeterProperty;
 import org.anasoid.jmeter.as.code.core.xstream.ConverterBeanUtils;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcCollection;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
+import org.anasoid.jmeter.as.code.core.xstream.exceptions.ConversionException;
+import org.anasoid.jmeter.as.code.core.xstream.io.xml.JmcXstreamWriter;
+import org.apache.commons.collections.CollectionUtils;
 
 /** Main xstream converter. */
+@SuppressWarnings({"PMD.GodClass", "PMD.TooManyMethods"})
 public class TestElementConverter implements Converter {
 
   private boolean inElementConversion;
@@ -60,7 +68,7 @@ public class TestElementConverter implements Converter {
       convertField(source, accessibleObject, writer, context);
     }
 
-    appendChild(source, writer, context);
+    appendChild(source, writer, context, true);
   }
 
   /** Convert field/method. */
@@ -87,7 +95,10 @@ public class TestElementConverter implements Converter {
   }
 
   protected void appendChild(
-      Object source, HierarchicalStreamWriter writer, MarshallingContext context) {
+      Object source,
+      HierarchicalStreamWriter writer,
+      MarshallingContext context,
+      boolean closeFirst) {
     if (inElementConversion) {
 
       return;
@@ -95,15 +106,57 @@ public class TestElementConverter implements Converter {
     if (source instanceof TestElementWrapper) {
 
       List<TestElementWrapper<?>> childs = ((TestElementWrapper) source).getChilds();
-      writer.endNode();
+      if (closeFirst) {
+        writer.endNode();
+      }
       writer.startNode("hashTree");
       if (childs != null) {
+        int i = 0;
         for (TestElementWrapper<?> child : childs) {
-          writer.startNode(child.getTestClassAsString());
-          context.convertAnother(child);
-          writer.endNode();
+
+          if (child instanceof AbstractJmxIncludeWrapper) {
+            include((AbstractJmxIncludeWrapper) child, writer, context, i);
+          } else {
+            writer.startNode(child.getTestClassAsString());
+            context.convertAnother(child);
+            writer.endNode();
+          }
+          i++;
         }
       }
+      if (!closeFirst) {
+        writer.endNode();
+      }
+    }
+  }
+
+  private void include(
+      AbstractJmxIncludeWrapper<?> includeWrapper,
+      HierarchicalStreamWriter writer,
+      MarshallingContext context,
+      int count) {
+
+    try {
+      includeWrapper.init();
+      Method method = includeWrapper.getClass().getMethod("toXml");
+      String result = (String) method.invoke(includeWrapper);
+      if (writer instanceof JmcXstreamWriter) {
+        JmcXstreamWriter jmcXstreamWriter = (JmcXstreamWriter) writer;
+        if (count == 0) {
+          jmcXstreamWriter.setValue("");
+        }
+        jmcXstreamWriter.writeRaw("\n");
+        jmcXstreamWriter.writeRaw(result);
+        if (CollectionUtils.isNotEmpty(includeWrapper.getChilds())) {
+          appendChild(includeWrapper, writer, context, false);
+        }
+      }
+
+    } catch (NoSuchMethodException
+        | IllegalAccessException
+        | InvocationTargetException
+        | IOException e) {
+      throw new ConversionException(e);
     }
   }
 
@@ -245,6 +298,6 @@ public class TestElementConverter implements Converter {
   public boolean canConvert(Class type) {
 
     return TestElementWrapper.class.isAssignableFrom(type)
-        || "ScriptWrapper".equals(type.getClass().getSimpleName());
+        || "ScriptWrapper".equals(type.getClass().getSimpleName()); // NOSONAR
   }
 }

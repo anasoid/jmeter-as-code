@@ -102,7 +102,7 @@ public abstract class AbstractBasicTestElementWrapper<T extends AbstractTestElem
     }
 
     /** Add tags. */
-    public B withTags(String... tags) {
+    public B addTags(String... tags) {
       if (this.tags$value == null) {
         this.tags$value = new HashSet<>();
         this.tags$set = true;

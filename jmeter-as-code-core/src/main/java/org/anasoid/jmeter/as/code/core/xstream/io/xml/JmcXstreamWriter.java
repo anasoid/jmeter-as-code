@@ -13,17 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * @author : anas
- * Date :   27-Feb-2021
+ * Date :   04-Apr-2021
  */
 
-package org.anasoid.jmeter.as.code.core.wrapper.jmeter.config;
+package org.anasoid.jmeter.as.code.core.xstream.io.xml;
 
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestElementWrapper;
-import org.apache.jmeter.config.ConfigElement;
+import com.thoughtworks.xstream.io.naming.NameCoder;
+import com.thoughtworks.xstream.io.xml.PrettyPrintWriter;
+import java.io.IOException;
+import java.io.Writer;
 
-/**
- * Wrapper for ConfigElement.
- *
- * @see org.apache.jmeter.config.ConfigElement
- */
-public interface ConfigElementWrapper<T extends ConfigElement> extends TestElementWrapper<T> {}
+/** Jmc Writer to have access to direct writer. */
+public class JmcXstreamWriter extends PrettyPrintWriter {
+
+  private final Writer writer;
+
+  public JmcXstreamWriter(Writer writer, NameCoder nameCoder) {
+    super(writer, nameCoder);
+    this.writer = writer;
+  }
+
+  public void writeRaw(String text) throws IOException {
+    this.flush();
+    writer.write(text);
+  }
+}
