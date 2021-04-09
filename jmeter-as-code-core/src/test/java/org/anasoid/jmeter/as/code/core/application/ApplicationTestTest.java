@@ -98,7 +98,7 @@ class ApplicationTestTest {
         SubChildTestingElementWrapperTesting.builder()
             .withBb1(true)
             .withField("f")
-            .withTags("toprepare")
+            .addTags("toprepare")
             .withName("sub2")
             .build();
 

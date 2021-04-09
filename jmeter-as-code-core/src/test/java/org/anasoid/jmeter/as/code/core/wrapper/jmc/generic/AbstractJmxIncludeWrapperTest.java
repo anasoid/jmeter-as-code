@@ -6,6 +6,7 @@ import java.util.Map;
 import org.anasoid.jmeter.as.code.core.AbstractJmcTest;
 import org.anasoid.jmeter.as.code.core.test.utils.xmlunit.JmcXmlComparator;
 import org.anasoid.jmeter.as.code.core.test.utils.xmlunit.filter.AttributesFilterManager;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.assertions.AssertionJmxIncludeWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.samplers.HTTPSamplerProxyWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.samplers.SamplerJmxIncludeWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestPlanWrapper;
@@ -37,6 +38,39 @@ class AbstractJmxIncludeWrapperTest extends AbstractJmcTest {
 
   private static final String PARENT_PATH =
       "org/anasoid/jmeter/as/code/core/wrapper/jmeter/jmc/generic";
+
+  @Test
+  void testRegex() throws IOException {
+
+    String content = readFile(PARENT_PATH + "/regex/regex.xml");
+
+    AssertionJmxIncludeWrapper include =
+        AssertionJmxIncludeWrapper.builder()
+            .withPath(PARENT_PATH + "/node.http.sampler.jmx")
+            .build();
+
+    String filtered = include.cleanup(content);
+
+    Assertions.assertEquals("<Main/>", filtered);
+  }
+
+  @Test
+  void testRegexFail() throws IOException {
+
+    String content = readFile(PARENT_PATH + "/regex/regex.fail.xml");
+
+    AssertionJmxIncludeWrapper include =
+        AssertionJmxIncludeWrapper.builder()
+            .withPath(PARENT_PATH + "/node.http.sampler.jmx")
+            .build();
+
+    try {
+      include.cleanup(content);
+      Assertions.fail();
+    } catch (ConversionException e) {
+      Assertions.assertTrue(e.getMessage().contains("Format incorrect for node "));
+    }
+  }
 
   @Test
   void testOneNode() throws IOException {
@@ -77,7 +111,7 @@ class AbstractJmxIncludeWrapperTest extends AbstractJmcTest {
                     .addSampler(
                         SamplerJmxIncludeWrapper.builder()
                             .withPath(PARENT_PATH + "/node.http.sampler.param.jmx")
-                            .withParams(Map.of("path", "mypath"))
+                            .addParam("path", "mypath")
                             .build())
                     .build())
             .build();
@@ -225,5 +259,17 @@ class AbstractJmxIncludeWrapperTest extends AbstractJmcTest {
             Arrays.asList(AttributesFilterManager.getCommentFilter()));
     Assertions.assertFalse(
         JmcXmlComparator.hasDifferences(diff), "httpsampler  not identical " + diff);
+  }
+
+  @Test
+  void testTag() throws IOException {
+
+    SamplerJmxIncludeWrapper sampler =
+        SamplerJmxIncludeWrapper.builder()
+            .withPath(PARENT_PATH + "/node.http.sampler.param.jmx")
+            .addTags("tag")
+            .build();
+
+    Assertions.assertTrue(sampler.getTags().contains("tag"));
   }
 }
