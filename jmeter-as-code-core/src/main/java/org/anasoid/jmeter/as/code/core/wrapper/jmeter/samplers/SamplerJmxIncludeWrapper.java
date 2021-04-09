@@ -19,12 +19,12 @@
 package org.anasoid.jmeter.as.code.core.wrapper.jmeter.samplers;
 
 import lombok.experimental.SuperBuilder;
-import org.anasoid.jmeter.as.code.core.wrapper.jmc.generic.AbstractJmxIncludeWrapper;
+import org.anasoid.jmeter.as.code.core.wrapper.jmc.generic.AbstractParentJmxIncludeWrapper;
 import org.apache.jmeter.samplers.Sampler;
 
 /** Sample Include Jmx. */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
-public class SamplerJmxIncludeWrapper extends AbstractJmxIncludeWrapper<Sampler>
+public class SamplerJmxIncludeWrapper extends AbstractParentJmxIncludeWrapper<Sampler>
     implements SamplerWrapper<Sampler> {
 
   private static final long serialVersionUID = -8017246349372467904L;

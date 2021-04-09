@@ -19,13 +19,16 @@
 package org.anasoid.jmeter.as.code.core.wrapper.jmeter.threads;
 
 import lombok.experimental.SuperBuilder;
-import org.anasoid.jmeter.as.code.core.wrapper.jmc.generic.AbstractJmxIncludeWrapper;
+import org.anasoid.jmeter.as.code.core.wrapper.jmc.generic.AbstractParentJmxIncludeWrapper;
 import org.apache.jmeter.threads.AbstractThreadGroup;
 
 /** AbstractThreadGroup Include Jmx. */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
-public class ThreadGroupJmxIncludeWrapper extends AbstractJmxIncludeWrapper<AbstractThreadGroup>
+public class ThreadGroupJmxIncludeWrapper
+    extends AbstractParentJmxIncludeWrapper<AbstractThreadGroup>
     implements ThreadWrapper<AbstractThreadGroup> {
 
   private static final long serialVersionUID = -8017246349372467904L;
+
+
 }

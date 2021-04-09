@@ -38,9 +38,10 @@ import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcCollection;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
 import org.anasoid.jmeter.as.code.core.xstream.exceptions.ConversionException;
 import org.anasoid.jmeter.as.code.core.xstream.io.xml.JmcXstreamWriter;
+import org.apache.commons.collections.CollectionUtils;
 
 /** Main xstream converter. */
-@SuppressWarnings("PMD.TooManyMethods")
+@SuppressWarnings({"PMD.GodClass", "PMD.TooManyMethods"})
 public class TestElementConverter implements Converter {
 
   private boolean inElementConversion;
@@ -67,7 +68,7 @@ public class TestElementConverter implements Converter {
       convertField(source, accessibleObject, writer, context);
     }
 
-    appendChild(source, writer, context);
+    appendChild(source, writer, context, true);
   }
 
   /** Convert field/method. */
@@ -94,7 +95,10 @@ public class TestElementConverter implements Converter {
   }
 
   protected void appendChild(
-      Object source, HierarchicalStreamWriter writer, MarshallingContext context) {
+      Object source,
+      HierarchicalStreamWriter writer,
+      MarshallingContext context,
+      boolean closeFirst) {
     if (inElementConversion) {
 
       return;
@@ -102,14 +106,16 @@ public class TestElementConverter implements Converter {
     if (source instanceof TestElementWrapper) {
 
       List<TestElementWrapper<?>> childs = ((TestElementWrapper) source).getChilds();
-      writer.endNode();
+      if (closeFirst) {
+        writer.endNode();
+      }
       writer.startNode("hashTree");
       if (childs != null) {
         int i = 0;
         for (TestElementWrapper<?> child : childs) {
 
           if (child instanceof AbstractJmxIncludeWrapper) {
-            include((AbstractJmxIncludeWrapper) child, writer, i);
+            include((AbstractJmxIncludeWrapper) child, writer, context, i);
           } else {
             writer.startNode(child.getTestClassAsString());
             context.convertAnother(child);
@@ -118,11 +124,17 @@ public class TestElementConverter implements Converter {
           i++;
         }
       }
+      if (!closeFirst) {
+        writer.endNode();
+      }
     }
   }
 
   private void include(
-      AbstractJmxIncludeWrapper<?> includeWrapper, HierarchicalStreamWriter writer, int count) {
+      AbstractJmxIncludeWrapper<?> includeWrapper,
+      HierarchicalStreamWriter writer,
+      MarshallingContext context,
+      int count) {
 
     try {
       includeWrapper.init();
@@ -135,6 +147,9 @@ public class TestElementConverter implements Converter {
         }
         jmcXstreamWriter.writeRaw("\n");
         jmcXstreamWriter.writeRaw(result);
+        if (CollectionUtils.isNotEmpty(includeWrapper.getChilds())) {
+          appendChild(includeWrapper, writer, context, false);
+        }
       }
 
     } catch (NoSuchMethodException

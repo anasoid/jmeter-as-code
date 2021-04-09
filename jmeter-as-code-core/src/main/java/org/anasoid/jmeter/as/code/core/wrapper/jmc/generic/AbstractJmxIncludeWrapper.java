@@ -47,7 +47,7 @@ import org.apache.commons.lang3.StringUtils;
 @XStreamConverter(value = TestElementConverter.class)
 public abstract class AbstractJmxIncludeWrapper<T> implements TestElementWrapper<T> {
 
-  private static final Pattern regex =
+  private static final Pattern REGEX =
       Pattern.compile(
           "<jmeterTestPlan +[a-zA-Z]*=\".{3,5}\" "
               + "+[a-zA-Z]*=\".{3,5}\" +[a-zA-Z]*=\".{3,5}\" *>"
@@ -65,16 +65,16 @@ public abstract class AbstractJmxIncludeWrapper<T> implements TestElementWrapper
     return null;
   }
 
-  public AbstractJmxIncludeWrapper(@NonNull String path) {
+  protected AbstractJmxIncludeWrapper(@NonNull String path) {
     this.path = path;
   }
 
-  public AbstractJmxIncludeWrapper(@NonNull String path, Map<String, String> params) {
+  protected AbstractJmxIncludeWrapper(@NonNull String path, Map<String, String> params) {
     this.path = path;
     this.params = new HashMap<>(params);
   }
 
-  public AbstractJmxIncludeWrapper(Map<String, String> params) {
+  protected AbstractJmxIncludeWrapper(Map<String, String> params) {
     this.params = new HashMap<>(params);
   }
 
@@ -129,10 +129,12 @@ public abstract class AbstractJmxIncludeWrapper<T> implements TestElementWrapper
    */
   protected String cleanup(String raw) {
 
-    Matcher regexMatcher = regex.matcher(raw);
-    String result = null;
+    Matcher regexMatcher = REGEX.matcher(raw);
+    String result;
     if (regexMatcher.find()) {
       result = regexMatcher.group(1);
+    } else {
+      throw new ConversionException("Format incorrect for node : " + raw);
     }
     return result;
   }
