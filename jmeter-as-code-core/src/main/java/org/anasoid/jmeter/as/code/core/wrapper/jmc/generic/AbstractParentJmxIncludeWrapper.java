@@ -40,7 +40,7 @@ public abstract class AbstractParentJmxIncludeWrapper<T> extends AbstractJmxIncl
   @XStreamOmitField private static final long serialVersionUID = -1010535206971620483L;
 
   private static final Pattern REGEX =
-      Pattern.compile("^[\\s]*(.+?)[\\s]*<hashTree/>$", Pattern.DOTALL);
+      Pattern.compile("^[\\s]*(.+?)[\\s]*\\<hashTree/\\>$", Pattern.DOTALL);
 
   @Builder.Default @XStreamOmitField private List<TestElementWrapper<?>> childs = new ArrayList<>();
 
