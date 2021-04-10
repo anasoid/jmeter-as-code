@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.4.1">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan" enabled="true">
+      <stringProp name="TestPlan.comments"></stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.tearDown_on_shutdown">true</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <CounterConfig guiclass="CounterConfigGui" testclass="CounterConfig" testname="Counter reverse" enabled="true">
+        <stringProp name="CounterConfig.start">10</stringProp>
+        <stringProp name="CounterConfig.end">200</stringProp>
+        <stringProp name="CounterConfig.incr">5</stringProp>
+        <stringProp name="CounterConfig.name">var</stringProp>
+        <stringProp name="CounterConfig.format">format</stringProp>
+        <boolProp name="CounterConfig.per_user">true</boolProp>
+        <boolProp name="CounterConfig.reset_on_tg_iteration">true</boolProp>
+      </CounterConfig>
+      <hashTree/>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>

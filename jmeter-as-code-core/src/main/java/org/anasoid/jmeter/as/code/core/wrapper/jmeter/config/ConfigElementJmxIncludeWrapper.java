@@ -20,12 +20,12 @@ package org.anasoid.jmeter.as.code.core.wrapper.jmeter.config;
 
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmeter.as.code.core.wrapper.jmc.generic.AbstractJmxIncludeWrapper;
-import org.apache.jmeter.config.ConfigElement;
+import org.apache.jmeter.testelement.AbstractTestElement;
 
 /** ConfigElement Include Jmx. */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
-public class ConfigElementJmxIncludeWrapper extends AbstractJmxIncludeWrapper<ConfigElement>
-    implements ConfigElementWrapper<ConfigElement> {
+public class ConfigElementJmxIncludeWrapper extends AbstractJmxIncludeWrapper<AbstractTestElement>
+    implements ConfigElementWrapper<AbstractTestElement> {
 
   private static final long serialVersionUID = -8017246349372467904L;
 }

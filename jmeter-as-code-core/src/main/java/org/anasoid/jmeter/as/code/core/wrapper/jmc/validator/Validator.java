@@ -13,19 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * @author : anas
- * Date :   27-Feb-2021
+ * Date :   10-Apr-2021
  */
 
-package org.anasoid.jmeter.as.code.core.wrapper.jmeter.config;
+package org.anasoid.jmeter.as.code.core.wrapper.jmc.validator;
 
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestElementWrapper;
-import org.apache.jmeter.testelement.AbstractTestElement;
+import org.anasoid.jmeter.as.code.core.xstream.exceptions.ConversionIllegalStateException;
 
-/**
- * Wrapper for ConfigElement. Using AbstractTestElement as not all configElement implement
- * configElement.
- *
- * @see org.apache.jmeter.config.ConfigElement
- */
-public interface ConfigElementWrapper<T extends AbstractTestElement>
-    extends TestElementWrapper<T> {}
+/** Validate test element wrapper before conversion. */
+public interface Validator {
+
+  /** Validate Test element. */
+  @SuppressWarnings("PMD.AvoidUncheckedExceptionsInSignatures")
+  void validate() throws ConversionIllegalStateException;
+}

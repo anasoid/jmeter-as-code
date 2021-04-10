@@ -30,7 +30,9 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import org.anasoid.jmeter.as.code.core.wrapper.jmc.Variable;
 import org.anasoid.jmeter.as.code.core.wrapper.jmc.generic.AbstractJmxIncludeWrapper;
+import org.anasoid.jmeter.as.code.core.wrapper.jmc.validator.Validator;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestElementWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.property.JMeterProperty;
 import org.anasoid.jmeter.as.code.core.xstream.ConverterBeanUtils;
@@ -50,6 +52,7 @@ public class TestElementConverter implements Converter {
   public void marshal(Object source, HierarchicalStreamWriter writer, MarshallingContext context) {
 
     init(source);
+    validate(source);
 
     List<AccessibleObject> allFieldsMethods = new ArrayList<>();
     allFieldsMethods.addAll(ConverterBeanUtils.getFields(source));
@@ -167,6 +170,13 @@ public class TestElementConverter implements Converter {
     }
   }
 
+  protected void validate(Object source) {
+
+    if (source instanceof Validator) {
+      ((Validator) source).validate();
+    }
+  }
+
   protected void convertAttributeField(
       Object value,
       AccessibleObject accessibleObject,
@@ -213,6 +223,8 @@ public class TestElementConverter implements Converter {
     if (value != null) {
       if (value.getClass().isEnum()) {
         context.convertAnother(ConverterBeanUtils.getEnumValue(value));
+      } else if (value instanceof Variable) {
+        context.convertAnother(((Variable) value).getName());
       } else {
         context.convertAnother(value);
       }

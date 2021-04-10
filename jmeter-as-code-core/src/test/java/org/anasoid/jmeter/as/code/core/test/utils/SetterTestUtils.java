@@ -28,6 +28,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
+import org.anasoid.jmeter.as.code.core.wrapper.jmc.Variable;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestElementWrapper;
 import org.anasoid.jmeter.as.code.core.xstream.ConverterBeanUtils;
 import org.junit.jupiter.api.Assertions;
@@ -102,6 +103,11 @@ public final class SetterTestUtils {
         byte[] array = new byte[7];
         rnd.nextBytes(array);
         value = new String(array, Charset.forName("UTF-8"));
+        method.invoke(testElement, value);
+      } else if (field.getType() == Variable.class) {
+        byte[] array = new byte[7];
+        rnd.nextBytes(array);
+        value = new Variable(new String(array, Charset.forName("UTF-8")));
         method.invoke(testElement, value);
       } else if (field.getType().isEnum()) {
         byte[] array = new byte[7];

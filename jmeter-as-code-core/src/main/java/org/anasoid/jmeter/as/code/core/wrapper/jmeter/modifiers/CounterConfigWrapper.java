@@ -1,0 +1,164 @@
+/*
+ * Copyright 2020-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License")
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * @author : anas
+ * Date :   09-Apr-2021
+ */
+
+package org.anasoid.jmeter.as.code.core.wrapper.jmeter.modifiers;
+
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import lombok.Builder.Default;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
+import org.anasoid.jmeter.as.code.core.wrapper.jmc.Variable;
+import org.anasoid.jmeter.as.code.core.wrapper.jmc.validator.Validator;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.config.ConfigTestElementWrapper;
+import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcNullAllowed;
+import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
+import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcSkipDefault;
+import org.anasoid.jmeter.as.code.core.xstream.exceptions.ConversionIllegalStateException;
+import org.apache.jmeter.modifiers.CounterConfig;
+import org.apache.jmeter.modifiers.gui.CounterConfigGui;
+
+/**
+ * Wrapper for CounterConfig.
+ *
+ * @see CounterConfig
+ */
+@SuperBuilder(setterPrefix = "with", toBuilder = true)
+@SuppressWarnings("PMD.RedundantFieldInitializer")
+public class CounterConfigWrapper extends ConfigTestElementWrapper<CounterConfig, CounterConfigGui>
+    implements Validator {
+
+  @XStreamOmitField private static final long serialVersionUID = -4321773956536604266L;
+
+  /** Starting value. */
+  @JmcProperty("CounterConfig.start")
+  @Getter
+  @Setter
+  @JmcNullAllowed
+  private String startAsVar;
+
+  /** Maximum value. */
+  @JmcProperty("CounterConfig.end")
+  @Getter
+  @Setter
+  @JmcNullAllowed
+  private String endAsVar;
+
+  /** Increment. */
+  @JmcProperty("CounterConfig.incr")
+  @Getter
+  @Setter
+  @JmcNullAllowed
+  private String incrementAsVar;
+
+  /** Variable Name. */
+  @JmcProperty("CounterConfig.name")
+  @Getter
+  @Setter
+  @JmcNullAllowed
+  private Variable variable;
+
+  @JmcNullAllowed
+  @JmcProperty("CounterConfig.format")
+  @Getter
+  @Setter
+  private String format;
+
+  /** Track counter independently for each user. */
+  @JmcProperty("CounterConfig.per_user")
+  @Getter
+  @Setter
+  @Default
+  private boolean perUser = false;
+
+  /** =Reset counter on each Thread Group Iteration. */
+  @JmcProperty("CounterConfig.reset_on_tg_iteration")
+  @Getter
+  @Setter
+  @JmcSkipDefault("false")
+  @Default
+  private boolean resetOnEachIteration = false;
+
+  @Override
+  public Class<CounterConfigGui> getGuiClass() {
+    return CounterConfigGui.class;
+  }
+
+  @Override
+  public Class<CounterConfig> getTestClass() {
+    return CounterConfig.class;
+  }
+
+  @Override
+  @SuppressWarnings("PMD.AvoidUncheckedExceptionsInSignatures")
+  public void validate() throws ConversionIllegalStateException {
+    if (!perUser && resetOnEachIteration) {
+
+      throw new ConversionIllegalStateException(
+          "When using perUser=false, resetOnEachIteration should not be used");
+    }
+  }
+
+  /** Builder. */
+  public abstract static class CounterConfigWrapperBuilder<
+          C extends CounterConfigWrapper, B extends CounterConfigWrapperBuilder<C, B>>
+      extends ConfigTestElementWrapper.ConfigTestElementWrapperBuilder<
+          CounterConfig, CounterConfigGui, C, B> {
+
+    public B withIncrement(Integer increment) {
+
+      return withIncrementAsVar(String.valueOf(increment));
+    }
+
+    /** Starting value. */
+    public B withStart(Integer start) {
+      return withStartAsVar(String.valueOf(start));
+    }
+
+    /** Maximum value. */
+    public B withEnd(Integer end) {
+      return withEndAsVar(String.valueOf(end));
+    }
+
+    /** track counter independently for each user. */
+    public B withPerUser(boolean perUser) {
+      if (!perUser && this.resetOnEachIteration$set) {
+        throw new ConversionIllegalStateException(
+            "When using perUser=false, resetOnEachIteration should not be used");
+      }
+      if (!perUser) {
+        withResetOnEachIteration(false);
+      }
+      this.perUser$value = perUser;
+      this.perUser$set = true;
+      return self();
+    }
+
+    /** reset counter on each thread group iteration. */
+    public B withResetOnEachIteration(boolean resetOnEachIteration) {
+      if (!this.perUser$value && this.perUser$set) {
+        throw new ConversionIllegalStateException(
+            "When using ConversionIllegalStateException=false,"
+                + " resetOnEachIteration should not be used");
+      }
+      this.resetOnEachIteration$value = resetOnEachIteration;
+      this.resetOnEachIteration$set = true;
+      return self();
+    }
+  }
+}

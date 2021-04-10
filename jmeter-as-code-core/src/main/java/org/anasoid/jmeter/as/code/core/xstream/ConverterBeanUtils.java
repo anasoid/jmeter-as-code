@@ -32,6 +32,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import org.anasoid.jmeter.as.code.core.wrapper.jmc.Variable;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestElementWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.property.JMeterProperty;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcAsAttribute;
@@ -271,6 +272,9 @@ public final class ConverterBeanUtils {
 
     } else if (ppClazz == Double.class) {
       return JMeterProperty.DOUBLE.value();
+
+    } else if (ppClazz == Variable.class) {
+      return JMeterProperty.STRING.value();
 
     } else if (value instanceof TestElementWrapper) {
       return JMeterProperty.ELEMENT.value();
