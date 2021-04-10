@@ -23,6 +23,7 @@ import org.anasoid.jmeter.as.code.core.wrapper.jmeter.gui.JMeterGUIWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.basic.AbstractBasicChildTestElementWrapper;
 import org.apache.jmeter.config.ConfigTestElement;
 import org.apache.jmeter.config.gui.AbstractConfigGui;
+import org.apache.jmeter.testelement.AbstractTestElement;
 
 /**
  * Wrapper for ConfigTestElement.
@@ -31,6 +32,6 @@ import org.apache.jmeter.config.gui.AbstractConfigGui;
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 public abstract class ConfigTestElementWrapper<
-        T extends ConfigTestElement, G extends AbstractConfigGui>
+        T extends AbstractTestElement, G extends AbstractConfigGui>
     extends AbstractBasicChildTestElementWrapper<T>
     implements JMeterGUIWrapper<G>, ConfigElementWrapper<T> {}
