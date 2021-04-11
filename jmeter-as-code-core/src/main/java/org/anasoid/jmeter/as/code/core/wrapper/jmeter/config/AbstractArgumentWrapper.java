@@ -24,6 +24,7 @@ import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.basic.AbstractBasicTestElementWrapper;
+import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcNullAllowed;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcSkipDefault;
 import org.apache.jmeter.config.Argument;
@@ -43,6 +44,7 @@ public abstract class AbstractArgumentWrapper<T extends Argument>
   private String name;
 
   @JmcProperty(Argument.VALUE)
+  @JmcNullAllowed
   private @Getter String value;
 
   @JmcProperty(Argument.METADATA)

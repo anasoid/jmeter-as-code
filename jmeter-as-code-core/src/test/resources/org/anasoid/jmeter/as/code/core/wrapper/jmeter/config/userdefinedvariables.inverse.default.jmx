@@ -20,6 +20,16 @@
             <stringProp name="Argument.desc">mydesc</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
+          <elementProp name="myvar2" elementType="Argument">
+            <stringProp name="Argument.name">myvar2</stringProp>
+            <stringProp name="Argument.value">myvalue2</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="myvar3" elementType="Argument">
+            <stringProp name="Argument.name">myvar3</stringProp>
+            <stringProp name="Argument.value"></stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
         </collectionProp>
       </Arguments>
       <hashTree/>

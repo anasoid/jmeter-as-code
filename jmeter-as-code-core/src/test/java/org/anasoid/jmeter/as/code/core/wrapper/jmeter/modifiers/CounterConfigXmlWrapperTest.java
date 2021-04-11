@@ -36,12 +36,6 @@ class CounterConfigXmlWrapperTest extends AbstractJmcTest {
   private static final String NODE_NAME = "CounterConfig";
 
   @Test
-  void testSetter()
-      throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-    SetterTestUtils.testSetter(CounterConfigWrapper.builder().build());
-  }
-
-  @Test
   void testDefault() throws IOException {
 
     TestPlanWrapper testPlanWrapper =

@@ -5,8 +5,6 @@ import java.lang.reflect.InvocationTargetException;
 import org.anasoid.jmeter.as.code.core.AbstractJmcTest;
 import org.anasoid.jmeter.as.code.core.test.utils.SetterTestUtils;
 import org.anasoid.jmeter.as.code.core.test.utils.xmlunit.JmcXmlComparator;
-import org.anasoid.jmeter.as.code.core.wrapper.jmc.Variable;
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.modifiers.CounterConfigWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestPlanWrapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -29,16 +27,16 @@ import org.xmlunit.diff.Diff;
  * Date :   11-Apr-2021
  */
 
-class RandomVariableConfigWrapperXmlTest extends AbstractJmcTest {
+class ArgumentsWrapperXmlTest extends AbstractJmcTest {
 
   private static final String PARENT_PATH = "org/anasoid/jmeter/as/code/core/wrapper/jmeter/config";
 
-  private static final String NODE_NAME = "RandomVariableConfig";
+  private static final String NODE_NAME = "Arguments";
 
   @Test
   void testSetter()
       throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-    SetterTestUtils.testSetter(RandomVariableConfigWrapper.builder().build());
+    SetterTestUtils.testSetter(ArgumentsWrapper.builder().build());
   }
 
   @Test
@@ -47,11 +45,11 @@ class RandomVariableConfigWrapperXmlTest extends AbstractJmcTest {
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
             .withName("Test Plan")
-            .addConfig(RandomVariableConfigWrapper.builder().withName("Random Variable").build())
+            .addConfig(ArgumentsWrapper.builder().withName("User Defined Variables").build())
             .build();
     String wrapperContent = toTmpFile(testPlanWrapper, NODE_NAME + "_");
     String wrapperContentFragment = getFragmentSingleNode(wrapperContent, NODE_NAME);
-    String expectedContent = readFile(PARENT_PATH + "/randomvariable.default.jmx");
+    String expectedContent = readFile(PARENT_PATH + "/userdefinedvariables.default.jmx");
     String expectedContentFragment = getFragmentSingleNode(expectedContent, NODE_NAME);
     Diff diff = JmcXmlComparator.compare(expectedContentFragment, wrapperContentFragment);
     Assertions.assertFalse(
@@ -65,19 +63,21 @@ class RandomVariableConfigWrapperXmlTest extends AbstractJmcTest {
         TestPlanWrapper.builder()
             .withName("Test Plan")
             .addConfig(
-                RandomVariableConfigWrapper.builder()
-                    .withName("Random Variable inverse")
-                    .withMinimumValue(10)
-                    .withMaximumValue(20)
-                    .withFormat("format")
-                    .withPerThread(true)
-                    .withRandomSeed(100)
-                    .withVariable(new Variable("myVar"))
+                ArgumentsWrapper.builder()
+                    .withName("User Defined Variables inverse")
+                    .addArgument(
+                        ArgumentWrapper.builder()
+                            .withName("myvar")
+                            .withValue("myvalue")
+                            .withDescription("mydesc")
+                            .build())
+                    .addArgument("myvar2", "myvalue2")
+                    .addArgument(ArgumentWrapper.builder().withName("myvar3").build())
                     .build())
             .build();
     String wrapperContent = toTmpFile(testPlanWrapper, NODE_NAME + "_");
     String wrapperContentFragment = getFragmentSingleNode(wrapperContent, NODE_NAME);
-    String expectedContent = readFile(PARENT_PATH + "/randomvariable.inverse.default.jmx");
+    String expectedContent = readFile(PARENT_PATH + "/userdefinedvariables.inverse.default.jmx");
     String expectedContentFragment = getFragmentSingleNode(expectedContent, NODE_NAME);
     Diff diff = JmcXmlComparator.compare(expectedContentFragment, wrapperContentFragment);
     Assertions.assertFalse(
