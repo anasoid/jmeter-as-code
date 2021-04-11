@@ -13,25 +13,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * @author : anas
- * Date :   27-Feb-2021
+ * Date :   11-Apr-2021
  */
 
 package org.anasoid.jmeter.as.code.core.wrapper.jmeter.config;
 
 import lombok.experimental.SuperBuilder;
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.gui.JMeterGUIWrapper;
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.basic.AbstractBasicChildTestElementWrapper;
-import org.apache.jmeter.config.ConfigTestElement;
-import org.apache.jmeter.gui.JMeterGUIComponent;
-import org.apache.jmeter.testelement.AbstractTestElement;
+import org.apache.jmeter.config.RandomVariableConfig;
+import org.apache.jmeter.testbeans.gui.TestBeanGUI;
 
 /**
- * Wrapper for ConfigTestElement.
+ * Wrapper for RandomVariableConfig.
  *
- * @see ConfigTestElement
+ * @see RandomVariableConfig
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
-public abstract class ConfigTestElementWrapper<
-        T extends AbstractTestElement, G extends JMeterGUIComponent>
-    extends AbstractBasicChildTestElementWrapper<T>
-    implements JMeterGUIWrapper<G>, ConfigElementWrapper<T> {}
+public class RandomVariableConfigWrapper
+    extends ConfigTestElementWrapper<RandomVariableConfig, TestBeanGUI> {
+
+  @Override
+  public Class<TestBeanGUI> getGuiClass() {
+    return TestBeanGUI.class;
+  }
+
+  @Override
+  public Class<RandomVariableConfig> getTestClass() {
+    return RandomVariableConfig.class;
+  }
+}
