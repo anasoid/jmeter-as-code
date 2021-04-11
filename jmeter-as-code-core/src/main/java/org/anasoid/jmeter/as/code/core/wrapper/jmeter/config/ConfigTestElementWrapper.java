@@ -22,7 +22,7 @@ import lombok.experimental.SuperBuilder;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.gui.JMeterGUIWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.basic.AbstractBasicChildTestElementWrapper;
 import org.apache.jmeter.config.ConfigTestElement;
-import org.apache.jmeter.config.gui.AbstractConfigGui;
+import org.apache.jmeter.gui.JMeterGUIComponent;
 import org.apache.jmeter.testelement.AbstractTestElement;
 
 /**
@@ -32,6 +32,6 @@ import org.apache.jmeter.testelement.AbstractTestElement;
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 public abstract class ConfigTestElementWrapper<
-        T extends AbstractTestElement, G extends AbstractConfigGui>
+        T extends AbstractTestElement, G extends JMeterGUIComponent>
     extends AbstractBasicChildTestElementWrapper<T>
     implements JMeterGUIWrapper<G>, ConfigElementWrapper<T> {}

@@ -1,11 +1,12 @@
-package org.anasoid.jmeter.as.code.core.wrapper.jmeter.protocol.http.control;
+package org.anasoid.jmeter.as.code.core.wrapper.jmeter.config;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import org.anasoid.jmeter.as.code.core.AbstractJmcTest;
 import org.anasoid.jmeter.as.code.core.test.utils.SetterTestUtils;
 import org.anasoid.jmeter.as.code.core.test.utils.xmlunit.JmcXmlComparator;
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.assertions.ResponseAssertionWrapper;
+import org.anasoid.jmeter.as.code.core.wrapper.jmc.Variable;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.modifiers.CounterConfigWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestPlanWrapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -25,15 +26,20 @@ import org.xmlunit.diff.Diff;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * @author : anas
- * Date :   09-Apr-2021
+ * Date :   11-Apr-2021
  */
 
-class CacheManagerWrapperXMLTest extends AbstractJmcTest {
+class RandomVariableConfigWrapperXmlTest extends AbstractJmcTest {
 
-  private static final String PARENT_PATH =
-      "org/anasoid/jmeter/as/code/core/wrapper/jmeter/protocol/http/control";
+  private static final String PARENT_PATH = "org/anasoid/jmeter/as/code/core/wrapper/jmeter/config";
 
-  private static final String NODE_NAME = "CacheManager";
+  private static final String NODE_NAME = "RandomVariableConfig";
+
+  @Test
+  void testSetter()
+      throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    SetterTestUtils.testSetter(RandomVariableConfigWrapper.builder().build());
+  }
 
   @Test
   void testDefault() throws IOException {
@@ -41,39 +47,40 @@ class CacheManagerWrapperXMLTest extends AbstractJmcTest {
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
             .withName("Test Plan")
-            .addConfig(CacheManagerWrapper.builder().withName("HTTP Cache Manager").build())
+            .addConfig(RandomVariableConfigWrapper.builder().withName("Random Variable").build())
             .build();
-
-    String wrapperContent = toTmpFile(testPlanWrapper, "httpcachemanager_");
+    String wrapperContent = toTmpFile(testPlanWrapper, NODE_NAME + "_");
     String wrapperContentFragment = getFragmentSingleNode(wrapperContent, NODE_NAME);
-    String expectedContent = readFile(PARENT_PATH + "/httpcachemanager.default.jmx");
+    String expectedContent = readFile(PARENT_PATH + "/randomvariable.default.jmx");
     String expectedContentFragment = getFragmentSingleNode(expectedContent, NODE_NAME);
     Diff diff = JmcXmlComparator.compare(expectedContentFragment, wrapperContentFragment);
     Assertions.assertFalse(
-        JmcXmlComparator.hasDifferences(diff), "httpcachemanager  not identical " + diff);
+        JmcXmlComparator.hasDifferences(diff), NODE_NAME + "  not identical " + diff);
   }
 
   @Test
-  void testReverse() throws IOException {
+  void testInverseDefault() throws IOException {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
             .withName("Test Plan")
             .addConfig(
-                CacheManagerWrapper.builder()
-                    .withName("HTTP Cache Manager Reverse")
-                    .withMaxSize(7000)
-                    .withControlledByThread(true)
-                    .withUseExpires(false)
+                RandomVariableConfigWrapper.builder()
+                    .withName("Random Variable inverse")
+                    .withMinimumValue(10)
+                    .withMaximumValue(20)
+                    .withFormat("format")
+                    .withPerThread(true)
+                    .withRandomSeed(100)
+                    .withVariable(new Variable("myVar"))
                     .build())
             .build();
-
-    String wrapperContent = toTmpFile(testPlanWrapper, "httpcachemanager_");
+    String wrapperContent = toTmpFile(testPlanWrapper, NODE_NAME + "_");
     String wrapperContentFragment = getFragmentSingleNode(wrapperContent, NODE_NAME);
-    String expectedContent = readFile(PARENT_PATH + "/httpcachemanager.reverse.jmx");
+    String expectedContent = readFile(PARENT_PATH + "/randomvariable.inverse.default.jmx");
     String expectedContentFragment = getFragmentSingleNode(expectedContent, NODE_NAME);
     Diff diff = JmcXmlComparator.compare(expectedContentFragment, wrapperContentFragment);
     Assertions.assertFalse(
-        JmcXmlComparator.hasDifferences(diff), "httpcachemanager  not identical " + diff);
+        JmcXmlComparator.hasDifferences(diff), NODE_NAME + "  not identical " + diff);
   }
 }
