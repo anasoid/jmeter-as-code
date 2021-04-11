@@ -19,6 +19,7 @@
 package org.anasoid.jmeter.as.code.core.wrapper.jmeter.config;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import lombok.Builder;
@@ -101,13 +102,7 @@ public class ArgumentsWrapper extends ConfigTestElementWrapper<Arguments, Argume
      * @param argument argument. to be add
      */
     public B addArgument(ArgumentWrapper argument) {
-      if (!this.arguments$set) {
-        this.arguments$value = new ArrayList<>();
-      }
-      this.arguments$value.add(argument);
-      this.arguments$set = true;
-
-      return self();
+      return addArguments(Arrays.asList(argument));
     }
   }
 }

@@ -18,6 +18,7 @@
 
 package org.anasoid.jmeter.as.code.core.wrapper.jmc;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
@@ -31,6 +32,7 @@ import lombok.NonNull;
  */
 public class Variable implements Serializable {
 
+  @XStreamOmitField private static final long serialVersionUID = -2353696454050745099L;
   private final String name;
 
   /**
