@@ -18,7 +18,14 @@
 
 package org.anasoid.jmeter.as.code.core.wrapper.jmeter.config;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import lombok.Builder.Default;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import org.anasoid.jmeter.as.code.core.wrapper.jmc.Variable;
+import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcNullAllowed;
+import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
 import org.apache.jmeter.config.RandomVariableConfig;
 import org.apache.jmeter.testbeans.gui.TestBeanGUI;
 
@@ -28,8 +35,53 @@ import org.apache.jmeter.testbeans.gui.TestBeanGUI;
  * @see RandomVariableConfig
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@SuppressWarnings("PMD.RedundantFieldInitializer")
 public class RandomVariableConfigWrapper
     extends ConfigTestElementWrapper<RandomVariableConfig, TestBeanGUI> {
+
+  @XStreamOmitField private static final long serialVersionUID = 1718898026893070845L;
+
+  /** Configure the Random generator. minimum Value. */
+  @JmcProperty("minimumValue")
+  @Getter
+  @Setter
+  @Default
+  private String minimumValueAsVar = "1";
+
+  /** Configure the Random generator. maximum Value. */
+  @JmcProperty("maximumValue")
+  @Getter
+  @Setter
+  @JmcNullAllowed
+  private String maximumValueAsVar;
+
+  /** Configure the Random generator,Seed for Random function. */
+  @JmcProperty("randomSeed")
+  @Getter
+  @Setter
+  @JmcNullAllowed
+  private String randomSeedAsVar;
+
+  /** Output variable. Variable Name. */
+  @JmcProperty("variableName")
+  @Getter
+  @Setter
+  @JmcNullAllowed
+  private Variable variable;
+
+  /** Output variable. Output Format. */
+  @JmcProperty("outputFormat")
+  @Getter
+  @Setter
+  @JmcNullAllowed
+  private String format;
+
+  /** Per Thread(User) ?. */
+  @JmcProperty("perThread")
+  @Getter
+  @Setter
+  @Default
+  private boolean perThread = false;
 
   @Override
   public Class<TestBeanGUI> getGuiClass() {
@@ -39,5 +91,27 @@ public class RandomVariableConfigWrapper
   @Override
   public Class<RandomVariableConfig> getTestClass() {
     return RandomVariableConfig.class;
+  }
+
+  /** Builder. */
+  public abstract static class RandomVariableConfigWrapperBuilder<
+          C extends RandomVariableConfigWrapper, B extends RandomVariableConfigWrapperBuilder<C, B>>
+      extends ConfigTestElementWrapper.ConfigTestElementWrapperBuilder<
+          RandomVariableConfig, TestBeanGUI, C, B> {
+
+    /** Configure the Random generator. minimum Value. */
+    public B withMinimumValue(Integer minimum) {
+      return withMinimumValueAsVar(String.valueOf(minimum));
+    }
+
+    /** Configure the Random generator. maximum Value. */
+    public B withMaximumValue(Integer maximum) {
+      return withMaximumValueAsVar(String.valueOf(maximum));
+    }
+
+    /** Configure the Random generator,Seed for Random function. */
+    public B withRandomSeed(Integer randomSeed) {
+      return withRandomSeedAsVar(String.valueOf(randomSeed));
+    }
   }
 }

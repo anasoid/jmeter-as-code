@@ -1,9 +1,7 @@
-package org.anasoid.jmeter.as.code.core.wrapper.jmeter.modifiers;
+package org.anasoid.jmeter.as.code.core.wrapper.jmeter.config;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import org.anasoid.jmeter.as.code.core.AbstractJmcTest;
-import org.anasoid.jmeter.as.code.core.test.utils.SetterTestUtils;
 import org.anasoid.jmeter.as.code.core.test.utils.xmlunit.JmcXmlComparator;
 import org.anasoid.jmeter.as.code.core.wrapper.jmc.Variable;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestPlanWrapper;
@@ -25,21 +23,14 @@ import org.xmlunit.diff.Diff;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * @author : anas
- * Date :   10-Apr-2021
+ * Date :   11-Apr-2021
  */
 
-class CounterConfigXmlWrapperTest extends AbstractJmcTest {
+class RandomVariableConfigWrapperXmlTest extends AbstractJmcTest {
 
-  private static final String PARENT_PATH =
-      "org/anasoid/jmeter/as/code/core/wrapper/jmeter/modifiers";
+  private static final String PARENT_PATH = "org/anasoid/jmeter/as/code/core/wrapper/jmeter/config";
 
-  private static final String NODE_NAME = "CounterConfig";
-
-  @Test
-  void testSetter()
-      throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-    SetterTestUtils.testSetter(CounterConfigWrapper.builder().build());
-  }
+  private static final String NODE_NAME = "RandomVariableConfig";
 
   @Test
   void testDefault() throws IOException {
@@ -47,11 +38,11 @@ class CounterConfigXmlWrapperTest extends AbstractJmcTest {
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
             .withName("Test Plan")
-            .addConfig(CounterConfigWrapper.builder().withName("Counter").build())
+            .addConfig(RandomVariableConfigWrapper.builder().withName("Random Variable").build())
             .build();
     String wrapperContent = toTmpFile(testPlanWrapper, NODE_NAME + "_");
     String wrapperContentFragment = getFragmentSingleNode(wrapperContent, NODE_NAME);
-    String expectedContent = readFile(PARENT_PATH + "/counter.default.jmx");
+    String expectedContent = readFile(PARENT_PATH + "/randomvariable.default.jmx");
     String expectedContentFragment = getFragmentSingleNode(expectedContent, NODE_NAME);
     Diff diff = JmcXmlComparator.compare(expectedContentFragment, wrapperContentFragment);
     Assertions.assertFalse(
@@ -59,26 +50,25 @@ class CounterConfigXmlWrapperTest extends AbstractJmcTest {
   }
 
   @Test
-  void testDefaultReverse() throws IOException {
+  void testInverseDefault() throws IOException {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
             .withName("Test Plan")
             .addConfig(
-                CounterConfigWrapper.builder()
-                    .withName("Counter reverse")
-                    .withStart(10)
-                    .withEnd(200)
-                    .withIncrement(5)
-                    .withVariable(new Variable("var"))
-                    .withPerUser(true)
-                    .withResetOnEachIteration(true)
+                RandomVariableConfigWrapper.builder()
+                    .withName("Random Variable inverse")
+                    .withMinimumValue(10)
+                    .withMaximumValue(20)
                     .withFormat("format")
+                    .withPerThread(true)
+                    .withRandomSeed(100)
+                    .withVariable(new Variable("myVar"))
                     .build())
             .build();
     String wrapperContent = toTmpFile(testPlanWrapper, NODE_NAME + "_");
     String wrapperContentFragment = getFragmentSingleNode(wrapperContent, NODE_NAME);
-    String expectedContent = readFile(PARENT_PATH + "/counter.default.reverse.jmx");
+    String expectedContent = readFile(PARENT_PATH + "/randomvariable.inverse.default.jmx");
     String expectedContentFragment = getFragmentSingleNode(expectedContent, NODE_NAME);
     Diff diff = JmcXmlComparator.compare(expectedContentFragment, wrapperContentFragment);
     Assertions.assertFalse(
