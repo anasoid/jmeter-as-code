@@ -19,6 +19,7 @@
 package org.anasoid.jmeter.as.code.core.wrapper.jmc.generic;
 
 import com.thoughtworks.xstream.annotations.XStreamConverter;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -32,7 +33,6 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import lombok.NonNull;
 import lombok.SneakyThrows;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestElementWrapper;
 import org.anasoid.jmeter.as.code.core.xstream.ConverterBeanUtils;
@@ -56,27 +56,19 @@ public abstract class AbstractJmxIncludeWrapper<T> implements TestElementWrapper
               + "</hashTree>[\\s]*</jmeterTestPlan>",
           Pattern.DOTALL);
 
+  @SuppressWarnings("PMD.UnusedAssignment")
+  @XStreamOmitField
   private Set<String> tags = new HashSet<>();
+
   private boolean isInitialized;
 
+  @SuppressWarnings("PMD.UnusedAssignment")
   private String path = getDefaultPath();
+
   private Map<String, String> params = new HashMap<>(); // NOPMD
 
   protected String getDefaultPath() {
     return null;
-  }
-
-  protected AbstractJmxIncludeWrapper(@NonNull String path) {
-    this.path = path;
-  }
-
-  protected AbstractJmxIncludeWrapper(@NonNull String path, Map<String, String> params) {
-    this.path = path;
-    this.params = new HashMap<>(params);
-  }
-
-  protected AbstractJmxIncludeWrapper(Map<String, String> params) {
-    this.params = new HashMap<>(params);
   }
 
   /** Convert object to Xml. */
