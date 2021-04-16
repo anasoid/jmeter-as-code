@@ -82,16 +82,16 @@ public class ResponseAssertionWrapper
   @JmcProperty("Assertion.test_type")
   protected Integer testType() {
     int result = matchingRule.value;
-    if (not) {
+    if (isNot()) {
       result = result | NOT;
-      if (or) {
+      if (isOr()) {
         result = result | OR;
       } else {
         result = result & ~OR;
       }
     } else {
       result = result & ~NOT;
-      if (or) {
+      if (isOr()) {
         result = result | OR;
       } else {
         result = result & ~OR;

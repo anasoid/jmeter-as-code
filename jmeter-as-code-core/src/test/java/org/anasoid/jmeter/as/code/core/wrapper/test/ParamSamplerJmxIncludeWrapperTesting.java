@@ -18,6 +18,7 @@
 
 package org.anasoid.jmeter.as.code.core.wrapper.test;
 
+import java.io.IOException;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.samplers.SamplerJmxIncludeWrapper;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcParam;
@@ -36,4 +37,6 @@ public class ParamSamplerJmxIncludeWrapperTesting extends SamplerJmxIncludeWrapp
 
   @JmcParam("path")
   private static String myPath = "mypath";
+
+
 }
