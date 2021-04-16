@@ -13,24 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * @author : anas
- * Date :   27-Feb-2021
+ * Date :   13-Apr-2021
  */
 
-package org.anasoid.jmeter.as.code.core.wrapper.jmeter.config;
+package org.anasoid.jmeter.as.code.core.xstream.types;
 
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestElementWrapper;
-import org.apache.jmeter.testelement.AbstractTestElement;
+/** Manage Boolean type. */
+public class BooleanManager extends TypeManager {
 
-/**
- * Wrapper for ConfigElement. Using AbstractTestElement as not all configElement implement
- * configElement.
- *
- * @see org.apache.jmeter.config.ConfigElement
- */
-@SuppressWarnings("PMD.ConstantsInInterface")
-public interface ConfigElementWrapper<T extends AbstractTestElement>
-    extends TestElementWrapper<T> { // NOSONAR
+  @Override
+  public Class getType(String value) {
+    if (value == null) {
+      return Boolean.class;
+    }
+    if ("true".equalsIgnoreCase(value) || "false".equalsIgnoreCase(value)) { // NOPMD
+      return Boolean.class;
+    }
 
-  String TRUE = "true";
-  String FALSE = "false";
+    return String.class;
+  }
 }
