@@ -119,6 +119,8 @@ public final class SetterTestUtils {
   /** test all setter. */
   public static void testSetter(TestElementWrapper testElement)
       throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    // Coverage toString
+    testElement.toString();
 
     List<Field> fields = SetterTestUtils.getSetterFields(testElement);
     Random rnd = new Random(999999);
