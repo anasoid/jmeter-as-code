@@ -46,6 +46,7 @@ import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcSkipDefault;
 import org.anasoid.jmeter.as.code.core.xstream.exceptions.ConversionException;
 import org.anasoid.jmeter.as.code.core.xstream.exceptions.ConversionMandatoryException;
+import org.anasoid.jmeter.as.code.core.xstream.types.TypeManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -251,6 +252,7 @@ public final class ConverterBeanUtils {
   }
 
   /** get Property Alias (intProp,stringProp,longProp .. ). */
+  @SuppressWarnings("PMD.NPathComplexity")
   public static String getPropertyAlias(Object value, Class<?> clazz) {
     Class<?> ppClazz = (clazz == Void.class && value != null) ? value.getClass() : clazz;
     if ((value != null) && (value.getClass().isEnum())) {
@@ -258,6 +260,20 @@ public final class ConverterBeanUtils {
       return getPropertyAlias(
           enumValue, (clazz == Void.class || clazz.isEnum()) ? enumValue.getClass() : clazz);
     }
+    if (TypeManager.class.isAssignableFrom(clazz)) {
+
+      try {
+        return getPropertyAlias(
+            value,
+            ((TypeManager) clazz.getDeclaredConstructor().newInstance()).getType((String) value));
+      } catch (InstantiationException
+          | NoSuchMethodException
+          | IllegalAccessException
+          | InvocationTargetException e) {
+        throw new ConversionException(e);
+      }
+    }
+
     if (ppClazz == Integer.class) {
       return JMeterProperty.INTEGER.value();
     } else if (ppClazz == String.class) {

@@ -13,24 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * @author : anas
- * Date :   27-Feb-2021
+ * Date :   13-Apr-2021
  */
 
-package org.anasoid.jmeter.as.code.core.wrapper.jmeter.config;
+package org.anasoid.jmeter.as.code.core.xstream.types;
 
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestElementWrapper;
-import org.apache.jmeter.testelement.AbstractTestElement;
+/** Type Manager, used to manage dynmaic property, when property depend on value. */
+public abstract class TypeManager {
 
-/**
- * Wrapper for ConfigElement. Using AbstractTestElement as not all configElement implement
- * configElement.
- *
- * @see org.apache.jmeter.config.ConfigElement
- */
-@SuppressWarnings("PMD.ConstantsInInterface")
-public interface ConfigElementWrapper<T extends AbstractTestElement>
-    extends TestElementWrapper<T> { // NOSONAR
-
-  String TRUE = "true";
-  String FALSE = "false";
+  /** get Type of the value. */
+  public abstract Class<?> getType(String value);
 }

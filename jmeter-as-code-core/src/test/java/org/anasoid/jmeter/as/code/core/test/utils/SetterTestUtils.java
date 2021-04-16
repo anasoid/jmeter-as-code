@@ -67,6 +67,32 @@ public final class SetterTestUtils {
   /**
    * get All field with setter annotation.
    *
+   * @param source object to be parsed.
+   * @return list all field.
+   */
+  private static List<Field> getGetterFields(Object source) {
+    Map<String, Field> result = new HashMap<>(); // NOPMD
+    Class<?> clazz = source.getClass();
+    for (Class<?> sclazz : ConverterBeanUtils.getSuperClasses(clazz)) {
+      for (Field field : sclazz.getDeclaredFields()) {
+        if (!result.containsKey(field.getName())) {
+
+          try {
+            Method method = getGetterMethod(source, field);
+          } catch (NoSuchMethodException e) {
+            continue;
+          }
+
+          result.put(field.getName(), field);
+        }
+      }
+    }
+    return new ArrayList<>(result.values());
+  }
+
+  /**
+   * get All field with setter annotation.
+   *
    * @return list all field.
    */
   private static Method getSetterMethod(Object source, Field field) throws NoSuchMethodException {
@@ -75,6 +101,19 @@ public final class SetterTestUtils {
         "set" + fieldName.substring(0, 1).toUpperCase(Locale.ROOT) + fieldName.substring(1);
 
     return source.getClass().getMethod(getMethodName, field.getType());
+  }
+
+  /**
+   * get All field with Getter annotation.
+   *
+   * @return list all field.
+   */
+  private static Method getGetterMethod(Object source, Field field) throws NoSuchMethodException {
+    String fieldName = field.getName();
+    String getMethodName =
+        "get" + fieldName.substring(0, 1).toUpperCase(Locale.ROOT) + fieldName.substring(1);
+
+    return source.getClass().getMethod(getMethodName);
   }
 
   /** test all setter. */
@@ -114,12 +153,30 @@ public final class SetterTestUtils {
         rnd.nextBytes(array);
         value = field.getType().getEnumConstants()[0];
         method.invoke(testElement, value);
+      } else if (List.class.isAssignableFrom(field.getType())) {
+        value = new ArrayList<>();
+        method.invoke(testElement, value);
       } else {
 
         throw new AssertionError("Type not found for :" + field);
       }
       field.setAccessible(true);
       Assertions.assertEquals(value, field.get(testElement));
+    }
+
+    testGetter(testElement);
+  }
+
+  /** test all Getter. */
+  public static void testGetter(TestElementWrapper testElement)
+      throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+
+    List<Field> fields = SetterTestUtils.getGetterFields(testElement);
+    Random rnd = new Random(999999);
+    for (Field field : fields) {
+      Method method = getGetterMethod(testElement, field);
+
+      method.invoke(testElement);
     }
   }
 }
