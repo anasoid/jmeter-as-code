@@ -19,6 +19,7 @@
 package org.anasoid.jmeter.as.code.core.wrapper.jmeter.config;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -28,10 +29,14 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import org.anasoid.jmeter.as.code.core.config.JmcConfig;
 import org.anasoid.jmeter.as.code.core.wrapper.jmc.Variable;
 import org.anasoid.jmeter.as.code.core.wrapper.jmc.config.ShareMode;
+import org.anasoid.jmeter.as.code.core.wrapper.jmc.validator.Validator;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcNullAllowed;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
+import org.anasoid.jmeter.as.code.core.xstream.exceptions.ConversionException;
+import org.anasoid.jmeter.as.code.core.xstream.exceptions.ConversionIllegalStateException;
 import org.anasoid.jmeter.as.code.core.xstream.types.BooleanManager;
 import org.apache.jmeter.config.CSVDataSet;
 import org.apache.jmeter.testbeans.gui.TestBeanGUI;
@@ -43,15 +48,14 @@ import org.apache.jmeter.testbeans.gui.TestBeanGUI;
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 @SuppressWarnings("PMD.TooManyMethods")
-public class CSVDataSetWrapper extends ConfigTestElementWrapper<CSVDataSet, TestBeanGUI> {
+public class CSVDataSetWrapper extends ConfigTestElementWrapper<CSVDataSet, TestBeanGUI>
+    implements Validator {
 
   @XStreamOmitField private static final long serialVersionUID = -1283066246657871689L;
 
-  @JmcProperty("filename")
-  @Getter
-  @Setter
-  @NonNull
-  private String filename;
+  @XStreamOmitField @Getter @Setter private String filename;
+
+  @XStreamOmitField @Getter @Setter private String resourceFile;
 
   @JmcProperty("fileEncoding")
   @Getter
@@ -60,6 +64,19 @@ public class CSVDataSetWrapper extends ConfigTestElementWrapper<CSVDataSet, Test
   private String fileEncoding;
 
   @XStreamOmitField @Getter @Default private List<Variable> variables = new ArrayList<>();
+
+  @JmcProperty("filename")
+  protected String getFilePath() {
+    if (resourceFile != null) {
+      URL url = Thread.currentThread().getContextClassLoader().getResource(resourceFile);
+      if (url == null) {
+        throw new ConversionException("ResourceFile not found : " + resourceFile);
+      }
+      return url.getFile();
+    }
+
+    return JmcConfig.getDataRoot() + filename;
+  }
 
   @JmcProperty("variableNames")
   protected String getVariableNames() {
@@ -118,6 +135,17 @@ public class CSVDataSetWrapper extends ConfigTestElementWrapper<CSVDataSet, Test
   @Override
   public Class<CSVDataSet> getTestClass() {
     return CSVDataSet.class;
+  }
+
+  @Override
+  public void validate() throws ConversionIllegalStateException { // NOPMD
+    if (getFilePath() == null) {
+      throw new ConversionIllegalStateException("Filename not provided");
+    }
+
+    if (getVariables().isEmpty()) {
+      throw new ConversionIllegalStateException("Variables is mandatory");
+    }
   }
 
   /** Builder. */

@@ -26,6 +26,12 @@ public final class JmcConfig {
 
   private JmcConfig() {}
 
+
+  /** Get Data root folder. */
+  public static String getDataRoot() {
+    return "";
+  }
+
   /**
    * Gets the Version (from Jmeter).
    *
