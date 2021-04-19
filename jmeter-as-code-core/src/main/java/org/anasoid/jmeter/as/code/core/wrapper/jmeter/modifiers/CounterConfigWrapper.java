@@ -50,21 +50,21 @@ public class CounterConfigWrapper extends ConfigTestElementWrapper<CounterConfig
   @Getter
   @Setter
   @JmcNullAllowed
-  private String startAsVar;
+  private String start;
 
   /** Maximum value. */
   @JmcProperty("CounterConfig.end")
   @Getter
   @Setter
   @JmcNullAllowed
-  private String endAsVar;
+  private String end;
 
   /** Increment. */
   @JmcProperty("CounterConfig.incr")
   @Getter
   @Setter
   @JmcNullAllowed
-  private String incrementAsVar;
+  private String increment;
 
   /** Variable Name. */
   @JmcProperty("CounterConfig.name")
@@ -115,24 +115,58 @@ public class CounterConfigWrapper extends ConfigTestElementWrapper<CounterConfig
   }
 
   /** Builder. */
+  @SuppressWarnings({"PMD.TooManyMethods"})
   public abstract static class CounterConfigWrapperBuilder<
           C extends CounterConfigWrapper, B extends CounterConfigWrapperBuilder<C, B>>
       extends ConfigTestElementWrapper.ConfigTestElementWrapperBuilder<
           CounterConfig, CounterConfigGui, C, B> {
 
+    /** Increment. */
     public B withIncrement(Integer increment) {
+      return withIncrement(String.valueOf(increment));
+    }
 
-      return withIncrementAsVar(String.valueOf(increment));
+    /** Increment. */
+    public B withIncrement(Variable increment) {
+      return withIncrement(String.valueOf(increment.getValue()));
+    }
+
+    /** Increment. */
+    public B withIncrement(String increment) {
+      this.increment = increment;
+      return self();
     }
 
     /** Starting value. */
     public B withStart(Integer start) {
-      return withStartAsVar(String.valueOf(start));
+      return withStart(String.valueOf(start));
+    }
+
+    /** Starting value. */
+    public B withStart(Variable start) {
+      return withStart(String.valueOf(start));
+    }
+
+    /** Starting value. */
+    public B withStart(String start) {
+      this.start = start;
+      return self();
     }
 
     /** Maximum value. */
     public B withEnd(Integer end) {
-      return withEndAsVar(String.valueOf(end));
+      return withEnd(String.valueOf(end));
+    }
+
+    /** Maximum value. */
+    public B withEnd(Variable end) {
+      return withEnd(String.valueOf(end.getValue()));
+    }
+
+    /** Maximum value. */
+    public B withEnd(String end) {
+      this.end = end;
+      return self();
     }
 
     /** track counter independently for each user. */

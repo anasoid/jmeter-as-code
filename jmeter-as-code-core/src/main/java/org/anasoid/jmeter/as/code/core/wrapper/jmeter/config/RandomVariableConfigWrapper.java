@@ -46,21 +46,21 @@ public class RandomVariableConfigWrapper
   @Getter
   @Setter
   @Default
-  private String minimumValueAsVar = "1";
+  private String minimumValue = "1";
 
   /** Configure the Random generator. maximum Value. */
   @JmcProperty("maximumValue")
   @Getter
   @Setter
   @JmcNullAllowed
-  private String maximumValueAsVar;
+  private String maximumValue;
 
   /** Configure the Random generator,Seed for Random function. */
   @JmcProperty("randomSeed")
   @Getter
   @Setter
   @JmcNullAllowed
-  private String randomSeedAsVar;
+  private String randomSeed;
 
   /** Output variable. Variable Name. */
   @JmcProperty("variableName")
@@ -101,17 +101,51 @@ public class RandomVariableConfigWrapper
 
     /** Configure the Random generator. minimum Value. */
     public B withMinimumValue(Integer minimum) {
-      return withMinimumValueAsVar(String.valueOf(minimum));
+      return withMinimumValue(String.valueOf(minimum));
+    }
+
+    /** Configure the Random generator. minimum Value. */
+    public B withMinimumValue(Variable minimum) {
+      return withMinimumValue(String.valueOf(minimum.getValue()));
+    }
+
+    /** Configure the Random generator. minimum Value. */
+    public B withMinimumValue(String minimum) {
+      this.minimumValue$value = minimum;
+      this.minimumValue$set = true;
+      return self();
     }
 
     /** Configure the Random generator. maximum Value. */
     public B withMaximumValue(Integer maximum) {
-      return withMaximumValueAsVar(String.valueOf(maximum));
+      return withMaximumValue(String.valueOf(maximum));
+    }
+
+    /** Configure the Random generator. maximum Value. */
+    public B withMaximumValue(Variable maximum) {
+      return withMaximumValue(String.valueOf(maximum.getValue()));
+    }
+
+    /** Configure the Random generator. maximum Value. */
+    public B withMaximumValue(String maximumValue) {
+      this.maximumValue = maximumValue;
+      return self();
     }
 
     /** Configure the Random generator,Seed for Random function. */
     public B withRandomSeed(Integer randomSeed) {
-      return withRandomSeedAsVar(String.valueOf(randomSeed));
+      return withRandomSeed(String.valueOf(randomSeed));
+    }
+
+    /** Configure the Random generator,Seed for Random function. */
+    public B withRandomSeed(Variable randomSeed) {
+      return withRandomSeed(String.valueOf(randomSeed.getValue()));
+    }
+
+    /** Configure the Random generator,Seed for Random function. */
+    public B withRandomSeed(String randomSeed) {
+      this.randomSeed = randomSeed;
+      return self();
     }
   }
 }

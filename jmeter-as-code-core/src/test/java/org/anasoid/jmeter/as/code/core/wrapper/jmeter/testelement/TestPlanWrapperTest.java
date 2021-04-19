@@ -85,7 +85,7 @@ class TestPlanWrapperTest extends AbstractJmcTest {
     Assertions.assertEquals(
         "thread", ((ThreadGroupWrapper) testPlanWrapper.getChilds().get(0)).getName());
     Assertions.assertEquals(
-        "100", ((ThreadGroupWrapper) testPlanWrapper.getChilds().get(0)).getDelayAsVar());
+        "100", ((ThreadGroupWrapper) testPlanWrapper.getChilds().get(0)).getDelay());
   }
 
   class MyThread extends AbstractJmcTemplate<ThreadGroupWrapper> {

@@ -26,6 +26,7 @@ import java.util.List;
 import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
+import org.anasoid.jmeter.as.code.core.wrapper.jmc.Variable;
 import org.anasoid.jmeter.as.code.core.wrapper.jmc.samplers.Implementation;
 import org.anasoid.jmeter.as.code.core.wrapper.jmc.samplers.IpSourceType;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.config.ConfigTestElementWrapper;
@@ -69,7 +70,7 @@ public class HttpDefaultsWrapper
   @JmcProperty(value = HTTPSamplerBase.PORT)
   @Getter
   @JmcNullAllowed
-  private final String portAsVar;
+  private final String port;
 
   /** Protocol [http]. */
   @JmcProperty(value = HTTPSamplerBase.PROTOCOL)
@@ -108,7 +109,7 @@ public class HttpDefaultsWrapper
 
   @JmcProperty(value = HTTPSamplerBase.PROXYPORT)
   @Getter
-  private final String proxyPortAsVar;
+  private final String proxyPort;
   /** Proxy user. */
   @JmcProperty(HTTPSamplerBase.PROXYUSER)
   @Getter
@@ -123,13 +124,13 @@ public class HttpDefaultsWrapper
   @JmcProperty(value = HTTPSamplerBase.CONNECT_TIMEOUT)
   @Getter
   @JmcNullAllowed
-  private final String connectTimeoutAsVar;
+  private final String connectTimeout;
 
   /** Response Timeouts (milliseconds). */
   @JmcProperty(value = HTTPSamplerBase.RESPONSE_TIMEOUT)
   @Getter
   @JmcNullAllowed
-  private final String responseTimeoutAsVar;
+  private final String responseTimeout;
 
   /** Save response as MD5 hash. */
   @JmcProperty(HTTPSamplerBase.MD5)
@@ -144,7 +145,7 @@ public class HttpDefaultsWrapper
   @JmcProperty(value = HTTPSamplerBase.CONCURRENT_POOL)
   @Default
   @Getter
-  private String concurrentPoolAsVar = String.valueOf(HTTPSamplerBase.CONCURRENT_POOL_SIZE);
+  private String concurrentPool = String.valueOf(HTTPSamplerBase.CONCURRENT_POOL_SIZE);
 
   /** Embedded Resources from HTML Files: URLs must match. */
   @JmcProperty(value = HTTPSamplerBase.EMBEDDED_URL_RE)
@@ -250,29 +251,85 @@ public class HttpDefaultsWrapper
     @SuppressWarnings("PMD.UnusedFormalParameter")
     private void withArguments(List<HTTPArgumentWrapper> arguments) {} // NOSONAR
 
-    /** set Port. */
+    /** Port Number. */
     public B withPort(int port) {
-      return withPortAsVar(String.valueOf(port));
+      return withPort(String.valueOf(port));
+    }
+
+    /** Port Number. */
+    public B withPort(Variable port) {
+      return withPort(String.valueOf(port.getValue()));
+    }
+
+    /** Port Number. */
+    public B withPort(String port) {
+      this.port = port;
+      return self();
     }
 
     /** set Proxy Port. */
-    public B withProxyPort(int port) {
-      return withProxyPortAsVar(String.valueOf(port));
+    public B withProxyPort(int proxyPort) {
+      return withProxyPort(String.valueOf(proxyPort));
     }
 
     /** set Proxy Port. */
+    public B withProxyPort(Variable proxyPort) {
+      return withProxyPort(String.valueOf(proxyPort.getValue()));
+    }
+
+    /** set Proxy Port. */
+    public B withProxyPort(String proxyPort) {
+      this.proxyPort = proxyPort;
+      return self();
+    }
+
+    /** Embedded Resources from HTML Files: Concurrent pool for parallel download. */
     public B withConcurrentPool(int pool) {
-      return withConcurrentPoolAsVar(String.valueOf(pool));
+      return withConcurrentPool(String.valueOf(pool));
+    }
+
+    /** Embedded Resources from HTML Files: Concurrent pool for parallel download. */
+    public B withConcurrentPool(Variable pool) {
+      return withConcurrentPool(String.valueOf(pool.getValue()));
+    }
+
+    /** Embedded Resources from HTML Files: Concurrent pool for parallel download. */
+    public B withConcurrentPool(String concurrentPool) {
+      this.concurrentPool$value = concurrentPool;
+      this.concurrentPool$set = true;
+      return self();
     }
 
     /** set Connect Timeout. */
     public B withConnectTimeout(int timeout) {
-      return withConnectTimeoutAsVar(String.valueOf(timeout));
+      return withConnectTimeout(String.valueOf(timeout));
+    }
+
+    /** set Connect Timeout. */
+    public B withConnectTimeout(Variable timeout) {
+      return withConnectTimeout(String.valueOf(timeout.getValue()));
+    }
+
+    /** set Connect Timeout. */
+    public B withConnectTimeout(String connectTimeout) {
+      this.connectTimeout = connectTimeout;
+      return self();
     }
 
     /** set Response Timeout. */
     public B withResponseTimeout(int timeout) {
-      return withResponseTimeoutAsVar(String.valueOf(timeout));
+      return withResponseTimeout(String.valueOf(timeout));
+    }
+
+    /** set Response Timeout. */
+    public B withResponseTimeout(Variable timeout) {
+      return withResponseTimeout(String.valueOf(timeout.getValue()));
+    }
+
+    /** set Response Timeout. */
+    public B withResponseTimeout(String responseTimeout) {
+      this.responseTimeout = responseTimeout;
+      return self();
     }
 
     /**

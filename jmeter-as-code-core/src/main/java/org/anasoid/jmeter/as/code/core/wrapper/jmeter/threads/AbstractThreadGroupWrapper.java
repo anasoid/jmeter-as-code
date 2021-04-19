@@ -25,6 +25,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmeter.as.code.core.application.validator.annotations.JmcChildrenTypes;
+import org.anasoid.jmeter.as.code.core.wrapper.jmc.Variable;
 import org.anasoid.jmeter.as.code.core.wrapper.jmc.threads.OnSampleError;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.control.ControllerWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.control.GenericControllerWrapper;
@@ -61,7 +62,7 @@ public abstract class AbstractThreadGroupWrapper<
   /** Number of Threads (users). */
   @JmcProperty(value = AbstractThreadGroup.NUM_THREADS)
   @Builder.Default
-  private @Getter @Setter String numThreadsAsVar = "1";
+  private @Getter @Setter String numThreads = "1";
 
   /** the sampler controller. */
   @JmcProperty(AbstractThreadGroup.MAIN_CONTROLLER)
@@ -78,7 +79,19 @@ public abstract class AbstractThreadGroupWrapper<
 
     /** set number of Threads. */
     public B withNumThreads(int numThreads) {
-      return withNumThreadsAsVar(String.valueOf(numThreads));
+      return withNumThreads(String.valueOf(numThreads));
+    }
+
+    /** set number of Threads. */
+    public B withNumThreads(Variable numThreads) {
+      return withNumThreads(String.valueOf(numThreads.getValue()));
+    }
+
+    /** set number of Threads. */
+    public B withNumThreads(String numThreads) {
+      this.numThreads$value = numThreads;
+      this.numThreads$set = true;
+      return self();
     }
 
     private B withSamplerController(GenericControllerWrapper<?, ?> controller) { // NOSONAR
