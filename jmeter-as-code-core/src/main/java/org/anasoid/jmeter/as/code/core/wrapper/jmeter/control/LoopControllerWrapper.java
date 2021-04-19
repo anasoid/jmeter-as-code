@@ -21,6 +21,7 @@ package org.anasoid.jmeter.as.code.core.wrapper.jmeter.control;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
+import org.anasoid.jmeter.as.code.core.wrapper.jmc.Variable;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
 import org.apache.jmeter.control.LoopController;
 import org.apache.jmeter.control.gui.LoopControlPanel;
@@ -39,10 +40,11 @@ public class LoopControllerWrapper
   @Builder.Default
   @Getter
   Boolean continueForever = false;
-  /** Loop Count. */
+
+  /** Number of iterations to use. */
   @JmcProperty(value = LoopController.LOOPS)
   @Getter
-  private String loopsAsVar;
+  private String loops;
 
   /** Builder. */
   public abstract static class LoopControllerWrapperBuilder<
@@ -50,9 +52,20 @@ public class LoopControllerWrapper
       extends GenericControllerWrapper.GenericControllerWrapperBuilder<
           LoopController, LoopControlPanel, C, B> {
 
-    /** set loops. */
+    /** Number of iterations to use. */
     public B withLoops(int loops) {
-      return withLoopsAsVar(String.valueOf(loops));
+      return withLoops(String.valueOf(loops));
+    }
+
+    /** Number of iterations to use. */
+    public B withLoops(Variable loops) {
+      return withLoops(String.valueOf(loops.getValue()));
+    }
+
+    /** Number of iterations to use. */
+    public B withLoops(String loops) {
+      this.loops = loops;
+      return self();
     }
   }
 

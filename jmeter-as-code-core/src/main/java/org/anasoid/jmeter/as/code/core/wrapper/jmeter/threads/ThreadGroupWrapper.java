@@ -24,6 +24,7 @@ import lombok.Builder;
 import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
+import org.anasoid.jmeter.as.code.core.wrapper.jmc.Variable;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.control.LoopControllerWrapper;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcNullAllowed;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
@@ -59,22 +60,22 @@ public class ThreadGroupWrapper extends AbstractThreadGroupWrapper<ThreadGroup, 
   @JmcProperty(value = ThreadGroup.DURATION)
   @Getter
   @JmcNullAllowed
-  private String durationAsVar;
+  private String duration;
 
   /** Startup delay (seconds). */
   @JmcProperty(value = ThreadGroup.DELAY)
   @Getter
   @JmcNullAllowed
-  private String delayAsVar;
+  private String delay;
 
   /** Ramp-up period (seconds). */
   @JmcProperty(value = ThreadGroup.RAMP_TIME)
   @Getter
   @Builder.Default
-  private String rampUpAsVar = "1";
+  private String rampUp = "1";
 
-  /** loops number. */
-  @XStreamOmitField private @Builder.Default @Getter String loopsAsVar = "1";
+  /** Number of iterations to use. */
+  @XStreamOmitField private @Builder.Default @Getter String loops = "1";
   /**
    * In spite of the name, this is actually used to determine if the loop controller is repeatable.
    * The value is only used in nextIsNull() when the loop end condition has been detected: If
@@ -93,36 +94,83 @@ public class ThreadGroupWrapper extends AbstractThreadGroupWrapper<ThreadGroup, 
     if (Boolean.TRUE.equals(continueForever)) {
       samplerControllerBuilder.withLoops(-1);
     } else {
-      samplerControllerBuilder.withLoopsAsVar(loopsAsVar);
+      samplerControllerBuilder.withLoops(loops);
     }
 
     samplerController = samplerControllerBuilder.build();
   }
 
   /** builder. */
+  @SuppressWarnings({"PMD.TooManyMethods"})
   public abstract static class ThreadGroupWrapperBuilder<
           C extends ThreadGroupWrapper, B extends ThreadGroupWrapperBuilder<C, B>>
       extends AbstractThreadGroupWrapper.AbstractThreadGroupWrapperBuilder<
           ThreadGroup, ThreadGroupGui, C, B> {
 
-    /** set rampUp. */
+    /** Ramp-up period (seconds). */
     public B withRampUp(int rampUp) {
-      return withRampUpAsVar(String.valueOf(rampUp));
+      return withRampUp(String.valueOf(rampUp));
     }
 
-    /** set duration. */
+    /** Ramp-up period (seconds). */
+    public B withRampUp(Variable rampUp) {
+      return withRampUp(String.valueOf(rampUp.getValue()));
+    }
+
+    /** Ramp-up period (seconds). */
+    public B withRampUp(String rampUp) {
+      this.rampUp$value = rampUp;
+      this.rampUp$set = true;
+      return self();
+    }
+
+    /** Duration (seconds). */
     public B withDuration(int duration) {
-      return withDurationAsVar(String.valueOf(duration));
+      return withDuration(String.valueOf(duration));
     }
 
-    /** set delay. */
+    /** Duration (seconds). */
+    public B withDuration(Variable duration) {
+      return withDuration(String.valueOf(duration.getValue()));
+    }
+
+    /** Duration (seconds). */
+    public B withDuration(String duration) {
+      this.duration = duration;
+      return self();
+    }
+
+    /** Startup delay (seconds). */
     public B withDelay(int delay) {
-      return withDelayAsVar(String.valueOf(delay));
+      return withDelay(String.valueOf(delay));
     }
 
-    /** set loops. */
+    /** Startup delay (seconds). */
+    public B withDelay(Variable delay) {
+      return withDelay(String.valueOf(delay.getValue()));
+    }
+
+    /** Startup delay (seconds). */
+    public B withDelay(String delay) {
+      this.delay = delay;
+      return self();
+    }
+
+    /** Number of iterations to use. */
     public B withLoops(int loops) {
-      return withLoopsAsVar(String.valueOf(loops));
+      return withLoops(String.valueOf(loops));
+    }
+
+    /** Number of iterations to use. */
+    public B withLoops(Variable loops) {
+      return withLoops(String.valueOf(loops.getValue()));
+    }
+
+    /** Number of iterations to use. */
+    public B withLoops(String loops) {
+      this.loops$value = loops;
+      this.loops$set = true;
+      return self();
     }
   }
 
