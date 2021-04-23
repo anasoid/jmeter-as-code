@@ -110,7 +110,8 @@ public class ResponseAssertionWrapper
     @SuppressWarnings("PMD.UnusedFormalParameter")
     private void withPatterns(List<String> patterns) {} // NOSONAR
 
-    protected B addPatterns(List<String> patterns) {
+    /** Add list of patterns. */
+    public B addPatterns(List<String> patterns) {
       if (!this.patterns$set) {
         this.patterns$value = new ArrayList<>();
         this.patterns$set = true;
@@ -119,7 +120,8 @@ public class ResponseAssertionWrapper
       return self();
     }
 
-    protected B addPattern(String pattern) {
+    /** Add pattern to list of patterns. */
+    public B addPattern(String pattern) {
       return addPatterns(Arrays.asList(pattern));
     }
   }

@@ -29,8 +29,8 @@ import java.util.List;
 import javax.xml.transform.Source;
 import org.anasoid.jmeter.as.code.core.application.ApplicationTest;
 import org.anasoid.jmeter.as.code.core.test.utils.SetterTestUtils;
+import org.anasoid.jmeter.as.code.core.util.FileUtils;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestPlanWrapper;
-import org.apache.commons.io.FileUtils;
 import org.apache.jmeter.testelement.TestElement;
 import org.xmlunit.builder.Input;
 
@@ -51,8 +51,6 @@ public abstract class AbstractJmcTest {
   protected void println(String content) {
     System.out.println(content); // NOPMD
   }
-
-
 
   /**
    * save testplan to tmp file.
@@ -80,9 +78,7 @@ public abstract class AbstractJmcTest {
    * @return file content as string.
    */
   protected String readFile(String resource) throws IOException {
-    URL url = this.getClass().getClassLoader().getResource(resource); // NOPMD
-
-    return FileUtils.readFileToString(new File(url.getFile()), StandardCharsets.UTF_8);
+    return FileUtils.readResource(resource);
   }
 
   /**

@@ -26,10 +26,19 @@ public final class JmcConfig {
 
   private JmcConfig() {}
 
-
   /** Get Data root folder. */
-  public static String getDataRoot() {
+  public static String getDataRootFolder() {
     return "";
+  }
+
+  /** Get Script root folder. */
+  public static String getScriptRootFolder() {
+    return "";
+  }
+
+  /** Get Script root folder. */
+  public static boolean isScriptResource() {
+    return true;
   }
 
   /**

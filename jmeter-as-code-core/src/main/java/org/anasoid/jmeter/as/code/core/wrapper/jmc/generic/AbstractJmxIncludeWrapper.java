@@ -20,11 +20,8 @@ package org.anasoid.jmeter.as.code.core.wrapper.jmc.generic;
 
 import com.thoughtworks.xstream.annotations.XStreamConverter;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
-import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -34,13 +31,13 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import lombok.SneakyThrows;
+import org.anasoid.jmeter.as.code.core.util.FileUtils;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestElementWrapper;
 import org.anasoid.jmeter.as.code.core.xstream.ConverterBeanUtils;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcParam;
 import org.anasoid.jmeter.as.code.core.xstream.converters.TestElementConverter;
 import org.anasoid.jmeter.as.code.core.xstream.exceptions.ConversionException;
 import org.apache.commons.collections.MapUtils;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 
 /** Abstract JmX Include element. */
@@ -77,7 +74,7 @@ public abstract class AbstractJmxIncludeWrapper<T> implements TestElementWrapper
       throw new ConversionException(
           "Path [" + path + "]+ is provided and  getDefaultPath  for :" + this);
     }
-    String raw = readFile(path);
+    String raw = FileUtils.readResource(path);
     return replaceParam(cleanup(raw));
   }
 
@@ -134,20 +131,6 @@ public abstract class AbstractJmxIncludeWrapper<T> implements TestElementWrapper
       throw new ConversionException("Format incorrect for node : " + raw);
     }
     return result;
-  }
-
-  /**
-   * read file from resource as string.
-   *
-   * @param resource resource path.
-   * @return file content as string.
-   */
-  protected String readFile(String resource) throws IOException {
-    URL url = this.getClass().getClassLoader().getResource(resource); // NOPMD
-    if (url == null) {
-      throw new ConversionException("Resource not found : " + resource);
-    }
-    return FileUtils.readFileToString(new File(url.getFile()), StandardCharsets.UTF_8);
   }
 
   /**
