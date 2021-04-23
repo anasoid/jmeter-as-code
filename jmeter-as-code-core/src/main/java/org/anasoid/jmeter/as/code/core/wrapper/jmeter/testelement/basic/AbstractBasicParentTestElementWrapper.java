@@ -26,7 +26,9 @@ import java.util.List;
 import lombok.Builder;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmeter.as.code.core.application.validator.annotations.JmcChildrenTypes;
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.config.ConfigTestElementWrapper;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.config.ConfigElementWrapper;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.processor.PostProcessorWrapper;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.processor.PreProcessorWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AssertionWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestElementWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.template.JmcTemplate;
@@ -34,7 +36,13 @@ import org.apache.jmeter.testelement.AbstractTestElement;
 
 /** Class represent a node with Children. */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
-@JmcChildrenTypes(type = {AssertionWrapper.class, ConfigTestElementWrapper.class})
+@JmcChildrenTypes(
+    type = {
+      AssertionWrapper.class,
+      ConfigElementWrapper.class,
+      PreProcessorWrapper.class,
+      PostProcessorWrapper.class
+    })
 public abstract class AbstractBasicParentTestElementWrapper<T extends AbstractTestElement>
     extends AbstractBasicTestElementWrapper<T> {
 
@@ -46,6 +54,7 @@ public abstract class AbstractBasicParentTestElementWrapper<T extends AbstractTe
   }
 
   /** Builder. */
+  @SuppressWarnings({"PMD.TooManyMethods"})
   public abstract static class AbstractBasicParentTestElementWrapperBuilder<
           T extends AbstractTestElement,
           C extends AbstractBasicParentTestElementWrapper<T>,
@@ -65,6 +74,8 @@ public abstract class AbstractBasicParentTestElementWrapper<T extends AbstractTe
 
       return self();
     }
+
+    // ASSERTION .
 
     /**
      * Add Assertion.
@@ -92,8 +103,10 @@ public abstract class AbstractBasicParentTestElementWrapper<T extends AbstractTe
       return self();
     }
 
+    // Config .
+
     /** Add configElement as child in tree. */
-    public B addConfig(ConfigTestElementWrapper<?, ?> config) { // NOSONAR
+    public B addConfig(ConfigElementWrapper<?> config) { // NOSONAR
       return addConfigs(Arrays.asList(config));
     }
 
@@ -102,14 +115,62 @@ public abstract class AbstractBasicParentTestElementWrapper<T extends AbstractTe
      *
      * @param config template config.
      */
-    public <E extends ConfigTestElementWrapper<?, ?>> B addConfig(JmcTemplate<E> config) {
+    public <E extends ConfigElementWrapper<?>> B addConfig(JmcTemplate<E> config) {
       return addConfig(config.generate());
     }
 
     /** Add configElements as child in tree. */
-    public B addConfigs(List<ConfigTestElementWrapper<?, ?>> childs) { // NOSONAR
-      for (ConfigTestElementWrapper<?, ?> config : childs) {
+    public B addConfigs(List<ConfigElementWrapper<?>> childs) { // NOSONAR
+      for (ConfigElementWrapper<?> config : childs) {
         withChild(config);
+      }
+      return self();
+    }
+
+    // PreProcessor .
+
+    /** Add PreProcessor as child in tree. */
+    public B addPreProcessor(PreProcessorWrapper<?> preProcessor) { // NOSONAR
+      return addPreProcessors(Arrays.asList(preProcessor));
+    }
+
+    /**
+     * Add preProcessor as child in tree.
+     *
+     * @param preProcessor template preProcessor.
+     */
+    public <E extends PreProcessorWrapper<?>> B addPreProcessor(JmcTemplate<E> preProcessor) {
+      return addPreProcessor(preProcessor.generate());
+    }
+
+    /** Add preProcessor as child in tree. */
+    public B addPreProcessors(List<PreProcessorWrapper<?>> childs) { // NOSONAR
+      for (PreProcessorWrapper<?> child : childs) {
+        withChild(child);
+      }
+      return self();
+    }
+
+    // PostProcessor .
+
+    /** Add postProcessor as child in tree. */
+    public B addPostProcessor(PostProcessorWrapper<?> postProcessor) { // NOSONAR
+      return addPostProcessors(Arrays.asList(postProcessor));
+    }
+
+    /**
+     * Add postProcessor as child in tree.
+     *
+     * @param postProcessor template postProcessor.
+     */
+    public <E extends PostProcessorWrapper<?>> B addPostProcessor(JmcTemplate<E> postProcessor) {
+      return addPostProcessor(postProcessor.generate());
+    }
+
+    /** Add postProcessor as child in tree. */
+    public B addPostProcessors(List<PostProcessorWrapper<?>> childs) { // NOSONAR
+      for (PostProcessorWrapper<?> child : childs) {
+        withChild(child);
       }
       return self();
     }

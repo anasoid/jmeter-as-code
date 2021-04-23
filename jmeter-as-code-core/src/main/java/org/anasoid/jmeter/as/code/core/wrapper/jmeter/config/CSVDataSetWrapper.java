@@ -75,7 +75,7 @@ public class CSVDataSetWrapper extends ConfigTestElementWrapper<CSVDataSet, Test
       return url.getFile();
     }
 
-    return JmcConfig.getDataRoot() + filename;
+    return JmcConfig.getDataRootFolder() + filename;
   }
 
   @JmcProperty("variableNames")
