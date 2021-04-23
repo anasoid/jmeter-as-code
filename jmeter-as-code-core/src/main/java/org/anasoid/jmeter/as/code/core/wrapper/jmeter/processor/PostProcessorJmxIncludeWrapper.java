@@ -13,18 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * @author : anas
- * Date :   21-Apr-2021
+ * Date :   03-Apr-2021
  */
 
 package org.anasoid.jmeter.as.code.core.wrapper.jmeter.processor;
 
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestElementWrapper;
-import org.apache.jmeter.processor.PreProcessor;
+import lombok.experimental.SuperBuilder;
+import org.anasoid.jmeter.as.code.core.wrapper.jmc.generic.AbstractJmxIncludeWrapper;
 import org.apache.jmeter.testelement.AbstractTestElement;
 
-/**
- * Wrapper of PreProcessor.
- *
- * @see PreProcessor
- */
-public interface PreProcessorWrapper<T extends AbstractTestElement> extends TestElementWrapper<T> {}
+/** ConfigElement Include Jmx. */
+@SuperBuilder(setterPrefix = "with", toBuilder = true)
+public class PostProcessorJmxIncludeWrapper extends AbstractJmxIncludeWrapper<AbstractTestElement>
+    implements PostProcessorWrapper<AbstractTestElement> {}

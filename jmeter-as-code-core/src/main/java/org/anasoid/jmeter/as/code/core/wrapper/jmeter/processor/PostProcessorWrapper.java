@@ -20,10 +20,12 @@ package org.anasoid.jmeter.as.code.core.wrapper.jmeter.processor;
 
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestElementWrapper;
 import org.apache.jmeter.processor.PostProcessor;
+import org.apache.jmeter.testelement.AbstractTestElement;
 
 /**
  * Wrapper of PostProcessor.
  *
  * @see PostProcessor
  */
-public interface PostProcessorWrapper<T extends PostProcessor> extends TestElementWrapper<T> {}
+public interface PostProcessorWrapper<T extends AbstractTestElement>
+    extends TestElementWrapper<T> {}
