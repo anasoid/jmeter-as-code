@@ -2,9 +2,11 @@ package org.anasoid.jmeter.as.code.core.wrapper.jmeter.protocol.http.modifier;
 
 import java.io.IOException;
 import java.io.StringWriter;
+import java.lang.reflect.InvocationTargetException;
 import org.anasoid.jmeter.as.code.core.AbstractJmcTest;
 import org.anasoid.jmeter.as.code.core.application.ApplicationTest;
 import org.anasoid.jmeter.as.code.core.application.ApplicationTestUtilsForTesting;
+import org.anasoid.jmeter.as.code.core.test.utils.SetterTestUtils;
 import org.anasoid.jmeter.as.code.core.xstream.exceptions.ConversionMandatoryException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -26,16 +28,19 @@ import org.junit.jupiter.api.Test;
  * Date :   24-Apr-2021
  */
 
-class URLRewritingModifierWrapperTest  extends AbstractJmcTest {
+class URLRewritingModifierWrapperTest extends AbstractJmcTest {
 
+  @Test
+  void testSetter()
+      throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    SetterTestUtils.testSetter(URLRewritingModifierWrapper.builder().build());
+  }
 
   @Test
   void testFailMandatoryArgument() throws IOException {
 
     try {
-      URLRewritingModifierWrapper wrapper =
-          URLRewritingModifierWrapper.builder()
-              .build();
+      URLRewritingModifierWrapper wrapper = URLRewritingModifierWrapper.builder().build();
       ApplicationTest applicationTest = ApplicationTestUtilsForTesting.getApplicationTest(wrapper);
       StringWriter wr = new StringWriter(); // NOPMD
       applicationTest.toJmx(wr);
@@ -45,5 +50,4 @@ class URLRewritingModifierWrapperTest  extends AbstractJmcTest {
       // Nothing
     }
   }
-
 }

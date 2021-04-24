@@ -1,7 +1,9 @@
 package org.anasoid.jmeter.as.code.core.wrapper.jmeter.protocol.http.modifier;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import org.anasoid.jmeter.as.code.core.AbstractJmcTest;
+import org.anasoid.jmeter.as.code.core.test.utils.SetterTestUtils;
 import org.anasoid.jmeter.as.code.core.test.utils.xmlunit.JmcXmlComparator;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestPlanWrapper;
 import org.junit.jupiter.api.Assertions;
@@ -30,6 +32,12 @@ class AnchorModifierWrapperXmlTest extends AbstractJmcTest {
       "org/anasoid/jmeter/as/code/core/wrapper/jmeter/protocol/http/modifier/";
 
   private static final String NODE_NAME = "AnchorModifier";
+
+  @Test
+  void testSetter()
+      throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    SetterTestUtils.testSetter(AnchorModifierWrapper.builder().build());
+  }
 
   @Test
   void testDefault() throws IOException {
