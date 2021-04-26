@@ -80,7 +80,7 @@ public class XPath2ExtractorWrapper
   @Setter
   private String defaultValue;
 
-  @JmcProperty("XPathExtractor2.default")
+  @JmcProperty("XPathExtractor2.fragment")
   @Getter
   @Setter
   @Default
