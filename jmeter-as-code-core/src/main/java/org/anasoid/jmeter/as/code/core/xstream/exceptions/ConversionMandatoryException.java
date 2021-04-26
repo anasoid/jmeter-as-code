@@ -20,14 +20,16 @@ package org.anasoid.jmeter.as.code.core.xstream.exceptions;
 
 import java.lang.reflect.AccessibleObject;
 
-/**
- * Error when Mandatory field.
- */
+/** Error when Mandatory field. */
 public class ConversionMandatoryException extends ConversionException {
 
   static final long serialVersionUID = -703454586545466939L;
 
   public ConversionMandatoryException(Object source, AccessibleObject field) {
-    super("Field (" + field + ") is mandatory on " + source.toString());
+    this(source, field.toString());
+  }
+
+  public ConversionMandatoryException(Object source, String fieldName) {
+    super("Field (" + fieldName + ") is mandatory on " + source.toString());
   }
 }
