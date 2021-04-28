@@ -1,7 +1,9 @@
 package org.anasoid.jmeter.as.code.core.wrapper.jmeter.extractor;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import org.anasoid.jmeter.as.code.core.AbstractJmcTest;
+import org.anasoid.jmeter.as.code.core.test.utils.SetterTestUtils;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestPlanWrapper;
 import org.junit.jupiter.api.Test;
 /*
@@ -28,6 +30,12 @@ class DebugPostProcessorWrapperXmlTest extends AbstractJmcTest {
       "org/anasoid/jmeter/as/code/core/wrapper/jmeter/extractor/postprocessor";
 
   private static final String NODE_NAME = "DebugPostProcessor";
+
+  @Test
+  void testSetter()
+      throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    SetterTestUtils.testSetter(DebugPostProcessorWrapper.builder().build());
+  }
 
   @Test
   void testDefault() throws IOException {

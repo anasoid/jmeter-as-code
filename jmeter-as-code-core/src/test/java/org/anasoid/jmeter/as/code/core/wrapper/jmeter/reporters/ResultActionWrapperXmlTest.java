@@ -1,9 +1,10 @@
 package org.anasoid.jmeter.as.code.core.wrapper.jmeter.reporters;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import org.anasoid.jmeter.as.code.core.AbstractJmcTest;
+import org.anasoid.jmeter.as.code.core.test.utils.SetterTestUtils;
 import org.anasoid.jmeter.as.code.core.wrapper.jmc.threads.OnError;
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.extractor.DebugPostProcessorWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestPlanWrapper;
 import org.junit.jupiter.api.Test;
 /*
@@ -30,6 +31,12 @@ class ResultActionWrapperXmlTest extends AbstractJmcTest {
       "org/anasoid/jmeter/as/code/core/wrapper/jmeter/reporters";
 
   private static final String NODE_NAME = "ResultAction";
+
+  @Test
+  void testSetter()
+      throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    SetterTestUtils.testSetter(ResultActionWrapper.builder().build());
+  }
 
   @Test
   void testDefault() throws IOException {

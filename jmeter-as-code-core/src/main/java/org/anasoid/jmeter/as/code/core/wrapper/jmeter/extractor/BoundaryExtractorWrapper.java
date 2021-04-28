@@ -22,10 +22,13 @@ import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import org.anasoid.jmeter.as.code.core.wrapper.jmc.validator.Validator;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.processor.PostProcessorWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AbstractScopedTestElementWrapper;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcMandatory;
+import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcNullAllowed;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
+import org.anasoid.jmeter.as.code.core.xstream.exceptions.ConversionIllegalStateException;
 import org.apache.jmeter.extractor.BoundaryExtractor;
 import org.apache.jmeter.extractor.gui.BoundaryExtractorGui;
 
@@ -38,7 +41,7 @@ import org.apache.jmeter.extractor.gui.BoundaryExtractorGui;
 @SuppressWarnings("PMD.RedundantFieldInitializer")
 public class BoundaryExtractorWrapper
     extends AbstractScopedTestElementWrapper<BoundaryExtractor, BoundaryExtractorGui>
-    implements PostProcessorWrapper<BoundaryExtractor> {
+    implements PostProcessorWrapper<BoundaryExtractor>, Validator {
 
   /**
    * The name of the JMeter variable in which to store the result. Also note that each group is
@@ -69,14 +72,17 @@ public class BoundaryExtractorWrapper
   @JmcProperty("BoundaryExtractor.lboundary")
   @Getter
   @Setter
+  @JmcNullAllowed
   private String leftBoundary;
 
   /** Right boundary of value to find. */
   @JmcProperty("BoundaryExtractor.rboundary")
   @Getter
   @Setter
+  @JmcNullAllowed
   private String rightBoundary;
 
+  /** Use empty default value. */
   @JmcProperty("BoundaryExtractor.default_empty_value")
   @Getter
   @Setter
@@ -89,36 +95,52 @@ public class BoundaryExtractorWrapper
   @JmcProperty("BoundaryExtractor.default")
   @Getter
   @Setter
+  @JmcNullAllowed
   private String defaultValue;
 
   @JmcProperty("BoundaryExtractor.useHeaders")
   @Getter
   @Setter
   @Default
-  private FieldToCheck useHeaders = FieldToCheck.USE_BODY;
+  private FieldToCheck useHeaders = FieldToCheck.BODY;
+
+  @Override
+  @SuppressWarnings("PMD.AvoidUncheckedExceptionsInSignatures")
+  public void validate() throws ConversionIllegalStateException {
+    if (defaultEmpty && defaultValue != null) {
+      throw new ConversionIllegalStateException(
+          "Can't have default value and use default value empty");
+    }
+  }
 
   /** enum for field check. */
   public enum FieldToCheck {
 
     /** Response Header. may not be present for non-HTTP samples. */
-    USE_HDRS("true"),
+    HEADERS("true"),
     /** Request Header. may not be present for non-HTTP samples. */
-    USE_REQUEST_HDRS("request_headers"),
+    REQUEST_HDRS("request_headers"),
     /** the body of the response, e.g. the content of a web-page (excluding headers). */
-    USE_BODY("false"),
+    BODY("false"),
+
+    /**
+     * Body as a Document - the extract text from various type of documents via Apache Tika (see
+     * View Results Tree Document view section).
+     */
+    BODY_AS_DOCUMENT("as_document"),
     /**
      * the body of the response, with all Html escape codes replaced. Note that Html escapes are
      * processed without regard to context, so some incorrect substitutions may be made. (Note that
      * this option highly impacts performances, so use it only when absolutely necessary and be
      * aware of its impacts).
      */
-    USE_BODY_UNESCAPED("unescaped"),
+    BODY_UNESCAPED("unescaped"),
     /** Url. */
-    USE_URL("URL"),
+    URL("URL"),
     /** Response code : ex 200. */
-    USE_CODE("code"),
+    RESPONSE_CODE("code"),
     /** Response message : ex ok. */
-    USE_MESSAGE("message");
+    MESSAGE("message");
 
     public final String value;
 

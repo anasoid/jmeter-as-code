@@ -18,11 +18,15 @@
 
 package org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement;
 
+import lombok.Builder.Default;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import org.anasoid.jmeter.as.code.core.wrapper.jmc.scope.Scope;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.gui.JMeterGUIWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.basic.AbstractBasicChildTestElementWrapper;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
+import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcSkipDefault;
 import org.apache.jmeter.gui.AbstractScopedJMeterGuiComponent;
 import org.apache.jmeter.testelement.AbstractScopedTestElement;
 
@@ -39,4 +43,11 @@ public abstract class AbstractScopedTestElementWrapper<
   @JmcProperty("Scope.variable")
   @Getter
   private String scopeVariable;
+
+  @JmcProperty("Sample.scope")
+  @Getter
+  @Setter
+  @JmcSkipDefault("children")
+  @Default
+  private Scope scope = Scope.CHILDREN;
 }
