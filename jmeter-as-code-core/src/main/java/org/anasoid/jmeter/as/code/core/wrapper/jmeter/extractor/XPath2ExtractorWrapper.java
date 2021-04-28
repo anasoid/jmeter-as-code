@@ -25,6 +25,7 @@ import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.config.ConfigElementWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.processor.PostProcessorWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AbstractScopedTestElementWrapper;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcMandatory;
@@ -40,6 +41,7 @@ import org.apache.jmeter.extractor.gui.XPath2ExtractorGui;
  * @see XPath2Extractor
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@SuppressWarnings("PMD.RedundantFieldInitializer")
 public class XPath2ExtractorWrapper
     extends AbstractScopedTestElementWrapper<XPath2Extractor, XPath2ExtractorGui>
     implements PostProcessorWrapper<XPath2Extractor> {
@@ -84,7 +86,7 @@ public class XPath2ExtractorWrapper
   @Getter
   @Setter
   @Default
-  @JmcSkipDefault("false")
+  @JmcSkipDefault(ConfigElementWrapper.FALSE)
   private boolean fragment = false;
 
   /**

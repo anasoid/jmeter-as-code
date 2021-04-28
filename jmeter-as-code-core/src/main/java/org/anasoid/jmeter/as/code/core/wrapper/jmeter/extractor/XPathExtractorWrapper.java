@@ -22,6 +22,7 @@ import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.config.ConfigElementWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.processor.PostProcessorWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AbstractScopedTestElementWrapper;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcMandatory;
@@ -36,6 +37,7 @@ import org.apache.jmeter.extractor.gui.XPathExtractorGui;
  * @see XPathExtractor
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@SuppressWarnings("PMD.RedundantFieldInitializer")
 public class XPathExtractorWrapper
     extends AbstractScopedTestElementWrapper<XPathExtractor, XPathExtractorGui>
     implements PostProcessorWrapper<XPathExtractor> {
@@ -87,7 +89,7 @@ public class XPathExtractorWrapper
   @Getter
   @Setter
   @Default
-  @JmcSkipDefault("false")
+  @JmcSkipDefault(ConfigElementWrapper.FALSE)
   private boolean fragment = false;
 
   /** Check the document against its schema. (If Tidy is not selected). */
@@ -113,7 +115,7 @@ public class XPathExtractorWrapper
   @Getter
   @Setter
   @Default
-  @JmcSkipDefault("false")
+  @JmcSkipDefault(ConfigElementWrapper.FALSE)
   private boolean whitespace = false;
 
   /** If selected, external DTDs are fetched. (If Tidy is not selected). */
@@ -121,7 +123,7 @@ public class XPathExtractorWrapper
   @Getter
   @Setter
   @Default
-  @JmcSkipDefault("false")
+  @JmcSkipDefault(ConfigElementWrapper.FALSE)
   private boolean downloadDtds = false;
 
   /**
@@ -150,7 +152,7 @@ public class XPathExtractorWrapper
   @Getter
   @Setter
   @Default
-  @JmcSkipDefault("false")
+  @JmcSkipDefault(ConfigElementWrapper.FALSE)
   private boolean tidyReportErrors = false;
 
   /** Sets the Tidy showWarnings option. */
@@ -158,7 +160,7 @@ public class XPathExtractorWrapper
   @Getter
   @Setter
   @Default
-  @JmcSkipDefault("false")
+  @JmcSkipDefault(ConfigElementWrapper.FALSE)
   private boolean tidyShowWarnings = false;
 
   @Override

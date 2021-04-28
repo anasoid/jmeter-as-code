@@ -46,6 +46,7 @@ import org.apache.jmeter.extractor.json.jsonpath.gui.JSONPostProcessorGui;
  * @see JSONPostProcessor
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@SuppressWarnings("PMD.RedundantFieldInitializer")
 public class JSONPostProcessorWrapper
     extends AbstractScopedTestElementWrapper<JSONPostProcessor, JSONPostProcessorGui>
     implements PostProcessorWrapper<JSONPostProcessor>, Validator {
@@ -131,6 +132,7 @@ public class JSONPostProcessorWrapper
   }
 
   @Override
+  @SuppressWarnings("PMD.AvoidUncheckedExceptionsInSignatures")
   public void validate() throws ConversionIllegalStateException {
     if (CollectionUtils.isEmpty(referenceNames)) {
       throw new ConversionMandatoryException(this, "referenceNames");

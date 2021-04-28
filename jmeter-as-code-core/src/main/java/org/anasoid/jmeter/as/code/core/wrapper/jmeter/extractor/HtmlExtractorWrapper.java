@@ -36,6 +36,7 @@ import org.apache.jmeter.extractor.gui.HtmlExtractorGui;
  * @see HtmlExtractor
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@SuppressWarnings("PMD.RedundantFieldInitializer")
 public class HtmlExtractorWrapper
     extends AbstractScopedTestElementWrapper<HtmlExtractor, HtmlExtractorGui>
     implements PostProcessorWrapper<HtmlExtractor> {
@@ -85,7 +86,6 @@ public class HtmlExtractorWrapper
    * to empty string instead of containing ${var} which may be useful if extracted value is
    * optional.
    */
-
   @JmcProperty("HtmlExtractor.default_empty_value")
   @Getter
   @Setter
@@ -107,7 +107,6 @@ public class HtmlExtractorWrapper
   @Setter
   private String defaultValue;
 
-
   @JmcProperty("HtmlExtractor.extractor_impl")
   @Getter
   @Setter
@@ -116,7 +115,6 @@ public class HtmlExtractorWrapper
 
   /** enum for extractor_impl. */
   public enum ExtractorImpl {
-
     JSOUP("JSOUP"),
     JODD("JODD");
 
@@ -135,7 +133,6 @@ public class HtmlExtractorWrapper
       return value;
     }
   }
-
 
   @Override
   public Class<HtmlExtractorGui> getGuiClass() {

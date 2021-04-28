@@ -35,6 +35,7 @@ import org.apache.jmeter.extractor.gui.BoundaryExtractorGui;
  * @see BoundaryExtractor
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@SuppressWarnings("PMD.RedundantFieldInitializer")
 public class BoundaryExtractorWrapper
     extends AbstractScopedTestElementWrapper<BoundaryExtractor, BoundaryExtractorGui>
     implements PostProcessorWrapper<BoundaryExtractor> {
