@@ -47,7 +47,7 @@ public abstract class AbstractScopedTestElementWrapper<
   @JmcProperty("Sample.scope")
   @Getter
   @Setter
-  @JmcSkipDefault("children")
+  @JmcSkipDefault("parent")
   @Default
-  private Scope scope = Scope.CHILDREN;
+  private Scope scope = Scope.PARENT;
 }

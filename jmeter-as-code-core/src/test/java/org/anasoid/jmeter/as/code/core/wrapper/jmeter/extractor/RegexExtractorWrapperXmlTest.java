@@ -24,12 +24,12 @@ import org.junit.jupiter.api.Test;
  * Date :   28-Apr-2021
  */
 
-class BoundaryExtractorWrapperXmlTest extends AbstractJmcTest {
+class RegexExtractorWrapperXmlTest extends AbstractJmcTest {
 
   private static final String PARENT_PATH =
       "org/anasoid/jmeter/as/code/core/wrapper/jmeter/extractor/postprocessor";
 
-  private static final String NODE_NAME = "BoundaryExtractor";
+  private static final String NODE_NAME = "RegexExtractor";
 
   @Test
   void testDefault() throws IOException {
@@ -38,14 +38,17 @@ class BoundaryExtractorWrapperXmlTest extends AbstractJmcTest {
         TestPlanWrapper.builder()
             .withName("Test Plan")
             .addPostProcessor(
-                BoundaryExtractorWrapper.builder()
-                    .withName("Boundary Extractor")
+                RegexExtractorWrapper.builder()
+                    .withName("Regular Expression Extractor")
                     .withRefName("var")
                     .withMatchNumber("0")
+                    .withTemplate("template")
+                    .withRegex("regex")
                     .build())
             .build();
 
-    checkWrapper(testPlanWrapper, PARENT_PATH + "/boundaryExtractor.default.jmx", NODE_NAME);
+    checkWrapper(
+        testPlanWrapper, PARENT_PATH + "/regularExpressionExtractor.default.jmx", NODE_NAME);
   }
 
   /** Test with empty default value. */
@@ -56,15 +59,18 @@ class BoundaryExtractorWrapperXmlTest extends AbstractJmcTest {
         TestPlanWrapper.builder()
             .withName("Test Plan")
             .addPostProcessor(
-                BoundaryExtractorWrapper.builder()
-                    .withName("Boundary Extractor")
+                RegexExtractorWrapper.builder()
+                    .withName("Regular Expression Extractor")
                     .withRefName("var")
                     .withMatchNumber("0")
+                    .withTemplate("template")
+                    .withRegex("regex")
                     .withDefaultEmpty(true)
                     .build())
             .build();
 
-    checkWrapper(testPlanWrapper, PARENT_PATH + "/boundaryExtractor.default.empty.jmx", NODE_NAME);
+    checkWrapper(
+        testPlanWrapper, PARENT_PATH + "/regularExpressionExtractor.default.empty.jmx", NODE_NAME);
   }
 
   @Test
@@ -74,18 +80,19 @@ class BoundaryExtractorWrapperXmlTest extends AbstractJmcTest {
         TestPlanWrapper.builder()
             .withName("Test Plan")
             .addPostProcessor(
-                BoundaryExtractorWrapper.builder()
-                    .withName("Boundary Extractor inverse")
+                RegexExtractorWrapper.builder()
+                    .withName("Regular Expression Extractor inverse")
                     .withRefName("var")
                     .withMatchNumber("0")
-                    .withLeftBoundary("l")
-                    .withRightBoundary("r")
+                    .withTemplate("template")
+                    .withRegex("regex")
                     .withDefaultValue("d")
-                    .withFieldToCheck(FieldToCheck.BODY_AS_DOCUMENT)
-                    .withScope(Scope.ALL)
+                    .withFieldToCheck(FieldToCheck.RESPONSE_CODE)
+                    .withScope(Scope.CHILDREN)
                     .build())
             .build();
 
-    checkWrapper(testPlanWrapper, PARENT_PATH + "/boundaryExtractor.inverse.jmx", NODE_NAME);
+    checkWrapper(
+        testPlanWrapper, PARENT_PATH + "/regularExpressionExtractor.inverse.jmx", NODE_NAME);
   }
 }
