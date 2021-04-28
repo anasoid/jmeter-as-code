@@ -23,7 +23,7 @@ import lombok.Getter;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmeter.as.code.core.wrapper.jmc.threads.OnError;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.gui.JMeterGUIWrapper;
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.basic.AbstractBasicTestElementWrapper;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.basic.AbstractBasicChildTestElementWrapper;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
 import org.apache.jmeter.gui.AbstractJMeterGuiComponent;
 import org.apache.jmeter.testelement.OnErrorTestElement;
@@ -36,13 +36,10 @@ import org.apache.jmeter.testelement.OnErrorTestElement;
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 public abstract class OnErrorTestElementWrapper<
         T extends OnErrorTestElement, G extends AbstractJMeterGuiComponent>
-    extends AbstractBasicTestElementWrapper<T> implements JMeterGUIWrapper<G> {
+    extends AbstractBasicChildTestElementWrapper<T> implements JMeterGUIWrapper<G> {
 
-
-  /**
-   * Action to be taken after a Sampler error.
-   */
-  @JmcProperty(OnErrorTestElement.ON_ERROR_ACTION)
+  /** Action to be taken after a Sampler error. */
+  @JmcProperty(value = OnErrorTestElement.ON_ERROR_ACTION, type = Integer.class)
   @Builder.Default
   @Getter
   private OnError onError = OnError.ON_ERROR_CONTINUE;
