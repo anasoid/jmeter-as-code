@@ -18,12 +18,14 @@
 
 package org.anasoid.jmeter.as.code.core.wrapper.jmeter.extractor;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.gui.JMeterGUIWrapper;
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.basic.AbstractBasicTestElementWrapper;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.processor.PostProcessorWrapper;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.basic.AbstractBasicChildTestElementWrapper;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
 import org.apache.jmeter.extractor.DebugPostProcessor;
 import org.apache.jmeter.testbeans.gui.TestBeanGUI;
@@ -33,9 +35,13 @@ import org.apache.jmeter.testbeans.gui.TestBeanGUI;
  *
  * @see DebugPostProcessor
  */
+@SuppressWarnings("PMD.RedundantFieldInitializer")
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
-public class DebugPostProcessorWrapper extends AbstractBasicTestElementWrapper<DebugPostProcessor>
-    implements JMeterGUIWrapper<TestBeanGUI> {
+public class DebugPostProcessorWrapper
+    extends AbstractBasicChildTestElementWrapper<DebugPostProcessor>
+    implements JMeterGUIWrapper<TestBeanGUI>, PostProcessorWrapper<DebugPostProcessor> {
+
+  @XStreamOmitField private static final long serialVersionUID = 5579621630694220646L;
 
   @JmcProperty("displaySamplerProperties")
   @Getter

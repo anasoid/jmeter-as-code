@@ -18,21 +18,17 @@
 
 package org.anasoid.jmeter.as.code.core;
 
-import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Field;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.List;
 import javax.xml.transform.Source;
 import org.anasoid.jmeter.as.code.core.application.ApplicationTest;
-import org.anasoid.jmeter.as.code.core.test.utils.SetterTestUtils;
+import org.anasoid.jmeter.as.code.core.test.utils.xmlunit.JmcXmlComparator;
 import org.anasoid.jmeter.as.code.core.util.FileUtils;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestPlanWrapper;
-import org.apache.jmeter.testelement.TestElement;
+import org.junit.jupiter.api.Assertions;
 import org.xmlunit.builder.Input;
+import org.xmlunit.diff.Diff;
 
 /** Abstract Class for tests. */
 @SuppressWarnings("PMD.AbstractClassWithoutAbstractMethod")
@@ -50,6 +46,17 @@ public abstract class AbstractJmcTest {
 
   protected void println(String content) {
     System.out.println(content); // NOPMD
+  }
+
+  protected void checkWrapper(TestPlanWrapper testPlanWrapper, String jmxFile, String node)
+      throws IOException {
+
+    String wrapperContent = toTmpFile(testPlanWrapper, node + "_");
+    String wrapperContentFragment = getFragmentSingleNode(wrapperContent, node);
+    String expectedContent = readFile(jmxFile);
+    String expectedContentFragment = getFragmentSingleNode(expectedContent, node);
+    Diff diff = JmcXmlComparator.compare(expectedContentFragment, wrapperContentFragment);
+    Assertions.assertFalse(JmcXmlComparator.hasDifferences(diff), node + "  not identical " + diff);
   }
 
   /**
