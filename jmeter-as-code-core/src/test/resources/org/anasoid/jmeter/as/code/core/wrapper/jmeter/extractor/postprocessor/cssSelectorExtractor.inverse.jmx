@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.4.1">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan" enabled="true">
+      <stringProp name="TestPlan.comments"></stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.tearDown_on_shutdown">true</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <HtmlExtractor guiclass="HtmlExtractorGui" testclass="HtmlExtractor" testname="CSS Selector Extractor inverse" enabled="true">
+        <stringProp name="HtmlExtractor.refname">var</stringProp>
+        <stringProp name="HtmlExtractor.expr">expres</stringProp>
+        <stringProp name="HtmlExtractor.attribute">a</stringProp>
+        <stringProp name="HtmlExtractor.default">d</stringProp>
+        <boolProp name="HtmlExtractor.default_empty_value">false</boolProp>
+        <stringProp name="HtmlExtractor.match_number">0</stringProp>
+        <stringProp name="HtmlExtractor.extractor_impl">JSOUP</stringProp>
+        <stringProp name="Sample.scope">variable</stringProp>
+        <stringProp name="Scope.variable">myvar</stringProp>
+      </HtmlExtractor>
+      <hashTree/>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>

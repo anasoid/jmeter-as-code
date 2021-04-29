@@ -22,6 +22,7 @@ import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import org.anasoid.jmeter.as.code.core.wrapper.jmc.Variable;
 import org.anasoid.jmeter.as.code.core.wrapper.jmc.scope.Scope;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.gui.JMeterGUIWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.basic.AbstractBasicChildTestElementWrapper;
@@ -50,4 +51,25 @@ public abstract class AbstractScopedTestElementWrapper<
   @JmcSkipDefault("parent")
   @Default
   private Scope scope = Scope.PARENT;
+
+  /** Builder. */
+  public abstract static class AbstractScopedTestElementWrapperBuilder<
+          T extends AbstractScopedTestElement,
+          G extends AbstractScopedJMeterGuiComponent,
+          C extends AbstractScopedTestElementWrapper<T, G>,
+          B extends AbstractScopedTestElementWrapperBuilder<T, G, C, B>>
+      extends AbstractBasicChildTestElementWrapper.AbstractBasicChildTestElementWrapperBuilder<
+          T, C, B> {
+
+    /** Scope variable. */
+    public B withScopeVariable(String scopeVariable) {
+      this.scopeVariable = scopeVariable;
+      return self();
+    }
+
+    /** Scope variable. */
+    public B withScopeVariable(Variable scopeVariable) {
+      return withScopeVariable(scopeVariable.getName());
+    }
+  }
 }

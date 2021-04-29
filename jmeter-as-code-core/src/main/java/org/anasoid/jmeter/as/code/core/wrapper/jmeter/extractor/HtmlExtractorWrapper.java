@@ -22,11 +22,13 @@ import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import org.anasoid.jmeter.as.code.core.wrapper.jmc.validator.Validator;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.processor.PostProcessorWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AbstractScopedTestElementWrapper;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcMandatory;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcNullAllowed;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
+import org.anasoid.jmeter.as.code.core.xstream.exceptions.ConversionIllegalStateException;
 import org.apache.jmeter.extractor.HtmlExtractor;
 import org.apache.jmeter.extractor.gui.HtmlExtractorGui;
 
@@ -39,7 +41,7 @@ import org.apache.jmeter.extractor.gui.HtmlExtractorGui;
 @SuppressWarnings("PMD.RedundantFieldInitializer")
 public class HtmlExtractorWrapper
     extends AbstractScopedTestElementWrapper<HtmlExtractor, HtmlExtractorGui>
-    implements PostProcessorWrapper<HtmlExtractor> {
+    implements PostProcessorWrapper<HtmlExtractor>, Validator {
 
   @JmcProperty("HtmlExtractor.refname")
   @Getter
@@ -64,7 +66,7 @@ public class HtmlExtractorWrapper
   @JmcProperty("HtmlExtractor.attribute")
   @Getter
   @Setter
-  @JmcMandatory
+  @JmcNullAllowed
   private String attribute;
 
   /**
@@ -105,6 +107,7 @@ public class HtmlExtractorWrapper
   @JmcProperty("HtmlExtractor.default")
   @Getter
   @Setter
+  @JmcNullAllowed
   private String defaultValue;
 
   @JmcProperty("HtmlExtractor.extractor_impl")
@@ -112,6 +115,15 @@ public class HtmlExtractorWrapper
   @Setter
   @JmcNullAllowed
   private ExtractorImpl extractorImplementation;
+
+  @Override
+  @SuppressWarnings("PMD.AvoidUncheckedExceptionsInSignatures")
+  public void validate() throws ConversionIllegalStateException {
+    if (defaultEmpty && defaultValue != null) {
+      throw new ConversionIllegalStateException(
+          "Can't have default value and use default value empty");
+    }
+  }
 
   /** enum for extractor_impl. */
   public enum ExtractorImpl {
