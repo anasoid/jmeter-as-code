@@ -24,6 +24,7 @@ import lombok.experimental.SuperBuilder;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.processor.PostProcessorWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AbstractScopedTestElementWrapper;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcMandatory;
+import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcNullAllowed;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
 import org.apache.jmeter.extractor.json.jmespath.JMESPathExtractor;
 import org.apache.jmeter.extractor.json.jmespath.gui.JMESPathExtractorGui;
@@ -50,7 +51,7 @@ public class JMESPathExtractorWrapper
   @JmcMandatory
   @Getter
   @Setter
-  private String referenceName;
+  private String refName;
 
   /**
    * If the JMESPath query leads to many results, you can choose which one(s) to extract as
@@ -64,6 +65,7 @@ public class JMESPathExtractorWrapper
   @JmcProperty("JMESExtractor.matchNumber")
   @Getter
   @Setter
+  @JmcNullAllowed
   private String matchNumber;
 
   /**

@@ -53,8 +53,12 @@ public abstract class AbstractJmcTest {
 
     String wrapperContent = toTmpFile(testPlanWrapper, node + "_");
     String wrapperContentFragment = getFragmentSingleNode(wrapperContent, node);
+    println("wrapperContentFragment :" + wrapperContentFragment);
+
     String expectedContent = readFile(jmxFile);
     String expectedContentFragment = getFragmentSingleNode(expectedContent, node);
+    println("expectedContentFragment :" + expectedContentFragment);
+
     Diff diff = JmcXmlComparator.compare(expectedContentFragment, wrapperContentFragment);
     Assertions.assertFalse(JmcXmlComparator.hasDifferences(diff), node + "  not identical " + diff);
   }
@@ -73,7 +77,6 @@ public abstract class AbstractJmcTest {
     applicationTest.toJmx(tmpPath.toFile());
 
     String wrapperContent = Files.readString(tmpPath);
-    println("content :" + wrapperContent);
 
     return wrapperContent;
   }
