@@ -22,12 +22,15 @@ import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import org.anasoid.jmeter.as.code.core.wrapper.jmc.validator.Validator;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.config.ConfigElementWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.processor.PostProcessorWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AbstractScopedTestElementWrapper;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcMandatory;
+import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcNullAllowed;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcSkipDefault;
+import org.anasoid.jmeter.as.code.core.xstream.exceptions.ConversionIllegalStateException;
 import org.apache.jmeter.extractor.XPathExtractor;
 import org.apache.jmeter.extractor.gui.XPathExtractorGui;
 
@@ -37,10 +40,14 @@ import org.apache.jmeter.extractor.gui.XPathExtractorGui;
  * @see XPathExtractor
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
-@SuppressWarnings("PMD.RedundantFieldInitializer")
+@SuppressWarnings({
+  "PMD.RedundantFieldInitializer",
+  "PMD.AvoidFieldNameMatchingMethodName",
+  "PMD.AvoidUncheckedExceptionsInSignatures"
+})
 public class XPathExtractorWrapper
     extends AbstractScopedTestElementWrapper<XPathExtractor, XPathExtractorGui>
-    implements PostProcessorWrapper<XPathExtractor> {
+    implements PostProcessorWrapper<XPathExtractor>, Validator {
 
   /** The name of the JMeter variable in which to store the result. */
   @JmcProperty("XPathExtractor.refname")
@@ -69,7 +76,8 @@ public class XPathExtractorWrapper
   @Getter
   @Setter
   @JmcMandatory
-  private String matchNumber;
+  @Default
+  private String matchNumber = "-1";
 
   /**
    * Default value returned when no match found. It is also returned if the node has no value and
@@ -78,6 +86,7 @@ public class XPathExtractorWrapper
   @JmcProperty("XPathExtractor.default")
   @Getter
   @Setter
+  @JmcNullAllowed
   private String defaultValue;
 
   /**
@@ -137,7 +146,7 @@ public class XPathExtractorWrapper
   @Getter
   @Setter
   @Default
-  private boolean tidyTolerant = false;
+  private boolean useTidy = false;
 
   /** Sets the Tidy Quiet flag. */
   @JmcProperty("XPathExtractor.quiet")
@@ -171,5 +180,20 @@ public class XPathExtractorWrapper
   @Override
   public Class<XPathExtractor> getTestClass() {
     return XPathExtractor.class;
+  }
+
+  @Override
+  public void validate() throws ConversionIllegalStateException {
+    if (useTidy) {
+      if (validate || namespace || downloadDtds || whitespace) {
+        throw new ConversionIllegalStateException(
+            "validate , namespace , downloadDtds , whitespace can't be used with useTidy");
+      }
+    } else {
+      if (!tidyQuiet || tidyReportErrors || tidyShowWarnings) {
+        throw new ConversionIllegalStateException(
+            "tidyQuiet , tidyReportErrors , tidyShowWarnings can't be used without useTidy");
+      }
+    }
   }
 }
