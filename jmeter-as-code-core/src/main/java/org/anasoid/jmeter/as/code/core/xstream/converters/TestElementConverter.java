@@ -62,6 +62,7 @@ public class TestElementConverter implements Converter {
     List<AccessibleObject> nonAttributes = new ArrayList<>(allFieldsMethods);
     nonAttributes.removeAll(attributes);
 
+
     // first convert attributes
     for (AccessibleObject accessibleObject : attributes) {
       convertField(source, accessibleObject, writer, context);

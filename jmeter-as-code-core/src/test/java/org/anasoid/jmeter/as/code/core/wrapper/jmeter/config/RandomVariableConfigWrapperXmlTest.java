@@ -6,7 +6,6 @@ import org.anasoid.jmeter.as.code.core.AbstractJmcTest;
 import org.anasoid.jmeter.as.code.core.test.utils.SetterTestUtils;
 import org.anasoid.jmeter.as.code.core.test.utils.xmlunit.JmcXmlComparator;
 import org.anasoid.jmeter.as.code.core.wrapper.jmc.Variable;
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.modifiers.CounterConfigWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestPlanWrapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

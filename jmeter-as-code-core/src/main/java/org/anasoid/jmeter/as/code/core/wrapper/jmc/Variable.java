@@ -94,4 +94,9 @@ public class Variable implements Serializable {
   public int hashCode() {
     return Objects.hash(name);
   }
+
+  @Override
+  public String toString() {
+    return "Variable{" + "name='" + name + '\'' + '}';
+  }
 }

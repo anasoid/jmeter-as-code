@@ -5,7 +5,6 @@ import java.io.StringWriter;
 import org.anasoid.jmeter.as.code.core.application.ApplicationTest;
 import org.anasoid.jmeter.as.code.core.application.ApplicationTestUtilsForTesting;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.config.ArgumentWrapper;
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestElementWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.threads.ThreadGroupWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.test.ParentTestElementWrapperTesting;
 import org.anasoid.jmeter.as.code.core.wrapper.test.SubChildTestingElementWrapperTesting;

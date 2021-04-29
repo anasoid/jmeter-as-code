@@ -18,10 +18,8 @@
 
 package org.anasoid.jmeter.as.code.core.wrapper.jmeter.child;
 
-import java.util.Arrays;
 import org.anasoid.jmeter.as.code.core.wrapper.test.ParentTestElementWrapperTesting;
 import org.anasoid.jmeter.as.code.core.wrapper.test.SubChildTestingElementWrapperTesting;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /** Test child on AbstractTestElementWrapper. */

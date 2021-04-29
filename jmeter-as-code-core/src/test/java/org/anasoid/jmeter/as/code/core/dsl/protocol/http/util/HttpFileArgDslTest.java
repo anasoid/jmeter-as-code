@@ -18,7 +18,6 @@
 
 package org.anasoid.jmeter.as.code.core.dsl.protocol.http.util;
 
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.protocol.http.util.HTTPArgumentWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.protocol.http.util.HTTPFileArgWrapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

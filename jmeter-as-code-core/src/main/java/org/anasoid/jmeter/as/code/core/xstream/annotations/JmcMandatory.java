@@ -19,12 +19,13 @@
 package org.anasoid.jmeter.as.code.core.xstream.annotations;
 
 import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 /** Defines that a list field of type, or field should not be null when serialized. */
-@Target({FIELD})
+@Target({FIELD, METHOD})
 @Retention(RUNTIME)
 public @interface JmcMandatory {}

@@ -26,7 +26,6 @@ import org.anasoid.jmeter.as.code.core.test.utils.xmlunit.JmcXmlComparator;
 import org.anasoid.jmeter.as.code.core.wrapper.jmc.assertions.AssertionField;
 import org.anasoid.jmeter.as.code.core.wrapper.jmc.assertions.MatchingRule;
 import org.anasoid.jmeter.as.code.core.wrapper.jmc.scope.Scope;
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.control.RandomOrderControllerWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestPlanWrapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

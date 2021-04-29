@@ -292,6 +292,9 @@ public final class ConverterBeanUtils {
     } else if (ppClazz == Variable.class) {
       return JMeterProperty.STRING.value();
 
+    } else if (ppClazz.isEnum()) {
+      return JMeterProperty.STRING.value();
+
     } else if (value instanceof TestElementWrapper) {
       return JMeterProperty.ELEMENT.value();
     }
