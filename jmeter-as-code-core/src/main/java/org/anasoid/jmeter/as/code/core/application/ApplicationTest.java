@@ -79,8 +79,8 @@ public class ApplicationTest {
 
         // JMeter initialization (properties, log levels, locale, etc)
         JMeterUtils.setJMeterHome(jmeterHome.getPath());
-        JMeterUtils.loadJMeterProperties(jmeterProperties.getPath());
-        JMeterUtils.initLocale();
+        // loadJMeterProperties
+        JMeterUtils.getProperties(jmeterProperties.getPath());
         initialized = true;
       } else {
         LOG.error(
