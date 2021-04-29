@@ -2,8 +2,6 @@ package org.anasoid.jmeter.as.code.core.wrapper.jmeter.extractor;
 
 import java.io.IOException;
 import org.anasoid.jmeter.as.code.core.AbstractJmcTest;
-import org.anasoid.jmeter.as.code.core.wrapper.jmc.extractor.FieldToCheck;
-import org.anasoid.jmeter.as.code.core.wrapper.jmc.scope.Scope;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestPlanWrapper;
 import org.junit.jupiter.api.Test;
 /*

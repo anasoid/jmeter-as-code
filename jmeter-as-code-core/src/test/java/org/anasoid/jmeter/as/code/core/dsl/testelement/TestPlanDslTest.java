@@ -18,9 +18,6 @@
 
 package org.anasoid.jmeter.as.code.core.dsl.testelement;
 
-import static org.anasoid.jmeter.as.code.core.dsl.samplers.HttpSamplerDsl.http;
-
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.samplers.HTTPSamplerProxyWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestPlanWrapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

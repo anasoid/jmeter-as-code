@@ -30,7 +30,6 @@ import org.anasoid.jmeter.as.code.core.wrapper.jmeter.protocol.http.util.HTTPArg
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.protocol.http.util.HTTPFileArgWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestPlanWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.threads.ThreadGroupWrapper;
-import org.apache.jmeter.control.LoopController;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.xmlunit.diff.Diff;
