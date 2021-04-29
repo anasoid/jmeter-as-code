@@ -32,6 +32,7 @@ import org.anasoid.jmeter.as.code.core.wrapper.jmc.validator.Validator;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.processor.PostProcessorWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AbstractScopedTestElementWrapper;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcMandatory;
+import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcNullAllowed;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcSkipDefault;
 import org.anasoid.jmeter.as.code.core.xstream.exceptions.ConversionIllegalStateException;
@@ -52,16 +53,16 @@ public class JSONPostProcessorWrapper
     implements PostProcessorWrapper<JSONPostProcessor>, Validator {
 
   /** JSON-PATH expressions (must match number of variables). */
-  @JmcMandatory @Getter @Setter private List<String> jmesPathExpr;
+  @XStreamOmitField @Getter @Setter private List<String> jsonPathExprs;
 
   @JmcProperty("JSONPostProcessor.jsonPathExprs")
   @JmcMandatory
-  protected String jmesPathExprProp() {
+  protected String jsonPathExprsProp() {
 
-    if (CollectionUtils.isEmpty(jmesPathExpr)) {
+    if (CollectionUtils.isEmpty(jsonPathExprs)) {
       return null;
     }
-    return String.join(";", jmesPathExpr);
+    return String.join(";", jsonPathExprs);
   }
 
   /**
@@ -93,6 +94,7 @@ public class JSONPostProcessorWrapper
   @JmcProperty("JSONPostProcessor.match_numbers")
   @Getter
   @Setter
+  @JmcNullAllowed
   private String matchNumber;
 
   /**
@@ -105,7 +107,7 @@ public class JSONPostProcessorWrapper
   protected String defaultValuesProp() {
 
     if (CollectionUtils.isEmpty(defaultValues)) {
-      return "";
+      return null;
     }
     return String.join(";", defaultValues);
   }
@@ -137,13 +139,13 @@ public class JSONPostProcessorWrapper
     if (CollectionUtils.isEmpty(referenceNames)) {
       throw new ConversionMandatoryException(this, "referenceNames");
     }
-    if (CollectionUtils.isEmpty(jmesPathExpr)) {
+    if (CollectionUtils.isEmpty(jsonPathExprs)) {
       throw new ConversionMandatoryException(this, "referenceNames");
     }
-    if (jmesPathExpr.size() != referenceNames.size()) {
+    if (jsonPathExprs.size() != referenceNames.size()) {
       throw new ConversionIllegalStateException(
-          "size of jmesPathExpr ["
-              + jmesPathExpr
+          "size of jsonPathExprs ["
+              + jsonPathExprs
               + "] and referenceNames ["
               + referenceNames
               + "] not equal");
@@ -204,23 +206,23 @@ public class JSONPostProcessorWrapper
       return addDefaultValues(Arrays.asList(value));
     }
 
-    protected B withJmesPathExpr(List<String> jmesPathExpr) {
-      this.jmesPathExpr = jmesPathExpr;
+    protected B withJsonPathExprs(List<String> jsonPathExprs) {
+      this.jsonPathExprs = jsonPathExprs;
       return self();
     }
 
     /** Add list of path expr . */
-    public B addJmesPathExprs(List<String> defaults) {
-      if (this.jmesPathExpr == null) {
-        withJmesPathExpr(new ArrayList<>());
+    public B addJsonPathExprs(List<String> defaults) {
+      if (this.jsonPathExprs == null) {
+        withJsonPathExprs(new ArrayList<>());
       }
-      this.jmesPathExpr.addAll(defaults);
+      this.jsonPathExprs.addAll(defaults);
       return self();
     }
 
     /** Add path expr . */
-    public B addJmesPathExpr(String value) {
-      return addJmesPathExprs(Arrays.asList(value));
+    public B addJsonPathExpr(String value) {
+      return addJsonPathExprs(Arrays.asList(value));
     }
   }
 }
