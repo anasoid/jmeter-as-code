@@ -1,4 +1,4 @@
-package org.anasoid.jmeter.as.code.core.wrapper.jmeter.extractor.json.jmespath;
+package org.anasoid.jmeter.as.code.core.wrapper.jmeter.extractor;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -25,17 +25,17 @@ import org.junit.jupiter.api.Test;
  * Date :   29-Apr-2021
  */
 
-class JMESPathExtractorWrapperXmlTest extends AbstractJmcTest {
+class XPath2ExtractorWrapperXmlTest extends AbstractJmcTest {
 
   private static final String PARENT_PATH =
-      "org/anasoid/jmeter/as/code/core/wrapper/jmeter/extractor/postprocessor/json/jmespath";
+      "org/anasoid/jmeter/as/code/core/wrapper/jmeter/extractor/postprocessor";
 
-  private static final String NODE_NAME = "JMESPathExtractor";
+  private static final String NODE_NAME = "XPath2Extractor";
 
   @Test
   void testSetter()
       throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-    SetterTestUtils.testSetter(JMESPathExtractorWrapper.builder().build());
+    SetterTestUtils.testSetter(XPath2ExtractorWrapper.builder().build());
   }
 
   @Test
@@ -45,14 +45,14 @@ class JMESPathExtractorWrapperXmlTest extends AbstractJmcTest {
         TestPlanWrapper.builder()
             .withName("Test Plan")
             .addPostProcessor(
-                JMESPathExtractorWrapper.builder()
-                    .withName("JSON JMESPath Extractor")
+                XPath2ExtractorWrapper.builder()
+                    .withName("XPath2 Extractor")
                     .withRefName("var")
-                    .withJmesPathExpr("expres")
+                    .withXpathQuery("query")
                     .build())
             .build();
 
-    checkWrapper(testPlanWrapper, PARENT_PATH + "/jsonJMESPathExtractor.default.jmx", NODE_NAME);
+    checkWrapper(testPlanWrapper, PARENT_PATH + "/xpath2Extractor.default.jmx", NODE_NAME);
   }
 
   @Test
@@ -62,16 +62,19 @@ class JMESPathExtractorWrapperXmlTest extends AbstractJmcTest {
         TestPlanWrapper.builder()
             .withName("Test Plan")
             .addPostProcessor(
-                JMESPathExtractorWrapper.builder()
-                    .withName("JSON JMESPath Extractor inverse")
+                XPath2ExtractorWrapper.builder()
+                    .withName("XPath2 Extractor inverse")
                     .withRefName("var")
-                    .withMatchNumber("0")
-                    .withJmesPathExpr("expres")
+                    .withMatchNumber("10")
+                    .withXpathQuery("query")
                     .withDefaultValue("d")
+                    .addNamespace("alias1")
+                    .addNamespace("alias2")
+                    .withFragment(true)
                     .withScope(Scope.CHILDREN)
                     .build())
             .build();
 
-    checkWrapper(testPlanWrapper, PARENT_PATH + "/jsonJMESPathExtractor.inverse.jmx", NODE_NAME);
+    checkWrapper(testPlanWrapper, PARENT_PATH + "/xpath2Extractor.inverse.jmx", NODE_NAME);
   }
 }

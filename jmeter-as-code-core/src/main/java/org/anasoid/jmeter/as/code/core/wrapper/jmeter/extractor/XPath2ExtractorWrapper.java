@@ -18,6 +18,7 @@
 
 package org.anasoid.jmeter.as.code.core.wrapper.jmeter.extractor;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -71,7 +72,8 @@ public class XPath2ExtractorWrapper
   @Getter
   @Setter
   @JmcMandatory
-  private String matchNumber;
+  @Default
+  private String matchNumber = "0";
 
   /**
    * Default value returned when no match found. It is also returned if the node has no value and
@@ -80,8 +82,14 @@ public class XPath2ExtractorWrapper
   @JmcProperty("XPathExtractor2.default")
   @Getter
   @Setter
-  private String defaultValue;
+  @Default
+  private String defaultValue = "";
 
+  /**
+   * If selected, the fragment will be returned rather than the text content. For example //title
+   * would return "<title>Apache JMeter</title>" rather than "Apache JMeter". In this case,
+   * //title/text() would return "Apache JMeter".
+   */
   @JmcProperty("XPathExtractor2.fragment")
   @Getter
   @Setter
@@ -94,7 +102,7 @@ public class XPath2ExtractorWrapper
    * must specify them as follow: prefix=namespace. This implementation makes it easier to use
    * namespaces than with the old XPathExtractor version.
    */
-  @Getter @Setter private List<String> namespaces;
+  @XStreamOmitField @Getter @Setter private List<String> namespaces;
 
   @JmcProperty("XPathExtractor2.namespaces")
   protected String jmesPathExprProp() {
