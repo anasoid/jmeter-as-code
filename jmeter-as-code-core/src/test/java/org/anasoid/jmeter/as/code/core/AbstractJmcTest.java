@@ -34,6 +34,8 @@ import org.xmlunit.diff.Diff;
 @SuppressWarnings("PMD.AbstractClassWithoutAbstractMethod")
 public abstract class AbstractJmcTest {
 
+  public static final String SCRIPT_PATH = "org/anasoid/jmeter/as/code/core/wrapper/jmeter/script";
+
   protected static final String DEFAULT_TEST_PLAN = "Test Plan";
 
   protected static final String DEFAULT_HTTP_REQUEST = "HTTP Request";
