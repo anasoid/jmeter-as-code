@@ -105,7 +105,7 @@ public class XPath2ExtractorWrapper
   @XStreamOmitField @Getter @Setter private List<String> namespaces;
 
   @JmcProperty("XPathExtractor2.namespaces")
-  protected String jmesPathExprProp() {
+  protected String namespacesProp() {
 
     if (CollectionUtils.isEmpty(namespaces)) {
       return "";
@@ -134,7 +134,7 @@ public class XPath2ExtractorWrapper
       return self();
     }
 
-    /** Add list of path expr . */
+    /** Add namespace . */
     public B addNamespaces(List<String> namespaces) {
       if (this.namespaces == null) {
         withNamespaces(new ArrayList<>());
@@ -143,7 +143,7 @@ public class XPath2ExtractorWrapper
       return self();
     }
 
-    /** Add path expr . */
+    /** Add namespace . */
     public B addNamespace(String value) {
       return addNamespaces(Arrays.asList(value));
     }

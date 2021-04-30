@@ -18,29 +18,37 @@
 
 package org.anasoid.jmeter.as.code.core.wrapper.jmeter.assertions;
 
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.gui.JMeterGUIWrapper;
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AssertionWrapper;
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.basic.AbstractBasicChildTestElementWrapper;
-import org.apache.jmeter.assertions.XMLAssertion;
-import org.apache.jmeter.assertions.gui.XMLAssertionGui;
+import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcMandatory;
+import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
+import org.apache.jmeter.assertions.JSONPathAssertion;
+import org.apache.jmeter.assertions.gui.JSONPathAssertionGui;
 
 /**
- * Wrapper for XMLAssertion.
+ * Wrapper for JSONPathAssertion.
  *
- * @see XMLAssertion
+ * @see JSONPathAssertion
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
-public class XMLAssertionWrapper extends AbstractBasicChildTestElementWrapper<XMLAssertion>
-    implements JMeterGUIWrapper<XMLAssertionGui>, AssertionWrapper<XMLAssertion> {
+public class JSONPathAssertionWrapper
+    extends AbstractJSONPathAssertionWrapper<JSONPathAssertion, JSONPathAssertionGui> {
+
+  /** Check that JMESPath to JSON element exists. */
+  @JmcProperty("JSON_PATH")
+  @Getter
+  @Setter
+  @JmcMandatory
+  private String jsonPath;
 
   @Override
-  public Class<XMLAssertionGui> getGuiClass() {
-    return XMLAssertionGui.class;
+  public Class<JSONPathAssertionGui> getGuiClass() {
+    return JSONPathAssertionGui.class;
   }
 
   @Override
-  public Class<XMLAssertion> getTestClass() {
-    return XMLAssertion.class;
+  public Class<JSONPathAssertion> getTestClass() {
+    return JSONPathAssertion.class;
   }
 }
