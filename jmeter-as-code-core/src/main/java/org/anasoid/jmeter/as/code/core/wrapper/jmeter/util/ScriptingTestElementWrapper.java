@@ -59,6 +59,7 @@ public abstract class ScriptingTestElementWrapper<
 
   @XStreamOmitField @Getter private String scriptFile;
 
+  /** Script file resource. the resource file will be included as content in test. */
   @XStreamOmitField @Default @Getter
   private boolean scriptFileResource = JmcConfig.isScriptResource();
 
