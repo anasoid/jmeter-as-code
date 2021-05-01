@@ -12,7 +12,7 @@
       <stringProp name="TestPlan.user_define_classpath"></stringProp>
     </TestPlan>
     <hashTree>
-      <XPathAssertion guiclass="XPathAssertionGui" testclass="XPathAssertion" testname="XPath Assertion" enabled="true">
+      <XPathAssertion guiclass="XPathAssertionGui" testclass="XPathAssertion" testname="XPath Assertion inverse" enabled="true">
         <boolProp name="XPath.negate">false</boolProp>
         <stringProp name="XPath.xpath">inverse</stringProp>
         <boolProp name="XPath.validate">true</boolProp>

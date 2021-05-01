@@ -81,7 +81,6 @@ public class XPathAssertionWrapper
   @Getter
   @Setter
   @Default
-  @JmcSkipDefault(ConfigElementWrapper.FALSE)
   private boolean whitespace = false;
 
   /** If selected, external DTDs are fetched. (If Tidy is not selected). */

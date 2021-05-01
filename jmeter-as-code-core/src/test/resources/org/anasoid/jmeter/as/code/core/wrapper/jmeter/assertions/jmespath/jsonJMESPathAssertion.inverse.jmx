@@ -12,17 +12,14 @@
       <stringProp name="TestPlan.user_define_classpath"></stringProp>
     </TestPlan>
     <hashTree>
-      <XPathAssertion guiclass="XPathAssertionGui" testclass="XPathAssertion" testname="XPath Assertion inverse" enabled="true">
-        <boolProp name="XPath.negate">true</boolProp>
-        <stringProp name="XPath.xpath">tidy</stringProp>
-        <boolProp name="XPath.validate">false</boolProp>
-        <boolProp name="XPath.whitespace">false</boolProp>
-        <boolProp name="XPath.tolerant">true</boolProp>
-        <boolProp name="XPath.namespace">false</boolProp>
-        <boolProp name="XPath.show_warnings">true</boolProp>
-        <boolProp name="XPath.report_errors">true</boolProp>
-        <boolProp name="XPath.quiet">false</boolProp>
-      </XPathAssertion>
+      <JMESPathAssertion guiclass="JMESPathAssertionGui" testclass="JMESPathAssertion" testname="JSON JMESPath Assertion inverse" enabled="true">
+        <stringProp name="JMES_PATH">path</stringProp>
+        <stringProp name="EXPECTED_VALUE">expected</stringProp>
+        <boolProp name="JSONVALIDATION">true</boolProp>
+        <boolProp name="EXPECT_NULL">false</boolProp>
+        <boolProp name="INVERT">true</boolProp>
+        <boolProp name="ISREGEX">false</boolProp>
+      </JMESPathAssertion>
       <hashTree/>
     </hashTree>
   </hashTree>

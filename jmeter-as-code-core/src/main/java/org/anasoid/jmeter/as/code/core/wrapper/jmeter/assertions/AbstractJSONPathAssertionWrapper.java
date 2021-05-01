@@ -27,15 +27,10 @@ import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AssertionWrapp
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.basic.AbstractBasicChildTestElementWrapper;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
 import org.anasoid.jmeter.as.code.core.xstream.exceptions.ConversionIllegalStateException;
-import org.apache.jmeter.assertions.JSONPathAssertion;
 import org.apache.jmeter.assertions.gui.AbstractAssertionGui;
 import org.apache.jmeter.testelement.AbstractTestElement;
 
-/**
- * Wrapper for JSONPathAssertion.
- *
- * @see JSONPathAssertion
- */
+/** Wrapper for JSONPathAssertion & JMESPathAssertion. */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 public abstract class AbstractJSONPathAssertionWrapper<
         G extends AbstractTestElement, F extends AbstractAssertionGui>
@@ -81,7 +76,11 @@ public abstract class AbstractJSONPathAssertionWrapper<
     if (!additionallyAssertValue && (expectedValue != null || !isRegex)) {
 
       throw new ConversionIllegalStateException(
-          "expectedValue can't be used with additionallyAssertValue");
+          "expectedValue or isRegex can't be used with additionallyAssertValue");
+    }
+    if (expectNull && (expectedValue != null || !isRegex)) {
+      throw new ConversionIllegalStateException(
+          "expectedValue or isRegex can't be used with expectNull");
     }
   }
 }

@@ -12,17 +12,12 @@
       <stringProp name="TestPlan.user_define_classpath"></stringProp>
     </TestPlan>
     <hashTree>
-      <XPathAssertion guiclass="XPathAssertionGui" testclass="XPathAssertion" testname="XPath Assertion inverse" enabled="true">
+      <XPath2Assertion guiclass="XPath2AssertionGui" testclass="XPath2Assertion" testname="XPath2 Assertion inverse" enabled="true">
         <boolProp name="XPath.negate">true</boolProp>
-        <stringProp name="XPath.xpath">tidy</stringProp>
-        <boolProp name="XPath.validate">false</boolProp>
-        <boolProp name="XPath.whitespace">false</boolProp>
-        <boolProp name="XPath.tolerant">true</boolProp>
-        <boolProp name="XPath.namespace">false</boolProp>
-        <boolProp name="XPath.show_warnings">true</boolProp>
-        <boolProp name="XPath.report_errors">true</boolProp>
-        <boolProp name="XPath.quiet">false</boolProp>
-      </XPathAssertion>
+        <stringProp name="XPath.xpath">inverse</stringProp>
+        <stringProp name="XPath.namespaces">name1
+name2</stringProp>
+      </XPath2Assertion>
       <hashTree/>
     </hashTree>
   </hashTree>
