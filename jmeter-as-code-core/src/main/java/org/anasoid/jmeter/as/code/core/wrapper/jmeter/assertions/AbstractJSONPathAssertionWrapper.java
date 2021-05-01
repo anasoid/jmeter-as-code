@@ -18,6 +18,7 @@
 
 package org.anasoid.jmeter.as.code.core.wrapper.jmeter.assertions;
 
+import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
@@ -25,6 +26,7 @@ import org.anasoid.jmeter.as.code.core.wrapper.jmc.validator.Validator;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.gui.JMeterGUIWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AssertionWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.basic.AbstractBasicChildTestElementWrapper;
+import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcNullAllowed;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
 import org.anasoid.jmeter.as.code.core.xstream.exceptions.ConversionIllegalStateException;
 import org.apache.jmeter.assertions.gui.AbstractAssertionGui;
@@ -44,6 +46,7 @@ public abstract class AbstractJSONPathAssertionWrapper<
   @JmcProperty("EXPECTED_VALUE")
   @Getter
   @Setter
+  @JmcNullAllowed
   private String expectedValue;
 
   /** Check the extracted JMESPath against an expected one. */
@@ -68,6 +71,7 @@ public abstract class AbstractJSONPathAssertionWrapper<
   @JmcProperty("ISREGEX")
   @Getter
   @Setter
+  @Default
   private boolean isRegex = true;
 
   @Override

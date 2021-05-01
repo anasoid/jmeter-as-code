@@ -1,7 +1,5 @@
 package org.anasoid.jmeter.as.code.core.wrapper.jmeter.assertions;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.io.IOException;
 import java.io.StringWriter;
 import java.lang.reflect.InvocationTargetException;

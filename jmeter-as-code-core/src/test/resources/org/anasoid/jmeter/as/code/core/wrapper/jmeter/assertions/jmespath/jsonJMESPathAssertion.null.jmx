@@ -13,7 +13,7 @@
     </TestPlan>
     <hashTree>
       <JMESPathAssertion guiclass="JMESPathAssertionGui" testclass="JMESPathAssertion" testname="JSON JMESPath Assertion" enabled="true">
-        <stringProp name="JMES_PATH"></stringProp>
+        <stringProp name="JMES_PATH">jsonPath</stringProp>
         <stringProp name="EXPECTED_VALUE"></stringProp>
         <boolProp name="JSONVALIDATION">false</boolProp>
         <boolProp name="EXPECT_NULL">true</boolProp>
