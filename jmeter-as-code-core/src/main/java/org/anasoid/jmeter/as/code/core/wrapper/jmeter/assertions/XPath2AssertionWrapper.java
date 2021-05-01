@@ -26,8 +26,8 @@ import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.processor.PostProcessorWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AbstractScopedTestElementWrapper;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AssertionWrapper;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcMandatory;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
 import org.apache.commons.collections.CollectionUtils;
@@ -43,7 +43,7 @@ import org.apache.jmeter.assertions.gui.XPath2AssertionGui;
 @SuppressWarnings("PMD.RedundantFieldInitializer")
 public class XPath2AssertionWrapper
     extends AbstractScopedTestElementWrapper<XPath2Assertion, XPath2AssertionGui>
-    implements PostProcessorWrapper<XPath2Assertion> {
+    implements AssertionWrapper<XPath2Assertion> {
 
   /** XPath to match in the document. */
   @JmcProperty("XPath.xpath")
