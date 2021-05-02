@@ -13,16 +13,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * @author : anas
- * Date :   03-Apr-2021
+ * Date :   02-May-2021
  */
 
-package org.anasoid.jmeter.as.code.core.wrapper.jmeter.processor;
+package org.anasoid.jmeter.as.code.core.wrapper.jmeter.timers;
 
 import lombok.experimental.SuperBuilder;
-import org.anasoid.jmeter.as.code.core.wrapper.jmc.generic.AbstractJmxIncludeWrapper;
-import org.apache.jmeter.testelement.AbstractTestElement;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.util.JSR223TestElementWrapper;
+import org.apache.jmeter.testbeans.gui.TestBeanGUI;
+import org.apache.jmeter.timers.JSR223Timer;
 
-/** PostProcessor Include Jmx. */
+/**
+ * Wrapper for JSR223Timer.
+ *
+ * @see JSR223Timer
+ */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
-public class PostProcessorJmxIncludeWrapper extends AbstractJmxIncludeWrapper<AbstractTestElement>
-    implements PostProcessorWrapper<AbstractTestElement> {}
+public class JSR223TimerWrapper extends JSR223TestElementWrapper<JSR223Timer, TestBeanGUI>
+    implements TimerWrapper<JSR223Timer> {
+
+  @Override
+  public Class<TestBeanGUI> getGuiClass() {
+    return TestBeanGUI.class;
+  }
+
+  @Override
+  public Class<JSR223Timer> getTestClass() {
+    return JSR223Timer.class;
+  }
+}
