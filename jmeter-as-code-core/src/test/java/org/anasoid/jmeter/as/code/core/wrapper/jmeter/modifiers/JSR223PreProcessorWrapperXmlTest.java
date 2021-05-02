@@ -31,8 +31,7 @@ class JSR223PreProcessorWrapperXmlTest extends AbstractJmcTest {
   private static final String PARENT_PATH =
       "org/anasoid/jmeter/as/code/core/wrapper/jmeter/modifiers/preprocessor";
 
-  private static final String SCRIPT_PATH =
-      "org/anasoid/jmeter/as/code/core/wrapper/jmeter/script";
+  private static final String SCRIPT_PATH = "org/anasoid/jmeter/as/code/core/wrapper/jmeter/script";
 
   private static final String NODE_NAME = "JSR223PreProcessor";
 
@@ -48,13 +47,8 @@ class JSR223PreProcessorWrapperXmlTest extends AbstractJmcTest {
                     .withScriptFile(SCRIPT_PATH + "/myscript.special.txt")
                     .build())
             .build();
-    String wrapperContent = toTmpFile(testPlanWrapper, NODE_NAME + "_");
-    String wrapperContentFragment = getFragmentSingleNode(wrapperContent, NODE_NAME);
-    String expectedContent = readFile(PARENT_PATH + "/JSR223.preprocessor.defaut.jmx");
-    String expectedContentFragment = getFragmentSingleNode(expectedContent, NODE_NAME);
-    Diff diff = JmcXmlComparator.compare(expectedContentFragment, wrapperContentFragment);
-    Assertions.assertFalse(
-        JmcXmlComparator.hasDifferences(diff), NODE_NAME + "  not identical " + diff);
+
+    checkWrapper(testPlanWrapper, PARENT_PATH + "/JSR223.preprocessor.defaut.jmx", NODE_NAME);
   }
 
   @Test
@@ -70,13 +64,8 @@ class JSR223PreProcessorWrapperXmlTest extends AbstractJmcTest {
                     .withScriptFileResource(false)
                     .build())
             .build();
-    String wrapperContent = toTmpFile(testPlanWrapper, NODE_NAME + "_");
-    String wrapperContentFragment = getFragmentSingleNode(wrapperContent, NODE_NAME);
-    String expectedContent = readFile(PARENT_PATH + "/JSR223.preprocessor.file.defaut.jmx");
-    String expectedContentFragment = getFragmentSingleNode(expectedContent, NODE_NAME);
-    Diff diff = JmcXmlComparator.compare(expectedContentFragment, wrapperContentFragment);
-    Assertions.assertFalse(
-        JmcXmlComparator.hasDifferences(diff), NODE_NAME + "  not identical " + diff);
+
+    checkWrapper(testPlanWrapper, PARENT_PATH + "/JSR223.preprocessor.file.defaut.jmx", NODE_NAME);
   }
 
   @Test
@@ -95,12 +84,7 @@ class JSR223PreProcessorWrapperXmlTest extends AbstractJmcTest {
                     .withScriptFile(SCRIPT_PATH + "/script.txt")
                     .build())
             .build();
-    String wrapperContent = toTmpFile(testPlanWrapper, NODE_NAME + "_");
-    String wrapperContentFragment = getFragmentSingleNode(wrapperContent, NODE_NAME);
-    String expectedContent = readFile(PARENT_PATH + "/JSR223.preprocessor.inverse.jmx");
-    String expectedContentFragment = getFragmentSingleNode(expectedContent, NODE_NAME);
-    Diff diff = JmcXmlComparator.compare(expectedContentFragment, wrapperContentFragment);
-    Assertions.assertFalse(
-        JmcXmlComparator.hasDifferences(diff), NODE_NAME + "  not identical " + diff);
+
+    checkWrapper(testPlanWrapper, PARENT_PATH + "/JSR223.preprocessor.inverse.jmx", NODE_NAME);
   }
 }

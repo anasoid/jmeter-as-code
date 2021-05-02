@@ -37,7 +37,7 @@ class SampleTimeoutWrapperXmlTest extends AbstractJmcTest {
   @Test
   void testSetter()
       throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-    SetterTestUtils.testSetter(SampleTimeoutWrapper.builder().build());
+    SetterTestUtils.testSetter(SampleTimeoutWrapper.builder());
   }
 
   @Test
@@ -52,12 +52,7 @@ class SampleTimeoutWrapperXmlTest extends AbstractJmcTest {
                     .withName("Sample Timeout")
                     .build())
             .build();
-    String wrapperContent = toTmpFile(testPlanWrapper, NODE_NAME + "_");
-    String wrapperContentFragment = getFragmentSingleNode(wrapperContent, NODE_NAME);
-    String expectedContent = readFile(PARENT_PATH + "/sampletimeout.default.jmx");
-    String expectedContentFragment = getFragmentSingleNode(expectedContent, NODE_NAME);
-    Diff diff = JmcXmlComparator.compare(expectedContentFragment, wrapperContentFragment);
-    Assertions.assertFalse(
-        JmcXmlComparator.hasDifferences(diff), NODE_NAME + "  not identical " + diff);
+
+    checkWrapper(testPlanWrapper, PARENT_PATH + "/sampletimeout.default.jmx", NODE_NAME);
   }
 }

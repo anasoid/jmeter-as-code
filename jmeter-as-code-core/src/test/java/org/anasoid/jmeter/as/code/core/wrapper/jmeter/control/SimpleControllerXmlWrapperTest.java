@@ -20,12 +20,9 @@ package org.anasoid.jmeter.as.code.core.wrapper.jmeter.control;
 
 import java.io.IOException;
 import org.anasoid.jmeter.as.code.core.AbstractJmcTest;
-import org.anasoid.jmeter.as.code.core.test.utils.xmlunit.JmcXmlComparator;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestPlanWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.threads.ThreadGroupWrapper;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.xmlunit.diff.Diff;
 
 class SimpleControllerXmlWrapperTest extends AbstractJmcTest {
 
@@ -44,17 +41,10 @@ class SimpleControllerXmlWrapperTest extends AbstractJmcTest {
                 ThreadGroupWrapper.builder()
                     .withName("Thread Group")
                     .addController(
-                        SimpleControllerWrapper.builder()
-                            .withName("Simple Controller")
-                            .build())
+                        SimpleControllerWrapper.builder().withName("Simple Controller").build())
                     .build())
             .build();
-    String wrapperContent = toTmpFile(testPlanWrapper, NODE_NAME + "_");
-    String wrapperContentFragment = getFragmentSingleNode(wrapperContent, NODE_NAME);
-    String expectedContent = readFile(PARENT_PATH + "/controller.default.jmx");
-    String expectedContentFragment = getFragmentSingleNode(expectedContent, NODE_NAME);
-    Diff diff = JmcXmlComparator.compare(expectedContentFragment, wrapperContentFragment);
-    Assertions.assertFalse(
-        JmcXmlComparator.hasDifferences(diff), NODE_NAME + "  not identical " + diff);
+
+    checkWrapper(testPlanWrapper, PARENT_PATH + "/controller.default.jmx", NODE_NAME);
   }
 }

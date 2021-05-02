@@ -34,7 +34,7 @@ class XPath2AssertionWrapperXmlTest extends AbstractJmcTest {
   @Test
   void testSetter()
       throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-    SetterTestUtils.testSetter(XPath2AssertionWrapper.builder().build());
+    SetterTestUtils.testSetter(XPath2AssertionWrapper.builder());
   }
 
   @Test

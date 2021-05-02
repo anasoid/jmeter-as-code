@@ -34,7 +34,7 @@ class DurationAssertionWrapperTest extends AbstractJmcTest {
   @Test
   void testSetter()
       throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-    SetterTestUtils.testSetter(DurationAssertionWrapper.builder().build());
+    SetterTestUtils.testSetter(DurationAssertionWrapper.builder());
   }
 
   @Test

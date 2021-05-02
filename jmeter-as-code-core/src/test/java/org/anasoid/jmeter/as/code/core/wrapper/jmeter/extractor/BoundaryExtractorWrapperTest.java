@@ -33,7 +33,7 @@ class BoundaryExtractorWrapperTest extends AbstractJmcTest {
   @Test
   void testSetter()
       throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-    SetterTestUtils.testSetter(BoundaryExtractorWrapper.builder().build());
+    SetterTestUtils.testSetter(BoundaryExtractorWrapper.builder());
   }
 
   @Test

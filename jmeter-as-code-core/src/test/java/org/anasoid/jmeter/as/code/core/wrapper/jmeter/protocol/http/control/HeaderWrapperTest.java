@@ -27,6 +27,6 @@ class HeaderWrapperTest extends AbstractJmcTest {
   @Test
   void testSetter()
       throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-    SetterTestUtils.testSetter(HeaderWrapper.builder().build());
+    SetterTestUtils.testSetter(HeaderWrapper.builder());
   }
 }

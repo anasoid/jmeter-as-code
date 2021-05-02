@@ -28,7 +28,7 @@ class AuthManagerWrapperTest {
   @Test
   void testSetter()
       throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-    SetterTestUtils.testSetter(AuthManagerWrapper.builder().build());
+    SetterTestUtils.testSetter(AuthManagerWrapper.builder());
   }
 
   @Test

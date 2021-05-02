@@ -40,7 +40,7 @@ class HTTPFileArgWrapperXMLTest extends AbstractJmcTest {
   @Test
   void testSetter()
       throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-    SetterTestUtils.testSetter(HTTPFileArgWrapper.builder().build());
+    SetterTestUtils.testSetter(HTTPFileArgWrapper.builder());
   }
 
   @Test
@@ -74,5 +74,7 @@ class HTTPFileArgWrapperXMLTest extends AbstractJmcTest {
     Diff diff = JmcXmlComparator.compare(expectedContentFragment, wrapperContentFragment);
     Assertions.assertFalse(
         JmcXmlComparator.hasDifferences(diff), "httpfielarg  not identical " + diff);
+
+
   }
 }

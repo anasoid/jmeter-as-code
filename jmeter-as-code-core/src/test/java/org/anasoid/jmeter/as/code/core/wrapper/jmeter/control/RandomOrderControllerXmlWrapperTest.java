@@ -39,7 +39,7 @@ class RandomOrderControllerXmlWrapperTest extends AbstractJmcTest {
   @Test
   void testSetter()
       throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-    SetterTestUtils.testSetter(RandomOrderControllerWrapper.builder().build());
+    SetterTestUtils.testSetter(RandomOrderControllerWrapper.builder());
   }
 
   @Test
@@ -57,12 +57,7 @@ class RandomOrderControllerXmlWrapperTest extends AbstractJmcTest {
                             .build())
                     .build())
             .build();
-    String wrapperContent = toTmpFile(testPlanWrapper, NODE_NAME + "_");
-    String wrapperContentFragment = getFragmentSingleNode(wrapperContent, NODE_NAME);
-    String expectedContent = readFile(PARENT_PATH + "/controller.default.jmx");
-    String expectedContentFragment = getFragmentSingleNode(expectedContent, NODE_NAME);
-    Diff diff = JmcXmlComparator.compare(expectedContentFragment, wrapperContentFragment);
-    Assertions.assertFalse(
-        JmcXmlComparator.hasDifferences(diff), NODE_NAME + "  not identical " + diff);
+
+    checkWrapper(testPlanWrapper, PARENT_PATH + "/controller.default.jmx", NODE_NAME);
   }
 }

@@ -33,7 +33,7 @@ class HTTPArgumentWrapperTest extends AbstractJmcTest {
   @Test
   void testSetter()
       throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-    SetterTestUtils.testSetter(HTTPArgumentWrapper.builder().build());
+    SetterTestUtils.testSetter(HTTPArgumentWrapper.builder());
   }
 
   @Test

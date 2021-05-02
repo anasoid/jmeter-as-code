@@ -2,12 +2,9 @@ package org.anasoid.jmeter.as.code.core.wrapper.jmeter.protocol.http.control;
 
 import java.io.IOException;
 import org.anasoid.jmeter.as.code.core.AbstractJmcTest;
-import org.anasoid.jmeter.as.code.core.test.utils.xmlunit.JmcXmlComparator;
 import org.anasoid.jmeter.as.code.core.wrapper.jmc.http.client.config.AuthMechanism;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestPlanWrapper;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.xmlunit.diff.Diff;
 /*
  * Copyright 2020-2021 the original author or authors.
  *
@@ -33,8 +30,6 @@ class AuthManagerXmlWrapperTest extends AbstractJmcTest {
 
   private static final String NODE_NAME = "AuthManager";
 
-
-
   @Test
   void testDefault() throws IOException {
 
@@ -44,13 +39,7 @@ class AuthManagerXmlWrapperTest extends AbstractJmcTest {
             .addConfig(AuthManagerWrapper.builder().withName("HTTP Authorization Manager").build())
             .build();
 
-    String wrapperContent = toTmpFile(testPlanWrapper, "authorizationmanager_");
-    String wrapperContentFragment = getFragmentSingleNode(wrapperContent, NODE_NAME);
-    String expectedContent = readFile(PARENT_PATH + "/authorizationmanager.default.jmx");
-    String expectedContentFragment = getFragmentSingleNode(expectedContent, NODE_NAME);
-    Diff diff = JmcXmlComparator.compare(expectedContentFragment, wrapperContentFragment);
-    Assertions.assertFalse(
-        JmcXmlComparator.hasDifferences(diff), "authorizationmanager  not identical " + diff);
+    checkWrapper(testPlanWrapper, PARENT_PATH + "/authorizationmanager.default.jmx", NODE_NAME);
   }
 
   @Test
@@ -83,12 +72,7 @@ class AuthManagerXmlWrapperTest extends AbstractJmcTest {
                     .build())
             .build();
 
-    String wrapperContent = toTmpFile(testPlanWrapper, "authorizationmanager_");
-    String wrapperContentFragment = getFragmentSingleNode(wrapperContent, NODE_NAME);
-    String expectedContent = readFile(PARENT_PATH + "/authorizationmanager.inverse.default.jmx");
-    String expectedContentFragment = getFragmentSingleNode(expectedContent, NODE_NAME);
-    Diff diff = JmcXmlComparator.compare(expectedContentFragment, wrapperContentFragment);
-    Assertions.assertFalse(
-        JmcXmlComparator.hasDifferences(diff), "authorizationmanager  not identical " + diff);
+    checkWrapper(
+        testPlanWrapper, PARENT_PATH + "/authorizationmanager.inverse.default.jmx", NODE_NAME);
   }
 }

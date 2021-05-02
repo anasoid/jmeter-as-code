@@ -33,7 +33,7 @@ class RegexExtractorWrapperTest extends AbstractJmcTest {
   @Test
   void testSetter()
       throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-    SetterTestUtils.testSetter(RegexExtractorWrapper.builder().build());
+    SetterTestUtils.testSetter(RegexExtractorWrapper.builder());
   }
 
   @Test

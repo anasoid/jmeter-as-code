@@ -37,15 +37,8 @@ class TestPlanWrapperXMLTest extends AbstractJmcTest {
   void testDefault() throws IOException {
 
     TestPlanWrapper testPlanWrapper = TestPlanWrapper.builder().withName("Test Plan").build();
-    String wrapperContent = toTmpFile(testPlanWrapper, "testplan_");
-    String expectedContent = readFile(PARENT_PATH + "/testplan.default.jmx");
-    Diff myDiff =
-        JmcXmlComparator.compare(
-            expectedContent,
-            wrapperContent,
-            null,
-            Arrays.asList(AttributesFilterManager.getCommentFilter()));
-    Assertions.assertFalse(myDiff.hasDifferences(), "Testplan not identical " + myDiff);
+
+    checkWrapper(testPlanWrapper, PARENT_PATH + "/testplan.default.jmx");
   }
 
   @Test
@@ -62,6 +55,7 @@ class TestPlanWrapperXMLTest extends AbstractJmcTest {
             .addArgument(
                 ArgumentWrapper.builder().withName("uservar1").withValue("uservar1-value").build())
             .build();
+
     String wrapperContent = toTmpFile(testPlanWrapper, "testplan_reverse_");
     String expectedContent = readFile(PARENT_PATH + "/testplan.reverse.jmx");
     Diff myDiff = JmcXmlComparator.compare(expectedContent, wrapperContent);

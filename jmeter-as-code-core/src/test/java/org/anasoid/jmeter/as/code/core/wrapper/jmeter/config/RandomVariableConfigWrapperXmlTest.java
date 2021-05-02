@@ -37,7 +37,7 @@ class RandomVariableConfigWrapperXmlTest extends AbstractJmcTest {
   @Test
   void testSetter()
       throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-    SetterTestUtils.testSetter(RandomVariableConfigWrapper.builder().build());
+    SetterTestUtils.testSetter(RandomVariableConfigWrapper.builder());
   }
 
   @Test
@@ -48,13 +48,8 @@ class RandomVariableConfigWrapperXmlTest extends AbstractJmcTest {
             .withName("Test Plan")
             .addConfig(RandomVariableConfigWrapper.builder().withName("Random Variable").build())
             .build();
-    String wrapperContent = toTmpFile(testPlanWrapper, NODE_NAME + "_");
-    String wrapperContentFragment = getFragmentSingleNode(wrapperContent, NODE_NAME);
-    String expectedContent = readFile(PARENT_PATH + "/randomvariable.default.jmx");
-    String expectedContentFragment = getFragmentSingleNode(expectedContent, NODE_NAME);
-    Diff diff = JmcXmlComparator.compare(expectedContentFragment, wrapperContentFragment);
-    Assertions.assertFalse(
-        JmcXmlComparator.hasDifferences(diff), NODE_NAME + "  not identical " + diff);
+
+    checkWrapper(testPlanWrapper, PARENT_PATH + "/randomvariable.default.jmx", NODE_NAME);
   }
 
   @Test
@@ -74,12 +69,7 @@ class RandomVariableConfigWrapperXmlTest extends AbstractJmcTest {
                     .withVariable(new Variable("myVar"))
                     .build())
             .build();
-    String wrapperContent = toTmpFile(testPlanWrapper, NODE_NAME + "_");
-    String wrapperContentFragment = getFragmentSingleNode(wrapperContent, NODE_NAME);
-    String expectedContent = readFile(PARENT_PATH + "/randomvariable.inverse.default.jmx");
-    String expectedContentFragment = getFragmentSingleNode(expectedContent, NODE_NAME);
-    Diff diff = JmcXmlComparator.compare(expectedContentFragment, wrapperContentFragment);
-    Assertions.assertFalse(
-        JmcXmlComparator.hasDifferences(diff), NODE_NAME + "  not identical " + diff);
+
+    checkWrapper(testPlanWrapper, PARENT_PATH + "/randomvariable.inverse.default.jmx", NODE_NAME);
   }
 }

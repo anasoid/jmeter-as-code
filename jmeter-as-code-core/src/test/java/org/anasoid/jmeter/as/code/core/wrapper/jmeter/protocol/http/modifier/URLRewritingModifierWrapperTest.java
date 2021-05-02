@@ -33,7 +33,7 @@ class URLRewritingModifierWrapperTest extends AbstractJmcTest {
   @Test
   void testSetter()
       throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-    SetterTestUtils.testSetter(URLRewritingModifierWrapper.builder().build());
+    SetterTestUtils.testSetter(URLRewritingModifierWrapper.builder());
   }
 
   @Test

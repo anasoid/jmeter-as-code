@@ -27,7 +27,7 @@ import org.xmlunit.diff.Diff;
 
 class RegExUserParametersWrapperXmlTest extends AbstractJmcTest {
   private static final String PARENT_PATH =
-      "org/anasoid/jmeter/as/code/core/wrapper/jmeter/protocol/http/modifier/";
+      "org/anasoid/jmeter/as/code/core/wrapper/jmeter/protocol/http/modifier";
 
   private static final String NODE_NAME = "RegExUserParameters";
 
@@ -45,12 +45,7 @@ class RegExUserParametersWrapperXmlTest extends AbstractJmcTest {
                     .withRegExParamValuesGrNr("value")
                     .build())
             .build();
-    String wrapperContent = toTmpFile(testPlanWrapper, NODE_NAME + "_");
-    String wrapperContentFragment = getFragmentSingleNode(wrapperContent, NODE_NAME);
-    String expectedContent = readFile(PARENT_PATH + "regexuserparameters.default.jmx");
-    String expectedContentFragment = getFragmentSingleNode(expectedContent, NODE_NAME);
-    Diff diff = JmcXmlComparator.compare(expectedContentFragment, wrapperContentFragment);
-    Assertions.assertFalse(
-        JmcXmlComparator.hasDifferences(diff), NODE_NAME + "  not identical " + diff);
+
+    checkWrapper(testPlanWrapper, PARENT_PATH + "/regexuserparameters.default.jmx", NODE_NAME);
   }
 }

@@ -29,14 +29,14 @@ import org.xmlunit.diff.Diff;
 
 class AnchorModifierWrapperXmlTest extends AbstractJmcTest {
   private static final String PARENT_PATH =
-      "org/anasoid/jmeter/as/code/core/wrapper/jmeter/protocol/http/modifier/";
+      "org/anasoid/jmeter/as/code/core/wrapper/jmeter/protocol/http/modifier";
 
   private static final String NODE_NAME = "AnchorModifier";
 
   @Test
   void testSetter()
       throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-    SetterTestUtils.testSetter(AnchorModifierWrapper.builder().build());
+    SetterTestUtils.testSetter(AnchorModifierWrapper.builder());
   }
 
   @Test
@@ -47,12 +47,7 @@ class AnchorModifierWrapperXmlTest extends AbstractJmcTest {
             .withName("Test Plan")
             .addPreProcessor(AnchorModifierWrapper.builder().withName("HTML Link Parser").build())
             .build();
-    String wrapperContent = toTmpFile(testPlanWrapper, NODE_NAME + "_");
-    String wrapperContentFragment = getFragmentSingleNode(wrapperContent, NODE_NAME);
-    String expectedContent = readFile(PARENT_PATH + "htmllinkparser.default.jmx");
-    String expectedContentFragment = getFragmentSingleNode(expectedContent, NODE_NAME);
-    Diff diff = JmcXmlComparator.compare(expectedContentFragment, wrapperContentFragment);
-    Assertions.assertFalse(
-        JmcXmlComparator.hasDifferences(diff), NODE_NAME + "  not identical " + diff);
+
+    checkWrapper(testPlanWrapper, PARENT_PATH + "/htmllinkparser.default.jmx", NODE_NAME);
   }
 }

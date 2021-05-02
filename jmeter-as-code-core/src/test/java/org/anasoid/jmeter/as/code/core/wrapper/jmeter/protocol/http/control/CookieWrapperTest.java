@@ -27,6 +27,6 @@ class CookieWrapperTest extends AbstractJmcTest {
   @Test
   void testSetter()
       throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-    SetterTestUtils.testSetter(CookieWrapper.builder().build());
+    SetterTestUtils.testSetter(CookieWrapper.builder());
   }
 }
