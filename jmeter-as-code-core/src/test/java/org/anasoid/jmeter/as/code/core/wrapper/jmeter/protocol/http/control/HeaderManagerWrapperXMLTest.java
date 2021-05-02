@@ -63,13 +63,8 @@ class HeaderManagerWrapperXMLTest extends AbstractJmcTest {
                             .build())
                     .build())
             .build();
-    String wrapperContent = toTmpFile(testPlanWrapper, "httpheadermanager_");
-    String wrapperContentFragment = getFragmentSingleNode(wrapperContent, NODE_NAME);
-    String expectedContent = readFile(PARENT_PATH + "/httpheadermanager.default.jmx");
-    String expectedContentFragment = getFragmentSingleNode(expectedContent, NODE_NAME);
-    Diff diff = JmcXmlComparator.compare(expectedContentFragment, wrapperContentFragment);
-    Assertions.assertFalse(
-        JmcXmlComparator.hasDifferences(diff), "httpheadermanager  not identical " + diff);
+
+    checkWrapper(testPlanWrapper, PARENT_PATH + "/httpheadermanager.default.jmx", NODE_NAME);
   }
 
   @Test
@@ -93,12 +88,7 @@ class HeaderManagerWrapperXMLTest extends AbstractJmcTest {
                             .build())
                     .build())
             .build();
-    String wrapperContent = toTmpFile(testPlanWrapper, "httpheadermanager_");
-    String wrapperContentFragment = getFragmentSingleNode(wrapperContent, NODE_NAME);
-    String expectedContent = readFile(PARENT_PATH + "/httpheadermanager.reverse.jmx");
-    String expectedContentFragment = getFragmentSingleNode(expectedContent, NODE_NAME);
-    Diff diff = JmcXmlComparator.compare(expectedContentFragment, wrapperContentFragment);
-    Assertions.assertFalse(
-        JmcXmlComparator.hasDifferences(diff), "httpheadermanager  not identical " + diff);
+
+    checkWrapper(testPlanWrapper, PARENT_PATH + "/httpheadermanager.reverse.jmx", NODE_NAME);
   }
 }

@@ -45,13 +45,8 @@ class ThreadGroupWrapperXMLTest extends AbstractJmcTest {
             .withName("Test Plan")
             .addThread(ThreadGroupWrapper.builder().withName("Thread Group").build())
             .build();
-    String wrapperContent = toTmpFile(testPlanWrapper, "threadgroup_");
-    String wrapperContentFragment = getFragmentSingleNode(wrapperContent, NODE_NAME);
-    String expectedContent = readFile(PARENT_PATH + "/threadgroup.default.jmx");
-    String expectedContentFragment = getFragmentSingleNode(expectedContent, NODE_NAME);
-    Diff diff = JmcXmlComparator.compare(expectedContentFragment, wrapperContentFragment);
-    Assertions.assertFalse(
-        JmcXmlComparator.hasDifferences(diff), "theadGroup  not identical " + diff);
+
+    checkWrapper(testPlanWrapper, PARENT_PATH + "/threadgroup.default.jmx", NODE_NAME);
   }
 
   @Test
@@ -62,16 +57,7 @@ class ThreadGroupWrapperXMLTest extends AbstractJmcTest {
             .withName("Test Plan")
             .addThread(ThreadGroupWrapper.builder().withName("Thread Group").build())
             .build();
-    String wrapperContent = toTmpFile(testPlanWrapper, "threadgroup_");
-    String expectedContent = readFile(PARENT_PATH + "/threadgroup.default.jmx");
-    Diff diff =
-        JmcXmlComparator.compare(
-            expectedContent,
-            wrapperContent,
-            null,
-            Arrays.asList(AttributesFilterManager.getCommentFilter()));
-    Assertions.assertFalse(
-        JmcXmlComparator.hasDifferences(diff), "theadGroup  not identical " + diff);
+    checkWrapper(testPlanWrapper, PARENT_PATH + "/threadgroup.default.jmx");
   }
 
   @Test
@@ -94,13 +80,8 @@ class ThreadGroupWrapperXMLTest extends AbstractJmcTest {
                     .withIsSameUserOnNextIteration(false)
                     .build())
             .build();
-    String wrapperContent = toTmpFile(testPlanWrapper, "threadgroup_");
-    String wrapperContentFragment = getFragmentSingleNode(wrapperContent, NODE_NAME);
-    String expectedContent = readFile(PARENT_PATH + "/threadgroup.reverse.jmx");
-    String expectedContentFragment = getFragmentSingleNode(expectedContent, NODE_NAME);
-    Diff diff = JmcXmlComparator.compare(expectedContentFragment, wrapperContentFragment);
-    Assertions.assertFalse(
-        JmcXmlComparator.hasDifferences(diff, LoopController.LOOPS),
-        "theadGroup  not identical " + diff);
+
+    checkWrapper(
+        testPlanWrapper, PARENT_PATH + "/threadgroup.reverse.jmx", NODE_NAME, LoopController.LOOPS);
   }
 }

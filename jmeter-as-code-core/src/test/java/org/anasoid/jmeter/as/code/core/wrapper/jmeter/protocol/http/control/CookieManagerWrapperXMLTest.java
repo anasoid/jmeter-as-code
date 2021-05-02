@@ -56,13 +56,8 @@ class CookieManagerWrapperXMLTest extends AbstractJmcTest {
                             .build())
                     .build())
             .build();
-    String wrapperContent = toTmpFile(testPlanWrapper, "httpcookiemanager_");
-    String wrapperContentFragment = getFragmentSingleNode(wrapperContent, NODE_NAME);
-    String expectedContent = readFile(PARENT_PATH + "/httpcookiemanager.default.jmx");
-    String expectedContentFragment = getFragmentSingleNode(expectedContent, NODE_NAME);
-    Diff diff = JmcXmlComparator.compare(expectedContentFragment, wrapperContentFragment);
-    Assertions.assertFalse(
-        JmcXmlComparator.hasDifferences(diff), "httpcookiemanager  not identical " + diff);
+
+    checkWrapper(testPlanWrapper, PARENT_PATH + "/httpcookiemanager.default.jmx", NODE_NAME);
   }
 
   @Test
@@ -98,12 +93,7 @@ class CookieManagerWrapperXMLTest extends AbstractJmcTest {
                             .build())
                     .build())
             .build();
-    String wrapperContent = toTmpFile(testPlanWrapper, "httpcookiemanager_");
-    String wrapperContentFragment = getFragmentSingleNode(wrapperContent, NODE_NAME);
-    String expectedContent = readFile(PARENT_PATH + "/httpcookiemanager.reverse.jmx");
-    String expectedContentFragment = getFragmentSingleNode(expectedContent, NODE_NAME);
-    Diff diff = JmcXmlComparator.compare(expectedContentFragment, wrapperContentFragment);
-    Assertions.assertFalse(
-        JmcXmlComparator.hasDifferences(diff), "httpcookiemanager  not identical " + diff);
+
+    checkWrapper(testPlanWrapper, PARENT_PATH + "/httpcookiemanager.reverse.jmx", NODE_NAME);
   }
 }

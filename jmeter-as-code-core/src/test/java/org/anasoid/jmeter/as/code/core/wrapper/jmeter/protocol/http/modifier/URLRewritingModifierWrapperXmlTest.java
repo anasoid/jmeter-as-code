@@ -2,11 +2,8 @@ package org.anasoid.jmeter.as.code.core.wrapper.jmeter.protocol.http.modifier;
 
 import java.io.IOException;
 import org.anasoid.jmeter.as.code.core.AbstractJmcTest;
-import org.anasoid.jmeter.as.code.core.test.utils.xmlunit.JmcXmlComparator;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestPlanWrapper;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.xmlunit.diff.Diff;
 /*
  * Copyright 2020-2021 the original author or authors.
  *
@@ -28,7 +25,7 @@ import org.xmlunit.diff.Diff;
 class URLRewritingModifierWrapperXmlTest extends AbstractJmcTest {
 
   private static final String PARENT_PATH =
-      "org/anasoid/jmeter/as/code/core/wrapper/jmeter/protocol/http/modifier/";
+      "org/anasoid/jmeter/as/code/core/wrapper/jmeter/protocol/http/modifier";
 
   private static final String NODE_NAME = "URLRewritingModifier";
 
@@ -44,13 +41,9 @@ class URLRewritingModifierWrapperXmlTest extends AbstractJmcTest {
                     .withArgumentName("session")
                     .build())
             .build();
-    String wrapperContent = toTmpFile(testPlanWrapper, NODE_NAME + "_");
-    String wrapperContentFragment = getFragmentSingleNode(wrapperContent, NODE_NAME);
-    String expectedContent = readFile(PARENT_PATH + "httpurlrewritingmodifier.default.jmx");
-    String expectedContentFragment = getFragmentSingleNode(expectedContent, NODE_NAME);
-    Diff diff = JmcXmlComparator.compare(expectedContentFragment, wrapperContentFragment);
-    Assertions.assertFalse(
-        JmcXmlComparator.hasDifferences(diff), NODE_NAME + "  not identical " + diff);
+
+    checkWrapper(testPlanWrapper, PARENT_PATH + "/httpurlrewritingmodifier.default.jmx",
+        NODE_NAME);
   }
 
   @Test
@@ -70,12 +63,9 @@ class URLRewritingModifierWrapperXmlTest extends AbstractJmcTest {
                     .withArgumentName("session")
                     .build())
             .build();
-    String wrapperContent = toTmpFile(testPlanWrapper, NODE_NAME + "_");
-    String wrapperContentFragment = getFragmentSingleNode(wrapperContent, NODE_NAME);
-    String expectedContent = readFile(PARENT_PATH + "httpurlrewritingmodifier.default.inverse.jmx");
-    String expectedContentFragment = getFragmentSingleNode(expectedContent, NODE_NAME);
-    Diff diff = JmcXmlComparator.compare(expectedContentFragment, wrapperContentFragment);
-    Assertions.assertFalse(
-        JmcXmlComparator.hasDifferences(diff), NODE_NAME + "  not identical " + diff);
+
+    checkWrapper(
+        testPlanWrapper, PARENT_PATH + "/httpurlrewritingmodifier.default.inverse.jmx",
+        NODE_NAME);
   }
 }

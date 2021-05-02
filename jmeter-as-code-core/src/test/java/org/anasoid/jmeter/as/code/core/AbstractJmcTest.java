@@ -21,9 +21,14 @@ package org.anasoid.jmeter.as.code.core;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Arrays;
+import java.util.List;
 import javax.xml.transform.Source;
 import org.anasoid.jmeter.as.code.core.application.ApplicationTest;
 import org.anasoid.jmeter.as.code.core.test.utils.xmlunit.JmcXmlComparator;
+import org.anasoid.jmeter.as.code.core.test.utils.xmlunit.filter.AttributesFilterManager;
+import org.anasoid.jmeter.as.code.core.test.utils.xmlunit.filter.JmcXmlFilterAttr;
+import org.anasoid.jmeter.as.code.core.test.utils.xmlunit.filter.JmcXmlFilterNode;
 import org.anasoid.jmeter.as.code.core.util.FileUtils;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestPlanWrapper;
 import org.junit.jupiter.api.Assertions;
@@ -50,7 +55,8 @@ public abstract class AbstractJmcTest {
     System.out.println(content); // NOPMD
   }
 
-  protected void checkWrapper(TestPlanWrapper testPlanWrapper, String jmxFile, String node)
+  protected void checkWrapper(
+      TestPlanWrapper testPlanWrapper, String jmxFile, String node, String... ignoreProperties)
       throws IOException {
 
     String wrapperContent = toTmpFile(testPlanWrapper, node + "_");
@@ -62,7 +68,32 @@ public abstract class AbstractJmcTest {
     println("expectedContentFragment :" + expectedContentFragment);
 
     Diff diff = JmcXmlComparator.compare(expectedContentFragment, wrapperContentFragment);
-    Assertions.assertFalse(JmcXmlComparator.hasDifferences(diff), node + "  not identical " + diff);
+    Assertions.assertFalse(
+        JmcXmlComparator.hasDifferences(diff, ignoreProperties), node + "  not identical " + diff);
+  }
+
+  protected void checkWrapper(TestPlanWrapper testPlanWrapper, String jmxFile) throws IOException {
+    checkWrapper(
+        testPlanWrapper, jmxFile, null,
+        Arrays.asList(AttributesFilterManager.getCommentFilter()));
+  }
+
+  protected void checkWrapper(
+      TestPlanWrapper testPlanWrapper,
+      String jmxFile,
+      List<JmcXmlFilterAttr> filterAttrs,
+      List<JmcXmlFilterNode> filterNodes,
+      String... ignoreProperties)
+      throws IOException {
+
+    String wrapperContent = toTmpFile(testPlanWrapper, "node_");
+    println("wrapperContent :" + wrapperContent);
+    String expectedContent = readFile(jmxFile);
+    println("expectedContent :" + expectedContent);
+
+    Diff diff = JmcXmlComparator.compare(expectedContent, wrapperContent, filterAttrs, filterNodes);
+    Assertions.assertFalse(
+        JmcXmlComparator.hasDifferences(diff, ignoreProperties), "not identical " + diff);
   }
 
   /**

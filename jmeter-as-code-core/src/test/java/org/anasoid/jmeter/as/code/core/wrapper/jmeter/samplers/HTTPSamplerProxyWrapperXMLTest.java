@@ -62,13 +62,8 @@ class HTTPSamplerProxyWrapperXMLTest extends AbstractJmcTest {
                             .build())
                     .build())
             .build();
-    String wrapperContent = toTmpFile(testPlanWrapper, "httpsampler_");
-    String wrapperContentFragment = getFragmentSingleNode(wrapperContent, NODE_NAME);
-    String expectedContent = readFile(PARENT_PATH + "/httpsampler.default.jmx");
-    String expectedContentFragment = getFragmentSingleNode(expectedContent, NODE_NAME);
-    Diff diff = JmcXmlComparator.compare(expectedContentFragment, wrapperContentFragment);
-    Assertions.assertFalse(
-        JmcXmlComparator.hasDifferences(diff), "httpsampler  not identical " + diff);
+
+    checkWrapper(testPlanWrapper, PARENT_PATH + "/httpsampler.default.jmx", NODE_NAME);
   }
 
   @Test
@@ -88,13 +83,8 @@ class HTTPSamplerProxyWrapperXMLTest extends AbstractJmcTest {
                             .build())
                     .build())
             .build();
-    String wrapperContent = toTmpFile(testPlanWrapper, "httpsampler_");
-    String wrapperContentFragment = getFragmentSingleNode(wrapperContent, NODE_NAME);
-    String expectedContent = readFile(PARENT_PATH + "/httpsampler.body.jmx");
-    String expectedContentFragment = getFragmentSingleNode(expectedContent, NODE_NAME);
-    Diff diff = JmcXmlComparator.compare(expectedContentFragment, wrapperContentFragment);
-    Assertions.assertFalse(
-        JmcXmlComparator.hasDifferences(diff), "httpsampler  not identical " + diff);
+
+    checkWrapper(testPlanWrapper, PARENT_PATH + "/httpsampler.body.jmx", NODE_NAME);
   }
 
   @Test
@@ -113,16 +103,7 @@ class HTTPSamplerProxyWrapperXMLTest extends AbstractJmcTest {
                             .build())
                     .build())
             .build();
-    String wrapperContent = toTmpFile(testPlanWrapper, "httpsampler_");
-    String expectedContent = readFile(PARENT_PATH + "/httpsampler.default.jmx");
-    Diff diff =
-        JmcXmlComparator.compare(
-            expectedContent,
-            wrapperContent,
-            null,
-            Arrays.asList(AttributesFilterManager.getCommentFilter()));
-    Assertions.assertFalse(
-        JmcXmlComparator.hasDifferences(diff), "httpsampler  not identical " + diff);
+    checkWrapper(testPlanWrapper, PARENT_PATH + "/httpsampler.default.jmx");
   }
 
   @Test
@@ -179,12 +160,7 @@ class HTTPSamplerProxyWrapperXMLTest extends AbstractJmcTest {
                             .build())
                     .build())
             .build();
-    String wrapperContent = toTmpFile(testPlanWrapper, "httpsampler_");
-    String wrapperContentFragment = getFragmentSingleNode(wrapperContent, NODE_NAME);
-    String expectedContent = readFile(PARENT_PATH + "/httpsampler.reverse.jmx");
-    String expectedContentFragment = getFragmentSingleNode(expectedContent, NODE_NAME);
-    Diff diff = JmcXmlComparator.compare(expectedContentFragment, wrapperContentFragment);
-    Assertions.assertFalse(
-        JmcXmlComparator.hasDifferences(diff), "httpsampler  not identical " + diff);
+
+    checkWrapper(testPlanWrapper, PARENT_PATH + "/httpsampler.reverse.jmx", NODE_NAME);
   }
 }

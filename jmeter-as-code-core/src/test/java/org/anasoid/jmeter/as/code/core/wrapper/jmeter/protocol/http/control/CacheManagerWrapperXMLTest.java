@@ -41,13 +41,7 @@ class CacheManagerWrapperXMLTest extends AbstractJmcTest {
             .addConfig(CacheManagerWrapper.builder().withName("HTTP Cache Manager").build())
             .build();
 
-    String wrapperContent = toTmpFile(testPlanWrapper, "httpcachemanager_");
-    String wrapperContentFragment = getFragmentSingleNode(wrapperContent, NODE_NAME);
-    String expectedContent = readFile(PARENT_PATH + "/httpcachemanager.default.jmx");
-    String expectedContentFragment = getFragmentSingleNode(expectedContent, NODE_NAME);
-    Diff diff = JmcXmlComparator.compare(expectedContentFragment, wrapperContentFragment);
-    Assertions.assertFalse(
-        JmcXmlComparator.hasDifferences(diff), "httpcachemanager  not identical " + diff);
+    checkWrapper(testPlanWrapper, PARENT_PATH + "/httpcachemanager.default.jmx", NODE_NAME);
   }
 
   @Test
@@ -65,12 +59,6 @@ class CacheManagerWrapperXMLTest extends AbstractJmcTest {
                     .build())
             .build();
 
-    String wrapperContent = toTmpFile(testPlanWrapper, "httpcachemanager_");
-    String wrapperContentFragment = getFragmentSingleNode(wrapperContent, NODE_NAME);
-    String expectedContent = readFile(PARENT_PATH + "/httpcachemanager.reverse.jmx");
-    String expectedContentFragment = getFragmentSingleNode(expectedContent, NODE_NAME);
-    Diff diff = JmcXmlComparator.compare(expectedContentFragment, wrapperContentFragment);
-    Assertions.assertFalse(
-        JmcXmlComparator.hasDifferences(diff), "httpcachemanager  not identical " + diff);
+    checkWrapper(testPlanWrapper, PARENT_PATH + "/httpcachemanager.reverse.jmx", NODE_NAME);
   }
 }

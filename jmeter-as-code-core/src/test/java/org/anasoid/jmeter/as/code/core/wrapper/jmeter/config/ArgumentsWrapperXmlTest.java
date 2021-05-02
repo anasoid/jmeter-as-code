@@ -47,13 +47,8 @@ class ArgumentsWrapperXmlTest extends AbstractJmcTest {
             .withName("Test Plan")
             .addConfig(ArgumentsWrapper.builder().withName("User Defined Variables").build())
             .build();
-    String wrapperContent = toTmpFile(testPlanWrapper, NODE_NAME + "_");
-    String wrapperContentFragment = getFragmentSingleNode(wrapperContent, NODE_NAME);
-    String expectedContent = readFile(PARENT_PATH + "/userdefinedvariables.default.jmx");
-    String expectedContentFragment = getFragmentSingleNode(expectedContent, NODE_NAME);
-    Diff diff = JmcXmlComparator.compare(expectedContentFragment, wrapperContentFragment);
-    Assertions.assertFalse(
-        JmcXmlComparator.hasDifferences(diff), NODE_NAME + "  not identical " + diff);
+
+    checkWrapper(testPlanWrapper, PARENT_PATH + "/userdefinedvariables.default.jmx", NODE_NAME);
   }
 
   @Test
@@ -75,12 +70,8 @@ class ArgumentsWrapperXmlTest extends AbstractJmcTest {
                     .addArgument(ArgumentWrapper.builder().withName("myvar3").build())
                     .build())
             .build();
-    String wrapperContent = toTmpFile(testPlanWrapper, NODE_NAME + "_");
-    String wrapperContentFragment = getFragmentSingleNode(wrapperContent, NODE_NAME);
-    String expectedContent = readFile(PARENT_PATH + "/userdefinedvariables.inverse.default.jmx");
-    String expectedContentFragment = getFragmentSingleNode(expectedContent, NODE_NAME);
-    Diff diff = JmcXmlComparator.compare(expectedContentFragment, wrapperContentFragment);
-    Assertions.assertFalse(
-        JmcXmlComparator.hasDifferences(diff), NODE_NAME + "  not identical " + diff);
+
+    checkWrapper(
+        testPlanWrapper, PARENT_PATH + "/userdefinedvariables.inverse.default.jmx", NODE_NAME);
   }
 }

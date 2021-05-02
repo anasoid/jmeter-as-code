@@ -49,13 +49,8 @@ class HttpDefaultsXMLWrapperTest extends AbstractJmcTest {
             .withName(DEFAULT_TEST_PLAN)
             .addConfig(HttpDefaultsWrapper.builder().withName("HTTP Request Defaults").build())
             .build();
-    String wrapperContent = toTmpFile(testPlanWrapper, "httpconfig_");
-    String wrapperContentFragment = getFragmentSingleNode(wrapperContent, NODE_NAME);
-    String expectedContent = readFile(PARENT_PATH + "/httpdefault.default.jmx");
-    String expectedContentFragment = getFragmentSingleNode(expectedContent, NODE_NAME);
-    Diff diff = JmcXmlComparator.compare(expectedContentFragment, wrapperContentFragment);
-    Assertions.assertFalse(
-        JmcXmlComparator.hasDifferences(diff), "httpconfig  not identical " + diff);
+
+    checkWrapper(testPlanWrapper, PARENT_PATH + "/httpdefault.default.jmx", NODE_NAME);
   }
 
   @Test
@@ -70,13 +65,8 @@ class HttpDefaultsXMLWrapperTest extends AbstractJmcTest {
                     .withBody("body")
                     .build())
             .build();
-    String wrapperContent = toTmpFile(testPlanWrapper, "httpconfig_");
-    String wrapperContentFragment = getFragmentSingleNode(wrapperContent, NODE_NAME);
-    String expectedContent = readFile(PARENT_PATH + "/httpdefault.body.jmx");
-    String expectedContentFragment = getFragmentSingleNode(expectedContent, NODE_NAME);
-    Diff diff = JmcXmlComparator.compare(expectedContentFragment, wrapperContentFragment);
-    Assertions.assertFalse(
-        JmcXmlComparator.hasDifferences(diff), "httpconfig  not identical " + diff);
+
+    checkWrapper(testPlanWrapper, PARENT_PATH + "/httpdefault.body.jmx", NODE_NAME);
   }
 
   @Test
@@ -118,12 +108,7 @@ class HttpDefaultsXMLWrapperTest extends AbstractJmcTest {
                             .build())
                     .build())
             .build();
-    String wrapperContent = toTmpFile(testPlanWrapper, "httpdefault_");
-    String wrapperContentFragment = getFragmentSingleNode(wrapperContent, NODE_NAME);
-    String expectedContent = readFile(PARENT_PATH + "/httpdefault.reverse.jmx");
-    String expectedContentFragment = getFragmentSingleNode(expectedContent, NODE_NAME);
-    Diff diff = JmcXmlComparator.compare(expectedContentFragment, wrapperContentFragment);
-    Assertions.assertFalse(
-        JmcXmlComparator.hasDifferences(diff), "httpdefault  not identical " + diff);
+
+    checkWrapper(testPlanWrapper, PARENT_PATH + "/httpdefault.reverse.jmx", NODE_NAME);
   }
 }

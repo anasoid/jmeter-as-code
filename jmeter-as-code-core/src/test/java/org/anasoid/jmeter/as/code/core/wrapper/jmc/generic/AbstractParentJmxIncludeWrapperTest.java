@@ -93,16 +93,7 @@ class AbstractParentJmxIncludeWrapperTest extends AbstractJmcTest {
                             .build())
                     .build())
             .build();
-    String wrapperContent = toTmpFile(testPlanWrapper, "httpsampler_");
-    String expectedContent = readFile(PARENT_PATH + "/main.one.node.jmx");
-    Diff diff =
-        JmcXmlComparator.compare(
-            expectedContent,
-            wrapperContent,
-            null,
-            Arrays.asList(AttributesFilterManager.getCommentFilter()));
-    Assertions.assertFalse(
-        JmcXmlComparator.hasDifferences(diff), "httpsampler  not identical " + diff);
+    checkWrapper(testPlanWrapper, PARENT_PATH + "/main.one.node.jmx");
   }
 
   @Test
@@ -127,16 +118,7 @@ class AbstractParentJmxIncludeWrapperTest extends AbstractJmcTest {
                         HTTPSamplerProxyWrapper.builder().withName("first").withPath("").build())
                     .build())
             .build();
-    String wrapperContent = toTmpFile(testPlanWrapper, "httpsampler_");
-    String expectedContent = readFile(PARENT_PATH + "/main.second.inverse.jmx");
-    Diff diff =
-        JmcXmlComparator.compare(
-            expectedContent,
-            wrapperContent,
-            null,
-            Arrays.asList(AttributesFilterManager.getCommentFilter()));
-    Assertions.assertFalse(
-        JmcXmlComparator.hasDifferences(diff), "httpsampler  not identical " + diff);
+    checkWrapper(testPlanWrapper, PARENT_PATH + "/main.second.inverse.jmx");
   }
 
   @Test
@@ -163,16 +145,8 @@ class AbstractParentJmxIncludeWrapperTest extends AbstractJmcTest {
                             .build())
                     .build())
             .build();
-    String wrapperContent = toTmpFile(testPlanWrapper, "httpsampler_");
-    String expectedContent = readFile(PARENT_PATH + "/main.one.node.two.config.jmx");
-    Diff diff =
-        JmcXmlComparator.compare(
-            expectedContent,
-            wrapperContent,
-            null,
-            Arrays.asList(AttributesFilterManager.getCommentFilter()));
-    Assertions.assertFalse(
-        JmcXmlComparator.hasDifferences(diff), "httpsampler  not identical " + diff);
+
+    checkWrapper(testPlanWrapper, PARENT_PATH + "/main.one.node.two.config.jmx");
   }
 
   @Test
@@ -199,15 +173,7 @@ class AbstractParentJmxIncludeWrapperTest extends AbstractJmcTest {
                             .build())
                     .build())
             .build();
-    String wrapperContent = toTmpFile(testPlanWrapper, "httpsampler_");
-    String expectedContent = readFile(PARENT_PATH + "/main.one.node.two.config.inverse.jmx");
-    Diff diff =
-        JmcXmlComparator.compare(
-            expectedContent,
-            wrapperContent,
-            null,
-            Arrays.asList(AttributesFilterManager.getCommentFilter()));
-    Assertions.assertFalse(
-        JmcXmlComparator.hasDifferences(diff), "httpsampler  not identical " + diff);
+
+    checkWrapper(testPlanWrapper, PARENT_PATH + "/main.one.node.two.config.inverse.jmx");
   }
 }
