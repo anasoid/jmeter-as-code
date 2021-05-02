@@ -30,6 +30,9 @@ import java.util.Map;
 import java.util.Random;
 import org.anasoid.jmeter.as.code.core.wrapper.jmc.Variable;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestElementWrapper;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.basic.AbstractBasicChildTestElementWrapper;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.basic.AbstractBasicTestElementWrapper;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.basic.AbstractBasicTestElementWrapper.AbstractBasicTestElementWrapperBuilder;
 import org.anasoid.jmeter.as.code.core.xstream.ConverterBeanUtils;
 import org.junit.jupiter.api.Assertions;
 
@@ -62,6 +65,26 @@ public final class SetterTestUtils {
       }
     }
     return new ArrayList<>(result.values());
+  }
+
+  /**
+   * get All field with setter annotation.
+   *
+   * @param source object to be parsed.
+   * @return list all field.
+   */
+  private static Method toBuildMethod(Object source) {
+    Map<String, Field> result = new HashMap<>(); // NOPMD
+    Class<?> clazz = source.getClass();
+    for (Class<?> sclazz : ConverterBeanUtils.getSuperClasses(clazz)) {
+      try {
+        Method method = sclazz.getDeclaredMethod("toBuilder");
+        return method;
+      } catch (NoSuchMethodException e) {
+        // Nothing
+      }
+    }
+    return null;
   }
 
   /**
@@ -117,11 +140,22 @@ public final class SetterTestUtils {
   }
 
   /** test all setter. */
-  public static void testSetter(TestElementWrapper testElement)
+  public static void testSetter(AbstractBasicTestElementWrapperBuilder testElementBuilder)
+      throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    testElementBuilder.toString();
+    testSetter(testElementBuilder.build());
+  }
+
+  /** test all setter. */
+  private static void testSetter(TestElementWrapper testElement)
       throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
     // Coverage toString
     testElement.toString();
 
+    Method toBuilder = SetterTestUtils.toBuildMethod(testElement);
+    if (toBuilder != null) {
+      toBuilder.invoke(testElement);
+    }
     List<Field> fields = SetterTestUtils.getSetterFields(testElement);
     Random rnd = new Random(999999);
     for (Field field : fields) {

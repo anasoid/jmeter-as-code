@@ -39,7 +39,7 @@ class TestPlanWrapperTest extends AbstractJmcTest {
   @Test
   void testSetter()
       throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-    SetterTestUtils.testSetter(TestPlanWrapper.builder().build());
+    SetterTestUtils.testSetter(TestPlanWrapper.builder());
   }
 
   @Test

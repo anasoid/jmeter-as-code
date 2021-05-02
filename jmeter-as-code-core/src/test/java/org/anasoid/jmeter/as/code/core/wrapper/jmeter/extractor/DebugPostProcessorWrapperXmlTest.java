@@ -34,7 +34,7 @@ class DebugPostProcessorWrapperXmlTest extends AbstractJmcTest {
   @Test
   void testSetter()
       throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-    SetterTestUtils.testSetter(DebugPostProcessorWrapper.builder().build());
+    SetterTestUtils.testSetter(DebugPostProcessorWrapper.builder());
   }
 
   @Test

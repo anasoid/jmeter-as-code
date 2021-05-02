@@ -34,7 +34,7 @@ class HtmlExtractorWrapperTest extends AbstractJmcTest {
   @Test
   void testSetter()
       throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-    SetterTestUtils.testSetter(HtmlExtractorWrapper.builder().build());
+    SetterTestUtils.testSetter(HtmlExtractorWrapper.builder());
   }
 
   @Test

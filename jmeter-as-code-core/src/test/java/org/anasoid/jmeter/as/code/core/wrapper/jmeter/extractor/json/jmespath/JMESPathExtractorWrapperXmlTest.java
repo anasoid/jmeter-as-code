@@ -35,7 +35,7 @@ class JMESPathExtractorWrapperXmlTest extends AbstractJmcTest {
   @Test
   void testSetter()
       throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-    SetterTestUtils.testSetter(JMESPathExtractorWrapper.builder().build());
+    SetterTestUtils.testSetter(JMESPathExtractorWrapper.builder());
   }
 
   @Test

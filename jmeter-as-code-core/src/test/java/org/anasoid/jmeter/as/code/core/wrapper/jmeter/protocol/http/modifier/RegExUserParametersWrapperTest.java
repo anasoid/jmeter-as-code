@@ -33,7 +33,7 @@ class RegExUserParametersWrapperTest extends AbstractJmcTest {
   @Test
   void testSetter()
       throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-    SetterTestUtils.testSetter(RegExUserParametersWrapper.builder().build());
+    SetterTestUtils.testSetter(RegExUserParametersWrapper.builder());
   }
 
   @Test

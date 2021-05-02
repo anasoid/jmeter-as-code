@@ -35,7 +35,7 @@ class ResultActionWrapperXmlTest extends AbstractJmcTest {
   @Test
   void testSetter()
       throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-    SetterTestUtils.testSetter(ResultActionWrapper.builder().build());
+    SetterTestUtils.testSetter(ResultActionWrapper.builder());
   }
 
   @Test

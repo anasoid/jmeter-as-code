@@ -31,7 +31,7 @@ class JMESPathAssertionWrapperTest {
   @Test
   void testSetter()
       throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-    SetterTestUtils.testSetter(JMESPathAssertionWrapper.builder().build());
+    SetterTestUtils.testSetter(JMESPathAssertionWrapper.builder());
   }
 
   @Test

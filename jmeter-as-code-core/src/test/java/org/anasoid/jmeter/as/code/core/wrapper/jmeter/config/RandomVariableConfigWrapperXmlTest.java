@@ -37,7 +37,7 @@ class RandomVariableConfigWrapperXmlTest extends AbstractJmcTest {
   @Test
   void testSetter()
       throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-    SetterTestUtils.testSetter(RandomVariableConfigWrapper.builder().build());
+    SetterTestUtils.testSetter(RandomVariableConfigWrapper.builder());
   }
 
   @Test

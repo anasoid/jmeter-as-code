@@ -30,7 +30,7 @@ class CacheManagerWrapperTest extends AbstractJmcTest {
   @Test
   void testSetter()
       throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-    SetterTestUtils.testSetter(CacheManagerWrapper.builder().build());
+    SetterTestUtils.testSetter(CacheManagerWrapper.builder());
   }
 
   @Test

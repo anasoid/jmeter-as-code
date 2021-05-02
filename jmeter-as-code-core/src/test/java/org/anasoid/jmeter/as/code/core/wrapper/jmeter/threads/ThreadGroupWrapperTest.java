@@ -33,7 +33,7 @@ class ThreadGroupWrapperTest extends AbstractJmcTest {
   @Test
   void testSetter()
       throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-    SetterTestUtils.testSetter(ThreadGroupWrapper.builder().build());
+    SetterTestUtils.testSetter(ThreadGroupWrapper.builder());
   }
 
   @Test

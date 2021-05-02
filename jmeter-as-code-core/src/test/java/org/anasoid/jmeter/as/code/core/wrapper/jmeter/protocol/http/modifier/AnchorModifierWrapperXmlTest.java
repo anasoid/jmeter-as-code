@@ -36,7 +36,7 @@ class AnchorModifierWrapperXmlTest extends AbstractJmcTest {
   @Test
   void testSetter()
       throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-    SetterTestUtils.testSetter(AnchorModifierWrapper.builder().build());
+    SetterTestUtils.testSetter(AnchorModifierWrapper.builder());
   }
 
   @Test

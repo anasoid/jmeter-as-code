@@ -34,7 +34,7 @@ class MD5HexAssertionWrapperXmlTest extends AbstractJmcTest {
   @Test
   void testSetter()
       throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-    SetterTestUtils.testSetter(MD5HexAssertionWrapper.builder().build());
+    SetterTestUtils.testSetter(MD5HexAssertionWrapper.builder());
   }
 
   @Test

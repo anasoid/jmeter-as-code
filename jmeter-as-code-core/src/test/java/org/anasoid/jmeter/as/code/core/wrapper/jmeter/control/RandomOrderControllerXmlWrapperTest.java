@@ -39,7 +39,7 @@ class RandomOrderControllerXmlWrapperTest extends AbstractJmcTest {
   @Test
   void testSetter()
       throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-    SetterTestUtils.testSetter(RandomOrderControllerWrapper.builder().build());
+    SetterTestUtils.testSetter(RandomOrderControllerWrapper.builder());
   }
 
   @Test

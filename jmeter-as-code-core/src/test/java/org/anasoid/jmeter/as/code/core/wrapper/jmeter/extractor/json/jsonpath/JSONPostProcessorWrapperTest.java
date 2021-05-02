@@ -33,7 +33,7 @@ class JSONPostProcessorWrapperTest {
   @Test
   void testSetter()
       throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-    SetterTestUtils.testSetter(JSONPostProcessorWrapper.builder().build());
+    SetterTestUtils.testSetter(JSONPostProcessorWrapper.builder());
   }
 
   @Test

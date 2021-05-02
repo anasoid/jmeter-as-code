@@ -34,7 +34,7 @@ class JSONPathAssertionWrapperXmlTest extends AbstractJmcTest {
   @Test
   void testSetter()
       throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-    SetterTestUtils.testSetter(JSONPathAssertionWrapper.builder().build());
+    SetterTestUtils.testSetter(JSONPathAssertionWrapper.builder());
   }
 
   @Test

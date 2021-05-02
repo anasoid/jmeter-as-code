@@ -34,7 +34,7 @@ class JSR223AssertionWrapperXmlTest extends AbstractJmcTest {
   @Test
   void testSetter()
       throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-    SetterTestUtils.testSetter(JSR223AssertionWrapper.builder().build());
+    SetterTestUtils.testSetter(JSR223AssertionWrapper.builder());
   }
 
   @Test

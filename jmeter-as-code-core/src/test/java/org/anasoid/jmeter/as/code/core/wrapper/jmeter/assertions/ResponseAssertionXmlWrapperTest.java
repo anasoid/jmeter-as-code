@@ -41,7 +41,7 @@ class ResponseAssertionXmlWrapperTest extends AbstractJmcTest {
   @Test
   void testSetter()
       throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-    SetterTestUtils.testSetter(ResponseAssertionWrapper.builder().build());
+    SetterTestUtils.testSetter(ResponseAssertionWrapper.builder());
   }
 
   @Test

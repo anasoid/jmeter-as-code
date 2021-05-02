@@ -33,7 +33,7 @@ class CounterConfigWrapperTest extends AbstractJmcTest {
   @Test
   void testSetter()
       throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-    SetterTestUtils.testSetter(CounterConfigWrapper.builder().build());
+    SetterTestUtils.testSetter(CounterConfigWrapper.builder());
   }
 
   @Test

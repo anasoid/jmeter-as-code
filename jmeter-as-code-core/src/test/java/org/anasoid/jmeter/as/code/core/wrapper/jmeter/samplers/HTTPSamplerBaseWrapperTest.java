@@ -43,7 +43,7 @@ class HTTPSamplerBaseWrapperTest extends AbstractJmcTest {
   @Test
   void testSetter()
       throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-    SetterTestUtils.testSetter(HTTPSamplerProxyWrapper.builder().build());
+    SetterTestUtils.testSetter(HTTPSamplerProxyWrapper.builder());
   }
 
   @Test

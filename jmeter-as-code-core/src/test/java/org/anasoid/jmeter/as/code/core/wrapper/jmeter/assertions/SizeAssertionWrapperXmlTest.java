@@ -37,7 +37,7 @@ class SizeAssertionWrapperXmlTest extends AbstractJmcTest {
   @Test
   void testSetter()
       throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-    SetterTestUtils.testSetter(SizeAssertionWrapper.builder().build());
+    SetterTestUtils.testSetter(SizeAssertionWrapper.builder());
   }
 
   @Test

@@ -185,7 +185,7 @@ public class CounterConfigWrapper extends ConfigTestElementWrapper<CounterConfig
 
     /** reset counter on each thread group iteration. */
     public B withResetOnEachIteration(boolean resetOnEachIteration) {
-      if (!this.perUser$value && this.perUser$set) {
+      if (resetOnEachIteration && (!this.perUser$value && this.perUser$set)) {
         throw new ConversionIllegalStateException(
             "When using ConversionIllegalStateException=false,"
                 + " resetOnEachIteration should not be used");

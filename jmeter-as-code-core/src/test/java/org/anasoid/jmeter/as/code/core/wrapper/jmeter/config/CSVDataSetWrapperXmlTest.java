@@ -38,7 +38,7 @@ class CSVDataSetWrapperXmlTest extends AbstractJmcTest {
   @Test
   void testSetter()
       throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-    SetterTestUtils.testSetter(CSVDataSetWrapper.builder().withFilename("/myfile").build());
+    SetterTestUtils.testSetter(CSVDataSetWrapper.builder().withFilename("/myfile"));
   }
 
   @Test

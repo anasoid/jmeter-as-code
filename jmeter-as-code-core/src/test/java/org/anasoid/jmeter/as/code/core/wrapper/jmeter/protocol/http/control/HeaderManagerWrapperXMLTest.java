@@ -40,7 +40,7 @@ class HeaderManagerWrapperXMLTest extends AbstractJmcTest {
   @Test
   void testSetter()
       throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-    SetterTestUtils.testSetter(HeaderManagerWrapper.builder().build());
+    SetterTestUtils.testSetter(HeaderManagerWrapper.builder());
   }
 
   @Test

@@ -34,7 +34,7 @@ class OnceOnlyControllerXmlWrapperTest extends AbstractJmcTest {
   @Test
   void testSetter()
       throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-    SetterTestUtils.testSetter(OnceOnlyControllerWrapper.builder().build());
+    SetterTestUtils.testSetter(OnceOnlyControllerWrapper.builder());
   }
 
   private static final String PARENT_PATH =

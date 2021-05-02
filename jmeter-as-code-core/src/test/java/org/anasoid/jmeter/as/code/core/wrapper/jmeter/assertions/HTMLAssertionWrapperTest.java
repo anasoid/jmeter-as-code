@@ -33,7 +33,7 @@ class HTMLAssertionWrapperTest extends AbstractJmcTest {
   @Test
   void testSetter()
       throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-    SetterTestUtils.testSetter(HTMLAssertionWrapper.builder().build());
+    SetterTestUtils.testSetter(HTMLAssertionWrapper.builder());
   }
 
   @Test
