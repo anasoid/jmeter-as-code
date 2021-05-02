@@ -36,6 +36,11 @@ public final class JmcConfig {
     return "";
   }
 
+  /** Get Result root folder. */
+  public static String getResultRootFolder() {
+    return "";
+  }
+
   /** Get Script root folder. */
   public static boolean isScriptResource() {
     return true;
