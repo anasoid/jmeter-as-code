@@ -33,6 +33,7 @@ import org.anasoid.jmeter.as.code.core.wrapper.jmeter.processor.PostProcessorWra
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.processor.PreProcessorWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AssertionWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestElementWrapper;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.timers.TimerWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.template.JmcTemplate;
 import org.anasoid.jmeter.as.code.core.xstream.exceptions.ConversionException;
 
@@ -43,7 +44,8 @@ import org.anasoid.jmeter.as.code.core.xstream.exceptions.ConversionException;
       AssertionWrapper.class,
       ConfigElementWrapper.class,
       PreProcessorWrapper.class,
-      PostProcessorWrapper.class
+      PostProcessorWrapper.class,
+      TimerWrapper.class
     })
 public abstract class AbstractParentJmxIncludeWrapper<T> extends AbstractJmxIncludeWrapper<T> {
 
@@ -198,6 +200,30 @@ public abstract class AbstractParentJmxIncludeWrapper<T> extends AbstractJmxIncl
     /** Add postProcessor as child in tree. */
     public B addPostProcessors(List<PostProcessorWrapper<?>> childs) { // NOSONAR
       for (PostProcessorWrapper<?> child : childs) {
+        withChild(child);
+      }
+      return self();
+    }
+
+    // Timer
+
+    /** Add timer as child in tree. */
+    public B addTimer(TimerWrapper<?> timer) { // NOSONAR
+      return addTimers(Arrays.asList(timer));
+    }
+
+    /**
+     * Add timer as child in tree.
+     *
+     * @param timer template timer.
+     */
+    public <E extends TimerWrapper<?>> B addTimer(JmcTemplate<E> timer) {
+      return addTimer(timer.generate());
+    }
+
+    /** Add timer as child in tree. */
+    public B addTimers(List<TimerWrapper<?>> childs) { // NOSONAR
+      for (TimerWrapper<?> child : childs) {
         withChild(child);
       }
       return self();
