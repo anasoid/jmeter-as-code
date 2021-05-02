@@ -35,7 +35,7 @@ class XPathAssertionWrapperXmlTest extends AbstractJmcTest {
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
             .withName("Test Plan")
-            .addPostProcessor(
+            .addAssertion(
                 XPathAssertionWrapper.builder().withName("XPath Assertion").withXpath("/").build())
             .build();
 
@@ -48,7 +48,7 @@ class XPathAssertionWrapperXmlTest extends AbstractJmcTest {
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
             .withName("Test Plan")
-            .addPostProcessor(
+            .addAssertion(
                 XPathAssertionWrapper.builder()
                     .withName("XPath Assertion")
                     .withXpath("tidy")
@@ -66,7 +66,7 @@ class XPathAssertionWrapperXmlTest extends AbstractJmcTest {
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
             .withName("Test Plan")
-            .addPostProcessor(
+            .addAssertion(
                 XPathAssertionWrapper.builder()
                     .withName("XPath Assertion inverse")
                     .withXpath("tidy")
@@ -87,7 +87,7 @@ class XPathAssertionWrapperXmlTest extends AbstractJmcTest {
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
             .withName("Test Plan")
-            .addPostProcessor(
+            .addAssertion(
                 XPathAssertionWrapper.builder()
                     .withName("XPath Assertion inverse")
                     .withXpath("inverse")

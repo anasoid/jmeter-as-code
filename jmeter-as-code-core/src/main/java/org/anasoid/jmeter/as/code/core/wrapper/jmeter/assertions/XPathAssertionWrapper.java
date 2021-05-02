@@ -24,8 +24,8 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmeter.as.code.core.wrapper.jmc.validator.Validator;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.config.ConfigElementWrapper;
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.processor.PostProcessorWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AbstractScopedTestElementWrapper;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AssertionWrapper;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcMandatory;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcSkipDefault;
@@ -42,7 +42,7 @@ import org.apache.jmeter.assertions.gui.XPathAssertionGui;
 @SuppressWarnings({"PMD.RedundantFieldInitializer", "PMD.AvoidFieldNameMatchingMethodName"})
 public class XPathAssertionWrapper
     extends AbstractScopedTestElementWrapper<XPathAssertion, XPathAssertionGui>
-    implements PostProcessorWrapper<XPathAssertion>, Validator {
+    implements AssertionWrapper<XPathAssertion>, Validator {
 
   /** Element query in XPath language. Can return more than one match. */
   @JmcProperty("XPath.xpath")
