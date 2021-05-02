@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.4.1">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan" enabled="true">
+      <stringProp name="TestPlan.comments"></stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.tearDown_on_shutdown">true</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <PreciseThroughputTimer guiclass="TestBeanGUI" testclass="PreciseThroughputTimer" testname="Precise Throughput Timer" enabled="true">
+        <doubleProp>
+          <name>allowedThroughputSurplus</name>
+          <value>1.0</value>
+          <savedValue>0.0</savedValue>
+        </doubleProp>
+        <intProp name="batchSize">1</intProp>
+        <intProp name="batchThreadDelay">0</intProp>
+        <longProp name="duration">3600</longProp>
+        <intProp name="exactLimit">10000</intProp>
+        <longProp name="randomSeed">0</longProp>
+        <doubleProp>
+          <name>throughput</name>
+          <value>100.0</value>
+          <savedValue>0.0</savedValue>
+        </doubleProp>
+        <intProp name="throughputPeriod">3600</intProp>
+      </PreciseThroughputTimer>
+      <hashTree/>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>
