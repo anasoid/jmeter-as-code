@@ -21,6 +21,7 @@ package org.anasoid.jmeter.as.code.core.wrapper.jmeter.control;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcNullAllowed;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
 import org.apache.jmeter.control.WhileController;
 import org.apache.jmeter.control.gui.WhileControllerGui;
@@ -41,6 +42,7 @@ public class WhileControllerWrapper
   @JmcProperty("WhileController.condition")
   @Getter
   @Setter
+  @JmcNullAllowed
   private String condition = "";
 
   @Override

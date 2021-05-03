@@ -33,6 +33,7 @@ import org.apache.jmeter.control.gui.RandomControlGui;
  * @see RandomController
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@SuppressWarnings("PMD.RedundantFieldInitializer")
 public class RandomControllerWrapper
     extends GenericControllerWrapper<RandomController, RandomControlGui> {
 
@@ -44,7 +45,7 @@ public class RandomControllerWrapper
 
   /** ignoreSubContoller is perssisted as int. */
   @JmcProperty("InterleaveControl.style")
-  protected int style() {
+  protected Integer style() {
     if (ignoreSubController) {
       return 0;
     } else {

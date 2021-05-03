@@ -34,6 +34,7 @@ import org.apache.jmeter.control.gui.TransactionControllerGui;
  * @see TransactionController
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@SuppressWarnings("PMD.RedundantFieldInitializer")
 public class TransactionControllerWrapper
     extends GenericControllerWrapper<TransactionController, TransactionControllerGui> {
 

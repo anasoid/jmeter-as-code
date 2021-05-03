@@ -35,6 +35,7 @@ import org.apache.jmeter.control.gui.IfControllerPanel;
  * @see IfController
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@SuppressWarnings("PMD.RedundantFieldInitializer")
 public class IfControllerWrapper extends GenericControllerWrapper<IfController, IfControllerPanel> {
 
   /**

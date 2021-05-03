@@ -18,11 +18,11 @@
 
 package org.anasoid.jmeter.as.code.core.wrapper.jmeter.control;
 
-import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcMandatory;
+import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcNullAllowed;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
 import org.apache.jmeter.control.SwitchController;
 import org.apache.jmeter.control.gui.SwitchControllerGui;
@@ -44,8 +44,8 @@ public class SwitchControllerWrapper
   @Getter
   @Setter
   @JmcMandatory
-  @Default
-  private String switchValue = "0";
+  @JmcNullAllowed
+  private String switchValue;
 
   @Override
   public Class<SwitchControllerGui> getGuiClass() {

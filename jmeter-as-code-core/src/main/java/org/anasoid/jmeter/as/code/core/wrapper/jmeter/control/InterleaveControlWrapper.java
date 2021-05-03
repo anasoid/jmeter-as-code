@@ -23,9 +23,7 @@ import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.config.ConfigElementWrapper;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
-import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcSkipDefault;
 import org.apache.jmeter.control.InterleaveControl;
 import org.apache.jmeter.control.gui.InterleaveControlGui;
 
@@ -35,6 +33,7 @@ import org.apache.jmeter.control.gui.InterleaveControlGui;
  * @see InterleaveControl
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@SuppressWarnings("PMD.RedundantFieldInitializer")
 public class InterleaveControlWrapper
     extends GenericControllerWrapper<InterleaveControl, InterleaveControlGui> {
 
@@ -55,12 +54,11 @@ public class InterleaveControlWrapper
   @Getter
   @Setter
   @Default
-  @JmcSkipDefault(ConfigElementWrapper.FALSE)
-  private boolean accrossThreads = true;
+  private boolean accrossThreads = false;
 
   /** ignoreSubContoller is perssisted as int. */
   @JmcProperty("InterleaveControl.style")
-  protected int style() {
+  protected Integer style() {
     if (ignoreSubController) {
       return 0;
     } else {

@@ -25,6 +25,7 @@ import lombok.experimental.SuperBuilder;
 import org.anasoid.jmeter.as.code.core.wrapper.jmc.Variable;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcMandatory;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
+import org.anasoid.jmeter.as.code.core.xstream.types.IntegerManager;
 import org.apache.jmeter.control.ThroughputController;
 import org.apache.jmeter.control.gui.ThroughputControllerGui;
 
@@ -34,6 +35,7 @@ import org.apache.jmeter.control.gui.ThroughputControllerGui;
  * @see ThroughputController
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@SuppressWarnings("PMD.RedundantFieldInitializer")
 public class ThroughputControllerWrapper
     extends GenericControllerWrapper<ThroughputController, ThroughputControllerGui> {
 
@@ -51,7 +53,7 @@ public class ThroughputControllerWrapper
    * iterations through the test plan. For total execution mode, the number indicates the total
    * number of times the controller will execute.
    */
-  @JmcProperty("ThroughputController.maxThroughput")
+  @JmcProperty(value = "ThroughputController.maxThroughput", type = IntegerManager.class)
   @Getter
   @Setter
   @JmcMandatory
