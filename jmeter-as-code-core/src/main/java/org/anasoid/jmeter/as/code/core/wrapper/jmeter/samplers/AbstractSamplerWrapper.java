@@ -21,8 +21,8 @@ package org.anasoid.jmeter.as.code.core.wrapper.jmeter.samplers;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.gui.JMeterGUIWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AbstractTestElementWrapper;
+import org.apache.jmeter.gui.AbstractJMeterGuiComponent;
 import org.apache.jmeter.samplers.AbstractSampler;
-import org.apache.jmeter.samplers.gui.AbstractSamplerGui;
 
 /**
  * Wrapper for AbstractSampler.
@@ -32,13 +32,13 @@ import org.apache.jmeter.samplers.gui.AbstractSamplerGui;
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 @SuppressWarnings("PMD.AbstractClassWithoutAnyMethod")
 public abstract class AbstractSamplerWrapper<
-        T extends AbstractSampler, G extends AbstractSamplerGui>
+        T extends AbstractSampler, G extends AbstractJMeterGuiComponent>
     extends AbstractTestElementWrapper<T> implements JMeterGUIWrapper<G>, SamplerWrapper<T> {
 
   /** Builder. */
   public abstract static class AbstractSamplerWrapperBuilder<
           T extends AbstractSampler,
-          G extends AbstractSamplerGui,
+          G extends AbstractJMeterGuiComponent,
           C extends AbstractSamplerWrapper<T, G>,
           B extends AbstractSamplerWrapperBuilder<T, G, C, B>>
       extends AbstractTestElementWrapper.AbstractTestElementWrapperBuilder<T, C, B> {}
