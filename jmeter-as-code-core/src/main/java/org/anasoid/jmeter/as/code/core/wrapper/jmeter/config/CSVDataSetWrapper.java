@@ -128,12 +128,12 @@ public class CSVDataSetWrapper extends ConfigTestElementWrapper<CSVDataSet, Test
   private String shareMode = ShareMode.SHARE_ALL.value();
 
   @Override
-  public Class<TestBeanGUI> getGuiClass() {
+  public Class<?> getGuiClass() {
     return TestBeanGUI.class;
   }
 
   @Override
-  public Class<CSVDataSet> getTestClass() {
+  public Class<?> getTestClass() {
     return CSVDataSet.class;
   }
 

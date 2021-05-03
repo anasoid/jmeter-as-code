@@ -84,12 +84,12 @@ public class RandomVariableConfigWrapper
   private boolean perThread = false;
 
   @Override
-  public Class<TestBeanGUI> getGuiClass() {
+  public Class<?> getGuiClass() {
     return TestBeanGUI.class;
   }
 
   @Override
-  public Class<RandomVariableConfig> getTestClass() {
+  public Class<?> getTestClass() {
     return RandomVariableConfig.class;
   }
 

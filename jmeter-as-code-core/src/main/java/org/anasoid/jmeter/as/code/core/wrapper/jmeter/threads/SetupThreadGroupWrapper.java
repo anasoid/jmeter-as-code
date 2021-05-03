@@ -33,12 +33,12 @@ import org.apache.jmeter.threads.gui.SetupThreadGroupGui;
 public class SetupThreadGroupWrapper extends ThreadGroupWrapper {
 
   @Override
-  public Class<SetupThreadGroup> getTestClass() {
+  public Class<?> getTestClass() {
     return SetupThreadGroup.class;
   }
 
   @Override
-  public Class<SetupThreadGroupGui> getGuiClass() {
+  public Class<?> getGuiClass() {
     return SetupThreadGroupGui.class;
   }
 }

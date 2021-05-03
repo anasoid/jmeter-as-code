@@ -67,12 +67,12 @@ public class CacheManagerWrapper extends ConfigTestElementWrapper<CacheManager, 
   private Integer maxSize = 5000;
 
   @Override
-  public Class<CacheManager> getTestClass() {
+  public Class<?> getTestClass() {
     return CacheManager.class;
   }
 
   @Override
-  public Class<CacheManagerGui> getGuiClass() {
+  public Class<?> getGuiClass() {
     return CacheManagerGui.class;
   }
 

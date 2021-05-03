@@ -80,12 +80,12 @@ public class ForeachControllerWrapper
   private boolean useSeparator = true;
 
   @Override
-  public Class<ForeachControlPanel> getGuiClass() {
+  public Class<?> getGuiClass() {
     return ForeachControlPanel.class;
   }
 
   @Override
-  public Class<ForeachController> getTestClass() {
+  public Class<?> getTestClass() {
     return ForeachController.class;
   }
 }

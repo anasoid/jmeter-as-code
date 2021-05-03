@@ -61,7 +61,7 @@ public class HTTPFileArgWrapper extends AbstractBasicTestElementWrapper<HTTPFile
   }
 
   @Override
-  public Class<HTTPFileArg> getTestClass() {
+  public Class<?> getTestClass() {
     return HTTPFileArg.class;
   }
 

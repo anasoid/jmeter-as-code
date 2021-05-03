@@ -46,12 +46,12 @@ public class MD5HexAssertionWrapper extends AbstractBasicChildTestElementWrapper
   private String md5hex;
 
   @Override
-  public Class<MD5HexAssertionGUI> getGuiClass() {
+  public Class<?> getGuiClass() {
     return MD5HexAssertionGUI.class;
   }
 
   @Override
-  public Class<MD5HexAssertion> getTestClass() {
+  public Class<?> getTestClass() {
     return MD5HexAssertion.class;
   }
 }

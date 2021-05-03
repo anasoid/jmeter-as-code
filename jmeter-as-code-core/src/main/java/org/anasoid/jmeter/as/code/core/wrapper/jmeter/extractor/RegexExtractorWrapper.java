@@ -138,12 +138,12 @@ public class RegexExtractorWrapper
   }
 
   @Override
-  public Class<RegexExtractorGui> getGuiClass() {
+  public Class<?> getGuiClass() {
     return RegexExtractorGui.class;
   }
 
   @Override
-  public Class<RegexExtractor> getTestClass() {
+  public Class<?> getTestClass() {
     return RegexExtractor.class;
   }
 }

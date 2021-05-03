@@ -97,12 +97,12 @@ public class URLRewritingModifierWrapper
   private boolean encode = false;
 
   @Override
-  public Class<URLRewritingModifierGui> getGuiClass() {
+  public Class<?> getGuiClass() {
     return URLRewritingModifierGui.class;
   }
 
   @Override
-  public Class<URLRewritingModifier> getTestClass() {
+  public Class<?> getTestClass() {
     return URLRewritingModifier.class;
   }
 }

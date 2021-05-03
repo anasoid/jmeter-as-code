@@ -33,12 +33,12 @@ public class JSR223SamplerWrapper extends JSR223TestElementWrapper<JSR223Sampler
     implements SamplerWrapper<JSR223Sampler> {
 
   @Override
-  public Class<TestBeanGUI> getGuiClass() {
+  public Class<?> getGuiClass() {
     return TestBeanGUI.class;
   }
 
   @Override
-  public Class<JSR223Sampler> getTestClass() {
+  public Class<?> getTestClass() {
     return JSR223Sampler.class;
   }
 }

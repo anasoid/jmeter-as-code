@@ -60,12 +60,12 @@ public class TransactionControllerWrapper
   private boolean includeTimers = false;
 
   @Override
-  public Class<TransactionControllerGui> getGuiClass() {
+  public Class<?> getGuiClass() {
     return TransactionControllerGui.class;
   }
 
   @Override
-  public Class<TransactionController> getTestClass() {
+  public Class<?> getTestClass() {
     return TransactionController.class;
   }
 }

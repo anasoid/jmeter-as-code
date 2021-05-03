@@ -54,7 +54,7 @@ public class HTTPArgumentWrapper extends AbstractArgumentWrapper<HTTPArgument> {
   private String contentType;
 
   @Override
-  public Class<HTTPArgument> getTestClass() {
+  public Class<?> getTestClass() {
     return HTTPArgument.class;
   }
 

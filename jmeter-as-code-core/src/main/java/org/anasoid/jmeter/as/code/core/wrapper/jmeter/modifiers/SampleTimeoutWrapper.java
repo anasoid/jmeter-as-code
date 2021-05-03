@@ -47,12 +47,12 @@ public class SampleTimeoutWrapper extends AbstractBasicChildTestElementWrapper<S
   private String timeout = "10000";
 
   @Override
-  public Class<SampleTimeoutGui> getGuiClass() {
+  public Class<?> getGuiClass() {
     return SampleTimeoutGui.class;
   }
 
   @Override
-  public Class<SampleTimeout> getTestClass() {
+  public Class<?> getTestClass() {
     return SampleTimeout.class;
   }
 

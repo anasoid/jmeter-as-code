@@ -66,12 +66,12 @@ public class AuthManagerWrapper extends ConfigTestElementWrapper<AuthManager, Au
   private List<AuthorizationWrapper> authorizations = new ArrayList<>();
 
   @Override
-  public Class<AuthPanel> getGuiClass() {
+  public Class<?> getGuiClass() {
     return AuthPanel.class;
   }
 
   @Override
-  public Class<AuthManager> getTestClass() {
+  public Class<?> getTestClass() {
     return AuthManager.class;
   }
 

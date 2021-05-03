@@ -116,12 +116,12 @@ public class BoundaryExtractorWrapper
   }
 
   @Override
-  public Class<BoundaryExtractorGui> getGuiClass() {
+  public Class<?> getGuiClass() {
     return BoundaryExtractorGui.class;
   }
 
   @Override
-  public Class<BoundaryExtractor> getTestClass() {
+  public Class<?> getTestClass() {
     return BoundaryExtractor.class;
   }
 }

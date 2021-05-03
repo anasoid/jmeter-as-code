@@ -64,12 +64,12 @@ public class SyncTimerWrapper extends AbstractTestElementWrapper<SyncTimer>
   private String timeout = "0";
 
   @Override
-  public Class<TestBeanGUI> getGuiClass() {
+  public Class<?> getGuiClass() {
     return TestBeanGUI.class;
   }
 
   @Override
-  public Class<SyncTimer> getTestClass() {
+  public Class<?> getTestClass() {
     return SyncTimer.class;
   }
 

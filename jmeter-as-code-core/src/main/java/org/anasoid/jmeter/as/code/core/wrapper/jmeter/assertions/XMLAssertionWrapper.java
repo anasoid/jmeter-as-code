@@ -35,12 +35,12 @@ public class XMLAssertionWrapper extends AbstractBasicChildTestElementWrapper<XM
     implements JMeterGUIWrapper<XMLAssertionGui>, AssertionWrapper<XMLAssertion> {
 
   @Override
-  public Class<XMLAssertionGui> getGuiClass() {
+  public Class<?> getGuiClass() {
     return XMLAssertionGui.class;
   }
 
   @Override
-  public Class<XMLAssertion> getTestClass() {
+  public Class<?> getTestClass() {
     return XMLAssertion.class;
   }
 }

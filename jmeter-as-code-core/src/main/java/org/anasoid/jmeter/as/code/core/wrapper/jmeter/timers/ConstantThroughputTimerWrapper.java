@@ -54,12 +54,12 @@ public class ConstantThroughputTimerWrapper
   private String throughput = "0.0";
 
   @Override
-  public Class<TestBeanGUI> getGuiClass() {
+  public Class<?> getGuiClass() {
     return TestBeanGUI.class;
   }
 
   @Override
-  public Class<ConstantThroughputTimer> getTestClass() {
+  public Class<?> getTestClass() {
     return ConstantThroughputTimer.class;
   }
 

@@ -32,12 +32,12 @@ public class RecordingControllerWrapper
     extends GenericControllerWrapper<RecordingController, RecordController> {
 
   @Override
-  public Class<RecordController> getGuiClass() {
+  public Class<?> getGuiClass() {
     return RecordController.class;
   }
 
   @Override
-  public Class<RecordingController> getTestClass() {
+  public Class<?> getTestClass() {
     return RecordingController.class;
   }
 }

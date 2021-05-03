@@ -44,12 +44,12 @@ public class JMESPathAssertionWrapper
   private String jmesPath;
 
   @Override
-  public Class<JMESPathAssertionGui> getGuiClass() {
+  public Class<?> getGuiClass() {
     return JMESPathAssertionGui.class;
   }
 
   @Override
-  public Class<JMESPathAssertion> getTestClass() {
+  public Class<?> getTestClass() {
     return JMESPathAssertion.class;
   }
 }

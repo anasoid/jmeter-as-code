@@ -88,12 +88,12 @@ public class PreciseThroughputTimerWrapper
   private String duration = "3600";
 
   @Override
-  public Class<TestBeanGUI> getGuiClass() {
+  public Class<?> getGuiClass() {
     return TestBeanGUI.class;
   }
 
   @Override
-  public Class<PreciseThroughputTimer> getTestClass() {
+  public Class<?> getTestClass() {
     return PreciseThroughputTimer.class;
   }
 

@@ -147,12 +147,12 @@ public class HtmlExtractorWrapper
   }
 
   @Override
-  public Class<HtmlExtractorGui> getGuiClass() {
+  public Class<?> getGuiClass() {
     return HtmlExtractorGui.class;
   }
 
   @Override
-  public Class<HtmlExtractor> getTestClass() {
+  public Class<?> getTestClass() {
     return HtmlExtractor.class;
   }
 }

@@ -72,12 +72,12 @@ public class IfControllerWrapper extends GenericControllerWrapper<IfController, 
   private boolean useExpression = true;
 
   @Override
-  public Class<IfControllerPanel> getGuiClass() {
+  public Class<?> getGuiClass() {
     return IfControllerPanel.class;
   }
 
   @Override
-  public Class<IfController> getTestClass() {
+  public Class<?> getTestClass() {
     return IfController.class;
   }
 }

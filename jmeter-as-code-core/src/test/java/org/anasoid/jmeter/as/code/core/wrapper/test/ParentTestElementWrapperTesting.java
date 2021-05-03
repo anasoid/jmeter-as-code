@@ -112,12 +112,12 @@ public class ParentTestElementWrapperTesting extends AbstractTestElementWrapper<
   private List<ArgumentWrapper> arguments = new ArrayList<>();
 
   @Override
-  public Class<TestPlanGui> getGuiClass() {
+  public Class<?> getGuiClass() {
     return TestPlanGui.class;
   }
 
   @Override
-  public Class<TestPlan> getTestClass() {
+  public Class<?> getTestClass() {
     return TestPlan.class;
   }
 

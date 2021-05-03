@@ -124,12 +124,12 @@ public class JSONPostProcessorWrapper
   private boolean computeConcat = false;
 
   @Override
-  public Class<JSONPostProcessorGui> getGuiClass() {
+  public Class<?> getGuiClass() {
     return JSONPostProcessorGui.class;
   }
 
   @Override
-  public Class<JSONPostProcessor> getTestClass() {
+  public Class<?> getTestClass() {
     return JSONPostProcessor.class;
   }
 

@@ -32,12 +32,12 @@ public class OnceOnlyControllerWrapper
     extends GenericControllerWrapper<OnceOnlyController, OnceOnlyControllerGui> {
 
   @Override
-  public Class<OnceOnlyControllerGui> getGuiClass() {
+  public Class<?> getGuiClass() {
     return OnceOnlyControllerGui.class;
   }
 
   @Override
-  public Class<OnceOnlyController> getTestClass() {
+  public Class<?> getTestClass() {
     return OnceOnlyController.class;
   }
 }

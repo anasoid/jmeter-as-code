@@ -34,12 +34,12 @@ public class HTTPSamplerProxyWrapper
     extends HTTPSamplerBaseWrapper<HTTPSamplerProxy, HttpTestSampleGui> {
 
   @Override
-  public Class<HttpTestSampleGui> getGuiClass() {
+  public Class<?> getGuiClass() {
     return HttpTestSampleGui.class;
   }
 
   @Override
-  public Class<HTTPSamplerProxy> getTestClass() {
+  public Class<?> getTestClass() {
     return HTTPSamplerProxy.class;
   }
 }

@@ -59,7 +59,7 @@ public class AuthorizationWrapper extends AbstractBasicTestElementWrapper<Author
   private @Getter @JmcNullAllowed AuthMechanism mechanism = AuthMechanism.BASIC;
 
   @Override
-  public Class<Authorization> getTestClass() {
+  public Class<?> getTestClass() {
     return Authorization.class;
   }
 

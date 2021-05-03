@@ -54,12 +54,12 @@ public class DebugSamplerWrapper extends AbstractSamplerWrapper<DebugSampler, Te
   private boolean displaySystemProperties = false;
 
   @Override
-  public Class<TestBeanGUI> getGuiClass() {
+  public Class<?> getGuiClass() {
     return TestBeanGUI.class;
   }
 
   @Override
-  public Class<DebugSampler> getTestClass() {
+  public Class<?> getTestClass() {
     return DebugSampler.class;
   }
 }

@@ -54,12 +54,12 @@ public class RandomControllerWrapper
   }
 
   @Override
-  public Class<RandomControlGui> getGuiClass() {
+  public Class<?> getGuiClass() {
     return RandomControlGui.class;
   }
 
   @Override
-  public Class<RandomController> getTestClass() {
+  public Class<?> getTestClass() {
     return RandomController.class;
   }
 }

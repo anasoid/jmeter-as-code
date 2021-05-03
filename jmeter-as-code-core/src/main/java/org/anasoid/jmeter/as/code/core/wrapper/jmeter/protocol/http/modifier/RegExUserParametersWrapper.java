@@ -60,12 +60,12 @@ public class RegExUserParametersWrapper
   private String regExParamValuesGrNr;
 
   @Override
-  public Class<RegExUserParametersGui> getGuiClass() {
+  public Class<?> getGuiClass() {
     return RegExUserParametersGui.class;
   }
 
   @Override
-  public Class<RegExUserParameters> getTestClass() {
+  public Class<?> getTestClass() {
     return RegExUserParameters.class;
   }
 }
