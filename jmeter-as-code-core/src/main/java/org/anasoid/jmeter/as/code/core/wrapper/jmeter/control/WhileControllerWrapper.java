@@ -18,6 +18,7 @@
 
 package org.anasoid.jmeter.as.code.core.wrapper.jmeter.control;
 
+import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
@@ -43,6 +44,7 @@ public class WhileControllerWrapper
   @Getter
   @Setter
   @JmcNullAllowed
+  @Default
   private String condition = "";
 
   @Override
