@@ -175,12 +175,12 @@ public class ThreadGroupWrapper extends AbstractThreadGroupWrapper<ThreadGroup, 
   }
 
   @Override
-  public Class<ThreadGroup> getTestClass() {
+  public Class<?> getTestClass() {
     return ThreadGroup.class;
   }
 
   @Override
-  public Class<ThreadGroupGui> getGuiClass() {
+  public Class<?> getGuiClass() {
     return ThreadGroupGui.class;
   }
 }
