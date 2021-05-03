@@ -49,12 +49,12 @@ public class ArgumentsWrapper extends ConfigTestElementWrapper<Arguments, Argume
   private List<ArgumentWrapper> arguments = new ArrayList<>();
 
   @Override
-  public Class<ArgumentsPanel> getGuiClass() {
+  public Class<?> getGuiClass() {
     return ArgumentsPanel.class;
   }
 
   @Override
-  public Class<Arguments> getTestClass() {
+  public Class<?> getTestClass() {
     return Arguments.class;
   }
 

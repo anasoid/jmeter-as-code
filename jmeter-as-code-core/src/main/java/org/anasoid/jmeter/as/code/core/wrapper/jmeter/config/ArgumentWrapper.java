@@ -30,7 +30,7 @@ import org.apache.jmeter.config.Argument;
 public class ArgumentWrapper extends AbstractArgumentWrapper<Argument> {
 
   @Override
-  public Class<Argument> getTestClass() {
+  public Class<?> getTestClass() {
     return Argument.class;
   }
 }

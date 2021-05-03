@@ -86,7 +86,7 @@ public class CookieWrapper extends AbstractBasicTestElementWrapper<Cookie> {
   }
 
   @Override
-  public Class<Cookie> getTestClass() {
+  public Class<?> getTestClass() {
     return Cookie.class;
   }
 

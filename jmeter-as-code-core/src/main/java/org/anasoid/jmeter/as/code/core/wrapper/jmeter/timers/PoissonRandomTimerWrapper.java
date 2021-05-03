@@ -34,12 +34,12 @@ public class PoissonRandomTimerWrapper
     extends RandomTimerWrapper<PoissonRandomTimer, PoissonRandomTimerGui> {
 
   @Override
-  public Class<PoissonRandomTimerGui> getGuiClass() {
+  public Class<?> getGuiClass() {
     return PoissonRandomTimerGui.class;
   }
 
   @Override
-  public Class<PoissonRandomTimer> getTestClass() {
+  public Class<?> getTestClass() {
     return PoissonRandomTimer.class;
   }
 

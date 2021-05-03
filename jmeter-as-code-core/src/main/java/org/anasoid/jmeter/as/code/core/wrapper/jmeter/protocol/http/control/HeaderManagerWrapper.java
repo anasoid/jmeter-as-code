@@ -44,12 +44,12 @@ public class HeaderManagerWrapper extends ConfigTestElementWrapper<HeaderManager
   @XStreamOmitField private static final long serialVersionUID = 8482403319301067878L;
 
   @Override
-  public Class<HeaderPanel> getGuiClass() {
+  public Class<?> getGuiClass() {
     return HeaderPanel.class;
   }
 
   @Override
-  public Class<HeaderManager> getTestClass() {
+  public Class<?> getTestClass() {
     return HeaderManager.class;
   }
 

@@ -95,12 +95,12 @@ public class CounterConfigWrapper extends ConfigTestElementWrapper<CounterConfig
   private boolean resetOnEachIteration = false;
 
   @Override
-  public Class<CounterConfigGui> getGuiClass() {
+  public Class<?> getGuiClass() {
     return CounterConfigGui.class;
   }
 
   @Override
-  public Class<CounterConfig> getTestClass() {
+  public Class<?> getTestClass() {
     return CounterConfig.class;
   }
 

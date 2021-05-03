@@ -31,7 +31,7 @@ public interface TestElementWrapper<T> extends Serializable {
   void init();
 
   /** Test Class used by Jmeter TestElement.TEST_CLASS. @See TestElement. */
-  <F extends T> Class<F> getTestClass();
+  Class<?> getTestClass();
 
   /** Test Class used by Jmeter TestElement.TEST_CLASS @See TestElement. */
   @JmcMethodAlias("testclass")

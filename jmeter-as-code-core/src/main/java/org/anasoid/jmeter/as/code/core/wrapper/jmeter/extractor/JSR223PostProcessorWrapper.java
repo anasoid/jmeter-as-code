@@ -36,12 +36,12 @@ public class JSR223PostProcessorWrapper
     implements PostProcessorWrapper<JSR223PostProcessor> {
 
   @Override
-  public Class<TestBeanGUI> getGuiClass() {
+  public Class<?> getGuiClass() {
     return TestBeanGUI.class;
   }
 
   @Override
-  public Class<JSR223PostProcessor> getTestClass() {
+  public Class<?> getTestClass() {
     return JSR223PostProcessor.class;
   }
 }

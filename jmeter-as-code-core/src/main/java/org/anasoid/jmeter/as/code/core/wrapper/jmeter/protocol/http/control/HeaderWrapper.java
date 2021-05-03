@@ -50,7 +50,7 @@ public class HeaderWrapper extends AbstractBasicTestElementWrapper<Header> {
   private @Getter @Setter String value = "";
 
   @Override
-  public Class<Header> getTestClass() {
+  public Class<?> getTestClass() {
     return Header.class;
   }
 

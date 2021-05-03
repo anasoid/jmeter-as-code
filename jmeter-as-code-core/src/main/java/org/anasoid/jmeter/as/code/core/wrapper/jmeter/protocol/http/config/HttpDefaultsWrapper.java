@@ -214,12 +214,12 @@ public class HttpDefaultsWrapper
   }
 
   @Override
-  public Class<HttpDefaultsGui> getGuiClass() {
+  public Class<?> getGuiClass() {
     return HttpDefaultsGui.class;
   }
 
   @Override
-  public Class<ConfigTestElement> getTestClass() {
+  public Class<?> getTestClass() {
     return ConfigTestElement.class;
   }
 

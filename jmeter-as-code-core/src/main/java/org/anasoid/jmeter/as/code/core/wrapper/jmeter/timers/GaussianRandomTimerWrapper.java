@@ -34,12 +34,12 @@ public class GaussianRandomTimerWrapper
     extends RandomTimerWrapper<GaussianRandomTimer, GaussianRandomTimerGui> {
 
   @Override
-  public Class<GaussianRandomTimerGui> getGuiClass() {
+  public Class<?> getGuiClass() {
     return GaussianRandomTimerGui.class;
   }
 
   @Override
-  public Class<GaussianRandomTimer> getTestClass() {
+  public Class<?> getTestClass() {
     return GaussianRandomTimer.class;
   }
 

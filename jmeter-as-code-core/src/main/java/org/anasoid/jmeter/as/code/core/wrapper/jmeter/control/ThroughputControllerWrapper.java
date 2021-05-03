@@ -73,12 +73,12 @@ public class ThroughputControllerWrapper
   private boolean perUser = false;
 
   @Override
-  public Class<ThroughputControllerGui> getGuiClass() {
+  public Class<?> getGuiClass() {
     return ThroughputControllerGui.class;
   }
 
   @Override
-  public Class<ThroughputController> getTestClass() {
+  public Class<?> getTestClass() {
     return ThroughputController.class;
   }
 

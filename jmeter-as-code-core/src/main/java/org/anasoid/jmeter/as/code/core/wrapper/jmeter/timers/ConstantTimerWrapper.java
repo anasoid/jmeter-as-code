@@ -33,12 +33,12 @@ public class ConstantTimerWrapper
     extends AbstractConstantTimerWrapper<ConstantTimer, ConstantTimerGui> {
 
   @Override
-  public Class<ConstantTimerGui> getGuiClass() {
+  public Class<?> getGuiClass() {
     return ConstantTimerGui.class;
   }
 
   @Override
-  public Class<ConstantTimer> getTestClass() {
+  public Class<?> getTestClass() {
     return ConstantTimer.class;
   }
 }

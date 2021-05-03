@@ -114,12 +114,12 @@ public class XPath2ExtractorWrapper
   }
 
   @Override
-  public Class<XPath2ExtractorGui> getGuiClass() {
+  public Class<?> getGuiClass() {
     return XPath2ExtractorGui.class;
   }
 
   @Override
-  public Class<XPath2Extractor> getTestClass() {
+  public Class<?> getTestClass() {
     return XPath2Extractor.class;
   }
 

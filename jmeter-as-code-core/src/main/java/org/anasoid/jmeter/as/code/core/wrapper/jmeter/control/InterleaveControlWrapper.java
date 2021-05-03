@@ -67,12 +67,12 @@ public class InterleaveControlWrapper
   }
 
   @Override
-  public Class<InterleaveControlGui> getGuiClass() {
+  public Class<?> getGuiClass() {
     return InterleaveControlGui.class;
   }
 
   @Override
-  public Class<InterleaveControl> getTestClass() {
+  public Class<?> getTestClass() {
     return InterleaveControl.class;
   }
 }

@@ -46,12 +46,12 @@ public class CriticalSectionControllerWrapper
   private String lockName;
 
   @Override
-  public Class<CriticalSectionControllerGui> getGuiClass() {
+  public Class<?> getGuiClass() {
     return CriticalSectionControllerGui.class;
   }
 
   @Override
-  public Class<CriticalSectionController> getTestClass() {
+  public Class<?> getTestClass() {
     return CriticalSectionController.class;
   }
 }

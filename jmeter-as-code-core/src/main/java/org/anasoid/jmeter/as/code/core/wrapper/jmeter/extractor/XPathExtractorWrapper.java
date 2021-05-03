@@ -173,12 +173,12 @@ public class XPathExtractorWrapper
   private boolean tidyShowWarnings = false;
 
   @Override
-  public Class<XPathExtractorGui> getGuiClass() {
+  public Class<?> getGuiClass() {
     return XPathExtractorGui.class;
   }
 
   @Override
-  public Class<XPathExtractor> getTestClass() {
+  public Class<?> getTestClass() {
     return XPathExtractor.class;
   }
 

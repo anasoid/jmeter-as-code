@@ -35,12 +35,12 @@ public class JSR223PreProcessorWrapper
     implements PreProcessorWrapper<JSR223PreProcessor> {
 
   @Override
-  public Class<TestBeanGUI> getGuiClass() {
+  public Class<?> getGuiClass() {
     return TestBeanGUI.class;
   }
 
   @Override
-  public Class<JSR223PreProcessor> getTestClass() {
+  public Class<?> getTestClass() {
     return JSR223PreProcessor.class;
   }
 }

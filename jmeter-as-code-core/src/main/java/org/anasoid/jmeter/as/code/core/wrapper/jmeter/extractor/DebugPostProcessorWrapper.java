@@ -68,12 +68,12 @@ public class DebugPostProcessorWrapper
   private boolean displaySystemProperties = false;
 
   @Override
-  public Class<TestBeanGUI> getGuiClass() {
+  public Class<?> getGuiClass() {
     return TestBeanGUI.class;
   }
 
   @Override
-  public Class<DebugPostProcessor> getTestClass() {
+  public Class<?> getTestClass() {
     return DebugPostProcessor.class;
   }
 }

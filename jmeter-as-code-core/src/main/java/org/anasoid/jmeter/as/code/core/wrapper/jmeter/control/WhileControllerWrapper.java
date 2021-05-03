@@ -48,12 +48,12 @@ public class WhileControllerWrapper
   private String condition = "";
 
   @Override
-  public Class<WhileControllerGui> getGuiClass() {
+  public Class<?> getGuiClass() {
     return WhileControllerGui.class;
   }
 
   @Override
-  public Class<WhileController> getTestClass() {
+  public Class<?> getTestClass() {
     return WhileController.class;
   }
 }

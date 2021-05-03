@@ -145,12 +145,12 @@ public class XPathAssertionWrapper
   }
 
   @Override
-  public Class<XPathAssertionGui> getGuiClass() {
+  public Class<?> getGuiClass() {
     return XPathAssertionGui.class;
   }
 
   @Override
-  public Class<XPathAssertion> getTestClass() {
+  public Class<?> getTestClass() {
     return XPathAssertion.class;
   }
 }

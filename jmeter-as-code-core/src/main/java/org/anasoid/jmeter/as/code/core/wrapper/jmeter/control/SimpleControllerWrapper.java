@@ -28,12 +28,12 @@ public class SimpleControllerWrapper
     extends GenericControllerWrapper<GenericController, LogicControllerGui> {
 
   @Override
-  public Class<LogicControllerGui> getGuiClass() {
+  public Class<?> getGuiClass() {
     return LogicControllerGui.class;
   }
 
   @Override
-  public Class<GenericController> getTestClass() {
+  public Class<?> getTestClass() {
     return GenericController.class;
   }
 }

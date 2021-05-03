@@ -33,12 +33,12 @@ public class JSR223TimerWrapper extends JSR223TestElementWrapper<JSR223Timer, Te
     implements TimerWrapper<JSR223Timer> {
 
   @Override
-  public Class<TestBeanGUI> getGuiClass() {
+  public Class<?> getGuiClass() {
     return TestBeanGUI.class;
   }
 
   @Override
-  public Class<JSR223Timer> getTestClass() {
+  public Class<?> getTestClass() {
     return JSR223Timer.class;
   }
 }

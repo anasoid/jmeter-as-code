@@ -48,12 +48,12 @@ public class SwitchControllerWrapper
   private String switchValue;
 
   @Override
-  public Class<SwitchControllerGui> getGuiClass() {
+  public Class<?> getGuiClass() {
     return SwitchControllerGui.class;
   }
 
   @Override
-  public Class<SwitchController> getTestClass() {
+  public Class<?> getTestClass() {
     return SwitchController.class;
   }
 }

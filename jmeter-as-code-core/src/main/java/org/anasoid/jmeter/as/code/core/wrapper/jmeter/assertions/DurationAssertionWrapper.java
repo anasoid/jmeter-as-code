@@ -51,12 +51,12 @@ public class DurationAssertionWrapper
   private String duration;
 
   @Override
-  public Class<DurationAssertionGui> getGuiClass() {
+  public Class<?> getGuiClass() {
     return DurationAssertionGui.class;
   }
 
   @Override
-  public Class<DurationAssertion> getTestClass() {
+  public Class<?> getTestClass() {
     return DurationAssertion.class;
   }
 

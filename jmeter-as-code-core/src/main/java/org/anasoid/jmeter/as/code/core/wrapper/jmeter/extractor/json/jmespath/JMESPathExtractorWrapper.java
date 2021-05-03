@@ -78,12 +78,12 @@ public class JMESPathExtractorWrapper
   private String defaultValue;
 
   @Override
-  public Class<JMESPathExtractorGui> getGuiClass() {
+  public Class<?> getGuiClass() {
     return JMESPathExtractorGui.class;
   }
 
   @Override
-  public Class<JMESPathExtractor> getTestClass() {
+  public Class<?> getTestClass() {
     return JMESPathExtractor.class;
   }
 }

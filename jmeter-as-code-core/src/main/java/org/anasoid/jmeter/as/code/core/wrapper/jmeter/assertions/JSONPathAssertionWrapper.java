@@ -43,12 +43,12 @@ public class JSONPathAssertionWrapper
   private String jsonPath;
 
   @Override
-  public Class<JSONPathAssertionGui> getGuiClass() {
+  public Class<?> getGuiClass() {
     return JSONPathAssertionGui.class;
   }
 
   @Override
-  public Class<JSONPathAssertion> getTestClass() {
+  public Class<?> getTestClass() {
     return JSONPathAssertion.class;
   }
 }

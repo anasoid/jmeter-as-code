@@ -90,12 +90,12 @@ public class HTMLAssertionWrapper extends AbstractTestElementWrapper<HTMLAsserti
   }
 
   @Override
-  public Class<HTMLAssertionGui> getGuiClass() {
+  public Class<?> getGuiClass() {
     return HTMLAssertionGui.class;
   }
 
   @Override
-  public Class<HTMLAssertion> getTestClass() {
+  public Class<?> getTestClass() {
     return HTMLAssertion.class;
   }
 

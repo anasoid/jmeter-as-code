@@ -54,12 +54,12 @@ public class XMLSchemaAssertionWrapper
   }
 
   @Override
-  public Class<XMLSchemaAssertionGUI> getGuiClass() {
+  public Class<?> getGuiClass() {
     return XMLSchemaAssertionGUI.class;
   }
 
   @Override
-  public Class<XMLSchemaAssertion> getTestClass() {
+  public Class<?> getTestClass() {
     return XMLSchemaAssertion.class;
   }
 }

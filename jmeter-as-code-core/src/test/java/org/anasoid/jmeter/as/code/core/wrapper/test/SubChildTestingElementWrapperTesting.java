@@ -46,12 +46,12 @@ public class SubChildTestingElementWrapperTesting
   }
 
   @Override
-  public Class<LoopController> getTestClass() {
+  public Class<?> getTestClass() {
     return LoopController.class;
   }
 
   @Override
-  public Class<LoopControlPanel> getGuiClass() {
+  public Class<?> getGuiClass() {
     return LoopControlPanel.class;
   }
 }

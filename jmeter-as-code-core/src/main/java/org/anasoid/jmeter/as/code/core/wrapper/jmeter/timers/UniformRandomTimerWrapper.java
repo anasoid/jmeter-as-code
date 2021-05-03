@@ -34,12 +34,12 @@ public class UniformRandomTimerWrapper
     extends RandomTimerWrapper<UniformRandomTimer, UniformRandomTimerGui> {
 
   @Override
-  public Class<UniformRandomTimerGui> getGuiClass() {
+  public Class<?> getGuiClass() {
     return UniformRandomTimerGui.class;
   }
 
   @Override
-  public Class<UniformRandomTimer> getTestClass() {
+  public Class<?> getTestClass() {
     return UniformRandomTimer.class;
   }
 

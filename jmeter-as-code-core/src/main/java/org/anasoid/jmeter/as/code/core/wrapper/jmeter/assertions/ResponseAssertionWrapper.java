@@ -127,12 +127,12 @@ public class ResponseAssertionWrapper
   }
 
   @Override
-  public Class<AssertionGui> getGuiClass() {
+  public Class<?> getGuiClass() {
     return AssertionGui.class;
   }
 
   @Override
-  public Class<ResponseAssertion> getTestClass() {
+  public Class<?> getTestClass() {
     return ResponseAssertion.class;
   }
 }

@@ -68,12 +68,12 @@ public class SizeAssertionWrapper
   private FieldtoTest fieldToTest = FieldtoTest.FULL_RESPONSE;
 
   @Override
-  public Class<SizeAssertionGui> getGuiClass() {
+  public Class<?> getGuiClass() {
     return SizeAssertionGui.class;
   }
 
   @Override
-  public Class<SizeAssertion> getTestClass() {
+  public Class<?> getTestClass() {
     return SizeAssertion.class;
   }
 

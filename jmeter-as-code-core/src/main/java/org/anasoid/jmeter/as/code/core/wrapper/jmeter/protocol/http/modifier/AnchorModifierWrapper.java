@@ -36,12 +36,12 @@ public class AnchorModifierWrapper extends AbstractBasicChildTestElementWrapper<
     implements JMeterGUIWrapper<AnchorModifierGui>, PreProcessorWrapper<AnchorModifier> {
 
   @Override
-  public Class<AnchorModifierGui> getGuiClass() {
+  public Class<?> getGuiClass() {
     return AnchorModifierGui.class;
   }
 
   @Override
-  public Class<AnchorModifier> getTestClass() {
+  public Class<?> getTestClass() {
     return AnchorModifier.class;
   }
 }

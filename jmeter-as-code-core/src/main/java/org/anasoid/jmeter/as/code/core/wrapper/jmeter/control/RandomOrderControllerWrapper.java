@@ -32,12 +32,12 @@ public class RandomOrderControllerWrapper
     extends GenericControllerWrapper<RandomOrderController, RandomOrderControllerGui> {
 
   @Override
-  public Class<RandomOrderControllerGui> getGuiClass() {
+  public Class<?> getGuiClass() {
     return RandomOrderControllerGui.class;
   }
 
   @Override
-  public Class<RandomOrderController> getTestClass() {
+  public Class<?> getTestClass() {
     return RandomOrderController.class;
   }
 }

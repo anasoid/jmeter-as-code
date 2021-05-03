@@ -34,12 +34,12 @@ public class ResultActionWrapper extends OnErrorTestElementWrapper<ResultAction,
     implements PostProcessorWrapper<ResultAction> {
 
   @Override
-  public Class<ResultActionGui> getGuiClass() {
+  public Class<?> getGuiClass() {
     return ResultActionGui.class;
   }
 
   @Override
-  public Class<ResultAction> getTestClass() {
+  public Class<?> getTestClass() {
     return ResultAction.class;
   }
 }

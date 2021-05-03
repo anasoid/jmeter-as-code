@@ -34,12 +34,12 @@ public class JSR223AssertionWrapper extends JSR223TestElementWrapper<JSR223Asser
     implements AssertionWrapper<JSR223Assertion> {
 
   @Override
-  public Class<TestBeanGUI> getGuiClass() {
+  public Class<?> getGuiClass() {
     return TestBeanGUI.class;
   }
 
   @Override
-  public Class<JSR223Assertion> getTestClass() {
+  public Class<?> getTestClass() {
     return JSR223Assertion.class;
   }
 }

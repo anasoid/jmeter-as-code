@@ -67,12 +67,12 @@ public class CookieManagerWrapper extends ConfigTestElementWrapper<CookieManager
   private CookiePolicy policy = CookiePolicy.STANDARD;
 
   @Override
-  public Class<CookiePanel> getGuiClass() {
+  public Class<?> getGuiClass() {
     return CookiePanel.class;
   }
 
   @Override
-  public Class<CookieManager> getTestClass() {
+  public Class<?> getTestClass() {
     return CookieManager.class;
   }
 
