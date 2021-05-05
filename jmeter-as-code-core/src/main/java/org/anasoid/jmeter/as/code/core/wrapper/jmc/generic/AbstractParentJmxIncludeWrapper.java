@@ -31,6 +31,7 @@ import org.anasoid.jmeter.as.code.core.application.validator.annotations.JmcChil
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.config.ConfigElementWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.processor.PostProcessorWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.processor.PreProcessorWrapper;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.samplers.SampleListenerWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AssertionWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.TestElementWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.timers.TimerWrapper;
@@ -45,7 +46,8 @@ import org.anasoid.jmeter.as.code.core.xstream.exceptions.ConversionException;
       ConfigElementWrapper.class,
       PreProcessorWrapper.class,
       PostProcessorWrapper.class,
-      TimerWrapper.class
+      TimerWrapper.class,
+      SampleListenerWrapper.class
     })
 public abstract class AbstractParentJmxIncludeWrapper<T> extends AbstractJmxIncludeWrapper<T> {
 
@@ -224,6 +226,30 @@ public abstract class AbstractParentJmxIncludeWrapper<T> extends AbstractJmxIncl
     /** Add timer as child in tree. */
     public B addTimers(List<TimerWrapper<?>> childs) { // NOSONAR
       for (TimerWrapper<?> child : childs) {
+        withChild(child);
+      }
+      return self();
+    }
+
+    // Listener
+
+    /** Add listener as child in tree. */
+    public B addListener(SampleListenerWrapper<?> listener) { // NOSONAR
+      return addListener(Arrays.asList(listener));
+    }
+
+    /**
+     * Add listener as child in tree.
+     *
+     * @param listener template listener.
+     */
+    public <E extends SampleListenerWrapper<?>> B addListener(JmcTemplate<E> listener) {
+      return addListener(listener.generate());
+    }
+
+    /** Add listener as child in tree. */
+    public B addListener(List<SampleListenerWrapper<?>> childs) { // NOSONAR
+      for (SampleListenerWrapper<?> child : childs) {
         withChild(child);
       }
       return self();
