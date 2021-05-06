@@ -28,7 +28,9 @@ import java.util.stream.Collectors;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AbstractTestElementWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.property.JMeterProperty;
 import org.anasoid.jmeter.as.code.core.xstream.io.xml.JmcXppDriver;
+import org.apache.jmeter.samplers.SampleSaveConfiguration;
 import org.apache.jmeter.save.converters.MultiPropertyConverter;
+import org.apache.jmeter.save.converters.SampleSaveConfigurationConverter;
 import org.apache.jmeter.save.converters.StringPropertyConverter;
 import org.apache.jmeter.testelement.property.CollectionProperty;
 import org.apache.jmeter.testelement.property.StringProperty;
@@ -42,7 +44,7 @@ public class JmcXstream extends XStream {
   public JmcXstream() {
     super(new JmcXppDriver());
     this.setMode(XStream.NO_REFERENCES);
-    this.aliasSystemAttribute(null, "class");
+    //this.aliasSystemAttribute(null, "class");
     this.alias("hashTree", HashTree.class);
     List<Class<?>> clazzs = new ArrayList<>();
     clazzs.add(ScriptWrapper.class);
@@ -53,6 +55,10 @@ public class JmcXstream extends XStream {
     this.registerConverter(new StringPropertyConverter());
     this.alias(JMeterProperty.STRING.value, StringProperty.class);
     this.registerConverter(new MultiPropertyConverter(this.getMapper()));
+
+    this.registerConverter(new SampleSaveConfigurationConverter(this.getMapper()));
+    this.alias(SampleSaveConfiguration.class.getSimpleName(), SampleSaveConfiguration.class);
+
     this.addImplicitCollection(CollectionProperty.class, "value");
   }
 

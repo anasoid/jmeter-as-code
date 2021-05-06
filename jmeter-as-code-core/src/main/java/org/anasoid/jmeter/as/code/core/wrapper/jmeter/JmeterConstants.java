@@ -32,5 +32,6 @@ public interface JmeterConstants {
     public String FLOAT_PROP = "floatProp";
     public String DOUBLE_PROP = "doubleProp";
     public String ELEMENT_PROP = "elementProp";
+    public String OBJECT_PROP = "objProp";
   }
 }
