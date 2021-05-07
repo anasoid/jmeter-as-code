@@ -24,7 +24,7 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmeter.as.code.core.wrapper.jmc.Variable;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.gui.JMeterGUIWrapper;
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AbstractTestElementWrapper;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.basic.AbstractBasicChildTestElementWrapper;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
 import org.apache.jmeter.timers.ConstantTimer;
 import org.apache.jmeter.timers.gui.AbstractTimerGui;
@@ -38,7 +38,8 @@ import org.apache.jmeter.timers.gui.AbstractTimerGui;
 @SuppressWarnings({"PMD.RedundantFieldInitializer", "PMD.AvoidUncheckedExceptionsInSignatures"})
 public abstract class AbstractConstantTimerWrapper<
         G extends ConstantTimer, F extends AbstractTimerGui>
-    extends AbstractTestElementWrapper<G> implements JMeterGUIWrapper<F>, TimerWrapper<G> {
+    extends AbstractBasicChildTestElementWrapper<G>
+    implements JMeterGUIWrapper<F>, TimerWrapper<G> {
 
   /** Number of milliseconds to pause. */
   @JmcProperty("ConstantTimer.delay")
@@ -53,7 +54,8 @@ public abstract class AbstractConstantTimerWrapper<
           F extends AbstractTimerGui,
           C extends AbstractConstantTimerWrapper<G, F>,
           B extends AbstractConstantTimerWrapperBuilder<G, F, C, B>>
-      extends AbstractTestElementWrapper.AbstractTestElementWrapperBuilder<G, C, B> {
+      extends AbstractBasicChildTestElementWrapper.AbstractBasicChildTestElementWrapperBuilder<
+          G, C, B> {
 
     /** Number of milliseconds to pause in addition to the calculate delay. */
     public B withDelay(String delay) {

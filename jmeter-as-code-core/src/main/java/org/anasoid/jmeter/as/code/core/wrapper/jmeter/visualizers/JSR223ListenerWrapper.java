@@ -16,21 +16,22 @@
  * Date :   21-Apr-2021
  */
 
-package org.anasoid.jmeter.as.code.core.wrapper.jmeter.samplers;
+package org.anasoid.jmeter.as.code.core.wrapper.jmeter.visualizers;
 
 import lombok.experimental.SuperBuilder;
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.util.JSR223TestElementParentWrapper;
-import org.apache.jmeter.protocol.java.sampler.JSR223Sampler;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AssertionWrapper;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.util.JSR223TestElementWrapper;
 import org.apache.jmeter.testbeans.gui.TestBeanGUI;
+import org.apache.jmeter.visualizers.JSR223Listener;
 
 /**
- * Wrapper for JSR223Sampler.
+ * Wrapper for JSR223Listener.
  *
- * @see JSR223Sampler
+ * @see JSR223Listener
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
-public class JSR223SamplerWrapper extends JSR223TestElementParentWrapper<JSR223Sampler, TestBeanGUI>
-    implements SamplerWrapper<JSR223Sampler> {
+public class JSR223ListenerWrapper extends JSR223TestElementWrapper<JSR223Listener, TestBeanGUI>
+    implements AssertionWrapper<JSR223Listener> {
 
   @Override
   public Class<?> getGuiClass() {
@@ -39,6 +40,6 @@ public class JSR223SamplerWrapper extends JSR223TestElementParentWrapper<JSR223S
 
   @Override
   public Class<?> getTestClass() {
-    return JSR223Sampler.class;
+    return JSR223Listener.class;
   }
 }

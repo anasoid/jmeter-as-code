@@ -13,32 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * @author : anas
- * Date :   21-Apr-2021
+ * Date :   05-May-2021
  */
 
-package org.anasoid.jmeter.as.code.core.wrapper.jmeter.samplers;
+package org.anasoid.jmeter.as.code.core.wrapper.jmeter.visualizers;
 
 import lombok.experimental.SuperBuilder;
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.util.JSR223TestElementParentWrapper;
-import org.apache.jmeter.protocol.java.sampler.JSR223Sampler;
-import org.apache.jmeter.testbeans.gui.TestBeanGUI;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.reporters.ResultCollectorWrapper;
+import org.apache.jmeter.reporters.ResultCollector;
+import org.apache.jmeter.visualizers.ViewResultsFullVisualizer;
 
 /**
- * Wrapper for JSR223Sampler.
+ * Wrapper for ViewResultsFullVisualizer.
  *
- * @see JSR223Sampler
+ * @see ViewResultsFullVisualizer
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
-public class JSR223SamplerWrapper extends JSR223TestElementParentWrapper<JSR223Sampler, TestBeanGUI>
-    implements SamplerWrapper<JSR223Sampler> {
+@SuppressWarnings({"PMD.RedundantFieldInitializer", "PMD.TooManyFields"})
+public class ViewResultsFullVisualizerWrapper
+    extends ResultCollectorWrapper<ResultCollector, ViewResultsFullVisualizer> {
 
   @Override
   public Class<?> getGuiClass() {
-    return TestBeanGUI.class;
+    return ViewResultsFullVisualizer.class;
   }
 
-  @Override
-  public Class<?> getTestClass() {
-    return JSR223Sampler.class;
-  }
+
 }

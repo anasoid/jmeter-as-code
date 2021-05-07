@@ -13,32 +13,34 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * @author : anas
- * Date :   21-Apr-2021
+ * Date :   05-May-2021
  */
 
-package org.anasoid.jmeter.as.code.core.wrapper.jmeter.samplers;
+package org.anasoid.jmeter.as.code.core.wrapper.jmeter.reporters;
 
 import lombok.experimental.SuperBuilder;
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.util.JSR223TestElementParentWrapper;
-import org.apache.jmeter.protocol.java.sampler.JSR223Sampler;
-import org.apache.jmeter.testbeans.gui.TestBeanGUI;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.gui.JMeterGUIWrapper;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.samplers.SampleListenerWrapper;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.basic.AbstractBasicChildTestElementWrapper;
+import org.apache.jmeter.reporters.Summariser;
+import org.apache.jmeter.reporters.gui.SummariserGui;
 
 /**
- * Wrapper for JSR223Sampler.
+ * Wrapper for Summariser.
  *
- * @see JSR223Sampler
+ * @see Summariser
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
-public class JSR223SamplerWrapper extends JSR223TestElementParentWrapper<JSR223Sampler, TestBeanGUI>
-    implements SamplerWrapper<JSR223Sampler> {
+public class SummariserWrapper extends AbstractBasicChildTestElementWrapper<Summariser>
+    implements JMeterGUIWrapper<SummariserGui>, SampleListenerWrapper<Summariser> {
 
   @Override
   public Class<?> getGuiClass() {
-    return TestBeanGUI.class;
+    return SummariserGui.class;
   }
 
   @Override
   public Class<?> getTestClass() {
-    return JSR223Sampler.class;
+    return Summariser.class;
   }
 }

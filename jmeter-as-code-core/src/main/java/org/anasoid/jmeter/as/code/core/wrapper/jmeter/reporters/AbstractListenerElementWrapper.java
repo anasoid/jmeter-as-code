@@ -13,32 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * @author : anas
- * Date :   21-Apr-2021
+ * Date :   05-May-2021
  */
 
-package org.anasoid.jmeter.as.code.core.wrapper.jmeter.samplers;
+package org.anasoid.jmeter.as.code.core.wrapper.jmeter.reporters;
 
 import lombok.experimental.SuperBuilder;
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.util.JSR223TestElementParentWrapper;
-import org.apache.jmeter.protocol.java.sampler.JSR223Sampler;
-import org.apache.jmeter.testbeans.gui.TestBeanGUI;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.gui.JMeterGUIWrapper;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.basic.AbstractBasicChildTestElementWrapper;
+import org.apache.jmeter.gui.AbstractJMeterGuiComponent;
+import org.apache.jmeter.reporters.AbstractListenerElement;
 
 /**
- * Wrapper for JSR223Sampler.
+ * Wrapper for AbstractListenerElement.
  *
- * @see JSR223Sampler
+ * @see AbstractListenerElement
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
-public class JSR223SamplerWrapper extends JSR223TestElementParentWrapper<JSR223Sampler, TestBeanGUI>
-    implements SamplerWrapper<JSR223Sampler> {
-
-  @Override
-  public Class<?> getGuiClass() {
-    return TestBeanGUI.class;
-  }
-
-  @Override
-  public Class<?> getTestClass() {
-    return JSR223Sampler.class;
-  }
-}
+public abstract class AbstractListenerElementWrapper<
+        T extends AbstractListenerElement, G extends AbstractJMeterGuiComponent>
+    extends AbstractBasicChildTestElementWrapper<T> implements JMeterGUIWrapper<G> {}

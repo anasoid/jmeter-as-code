@@ -24,7 +24,7 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmeter.as.code.core.wrapper.jmc.Variable;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.gui.JMeterGUIWrapper;
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AbstractTestElementWrapper;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.basic.AbstractBasicChildTestElementWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.timers.TimerWrapper;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
 import org.anasoid.jmeter.as.code.core.xstream.types.IntegerManager;
@@ -39,7 +39,7 @@ import org.apache.jmeter.timers.poissonarrivals.PreciseThroughputTimer;
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 public class PreciseThroughputTimerWrapper
-    extends AbstractTestElementWrapper<PreciseThroughputTimer>
+    extends AbstractBasicChildTestElementWrapper<PreciseThroughputTimer>
     implements JMeterGUIWrapper<TestBeanGUI>, TimerWrapper<PreciseThroughputTimer> {
 
   /** Batched departures. Number of threads in the batch (threads). */
@@ -102,7 +102,7 @@ public class PreciseThroughputTimerWrapper
   public abstract static class PreciseThroughputTimerWrapperBuilder<
           C extends PreciseThroughputTimerWrapper,
           B extends PreciseThroughputTimerWrapperBuilder<C, B>>
-      extends AbstractTestElementWrapper.AbstractTestElementWrapperBuilder<
+      extends AbstractBasicChildTestElementWrapper.AbstractBasicChildTestElementWrapperBuilder<
           PreciseThroughputTimer, C, B> {
 
     /** Batched departures. Number of threads in the batch (threads). */

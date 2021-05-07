@@ -30,22 +30,23 @@ import org.anasoid.jmeter.as.code.core.util.FileUtils;
 import org.anasoid.jmeter.as.code.core.wrapper.jmc.script.ScriptLanguage;
 import org.anasoid.jmeter.as.code.core.wrapper.jmc.validator.Validator;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.gui.JMeterGUIWrapper;
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.basic.AbstractBasicChildTestElementWrapper;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AbstractTestElementWrapper;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
 import org.anasoid.jmeter.as.code.core.xstream.exceptions.ConversionIllegalStateException;
 import org.apache.jmeter.gui.AbstractJMeterGuiComponent;
 import org.apache.jmeter.util.ScriptingTestElement;
 
 /**
- * Wrapper for ScriptingTestElement.
+ * Wrapper for ScriptingTestElement for element with parent like sample, identical code for {@link
+ * ScriptingTestElementWrapper}.
  *
  * @see ScriptingTestElement
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 @SuppressWarnings({"PMD.AbstractClassWithoutAnyMethod", "PMD.AvoidUncheckedExceptionsInSignatures"})
-public abstract class ScriptingTestElementWrapper<
+public abstract class ScriptingTestElementParentWrapper<
         T extends ScriptingTestElement, G extends AbstractJMeterGuiComponent>
-    extends AbstractBasicChildTestElementWrapper<T> implements JMeterGUIWrapper<G>, Validator {
+    extends AbstractTestElementWrapper<T> implements JMeterGUIWrapper<G>, Validator {
 
   /**
    * Parameters to pass to the BeanShell script. The list is passed to script split on white-space.
@@ -95,13 +96,12 @@ public abstract class ScriptingTestElementWrapper<
   }
 
   /** Builder. */
-  public abstract static class ScriptingTestElementWrapperBuilder<
+  public abstract static class ScriptingTestElementParentWrapperBuilder<
           T extends ScriptingTestElement,
           G extends AbstractJMeterGuiComponent,
-          C extends ScriptingTestElementWrapper<T, G>,
-          B extends ScriptingTestElementWrapperBuilder<T, G, C, B>>
-      extends AbstractBasicChildTestElementWrapper.AbstractBasicChildTestElementWrapperBuilder<
-          T, C, B> {
+          C extends ScriptingTestElementParentWrapper<T, G>,
+          B extends ScriptingTestElementParentWrapperBuilder<T, G, C, B>>
+      extends AbstractTestElementWrapperBuilder<T, C, B> {
 
     /** The JSR223 language to be used. */
     public B withScriptLanguage(String scriptLanguage) {
@@ -121,7 +121,7 @@ public abstract class ScriptingTestElementWrapper<
       return self();
     }
 
-    /** Add Paramete to List of Variable Name. */
+    /** Add Parameter to List of Variable Name. */
     public B addParameters(List<String> parameters) {
       if (!this.parameters$set) {
         withParameters(new ArrayList<>());
