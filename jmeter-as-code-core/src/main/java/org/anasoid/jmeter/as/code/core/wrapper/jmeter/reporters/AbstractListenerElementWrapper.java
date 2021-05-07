@@ -20,7 +20,7 @@ package org.anasoid.jmeter.as.code.core.wrapper.jmeter.reporters;
 
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.gui.JMeterGUIWrapper;
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AbstractTestElementWrapper;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.basic.AbstractBasicChildTestElementWrapper;
 import org.apache.jmeter.gui.AbstractJMeterGuiComponent;
 import org.apache.jmeter.reporters.AbstractListenerElement;
 
@@ -32,4 +32,4 @@ import org.apache.jmeter.reporters.AbstractListenerElement;
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 public abstract class AbstractListenerElementWrapper<
         T extends AbstractListenerElement, G extends AbstractJMeterGuiComponent>
-    extends AbstractTestElementWrapper<T> implements JMeterGUIWrapper<G> {}
+    extends AbstractBasicChildTestElementWrapper<T> implements JMeterGUIWrapper<G> {}

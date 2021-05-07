@@ -24,7 +24,7 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmeter.as.code.core.wrapper.jmc.Variable;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.gui.JMeterGUIWrapper;
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AbstractTestElementWrapper;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.basic.AbstractBasicChildTestElementWrapper;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
 import org.apache.jmeter.testbeans.gui.TestBeanGUI;
 import org.apache.jmeter.timers.ConstantThroughputTimer;
@@ -37,7 +37,7 @@ import org.apache.jmeter.timers.ConstantThroughputTimer;
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 @SuppressWarnings({"PMD.RedundantFieldInitializer", "PMD.AvoidUncheckedExceptionsInSignatures"})
 public class ConstantThroughputTimerWrapper
-    extends AbstractTestElementWrapper<ConstantThroughputTimer>
+    extends AbstractBasicChildTestElementWrapper<ConstantThroughputTimer>
     implements JMeterGUIWrapper<TestBeanGUI>, TimerWrapper<ConstantThroughputTimer> {
 
   @JmcProperty(value = "calcMode")
@@ -95,7 +95,7 @@ public class ConstantThroughputTimerWrapper
 
     public final Integer value;
 
-    private CalcMode(Integer value) {
+    CalcMode(Integer value) {
       this.value = value;
     }
 
@@ -113,7 +113,7 @@ public class ConstantThroughputTimerWrapper
   public abstract static class ConstantThroughputTimerWrapperBuilder<
           C extends ConstantThroughputTimerWrapper,
           B extends ConstantThroughputTimerWrapperBuilder<C, B>>
-      extends AbstractTestElementWrapper.AbstractTestElementWrapperBuilder<
+      extends AbstractBasicChildTestElementWrapper.AbstractBasicChildTestElementWrapperBuilder<
           ConstantThroughputTimer, C, B> {
 
     /** Throughput we want the timer to try to generate. */

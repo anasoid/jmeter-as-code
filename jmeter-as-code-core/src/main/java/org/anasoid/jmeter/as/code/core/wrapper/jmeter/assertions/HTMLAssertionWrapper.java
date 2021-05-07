@@ -26,8 +26,8 @@ import lombok.experimental.SuperBuilder;
 import org.anasoid.jmeter.as.code.core.config.JmcConfig;
 import org.anasoid.jmeter.as.code.core.wrapper.jmc.validator.Validator;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.gui.JMeterGUIWrapper;
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AbstractTestElementWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AssertionWrapper;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.basic.AbstractBasicChildTestElementWrapper;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
 import org.anasoid.jmeter.as.code.core.xstream.exceptions.ConversionIllegalStateException;
 import org.apache.jmeter.assertions.HTMLAssertion;
@@ -41,7 +41,7 @@ import org.apache.jmeter.assertions.gui.HTMLAssertionGui;
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 @SuppressWarnings({"PMD.RedundantFieldInitializer", "PMD.AvoidUncheckedExceptionsInSignatures"})
-public class HTMLAssertionWrapper extends AbstractTestElementWrapper<HTMLAssertion>
+public class HTMLAssertionWrapper extends AbstractBasicChildTestElementWrapper<HTMLAssertion>
     implements JMeterGUIWrapper<HTMLAssertionGui>, AssertionWrapper<HTMLAssertion>, Validator {
 
   /** Number of errors allowed before classing the response as failed. */

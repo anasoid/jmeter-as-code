@@ -21,7 +21,7 @@ package org.anasoid.jmeter.as.code.core.wrapper.jmeter.reporters;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.gui.JMeterGUIWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.samplers.SampleListenerWrapper;
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AbstractTestElementWrapper;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.basic.AbstractBasicChildTestElementWrapper;
 import org.apache.jmeter.reporters.Summariser;
 import org.apache.jmeter.reporters.gui.SummariserGui;
 
@@ -31,7 +31,7 @@ import org.apache.jmeter.reporters.gui.SummariserGui;
  * @see Summariser
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
-public class SummariserWrapper extends AbstractTestElementWrapper<Summariser>
+public class SummariserWrapper extends AbstractBasicChildTestElementWrapper<Summariser>
     implements JMeterGUIWrapper<SummariserGui>, SampleListenerWrapper<Summariser> {
 
   @Override

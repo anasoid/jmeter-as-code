@@ -24,7 +24,7 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmeter.as.code.core.wrapper.jmc.Variable;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.gui.JMeterGUIWrapper;
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.AbstractTestElementWrapper;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.testelement.basic.AbstractBasicChildTestElementWrapper;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
 import org.anasoid.jmeter.as.code.core.xstream.types.IntegerManager;
 import org.anasoid.jmeter.as.code.core.xstream.types.LongManager;
@@ -38,7 +38,7 @@ import org.apache.jmeter.timers.SyncTimer;
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 @SuppressWarnings({"PMD.RedundantFieldInitializer", "PMD.AvoidUncheckedExceptionsInSignatures"})
-public class SyncTimerWrapper extends AbstractTestElementWrapper<SyncTimer>
+public class SyncTimerWrapper extends AbstractBasicChildTestElementWrapper<SyncTimer>
     implements JMeterGUIWrapper<TestBeanGUI>, TimerWrapper<SyncTimer> {
 
   /**
@@ -76,7 +76,8 @@ public class SyncTimerWrapper extends AbstractTestElementWrapper<SyncTimer>
   /** Builder. */
   public abstract static class SyncTimerWrapperBuilder<
           C extends SyncTimerWrapper, B extends SyncTimerWrapperBuilder<C, B>>
-      extends AbstractTestElementWrapper.AbstractTestElementWrapperBuilder<SyncTimer, C, B> {
+      extends AbstractBasicChildTestElementWrapper.AbstractBasicChildTestElementWrapperBuilder<
+          SyncTimer, C, B> {
 
     /**
      * Number of threads to release at once. Setting it to 0 is equivalent to setting it to Number
