@@ -27,17 +27,16 @@ import org.anasoid.jmeter.as.code.core.wrapper.jmeter.reporters.ResultCollectorW
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
 import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcSkipDefault;
 import org.apache.jmeter.reporters.ResultCollector;
-import org.apache.jmeter.visualizers.StatVisualizer;
+import org.apache.jmeter.visualizers.SummaryReport;
 
 /**
- * Wrapper for StatVisualizer.
+ * Wrapper for SummaryReport.
  *
- * @see StatVisualizer
+ * @see SummaryReport
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 @SuppressWarnings({"PMD.RedundantFieldInitializer", "PMD.TooManyFields"})
-public class AggregateReportWrapper
-    extends ResultCollectorWrapper<ResultCollector, StatVisualizer> {
+public class SummaryReportWrapper extends ResultCollectorWrapper<ResultCollector, SummaryReport> {
 
   @JmcProperty("useGroupName")
   @Getter
@@ -55,6 +54,6 @@ public class AggregateReportWrapper
 
   @Override
   public Class<?> getGuiClass() {
-    return StatVisualizer.class;
+    return SummaryReport.class;
   }
 }

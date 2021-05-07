@@ -18,43 +18,25 @@
 
 package org.anasoid.jmeter.as.code.core.wrapper.jmeter.visualizers;
 
-import lombok.Builder.Default;
-import lombok.Getter;
-import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.config.ConfigElementWrapper;
 import org.anasoid.jmeter.as.code.core.wrapper.jmeter.reporters.ResultCollectorWrapper;
-import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcProperty;
-import org.anasoid.jmeter.as.code.core.xstream.annotations.JmcSkipDefault;
 import org.apache.jmeter.reporters.ResultCollector;
-import org.apache.jmeter.visualizers.StatVisualizer;
+import org.apache.jmeter.visualizers.ViewResultsFullVisualizer;
 
 /**
- * Wrapper for StatVisualizer.
+ * Wrapper for ViewResultsFullVisualizer.
  *
- * @see StatVisualizer
+ * @see ViewResultsFullVisualizer
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 @SuppressWarnings({"PMD.RedundantFieldInitializer", "PMD.TooManyFields"})
-public class AggregateReportWrapper
-    extends ResultCollectorWrapper<ResultCollector, StatVisualizer> {
-
-  @JmcProperty("useGroupName")
-  @Getter
-  @Setter
-  @Default
-  @JmcSkipDefault(ConfigElementWrapper.FALSE)
-  boolean useGroupName = false;
-
-  @JmcProperty("saveHeaders")
-  @Getter
-  @Setter
-  @Default
-  @JmcSkipDefault(ConfigElementWrapper.TRUE)
-  boolean saveHeaders = true;
+public class ViewResultsFullVisualizerWrapper
+    extends ResultCollectorWrapper<ResultCollector, ViewResultsFullVisualizer> {
 
   @Override
   public Class<?> getGuiClass() {
-    return StatVisualizer.class;
+    return ViewResultsFullVisualizer.class;
   }
+
+
 }

@@ -71,20 +71,6 @@ public abstract class ResultCollectorWrapper<
   @Default
   boolean logError = false;
 
-  @JmcProperty("useGroupName")
-  @Getter
-  @Setter
-  @Default
-  @JmcSkipDefault(ConfigElementWrapper.FALSE)
-  boolean useGroupName = false;
-
-  @JmcProperty("saveHeaders")
-  @Getter
-  @Setter
-  @Default
-  @JmcSkipDefault(ConfigElementWrapper.TRUE)
-  boolean saveHeaders = true;
-
   @JmcProperty("ResultCollector.success_only_logging")
   @Getter
   @Setter
@@ -97,6 +83,11 @@ public abstract class ResultCollectorWrapper<
     SampleSaveConfigurationConverter converter = new SampleSaveConfigurationConverter();
     SampleSaveConfiguration saveConfig = converter.convert(saveConfiguration);
     return new ObjectProperty("saveConfig", saveConfig);
+  }
+
+  @Override
+  public Class<?> getTestClass() {
+    return ResultCollector.class;
   }
 
   @Override
