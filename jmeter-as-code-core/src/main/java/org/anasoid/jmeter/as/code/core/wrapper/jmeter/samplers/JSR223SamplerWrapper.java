@@ -19,7 +19,7 @@
 package org.anasoid.jmeter.as.code.core.wrapper.jmeter.samplers;
 
 import lombok.experimental.SuperBuilder;
-import org.anasoid.jmeter.as.code.core.wrapper.jmeter.util.JSR223TestElementWrapper;
+import org.anasoid.jmeter.as.code.core.wrapper.jmeter.util.JSR223TestElementParentWrapper;
 import org.apache.jmeter.protocol.java.sampler.JSR223Sampler;
 import org.apache.jmeter.testbeans.gui.TestBeanGUI;
 
@@ -29,7 +29,7 @@ import org.apache.jmeter.testbeans.gui.TestBeanGUI;
  * @see JSR223Sampler
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
-public class JSR223SamplerWrapper extends JSR223TestElementWrapper<JSR223Sampler, TestBeanGUI>
+public class JSR223SamplerWrapper extends JSR223TestElementParentWrapper<JSR223Sampler, TestBeanGUI>
     implements SamplerWrapper<JSR223Sampler> {
 
   @Override
