@@ -13,8 +13,16 @@ plugins {
     id "org.sonarqube" version "3.1.1"
     id 'jacoco'
     id 'com.github.rewolf.gradle.moarjavadoc' version "1.0.0"
+    id 'pl.allegro.tech.build.axion-release' version '1.13.2'
+}
+
+
+scmVersion {
+
 
 }
+
+
 // Apply the java plugin to add support for Java
 apply plugin: 'org.owasp.dependencycheck'
 
@@ -28,6 +36,7 @@ allprojects {
     sourceCompatibility = JavaVersion.VERSION_11
     targetCompatibility = JavaVersion.VERSION_11
 
+    project.version = scmVersion.version
 
     repositories {
         jcenter()
@@ -53,6 +62,7 @@ subprojects {
     apply plugin: 'maven-publish'
     apply plugin: "jacoco"
     apply plugin: 'com.github.rewolf.gradle.moarjavadoc'
+    apply plugin: 'signing'
 
     publishing {
         publications {
@@ -140,8 +150,6 @@ subprojects {
         implementation("commons-io:commons-io:$commonsIoVersion")
 
 
-
-
         //Test
         testImplementation("org.junit.jupiter:junit-jupiter-api:$junitVersion")
         testImplementation("org.junit.jupiter:junit-jupiter-params:$junitVersion")
@@ -182,6 +190,17 @@ test {
 // always run the tests before generating the report
 codeCoverageReport.dependsOn {
     subprojects*.test
+}
+
+
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
 }
 
 sonarqube {
