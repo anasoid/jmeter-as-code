@@ -74,7 +74,11 @@ public final class ConverterBeanUtils {
         JmcMethodAlias jmcMethodAlias = getAnnotation(method, JmcMethodAlias.class);
         JmcProperty jmcProperty = getAnnotation(method, JmcProperty.class);
         JmcInherited jmcInherited = method.getAnnotation(JmcInherited.class);
-        if (((jmcMethodAlias != null) || (jmcProperty != null) || (jmcInherited != null))
+        JmcCollection jmcCollection = method.getAnnotation(JmcCollection.class);
+        if (((jmcMethodAlias != null)
+                || (jmcProperty != null)
+                || (jmcInherited != null)
+                || (jmcCollection != null))
             && !result.containsKey(method.getName())) {
           if (method.getParameters().length > 0) {
             throw new ConversionException(
