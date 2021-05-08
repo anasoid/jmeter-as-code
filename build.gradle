@@ -24,7 +24,7 @@ allprojects {
     apply plugin: "jacoco"
 
 
-    group = 'org.anasoid.jmeter-as-code'
+    group = 'org.anasoid.jmc'
     sourceCompatibility = JavaVersion.VERSION_11
     targetCompatibility = JavaVersion.VERSION_11
 

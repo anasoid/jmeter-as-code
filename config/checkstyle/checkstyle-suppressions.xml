@@ -7,6 +7,6 @@
 <suppressions>
   <suppress  files=".*\.java" message=".*Abbreviation in name '.*' must contain no more than '1' consecutive capital letters" />
   <suppress  files=".*/core/application/.*JmcXstream\.java" message="new' has incorrect indentation level 10, expected level should be 12" />
-  <suppress  files="/org/anasoid/jmeter/as/code/core/wrapper/jmc/generic/AbstractJmxIncludeWrapper\.java" message="Method name '\$fill.*' must match pattern" />
+  <suppress  files="/org/anasoid/jmc/core/wrapper/jmc/generic/AbstractJmxIncludeWrapper\.java" message="Method name '\$fill.*' must match pattern" />
 
 </suppressions>
