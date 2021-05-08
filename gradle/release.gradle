@@ -1,0 +1,18 @@
+subprojects {
+
+    java {
+        withJavadocJar()
+        withSourcesJar()
+    }
+
+
+
+    publishing {
+        publications {
+            mavenJava(MavenPublication) {
+                from components.java
+
+            }
+        }
+    }
+}
