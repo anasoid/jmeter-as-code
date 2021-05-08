@@ -8,14 +8,14 @@ build
 classes/
 /build
 buildSrc/build
-/jmeter-as-code-*/build
+/jmc-*/build
 /src/asciidoc/build
 target/
 
 # Eclipse artifacts, including WTP generated manifests
 .classpath
 .project
-jmeter-as-code-*/src/main/java/META-INF/MANIFEST.MF
+jmc-*/src/main/java/META-INF/MANIFEST.MF
 
 # IDEA artifacts and output dirs
 *.iml
@@ -28,4 +28,4 @@ atlassian-ide-plugin.xml
 .gradletasknamecache
 
 .checkstyle
-/jmeter-as-code-*/.checkstyle
+/jmc-*/.checkstyle
