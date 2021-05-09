@@ -27,18 +27,18 @@ jobs:
           path: |
             ~/.gradle/caches
             ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-main-V1-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('gradle.properties') }}
+          key: ${{ runner.os }}-gradle-main-V2-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('gradle.properties') }}
           restore-keys: |
-            ${{ runner.os }}-gradle-main-V1
+            ${{ runner.os }}-gradle-main-V2
 
       - name: Cache Sonar
         uses: actions/cache@v2
         with:
           path: |
             ~/.sonar
-          key: ${{ runner.os }}-sonar-V1-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('gradle.properties') }}
+          key: ${{ runner.os }}-sonar-V2-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('gradle.properties') }}
           restore-keys: |
-            ${{ runner.os }}-sonar-V1
+            ${{ runner.os }}-sonar-V2
 
       - name: Cache Jmeter
         uses: actions/cache@v2
