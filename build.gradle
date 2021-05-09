@@ -19,6 +19,7 @@ plugins {
     id 'jacoco'
     id 'pl.allegro.tech.build.axion-release' version '1.13.2'
     id "io.freefair.lombok" version "6.0.0-m2"
+
 }
 
 
@@ -39,6 +40,7 @@ apply plugin: 'org.owasp.dependencycheck'
 allprojects {
     apply plugin: 'java'
     apply plugin: "jacoco"
+    apply plugin: 'signing'
 
     project.version = scmVersion.version
 
@@ -68,7 +70,6 @@ subprojects {
 
     apply plugin: 'checkstyle'
     apply plugin: 'pmd'
-    apply plugin: 'maven-publish'
     apply plugin: "jacoco"
     apply plugin: 'signing'
 
