@@ -82,13 +82,13 @@ public class SizeAssertionWrapper
     EQUAL(1),
     /** = . */
     NOT_EQUAL(2),
-    /** >= . */
+    /** &gt; . */
     GREATER_THAN(3),
-    /** < . */
+    /** &lt; . */
     LESS_THAN(4),
-    /** >= . */
+    /** &gt;= . */
     GREATER_THAN_EQUAL(5),
-    /** <= . */
+    /** &lt;= . */
     LESS_THAN_EQUAL(6);
 
     public final Integer value;
