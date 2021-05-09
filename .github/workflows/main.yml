@@ -50,6 +50,9 @@ jobs:
       - name: printenv
         run: printenv
 
+      - name: Java version
+        run: java -version
+
       - name: chmod  download-jmeter
         run: chmod +x ~/work/jmeter-as-code/jmeter-as-code/.github/scripts/download-jmeter.sh
 
