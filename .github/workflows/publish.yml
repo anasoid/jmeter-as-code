@@ -1,5 +1,8 @@
+
+
 # This workflow will build a Java project with Gradle
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
+
 
 name: publish
 
@@ -10,11 +13,14 @@ on:
         description: 'comment'
         required: true
 
+
 jobs:
   build:
 
     runs-on: ubuntu-20.04
-
+    env:
+      JMETER_HOME: /home/runner/.jmeter/jmeter
+      JMETER_FILE: apache-jmeter-5.4.1
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -30,23 +36,45 @@ jobs:
           path: |
             ~/.gradle/caches
             ~/.gradle/wrapper
-            ~/.gradle/dependency-check-data
-          key: ${{ runner.os }}-gradle-publish-V1-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('gradle.properties') }}
+          key: ${{ runner.os }}-gradle-main-V1-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('gradle.properties') }}
           restore-keys: |
-            ${{ runner.os }}-gradle-publish-V1
+            ${{ runner.os }}-gradle-main-V1
 
 
+
+      - name: Cache Jmeter
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.jmeter
+          key: jmeter2-$JMETER_FILE
+
+      - name: printenv
+        run: printenv
+
+      - name: Java version
+        run: java -version
+
+      - name: chmod  download-jmeter
+        run: chmod +x ~/work/jmeter-as-code/jmeter-as-code/.github/scripts/download-jmeter.sh
+
+      - name: Download Jmeter
+        run: ~/work/jmeter-as-code/jmeter-as-code/.github/scripts/download-jmeter.sh
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: dependencyCheck
-        run: ./gradlew --console=verbose build
+      - name: Build with Gradle
+        run: ./gradlew --stacktrace --console=verbose build
 
+      - name: Publish core
+        run: ./gradlew --stacktrace --console=verbose jmc-core:publish
 
-      - name: Publish artifact Test Report
+      - name: Publish artifact libs
         uses: actions/upload-artifact@v2
-        if: always()
         with:
           name: reports
           path: '**/build/libs/**'
+
+
+
