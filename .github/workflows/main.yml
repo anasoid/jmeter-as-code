@@ -63,10 +63,15 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build with Gradle
-        run: ./gradlew --console=verbose -x test build
+        run: ./gradlew --stacktrace --console=verbose -x test build
 
       - name: Test with Gradle
-        run: ./gradlew --console=verbose test
+        run: ./gradlew --stacktrace --console=verbose test
+
+      - name: check javadoc
+        uses: mikepenz/action-junit-report@v2
+        if:   always()
+        run: cat /home/runner/work/jmeter-as-code/jmeter-as-code/jmc-core/build/tmp/javadoc/javadoc.options
 
       - name: Sonar check
         run: ./gradlew  --console=verbose --stacktrace  sonarqube -Dsonar.organization=anasoid-org -Dsonar.projectKey=anasoid_jmeter-as-code  -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}
