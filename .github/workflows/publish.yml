@@ -32,7 +32,7 @@ jobs:
         run: git config --global advice.detachedHead false
 
       - name: Checkout
-        uses: gogaille/sparse-checkout
+        uses: actions/checkout@v2
 
 
       - name: Set up JDK 11
@@ -89,8 +89,8 @@ jobs:
       - name: Publish artifact libs
         uses: actions/upload-artifact@v2
         with:
-          name: reports
-          path: '**/build/libs/**'
+          name: jmc-core
+          path: 'jmc-core/build/libs/**'
 
 
 
