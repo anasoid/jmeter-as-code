@@ -8,8 +8,8 @@ plugins {
 }
 
 repositories {
-    // Use JCenter for resolving dependencies.
-    jcenter()
+    // Use   mavenCentral for resolving dependencies.
+    mavenCentral()
 }
 
 dependencies {
