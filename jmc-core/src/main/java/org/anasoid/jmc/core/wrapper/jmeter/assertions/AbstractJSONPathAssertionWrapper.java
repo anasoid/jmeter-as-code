@@ -32,7 +32,7 @@ import org.anasoid.jmc.core.xstream.exceptions.ConversionIllegalStateException;
 import org.apache.jmeter.assertions.gui.AbstractAssertionGui;
 import org.apache.jmeter.testelement.AbstractTestElement;
 
-/** Wrapper for JSONPathAssertion & JMESPathAssertion. */
+/** Wrapper for JSONPathAssertion and JMESPathAssertion. */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 public abstract class AbstractJSONPathAssertionWrapper<
         G extends AbstractTestElement, F extends AbstractAssertionGui>

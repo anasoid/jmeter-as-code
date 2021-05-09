@@ -50,6 +50,9 @@ jobs:
       - name: printenv
         run: printenv
 
+      - name: Java version
+        run: java -version
+
       - name: chmod  download-jmeter
         run: chmod +x ~/work/jmeter-as-code/jmeter-as-code/.github/scripts/download-jmeter.sh
 
@@ -60,10 +63,10 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build with Gradle
-        run: ./gradlew --console=verbose -x test build
+        run: ./gradlew --stacktrace --console=verbose -x test build
 
       - name: Test with Gradle
-        run: ./gradlew --console=verbose test
+        run: ./gradlew --stacktrace --console=verbose test
 
       - name: Sonar check
         run: ./gradlew  --console=verbose --stacktrace  sonarqube -Dsonar.organization=anasoid-org -Dsonar.projectKey=anasoid_jmeter-as-code  -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}

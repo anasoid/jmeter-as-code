@@ -61,8 +61,8 @@ public class IfControllerWrapper extends GenericControllerWrapper<IfController, 
   /**
    * Interpret Condition as Variable Expression? f this is selected, then the condition must be an
    * expression that evaluates to "true" (case is ignored). For example, ${FOUND} or
-   * ${__jexl3(${VAR} > 100)}. Unlike the JavaScript case, the condition is only checked to see if
-   * it matches "true" (case is ignored).
+   * ${__jexl3(${VAR} &gt; 100)}. Unlike the JavaScript case, the condition is only checked to see
+   * if it matches "true" (case is ignored).
    */
   @JmcProperty("IfController.useExpression")
   @Getter

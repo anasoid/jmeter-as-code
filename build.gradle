@@ -1,9 +1,14 @@
 buildscript {
     repositories {
         mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+
     }
     dependencies {
         classpath 'org.owasp:dependency-check-gradle:6.1.6'
+
     }
 }
 
@@ -12,14 +17,19 @@ plugins {
     id "io.spring.dependency-management" version "1.0.11.RELEASE"
     id "org.sonarqube" version "3.1.1"
     id 'jacoco'
-    id 'com.github.rewolf.gradle.moarjavadoc' version "1.0.0"
     id 'pl.allegro.tech.build.axion-release' version '1.13.2'
+    id "io.freefair.lombok" version "6.0.0-m2"
+
 }
 
 
 scmVersion {
 
 
+    branchVersionCreator = [
+            '.*': { version, position -> "$position.branch".replace("/", "~") },
+
+    ]
 }
 
 
@@ -30,13 +40,14 @@ apply plugin: 'org.owasp.dependencycheck'
 allprojects {
     apply plugin: 'java'
     apply plugin: "jacoco"
+    apply plugin: 'signing'
 
+    project.version = scmVersion.version
 
     group = 'org.anasoid.jmc'
     sourceCompatibility = JavaVersion.VERSION_11
     targetCompatibility = JavaVersion.VERSION_11
 
-    project.version = scmVersion.version
 
     repositories {
         jcenter()
@@ -59,19 +70,10 @@ subprojects {
 
     apply plugin: 'checkstyle'
     apply plugin: 'pmd'
-    apply plugin: 'maven-publish'
     apply plugin: "jacoco"
-    apply plugin: 'com.github.rewolf.gradle.moarjavadoc'
     apply plugin: 'signing'
 
-    publishing {
-        publications {
-            mavenJava(MavenPublication) {
-                from components.java
 
-            }
-        }
-    }
     System.setProperty("org.checkstyle.google.suppressionfilter.config", rootProject.projectDir.toString() + "/config/checkstyle/checkstyle-suppressions.xml")
     checkstyle {
 
@@ -137,11 +139,11 @@ subprojects {
         implementation("com.thoughtworks.xstream:xstream:1.4.15")
 
         //LOMBOCK
-        compileOnly 'org.projectlombok:lombok:1.18.16'
-        annotationProcessor 'org.projectlombok:lombok:1.18.16'
+        compileOnly 'org.projectlombok:lombok:1.18.20'
+        annotationProcessor 'org.projectlombok:lombok:1.18.20'
 
-        testCompileOnly 'org.projectlombok:lombok:1.18.16'
-        testAnnotationProcessor 'org.projectlombok:lombok:1.18.16'
+        testCompileOnly 'org.projectlombok:lombok:1.18.20'
+        testAnnotationProcessor 'org.projectlombok:lombok:1.18.20'
 
 
         //Apache common
@@ -168,6 +170,8 @@ subprojects {
 
 }
 
+apply from: "${rootProject.projectDir}/gradle/release.gradle"
+apply from: "${rootProject.projectDir}/gradle/javadoc.gradle"
 
 task codeCoverageReport(type: JacocoReport) {
 
@@ -192,16 +196,6 @@ codeCoverageReport.dependsOn {
     subprojects*.test
 }
 
-
-task javadocJar(type: Jar) {
-    classifier = 'javadoc'
-    from javadoc
-}
-
-task sourcesJar(type: Jar) {
-    classifier = 'sources'
-    from sourceSets.main.allSource
-}
 
 sonarqube {
     properties {

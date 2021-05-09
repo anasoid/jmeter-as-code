@@ -8,11 +8,9 @@ plugins {
 
 dependencies {
 
-    implementation(project(":jmc-plugin"))
 
     implementation("commons-beanutils:commons-beanutils:$commonsBeanutilsVersion")
     implementation("io.github.classgraph:classgraph:$classgraphVersion")
-
 
 
 }

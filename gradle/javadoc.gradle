@@ -1,0 +1,15 @@
+// Lombok Task
+lombok {
+    version = "1.18.20"
+}
+
+
+subprojects {
+    apply plugin: "io.freefair.lombok"
+
+    javadoc {
+        if(JavaVersion.current().isJava9Compatible()) {
+            options.addBooleanOption('html5', true)
+        }
+    }
+}

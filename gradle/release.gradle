@@ -1,0 +1,63 @@
+subprojects {
+
+    apply plugin: 'maven-publish'
+
+    java {
+        withJavadocJar()
+        withSourcesJar()
+    }
+
+
+
+    publishing {
+        publications {
+            mavenJava(MavenPublication) {
+                from components.java
+                pom {
+                    name = 'Jmeter as code (JMC)'
+                    description = 'Jmeter as code (JMC)'
+                    url = 'https://github.com/anasoid/jmeter-as-code'
+                    licenses {
+                        license {
+                            name = 'The Apache License, Version 2.0'
+                            url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        }
+                    }
+                    developers {
+                        developer {
+                            id = 'anasoid'
+                            name = 'Anas OUFDOU'
+                            email = 'oufdou.anas@gmail.com'
+                        }
+                    }
+                    scm {
+                        connection = 'scm:git:https://github.com/anasoid/jmeter-as-code.git'
+                        developerConnection = 'scm:git:https://github.com/anasoid/jmeter-as-code.git'
+                        url = 'https://github.com/anasoid/jmeter-as-code'
+                    }
+                }
+            }
+        }
+        repositories {
+            maven {
+                // change URLs to point to your repos, e.g. http://my.org/repo
+                def releasesRepoUrl = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+                def snapshotsRepoUrl = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+                url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+                credentials {
+                    username = System.getenv("MAVEN_USERNAME")
+                    password = System.getenv("MAVEN_PASSWORD")
+                }
+            }
+        }
+    }
+
+    signing {
+        def signingKey = findProperty("signingKey")
+        def signingPassword = findProperty("signingPassword")
+        useInMemoryPgpKeys(signingKey, signingPassword)
+        sign publishing.publications.mavenJava
+
+    }
+
+}
