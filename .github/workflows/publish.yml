@@ -15,7 +15,7 @@ on:
 
 
 jobs:
-  build:
+  publish:
 
     runs-on: ubuntu-20.04
     env:
@@ -29,6 +29,7 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
+          distribution: 'adopt'
 
       - name: Cache Gradle
         uses: actions/cache@v2
@@ -36,9 +37,9 @@ jobs:
           path: |
             ~/.gradle/caches
             ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-main-V1-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('gradle.properties') }}
+          key: ${{ runner.os }}-gradle-publish-V1-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('gradle.properties') }}
           restore-keys: |
-            ${{ runner.os }}-gradle-main-V1
+            ${{ runner.os }}-gradle-publish-V1
 
 
 
