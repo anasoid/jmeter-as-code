@@ -29,7 +29,7 @@ class HttpSamplerDslTest {
   @Test
   void testArgument() {
 
-    HTTPSamplerProxyWrapper httpSampler = http("domain", "name", "path");
+    HTTPSamplerProxyWrapper httpSampler = http("domain", "name", "path").build();
 
     Assertions.assertEquals("name", httpSampler.getName());
     Assertions.assertEquals("path", httpSampler.getPath());
