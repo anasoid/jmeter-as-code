@@ -91,8 +91,8 @@ public class XPathExtractorWrapper
 
   /**
    * If selected, the fragment will be returned rather than the text content. For example //title
-   * would return "<title>Apache JMeter</title>" rather than "Apache JMeter". In this case,
-   * //title/text() would return "Apache JMeter".
+   * would return "&lt;title&gt;Apache JMeter&lt;/title&gt;" rather than "Apache JMeter". In this
+   * case, //title/text() would return "Apache JMeter".
    */
   @JmcProperty("XPathExtractor.fragment")
   @Getter
