@@ -12,7 +12,8 @@ on:
       comment:
         description: 'comment'
         required: true
-
+  release:
+    types: [created ]
 
 jobs:
   publish:
