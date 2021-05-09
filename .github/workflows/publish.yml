@@ -12,6 +12,7 @@ on:
       comment:
         description: 'comment'
         required: true
+        default: 'TODO'
   release:
     types: [created ]
 
@@ -22,7 +23,14 @@ jobs:
     env:
       JMETER_HOME: /home/runner/.jmeter/jmeter
       JMETER_FILE: apache-jmeter-5.4.1
+
+
     steps:
+
+
+      - name: configure git
+        run: git config advice.detachedHead false
+
       - name: Checkout
         uses: actions/checkout@v2
 
