@@ -60,6 +60,7 @@ public class HeaderManagerWrapper extends ConfigTestElementWrapper<HeaderManager
   private final List<HeaderWrapper> headers = new ArrayList<>();
 
   /** Builder. */
+  @SuppressWarnings({"PMD.TooManyMethods"})
   public abstract static class HeaderManagerWrapperBuilder<
           C extends HeaderManagerWrapper, B extends HeaderManagerWrapperBuilder<C, B>>
       extends ConfigTestElementWrapper.ConfigTestElementWrapperBuilder<
@@ -92,6 +93,41 @@ public class HeaderManagerWrapper extends ConfigTestElementWrapper<HeaderManager
      */
     public B addHeader(String name, String value) {
       return this.addHeader(HeaderWrapper.builder().withName(name).withValue(value).build());
+    }
+
+    /** set Accept header. */
+    public B acceptHeader(String value) {
+      return addHeader("Accept", value);
+    }
+
+    /** set Accept-Charset header. */
+    public B acceptCharsetHeader(String value) {
+      return addHeader("Accept-Charset", value);
+    }
+
+    /** set Accept-Encoding header. */
+    public B acceptEncodingHeader(String value) {
+      return addHeader("Accept-Encoding", value);
+    }
+
+    /** set Accept-Language header. */
+    public B acceptLanguageHeader(String value) {
+      return addHeader("Accept-Language", value);
+    }
+
+    /** set Authorization header. */
+    public B authorizationHeader(String value) {
+      return addHeader("Authorization", value);
+    }
+
+    /** set Content-Type header. */
+    public B contentTypeHeader(String value) {
+      return addHeader("Content-Type", value);
+    }
+
+    /** set User-Agent header. */
+    public B userAgentHeader(String value) {
+      return addHeader("User-Agent", value);
     }
   }
 }

@@ -18,7 +18,9 @@
 
 package org.anasoid.jmc.core.dsl.samplers;
 
+import org.anasoid.jmc.core.wrapper.jmc.samplers.HttpMethod;
 import org.anasoid.jmc.core.wrapper.jmeter.samplers.HTTPSamplerProxyWrapper;
+import org.anasoid.jmc.core.wrapper.jmeter.samplers.HTTPSamplerProxyWrapper.HTTPSamplerProxyWrapperBuilder;
 
 /**
  * Dsl for HTTPSamplerProxyWrapper.
@@ -30,26 +32,16 @@ public final class HttpSamplerDsl {
   private HttpSamplerDsl() {}
 
   /**
-   * Get HTTPSamplerProxy builder.
-   *
-   * @return builder.
-   */
-  public static HTTPSamplerProxyWrapper.HTTPSamplerProxyWrapperBuilder<?, ?> httpBuilder() {
-
-    return HTTPSamplerProxyWrapper.builder();
-  }
-
-  /**
    * Get HTTPSamplerProxy builder with name and path.
    *
    * @param name sampler name.
    * @param path sampler path.
    * @return builder.
    */
-  public static HTTPSamplerProxyWrapper.HTTPSamplerProxyWrapperBuilder<?, ?> httpBuilder(
+  public static HTTPSamplerProxyWrapper.HTTPSamplerProxyWrapperBuilder<?, ?> http(
       String name, String path) {
 
-    return httpBuilder().withName(name).withPath(path);
+    return HTTPSamplerProxyWrapper.builder().withName(name).withPath(path);
   }
 
   /**
@@ -60,10 +52,10 @@ public final class HttpSamplerDsl {
    * @param path sampler path.
    * @return builder.
    */
-  public static HTTPSamplerProxyWrapper.HTTPSamplerProxyWrapperBuilder<?, ?> httpBuilder(
+  public static HTTPSamplerProxyWrapper.HTTPSamplerProxyWrapperBuilder<?, ?> http(
       String domain, String name, String path) {
 
-    return httpBuilder(name, path).withDomain(domain);
+    return http(name, path).withDomain(domain);
   }
 
   /**
@@ -71,23 +63,58 @@ public final class HttpSamplerDsl {
    *
    * @param name sampler name.
    * @param path sampler path.
-   * @return sampler.
+   * @return builder.
    */
-  public static HTTPSamplerProxyWrapper http(String name, String path) {
+  public static HTTPSamplerProxyWrapperBuilder<?, ?> get(String name, String path) {
 
-    return httpBuilder(name, path).build();
+    return http(name, path);
   }
 
   /**
-   * Get HTTPSamplerProxy sampler with domain, name and path.
+   * Post HTTPSamplerProxy sampler with name and path.
    *
-   * @param domain sampler domain.
    * @param name sampler name.
    * @param path sampler path.
-   * @return sampler.
+   * @return builder.
    */
-  public static HTTPSamplerProxyWrapper http(String domain, String name, String path) {
+  public static HTTPSamplerProxyWrapperBuilder<?, ?> post(String name, String path) {
 
-    return httpBuilder(domain, name, path).build();
+    return http(name, path).withMethod(HttpMethod.POST);
+  }
+
+  /**
+   * Put HTTPSamplerProxy sampler with name and path.
+   *
+   * @param name sampler name.
+   * @param path sampler path.
+   * @return builder.
+   */
+  public static HTTPSamplerProxyWrapperBuilder<?, ?> put(String name, String path) {
+
+    return http(name, path).withMethod(HttpMethod.PUT);
+  }
+
+  /**
+   * OPTIONS HTTPSamplerProxy sampler with name and path.
+   *
+   * @param name sampler name.
+   * @param path sampler path.
+   * @return builder.
+   */
+  public static HTTPSamplerProxyWrapperBuilder<?, ?> options(String name, String path) {
+
+    return http(name, path).withMethod(HttpMethod.OPTIONS);
+  }
+
+  /**
+   * DELETE HTTPSamplerProxy sampler with name and path.
+   *
+   * @param name sampler name.
+   * @param path sampler path.
+   * @return builder.
+   */
+  public static HTTPSamplerProxyWrapperBuilder<?, ?> delete(String name, String path) {
+
+    return http(name, path).withMethod(HttpMethod.DELETE);
   }
 }
