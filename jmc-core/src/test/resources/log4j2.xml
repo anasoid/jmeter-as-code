@@ -37,7 +37,7 @@
       <AppenderRef ref="STDOUT"/>
     </Root>
 
-    <Logger name="org.anasoid.jmeter.as.code" level="debug"/>
+    <Logger name="org.anasoid.jmc" level="debug"/>
 
 
   </Loggers>
