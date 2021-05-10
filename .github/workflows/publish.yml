@@ -36,7 +36,7 @@ jobs:
 
 
       - name: Set up JDK 11
-        uses: actions/setup-java@V1
+        uses: actions/setup-java@v1
         with:
           java-version: 11
 
