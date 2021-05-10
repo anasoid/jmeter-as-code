@@ -1,6 +1,6 @@
 # Write Jmeter tests as code.
 
-An API that give access t full Jmeter feature as code, All designed object in GUI can be written as code.
+An API that give access to full Jmeter feature as code, All designed object in GUI can be written as code.
 
 ![Build & Test](https://github.com/anasoid/jmeter-as-code/actions/workflows/main.yml/badge.svg)
 ![Audit](https://github.com/anasoid/jmeter-as-code/actions/workflows/audit.yml/badge.svg)
