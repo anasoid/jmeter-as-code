@@ -18,7 +18,6 @@
 
 package org.anasoid.jmc.core.wrapper.jmeter.threads;
 
-import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import lombok.Builder;
 import lombok.Builder.Default;
@@ -41,7 +40,6 @@ import org.apache.jmeter.threads.gui.ThreadGroupGui;
  * @see ThreadGroup
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
-@XStreamAlias("ThreadGroup")
 @JmcDefaultName("Thread Group")
 public class ThreadGroupWrapper extends AbstractThreadGroupWrapper<ThreadGroup, ThreadGroupGui> {
 

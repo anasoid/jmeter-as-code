@@ -18,7 +18,6 @@
 
 package org.anasoid.jmc.core.wrapper.jmeter.samplers;
 
-import com.thoughtworks.xstream.annotations.XStreamAlias;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.apache.jmeter.protocol.http.control.gui.HttpTestSampleGui;
@@ -31,7 +30,6 @@ import org.apache.jmeter.protocol.http.sampler.HTTPSamplerProxy;
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 @JmcDefaultName("HTTP Request")
-@XStreamAlias("HTTPSamplerProxy")
 public class HTTPSamplerProxyWrapper
     extends HTTPSamplerBaseWrapper<HTTPSamplerProxy, HttpTestSampleGui> {
 

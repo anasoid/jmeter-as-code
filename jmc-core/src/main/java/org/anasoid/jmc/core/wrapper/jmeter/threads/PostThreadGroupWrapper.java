@@ -18,7 +18,6 @@
 
 package org.anasoid.jmc.core.wrapper.jmeter.threads;
 
-import com.thoughtworks.xstream.annotations.XStreamAlias;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.apache.jmeter.threads.PostThreadGroup;
@@ -30,7 +29,6 @@ import org.apache.jmeter.threads.gui.PostThreadGroupGui;
  * @see PostThreadGroup
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
-@XStreamAlias("PostThreadGroup")
 @JmcDefaultName("tearDown Thread Group")
 public class PostThreadGroupWrapper extends ThreadGroupWrapper {
 
