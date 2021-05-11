@@ -33,9 +33,7 @@ class PostThreadGroupWrapperXMLTest extends AbstractJmcTest {
   void testDefault() throws IOException {
 
     TestPlanWrapper testPlanWrapper =
-        TestPlanWrapper.builder()
-            .addThread(PostThreadGroupWrapper.builder().withName("tearDown Thread Group").build())
-            .build();
+        TestPlanWrapper.builder().addThread(PostThreadGroupWrapper.builder().build()).build();
 
     checkWrapper(testPlanWrapper, PARENT_PATH + "/tearDownThreadGroup.default.jmx", NODE_NAME);
   }

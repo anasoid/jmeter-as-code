@@ -44,7 +44,6 @@ class HTTPArgumentWrapperXMLTest extends AbstractJmcTest {
                 ThreadGroupWrapper.builder()
                     .addSampler(
                         HTTPSamplerProxyWrapper.builder()
-                            .withName("HTTP Request")
                             .withPath("")
                             .addArgument(
                                 HTTPArgumentWrapper.builder()

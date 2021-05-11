@@ -41,10 +41,7 @@ class GaussianRandomTimerWrapperXmlTest extends AbstractJmcTest {
   void testDefault() throws IOException {
 
     TestPlanWrapper testPlanWrapper =
-        TestPlanWrapper.builder()
-            .addTimer(
-                GaussianRandomTimerWrapper.builder().withName("Gaussian Random Timer").build())
-            .build();
+        TestPlanWrapper.builder().addTimer(GaussianRandomTimerWrapper.builder().build()).build();
 
     checkWrapper(testPlanWrapper, PARENT_PATH + "/gaussianRandomTimer.default.jmx", NODE_NAME);
   }
@@ -56,7 +53,6 @@ class GaussianRandomTimerWrapperXmlTest extends AbstractJmcTest {
         TestPlanWrapper.builder()
             .addTimer(
                 GaussianRandomTimerWrapper.builder()
-                    .withName("Gaussian Random Timer")
                     .withDelay(new Variable("delay"))
                     .withDeviation(new Variable("rnd"))
                     .build())

@@ -43,7 +43,6 @@ class JSR223TimerWrapperXmlTest extends AbstractJmcTest {
         TestPlanWrapper.builder()
             .addTimer(
                 JSR223TimerWrapper.builder()
-                    .withName("JSR223 Timer")
                     .withScriptFile(SCRIPT_PATH + "/myscript.special.txt")
                     .build())
             .build();

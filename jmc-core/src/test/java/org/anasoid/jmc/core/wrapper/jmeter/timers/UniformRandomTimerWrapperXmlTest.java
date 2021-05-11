@@ -42,11 +42,7 @@ class UniformRandomTimerWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .addTimer(
-                UniformRandomTimerWrapper.builder()
-                    .withName("Uniform Random Timer")
-                    .withDelay(0)
-                    .build())
+            .addTimer(UniformRandomTimerWrapper.builder().withDelay(0).build())
             .build();
 
     checkWrapper(testPlanWrapper, PARENT_PATH + "/uniformRandomTimer.default.jmx", NODE_NAME);
@@ -59,7 +55,6 @@ class UniformRandomTimerWrapperXmlTest extends AbstractJmcTest {
         TestPlanWrapper.builder()
             .addTimer(
                 UniformRandomTimerWrapper.builder()
-                    .withName("Uniform Random Timer")
                     .withDelay(new Variable("delay"))
                     .withRandom(new Variable("rnd"))
                     .build())

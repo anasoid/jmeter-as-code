@@ -39,10 +39,7 @@ class ComparisonAssertionVisualizerWrapperXmlTest extends AbstractJmcTest {
   void testDefault() throws IOException {
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .addListener(
-                ComparisonAssertionVisualizerWrapper.builder()
-                    .withName("Comparison Assertion Visualizer")
-                    .build())
+            .addListener(ComparisonAssertionVisualizerWrapper.builder().build())
             .build();
 
     checkWrapper(

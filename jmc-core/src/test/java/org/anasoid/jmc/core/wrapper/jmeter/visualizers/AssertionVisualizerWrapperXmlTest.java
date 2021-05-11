@@ -38,9 +38,7 @@ class AssertionVisualizerWrapperXmlTest extends AbstractJmcTest {
   @Test
   void testDefault() throws IOException {
     TestPlanWrapper testPlanWrapper =
-        TestPlanWrapper.builder()
-            .addListener(AssertionVisualizerWrapper.builder().withName("Assertion Results").build())
-            .build();
+        TestPlanWrapper.builder().addListener(AssertionVisualizerWrapper.builder().build()).build();
 
     checkWrapper(testPlanWrapper, PARENT_PATH + "/assertionResults.default.jmx", NODE_NAME);
   }

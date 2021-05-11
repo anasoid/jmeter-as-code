@@ -22,6 +22,7 @@ import lombok.experimental.SuperBuilder;
 import org.anasoid.jmc.core.wrapper.jmeter.gui.JMeterGUIWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.samplers.SampleListenerWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.basic.AbstractBasicChildTestElementWrapper;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.apache.jmeter.reporters.Summariser;
 import org.apache.jmeter.reporters.gui.SummariserGui;
 
@@ -31,6 +32,7 @@ import org.apache.jmeter.reporters.gui.SummariserGui;
  * @see Summariser
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@JmcDefaultName("Generate Summary Results")
 public class SummariserWrapper extends AbstractBasicChildTestElementWrapper<Summariser>
     implements JMeterGUIWrapper<SummariserGui>, SampleListenerWrapper<Summariser> {
 

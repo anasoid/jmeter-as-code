@@ -49,7 +49,6 @@ class HeaderManagerWrapperXMLTest extends AbstractJmcTest {
                 ThreadGroupWrapper.builder()
                     .addSampler(
                         HTTPSamplerProxyWrapper.builder()
-                            .withName("HTTP Request")
                             .withPath("")
                             .addConfig(HeaderManagerWrapper.builder().build())
                             .build())
@@ -68,7 +67,6 @@ class HeaderManagerWrapperXMLTest extends AbstractJmcTest {
                 ThreadGroupWrapper.builder()
                     .addSampler(
                         HTTPSamplerProxyWrapper.builder()
-                            .withName("HTTP Request")
                             .withPath("")
                             .addConfig(
                                 HeaderManagerWrapper.builder().addHeader("param", "value").build())

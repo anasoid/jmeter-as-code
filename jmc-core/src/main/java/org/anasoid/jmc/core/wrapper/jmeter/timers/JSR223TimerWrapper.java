@@ -20,6 +20,7 @@ package org.anasoid.jmc.core.wrapper.jmeter.timers;
 
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmc.core.wrapper.jmeter.util.JSR223TestElementWrapper;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.apache.jmeter.testbeans.gui.TestBeanGUI;
 import org.apache.jmeter.timers.JSR223Timer;
 
@@ -29,6 +30,7 @@ import org.apache.jmeter.timers.JSR223Timer;
  * @see JSR223Timer
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@JmcDefaultName("JSR223 Timer")
 public class JSR223TimerWrapper extends JSR223TestElementWrapper<JSR223Timer, TestBeanGUI>
     implements TimerWrapper<JSR223Timer> {
 

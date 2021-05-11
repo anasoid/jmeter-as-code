@@ -73,10 +73,8 @@ class AbstractParentJmxIncludeWrapperTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName(DEFAULT_TEST_PLAN)
             .addThread(
                 ThreadGroupWrapper.builder()
-                    .withName(DEFAULT_THREAD_GROUP)
                     .addSampler(
                         SamplerJmxIncludeWrapper.builder()
                             .withPath(PARENT_PATH + "/node.http.sampler.simple.jmx")
@@ -93,10 +91,8 @@ class AbstractParentJmxIncludeWrapperTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName(DEFAULT_TEST_PLAN)
             .addThread(
                 ThreadGroupWrapper.builder()
-                    .withName(DEFAULT_THREAD_GROUP)
                     .addSampler(
                         SamplerJmxIncludeWrapper.builder()
                             .withPath(PARENT_PATH + "/node.http.sampler.simple.jmx")
@@ -115,10 +111,8 @@ class AbstractParentJmxIncludeWrapperTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName(DEFAULT_TEST_PLAN)
             .addThread(
                 ThreadGroupWrapper.builder()
-                    .withName(DEFAULT_THREAD_GROUP)
                     .addSampler(
                         SamplerJmxIncludeWrapper.builder()
                             .withPath(PARENT_PATH + "/node.http.sampler.simple.jmx")
@@ -137,10 +131,8 @@ class AbstractParentJmxIncludeWrapperTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName(DEFAULT_TEST_PLAN)
             .addThread(
                 ThreadGroupWrapper.builder()
-                    .withName(DEFAULT_THREAD_GROUP)
                     .addSampler(
                         SamplerJmxIncludeWrapper.builder()
                             .withPath(PARENT_PATH + "/node.http.sampler.simple.jmx")

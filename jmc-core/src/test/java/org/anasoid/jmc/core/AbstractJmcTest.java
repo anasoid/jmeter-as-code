@@ -41,12 +41,6 @@ public abstract class AbstractJmcTest {
 
   public static final String SCRIPT_PATH = "org/anasoid/jmc/core/wrapper/jmeter/script";
 
-  protected static final String DEFAULT_TEST_PLAN = "Test Plan";
-
-  protected static final String DEFAULT_HTTP_REQUEST = "HTTP Request";
-
-  protected static final String DEFAULT_THREAD_GROUP = "Thread Group";
-
   protected Source getSource(String content) {
     return Input.fromString(content).build();
   }

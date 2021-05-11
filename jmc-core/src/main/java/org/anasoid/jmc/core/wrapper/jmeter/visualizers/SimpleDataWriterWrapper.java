@@ -20,6 +20,7 @@ package org.anasoid.jmc.core.wrapper.jmeter.visualizers;
 
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmc.core.wrapper.jmeter.reporters.ResultCollectorWrapper;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.apache.jmeter.reporters.ResultCollector;
 import org.apache.jmeter.visualizers.SimpleDataWriter;
 
@@ -29,6 +30,7 @@ import org.apache.jmeter.visualizers.SimpleDataWriter;
  * @see SimpleDataWriter
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@JmcDefaultName("Simple Data Writer")
 @SuppressWarnings({"PMD.RedundantFieldInitializer", "PMD.TooManyFields"})
 public class SimpleDataWriterWrapper
     extends ResultCollectorWrapper<ResultCollector, SimpleDataWriter> {

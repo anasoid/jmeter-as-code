@@ -26,6 +26,7 @@ import org.anasoid.jmc.core.wrapper.jmc.Variable;
 import org.anasoid.jmc.core.wrapper.jmeter.gui.JMeterGUIWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.basic.AbstractBasicChildTestElementWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.timers.TimerWrapper;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.anasoid.jmc.core.xstream.annotations.JmcProperty;
 import org.anasoid.jmc.core.xstream.types.IntegerManager;
 import org.anasoid.jmc.core.xstream.types.LongManager;
@@ -38,6 +39,7 @@ import org.apache.jmeter.timers.poissonarrivals.PreciseThroughputTimer;
  * @see org.apache.jmeter.timers.poissonarrivals.PreciseThroughputTimer
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@JmcDefaultName("Precise Throughput Timer")
 public class PreciseThroughputTimerWrapper
     extends AbstractBasicChildTestElementWrapper<PreciseThroughputTimer>
     implements JMeterGUIWrapper<TestBeanGUI>, TimerWrapper<PreciseThroughputTimer> {

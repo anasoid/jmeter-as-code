@@ -45,7 +45,6 @@ class CookieManagerWrapperTest extends AbstractJmcTest {
 
     CookieManagerWrapper cookieManagerWrapper =
         CookieManagerWrapper.builder()
-            .withName("HTTP Cookie Manager")
             .addCookie(CookieWrapper.builder().withName("name").build())
             .build();
 
@@ -65,7 +64,6 @@ class CookieManagerWrapperTest extends AbstractJmcTest {
 
     CookieManagerWrapper cookieManagerWrapper =
         CookieManagerWrapper.builder()
-            .withName("HTTP Cookie Manager")
             .addCookie(CookieWrapper.builder().withValue("val").build())
             .build();
 
@@ -98,7 +96,7 @@ class CookieManagerWrapperTest extends AbstractJmcTest {
     parentTestElementWrapperTesting = (ParentTestElementWrapperTesting) applicationTest.toJmx(wr);
 
     Assertions.assertEquals(
-        "Cookie Manager",
+        "HTTP Cookie Manager",
         ((CookieManagerWrapper) parentTestElementWrapperTesting.getChilds().get(0)).getName());
   }
 

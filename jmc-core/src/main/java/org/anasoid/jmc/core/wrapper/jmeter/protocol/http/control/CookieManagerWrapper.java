@@ -44,7 +44,7 @@ import org.apache.jmeter.protocol.http.gui.CookiePanel;
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 @JmcChildrenTypes(type = {CookieWrapper.class})
-@JmcDefaultName("Cookie Manager")
+@JmcDefaultName("HTTP Cookie Manager")
 public class CookieManagerWrapper extends ConfigTestElementWrapper<CookieManager, CookiePanel> {
 
   @XStreamOmitField private static final long serialVersionUID = 8482403319301067878L;

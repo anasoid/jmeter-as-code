@@ -38,9 +38,7 @@ class AggregateGraphWrapperWrapperXmlTest extends AbstractJmcTest {
   @Test
   void testDefault() throws IOException {
     TestPlanWrapper testPlanWrapper =
-        TestPlanWrapper.builder()
-            .addListener(AggregateGraphWrapper.builder().withName("Aggregate Graph").build())
-            .build();
+        TestPlanWrapper.builder().addListener(AggregateGraphWrapper.builder().build()).build();
 
     checkWrapper(testPlanWrapper, PARENT_PATH + "/aggregateGraph.default.jmx", NODE_NAME);
   }

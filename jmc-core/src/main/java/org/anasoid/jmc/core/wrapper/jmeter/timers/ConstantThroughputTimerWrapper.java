@@ -25,6 +25,7 @@ import lombok.experimental.SuperBuilder;
 import org.anasoid.jmc.core.wrapper.jmc.Variable;
 import org.anasoid.jmc.core.wrapper.jmeter.gui.JMeterGUIWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.basic.AbstractBasicChildTestElementWrapper;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.anasoid.jmc.core.xstream.annotations.JmcProperty;
 import org.apache.jmeter.testbeans.gui.TestBeanGUI;
 import org.apache.jmeter.timers.ConstantThroughputTimer;
@@ -35,6 +36,7 @@ import org.apache.jmeter.timers.ConstantThroughputTimer;
  * @see ConstantThroughputTimer
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@JmcDefaultName("Constant Throughput Timer")
 @SuppressWarnings({"PMD.RedundantFieldInitializer", "PMD.AvoidUncheckedExceptionsInSignatures"})
 public class ConstantThroughputTimerWrapper
     extends AbstractBasicChildTestElementWrapper<ConstantThroughputTimer>

@@ -20,6 +20,7 @@ package org.anasoid.jmc.core.wrapper.jmeter.samplers;
 
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmc.core.wrapper.jmeter.util.JSR223TestElementParentWrapper;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.apache.jmeter.protocol.java.sampler.JSR223Sampler;
 import org.apache.jmeter.testbeans.gui.TestBeanGUI;
 
@@ -29,6 +30,7 @@ import org.apache.jmeter.testbeans.gui.TestBeanGUI;
  * @see JSR223Sampler
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@JmcDefaultName("JSR223 Sampler")
 public class JSR223SamplerWrapper extends JSR223TestElementParentWrapper<JSR223Sampler, TestBeanGUI>
     implements SamplerWrapper<JSR223Sampler> {
 

@@ -42,13 +42,10 @@ class JSR223SamplerWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName(DEFAULT_TEST_PLAN)
             .addThread(
                 ThreadGroupWrapper.builder()
-                    .withName(DEFAULT_THREAD_GROUP)
                     .addSampler(
                         JSR223SamplerWrapper.builder()
-                            .withName("JSR223 Sampler")
                             .withScriptFile(SCRIPT_PATH + "/myscript.special.txt")
                             .build())
                     .build())

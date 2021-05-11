@@ -43,7 +43,6 @@ class JSR223ListenerWrapperXmlTest extends AbstractJmcTest {
         TestPlanWrapper.builder()
             .addAssertion(
                 JSR223ListenerWrapper.builder()
-                    .withName("JSR223 Listener")
                     .withScriptFile(SCRIPT_PATH + "/myscript.special.txt")
                     .build())
             .build();

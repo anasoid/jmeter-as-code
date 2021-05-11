@@ -20,6 +20,7 @@ package org.anasoid.jmc.core.wrapper.jmeter.threads;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import lombok.experimental.SuperBuilder;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.apache.jmeter.threads.SetupThreadGroup;
 import org.apache.jmeter.threads.gui.SetupThreadGroupGui;
 
@@ -30,6 +31,7 @@ import org.apache.jmeter.threads.gui.SetupThreadGroupGui;
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 @XStreamAlias("SetupThreadGroup")
+@JmcDefaultName("setUp Thread Group")
 public class SetupThreadGroupWrapper extends ThreadGroupWrapper {
 
   @Override

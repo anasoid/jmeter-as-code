@@ -40,9 +40,7 @@ class ArgumentsWrapperXmlTest extends AbstractJmcTest {
   void testDefault() throws IOException {
 
     TestPlanWrapper testPlanWrapper =
-        TestPlanWrapper.builder()
-            .addConfig(ArgumentsWrapper.builder().withName("User Defined Variables").build())
-            .build();
+        TestPlanWrapper.builder().addConfig(ArgumentsWrapper.builder().build()).build();
 
     checkWrapper(testPlanWrapper, PARENT_PATH + "/userdefinedvariables.default.jmx", NODE_NAME);
   }

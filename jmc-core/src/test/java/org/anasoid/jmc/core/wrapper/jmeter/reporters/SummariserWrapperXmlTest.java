@@ -38,9 +38,7 @@ class SummariserWrapperXmlTest extends AbstractJmcTest {
   @Test
   void testDefault() throws IOException {
     TestPlanWrapper testPlanWrapper =
-        TestPlanWrapper.builder()
-            .addListener(SummariserWrapper.builder().withName("Generate Summary Results").build())
-            .build();
+        TestPlanWrapper.builder().addListener(SummariserWrapper.builder().build()).build();
 
     checkWrapper(testPlanWrapper, PARENT_PATH + "/generateSummaryResults.default.jmx", NODE_NAME);
   }

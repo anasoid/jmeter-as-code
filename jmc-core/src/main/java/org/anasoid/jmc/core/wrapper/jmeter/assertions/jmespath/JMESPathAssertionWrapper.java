@@ -34,7 +34,7 @@ import org.apache.jmeter.assertions.jmespath.gui.JMESPathAssertionGui;
  * @see JMESPathAssertion
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
-@JmcDefaultName("JSON Extractor")
+@JmcDefaultName("JSON JMESPath Assertion")
 public class JMESPathAssertionWrapper
     extends AbstractJSONPathAssertionWrapper<JMESPathAssertion, JMESPathAssertionGui> {
 

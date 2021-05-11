@@ -41,9 +41,7 @@ class ConstantTimerWrapperXmlTest extends AbstractJmcTest {
   void testDefault() throws IOException {
 
     TestPlanWrapper testPlanWrapper =
-        TestPlanWrapper.builder()
-            .addTimer(ConstantTimerWrapper.builder().withName("Constant Timer").build())
-            .build();
+        TestPlanWrapper.builder().addTimer(ConstantTimerWrapper.builder().build()).build();
 
     checkWrapper(testPlanWrapper, PARENT_PATH + "/constantTimer.default.jmx", NODE_NAME);
   }
@@ -53,11 +51,7 @@ class ConstantTimerWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .addTimer(
-                ConstantTimerWrapper.builder()
-                    .withName("Constant Timer")
-                    .withDelay(new Variable("myvar"))
-                    .build())
+            .addTimer(ConstantTimerWrapper.builder().withDelay(new Variable("myvar")).build())
             .build();
 
     checkWrapper(testPlanWrapper, PARENT_PATH + "/constantTimer.var.jmx", NODE_NAME);

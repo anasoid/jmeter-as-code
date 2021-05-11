@@ -43,10 +43,7 @@ class ConstantThroughputTimerWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .addTimer(
-                ConstantThroughputTimerWrapper.builder()
-                    .withName("Constant Throughput Timer")
-                    .build())
+            .addTimer(ConstantThroughputTimerWrapper.builder().build())
             .build();
 
     checkWrapper(
@@ -60,7 +57,6 @@ class ConstantThroughputTimerWrapperXmlTest extends AbstractJmcTest {
         TestPlanWrapper.builder()
             .addTimer(
                 ConstantThroughputTimerWrapper.builder()
-                    .withName("Constant Throughput Timer")
                     .withCalcMode(CalcMode.AllActiveThreadsInCurrentThreadGroup)
                     .withThroughput(new Variable("thr"))
                     .build())

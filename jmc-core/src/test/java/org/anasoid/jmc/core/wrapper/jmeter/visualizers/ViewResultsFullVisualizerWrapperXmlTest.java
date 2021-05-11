@@ -39,8 +39,7 @@ class ViewResultsFullVisualizerWrapperXmlTest extends AbstractJmcTest {
   void testDefault() throws IOException {
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .addListener(
-                ViewResultsFullVisualizerWrapper.builder().withName("View Results Tree").build())
+            .addListener(ViewResultsFullVisualizerWrapper.builder().build())
             .build();
 
     checkWrapper(testPlanWrapper, PARENT_PATH + "/viewResultsTree.default.jmx", NODE_NAME);

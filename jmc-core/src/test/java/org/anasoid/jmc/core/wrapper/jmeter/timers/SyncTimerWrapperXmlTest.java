@@ -41,9 +41,7 @@ class SyncTimerWrapperXmlTest extends AbstractJmcTest {
   void testDefault() throws IOException {
 
     TestPlanWrapper testPlanWrapper =
-        TestPlanWrapper.builder()
-            .addTimer(SyncTimerWrapper.builder().withName("Synchronizing Timer").build())
-            .build();
+        TestPlanWrapper.builder().addTimer(SyncTimerWrapper.builder().build()).build();
 
     checkWrapper(testPlanWrapper, PARENT_PATH + "/synchronizingTimer.default.jmx", NODE_NAME);
   }
@@ -55,7 +53,6 @@ class SyncTimerWrapperXmlTest extends AbstractJmcTest {
         TestPlanWrapper.builder()
             .addTimer(
                 SyncTimerWrapper.builder()
-                    .withName("Synchronizing Timer")
                     .withGroupSize(new Variable("number"))
                     .withTimeout(new Variable("timeout"))
                     .build())

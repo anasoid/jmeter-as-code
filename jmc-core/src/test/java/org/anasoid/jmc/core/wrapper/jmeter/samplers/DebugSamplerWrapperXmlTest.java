@@ -42,11 +42,9 @@ class DebugSamplerWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName(DEFAULT_TEST_PLAN)
             .addThread(
                 ThreadGroupWrapper.builder()
-                    .withName(DEFAULT_THREAD_GROUP)
-                    .addSampler(DebugSamplerWrapper.builder().withName("Debug Sampler").build())
+                    .addSampler(DebugSamplerWrapper.builder().build())
                     .build())
             .build();
 
@@ -58,13 +56,10 @@ class DebugSamplerWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName(DEFAULT_TEST_PLAN)
             .addThread(
                 ThreadGroupWrapper.builder()
-                    .withName(DEFAULT_THREAD_GROUP)
                     .addSampler(
                         DebugSamplerWrapper.builder()
-                            .withName("Debug Sampler")
                             .withDisplayJMeterProperties(true)
                             .withDisplaySystemProperties(true)
                             .withDisplayJMeterVariables(false)

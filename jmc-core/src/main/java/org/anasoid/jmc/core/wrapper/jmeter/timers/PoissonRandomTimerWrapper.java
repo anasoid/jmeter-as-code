@@ -20,6 +20,7 @@ package org.anasoid.jmc.core.wrapper.jmeter.timers;
 
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmc.core.wrapper.jmc.Variable;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.apache.jmeter.timers.PoissonRandomTimer;
 import org.apache.jmeter.timers.gui.PoissonRandomTimerGui;
 
@@ -29,6 +30,7 @@ import org.apache.jmeter.timers.gui.PoissonRandomTimerGui;
  * @see PoissonRandomTimer
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@JmcDefaultName("Poisson Random Timer")
 @SuppressWarnings({"PMD.RedundantFieldInitializer", "PMD.AvoidUncheckedExceptionsInSignatures"})
 public class PoissonRandomTimerWrapper
     extends RandomTimerWrapper<PoissonRandomTimer, PoissonRandomTimerGui> {

@@ -34,7 +34,6 @@ class BackendListenerWrapperXmlTest extends AbstractJmcTest {
         TestPlanWrapper.builder()
             .addListener(
                 BackendListenerWrapper.builder()
-                    .withName("Backend Listener")
                     .withImplementation(BackendListenerClient.InfluxDBRawBackendListenerClient)
                     .build())
             .build();
@@ -48,7 +47,6 @@ class BackendListenerWrapperXmlTest extends AbstractJmcTest {
         TestPlanWrapper.builder()
             .addListener(
                 BackendListenerWrapper.builder()
-                    .withName("Backend Listener")
                     .withImplementation(BackendListenerClient.GraphiteBackendListenerClient)
                     .addArgument("myvar", "var")
                     .addArgument("myempty", "")

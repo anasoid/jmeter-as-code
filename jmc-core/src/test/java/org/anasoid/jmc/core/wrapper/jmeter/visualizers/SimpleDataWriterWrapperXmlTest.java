@@ -38,9 +38,7 @@ class SimpleDataWriterWrapperXmlTest extends AbstractJmcTest {
   @Test
   void testDefault() throws IOException {
     TestPlanWrapper testPlanWrapper =
-        TestPlanWrapper.builder()
-            .addListener(SimpleDataWriterWrapper.builder().withName("Simple Data Writer").build())
-            .build();
+        TestPlanWrapper.builder().addListener(SimpleDataWriterWrapper.builder().build()).build();
 
     checkWrapper(testPlanWrapper, PARENT_PATH + "/simpleDataWriter.default.jmx", NODE_NAME);
   }

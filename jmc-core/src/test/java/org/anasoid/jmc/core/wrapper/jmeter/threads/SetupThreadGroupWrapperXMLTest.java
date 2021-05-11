@@ -33,9 +33,7 @@ class SetupThreadGroupWrapperXMLTest extends AbstractJmcTest {
   void testDefault() throws IOException {
 
     TestPlanWrapper testPlanWrapper =
-        TestPlanWrapper.builder()
-            .addThread(SetupThreadGroupWrapper.builder().withName("setUp Thread Group").build())
-            .build();
+        TestPlanWrapper.builder().addThread(SetupThreadGroupWrapper.builder().build()).build();
 
     checkWrapper(testPlanWrapper, PARENT_PATH + "/setUpThreadGroup.default.jmx", NODE_NAME);
   }

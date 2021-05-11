@@ -42,10 +42,7 @@ class HttpDefaultsXMLWrapperTest extends AbstractJmcTest {
   void testDefault() throws IOException {
 
     TestPlanWrapper testPlanWrapper =
-        TestPlanWrapper.builder()
-            .withName(DEFAULT_TEST_PLAN)
-            .addConfig(HttpDefaultsWrapper.builder().build())
-            .build();
+        TestPlanWrapper.builder().addConfig(HttpDefaultsWrapper.builder().build()).build();
 
     checkWrapper(testPlanWrapper, PARENT_PATH + "/httpdefault.default.jmx", NODE_NAME);
   }
@@ -55,7 +52,6 @@ class HttpDefaultsXMLWrapperTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName(DEFAULT_TEST_PLAN)
             .addConfig(HttpDefaultsWrapper.builder().withBody("body").build())
             .build();
 
@@ -67,7 +63,6 @@ class HttpDefaultsXMLWrapperTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName(DEFAULT_TEST_PLAN)
             .addConfig(
                 HttpDefaultsWrapper.builder()
                     .withComment("comment")

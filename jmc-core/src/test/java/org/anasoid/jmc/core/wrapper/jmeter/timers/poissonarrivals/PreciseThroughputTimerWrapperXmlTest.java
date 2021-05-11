@@ -42,12 +42,7 @@ class PreciseThroughputTimerWrapperXmlTest extends AbstractJmcTest {
   void testDefault() throws IOException {
 
     TestPlanWrapper testPlanWrapper =
-        TestPlanWrapper.builder()
-            .addTimer(
-                PreciseThroughputTimerWrapper.builder()
-                    .withName("Precise Throughput Timer")
-                    .build())
-            .build();
+        TestPlanWrapper.builder().addTimer(PreciseThroughputTimerWrapper.builder().build()).build();
 
     checkWrapper(
         testPlanWrapper, PARENT_PATH + "/preciseThroughputTimer.adapted.default.jmx", NODE_NAME);
@@ -60,7 +55,6 @@ class PreciseThroughputTimerWrapperXmlTest extends AbstractJmcTest {
         TestPlanWrapper.builder()
             .addTimer(
                 PreciseThroughputTimerWrapper.builder()
-                    .withName("Precise Throughput Timer")
                     .withBatchSize(new Variable("nb"))
                     .withBatchThreadDelay(new Variable("delay"))
                     .withDuration(new Variable("d"))

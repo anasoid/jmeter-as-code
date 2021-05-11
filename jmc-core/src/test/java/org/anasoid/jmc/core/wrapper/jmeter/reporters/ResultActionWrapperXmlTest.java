@@ -41,10 +41,7 @@ class ResultActionWrapperXmlTest extends AbstractJmcTest {
   void testDefault() throws IOException {
 
     TestPlanWrapper testPlanWrapper =
-        TestPlanWrapper.builder()
-            .addPostProcessor(
-                ResultActionWrapper.builder().withName("Result Status Action Handler").build())
-            .build();
+        TestPlanWrapper.builder().addPostProcessor(ResultActionWrapper.builder().build()).build();
 
     checkWrapper(
         testPlanWrapper, PARENT_PATH + "/resultStatusActionHandler.default.jmx", NODE_NAME);

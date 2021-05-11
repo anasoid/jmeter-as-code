@@ -31,9 +31,7 @@ class AggregateReportWrapperXmlTest extends AbstractJmcTest {
   @Test
   void testDefault() throws IOException {
     TestPlanWrapper testPlanWrapper =
-        TestPlanWrapper.builder()
-            .addListener(AggregateReportWrapper.builder().withName("Aggregate Report").build())
-            .build();
+        TestPlanWrapper.builder().addListener(AggregateReportWrapper.builder().build()).build();
 
     checkWrapper(testPlanWrapper, PARENT_PATH + "/aggregateReport.default.jmx", NODE_NAME);
   }
@@ -44,7 +42,6 @@ class AggregateReportWrapperXmlTest extends AbstractJmcTest {
         TestPlanWrapper.builder()
             .addListener(
                 AggregateReportWrapper.builder()
-                    .withName("Aggregate Report")
                     .withLogSuccess(true)
                     .withSaveConfiguration(
                         SampleSaveConfigurationWrapper.builder()
@@ -89,7 +86,6 @@ class AggregateReportWrapperXmlTest extends AbstractJmcTest {
         TestPlanWrapper.builder()
             .addListener(
                 AggregateReportWrapper.builder()
-                    .withName("Aggregate Report")
                     .withLogError(true)
                     .withFilename("/result.jtl")
                     .withSaveHeaders(false)

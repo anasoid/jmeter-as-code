@@ -52,7 +52,6 @@ class HTTPFileArgWrapperXMLTest extends AbstractJmcTest {
                 ThreadGroupWrapper.builder()
                     .addSampler(
                         HTTPSamplerProxyWrapper.builder()
-                            .withName("HTTP Request")
                             .withPath("")
                             .addFileArgument(
                                 HTTPFileArgWrapper.builder()

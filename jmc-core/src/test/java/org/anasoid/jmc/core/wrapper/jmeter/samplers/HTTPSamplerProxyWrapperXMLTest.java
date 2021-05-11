@@ -45,15 +45,9 @@ class HTTPSamplerProxyWrapperXMLTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName(DEFAULT_TEST_PLAN)
             .addThread(
                 ThreadGroupWrapper.builder()
-                    .withName(DEFAULT_THREAD_GROUP)
-                    .addSampler(
-                        HTTPSamplerProxyWrapper.builder()
-                            .withName(DEFAULT_HTTP_REQUEST)
-                            .withPath("")
-                            .build())
+                    .addSampler(HTTPSamplerProxyWrapper.builder().withPath("").build())
                     .build())
             .build();
 
@@ -65,16 +59,10 @@ class HTTPSamplerProxyWrapperXMLTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName(DEFAULT_TEST_PLAN)
             .addThread(
                 ThreadGroupWrapper.builder()
-                    .withName(DEFAULT_THREAD_GROUP)
                     .addSampler(
-                        HTTPSamplerProxyWrapper.builder()
-                            .withName(DEFAULT_HTTP_REQUEST)
-                            .withPath("")
-                            .withBody("body")
-                            .build())
+                        HTTPSamplerProxyWrapper.builder().withPath("").withBody("body").build())
                     .build())
             .build();
 
@@ -86,15 +74,9 @@ class HTTPSamplerProxyWrapperXMLTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName(DEFAULT_TEST_PLAN)
             .addThread(
                 ThreadGroupWrapper.builder()
-                    .withName(DEFAULT_THREAD_GROUP)
-                    .addSampler(
-                        HTTPSamplerProxyWrapper.builder()
-                            .withName(DEFAULT_HTTP_REQUEST)
-                            .withPath("")
-                            .build())
+                    .addSampler(HTTPSamplerProxyWrapper.builder().withPath("").build())
                     .build())
             .build();
     checkWrapper(testPlanWrapper, PARENT_PATH + "/httpsampler.default.jmx");
@@ -105,13 +87,10 @@ class HTTPSamplerProxyWrapperXMLTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName(DEFAULT_TEST_PLAN)
             .addThread(
                 ThreadGroupWrapper.builder()
-                    .withName(DEFAULT_THREAD_GROUP)
                     .addSampler(
                         HTTPSamplerProxyWrapper.builder()
-                            .withName(DEFAULT_HTTP_REQUEST)
                             .withComment("comment")
                             .withPath("/path")
                             .withDomain("server")

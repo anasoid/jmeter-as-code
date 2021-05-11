@@ -38,9 +38,7 @@ class TableVisualizerWrapperXmlTest extends AbstractJmcTest {
   @Test
   void testDefault() throws IOException {
     TestPlanWrapper testPlanWrapper =
-        TestPlanWrapper.builder()
-            .addListener(TableVisualizerWrapper.builder().withName("View Results in Table").build())
-            .build();
+        TestPlanWrapper.builder().addListener(TableVisualizerWrapper.builder().build()).build();
 
     checkWrapper(testPlanWrapper, PARENT_PATH + "/viewResultsinTable.default.jmx", NODE_NAME);
   }

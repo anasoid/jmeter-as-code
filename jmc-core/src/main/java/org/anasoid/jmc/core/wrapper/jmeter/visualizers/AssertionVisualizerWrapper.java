@@ -20,6 +20,7 @@ package org.anasoid.jmc.core.wrapper.jmeter.visualizers;
 
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmc.core.wrapper.jmeter.reporters.ResultCollectorWrapper;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.apache.jmeter.reporters.ResultCollector;
 import org.apache.jmeter.visualizers.AssertionVisualizer;
 
@@ -29,6 +30,7 @@ import org.apache.jmeter.visualizers.AssertionVisualizer;
  * @see AssertionVisualizer
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@JmcDefaultName("Assertion Results")
 @SuppressWarnings({"PMD.RedundantFieldInitializer", "PMD.TooManyFields"})
 public class AssertionVisualizerWrapper
     extends ResultCollectorWrapper<ResultCollector, AssertionVisualizer> {

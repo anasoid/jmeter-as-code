@@ -26,6 +26,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmc.core.xstream.annotations.JmcCollection;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.anasoid.jmc.core.xstream.annotations.JmcEmptyAllowed;
 import org.apache.jmeter.config.Arguments;
 import org.apache.jmeter.config.gui.ArgumentsPanel;
@@ -36,6 +37,7 @@ import org.apache.jmeter.config.gui.ArgumentsPanel;
  * @see Arguments
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@JmcDefaultName("User Defined Variables")
 public class ArgumentsWrapper extends ConfigTestElementWrapper<Arguments, ArgumentsPanel> {
 
   @JmcCollection(
