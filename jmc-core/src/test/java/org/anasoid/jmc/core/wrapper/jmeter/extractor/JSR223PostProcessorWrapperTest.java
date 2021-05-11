@@ -37,7 +37,6 @@ class JSR223PostProcessorWrapperTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addPostProcessor(
                 JSR223PostProcessorWrapper.builder()
                     .withName("JSR223 PostProcessor")
@@ -53,7 +52,6 @@ class JSR223PostProcessorWrapperTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addPostProcessor(
                 JSR223PostProcessorWrapper.builder()
                     .withName("JSR223 PostProcessor")
@@ -70,7 +68,6 @@ class JSR223PostProcessorWrapperTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addPostProcessor(
                 JSR223PostProcessorWrapper.builder()
                     .withName("JSR223 PostProcessor inverse")

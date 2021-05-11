@@ -27,8 +27,7 @@ import org.junit.jupiter.api.Test;
 
 class ResultActionWrapperXmlTest extends AbstractJmcTest {
 
-  private static final String PARENT_PATH =
-      "org/anasoid/jmc/core/wrapper/jmeter/reporters";
+  private static final String PARENT_PATH = "org/anasoid/jmc/core/wrapper/jmeter/reporters";
 
   private static final String NODE_NAME = "ResultAction";
 
@@ -43,7 +42,6 @@ class ResultActionWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addPostProcessor(
                 ResultActionWrapper.builder().withName("Result Status Action Handler").build())
             .build();
@@ -57,7 +55,6 @@ class ResultActionWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addPostProcessor(
                 ResultActionWrapper.builder()
                     .withName("Result Status Action Handler inverse")

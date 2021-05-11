@@ -42,7 +42,6 @@ class PoissonRandomTimerWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addTimer(
                 PoissonRandomTimerWrapper.builder()
                     .withName("Poisson Random Timer")
@@ -58,7 +57,6 @@ class PoissonRandomTimerWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addTimer(
                 PoissonRandomTimerWrapper.builder()
                     .withName("Poisson Random Timer")

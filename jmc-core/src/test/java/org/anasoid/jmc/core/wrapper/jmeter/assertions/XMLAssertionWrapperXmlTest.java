@@ -26,8 +26,7 @@ import org.junit.jupiter.api.Test;
 
 class XMLAssertionWrapperXmlTest extends AbstractJmcTest {
 
-  private static final String PARENT_PATH =
-      "org/anasoid/jmc/core/wrapper/jmeter/assertions";
+  private static final String PARENT_PATH = "org/anasoid/jmc/core/wrapper/jmeter/assertions";
 
   private static final String NODE_NAME = "XMLAssertion";
 
@@ -42,7 +41,6 @@ class XMLAssertionWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addAssertion(XMLAssertionWrapper.builder().withName("XML Assertion").build())
             .build();
 

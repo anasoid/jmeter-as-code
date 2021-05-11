@@ -43,7 +43,6 @@ class CSVDataSetWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addConfig(
                 CSVDataSetWrapper.builder()
                     .withName("CSV Data Set Config")
@@ -60,7 +59,6 @@ class CSVDataSetWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addConfig(
                 CSVDataSetWrapper.builder()
                     .withName("CSV Data Set Config inverse")
@@ -85,7 +83,6 @@ class CSVDataSetWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addConfig(
                 CSVDataSetWrapper.builder()
                     .withName("CSV Data Set Config inverse")

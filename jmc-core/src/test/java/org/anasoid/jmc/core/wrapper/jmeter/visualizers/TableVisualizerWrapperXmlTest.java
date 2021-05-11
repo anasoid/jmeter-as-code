@@ -25,8 +25,7 @@ import org.junit.jupiter.api.Test;
  */
 
 class TableVisualizerWrapperXmlTest extends AbstractJmcTest {
-  private static final String PARENT_PATH =
-      "org/anasoid/jmc/core/wrapper/jmeter/visualizers";
+  private static final String PARENT_PATH = "org/anasoid/jmc/core/wrapper/jmeter/visualizers";
 
   private static final String NODE_NAME = "ResultCollector";
 
@@ -40,7 +39,6 @@ class TableVisualizerWrapperXmlTest extends AbstractJmcTest {
   void testDefault() throws IOException {
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addListener(TableVisualizerWrapper.builder().withName("View Results in Table").build())
             .build();
 

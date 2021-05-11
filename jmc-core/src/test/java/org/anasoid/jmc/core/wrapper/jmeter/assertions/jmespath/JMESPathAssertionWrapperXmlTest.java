@@ -34,7 +34,6 @@ class JMESPathAssertionWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addAssertion(
                 JMESPathAssertionWrapper.builder()
                     .withName("JSON JMESPath Assertion")
@@ -50,7 +49,6 @@ class JMESPathAssertionWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addAssertion(
                 JMESPathAssertionWrapper.builder()
                     .withName("JSON JMESPath Assertion")
@@ -67,7 +65,6 @@ class JMESPathAssertionWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addAssertion(
                 JMESPathAssertionWrapper.builder()
                     .withName("JSON JMESPath Assertion inverse")

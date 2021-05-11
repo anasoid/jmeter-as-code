@@ -25,8 +25,7 @@ import org.junit.jupiter.api.Test;
 
 class PostThreadGroupWrapperXMLTest extends AbstractJmcTest {
 
-  private static final String PARENT_PATH =
-      "org/anasoid/jmc/core/wrapper/jmeter/threads";
+  private static final String PARENT_PATH = "org/anasoid/jmc/core/wrapper/jmeter/threads";
 
   private static final String NODE_NAME = "PostThreadGroup";
 
@@ -35,11 +34,9 @@ class PostThreadGroupWrapperXMLTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addThread(PostThreadGroupWrapper.builder().withName("tearDown Thread Group").build())
             .build();
 
     checkWrapper(testPlanWrapper, PARENT_PATH + "/tearDownThreadGroup.default.jmx", NODE_NAME);
   }
-
 }

@@ -74,8 +74,7 @@ public abstract class AbstractJmcTest {
 
   protected void checkWrapper(TestPlanWrapper testPlanWrapper, String jmxFile) throws IOException {
     checkWrapper(
-        testPlanWrapper, jmxFile, null,
-        Arrays.asList(AttributesFilterManager.getCommentFilter()));
+        testPlanWrapper, jmxFile, null, Arrays.asList(AttributesFilterManager.getCommentFilter()));
   }
 
   protected void checkWrapper(

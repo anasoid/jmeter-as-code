@@ -26,8 +26,7 @@ import org.junit.jupiter.api.Test;
 
 class HTMLAssertionWrapperXmlTest extends AbstractJmcTest {
 
-  private static final String PARENT_PATH =
-      "org/anasoid/jmc/core/wrapper/jmeter/assertions";
+  private static final String PARENT_PATH = "org/anasoid/jmc/core/wrapper/jmeter/assertions";
 
   private static final String NODE_NAME = "HTMLAssertion";
 
@@ -36,7 +35,6 @@ class HTMLAssertionWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addAssertion(HTMLAssertionWrapper.builder().withName("HTML Assertion").build())
             .build();
 
@@ -48,7 +46,6 @@ class HTMLAssertionWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addAssertion(
                 HTMLAssertionWrapper.builder()
                     .withName("HTML Assertion")
@@ -64,7 +61,6 @@ class HTMLAssertionWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addAssertion(
                 HTMLAssertionWrapper.builder()
                     .withName("HTML Assertion inverse")

@@ -26,9 +26,9 @@ import org.anasoid.jmc.core.xstream.exceptions.ConversionIllegalStateException;
 /** Group all validator to validate testElement. */
 public final class NodeValidatorManager {
 
-  private NodeValidatorManager() {}
-
   private static final List<NodeValidator> VALIDATORS = Arrays.asList(new ChildrenTypeValidator());
+
+  private NodeValidatorManager() {}
 
   /**
    * Validate node, Check using all nodate validators.

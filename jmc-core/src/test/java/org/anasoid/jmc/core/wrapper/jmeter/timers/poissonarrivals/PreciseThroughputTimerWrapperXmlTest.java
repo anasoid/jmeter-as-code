@@ -43,7 +43,6 @@ class PreciseThroughputTimerWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addTimer(
                 PreciseThroughputTimerWrapper.builder()
                     .withName("Precise Throughput Timer")
@@ -59,7 +58,6 @@ class PreciseThroughputTimerWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addTimer(
                 PreciseThroughputTimerWrapper.builder()
                     .withName("Precise Throughput Timer")

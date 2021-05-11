@@ -30,8 +30,7 @@ import org.junit.jupiter.api.Test;
 
 class ResponseAssertionXmlWrapperTest extends AbstractJmcTest {
 
-  private static final String PARENT_PATH =
-      "org/anasoid/jmc/core/wrapper/jmeter/assertions";
+  private static final String PARENT_PATH = "org/anasoid/jmc/core/wrapper/jmeter/assertions";
 
   private static final String NODE_NAME = "ResponseAssertion";
 
@@ -46,7 +45,6 @@ class ResponseAssertionXmlWrapperTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addAssertion(ResponseAssertionWrapper.builder().withName("Response Assertion").build())
             .build();
 
@@ -58,7 +56,6 @@ class ResponseAssertionXmlWrapperTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addAssertion(
                 ResponseAssertionWrapper.builder()
                     .withName("Response Assertion")

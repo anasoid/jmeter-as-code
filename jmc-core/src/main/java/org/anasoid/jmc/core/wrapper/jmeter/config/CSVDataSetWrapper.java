@@ -64,6 +64,41 @@ public class CSVDataSetWrapper extends ConfigTestElementWrapper<CSVDataSet, Test
   private String fileEncoding;
 
   @XStreamOmitField @Getter @Default private List<Variable> variables = new ArrayList<>();
+  /**
+   * Ignore first line of CSV file, it will only be used if Variable Names is not empty, if Variable
+   * Names is empty the first line must contain the headers.
+   */
+  @JmcProperty(value = "ignoreFirstLine", type = BooleanManager.class)
+  @Getter
+  @Setter
+  @Default
+  private String ignoreFirstLine = FALSE;
+  @JmcProperty("delimiter")
+  @Getter
+  @Setter
+  @Default
+  @NonNull
+  private String delimiter = ",";
+  @JmcProperty(value = "recycle", type = BooleanManager.class)
+  @Getter
+  @Setter
+  @Default
+  private String recycle = TRUE;
+  @JmcProperty(value = "stopThread", type = BooleanManager.class)
+  @Getter
+  @Setter
+  @Default
+  private String stopThread = FALSE;
+  @JmcProperty(value = "quotedData", type = BooleanManager.class)
+  @Getter
+  @Setter
+  @Default
+  private String quotedData = FALSE;
+  @JmcProperty("shareMode")
+  @Getter
+  @Setter
+  @Default
+  private String shareMode = ShareMode.SHARE_ALL.value();
 
   @JmcProperty("filename")
   protected String getFilePath() {
@@ -85,47 +120,6 @@ public class CSVDataSetWrapper extends ConfigTestElementWrapper<CSVDataSet, Test
     }
     return String.join(",", variables.stream().map(Variable::getName).collect(Collectors.toList()));
   }
-
-  /**
-   * Ignore first line of CSV file, it will only be used if Variable Names is not empty, if Variable
-   * Names is empty the first line must contain the headers.
-   */
-  @JmcProperty(value = "ignoreFirstLine", type = BooleanManager.class)
-  @Getter
-  @Setter
-  @Default
-  private String ignoreFirstLine = FALSE;
-
-  @JmcProperty("delimiter")
-  @Getter
-  @Setter
-  @Default
-  @NonNull
-  private String delimiter = ",";
-
-  @JmcProperty(value = "recycle", type = BooleanManager.class)
-  @Getter
-  @Setter
-  @Default
-  private String recycle = TRUE;
-
-  @JmcProperty(value = "stopThread", type = BooleanManager.class)
-  @Getter
-  @Setter
-  @Default
-  private String stopThread = FALSE;
-
-  @JmcProperty(value = "quotedData", type = BooleanManager.class)
-  @Getter
-  @Setter
-  @Default
-  private String quotedData = FALSE;
-
-  @JmcProperty("shareMode")
-  @Getter
-  @Setter
-  @Default
-  private String shareMode = ShareMode.SHARE_ALL.value();
 
   @Override
   public Class<?> getGuiClass() {

@@ -42,7 +42,6 @@ class UniformRandomTimerWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addTimer(
                 UniformRandomTimerWrapper.builder()
                     .withName("Uniform Random Timer")
@@ -58,7 +57,6 @@ class UniformRandomTimerWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addTimer(
                 UniformRandomTimerWrapper.builder()
                     .withName("Uniform Random Timer")

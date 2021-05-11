@@ -24,8 +24,7 @@ import org.junit.jupiter.api.Test;
  */
 
 class AggregateReportWrapperXmlTest extends AbstractJmcTest {
-  private static final String PARENT_PATH =
-      "org/anasoid/jmc/core/wrapper/jmeter/visualizers";
+  private static final String PARENT_PATH = "org/anasoid/jmc/core/wrapper/jmeter/visualizers";
 
   private static final String NODE_NAME = "ResultCollector";
 
@@ -33,7 +32,6 @@ class AggregateReportWrapperXmlTest extends AbstractJmcTest {
   void testDefault() throws IOException {
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addListener(AggregateReportWrapper.builder().withName("Aggregate Report").build())
             .build();
 
@@ -44,7 +42,6 @@ class AggregateReportWrapperXmlTest extends AbstractJmcTest {
   void testDefaultAllTrue() throws IOException {
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addListener(
                 AggregateReportWrapper.builder()
                     .withName("Aggregate Report")
@@ -90,7 +87,6 @@ class AggregateReportWrapperXmlTest extends AbstractJmcTest {
   void testInverseAllFalse() throws IOException {
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addListener(
                 AggregateReportWrapper.builder()
                     .withName("Aggregate Report")

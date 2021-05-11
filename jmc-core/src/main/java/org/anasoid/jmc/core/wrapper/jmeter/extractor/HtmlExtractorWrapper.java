@@ -125,6 +125,16 @@ public class HtmlExtractorWrapper
     }
   }
 
+  @Override
+  public Class<?> getGuiClass() {
+    return HtmlExtractorGui.class;
+  }
+
+  @Override
+  public Class<?> getTestClass() {
+    return HtmlExtractor.class;
+  }
+
   /** enum for extractor_impl. */
   public enum ExtractorImpl {
     JSOUP("JSOUP"),
@@ -144,15 +154,5 @@ public class HtmlExtractorWrapper
     public String toString() {
       return value;
     }
-  }
-
-  @Override
-  public Class<?> getGuiClass() {
-    return HtmlExtractorGui.class;
-  }
-
-  @Override
-  public Class<?> getTestClass() {
-    return HtmlExtractor.class;
   }
 }

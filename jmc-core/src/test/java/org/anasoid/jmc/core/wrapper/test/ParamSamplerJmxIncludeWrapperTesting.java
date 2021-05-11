@@ -26,16 +26,12 @@ import org.anasoid.jmc.core.xstream.annotations.JmcParam;
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 public class ParamSamplerJmxIncludeWrapperTesting extends SamplerJmxIncludeWrapper {
 
-  private static final String PARENT_PATH =
-      "org/anasoid/jmc/core/wrapper/jmeter/jmc/generic";
+  private static final String PARENT_PATH = "org/anasoid/jmc/core/wrapper/jmeter/jmc/generic";
+  @JmcParam("path")
+  private static String myPath = "mypath";
 
   @Override
   protected String getDefaultPath() {
     return PARENT_PATH + "/node.http.sampler.param.jmx";
   }
-
-  @JmcParam("path")
-  private static String myPath = "mypath";
-
-
 }

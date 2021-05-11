@@ -42,7 +42,6 @@ class DebugPostProcessorWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addPostProcessor(
                 DebugPostProcessorWrapper.builder().withName("Debug PostProcessor").build())
             .build();
@@ -55,7 +54,6 @@ class DebugPostProcessorWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addPostProcessor(
                 DebugPostProcessorWrapper.builder()
                     .withName("Debug PostProcessor inverse")

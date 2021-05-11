@@ -42,7 +42,6 @@ class SyncTimerWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addTimer(SyncTimerWrapper.builder().withName("Synchronizing Timer").build())
             .build();
 
@@ -54,7 +53,6 @@ class SyncTimerWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addTimer(
                 SyncTimerWrapper.builder()
                     .withName("Synchronizing Timer")

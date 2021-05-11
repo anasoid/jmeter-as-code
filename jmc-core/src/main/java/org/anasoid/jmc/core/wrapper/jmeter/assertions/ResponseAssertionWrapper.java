@@ -100,6 +100,16 @@ public class ResponseAssertionWrapper
     return result;
   }
 
+  @Override
+  public Class<?> getGuiClass() {
+    return AssertionGui.class;
+  }
+
+  @Override
+  public Class<?> getTestClass() {
+    return ResponseAssertion.class;
+  }
+
   /** Builder. */
   public abstract static class ResponseAssertionWrapperBuilder<
           C extends ResponseAssertionWrapper, B extends ResponseAssertionWrapperBuilder<C, B>>
@@ -124,15 +134,5 @@ public class ResponseAssertionWrapper
     public B addPattern(String pattern) {
       return addPatterns(Arrays.asList(pattern));
     }
-  }
-
-  @Override
-  public Class<?> getGuiClass() {
-    return AssertionGui.class;
-  }
-
-  @Override
-  public Class<?> getTestClass() {
-    return ResponseAssertion.class;
   }
 }

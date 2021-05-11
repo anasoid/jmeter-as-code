@@ -43,7 +43,6 @@ class XPath2ExtractorWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addPostProcessor(
                 XPath2ExtractorWrapper.builder()
                     .withName("XPath2 Extractor")
@@ -60,7 +59,6 @@ class XPath2ExtractorWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addPostProcessor(
                 XPath2ExtractorWrapper.builder()
                     .withName("XPath2 Extractor inverse")

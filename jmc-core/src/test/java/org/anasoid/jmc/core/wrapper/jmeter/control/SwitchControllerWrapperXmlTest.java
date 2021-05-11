@@ -27,8 +27,7 @@ import org.junit.jupiter.api.Test;
 
 class SwitchControllerWrapperXmlTest extends AbstractJmcTest {
 
-  private static final String PARENT_PATH =
-      "org/anasoid/jmc/core/wrapper/jmeter/control";
+  private static final String PARENT_PATH = "org/anasoid/jmc/core/wrapper/jmeter/control";
 
   private static final String NODE_NAME = "SwitchController";
 
@@ -43,14 +42,10 @@ class SwitchControllerWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addThread(
                 ThreadGroupWrapper.builder()
-                    .withName("Thread Group")
                     .addController(
-                        SwitchControllerWrapper.builder()
-                            .withName("Switch Controller")
-                            .build())
+                        SwitchControllerWrapper.builder().withName("Switch Controller").build())
                     .build())
             .build();
 
@@ -62,10 +57,8 @@ class SwitchControllerWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addThread(
                 ThreadGroupWrapper.builder()
-                    .withName("Thread Group")
                     .addController(
                         SwitchControllerWrapper.builder()
                             .withName("Switch Controller")

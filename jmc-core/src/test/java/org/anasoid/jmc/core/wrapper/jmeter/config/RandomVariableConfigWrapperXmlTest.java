@@ -42,7 +42,6 @@ class RandomVariableConfigWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addConfig(RandomVariableConfigWrapper.builder().withName("Random Variable").build())
             .build();
 
@@ -54,7 +53,6 @@ class RandomVariableConfigWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addConfig(
                 RandomVariableConfigWrapper.builder()
                     .withName("Random Variable inverse")

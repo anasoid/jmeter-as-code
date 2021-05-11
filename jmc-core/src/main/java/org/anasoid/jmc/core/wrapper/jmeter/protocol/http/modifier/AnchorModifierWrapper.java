@@ -26,8 +26,7 @@ import org.apache.jmeter.protocol.http.modifier.AnchorModifier;
 import org.apache.jmeter.protocol.http.modifier.gui.AnchorModifierGui;
 
 /**
- * Wrapper for AnchorModifier.
- * HTML Link Parser.
+ * Wrapper for AnchorModifier. HTML Link Parser.
  *
  * @see AnchorModifier
  */

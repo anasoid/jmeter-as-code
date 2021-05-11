@@ -42,7 +42,6 @@ class ConstantTimerWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addTimer(ConstantTimerWrapper.builder().withName("Constant Timer").build())
             .build();
 
@@ -54,7 +53,6 @@ class ConstantTimerWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addTimer(
                 ConstantTimerWrapper.builder()
                     .withName("Constant Timer")

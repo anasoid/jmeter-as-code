@@ -34,7 +34,6 @@ class XPathExtractorWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addPostProcessor(
                 XPathExtractorWrapper.builder()
                     .withName("XPath Extractor")
@@ -51,7 +50,6 @@ class XPathExtractorWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addPostProcessor(
                 XPathExtractorWrapper.builder()
                     .withName("XPath Extractor")
@@ -69,7 +67,6 @@ class XPathExtractorWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addPostProcessor(
                 XPathExtractorWrapper.builder()
                     .withName("XPath Extractor inverse")
@@ -92,7 +89,6 @@ class XPathExtractorWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addPostProcessor(
                 XPathExtractorWrapper.builder()
                     .withName("XPath Extractor inverse")

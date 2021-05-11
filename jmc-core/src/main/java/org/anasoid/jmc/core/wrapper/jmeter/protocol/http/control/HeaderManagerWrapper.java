@@ -42,6 +42,11 @@ import org.apache.jmeter.protocol.http.gui.HeaderPanel;
 public class HeaderManagerWrapper extends ConfigTestElementWrapper<HeaderManager, HeaderPanel> {
 
   @XStreamOmitField private static final long serialVersionUID = 8482403319301067878L;
+  @JmcCollection(value = "HeaderManager.headers")
+  @Getter
+  @JmcEmptyAllowed
+  @Default
+  private final List<HeaderWrapper> headers = new ArrayList<>();
 
   @Override
   public Class<?> getGuiClass() {
@@ -52,12 +57,6 @@ public class HeaderManagerWrapper extends ConfigTestElementWrapper<HeaderManager
   public Class<?> getTestClass() {
     return HeaderManager.class;
   }
-
-  @JmcCollection(value = "HeaderManager.headers")
-  @Getter
-  @JmcEmptyAllowed
-  @Default
-  private final List<HeaderWrapper> headers = new ArrayList<>();
 
   /** Builder. */
   @SuppressWarnings({"PMD.TooManyMethods"})

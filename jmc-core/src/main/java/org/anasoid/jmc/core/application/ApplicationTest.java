@@ -53,53 +53,15 @@ public class ApplicationTest {
   private static final String SLASH = System.getProperty("file.separator");
   private static boolean initialized;
 
-  private final TestPlanWrapper testPlanWrapper;
-  private final TestElementWrapper<?> testElement;
-
-  private final List<PrepareInterceptor> prepareInterceptors;
-
-  private boolean testMode;
-
   static {
     LOG.info("ApplicationTest Initialization");
     init();
   }
 
-  private static void init() {
-    String jmeterHomeKey = "JMETER_HOME";
-    String jmeterHomePath = System.getProperty(jmeterHomeKey);
-    if (jmeterHomePath == null) {
-      jmeterHomePath = System.getenv(jmeterHomeKey);
-    }
-    if (jmeterHomePath != null && new File(jmeterHomePath).exists()) {
-      File jmeterHome = new File(jmeterHomePath);
-      File jmeterProperties =
-          new File(jmeterHome.getPath() + SLASH + "bin" + SLASH + "jmeter.properties");
-      if (jmeterProperties.exists()) {
-
-        // JMeter initialization (properties, log levels, locale, etc)
-        JMeterUtils.setJMeterHome(jmeterHome.getPath());
-        // loadJMeterProperties
-        JMeterUtils.getProperties(jmeterProperties.getPath());
-        initialized = true;
-      } else {
-        LOG.error(
-            "Jmeter is not correctly configured, missing jmeter.properties, on : {}",
-            jmeterProperties);
-      }
-    } else {
-      LOG.error(
-          "Jmeter is not correctly configured $JMETER_HOME is not correct : {} , {}",
-          System.getProperty(jmeterHomeKey),
-          System.getenv(jmeterHomeKey));
-    }
-  }
-
-  private static void isInit() {
-    if (!initialized) {
-      throw new IllegalStateException("Jmeter is not correctly initialized");
-    }
-  }
+  private final TestPlanWrapper testPlanWrapper;
+  private final TestElementWrapper<?> testElement;
+  private final List<PrepareInterceptor> prepareInterceptors;
+  private boolean testMode;
 
   /**
    * create application test.
@@ -137,6 +99,42 @@ public class ApplicationTest {
   /** Only for Test. */
   protected ApplicationTest(TestElementWrapper<?> testElement) {
     this(testElement, new ArrayList<>());
+  }
+
+  private static void init() {
+    String jmeterHomeKey = "JMETER_HOME";
+    String jmeterHomePath = System.getProperty(jmeterHomeKey);
+    if (jmeterHomePath == null) {
+      jmeterHomePath = System.getenv(jmeterHomeKey);
+    }
+    if (jmeterHomePath != null && new File(jmeterHomePath).exists()) {
+      File jmeterHome = new File(jmeterHomePath);
+      File jmeterProperties =
+          new File(jmeterHome.getPath() + SLASH + "bin" + SLASH + "jmeter.properties");
+      if (jmeterProperties.exists()) {
+
+        // JMeter initialization (properties, log levels, locale, etc)
+        JMeterUtils.setJMeterHome(jmeterHome.getPath());
+        // loadJMeterProperties
+        JMeterUtils.getProperties(jmeterProperties.getPath());
+        initialized = true;
+      } else {
+        LOG.error(
+            "Jmeter is not correctly configured, missing jmeter.properties, on : {}",
+            jmeterProperties);
+      }
+    } else {
+      LOG.error(
+          "Jmeter is not correctly configured $JMETER_HOME is not correct : {} , {}",
+          System.getProperty(jmeterHomeKey),
+          System.getenv(jmeterHomeKey));
+    }
+  }
+
+  private static void isInit() {
+    if (!initialized) {
+      throw new IllegalStateException("Jmeter is not correctly initialized");
+    }
   }
 
   /**

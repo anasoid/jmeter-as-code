@@ -41,7 +41,6 @@ class ArgumentsWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addConfig(ArgumentsWrapper.builder().withName("User Defined Variables").build())
             .build();
 
@@ -53,7 +52,6 @@ class ArgumentsWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addConfig(
                 ArgumentsWrapper.builder()
                     .withName("User Defined Variables inverse")

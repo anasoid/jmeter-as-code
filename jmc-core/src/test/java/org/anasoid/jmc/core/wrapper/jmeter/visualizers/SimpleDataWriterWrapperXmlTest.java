@@ -25,8 +25,7 @@ import org.junit.jupiter.api.Test;
  */
 
 class SimpleDataWriterWrapperXmlTest extends AbstractJmcTest {
-  private static final String PARENT_PATH =
-      "org/anasoid/jmc/core/wrapper/jmeter/visualizers";
+  private static final String PARENT_PATH = "org/anasoid/jmc/core/wrapper/jmeter/visualizers";
 
   private static final String NODE_NAME = "ResultCollector";
 
@@ -40,7 +39,6 @@ class SimpleDataWriterWrapperXmlTest extends AbstractJmcTest {
   void testDefault() throws IOException {
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addListener(SimpleDataWriterWrapper.builder().withName("Simple Data Writer").build())
             .build();
 

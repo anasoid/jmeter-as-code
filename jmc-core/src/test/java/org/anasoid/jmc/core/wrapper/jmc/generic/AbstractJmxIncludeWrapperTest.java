@@ -36,8 +36,7 @@ import org.xmlunit.diff.Diff;
 
 class AbstractJmxIncludeWrapperTest extends AbstractJmcTest {
 
-  private static final String PARENT_PATH =
-      "org/anasoid/jmc/core/wrapper/jmeter/jmc/generic";
+  private static final String PARENT_PATH = "org/anasoid/jmc/core/wrapper/jmeter/jmc/generic";
 
   @Test
   void testRegex() throws IOException {
@@ -174,8 +173,7 @@ class AbstractJmxIncludeWrapperTest extends AbstractJmcTest {
             wrapperContent,
             null,
             Arrays.asList(AttributesFilterManager.getCommentFilter()));
-    Assertions.assertTrue(
-        JmcXmlComparator.hasDifferences(diff), "node  not identical " + diff);
+    Assertions.assertTrue(JmcXmlComparator.hasDifferences(diff), "node  not identical " + diff);
   }
 
   @Test

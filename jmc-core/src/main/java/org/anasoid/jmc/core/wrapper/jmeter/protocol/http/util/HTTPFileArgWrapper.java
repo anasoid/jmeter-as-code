@@ -36,12 +36,6 @@ import org.apache.jmeter.protocol.http.util.HTTPFileArg;
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 public class HTTPFileArgWrapper extends AbstractBasicTestElementWrapper<HTTPFileArg> {
 
-  @JmcAsAttribute
-  @JmcMethodAlias("name")
-  protected String getPathAsAttribute() {
-    return path;
-  }
-
   /** File path. */
   @XStreamOmitField @Getter @Setter private String path;
   /** Parameter name. */
@@ -54,6 +48,12 @@ public class HTTPFileArgWrapper extends AbstractBasicTestElementWrapper<HTTPFile
   @Getter
   @Setter
   private String mimeType;
+
+  @JmcAsAttribute
+  @JmcMethodAlias("name")
+  protected String getPathAsAttribute() {
+    return path;
+  }
 
   @JmcProperty("File.path")
   protected String getPathProperty() {

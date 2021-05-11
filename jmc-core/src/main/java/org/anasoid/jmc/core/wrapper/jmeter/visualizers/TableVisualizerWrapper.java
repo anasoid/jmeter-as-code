@@ -37,6 +37,4 @@ public class TableVisualizerWrapper
   public Class<?> getGuiClass() {
     return TableVisualizer.class;
   }
-
-
 }

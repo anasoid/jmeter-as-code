@@ -20,8 +20,5 @@ package org.anasoid.jmc.core.test.utils.xmlunit.filter;
 
 import org.w3c.dom.Node;
 
-/**
- * Interface for implementation , to filter node to be ignored during XML test comparison.
- *
- */
+/** Interface for implementation , to filter node to be ignored during XML test comparison. */
 public interface JmcXmlFilterNode extends JmcXmlFilter<Node> {}

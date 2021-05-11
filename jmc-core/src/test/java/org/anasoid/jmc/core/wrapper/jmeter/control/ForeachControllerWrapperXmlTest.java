@@ -27,8 +27,7 @@ import org.junit.jupiter.api.Test;
 
 class ForeachControllerWrapperXmlTest extends AbstractJmcTest {
 
-  private static final String PARENT_PATH =
-      "org/anasoid/jmc/core/wrapper/jmeter/control";
+  private static final String PARENT_PATH = "org/anasoid/jmc/core/wrapper/jmeter/control";
 
   private static final String NODE_NAME = "ForeachController";
 
@@ -43,14 +42,10 @@ class ForeachControllerWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addThread(
                 ThreadGroupWrapper.builder()
-                    .withName("Thread Group")
                     .addController(
-                        ForeachControllerWrapper.builder()
-                            .withName("ForEach Controller")
-                            .build())
+                        ForeachControllerWrapper.builder().withName("ForEach Controller").build())
                     .build())
             .build();
 
@@ -62,10 +57,8 @@ class ForeachControllerWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addThread(
                 ThreadGroupWrapper.builder()
-                    .withName("Thread Group")
                     .addController(
                         ForeachControllerWrapper.builder()
                             .withName("ForEach Controller")

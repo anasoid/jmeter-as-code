@@ -103,6 +103,16 @@ public class ThreadGroupWrapper extends AbstractThreadGroupWrapper<ThreadGroup, 
     samplerController = samplerControllerBuilder.build();
   }
 
+  @Override
+  public Class<?> getTestClass() {
+    return ThreadGroup.class;
+  }
+
+  @Override
+  public Class<?> getGuiClass() {
+    return ThreadGroupGui.class;
+  }
+
   /** builder. */
   @SuppressWarnings({"PMD.TooManyMethods"})
   public abstract static class ThreadGroupWrapperBuilder<
@@ -175,15 +185,5 @@ public class ThreadGroupWrapper extends AbstractThreadGroupWrapper<ThreadGroup, 
       this.loops$set = true;
       return self();
     }
-  }
-
-  @Override
-  public Class<?> getTestClass() {
-    return ThreadGroup.class;
-  }
-
-  @Override
-  public Class<?> getGuiClass() {
-    return ThreadGroupGui.class;
   }
 }

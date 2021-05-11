@@ -64,6 +64,21 @@ public abstract class AbstractJmxIncludeWrapper<T> implements TestElementWrapper
 
   private Map<String, String> params = new HashMap<>(); // NOPMD
 
+  @SuppressWarnings("PMD.AccessorMethodGeneration")
+  protected AbstractJmxIncludeWrapper(AbstractJmxIncludeWrapperBuilder<T, ?, ?> b) {
+    if (b.pathSet) {
+      this.path = b.pathValue;
+    } else {
+      this.path = getDefaultPath(); // NOPMD
+    }
+    if (b.tagsSet) {
+      this.tags = b.tagsValue;
+    } else {
+      this.tags = new HashSet<>();
+    }
+    this.params = b.params;
+  }
+
   protected String getDefaultPath() {
     return null;
   }
@@ -290,20 +305,5 @@ public abstract class AbstractJmxIncludeWrapper<T> implements TestElementWrapper
           + this.params
           + ")";
     }
-  }
-
-  @SuppressWarnings("PMD.AccessorMethodGeneration")
-  protected AbstractJmxIncludeWrapper(AbstractJmxIncludeWrapperBuilder<T, ?, ?> b) {
-    if (b.pathSet) {
-      this.path = b.pathValue;
-    } else {
-      this.path = getDefaultPath(); // NOPMD
-    }
-    if (b.tagsSet) {
-      this.tags = b.tagsValue;
-    } else {
-      this.tags = new HashSet<>();
-    }
-    this.params = b.params;
   }
 }

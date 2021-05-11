@@ -28,17 +28,6 @@ import org.xmlunit.diff.DefaultNodeMatcher;
 
 /** xmlunit Node Matcher for comparison. Order node to ignore node order for comparison. */
 public class JmcNodeMatcher extends DefaultNodeMatcher {
-  @Override
-  public Iterable<Map.Entry<Node, Node>> match(
-      Iterable<Node> controlNodes, Iterable<Node> testNodes) {
-
-    return super.match(sort(controlNodes), sort(testNodes));
-  }
-
-  private static Iterable<Node> sort(Iterable<Node> nodes) {
-    return FluentIterable.from(nodes).toSortedList(COMPARATOR_NODE);
-  }
-
   private static final Comparator<Node> COMPARATOR_NODE =
       (node1, node2) -> {
         int nameResult = StringUtils.compare(node1.getLocalName(), node2.getLocalName());
@@ -71,4 +60,15 @@ public class JmcNodeMatcher extends DefaultNodeMatcher {
         }
         return 0;
       };
+
+  private static Iterable<Node> sort(Iterable<Node> nodes) {
+    return FluentIterable.from(nodes).toSortedList(COMPARATOR_NODE);
+  }
+
+  @Override
+  public Iterable<Map.Entry<Node, Node>> match(
+      Iterable<Node> controlNodes, Iterable<Node> testNodes) {
+
+    return super.match(sort(controlNodes), sort(testNodes));
+  }
 }

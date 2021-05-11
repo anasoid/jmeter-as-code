@@ -45,10 +45,8 @@ class HeaderManagerWrapperXMLTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addThread(
                 ThreadGroupWrapper.builder()
-                    .withName("Thread Group")
                     .addSampler(
                         HTTPSamplerProxyWrapper.builder()
                             .withName("HTTP Request")
@@ -69,10 +67,8 @@ class HeaderManagerWrapperXMLTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addThread(
                 ThreadGroupWrapper.builder()
-                    .withName("Thread Group")
                     .addSampler(
                         HTTPSamplerProxyWrapper.builder()
                             .withName("HTTP Request")

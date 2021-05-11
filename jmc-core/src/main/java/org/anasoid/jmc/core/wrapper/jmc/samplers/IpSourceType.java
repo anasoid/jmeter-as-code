@@ -35,12 +35,12 @@ public enum IpSourceType {
 
   public final Integer value;
 
-  public Integer value() {
-    return value;
-  }
-
   private IpSourceType(Integer value) {
     this.value = value;
+  }
+
+  public Integer value() {
+    return value;
   }
 
   @Override

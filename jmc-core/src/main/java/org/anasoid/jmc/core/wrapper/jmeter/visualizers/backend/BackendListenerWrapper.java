@@ -52,8 +52,8 @@ import org.apache.jmeter.visualizers.backend.BackendListenerGui;
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 public class BackendListenerWrapper extends AbstractBasicChildTestElementWrapper<BackendListener>
     implements JMeterGUIWrapper<BackendListenerGui>,
-    SampleListenerWrapper<BackendListener>,
-    Validator {
+        SampleListenerWrapper<BackendListener>,
+        Validator {
 
   @JmcProperty("QUEUE_SIZE")
   @Getter
@@ -65,6 +65,7 @@ public class BackendListenerWrapper extends AbstractBasicChildTestElementWrapper
   @XStreamOmitField @Getter private String className;
 
   @XStreamOmitField @Getter private BackendListenerClient implementation;
+  @XStreamOmitField @Default @Getter private Map<String, String> arguments = new HashMap<>();
 
   @JmcProperty("classname")
   @JmcMandatory
@@ -74,8 +75,6 @@ public class BackendListenerWrapper extends AbstractBasicChildTestElementWrapper
     }
     return implementation.value();
   }
-
-  @XStreamOmitField @Default @Getter private Map<String, String> arguments = new HashMap<>();
 
   @JmcCollection(
       value = Arguments.ARGUMENTS,

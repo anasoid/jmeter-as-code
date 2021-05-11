@@ -32,7 +32,6 @@ class BackendListenerWrapperXmlTest extends AbstractJmcTest {
   void testDefault() throws IOException {
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addListener(
                 BackendListenerWrapper.builder()
                     .withName("Backend Listener")
@@ -47,7 +46,6 @@ class BackendListenerWrapperXmlTest extends AbstractJmcTest {
   void testInverse() throws IOException {
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addListener(
                 BackendListenerWrapper.builder()
                     .withName("Backend Listener")

@@ -33,7 +33,6 @@ class RegExUserParametersWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addPreProcessor(
                 RegExUserParametersWrapper.builder()
                     .withName("RegEx User Parameters")

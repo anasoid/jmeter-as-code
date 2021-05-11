@@ -55,6 +55,17 @@ public abstract class ResultCollectorWrapper<
       SampleSaveConfigurationWrapper.builder().build();
 
   @XStreamOmitField @Getter @Setter String filename;
+  @JmcProperty("ResultCollector.error_logging")
+  @Getter
+  @Setter
+  @Default
+  boolean logError = false;
+  @JmcProperty("ResultCollector.success_only_logging")
+  @Getter
+  @Setter
+  @Default
+  @JmcSkipDefault(ConfigElementWrapper.FALSE)
+  boolean logSuccess = false;
 
   @JmcProperty("filename")
   protected String getFilePath() {
@@ -64,19 +75,6 @@ public abstract class ResultCollectorWrapper<
     }
     return JmcConfig.getResultRootFolder() + filename;
   }
-
-  @JmcProperty("ResultCollector.error_logging")
-  @Getter
-  @Setter
-  @Default
-  boolean logError = false;
-
-  @JmcProperty("ResultCollector.success_only_logging")
-  @Getter
-  @Setter
-  @Default
-  @JmcSkipDefault(ConfigElementWrapper.FALSE)
-  boolean logSuccess = false;
 
   @JmcMethodAlias(JmeterProperty.OBJECT_PROP)
   protected ObjectProperty getSaveConfig() {

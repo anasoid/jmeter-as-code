@@ -37,7 +37,6 @@ class JSR223PreProcessorWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addPreProcessor(
                 JSR223PreProcessorWrapper.builder()
                     .withName("JSR223 PreProcessor")
@@ -53,7 +52,6 @@ class JSR223PreProcessorWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addPreProcessor(
                 JSR223PreProcessorWrapper.builder()
                     .withName("JSR223 PreProcessor")
@@ -70,7 +68,6 @@ class JSR223PreProcessorWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addPreProcessor(
                 JSR223PreProcessorWrapper.builder()
                     .withName("JSR223 PreProcessor inverse")

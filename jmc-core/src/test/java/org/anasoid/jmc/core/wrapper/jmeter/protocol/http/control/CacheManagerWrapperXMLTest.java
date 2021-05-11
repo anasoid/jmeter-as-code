@@ -34,7 +34,6 @@ class CacheManagerWrapperXMLTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addConfig(CacheManagerWrapper.builder().withName("HTTP Cache Manager").build())
             .build();
 
@@ -46,7 +45,6 @@ class CacheManagerWrapperXMLTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addConfig(
                 CacheManagerWrapper.builder()
                     .withName("HTTP Cache Manager Reverse")

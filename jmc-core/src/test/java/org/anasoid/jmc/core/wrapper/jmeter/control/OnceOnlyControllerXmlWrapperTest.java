@@ -28,26 +28,22 @@ import org.junit.jupiter.api.Test;
 
 class OnceOnlyControllerXmlWrapperTest extends AbstractJmcTest {
 
+  private static final String PARENT_PATH = "org/anasoid/jmc/core/wrapper/jmeter/control";
+  private static final String NODE_NAME = "OnceOnlyController";
+
   @Test
   void testSetter()
       throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
     SetterTestUtils.testSetter(OnceOnlyControllerWrapper.builder());
   }
 
-  private static final String PARENT_PATH =
-      "org/anasoid/jmc/core/wrapper/jmeter/control";
-
-  private static final String NODE_NAME = "OnceOnlyController";
-
   @Test
   void testDefault() throws IOException {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addThread(
                 ThreadGroupWrapper.builder()
-                    .withName("Thread Group")
                     .addController(
                         OnceOnlyControllerWrapper.builder()
                             .withName("Once Only Controller")

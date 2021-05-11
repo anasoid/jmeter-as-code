@@ -27,8 +27,7 @@ import org.junit.jupiter.api.Test;
 
 class WhileControllerWrapperXmlTest extends AbstractJmcTest {
 
-  private static final String PARENT_PATH =
-      "org/anasoid/jmc/core/wrapper/jmeter/control";
+  private static final String PARENT_PATH = "org/anasoid/jmc/core/wrapper/jmeter/control";
 
   private static final String NODE_NAME = "WhileController";
 
@@ -43,14 +42,10 @@ class WhileControllerWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addThread(
                 ThreadGroupWrapper.builder()
-                    .withName("Thread Group")
                     .addController(
-                        WhileControllerWrapper.builder()
-                            .withName("While Controller")
-                            .build())
+                        WhileControllerWrapper.builder().withName("While Controller").build())
                     .build())
             .build();
 
@@ -62,10 +57,8 @@ class WhileControllerWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addThread(
                 ThreadGroupWrapper.builder()
-                    .withName("Thread Group")
                     .addController(
                         WhileControllerWrapper.builder()
                             .withName("While Controller")

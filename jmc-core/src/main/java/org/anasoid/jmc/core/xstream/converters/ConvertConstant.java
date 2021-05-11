@@ -21,7 +21,7 @@ package org.anasoid.jmc.core.xstream.converters;
 /** Converter Constant. */
 public final class ConvertConstant {
 
-  private ConvertConstant() {}
-
   public static final String ATTRIBUTE_ELEMENT_TYPE = "elementType";
+
+  private ConvertConstant() {}
 }

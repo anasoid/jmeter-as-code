@@ -42,7 +42,6 @@ class GaussianRandomTimerWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addTimer(
                 GaussianRandomTimerWrapper.builder().withName("Gaussian Random Timer").build())
             .build();
@@ -55,7 +54,6 @@ class GaussianRandomTimerWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addTimer(
                 GaussianRandomTimerWrapper.builder()
                     .withName("Gaussian Random Timer")

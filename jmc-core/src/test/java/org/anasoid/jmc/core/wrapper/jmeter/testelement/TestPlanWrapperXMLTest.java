@@ -34,7 +34,7 @@ class TestPlanWrapperXMLTest extends AbstractJmcTest {
   @Test
   void testDefault() throws IOException {
 
-    TestPlanWrapper testPlanWrapper = TestPlanWrapper.builder().withName("Test Plan").build();
+    TestPlanWrapper testPlanWrapper = TestPlanWrapper.builder().build();
 
     checkWrapper(testPlanWrapper, PARENT_PATH + "/testplan.default.jmx");
   }

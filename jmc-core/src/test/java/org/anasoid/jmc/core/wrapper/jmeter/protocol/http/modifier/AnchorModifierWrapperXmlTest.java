@@ -41,7 +41,6 @@ class AnchorModifierWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addPreProcessor(AnchorModifierWrapper.builder().withName("HTML Link Parser").build())
             .build();
 

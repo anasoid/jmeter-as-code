@@ -36,8 +36,7 @@ import org.junit.jupiter.api.Test;
  */
 class HTTPSamplerProxyWrapperXMLTest extends AbstractJmcTest {
 
-  private static final String PARENT_PATH =
-      "org/anasoid/jmc/core/wrapper/jmeter/samplers/http";
+  private static final String PARENT_PATH = "org/anasoid/jmc/core/wrapper/jmeter/samplers/http";
 
   private static final String NODE_NAME = "HTTPSamplerProxy";
 

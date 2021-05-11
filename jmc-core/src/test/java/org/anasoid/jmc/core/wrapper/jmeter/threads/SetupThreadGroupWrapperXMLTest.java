@@ -25,8 +25,7 @@ import org.junit.jupiter.api.Test;
 
 class SetupThreadGroupWrapperXMLTest extends AbstractJmcTest {
 
-  private static final String PARENT_PATH =
-      "org/anasoid/jmc/core/wrapper/jmeter/threads";
+  private static final String PARENT_PATH = "org/anasoid/jmc/core/wrapper/jmeter/threads";
 
   private static final String NODE_NAME = "SetupThreadGroup";
 
@@ -35,11 +34,9 @@ class SetupThreadGroupWrapperXMLTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addThread(SetupThreadGroupWrapper.builder().withName("setUp Thread Group").build())
             .build();
 
     checkWrapper(testPlanWrapper, PARENT_PATH + "/setUpThreadGroup.default.jmx", NODE_NAME);
   }
-
 }

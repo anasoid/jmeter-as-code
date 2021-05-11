@@ -37,6 +37,4 @@ public class SimpleDataWriterWrapper
   public Class<?> getGuiClass() {
     return SimpleDataWriter.class;
   }
-
-
 }

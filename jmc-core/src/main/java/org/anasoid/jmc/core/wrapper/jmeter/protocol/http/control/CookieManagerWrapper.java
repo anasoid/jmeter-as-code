@@ -46,19 +46,21 @@ import org.apache.jmeter.protocol.http.gui.CookiePanel;
 public class CookieManagerWrapper extends ConfigTestElementWrapper<CookieManager, CookiePanel> {
 
   @XStreamOmitField private static final long serialVersionUID = 8482403319301067878L;
-
+  @JmcCollection(value = "CookieManager.cookies")
+  @Getter
+  @JmcEmptyAllowed
+  @Default
+  private final List<CookieWrapper> cookies = new ArrayList<>();
   @JmcProperty("CookieManager.clearEachIteration")
   @Getter
   @Setter
   @Default
   private Boolean clearEachIteration = false;
-
   @JmcProperty("CookieManager.controlledByThreadGroup")
   @Getter
   @Setter
   @Default
   private Boolean controlledByThreadGroup = false;
-
   @JmcProperty("CookieManager.policy")
   @Getter
   @Setter
@@ -75,12 +77,6 @@ public class CookieManagerWrapper extends ConfigTestElementWrapper<CookieManager
   public Class<?> getTestClass() {
     return CookieManager.class;
   }
-
-  @JmcCollection(value = "CookieManager.cookies")
-  @Getter
-  @JmcEmptyAllowed
-  @Default
-  private final List<CookieWrapper> cookies = new ArrayList<>();
 
   /** Builder. */
   public abstract static class CookieManagerWrapperBuilder<

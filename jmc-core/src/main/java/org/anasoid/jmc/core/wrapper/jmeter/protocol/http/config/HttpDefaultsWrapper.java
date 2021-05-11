@@ -140,34 +140,28 @@ public class HttpDefaultsWrapper
   @JmcProperty(HTTPSamplerBase.POST_BODY_RAW)
   @Getter
   private final Boolean postBodyRaw;
-
+  /** Embedded Resources from HTML Files: URLs must match. */
+  @JmcProperty(value = HTTPSamplerBase.EMBEDDED_URL_RE)
+  @Getter
+  private final String embeddedUrlRE;
+  /** Embedded Resources from HTML Files: URLs must not match. */
+  @JmcProperty(HTTPSamplerBase.EMBEDDED_URL_EXCLUDE_RE)
+  @Getter
+  private final String embeddedUrlExcludeRE;
+  /** Embedded Resources from HTML Files: Parallel downloads. */
+  @JmcProperty(HTTPSamplerBase.CONCURRENT_DWN)
+  @Getter
+  private final Boolean concurrentDwn;
+  @JmcProperty(HTTPSamplerBase.IMAGE_PARSER)
+  @Getter
+  private final Boolean imageParser;
+  @Getter @Default @XStreamOmitField
+  private final List<HTTPArgumentWrapper> arguments = new ArrayList<>();
   /** Embedded Resources from HTML Files: Concurrent pool for parallel download. */
   @JmcProperty(value = HTTPSamplerBase.CONCURRENT_POOL)
   @Default
   @Getter
   private String concurrentPool = String.valueOf(HTTPSamplerBase.CONCURRENT_POOL_SIZE);
-
-  /** Embedded Resources from HTML Files: URLs must match. */
-  @JmcProperty(value = HTTPSamplerBase.EMBEDDED_URL_RE)
-  @Getter
-  private final String embeddedUrlRE;
-
-  /** Embedded Resources from HTML Files: URLs must not match. */
-  @JmcProperty(HTTPSamplerBase.EMBEDDED_URL_EXCLUDE_RE)
-  @Getter
-  private final String embeddedUrlExcludeRE;
-
-  /** Embedded Resources from HTML Files: Parallel downloads. */
-  @JmcProperty(HTTPSamplerBase.CONCURRENT_DWN)
-  @Getter
-  private final Boolean concurrentDwn;
-
-  @JmcProperty(HTTPSamplerBase.IMAGE_PARSER)
-  @Getter
-  private final Boolean imageParser;
-
-  @Getter @Default @XStreamOmitField
-  private final List<HTTPArgumentWrapper> arguments = new ArrayList<>();
 
   /**
    * Arguments format when User Defined Variables.

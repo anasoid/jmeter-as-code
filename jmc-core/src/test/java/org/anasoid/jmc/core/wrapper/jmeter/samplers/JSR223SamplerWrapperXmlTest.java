@@ -27,8 +27,7 @@ import org.junit.jupiter.api.Test;
 
 class JSR223SamplerWrapperXmlTest extends AbstractJmcTest {
 
-  private static final String PARENT_PATH =
-      "org/anasoid/jmc/core/wrapper/jmeter/samplers";
+  private static final String PARENT_PATH = "org/anasoid/jmc/core/wrapper/jmeter/samplers";
 
   private static final String NODE_NAME = "JSR223Sampler";
 

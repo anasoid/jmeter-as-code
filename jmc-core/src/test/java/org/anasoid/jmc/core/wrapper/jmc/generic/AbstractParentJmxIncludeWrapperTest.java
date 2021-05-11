@@ -31,8 +31,7 @@ import org.junit.jupiter.api.Test;
 
 class AbstractParentJmxIncludeWrapperTest extends AbstractJmcTest {
 
-  private static final String PARENT_PATH =
-      "org/anasoid/jmc/core/wrapper/jmeter/jmc/generic";
+  private static final String PARENT_PATH = "org/anasoid/jmc/core/wrapper/jmeter/jmc/generic";
 
   @Test
   void testRegex() throws IOException {

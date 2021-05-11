@@ -35,7 +35,6 @@ class AuthManagerXmlWrapperTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addConfig(AuthManagerWrapper.builder().withName("HTTP Authorization Manager").build())
             .build();
 
@@ -47,7 +46,6 @@ class AuthManagerXmlWrapperTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addConfig(
                 AuthManagerWrapper.builder()
                     .withName("HTTP Authorization Manager inverse")

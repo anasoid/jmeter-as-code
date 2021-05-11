@@ -25,8 +25,7 @@ import org.junit.jupiter.api.Test;
 
 class CounterConfigXmlWrapperTest extends AbstractJmcTest {
 
-  private static final String PARENT_PATH =
-      "org/anasoid/jmc/core/wrapper/jmeter/modifiers";
+  private static final String PARENT_PATH = "org/anasoid/jmc/core/wrapper/jmeter/modifiers";
 
   private static final String NODE_NAME = "CounterConfig";
 
@@ -35,7 +34,6 @@ class CounterConfigXmlWrapperTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addConfig(CounterConfigWrapper.builder().withName("Counter").build())
             .build();
 
@@ -47,7 +45,6 @@ class CounterConfigXmlWrapperTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addConfig(
                 CounterConfigWrapper.builder()
                     .withName("Counter reverse")

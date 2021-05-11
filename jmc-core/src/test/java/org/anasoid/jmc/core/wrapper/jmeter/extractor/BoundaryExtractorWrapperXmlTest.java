@@ -36,7 +36,6 @@ class BoundaryExtractorWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addPostProcessor(
                 BoundaryExtractorWrapper.builder()
                     .withName("Boundary Extractor")
@@ -54,7 +53,6 @@ class BoundaryExtractorWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addPostProcessor(
                 BoundaryExtractorWrapper.builder()
                     .withName("Boundary Extractor")
@@ -72,7 +70,6 @@ class BoundaryExtractorWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addPostProcessor(
                 BoundaryExtractorWrapper.builder()
                     .withName("Boundary Extractor inverse")

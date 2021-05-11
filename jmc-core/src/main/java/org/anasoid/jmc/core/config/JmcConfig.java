@@ -44,34 +44,11 @@ import org.slf4j.LoggerFactory;
 public final class JmcConfig {
 
   private static final Logger LOG = LoggerFactory.getLogger(JmcConfig.class);
-
-  private static final Properties properties = loadJmcProperties();
   private static final String MAIN_CONFIG_FILE = "org/anasoid/jmc/core/config/jmc.properties";
   private static final String USER_CONFIG_FILE = "jmc-user.properties";
+  private static final Properties properties = loadJmcProperties();
 
   private JmcConfig() {}
-
-  /**
-   * get property from config.
-   *
-   * @param key key.
-   * @return null or value.
-   */
-  public String getProperty(String key) {
-
-    return properties.getProperty(key);
-  }
-
-  /**
-   * get property from config.
-   *
-   * @param key key.
-   * @param defaultValue defaultValue, return if key not found.
-   * @return value or defaultValue.
-   */
-  public String getProperty(String key, String defaultValue) {
-    return properties.getProperty(key, defaultValue);
-  }
 
   /** Get Data root folder. */
   public static String getDataRootFolder() {
@@ -150,5 +127,27 @@ public final class JmcConfig {
       }
     }
     return p;
+  }
+
+  /**
+   * get property from config.
+   *
+   * @param key key.
+   * @return null or value.
+   */
+  public String getProperty(String key) {
+
+    return properties.getProperty(key);
+  }
+
+  /**
+   * get property from config.
+   *
+   * @param key key.
+   * @param defaultValue defaultValue, return if key not found.
+   * @return value or defaultValue.
+   */
+  public String getProperty(String key, String defaultValue) {
+    return properties.getProperty(key, defaultValue);
   }
 }

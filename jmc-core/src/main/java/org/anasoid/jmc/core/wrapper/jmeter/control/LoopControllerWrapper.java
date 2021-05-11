@@ -46,6 +46,16 @@ public class LoopControllerWrapper
   @Getter
   private String loops;
 
+  @Override
+  public Class<?> getTestClass() {
+    return LoopController.class;
+  }
+
+  @Override
+  public Class<?> getGuiClass() {
+    return LoopControlPanel.class;
+  }
+
   /** Builder. */
   public abstract static class LoopControllerWrapperBuilder<
           C extends LoopControllerWrapper, B extends LoopControllerWrapperBuilder<C, B>>
@@ -67,15 +77,5 @@ public class LoopControllerWrapper
       this.loops = loops;
       return self();
     }
-  }
-
-  @Override
-  public Class<?> getTestClass() {
-    return LoopController.class;
-  }
-
-  @Override
-  public Class<?> getGuiClass() {
-    return LoopControlPanel.class;
   }
 }

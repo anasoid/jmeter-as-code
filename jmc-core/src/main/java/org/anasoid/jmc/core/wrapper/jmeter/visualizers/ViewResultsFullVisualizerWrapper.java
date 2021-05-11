@@ -37,6 +37,4 @@ public class ViewResultsFullVisualizerWrapper
   public Class<?> getGuiClass() {
     return ViewResultsFullVisualizer.class;
   }
-
-
 }

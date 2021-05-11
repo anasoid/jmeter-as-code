@@ -29,6 +29,4 @@ public class ThreadGroupJmxIncludeWrapper
     implements ThreadWrapper<AbstractThreadGroup> {
 
   private static final long serialVersionUID = -8017246349372467904L;
-
-
 }

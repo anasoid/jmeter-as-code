@@ -27,8 +27,7 @@ import org.junit.jupiter.api.Test;
 
 class ThreadGroupWrapperXMLTest extends AbstractJmcTest {
 
-  private static final String PARENT_PATH =
-      "org/anasoid/jmc/core/wrapper/jmeter/threads";
+  private static final String PARENT_PATH = "org/anasoid/jmc/core/wrapper/jmeter/threads";
 
   private static final String NODE_NAME = "ThreadGroup";
 
@@ -36,10 +35,7 @@ class ThreadGroupWrapperXMLTest extends AbstractJmcTest {
   void testDefault() throws IOException {
 
     TestPlanWrapper testPlanWrapper =
-        TestPlanWrapper.builder()
-            .withName("Test Plan")
-            .addThread(ThreadGroupWrapper.builder().withName("Thread Group").build())
-            .build();
+        TestPlanWrapper.builder().addThread(ThreadGroupWrapper.builder().build()).build();
 
     checkWrapper(testPlanWrapper, PARENT_PATH + "/threadgroup.default.jmx", NODE_NAME);
   }
@@ -48,10 +44,8 @@ class ThreadGroupWrapperXMLTest extends AbstractJmcTest {
   void testFullDefault() throws IOException {
 
     TestPlanWrapper testPlanWrapper =
-        TestPlanWrapper.builder()
-            .withName("Test Plan")
-            .addThread(ThreadGroupWrapper.builder().withName("Thread Group").build())
-            .build();
+        TestPlanWrapper.builder().addThread(ThreadGroupWrapper.builder().build()).build();
+
     checkWrapper(testPlanWrapper, PARENT_PATH + "/threadgroup.default.jmx");
   }
 
@@ -60,7 +54,6 @@ class ThreadGroupWrapperXMLTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addThread(
                 ThreadGroupWrapper.builder()
                     .withName("Thread Group Reverse")

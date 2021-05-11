@@ -18,12 +18,8 @@
 
 package org.anasoid.jmc.core.wrapper.jmc.script;
 
-/**
- * Script Language enumeration.
- */
+/** Script Language enumeration. */
 public enum ScriptLanguage {
-
-
   GROOVY("groovy"),
   JAVA("java"),
   JAVASCRIPT("javascript"),
