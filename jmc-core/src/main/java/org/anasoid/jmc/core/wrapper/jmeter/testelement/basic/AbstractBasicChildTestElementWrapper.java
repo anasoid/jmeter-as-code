@@ -24,6 +24,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import org.anasoid.jmc.core.wrapper.jmeter.testelement.TestElementTreeNodeWrapper;
 import org.anasoid.jmc.core.xstream.annotations.JmcProperty;
 import org.anasoid.jmc.core.xstream.annotations.JmcSkipDefault;
 import org.apache.jmeter.testelement.AbstractTestElement;
@@ -34,7 +35,7 @@ import org.apache.jmeter.testelement.TestElement;
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 public abstract class AbstractBasicChildTestElementWrapper<T extends AbstractTestElement>
-    extends AbstractBasicTestElementWrapper<T> {
+    extends AbstractBasicTestElementWrapper<T> implements TestElementTreeNodeWrapper<T> {
 
   /** Name. */
   @XStreamAsAttribute

@@ -40,23 +40,23 @@ import org.apache.jmeter.testelement.TestElement;
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 @XStreamConverter(value = TestElementConverter.class)
 public abstract class AbstractTestElementWrapper<T extends AbstractTestElement>
-    extends AbstractBasicParentTestElementWrapper<T> {
+    extends AbstractBasicParentTestElementWrapper<T> implements TestElementTreeNodeWrapper<T> {
 
   /** Name. */
   @XStreamAsAttribute
   @XStreamAlias("testname")
-  @Getter @Setter
+  @Getter
+  @Setter
   private String name;
 
   /** Comments. */
   @JmcProperty(TestElement.COMMENTS)
-  @Getter @Setter
+  @Getter
+  @Setter
   @Builder.Default
   @JmcSkipDefault("")
   private String comment = "";
 
   /** enabled. */
   @XStreamAsAttribute @Builder.Default @Getter @Setter private boolean enabled = true;
-
-
 }

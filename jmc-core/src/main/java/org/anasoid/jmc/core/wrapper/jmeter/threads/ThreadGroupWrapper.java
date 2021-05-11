@@ -27,6 +27,7 @@ import lombok.experimental.SuperBuilder;
 import org.anasoid.jmc.core.wrapper.jmc.Variable;
 import org.anasoid.jmc.core.wrapper.jmeter.control.LoopControllerWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.control.LoopControllerWrapper.LoopControllerWrapperBuilder;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.anasoid.jmc.core.xstream.annotations.JmcNullAllowed;
 import org.anasoid.jmc.core.xstream.annotations.JmcProperty;
 import org.anasoid.jmc.core.xstream.annotations.JmcSkipDefault;
@@ -40,6 +41,7 @@ import org.apache.jmeter.threads.gui.ThreadGroupGui;
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 @XStreamAlias("ThreadGroup")
+@JmcDefaultName("Thread Group")
 public class ThreadGroupWrapper extends AbstractThreadGroupWrapper<ThreadGroup, ThreadGroupGui> {
 
   @XStreamOmitField private static final long serialVersionUID = -5025050304929170782L;
