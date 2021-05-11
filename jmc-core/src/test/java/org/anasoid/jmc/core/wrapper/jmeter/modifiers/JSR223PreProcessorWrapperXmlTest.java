@@ -39,7 +39,6 @@ class JSR223PreProcessorWrapperXmlTest extends AbstractJmcTest {
         TestPlanWrapper.builder()
             .addPreProcessor(
                 JSR223PreProcessorWrapper.builder()
-                    .withName("JSR223 PreProcessor")
                     .withScriptFile(SCRIPT_PATH + "/myscript.special.txt")
                     .build())
             .build();
@@ -54,7 +53,6 @@ class JSR223PreProcessorWrapperXmlTest extends AbstractJmcTest {
         TestPlanWrapper.builder()
             .addPreProcessor(
                 JSR223PreProcessorWrapper.builder()
-                    .withName("JSR223 PreProcessor")
                     .withScriptFile("/myfile")
                     .withScriptFileResource(false)
                     .build())

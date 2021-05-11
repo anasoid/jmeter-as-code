@@ -24,6 +24,7 @@ import lombok.experimental.SuperBuilder;
 import org.anasoid.jmc.core.wrapper.jmeter.gui.JMeterGUIWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.processor.PreProcessorWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.basic.AbstractBasicChildTestElementWrapper;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.anasoid.jmc.core.xstream.annotations.JmcMandatory;
 import org.anasoid.jmc.core.xstream.annotations.JmcProperty;
 import org.apache.jmeter.protocol.http.modifier.RegExUserParameters;
@@ -35,6 +36,7 @@ import org.apache.jmeter.protocol.http.modifier.gui.RegExUserParametersGui;
  * @see RegExUserParameters
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@JmcDefaultName("RegEx User Parameters")
 public class RegExUserParametersWrapper
     extends AbstractBasicChildTestElementWrapper<RegExUserParameters>
     implements JMeterGUIWrapper<RegExUserParametersGui>, PreProcessorWrapper<RegExUserParameters> {

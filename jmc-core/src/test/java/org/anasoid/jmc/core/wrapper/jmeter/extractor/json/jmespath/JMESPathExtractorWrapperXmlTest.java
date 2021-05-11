@@ -45,7 +45,6 @@ class JMESPathExtractorWrapperXmlTest extends AbstractJmcTest {
         TestPlanWrapper.builder()
             .addPostProcessor(
                 JMESPathExtractorWrapper.builder()
-                    .withName("JSON JMESPath Extractor")
                     .withRefName("var")
                     .withJmesPathExpr("expres")
                     .build())

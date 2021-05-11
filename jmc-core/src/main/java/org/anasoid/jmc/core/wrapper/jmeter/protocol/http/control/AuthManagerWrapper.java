@@ -29,6 +29,7 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmc.core.wrapper.jmeter.config.ConfigTestElementWrapper;
 import org.anasoid.jmc.core.xstream.annotations.JmcCollection;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.anasoid.jmc.core.xstream.annotations.JmcEmptyAllowed;
 import org.anasoid.jmc.core.xstream.annotations.JmcProperty;
 import org.anasoid.jmc.core.xstream.annotations.JmcSkipDefault;
@@ -41,10 +42,17 @@ import org.apache.jmeter.protocol.http.gui.AuthPanel;
  * @see AuthManager
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@JmcDefaultName("HTTP Authorization Manager")
 @SuppressWarnings("PMD.RedundantFieldInitializer")
 public class AuthManagerWrapper extends ConfigTestElementWrapper<AuthManager, AuthPanel> {
 
   @XStreamOmitField private static final long serialVersionUID = 4261318150151324005L;
+
+  @JmcCollection(value = "AuthManager.auth_list")
+  @Builder.Default
+  @Getter
+  @JmcEmptyAllowed
+  private final List<AuthorizationWrapper> authorizations = new ArrayList<>();
   /** If selected, then the cache is cleared at the start of the thread. */
   @JmcProperty("AuthManager.clearEachIteration")
   @Getter
@@ -58,12 +66,6 @@ public class AuthManagerWrapper extends ConfigTestElementWrapper<AuthManager, Au
   @Setter
   @Default
   private boolean controlledByThread = false;
-
-  @JmcCollection(value = "AuthManager.auth_list")
-  @Builder.Default
-  @Getter
-  @JmcEmptyAllowed
-  private final List<AuthorizationWrapper> authorizations = new ArrayList<>();
 
   @Override
   public Class<?> getGuiClass() {

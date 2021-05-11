@@ -44,7 +44,7 @@ class HttpDefaultsXMLWrapperTest extends AbstractJmcTest {
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
             .withName(DEFAULT_TEST_PLAN)
-            .addConfig(HttpDefaultsWrapper.builder().withName("HTTP Request Defaults").build())
+            .addConfig(HttpDefaultsWrapper.builder().build())
             .build();
 
     checkWrapper(testPlanWrapper, PARENT_PATH + "/httpdefault.default.jmx", NODE_NAME);
@@ -56,11 +56,7 @@ class HttpDefaultsXMLWrapperTest extends AbstractJmcTest {
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
             .withName(DEFAULT_TEST_PLAN)
-            .addConfig(
-                HttpDefaultsWrapper.builder()
-                    .withName("HTTP Request Defaults")
-                    .withBody("body")
-                    .build())
+            .addConfig(HttpDefaultsWrapper.builder().withBody("body").build())
             .build();
 
     checkWrapper(testPlanWrapper, PARENT_PATH + "/httpdefault.body.jmx", NODE_NAME);
@@ -74,7 +70,6 @@ class HttpDefaultsXMLWrapperTest extends AbstractJmcTest {
             .withName(DEFAULT_TEST_PLAN)
             .addConfig(
                 HttpDefaultsWrapper.builder()
-                    .withName("HTTP Request Defaults")
                     .withComment("comment")
                     .withPath("/path")
                     .withDomain("server")

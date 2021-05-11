@@ -25,6 +25,7 @@ import lombok.experimental.SuperBuilder;
 import org.anasoid.jmc.core.wrapper.jmc.validator.Validator;
 import org.anasoid.jmc.core.wrapper.jmeter.processor.PostProcessorWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.AbstractScopedTestElementWrapper;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.anasoid.jmc.core.xstream.annotations.JmcMandatory;
 import org.anasoid.jmc.core.xstream.annotations.JmcNullAllowed;
 import org.anasoid.jmc.core.xstream.annotations.JmcProperty;
@@ -38,6 +39,7 @@ import org.apache.jmeter.extractor.gui.HtmlExtractorGui;
  * @see HtmlExtractor
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@JmcDefaultName("CSS Selector Extractor")
 @SuppressWarnings("PMD.RedundantFieldInitializer")
 public class HtmlExtractorWrapper
     extends AbstractScopedTestElementWrapper<HtmlExtractor, HtmlExtractorGui>

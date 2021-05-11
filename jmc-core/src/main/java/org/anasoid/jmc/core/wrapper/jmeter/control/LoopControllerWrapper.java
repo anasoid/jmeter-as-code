@@ -37,16 +37,15 @@ import org.apache.jmeter.control.gui.LoopControlPanel;
 public class LoopControllerWrapper
     extends GenericControllerWrapper<LoopController, LoopControlPanel> {
 
+  /** Number of iterations to use. */
+  @JmcProperty(value = LoopController.LOOPS)
+  @Getter
+  private final String loops;
   /** Infinite. */
   @JmcProperty("LoopController.continue_forever")
   @Builder.Default
   @Getter
   Boolean continueForever = false;
-
-  /** Number of iterations to use. */
-  @JmcProperty(value = LoopController.LOOPS)
-  @Getter
-  private final String loops;
 
   @Override
   public Class<?> getTestClass() {

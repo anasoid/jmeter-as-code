@@ -42,8 +42,7 @@ class DebugPostProcessorWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .addPostProcessor(
-                DebugPostProcessorWrapper.builder().withName("Debug PostProcessor").build())
+            .addPostProcessor(DebugPostProcessorWrapper.builder().build())
             .build();
 
     checkWrapper(testPlanWrapper, PARENT_PATH + "/debug.postProcessor.default.jmx", NODE_NAME);

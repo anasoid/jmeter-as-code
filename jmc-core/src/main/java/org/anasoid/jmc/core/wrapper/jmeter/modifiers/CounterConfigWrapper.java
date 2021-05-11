@@ -26,6 +26,7 @@ import lombok.experimental.SuperBuilder;
 import org.anasoid.jmc.core.wrapper.jmc.Variable;
 import org.anasoid.jmc.core.wrapper.jmc.validator.Validator;
 import org.anasoid.jmc.core.wrapper.jmeter.config.ConfigTestElementWrapper;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.anasoid.jmc.core.xstream.annotations.JmcNullAllowed;
 import org.anasoid.jmc.core.xstream.annotations.JmcProperty;
 import org.anasoid.jmc.core.xstream.annotations.JmcSkipDefault;
@@ -39,6 +40,7 @@ import org.apache.jmeter.modifiers.gui.CounterConfigGui;
  * @see CounterConfig
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@JmcDefaultName("Counter")
 @SuppressWarnings("PMD.RedundantFieldInitializer")
 public class CounterConfigWrapper extends ConfigTestElementWrapper<CounterConfig, CounterConfigGui>
     implements Validator {

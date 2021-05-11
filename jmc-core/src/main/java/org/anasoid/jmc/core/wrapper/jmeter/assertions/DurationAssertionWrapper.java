@@ -40,7 +40,7 @@ import org.apache.jmeter.assertions.gui.DurationAssertionGui;
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 @SuppressWarnings({"PMD.RedundantFieldInitializer", "PMD.AvoidUncheckedExceptionsInSignatures"})
-@JmcDefaultName("XPath Extractor")
+@JmcDefaultName("Duration Assertion")
 public class DurationAssertionWrapper
     extends AbstractScopedAssertionWrapper<DurationAssertion, DurationAssertionGui>
     implements Validator {

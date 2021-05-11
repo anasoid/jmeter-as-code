@@ -22,6 +22,7 @@ import lombok.experimental.SuperBuilder;
 import org.anasoid.jmc.core.wrapper.jmeter.gui.JMeterGUIWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.processor.PreProcessorWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.basic.AbstractBasicChildTestElementWrapper;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.apache.jmeter.protocol.http.modifier.AnchorModifier;
 import org.apache.jmeter.protocol.http.modifier.gui.AnchorModifierGui;
 
@@ -31,6 +32,7 @@ import org.apache.jmeter.protocol.http.modifier.gui.AnchorModifierGui;
  * @see AnchorModifier
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@JmcDefaultName("HTML Link Parser")
 public class AnchorModifierWrapper extends AbstractBasicChildTestElementWrapper<AnchorModifier>
     implements JMeterGUIWrapper<AnchorModifierGui>, PreProcessorWrapper<AnchorModifier> {
 

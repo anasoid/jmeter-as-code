@@ -30,6 +30,7 @@ import org.anasoid.jmc.core.application.validator.annotations.JmcChildrenTypes;
 import org.anasoid.jmc.core.wrapper.jmc.http.client.config.CookiePolicy;
 import org.anasoid.jmc.core.wrapper.jmeter.config.ConfigTestElementWrapper;
 import org.anasoid.jmc.core.xstream.annotations.JmcCollection;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.anasoid.jmc.core.xstream.annotations.JmcEmptyAllowed;
 import org.anasoid.jmc.core.xstream.annotations.JmcProperty;
 import org.anasoid.jmc.core.xstream.annotations.JmcSkipDefault;
@@ -43,6 +44,7 @@ import org.apache.jmeter.protocol.http.gui.CookiePanel;
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 @JmcChildrenTypes(type = {CookieWrapper.class})
+@JmcDefaultName("Cookie Manager")
 public class CookieManagerWrapper extends ConfigTestElementWrapper<CookieManager, CookiePanel> {
 
   @XStreamOmitField private static final long serialVersionUID = 8482403319301067878L;

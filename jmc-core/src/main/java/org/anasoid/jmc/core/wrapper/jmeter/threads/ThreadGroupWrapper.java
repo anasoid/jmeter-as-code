@@ -46,41 +46,16 @@ import org.apache.jmeter.threads.gui.ThreadGroupGui;
 public class ThreadGroupWrapper extends AbstractThreadGroupWrapper<ThreadGroup, ThreadGroupGui> {
 
   @XStreamOmitField private static final long serialVersionUID = -5025050304929170782L;
-
-  /** Specify Thread lifetime. */
-  @JmcProperty(ThreadGroup.SCHEDULER)
-  @Default
-  @Setter
-  @Getter
-  private Boolean scheduler = false;
-
-  /** Specify Thread lifetime. */
-  @JmcProperty(ThreadGroup.DELAYED_START)
-  @Default
-  @Getter
-  @Setter
-  @JmcSkipDefault("false")
-  private Boolean delayedStartup = false;
-
-  /** Duration (seconds). */
-  @JmcProperty(value = ThreadGroup.DURATION)
-  @Getter
-  @Setter
-  @JmcNullAllowed
-  private String duration;
-
   /** Startup delay (seconds). */
   @JmcProperty(value = ThreadGroup.DELAY)
   @Getter
   @JmcNullAllowed
   private final String delay;
-
   /** Ramp-up period (seconds). */
   @JmcProperty(value = ThreadGroup.RAMP_TIME)
   @Getter
   @Builder.Default
   private final String rampUp = "1";
-
   /** Number of iterations to use. */
   @XStreamOmitField private @Builder.Default @Getter final String loops = "1";
   /**
@@ -92,6 +67,25 @@ public class ThreadGroupWrapper extends AbstractThreadGroupWrapper<ThreadGroup, 
    * not be repeated. However, it's not clear that a Thread Group could ever be repeated.
    */
   @XStreamOmitField private @Builder.Default @Getter final Boolean continueForever = false;
+  /** Specify Thread lifetime. */
+  @JmcProperty(ThreadGroup.SCHEDULER)
+  @Default
+  @Setter
+  @Getter
+  private Boolean scheduler = false;
+  /** Specify Thread lifetime. */
+  @JmcProperty(ThreadGroup.DELAYED_START)
+  @Default
+  @Getter
+  @Setter
+  @JmcSkipDefault("false")
+  private Boolean delayedStartup = false;
+  /** Duration (seconds). */
+  @JmcProperty(value = ThreadGroup.DURATION)
+  @Getter
+  @Setter
+  @JmcNullAllowed
+  private String duration;
 
   @Override
   public void internalInit() {

@@ -39,7 +39,6 @@ class JSR223PostProcessorWrapperTest extends AbstractJmcTest {
         TestPlanWrapper.builder()
             .addPostProcessor(
                 JSR223PostProcessorWrapper.builder()
-                    .withName("JSR223 PostProcessor")
                     .withScriptFile(SCRIPT_PATH + "/myscript.special.txt")
                     .build())
             .build();
@@ -54,7 +53,6 @@ class JSR223PostProcessorWrapperTest extends AbstractJmcTest {
         TestPlanWrapper.builder()
             .addPostProcessor(
                 JSR223PostProcessorWrapper.builder()
-                    .withName("JSR223 PostProcessor")
                     .withScriptFile("/myfile")
                     .withScriptFileResource(false)
                     .build())

@@ -91,6 +91,12 @@ class CookieManagerWrapperTest extends AbstractJmcTest {
             .addConfig(new MyConfig())
             .build();
 
+    ApplicationTest applicationTest =
+        ApplicationTestUtilsForTesting.getApplicationTest(parentTestElementWrapperTesting);
+    StringWriter wr = new StringWriter(); // NOPMD
+
+    parentTestElementWrapperTesting = (ParentTestElementWrapperTesting) applicationTest.toJmx(wr);
+
     Assertions.assertEquals(
         "Cookie Manager",
         ((CookieManagerWrapper) parentTestElementWrapperTesting.getChilds().get(0)).getName());
@@ -100,8 +106,7 @@ class CookieManagerWrapperTest extends AbstractJmcTest {
 
     @Override
     protected JmcWrapperBuilder<CookieManagerWrapper> init() {
-      return (JmcWrapperBuilder<CookieManagerWrapper>)
-          CookieManagerWrapper.builder().withName("Cookie Manager");
+      return (JmcWrapperBuilder<CookieManagerWrapper>) CookieManagerWrapper.builder();
     }
   }
 }

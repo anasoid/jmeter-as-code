@@ -26,6 +26,7 @@ import org.anasoid.jmc.core.wrapper.jmc.Variable;
 import org.anasoid.jmc.core.wrapper.jmeter.gui.JMeterGUIWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.processor.PreProcessorWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.basic.AbstractBasicChildTestElementWrapper;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.anasoid.jmc.core.xstream.annotations.JmcProperty;
 import org.apache.jmeter.modifiers.SampleTimeout;
 import org.apache.jmeter.modifiers.gui.SampleTimeoutGui;
@@ -36,6 +37,7 @@ import org.apache.jmeter.modifiers.gui.SampleTimeoutGui;
  * @see SampleTimeout
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@JmcDefaultName("Sample Timeout")
 public class SampleTimeoutWrapper extends AbstractBasicChildTestElementWrapper<SampleTimeout>
     implements JMeterGUIWrapper<SampleTimeoutGui>, PreProcessorWrapper<SampleTimeout> {
 

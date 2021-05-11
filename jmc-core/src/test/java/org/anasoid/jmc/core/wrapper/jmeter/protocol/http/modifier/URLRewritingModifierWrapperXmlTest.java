@@ -35,10 +35,7 @@ class URLRewritingModifierWrapperXmlTest extends AbstractJmcTest {
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
             .addPreProcessor(
-                URLRewritingModifierWrapper.builder()
-                    .withName("HTTP URL Re-writing Modifier")
-                    .withArgumentName("session")
-                    .build())
+                URLRewritingModifierWrapper.builder().withArgumentName("session").build())
             .build();
 
     checkWrapper(testPlanWrapper, PARENT_PATH + "/httpurlrewritingmodifier.default.jmx", NODE_NAME);

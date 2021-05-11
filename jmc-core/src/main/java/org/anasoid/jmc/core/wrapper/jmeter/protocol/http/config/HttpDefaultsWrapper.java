@@ -32,6 +32,7 @@ import org.anasoid.jmc.core.wrapper.jmc.samplers.IpSourceType;
 import org.anasoid.jmc.core.wrapper.jmeter.config.ConfigTestElementWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.protocol.http.util.HTTPArgumentWrapper;
 import org.anasoid.jmc.core.xstream.annotations.JmcCollection;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.anasoid.jmc.core.xstream.annotations.JmcEmptyAllowed;
 import org.anasoid.jmc.core.xstream.annotations.JmcMethodAlias;
 import org.anasoid.jmc.core.xstream.annotations.JmcNullAllowed;
@@ -51,6 +52,7 @@ import org.apache.jmeter.protocol.http.sampler.HTTPSamplerBase;
  * @see HttpDefaultsGui
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@JmcDefaultName("HTTP Request Defaults")
 @SuppressWarnings({"PMD.TooManyFields"})
 public class HttpDefaultsWrapper
     extends ConfigTestElementWrapper<ConfigTestElement, HttpDefaultsGui> {

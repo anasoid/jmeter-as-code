@@ -56,35 +56,6 @@ import org.apache.jmeter.testelement.TestPlan;
 public class TestPlanWrapper extends AbstractTestElementWrapper<TestPlan>
     implements JMeterGUIWrapper<TestPlanGui> {
 
-  /** Functional Test Mode (i.e. save Response Data and Sampler Data) */
-  @JmcProperty("TestPlan.functional_mode")
-  @Getter
-  @Setter
-  private boolean functionalMode;
-
-  /** Run Thread Groups consecutively (i.e. one at a time). */
-  @JmcProperty("TestPlan.serialize_threadgroups")
-  @Getter
-  @Setter
-  private boolean serialized;
-  /** Run tearDown Thread Groups after shutdown of main threads. */
-  @JmcProperty("TestPlan.tearDown_on_shutdown")
-  @JmcSkipDefault("false")
-  @Getter
-  @Setter
-  @Default
-  private boolean tearDownOnShutdown = true;
-
-  /**
-   * Set the classpath for the test plan. If the classpath is made up from more then one path, the
-   * parts must be separated with CLASSPATH_SEPARATOR.
-   */
-  @JmcProperty("TestPlan.user_define_classpath")
-  @Getter
-  @Setter
-  @Default
-  private String testPlanClasspath = "";
-
   @JmcCollection(
       value = Arguments.ARGUMENTS,
       withElementProp = true,
@@ -97,6 +68,32 @@ public class TestPlanWrapper extends AbstractTestElementWrapper<TestPlan>
   @Getter
   @JmcEmptyAllowed
   private final List<ArgumentWrapper> arguments = new ArrayList<>();
+  /** Functional Test Mode (i.e. save Response Data and Sampler Data) */
+  @JmcProperty("TestPlan.functional_mode")
+  @Getter
+  @Setter
+  private boolean functionalMode;
+  /** Run Thread Groups consecutively (i.e. one at a time). */
+  @JmcProperty("TestPlan.serialize_threadgroups")
+  @Getter
+  @Setter
+  private boolean serialized;
+  /** Run tearDown Thread Groups after shutdown of main threads. */
+  @JmcProperty("TestPlan.tearDown_on_shutdown")
+  @JmcSkipDefault("false")
+  @Getter
+  @Setter
+  @Default
+  private boolean tearDownOnShutdown = true;
+  /**
+   * Set the classpath for the test plan. If the classpath is made up from more then one path, the
+   * parts must be separated with CLASSPATH_SEPARATOR.
+   */
+  @JmcProperty("TestPlan.user_define_classpath")
+  @Getter
+  @Setter
+  @Default
+  private String testPlanClasspath = "";
 
   @Override
   public Class<?> getGuiClass() {

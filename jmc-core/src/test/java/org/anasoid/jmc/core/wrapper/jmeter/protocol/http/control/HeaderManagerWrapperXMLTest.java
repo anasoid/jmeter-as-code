@@ -51,10 +51,7 @@ class HeaderManagerWrapperXMLTest extends AbstractJmcTest {
                         HTTPSamplerProxyWrapper.builder()
                             .withName("HTTP Request")
                             .withPath("")
-                            .addConfig(
-                                HeaderManagerWrapper.builder()
-                                    .withName("HTTP Header Manager")
-                                    .build())
+                            .addConfig(HeaderManagerWrapper.builder().build())
                             .build())
                     .build())
             .build();
@@ -74,10 +71,7 @@ class HeaderManagerWrapperXMLTest extends AbstractJmcTest {
                             .withName("HTTP Request")
                             .withPath("")
                             .addConfig(
-                                HeaderManagerWrapper.builder()
-                                    .withName("HTTP Header Manager")
-                                    .addHeader("param", "value")
-                                    .build())
+                                HeaderManagerWrapper.builder().addHeader("param", "value").build())
                             .build())
                     .build())
             .build();

@@ -170,11 +170,16 @@ public class TestElementConverter implements Converter {
     if (source instanceof TestElementWrapper) {
       ((TestElementWrapper) source).init();
     }
-    if (source instanceof TestElementTreeNodeWrapper) {
-      TestElementTreeNodeWrapper sourceTreeNode = (TestElementTreeNodeWrapper) source;
-      JmcDefaultName jmcDefaultName = source.getClass().getAnnotation(JmcDefaultName.class);
-      if (jmcDefaultName != null && sourceTreeNode.getName() == null) {
-        sourceTreeNode.setName(jmcDefaultName.value());
+    JmcDefaultName jmcDefaultName = source.getClass().getAnnotation(JmcDefaultName.class);
+    if (jmcDefaultName != null) {
+      if (source instanceof TestElementTreeNodeWrapper) {
+        TestElementTreeNodeWrapper sourceTreeNode = (TestElementTreeNodeWrapper) source;
+        if (sourceTreeNode.getName() == null) {
+          sourceTreeNode.setName(jmcDefaultName.value());
+        }
+      } else {
+        throw new ConversionException(
+            "JmcDefaultName present on not TestElementTreeNodeWrapper type.");
       }
     }
   }

@@ -26,6 +26,7 @@ import org.anasoid.jmc.core.wrapper.jmc.extractor.FieldToCheck;
 import org.anasoid.jmc.core.wrapper.jmc.validator.Validator;
 import org.anasoid.jmc.core.wrapper.jmeter.processor.PostProcessorWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.AbstractScopedTestElementWrapper;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.anasoid.jmc.core.xstream.annotations.JmcMandatory;
 import org.anasoid.jmc.core.xstream.annotations.JmcNullAllowed;
 import org.anasoid.jmc.core.xstream.annotations.JmcProperty;
@@ -39,6 +40,7 @@ import org.apache.jmeter.extractor.gui.BoundaryExtractorGui;
  * @see BoundaryExtractor
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@JmcDefaultName("Boundary Extractor")
 @SuppressWarnings("PMD.RedundantFieldInitializer")
 public class BoundaryExtractorWrapper
     extends AbstractScopedTestElementWrapper<BoundaryExtractor, BoundaryExtractorGui>

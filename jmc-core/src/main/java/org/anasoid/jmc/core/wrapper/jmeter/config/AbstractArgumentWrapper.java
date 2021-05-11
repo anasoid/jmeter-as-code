@@ -48,14 +48,14 @@ public abstract class AbstractArgumentWrapper<T extends Argument>
   @JmcNullAllowed
   private @Getter final String value;
 
+  @JmcProperty(Argument.DESCRIPTION)
+  private @Getter final String description;
+
   @JmcProperty(Argument.METADATA)
   @Default
   @Setter
   @Getter
   private String metadata = "=";
-
-  @JmcProperty(Argument.DESCRIPTION)
-  private @Getter final String description;
 
   @JmcProperty(Argument.ARG_NAME)
   @JmcSkipDefault("")

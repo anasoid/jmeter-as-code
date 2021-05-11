@@ -23,6 +23,7 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmc.core.wrapper.jmeter.processor.PostProcessorWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.AbstractScopedTestElementWrapper;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.anasoid.jmc.core.xstream.annotations.JmcMandatory;
 import org.anasoid.jmc.core.xstream.annotations.JmcNullAllowed;
 import org.anasoid.jmc.core.xstream.annotations.JmcProperty;
@@ -35,6 +36,7 @@ import org.apache.jmeter.extractor.json.jmespath.gui.JMESPathExtractorGui;
  * @see JMESPathExtractorWrapper
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@JmcDefaultName("JSON JMESPath Extractor")
 public class JMESPathExtractorWrapper
     extends AbstractScopedTestElementWrapper<JMESPathExtractor, JMESPathExtractorGui>
     implements PostProcessorWrapper<JMESPathExtractor> {

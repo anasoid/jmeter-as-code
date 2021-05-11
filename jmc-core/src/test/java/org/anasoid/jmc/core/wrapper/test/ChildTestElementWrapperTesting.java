@@ -36,6 +36,14 @@ public abstract class ChildTestElementWrapperTesting<
         T extends GenericController, G extends AbstractControllerGui>
     extends AbstractTestElementWrapper<T> implements JMeterGUIWrapper<G> {
 
+  @JmcProperty("child.onSampleError")
+  @Builder.Default
+  @Getter
+  private final OnSampleError onSampleError = OnSampleError.ON_SAMPLE_ERROR_CONTINUE;
+
+  @Builder.Default @Getter
+  private final OnSampleError onSampleError2 = OnSampleError.ON_SAMPLE_ERROR_STOPTEST;
+
   @JmcProperty("child.field")
   @Builder.Default
   @Getter
@@ -45,12 +53,4 @@ public abstract class ChildTestElementWrapperTesting<
   @Getter
   @XStreamAlias("fieldChild")
   String fieldChild = "super";
-
-  @JmcProperty("child.onSampleError")
-  @Builder.Default
-  @Getter
-  private final OnSampleError onSampleError = OnSampleError.ON_SAMPLE_ERROR_CONTINUE;
-
-  @Builder.Default @Getter
-  private final OnSampleError onSampleError2 = OnSampleError.ON_SAMPLE_ERROR_STOPTEST;
 }

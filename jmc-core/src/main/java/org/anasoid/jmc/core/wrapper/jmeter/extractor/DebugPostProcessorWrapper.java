@@ -26,6 +26,7 @@ import lombok.experimental.SuperBuilder;
 import org.anasoid.jmc.core.wrapper.jmeter.gui.JMeterGUIWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.processor.PostProcessorWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.basic.AbstractBasicChildTestElementWrapper;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.anasoid.jmc.core.xstream.annotations.JmcProperty;
 import org.apache.jmeter.extractor.DebugPostProcessor;
 import org.apache.jmeter.testbeans.gui.TestBeanGUI;
@@ -37,6 +38,7 @@ import org.apache.jmeter.testbeans.gui.TestBeanGUI;
  */
 @SuppressWarnings("PMD.RedundantFieldInitializer")
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@JmcDefaultName("Debug PostProcessor")
 public class DebugPostProcessorWrapper
     extends AbstractBasicChildTestElementWrapper<DebugPostProcessor>
     implements JMeterGUIWrapper<TestBeanGUI>, PostProcessorWrapper<DebugPostProcessor> {

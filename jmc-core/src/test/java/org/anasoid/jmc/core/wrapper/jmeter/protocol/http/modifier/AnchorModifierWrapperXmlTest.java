@@ -40,9 +40,7 @@ class AnchorModifierWrapperXmlTest extends AbstractJmcTest {
   void testDefault() throws IOException {
 
     TestPlanWrapper testPlanWrapper =
-        TestPlanWrapper.builder()
-            .addPreProcessor(AnchorModifierWrapper.builder().withName("HTML Link Parser").build())
-            .build();
+        TestPlanWrapper.builder().addPreProcessor(AnchorModifierWrapper.builder().build()).build();
 
     checkWrapper(testPlanWrapper, PARENT_PATH + "/htmllinkparser.default.jmx", NODE_NAME);
   }

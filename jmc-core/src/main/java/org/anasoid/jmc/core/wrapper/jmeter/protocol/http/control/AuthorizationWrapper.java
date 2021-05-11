@@ -39,30 +39,24 @@ import org.apache.jmeter.protocol.http.control.Authorization;
 public class AuthorizationWrapper extends AbstractBasicTestElementWrapper<Authorization> {
 
   @JmcProperty("Authorization.url")
-  private @Getter @JmcNullAllowed
-  final String url;
+  private @Getter @JmcNullAllowed final String url;
 
   @JmcProperty("Authorization.username")
-  private @Getter @JmcNullAllowed
-  final String username;
+  private @Getter @JmcNullAllowed final String username;
 
   @JmcProperty("Authorization.password")
-  private @Getter @JmcNullAllowed
-  final String password;
+  private @Getter @JmcNullAllowed final String password;
 
   @JmcProperty("Authorization.domain")
-  private @Getter @JmcNullAllowed
-  final String domain;
+  private @Getter @JmcNullAllowed final String domain;
 
   @JmcProperty("Authorization.realm")
-  private @Getter @JmcNullAllowed
-  final String realm;
+  private @Getter @JmcNullAllowed final String realm;
 
   @JmcProperty("Authorization.mechanism")
   @JmcSkipDefault("BASIC")
   @Default
-  private @Getter @JmcNullAllowed
-  final AuthMechanism mechanism = AuthMechanism.BASIC;
+  private @Getter @JmcNullAllowed final AuthMechanism mechanism = AuthMechanism.BASIC;
 
   @Override
   public Class<?> getTestClass() {

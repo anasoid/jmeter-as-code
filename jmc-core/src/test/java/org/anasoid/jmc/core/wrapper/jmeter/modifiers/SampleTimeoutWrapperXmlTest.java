@@ -41,11 +41,7 @@ class SampleTimeoutWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .addPreProcessor(
-                SampleTimeoutWrapper.builder()
-                    .withTimeout(20000)
-                    .withName("Sample Timeout")
-                    .build())
+            .addPreProcessor(SampleTimeoutWrapper.builder().withTimeout(20000).build())
             .build();
 
     checkWrapper(testPlanWrapper, PARENT_PATH + "/sampletimeout.default.jmx", NODE_NAME);

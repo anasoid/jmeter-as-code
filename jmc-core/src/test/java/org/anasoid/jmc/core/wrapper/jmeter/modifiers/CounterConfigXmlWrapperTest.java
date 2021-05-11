@@ -33,9 +33,7 @@ class CounterConfigXmlWrapperTest extends AbstractJmcTest {
   void testDefault() throws IOException {
 
     TestPlanWrapper testPlanWrapper =
-        TestPlanWrapper.builder()
-            .addConfig(CounterConfigWrapper.builder().withName("Counter").build())
-            .build();
+        TestPlanWrapper.builder().addConfig(CounterConfigWrapper.builder().build()).build();
 
     checkWrapper(testPlanWrapper, PARENT_PATH + "/counter.default.jmx", NODE_NAME);
   }

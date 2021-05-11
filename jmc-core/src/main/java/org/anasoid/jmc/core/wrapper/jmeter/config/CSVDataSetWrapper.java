@@ -54,9 +54,8 @@ public class CSVDataSetWrapper extends ConfigTestElementWrapper<CSVDataSet, Test
     implements Validator {
 
   @XStreamOmitField private static final long serialVersionUID = -1283066246657871689L;
-
+  @XStreamOmitField @Getter @Default private final List<Variable> variables = new ArrayList<>();
   @XStreamOmitField @Getter @Setter private String filename;
-
   @XStreamOmitField @Getter @Setter private String resourceFile;
 
   @JmcProperty("fileEncoding")
@@ -64,8 +63,6 @@ public class CSVDataSetWrapper extends ConfigTestElementWrapper<CSVDataSet, Test
   @Setter
   @JmcNullAllowed
   private String fileEncoding;
-
-  @XStreamOmitField @Getter @Default private final List<Variable> variables = new ArrayList<>();
   /**
    * Ignore first line of CSV file, it will only be used if Variable Names is not empty, if Variable
    * Names is empty the first line must contain the headers.
