@@ -36,7 +36,7 @@ public enum AuthMechanism {
 
   public final String value;
 
-  private AuthMechanism(String value) {
+  AuthMechanism(String value) {
     this.value = value;
   }
 

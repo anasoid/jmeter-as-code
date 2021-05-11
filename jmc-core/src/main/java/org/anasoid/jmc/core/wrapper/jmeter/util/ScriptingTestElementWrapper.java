@@ -50,18 +50,18 @@ public abstract class ScriptingTestElementWrapper<
   /**
    * Parameters to pass to the BeanShell script. The list is passed to script split on white-space.
    */
-  @XStreamOmitField @Getter @Default private List<String> parameters = new ArrayList<>();
+  @XStreamOmitField @Getter @Default private final List<String> parameters = new ArrayList<>();
 
   @JmcProperty(value = "scriptLanguage")
   @Getter
   @Default
-  private String scriptLanguage = ScriptLanguage.GROOVY.value();
+  private final String scriptLanguage = ScriptLanguage.GROOVY.value();
 
-  @XStreamOmitField @Getter private String scriptFile;
+  @XStreamOmitField @Getter private final String scriptFile;
 
   /** Script file resource. the resource file will be included as content in test. */
   @XStreamOmitField @Default @Getter
-  private boolean scriptFileResource = JmcConfig.isScriptResource();
+  private final boolean scriptFileResource = JmcConfig.isScriptResource();
 
   @Override
   public void validate() throws ConversionIllegalStateException {

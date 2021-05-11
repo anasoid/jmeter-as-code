@@ -23,6 +23,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmc.core.wrapper.jmc.Variable;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.anasoid.jmc.core.xstream.annotations.JmcMandatory;
 import org.anasoid.jmc.core.xstream.annotations.JmcProperty;
 import org.anasoid.jmc.core.xstream.types.IntegerManager;
@@ -35,6 +36,7 @@ import org.apache.jmeter.control.gui.ThroughputControllerGui;
  * @see ThroughputController
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@JmcDefaultName("Throughput Controller")
 @SuppressWarnings("PMD.RedundantFieldInitializer")
 public class ThroughputControllerWrapper
     extends GenericControllerWrapper<ThroughputController, ThroughputControllerGui> {
@@ -89,7 +91,7 @@ public class ThroughputControllerWrapper
 
     public final Integer value;
 
-    private ExecutionStyle(Integer value) {
+    ExecutionStyle(Integer value) {
       this.value = value;
     }
 

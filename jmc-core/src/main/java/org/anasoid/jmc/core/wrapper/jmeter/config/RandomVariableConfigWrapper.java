@@ -24,6 +24,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmc.core.wrapper.jmc.Variable;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.anasoid.jmc.core.xstream.annotations.JmcNullAllowed;
 import org.anasoid.jmc.core.xstream.annotations.JmcProperty;
 import org.apache.jmeter.config.RandomVariableConfig;
@@ -36,6 +37,7 @@ import org.apache.jmeter.testbeans.gui.TestBeanGUI;
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 @SuppressWarnings("PMD.RedundantFieldInitializer")
+@JmcDefaultName("Random Variable")
 public class RandomVariableConfigWrapper
     extends ConfigTestElementWrapper<RandomVariableConfig, TestBeanGUI> {
 

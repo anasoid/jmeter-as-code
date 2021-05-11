@@ -23,15 +23,15 @@ package org.anasoid.jmc.core.wrapper.jmeter;
 public interface JmeterConstants {
 
   /** Cst for JmeterProperty. */
-  public interface JmeterProperty { // NOSONAR
-    public String COLLECTION_PROP = "collectionProp";
-    public String INTEGER_PROP = "intProp";
-    public String STRING_PROP = "stringProp";
-    public String BOOL_PROP = "boolProp";
-    public String LONG_PROP = "longProp";
-    public String FLOAT_PROP = "floatProp";
-    public String DOUBLE_PROP = "doubleProp";
-    public String ELEMENT_PROP = "elementProp";
-    public String OBJECT_PROP = "objProp";
+  interface JmeterProperty { // NOSONAR
+    String COLLECTION_PROP = "collectionProp";
+    String INTEGER_PROP = "intProp";
+    String STRING_PROP = "stringProp";
+    String BOOL_PROP = "boolProp";
+    String LONG_PROP = "longProp";
+    String FLOAT_PROP = "floatProp";
+    String DOUBLE_PROP = "doubleProp";
+    String ELEMENT_PROP = "elementProp";
+    String OBJECT_PROP = "objProp";
   }
 }

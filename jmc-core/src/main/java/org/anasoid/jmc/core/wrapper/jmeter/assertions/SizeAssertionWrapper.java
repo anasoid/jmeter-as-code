@@ -95,7 +95,7 @@ public class SizeAssertionWrapper
 
     public final Integer value;
 
-    private Operator(Integer value) {
+    Operator(Integer value) {
       this.value = value;
     }
 
@@ -119,7 +119,7 @@ public class SizeAssertionWrapper
 
     public final String value;
 
-    private FieldtoTest(String value) {
+    FieldtoTest(String value) {
       this.value = value;
     }
 

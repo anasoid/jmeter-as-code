@@ -29,7 +29,7 @@ public class ParamSamplerJmxIncludeWrapperTesting extends SamplerJmxIncludeWrapp
   private static final String PARENT_PATH = "org/anasoid/jmc/core/wrapper/jmeter/jmc/generic";
 
   @JmcParam("path")
-  private static String myPath = "mypath";
+  private static final String myPath = "mypath";
 
   @Override
   protected String getDefaultPath() {

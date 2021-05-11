@@ -163,7 +163,7 @@ public class HttpDefaultsWrapper
   @JmcProperty(value = HTTPSamplerBase.CONCURRENT_POOL)
   @Default
   @Getter
-  private String concurrentPool = String.valueOf(HTTPSamplerBase.CONCURRENT_POOL_SIZE);
+  private final String concurrentPool = String.valueOf(HTTPSamplerBase.CONCURRENT_POOL_SIZE);
 
   /**
    * Arguments format when User Defined Variables.

@@ -44,11 +44,7 @@ class IfControllerWrapperXmlTest extends AbstractJmcTest {
         TestPlanWrapper.builder()
             .addThread(
                 ThreadGroupWrapper.builder()
-                    .addController(
-                        IfControllerWrapper.builder()
-                            .withName("If Controller")
-                            .withCondition("${var}")
-                            .build())
+                    .addController(IfControllerWrapper.builder().withCondition("${var}").build())
                     .build())
             .build();
 
@@ -64,7 +60,6 @@ class IfControllerWrapperXmlTest extends AbstractJmcTest {
                 ThreadGroupWrapper.builder()
                     .addController(
                         IfControllerWrapper.builder()
-                            .withName("If Controller")
                             .withCondition("${var}")
                             .withEvaluateAll(true)
                             .withUseExpression(false)

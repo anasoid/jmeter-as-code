@@ -50,7 +50,8 @@ import org.apache.jmeter.testelement.AbstractTestElement;
 public abstract class AbstractBasicParentTestElementWrapper<T extends AbstractTestElement>
     extends AbstractBasicTestElementWrapper<T> {
 
-  @Builder.Default @XStreamOmitField private List<TestElementWrapper<?>> childs = new ArrayList<>();
+  @Builder.Default @XStreamOmitField
+  private final List<TestElementWrapper<?>> childs = new ArrayList<>();
 
   @Override
   public List<TestElementWrapper<?>> getChilds() {

@@ -42,5 +42,5 @@ public abstract class OnErrorTestElementWrapper<
   @JmcProperty(value = OnErrorTestElement.ON_ERROR_ACTION, type = Integer.class)
   @Builder.Default
   @Getter
-  private OnError onError = OnError.ON_ERROR_CONTINUE;
+  private final OnError onError = OnError.ON_ERROR_CONTINUE;
 }

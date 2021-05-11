@@ -45,7 +45,6 @@ class CSVDataSetWrapperXmlTest extends AbstractJmcTest {
         TestPlanWrapper.builder()
             .addConfig(
                 CSVDataSetWrapper.builder()
-                    .withName("CSV Data Set Config")
                     .addvariable(new Variable("var"))
                     .withFilename("/myfile")
                     .build())

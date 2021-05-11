@@ -56,7 +56,8 @@ public abstract class AbstractParentJmxIncludeWrapper<T> extends AbstractJmxIncl
   private static final Pattern REGEX =
       Pattern.compile("^[\\s]*(.+?)[\\s]*\\<hashTree/\\>$", Pattern.DOTALL);
 
-  @Builder.Default @XStreamOmitField private List<TestElementWrapper<?>> childs = new ArrayList<>();
+  @Builder.Default @XStreamOmitField
+  private final List<TestElementWrapper<?>> childs = new ArrayList<>();
 
   protected String cleanupChild(String raw) {
 

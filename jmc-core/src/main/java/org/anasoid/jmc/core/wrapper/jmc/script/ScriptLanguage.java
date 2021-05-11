@@ -33,7 +33,7 @@ public enum ScriptLanguage {
 
   private final String value;
 
-  private ScriptLanguage(String value) {
+  ScriptLanguage(String value) {
     this.value = value;
   }
 

@@ -46,7 +46,6 @@ class CriticalSectionControllerWrapperXmlTest extends AbstractJmcTest {
                 ThreadGroupWrapper.builder()
                     .addController(
                         CriticalSectionControllerWrapper.builder()
-                            .withName("Critical Section Controller")
                             .withLockName("global_lock")
                             .build())
                     .build())

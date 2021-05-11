@@ -46,7 +46,7 @@ public class ArgumentsWrapper extends ConfigTestElementWrapper<Arguments, Argume
   @Builder.Default
   @Getter
   @JmcEmptyAllowed
-  private List<ArgumentWrapper> arguments = new ArrayList<>();
+  private final List<ArgumentWrapper> arguments = new ArrayList<>();
 
   @Override
   public Class<?> getGuiClass() {

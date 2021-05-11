@@ -24,6 +24,7 @@ import java.util.Arrays;
 import java.util.List;
 import lombok.Builder.Default;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmc.core.wrapper.jmc.assertions.AssertionField;
 import org.anasoid.jmc.core.wrapper.jmc.assertions.MatchingRule;
@@ -54,24 +55,28 @@ public class ResponseAssertionWrapper
 
   @JmcProperty("Assertion.custom_message")
   @Getter
+  @Setter
   @Default
   private String customMessage = "";
 
   @JmcProperty("Assertion.assume_success")
   @Getter
+  @Setter
   @Default
   private Boolean ignoreStatus = false;
 
   @JmcProperty("Assertion.test_field")
   @Getter
+  @Setter
   @Default
   private AssertionField fieldToTest = AssertionField.RESPONSE_DATA;
 
-  @Getter @XStreamOmitField @Default private MatchingRule matchingRule = MatchingRule.SUBSTRING;
+  @Getter @Setter @XStreamOmitField @Default
+  private MatchingRule matchingRule = MatchingRule.SUBSTRING;
 
-  @Getter @XStreamOmitField @Default private boolean not = false; // NOSONAR
+  @Getter @Setter @XStreamOmitField @Default private boolean not = false; // NOSONAR
 
-  @Getter @XStreamOmitField @Default private boolean or = false; // NOSONAR
+  @Getter @Setter @XStreamOmitField @Default private boolean or = false; // NOSONAR
 
   @Getter @Default @XStreamOmitField private List<String> patterns = new ArrayList<>();
 

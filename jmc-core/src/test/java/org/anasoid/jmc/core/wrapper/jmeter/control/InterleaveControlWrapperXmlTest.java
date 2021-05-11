@@ -44,10 +44,7 @@ class InterleaveControlWrapperXmlTest extends AbstractJmcTest {
         TestPlanWrapper.builder()
             .addThread(
                 ThreadGroupWrapper.builder()
-                    .addController(
-                        InterleaveControlWrapper.builder()
-                            .withName("Interleave Controller")
-                            .build())
+                    .addController(InterleaveControlWrapper.builder().build())
                     .build())
             .build();
 
@@ -63,7 +60,6 @@ class InterleaveControlWrapperXmlTest extends AbstractJmcTest {
                 ThreadGroupWrapper.builder()
                     .addController(
                         InterleaveControlWrapper.builder()
-                            .withName("Interleave Controller")
                             .withAccrossThreads(true)
                             .withIgnoreSubController(true)
                             .build())

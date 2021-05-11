@@ -63,7 +63,7 @@ public class AuthManagerWrapper extends ConfigTestElementWrapper<AuthManager, Au
   @Builder.Default
   @Getter
   @JmcEmptyAllowed
-  private List<AuthorizationWrapper> authorizations = new ArrayList<>();
+  private final List<AuthorizationWrapper> authorizations = new ArrayList<>();
 
   @Override
   public Class<?> getGuiClass() {

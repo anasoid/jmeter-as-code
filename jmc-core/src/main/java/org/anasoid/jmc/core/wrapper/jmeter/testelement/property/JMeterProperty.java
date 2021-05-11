@@ -38,7 +38,7 @@ public enum JMeterProperty {
 
   public final String value;
 
-  private JMeterProperty(String value) {
+  JMeterProperty(String value) {
     this.value = value;
   }
 

@@ -23,6 +23,7 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import lombok.Builder;
 import lombok.Builder.Default;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmc.core.wrapper.jmc.Variable;
 import org.anasoid.jmc.core.wrapper.jmeter.control.LoopControllerWrapper;
@@ -49,6 +50,7 @@ public class ThreadGroupWrapper extends AbstractThreadGroupWrapper<ThreadGroup, 
   /** Specify Thread lifetime. */
   @JmcProperty(ThreadGroup.SCHEDULER)
   @Default
+  @Setter
   @Getter
   private Boolean scheduler = false;
 
@@ -56,12 +58,14 @@ public class ThreadGroupWrapper extends AbstractThreadGroupWrapper<ThreadGroup, 
   @JmcProperty(ThreadGroup.DELAYED_START)
   @Default
   @Getter
+  @Setter
   @JmcSkipDefault("false")
   private Boolean delayedStartup = false;
 
   /** Duration (seconds). */
   @JmcProperty(value = ThreadGroup.DURATION)
   @Getter
+  @Setter
   @JmcNullAllowed
   private String duration;
 
@@ -69,16 +73,16 @@ public class ThreadGroupWrapper extends AbstractThreadGroupWrapper<ThreadGroup, 
   @JmcProperty(value = ThreadGroup.DELAY)
   @Getter
   @JmcNullAllowed
-  private String delay;
+  private final String delay;
 
   /** Ramp-up period (seconds). */
   @JmcProperty(value = ThreadGroup.RAMP_TIME)
   @Getter
   @Builder.Default
-  private String rampUp = "1";
+  private final String rampUp = "1";
 
   /** Number of iterations to use. */
-  @XStreamOmitField private @Builder.Default @Getter String loops = "1";
+  @XStreamOmitField private @Builder.Default @Getter final String loops = "1";
   /**
    * In spite of the name, this is actually used to determine if the loop controller is repeatable.
    * The value is only used in nextIsNull() when the loop end condition has been detected: If
@@ -87,13 +91,13 @@ public class ThreadGroupWrapper extends AbstractThreadGroupWrapper<ThreadGroup, 
    * them. Thread Group sets the value false, so nextIsNull() sets done, and the Thread Group will
    * not be repeated. However, it's not clear that a Thread Group could ever be repeated.
    */
-  @XStreamOmitField private @Builder.Default @Getter Boolean continueForever = false;
+  @XStreamOmitField private @Builder.Default @Getter final Boolean continueForever = false;
 
   @Override
   public void internalInit() {
     super.internalInit();
     LoopControllerWrapperBuilder<?, ?> samplerControllerBuilder =
-        LoopControllerWrapper.builder().withName("Loop Controller").withContinueForever(false);
+        LoopControllerWrapper.builder().withContinueForever(false);
     if (Boolean.TRUE.equals(continueForever)) {
       samplerControllerBuilder.withLoops(-1);
     } else {

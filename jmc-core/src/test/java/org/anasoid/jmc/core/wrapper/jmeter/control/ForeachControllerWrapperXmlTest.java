@@ -44,8 +44,7 @@ class ForeachControllerWrapperXmlTest extends AbstractJmcTest {
         TestPlanWrapper.builder()
             .addThread(
                 ThreadGroupWrapper.builder()
-                    .addController(
-                        ForeachControllerWrapper.builder().withName("ForEach Controller").build())
+                    .addController(ForeachControllerWrapper.builder().build())
                     .build())
             .build();
 
@@ -61,7 +60,6 @@ class ForeachControllerWrapperXmlTest extends AbstractJmcTest {
                 ThreadGroupWrapper.builder()
                     .addController(
                         ForeachControllerWrapper.builder()
-                            .withName("ForEach Controller")
                             .withInputVal("prefix")
                             .withReturnVariable("output")
                             .withStartIndex("start")

@@ -44,8 +44,7 @@ class WhileControllerWrapperXmlTest extends AbstractJmcTest {
         TestPlanWrapper.builder()
             .addThread(
                 ThreadGroupWrapper.builder()
-                    .addController(
-                        WhileControllerWrapper.builder().withName("While Controller").build())
+                    .addController(WhileControllerWrapper.builder().build())
                     .build())
             .build();
 
@@ -60,10 +59,7 @@ class WhileControllerWrapperXmlTest extends AbstractJmcTest {
             .addThread(
                 ThreadGroupWrapper.builder()
                     .addController(
-                        WhileControllerWrapper.builder()
-                            .withName("While Controller")
-                            .withCondition("${condition}")
-                            .build())
+                        WhileControllerWrapper.builder().withCondition("${condition}").build())
                     .build())
             .build();
 

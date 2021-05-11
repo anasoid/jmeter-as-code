@@ -44,10 +44,7 @@ class TransactionControllerWrapperXmlTest extends AbstractJmcTest {
         TestPlanWrapper.builder()
             .addThread(
                 ThreadGroupWrapper.builder()
-                    .addController(
-                        TransactionControllerWrapper.builder()
-                            .withName("Transaction Controller")
-                            .build())
+                    .addController(TransactionControllerWrapper.builder().build())
                     .build())
             .build();
 
@@ -63,7 +60,6 @@ class TransactionControllerWrapperXmlTest extends AbstractJmcTest {
                 ThreadGroupWrapper.builder()
                     .addController(
                         TransactionControllerWrapper.builder()
-                            .withName("Transaction Controller")
                             .withIncludeTimers(true)
                             .withParent(true)
                             .build())

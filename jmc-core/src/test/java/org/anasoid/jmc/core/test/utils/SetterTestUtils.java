@@ -22,6 +22,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -175,12 +176,12 @@ public final class SetterTestUtils {
       } else if (field.getType() == String.class) {
         byte[] array = new byte[7];
         rnd.nextBytes(array);
-        value = new String(array, Charset.forName("UTF-8"));
+        value = new String(array, StandardCharsets.UTF_8);
         method.invoke(testElement, value);
       } else if (field.getType() == Variable.class) {
         byte[] array = new byte[7];
         rnd.nextBytes(array);
-        value = new Variable(new String(array, Charset.forName("UTF-8")));
+        value = new Variable(new String(array, StandardCharsets.UTF_8));
         method.invoke(testElement, value);
       } else if (field.getType().isEnum()) {
         byte[] array = new byte[7];

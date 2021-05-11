@@ -118,7 +118,7 @@ public class HTMLAssertionWrapper extends AbstractBasicChildTestElementWrapper<H
 
     public final Long value;
 
-    private Format(Long value) {
+    Format(Long value) {
       this.value = value;
     }
 
@@ -141,7 +141,7 @@ public class HTMLAssertionWrapper extends AbstractBasicChildTestElementWrapper<H
 
     public final String value;
 
-    private Doctype(String value) {
+    Doctype(String value) {
       this.value = value;
     }
 

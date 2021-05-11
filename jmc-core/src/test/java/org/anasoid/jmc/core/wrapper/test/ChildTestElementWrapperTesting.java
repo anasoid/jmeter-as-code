@@ -49,8 +49,8 @@ public abstract class ChildTestElementWrapperTesting<
   @JmcProperty("child.onSampleError")
   @Builder.Default
   @Getter
-  private OnSampleError onSampleError = OnSampleError.ON_SAMPLE_ERROR_CONTINUE;
+  private final OnSampleError onSampleError = OnSampleError.ON_SAMPLE_ERROR_CONTINUE;
 
   @Builder.Default @Getter
-  private OnSampleError onSampleError2 = OnSampleError.ON_SAMPLE_ERROR_STOPTEST;
+  private final OnSampleError onSampleError2 = OnSampleError.ON_SAMPLE_ERROR_STOPTEST;
 }

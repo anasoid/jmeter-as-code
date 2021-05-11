@@ -35,7 +35,7 @@ public enum MatchingRule {
 
   public final int value;
 
-  private MatchingRule(int value) {
+  MatchingRule(int value) {
     this.value = value;
   }
 

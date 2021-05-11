@@ -49,7 +49,7 @@ public enum FieldToCheck {
 
   public final String value;
 
-  private FieldToCheck(String value) {
+  FieldToCheck(String value) {
     this.value = value;
   }
 

@@ -45,10 +45,7 @@ class RandomOrderControllerXmlWrapperTest extends AbstractJmcTest {
         TestPlanWrapper.builder()
             .addThread(
                 ThreadGroupWrapper.builder()
-                    .addController(
-                        RandomOrderControllerWrapper.builder()
-                            .withName("Random Order Controller")
-                            .build())
+                    .addController(RandomOrderControllerWrapper.builder().build())
                     .build())
             .build();
 

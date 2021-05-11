@@ -44,8 +44,7 @@ class SwitchControllerWrapperXmlTest extends AbstractJmcTest {
         TestPlanWrapper.builder()
             .addThread(
                 ThreadGroupWrapper.builder()
-                    .addController(
-                        SwitchControllerWrapper.builder().withName("Switch Controller").build())
+                    .addController(SwitchControllerWrapper.builder().build())
                     .build())
             .build();
 
@@ -60,10 +59,7 @@ class SwitchControllerWrapperXmlTest extends AbstractJmcTest {
             .addThread(
                 ThreadGroupWrapper.builder()
                     .addController(
-                        SwitchControllerWrapper.builder()
-                            .withName("Switch Controller")
-                            .withSwitchValue("${switch}")
-                            .build())
+                        SwitchControllerWrapper.builder().withSwitchValue("${switch}").build())
                     .build())
             .build();
 

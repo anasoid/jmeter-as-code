@@ -23,5 +23,5 @@ import org.apache.jmeter.gui.JMeterGUIComponent;
 /** Gui WRAPPER. */
 public interface JMeterGUIWrapper<G extends JMeterGUIComponent> {
   /** Gui Test Class used by Jmeter TestElement.GUI_CLASS @See TestElement */
-  public abstract Class<?> getGuiClass();
+  Class<?> getGuiClass();
 }

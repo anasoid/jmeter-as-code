@@ -62,10 +62,10 @@ public class BackendListenerWrapper extends AbstractBasicChildTestElementWrapper
   @JmcSkipDefault("5000")
   private String queueSize = "5000";
 
-  @XStreamOmitField @Getter private String className;
+  @XStreamOmitField @Getter private final String className;
 
-  @XStreamOmitField @Getter private BackendListenerClient implementation;
-  @XStreamOmitField @Default @Getter private Map<String, String> arguments = new HashMap<>();
+  @XStreamOmitField @Getter private final BackendListenerClient implementation;
+  @XStreamOmitField @Default @Getter private final Map<String, String> arguments = new HashMap<>();
 
   @JmcProperty("classname")
   @JmcMandatory

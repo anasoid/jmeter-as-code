@@ -43,7 +43,7 @@ public abstract class AbstractScopedTestElementWrapper<
 
   @JmcProperty("Scope.variable")
   @Getter
-  private String scopeVariable;
+  private final String scopeVariable;
 
   @JmcProperty("Sample.scope")
   @Getter

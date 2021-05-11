@@ -37,10 +37,7 @@ class RecordingControllerXmlWrapperTest extends AbstractJmcTest {
         TestPlanWrapper.builder()
             .addThread(
                 ThreadGroupWrapper.builder()
-                    .addController(
-                        RecordingControllerWrapper.builder()
-                            .withName("Recording Controller")
-                            .build())
+                    .addController(RecordingControllerWrapper.builder().build())
                     .build())
             .build();
 

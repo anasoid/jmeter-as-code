@@ -142,7 +142,7 @@ public class HtmlExtractorWrapper
 
     public final String value;
 
-    private ExtractorImpl(String value) {
+    ExtractorImpl(String value) {
       this.value = value;
     }
 

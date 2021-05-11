@@ -33,6 +33,7 @@ import org.anasoid.jmc.core.config.JmcConfig;
 import org.anasoid.jmc.core.wrapper.jmc.Variable;
 import org.anasoid.jmc.core.wrapper.jmc.config.ShareMode;
 import org.anasoid.jmc.core.wrapper.jmc.validator.Validator;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.anasoid.jmc.core.xstream.annotations.JmcNullAllowed;
 import org.anasoid.jmc.core.xstream.annotations.JmcProperty;
 import org.anasoid.jmc.core.xstream.exceptions.ConversionException;
@@ -47,6 +48,7 @@ import org.apache.jmeter.testbeans.gui.TestBeanGUI;
  * @see CSVDataSet
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@JmcDefaultName("CSV Data Set Config")
 @SuppressWarnings("PMD.TooManyMethods")
 public class CSVDataSetWrapper extends ConfigTestElementWrapper<CSVDataSet, TestBeanGUI>
     implements Validator {
@@ -63,7 +65,7 @@ public class CSVDataSetWrapper extends ConfigTestElementWrapper<CSVDataSet, Test
   @JmcNullAllowed
   private String fileEncoding;
 
-  @XStreamOmitField @Getter @Default private List<Variable> variables = new ArrayList<>();
+  @XStreamOmitField @Getter @Default private final List<Variable> variables = new ArrayList<>();
   /**
    * Ignore first line of CSV file, it will only be used if Variable Names is not empty, if Variable
    * Names is empty the first line must contain the headers.

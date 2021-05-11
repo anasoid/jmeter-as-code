@@ -23,6 +23,7 @@ import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.anasoid.jmc.core.xstream.annotations.JmcProperty;
 import org.apache.jmeter.control.RandomController;
 import org.apache.jmeter.control.gui.RandomControlGui;
@@ -33,6 +34,7 @@ import org.apache.jmeter.control.gui.RandomControlGui;
  * @see RandomController
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@JmcDefaultName("Random Controller")
 @SuppressWarnings("PMD.RedundantFieldInitializer")
 public class RandomControllerWrapper
     extends GenericControllerWrapper<RandomController, RandomControlGui> {

@@ -19,6 +19,7 @@
 package org.anasoid.jmc.core.wrapper.jmeter.control;
 
 import lombok.experimental.SuperBuilder;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.apache.jmeter.control.OnceOnlyController;
 import org.apache.jmeter.control.gui.OnceOnlyControllerGui;
 
@@ -28,6 +29,7 @@ import org.apache.jmeter.control.gui.OnceOnlyControllerGui;
  * @see OnceOnlyController
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@JmcDefaultName("Once Only Controller")
 public class OnceOnlyControllerWrapper
     extends GenericControllerWrapper<OnceOnlyController, OnceOnlyControllerGui> {
 

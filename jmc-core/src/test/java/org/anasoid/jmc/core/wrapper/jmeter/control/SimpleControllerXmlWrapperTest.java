@@ -37,8 +37,7 @@ class SimpleControllerXmlWrapperTest extends AbstractJmcTest {
         TestPlanWrapper.builder()
             .addThread(
                 ThreadGroupWrapper.builder()
-                    .addController(
-                        SimpleControllerWrapper.builder().withName("Simple Controller").build())
+                    .addController(SimpleControllerWrapper.builder().build())
                     .build())
             .build();
 

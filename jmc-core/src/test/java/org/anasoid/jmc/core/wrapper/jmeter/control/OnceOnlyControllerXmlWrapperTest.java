@@ -44,10 +44,7 @@ class OnceOnlyControllerXmlWrapperTest extends AbstractJmcTest {
         TestPlanWrapper.builder()
             .addThread(
                 ThreadGroupWrapper.builder()
-                    .addController(
-                        OnceOnlyControllerWrapper.builder()
-                            .withName("Once Only Controller")
-                            .build())
+                    .addController(OnceOnlyControllerWrapper.builder().build())
                     .build())
             .build();
 

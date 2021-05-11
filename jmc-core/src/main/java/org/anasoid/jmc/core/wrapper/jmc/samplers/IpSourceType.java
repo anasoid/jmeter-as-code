@@ -35,7 +35,7 @@ public enum IpSourceType {
 
   public final Integer value;
 
-  private IpSourceType(Integer value) {
+  IpSourceType(Integer value) {
     this.value = value;
   }
 

@@ -41,9 +41,7 @@ class RandomVariableConfigWrapperXmlTest extends AbstractJmcTest {
   void testDefault() throws IOException {
 
     TestPlanWrapper testPlanWrapper =
-        TestPlanWrapper.builder()
-            .addConfig(RandomVariableConfigWrapper.builder().withName("Random Variable").build())
-            .build();
+        TestPlanWrapper.builder().addConfig(RandomVariableConfigWrapper.builder().build()).build();
 
     checkWrapper(testPlanWrapper, PARENT_PATH + "/randomvariable.default.jmx", NODE_NAME);
   }

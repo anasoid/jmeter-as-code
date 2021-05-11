@@ -27,5 +27,5 @@ public interface Converter<S, D> {
    * @param source source object.
    * @return converted object.
    */
-  public D convert(S source);
+  D convert(S source);
 }

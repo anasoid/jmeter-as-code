@@ -44,7 +44,7 @@ public abstract class AbstractBasicTestElementWrapper<T extends AbstractTestElem
   @XStreamOmitField private static final long serialVersionUID = 5001920204233593046L;
   @XStreamOmitField private boolean isInitialized;
 
-  @Default @Getter @XStreamOmitField private Set<String> tags = new HashSet<>();
+  @Default @Getter @XStreamOmitField private final Set<String> tags = new HashSet<>();
 
   @Override
   public final void init() {

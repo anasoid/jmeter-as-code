@@ -32,7 +32,7 @@ public enum ShareMode {
 
   public final String value;
 
-  private ShareMode(String value) {
+  ShareMode(String value) {
     this.value = value;
   }
 

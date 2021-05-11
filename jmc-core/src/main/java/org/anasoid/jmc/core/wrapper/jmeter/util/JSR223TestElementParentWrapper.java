@@ -20,6 +20,7 @@ package org.anasoid.jmc.core.wrapper.jmeter.util;
 
 import lombok.Builder.Default;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmc.core.xstream.annotations.JmcProperty;
 import org.apache.jmeter.gui.AbstractJMeterGuiComponent;
@@ -39,6 +40,7 @@ public abstract class JSR223TestElementParentWrapper<
 
   @JmcProperty(value = "cacheKey", type = String.class)
   @Getter
+  @Setter
   @Default
   private Boolean cacheKey = true;
 }

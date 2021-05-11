@@ -19,6 +19,7 @@
 package org.anasoid.jmc.core.wrapper.jmeter.control;
 
 import lombok.experimental.SuperBuilder;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.apache.jmeter.control.RandomOrderController;
 import org.apache.jmeter.control.gui.RandomOrderControllerGui;
 
@@ -28,6 +29,7 @@ import org.apache.jmeter.control.gui.RandomOrderControllerGui;
  * @see RandomOrderController
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@JmcDefaultName("Random Order Controller")
 public class RandomOrderControllerWrapper
     extends GenericControllerWrapper<RandomOrderController, RandomOrderControllerGui> {
 

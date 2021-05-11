@@ -23,6 +23,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmc.core.wrapper.jmeter.config.ConfigElementWrapper;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.anasoid.jmc.core.xstream.annotations.JmcMandatory;
 import org.anasoid.jmc.core.xstream.annotations.JmcProperty;
 import org.anasoid.jmc.core.xstream.annotations.JmcSkipDefault;
@@ -35,6 +36,7 @@ import org.apache.jmeter.control.gui.IfControllerPanel;
  * @see IfController
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@JmcDefaultName("If Controller")
 @SuppressWarnings("PMD.RedundantFieldInitializer")
 public class IfControllerWrapper extends GenericControllerWrapper<IfController, IfControllerPanel> {
 

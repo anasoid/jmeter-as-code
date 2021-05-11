@@ -48,7 +48,7 @@ public enum OnSampleError {
 
   public final String value;
 
-  private OnSampleError(String value) {
+  OnSampleError(String value) {
     this.value = value;
   }
 
