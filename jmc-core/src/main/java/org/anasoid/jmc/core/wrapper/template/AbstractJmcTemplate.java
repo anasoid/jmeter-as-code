@@ -41,13 +41,21 @@ public abstract class AbstractJmcTemplate<W extends AbstractBasicTestElementWrap
    *
    * @param builder input is returned by method init().
    */
-  protected void prepare(JmcWrapperBuilder<W> builder) {}
+  protected void prepareBuilder(JmcWrapperBuilder<W> builder) {}
+
+  /**
+   * finalize wrapper to custom more attributes.
+   *
+   * @param wrapper Wrapper.
+   */
+  protected void prepareWrapper(W wrapper) {}
 
   @Override
   public final W generate() {
     JmcWrapperBuilder<W> b = init();
-    prepare(b);
+    prepareBuilder(b);
     W result = b.build();
+    prepareWrapper(result);
     return result;
   }
 }
