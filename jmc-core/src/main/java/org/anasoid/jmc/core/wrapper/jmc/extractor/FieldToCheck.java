@@ -18,7 +18,6 @@
 
 package org.anasoid.jmc.core.wrapper.jmc.extractor;
 
-
 /** enum for field check. */
 public enum FieldToCheck {
 
@@ -30,15 +29,15 @@ public enum FieldToCheck {
   BODY("false"),
 
   /**
-   * Body as a Document - the extract text from various type of documents via Apache Tika (see
-   * View Results Tree Document view section).
+   * Body as a Document - the extract text from various type of documents via Apache Tika (see View
+   * Results Tree Document view section).
    */
   BODY_AS_DOCUMENT("as_document"),
   /**
    * the body of the response, with all Html escape codes replaced. Note that Html escapes are
    * processed without regard to context, so some incorrect substitutions may be made. (Note that
-   * this option highly impacts performances, so use it only when absolutely necessary and be
-   * aware of its impacts).
+   * this option highly impacts performances, so use it only when absolutely necessary and be aware
+   * of its impacts).
    */
   BODY_UNESCAPED("unescaped"),
   /** Url. */
@@ -50,7 +49,7 @@ public enum FieldToCheck {
 
   public final String value;
 
-  private FieldToCheck(String value) {
+  FieldToCheck(String value) {
     this.value = value;
   }
 

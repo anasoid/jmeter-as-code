@@ -32,7 +32,7 @@ import org.xmlunit.diff.Difference;
 /** Util to compare XML. */
 public final class JmcXmlComparator {
 
-  private static String NAME_KEY = "name";
+  private static final String NAME_KEY = "name";
 
   private JmcXmlComparator() {}
 

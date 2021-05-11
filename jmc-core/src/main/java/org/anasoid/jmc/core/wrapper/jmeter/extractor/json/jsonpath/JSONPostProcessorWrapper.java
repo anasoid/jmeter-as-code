@@ -31,6 +31,7 @@ import org.anasoid.jmc.core.wrapper.jmc.Variable;
 import org.anasoid.jmc.core.wrapper.jmc.validator.Validator;
 import org.anasoid.jmc.core.wrapper.jmeter.processor.PostProcessorWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.AbstractScopedTestElementWrapper;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.anasoid.jmc.core.xstream.annotations.JmcMandatory;
 import org.anasoid.jmc.core.xstream.annotations.JmcNullAllowed;
 import org.anasoid.jmc.core.xstream.annotations.JmcProperty;
@@ -48,40 +49,18 @@ import org.apache.jmeter.extractor.json.jsonpath.gui.JSONPostProcessorGui;
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 @SuppressWarnings("PMD.RedundantFieldInitializer")
+@JmcDefaultName("JSON Extractor")
 public class JSONPostProcessorWrapper
     extends AbstractScopedTestElementWrapper<JSONPostProcessor, JSONPostProcessorGui>
     implements PostProcessorWrapper<JSONPostProcessor>, Validator {
 
   /** JSON-PATH expressions (must match number of variables). */
   @XStreamOmitField @Getter @Setter private List<String> jsonPathExprs;
-
-  @JmcProperty("JSONPostProcessor.jsonPathExprs")
-  @JmcMandatory
-  protected String jsonPathExprsProp() {
-
-    if (CollectionUtils.isEmpty(jsonPathExprs)) {
-      return null;
-    }
-    return String.join(";", jsonPathExprs);
-  }
-
   /**
    * Semi-colon separated names of variables that will contain the results of JSON-PATH expressions
    * (must match number of JSON-PATH expressions).
    */
   @XStreamOmitField @Getter @Setter private List<Variable> referenceNames;
-
-  @JmcProperty("JSONPostProcessor.referenceNames")
-  @JmcMandatory
-  protected String referenceNamesProp() {
-
-    if (CollectionUtils.isEmpty(referenceNames)) {
-      return null;
-    }
-    return String.join(
-        ";", referenceNames.stream().map(Variable::getName).collect(Collectors.toList()));
-  }
-
   /**
    * If the JSON Path query leads to many results, you can choose which one(s) to extract as
    * Variables:
@@ -96,22 +75,11 @@ public class JSONPostProcessorWrapper
   @Setter
   @JmcNullAllowed
   private String matchNumber;
-
   /**
    * Semi-colon separated default values if JSON-PATH expressions do not return any result(must
    * match number of variables).
    */
   @XStreamOmitField @Getter @Setter private List<String> defaultValues;
-
-  @JmcProperty("JSONPostProcessor.defaultValues")
-  protected String defaultValuesProp() {
-
-    if (CollectionUtils.isEmpty(defaultValues)) {
-      return null;
-    }
-    return String.join(";", defaultValues);
-  }
-
   /**
    * Default value returned when no match found. It is also returned if the node has no value and
    * the fragment option is not selected.
@@ -122,6 +90,36 @@ public class JSONPostProcessorWrapper
   @Setter
   @Default
   private boolean computeConcat = false;
+
+  @JmcProperty("JSONPostProcessor.jsonPathExprs")
+  @JmcMandatory
+  protected String jsonPathExprsProp() {
+
+    if (CollectionUtils.isEmpty(jsonPathExprs)) {
+      return null;
+    }
+    return String.join(";", jsonPathExprs);
+  }
+
+  @JmcProperty("JSONPostProcessor.referenceNames")
+  @JmcMandatory
+  protected String referenceNamesProp() {
+
+    if (CollectionUtils.isEmpty(referenceNames)) {
+      return null;
+    }
+    return String.join(
+        ";", referenceNames.stream().map(Variable::getName).collect(Collectors.toList()));
+  }
+
+  @JmcProperty("JSONPostProcessor.defaultValues")
+  protected String defaultValuesProp() {
+
+    if (CollectionUtils.isEmpty(defaultValues)) {
+      return null;
+    }
+    return String.join(";", defaultValues);
+  }
 
   @Override
   public Class<?> getGuiClass() {

@@ -26,8 +26,7 @@ import org.junit.jupiter.api.Test;
 
 class MD5HexAssertionWrapperXmlTest extends AbstractJmcTest {
 
-  private static final String PARENT_PATH =
-      "org/anasoid/jmc/core/wrapper/jmeter/assertions";
+  private static final String PARENT_PATH = "org/anasoid/jmc/core/wrapper/jmeter/assertions";
 
   private static final String NODE_NAME = "MD5HexAssertion";
 
@@ -42,12 +41,7 @@ class MD5HexAssertionWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
-            .addAssertion(
-                MD5HexAssertionWrapper.builder()
-                    .withName("MD5Hex Assertion")
-                    .withMd5hex("123")
-                    .build())
+            .addAssertion(MD5HexAssertionWrapper.builder().withMd5hex("123").build())
             .build();
 
     checkWrapper(testPlanWrapper, PARENT_PATH + "/md5HexAssertion.default.jmx", NODE_NAME);

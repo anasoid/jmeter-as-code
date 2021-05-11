@@ -22,6 +22,7 @@ import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.anasoid.jmc.core.xstream.annotations.JmcNullAllowed;
 import org.anasoid.jmc.core.xstream.annotations.JmcProperty;
 import org.apache.jmeter.control.ForeachController;
@@ -33,6 +34,7 @@ import org.apache.jmeter.control.gui.ForeachControlPanel;
  * @see ForeachController
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@JmcDefaultName("ForEach Controller")
 @SuppressWarnings("PMD.RedundantFieldInitializer")
 public class ForeachControllerWrapper
     extends GenericControllerWrapper<ForeachController, ForeachControlPanel> {

@@ -42,7 +42,6 @@ class XPathExtractorWrapperTest extends AbstractJmcTest {
     try {
       XPathExtractorWrapper wrapper =
           XPathExtractorWrapper.builder()
-              .withName("XPath Extractor")
               .withRefName("var")
               .withXpathQuery("query")
               .withUseTidy(true)
@@ -64,7 +63,6 @@ class XPathExtractorWrapperTest extends AbstractJmcTest {
     try {
       XPathExtractorWrapper wrapper =
           XPathExtractorWrapper.builder()
-              .withName("XPath Extractor")
               .withRefName("var")
               .withXpathQuery("query")
               .withTidyShowWarnings(true)

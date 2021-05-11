@@ -26,8 +26,7 @@ import org.junit.jupiter.api.Test;
 
 class DurationAssertionWrapperXmlTest extends AbstractJmcTest {
 
-  private static final String PARENT_PATH =
-      "org/anasoid/jmc/core/wrapper/jmeter/assertions";
+  private static final String PARENT_PATH = "org/anasoid/jmc/core/wrapper/jmeter/assertions";
 
   private static final String NODE_NAME = "DurationAssertion";
 
@@ -36,12 +35,7 @@ class DurationAssertionWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
-            .addAssertion(
-                DurationAssertionWrapper.builder()
-                    .withName("Duration Assertion")
-                    .withDuration(1000)
-                    .build())
+            .addAssertion(DurationAssertionWrapper.builder().withDuration(1000).build())
             .build();
 
     checkWrapper(testPlanWrapper, PARENT_PATH + "/durationAssertion.default.jmx", NODE_NAME);
@@ -52,7 +46,6 @@ class DurationAssertionWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addAssertion(
                 DurationAssertionWrapper.builder()
                     .withName("Duration Assertion inverse")

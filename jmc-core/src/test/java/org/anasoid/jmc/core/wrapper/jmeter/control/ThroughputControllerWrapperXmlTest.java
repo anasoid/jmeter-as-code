@@ -29,8 +29,7 @@ import org.junit.jupiter.api.Test;
 
 class ThroughputControllerWrapperXmlTest extends AbstractJmcTest {
 
-  private static final String PARENT_PATH =
-      "org/anasoid/jmc/core/wrapper/jmeter/control";
+  private static final String PARENT_PATH = "org/anasoid/jmc/core/wrapper/jmeter/control";
 
   private static final String NODE_NAME = "ThroughputController";
 
@@ -45,15 +44,10 @@ class ThroughputControllerWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addThread(
                 ThreadGroupWrapper.builder()
-                    .withName("Thread Group")
                     .addController(
-                        ThroughputControllerWrapper.builder()
-                            .withName("Throughput Controller")
-                            .withMaxThroughput(1)
-                            .build())
+                        ThroughputControllerWrapper.builder().withMaxThroughput(1).build())
                     .build())
             .build();
 
@@ -66,13 +60,10 @@ class ThroughputControllerWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addThread(
                 ThreadGroupWrapper.builder()
-                    .withName("Thread Group")
                     .addController(
                         ThroughputControllerWrapper.builder()
-                            .withName("Throughput Controller")
                             .withMaxThroughput(new Variable("thr"))
                             .withPerUser(true)
                             .withExecutionStyle(ExecutionStyle.TotalExecutions)

@@ -13,35 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * @author : anas
- * Date :   12-Apr-2021
+ * Date :   11-May-2021
  */
 
-package org.anasoid.jmc.core.wrapper.jmc.config;
+package org.anasoid.jmc.core.wrapper.jmeter.testelement;
 
-/** Shared data mode. */
-public enum ShareMode {
+/** Interface to be implemented by tree node. */
+public interface TestElementTreeNodeWrapper<T> extends TestElementWrapper<T> {
 
-  /** All threads - (the default) the file is shared between all the threads. */
-  SHARE_ALL("shareMode.all"),
+  /** Name. */
+  String getName();
 
-  /** each file is opened once for each thread group in which the element appears. */
-  SHARE_GROUP("shareMode.group"),
+  /** Name. */
+  void setName(String name);
 
-  /** each file is opened separately for each thread. */
-  SHARE_THREAD("shareMode.thread");
+  /** Comment. */
+  String getComment();
 
-  public final String value;
-
-  ShareMode(String value) {
-    this.value = value;
-  }
-
-  public String value() {
-    return value;
-  }
-
-  @Override
-  public String toString() {
-    return value;
-  }
+  /** Comment. */
+  void setComment(String comment);
 }

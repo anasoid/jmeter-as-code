@@ -27,8 +27,7 @@ import org.junit.jupiter.api.Test;
 
 class InterleaveControlWrapperXmlTest extends AbstractJmcTest {
 
-  private static final String PARENT_PATH =
-      "org/anasoid/jmc/core/wrapper/jmeter/control";
+  private static final String PARENT_PATH = "org/anasoid/jmc/core/wrapper/jmeter/control";
 
   private static final String NODE_NAME = "InterleaveControl";
 
@@ -43,14 +42,9 @@ class InterleaveControlWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addThread(
                 ThreadGroupWrapper.builder()
-                    .withName("Thread Group")
-                    .addController(
-                        InterleaveControlWrapper.builder()
-                            .withName("Interleave Controller")
-                            .build())
+                    .addController(InterleaveControlWrapper.builder().build())
                     .build())
             .build();
 
@@ -62,13 +56,10 @@ class InterleaveControlWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addThread(
                 ThreadGroupWrapper.builder()
-                    .withName("Thread Group")
                     .addController(
                         InterleaveControlWrapper.builder()
-                            .withName("Interleave Controller")
                             .withAccrossThreads(true)
                             .withIgnoreSubController(true)
                             .build())

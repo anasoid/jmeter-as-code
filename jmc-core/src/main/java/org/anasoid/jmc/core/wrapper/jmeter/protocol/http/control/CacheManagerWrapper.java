@@ -24,6 +24,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmc.core.wrapper.jmeter.config.ConfigTestElementWrapper;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.anasoid.jmc.core.xstream.annotations.JmcProperty;
 import org.anasoid.jmc.core.xstream.annotations.JmcSkipDefault;
 import org.apache.jmeter.protocol.http.control.CacheManager;
@@ -36,6 +37,7 @@ import org.apache.jmeter.protocol.http.gui.CacheManagerGui;
  */
 @SuppressWarnings("PMD.RedundantFieldInitializer")
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@JmcDefaultName("HTTP Cache Manager")
 public class CacheManagerWrapper extends ConfigTestElementWrapper<CacheManager, CacheManagerGui> {
 
   @XStreamOmitField private static final long serialVersionUID = -4068882490947271216L;

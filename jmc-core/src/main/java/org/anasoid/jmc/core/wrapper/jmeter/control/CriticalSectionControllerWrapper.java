@@ -21,6 +21,7 @@ package org.anasoid.jmc.core.wrapper.jmeter.control;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.anasoid.jmc.core.xstream.annotations.JmcMandatory;
 import org.anasoid.jmc.core.xstream.annotations.JmcProperty;
 import org.apache.jmeter.control.CriticalSectionController;
@@ -32,6 +33,7 @@ import org.apache.jmeter.control.gui.CriticalSectionControllerGui;
  * @see CriticalSectionController
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@JmcDefaultName("Critical Section Controller")
 public class CriticalSectionControllerWrapper
     extends GenericControllerWrapper<CriticalSectionController, CriticalSectionControllerGui> {
 

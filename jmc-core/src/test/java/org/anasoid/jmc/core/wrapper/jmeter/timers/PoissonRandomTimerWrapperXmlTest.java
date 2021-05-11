@@ -42,12 +42,7 @@ class PoissonRandomTimerWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
-            .addTimer(
-                PoissonRandomTimerWrapper.builder()
-                    .withName("Poisson Random Timer")
-                    .withLambda("100")
-                    .build())
+            .addTimer(PoissonRandomTimerWrapper.builder().withLambda("100").build())
             .build();
 
     checkWrapper(testPlanWrapper, PARENT_PATH + "/poissonRandomTimer.default.jmx", NODE_NAME);
@@ -58,10 +53,8 @@ class PoissonRandomTimerWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addTimer(
                 PoissonRandomTimerWrapper.builder()
-                    .withName("Poisson Random Timer")
                     .withDelay(new Variable("delay"))
                     .withLambda(new Variable("lambda"))
                     .build())

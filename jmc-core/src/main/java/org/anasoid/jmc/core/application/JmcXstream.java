@@ -44,7 +44,6 @@ public class JmcXstream extends XStream {
   public JmcXstream() {
     super(new JmcXppDriver());
     this.setMode(XStream.NO_REFERENCES);
-    //this.aliasSystemAttribute(null, "class");
     this.alias("hashTree", HashTree.class);
     List<Class<?>> clazzs = new ArrayList<>();
     clazzs.add(ScriptWrapper.class);

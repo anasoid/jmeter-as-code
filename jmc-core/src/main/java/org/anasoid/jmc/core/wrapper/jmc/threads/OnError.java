@@ -52,7 +52,7 @@ public enum OnError {
 
   public final String value;
 
-  private OnError(String value) {
+  OnError(String value) {
     this.value = value;
   }
 

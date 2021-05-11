@@ -32,10 +32,8 @@ class BackendListenerWrapperXmlTest extends AbstractJmcTest {
   void testDefault() throws IOException {
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addListener(
                 BackendListenerWrapper.builder()
-                    .withName("Backend Listener")
                     .withImplementation(BackendListenerClient.InfluxDBRawBackendListenerClient)
                     .build())
             .build();
@@ -47,10 +45,8 @@ class BackendListenerWrapperXmlTest extends AbstractJmcTest {
   void testInverse() throws IOException {
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addListener(
                 BackendListenerWrapper.builder()
-                    .withName("Backend Listener")
                     .withImplementation(BackendListenerClient.GraphiteBackendListenerClient)
                     .addArgument("myvar", "var")
                     .addArgument("myempty", "")

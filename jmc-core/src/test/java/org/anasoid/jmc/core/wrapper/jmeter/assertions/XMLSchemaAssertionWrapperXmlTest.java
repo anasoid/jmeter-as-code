@@ -26,8 +26,7 @@ import org.junit.jupiter.api.Test;
 
 class XMLSchemaAssertionWrapperXmlTest extends AbstractJmcTest {
 
-  private static final String PARENT_PATH =
-      "org/anasoid/jmc/core/wrapper/jmeter/assertions";
+  private static final String PARENT_PATH = "org/anasoid/jmc/core/wrapper/jmeter/assertions";
 
   private static final String NODE_NAME = "XMLSchemaAssertion";
 
@@ -42,12 +41,7 @@ class XMLSchemaAssertionWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
-            .addAssertion(
-                XMLSchemaAssertionWrapper.builder()
-                    .withName("XML Schema Assertion")
-                    .withFilename("myfile")
-                    .build())
+            .addAssertion(XMLSchemaAssertionWrapper.builder().withFilename("myfile").build())
             .build();
 
     checkWrapper(testPlanWrapper, PARENT_PATH + "/xmlSchemaAssertion.default.jmx", NODE_NAME);

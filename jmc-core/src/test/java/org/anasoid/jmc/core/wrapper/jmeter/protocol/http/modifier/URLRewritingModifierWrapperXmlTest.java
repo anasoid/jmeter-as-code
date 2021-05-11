@@ -34,16 +34,11 @@ class URLRewritingModifierWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addPreProcessor(
-                URLRewritingModifierWrapper.builder()
-                    .withName("HTTP URL Re-writing Modifier")
-                    .withArgumentName("session")
-                    .build())
+                URLRewritingModifierWrapper.builder().withArgumentName("session").build())
             .build();
 
-    checkWrapper(testPlanWrapper, PARENT_PATH + "/httpurlrewritingmodifier.default.jmx",
-        NODE_NAME);
+    checkWrapper(testPlanWrapper, PARENT_PATH + "/httpurlrewritingmodifier.default.jmx", NODE_NAME);
   }
 
   @Test
@@ -51,7 +46,6 @@ class URLRewritingModifierWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addPreProcessor(
                 URLRewritingModifierWrapper.builder()
                     .withName("HTTP URL Re-writing Modifier inverse")
@@ -65,7 +59,6 @@ class URLRewritingModifierWrapperXmlTest extends AbstractJmcTest {
             .build();
 
     checkWrapper(
-        testPlanWrapper, PARENT_PATH + "/httpurlrewritingmodifier.default.inverse.jmx",
-        NODE_NAME);
+        testPlanWrapper, PARENT_PATH + "/httpurlrewritingmodifier.default.inverse.jmx", NODE_NAME);
   }
 }

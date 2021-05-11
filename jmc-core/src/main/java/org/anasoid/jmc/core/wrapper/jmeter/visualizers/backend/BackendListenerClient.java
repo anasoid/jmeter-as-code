@@ -73,7 +73,7 @@ public enum BackendListenerClient {
   private final String value;
   private final Map<String, String> defaultValue;
 
-  private BackendListenerClient(String value, Map<String, String> defaultValue) {
+  BackendListenerClient(String value, Map<String, String> defaultValue) {
     this.value = value;
     this.defaultValue = defaultValue;
   }

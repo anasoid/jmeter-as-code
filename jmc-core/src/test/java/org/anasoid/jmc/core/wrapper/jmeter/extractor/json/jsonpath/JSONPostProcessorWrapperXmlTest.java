@@ -30,16 +30,13 @@ class JSONPostProcessorWrapperXmlTest extends AbstractJmcTest {
 
   private static final String NODE_NAME = "JSONPostProcessor";
 
-
   @Test
   void testDefault() throws IOException {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addPostProcessor(
                 JSONPostProcessorWrapper.builder()
-                    .withName("JSON Extractor")
                     .addReferenceName(new Variable("var1"))
                     .addJsonPathExpr("express")
                     .build())
@@ -53,7 +50,6 @@ class JSONPostProcessorWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addPostProcessor(
                 JSONPostProcessorWrapper.builder()
                     .withName("JSON Extractor inverse")

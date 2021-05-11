@@ -40,13 +40,10 @@ class HTTPArgumentWrapperXMLTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addThread(
                 ThreadGroupWrapper.builder()
-                    .withName("Thread Group")
                     .addSampler(
                         HTTPSamplerProxyWrapper.builder()
-                            .withName("HTTP Request")
                             .withPath("")
                             .addArgument(
                                 HTTPArgumentWrapper.builder()

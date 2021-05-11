@@ -26,8 +26,7 @@ import org.junit.jupiter.api.Test;
 
 class RecordingControllerXmlWrapperTest extends AbstractJmcTest {
 
-  private static final String PARENT_PATH =
-      "org/anasoid/jmc/core/wrapper/jmeter/control";
+  private static final String PARENT_PATH = "org/anasoid/jmc/core/wrapper/jmeter/control";
 
   private static final String NODE_NAME = "RecordingController";
 
@@ -36,17 +35,11 @@ class RecordingControllerXmlWrapperTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addThread(
                 ThreadGroupWrapper.builder()
-                    .withName("Thread Group")
-                    .addController(
-                        RecordingControllerWrapper.builder()
-                            .withName("Recording Controller")
-                            .build())
+                    .addController(RecordingControllerWrapper.builder().build())
                     .build())
             .build();
-
 
     checkWrapper(testPlanWrapper, PARENT_PATH + "/controller.default.jmx", NODE_NAME);
   }

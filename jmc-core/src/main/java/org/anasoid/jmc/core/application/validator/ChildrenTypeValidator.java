@@ -30,6 +30,21 @@ import org.anasoid.jmc.core.xstream.exceptions.ConversionIllegalStateException;
 /** Validate type of children, When access directly to child list, children can be not valid. */
 public class ChildrenTypeValidator implements NodeValidator {
 
+  /** is field/method will be converted as property. */
+  @SuppressWarnings({"PMD.EmptyCatchBlock", "PMD.AvoidDeeplyNestedIfStmts"})
+  public static Set<Class<?>> getTypes(TestElementWrapper<?> testElementWrapper) {
+    Set<Class<?>> result = new HashSet<>();
+    Class<?> item = testElementWrapper.getClass();
+    while (item != Object.class) {
+      JmcChildrenTypes[] jmcChildrenTypes = item.getAnnotationsByType(JmcChildrenTypes.class);
+      for (JmcChildrenTypes j : jmcChildrenTypes) {
+        result.addAll(Arrays.asList(j.type()));
+      }
+      item = item.getSuperclass();
+    }
+    return result;
+  }
+
   @Override
   @SuppressWarnings("PMD.AvoidUncheckedExceptionsInSignatures")
   public void validate(TestElementWrapper testElementWrapper)
@@ -49,21 +64,5 @@ public class ChildrenTypeValidator implements NodeValidator {
         }
       }
     }
-  }
-
-  /** is field/method will be converted as property. */
-  @SuppressWarnings({"PMD.EmptyCatchBlock", "PMD.AvoidDeeplyNestedIfStmts"})
-  public static Set<Class<?>> getTypes(TestElementWrapper<?> testElementWrapper) {
-    Set<Class<?>> result = new HashSet<>();
-    Class<?> item = testElementWrapper.getClass();
-    while (item != Object.class) {
-      JmcChildrenTypes[] jmcChildrenTypes =
-          item.getAnnotationsByType(JmcChildrenTypes.class);
-      for (JmcChildrenTypes j : jmcChildrenTypes) {
-        result.addAll(Arrays.asList(j.type()));
-      }
-      item = item.getSuperclass();
-    }
-    return result;
   }
 }

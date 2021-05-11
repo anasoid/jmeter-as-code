@@ -24,6 +24,7 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmc.core.wrapper.jmeter.config.ConfigElementWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.reporters.ResultCollectorWrapper;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.anasoid.jmc.core.xstream.annotations.JmcProperty;
 import org.anasoid.jmc.core.xstream.annotations.JmcSkipDefault;
 import org.apache.jmeter.reporters.ResultCollector;
@@ -35,6 +36,7 @@ import org.apache.jmeter.visualizers.SummaryReport;
  * @see SummaryReport
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@JmcDefaultName("Summary Report")
 @SuppressWarnings({"PMD.RedundantFieldInitializer", "PMD.TooManyFields"})
 public class SummaryReportWrapper extends ResultCollectorWrapper<ResultCollector, SummaryReport> {
 

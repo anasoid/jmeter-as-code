@@ -25,8 +25,7 @@ import org.junit.jupiter.api.Test;
  */
 
 class SummariserWrapperXmlTest extends AbstractJmcTest {
-  private static final String PARENT_PATH =
-      "org/anasoid/jmc/core/wrapper/jmeter/reporters";
+  private static final String PARENT_PATH = "org/anasoid/jmc/core/wrapper/jmeter/reporters";
 
   private static final String NODE_NAME = "Summariser";
 
@@ -39,10 +38,7 @@ class SummariserWrapperXmlTest extends AbstractJmcTest {
   @Test
   void testDefault() throws IOException {
     TestPlanWrapper testPlanWrapper =
-        TestPlanWrapper.builder()
-            .withName("Test Plan")
-            .addListener(SummariserWrapper.builder().withName("Generate Summary Results").build())
-            .build();
+        TestPlanWrapper.builder().addListener(SummariserWrapper.builder().build()).build();
 
     checkWrapper(testPlanWrapper, PARENT_PATH + "/generateSummaryResults.default.jmx", NODE_NAME);
   }

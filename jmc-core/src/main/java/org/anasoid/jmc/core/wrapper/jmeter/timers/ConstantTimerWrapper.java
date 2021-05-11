@@ -19,6 +19,7 @@
 package org.anasoid.jmc.core.wrapper.jmeter.timers;
 
 import lombok.experimental.SuperBuilder;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.apache.jmeter.timers.ConstantTimer;
 import org.apache.jmeter.timers.gui.ConstantTimerGui;
 
@@ -28,6 +29,7 @@ import org.apache.jmeter.timers.gui.ConstantTimerGui;
  * @see ConstantTimer
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@JmcDefaultName("Constant Timer")
 @SuppressWarnings({"PMD.RedundantFieldInitializer", "PMD.AvoidUncheckedExceptionsInSignatures"})
 public class ConstantTimerWrapper
     extends AbstractConstantTimerWrapper<ConstantTimer, ConstantTimerGui> {

@@ -19,11 +19,13 @@
 package org.anasoid.jmc.core.wrapper.jmeter.control;
 
 import lombok.experimental.SuperBuilder;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.apache.jmeter.control.GenericController;
 import org.apache.jmeter.control.gui.LogicControllerGui;
 
 /** Wrapper for Simple Controller. */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@JmcDefaultName("Simple Controller")
 public class SimpleControllerWrapper
     extends GenericControllerWrapper<GenericController, LogicControllerGui> {
 

@@ -21,6 +21,7 @@ package org.anasoid.jmc.core.wrapper.jmeter.modifiers;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmc.core.wrapper.jmeter.processor.PreProcessorWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.util.JSR223TestElementWrapper;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.apache.jmeter.modifiers.JSR223PreProcessor;
 import org.apache.jmeter.testbeans.gui.TestBeanGUI;
 
@@ -30,6 +31,7 @@ import org.apache.jmeter.testbeans.gui.TestBeanGUI;
  * @see JSR223PreProcessor
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@JmcDefaultName("JSR223 PreProcessor")
 public class JSR223PreProcessorWrapper
     extends JSR223TestElementWrapper<JSR223PreProcessor, TestBeanGUI>
     implements PreProcessorWrapper<JSR223PreProcessor> {

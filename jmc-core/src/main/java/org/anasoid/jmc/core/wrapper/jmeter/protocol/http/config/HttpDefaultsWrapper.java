@@ -32,6 +32,7 @@ import org.anasoid.jmc.core.wrapper.jmc.samplers.IpSourceType;
 import org.anasoid.jmc.core.wrapper.jmeter.config.ConfigTestElementWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.protocol.http.util.HTTPArgumentWrapper;
 import org.anasoid.jmc.core.xstream.annotations.JmcCollection;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.anasoid.jmc.core.xstream.annotations.JmcEmptyAllowed;
 import org.anasoid.jmc.core.xstream.annotations.JmcMethodAlias;
 import org.anasoid.jmc.core.xstream.annotations.JmcNullAllowed;
@@ -51,6 +52,7 @@ import org.apache.jmeter.protocol.http.sampler.HTTPSamplerBase;
  * @see HttpDefaultsGui
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@JmcDefaultName("HTTP Request Defaults")
 @SuppressWarnings({"PMD.TooManyFields"})
 public class HttpDefaultsWrapper
     extends ConfigTestElementWrapper<ConfigTestElement, HttpDefaultsGui> {
@@ -140,23 +142,14 @@ public class HttpDefaultsWrapper
   @JmcProperty(HTTPSamplerBase.POST_BODY_RAW)
   @Getter
   private final Boolean postBodyRaw;
-
-  /** Embedded Resources from HTML Files: Concurrent pool for parallel download. */
-  @JmcProperty(value = HTTPSamplerBase.CONCURRENT_POOL)
-  @Default
-  @Getter
-  private String concurrentPool = String.valueOf(HTTPSamplerBase.CONCURRENT_POOL_SIZE);
-
   /** Embedded Resources from HTML Files: URLs must match. */
   @JmcProperty(value = HTTPSamplerBase.EMBEDDED_URL_RE)
   @Getter
   private final String embeddedUrlRE;
-
   /** Embedded Resources from HTML Files: URLs must not match. */
   @JmcProperty(HTTPSamplerBase.EMBEDDED_URL_EXCLUDE_RE)
   @Getter
   private final String embeddedUrlExcludeRE;
-
   /** Embedded Resources from HTML Files: Parallel downloads. */
   @JmcProperty(HTTPSamplerBase.CONCURRENT_DWN)
   @Getter
@@ -168,6 +161,11 @@ public class HttpDefaultsWrapper
 
   @Getter @Default @XStreamOmitField
   private final List<HTTPArgumentWrapper> arguments = new ArrayList<>();
+  /** Embedded Resources from HTML Files: Concurrent pool for parallel download. */
+  @JmcProperty(value = HTTPSamplerBase.CONCURRENT_POOL)
+  @Default
+  @Getter
+  private final String concurrentPool = String.valueOf(HTTPSamplerBase.CONCURRENT_POOL_SIZE);
 
   /**
    * Arguments format when User Defined Variables.

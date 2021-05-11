@@ -48,13 +48,10 @@ class HTTPFileArgWrapperXMLTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addThread(
                 ThreadGroupWrapper.builder()
-                    .withName("Thread Group")
                     .addSampler(
                         HTTPSamplerProxyWrapper.builder()
-                            .withName("HTTP Request")
                             .withPath("")
                             .addFileArgument(
                                 HTTPFileArgWrapper.builder()
@@ -74,7 +71,5 @@ class HTTPFileArgWrapperXMLTest extends AbstractJmcTest {
     Diff diff = JmcXmlComparator.compare(expectedContentFragment, wrapperContentFragment);
     Assertions.assertFalse(
         JmcXmlComparator.hasDifferences(diff), "httpfielarg  not identical " + diff);
-
-
   }
 }

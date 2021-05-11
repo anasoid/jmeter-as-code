@@ -22,6 +22,7 @@ import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.anasoid.jmc.core.xstream.annotations.JmcNullAllowed;
 import org.anasoid.jmc.core.xstream.annotations.JmcProperty;
 import org.apache.jmeter.control.WhileController;
@@ -33,6 +34,7 @@ import org.apache.jmeter.control.gui.WhileControllerGui;
  * @see WhileController
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@JmcDefaultName("While Controller")
 public class WhileControllerWrapper
     extends GenericControllerWrapper<WhileController, WhileControllerGui> {
 

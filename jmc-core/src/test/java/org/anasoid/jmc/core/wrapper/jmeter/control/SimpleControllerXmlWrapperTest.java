@@ -26,8 +26,7 @@ import org.junit.jupiter.api.Test;
 
 class SimpleControllerXmlWrapperTest extends AbstractJmcTest {
 
-  private static final String PARENT_PATH =
-      "org/anasoid/jmc/core/wrapper/jmeter/control";
+  private static final String PARENT_PATH = "org/anasoid/jmc/core/wrapper/jmeter/control";
 
   private static final String NODE_NAME = "GenericController";
 
@@ -36,12 +35,9 @@ class SimpleControllerXmlWrapperTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addThread(
                 ThreadGroupWrapper.builder()
-                    .withName("Thread Group")
-                    .addController(
-                        SimpleControllerWrapper.builder().withName("Simple Controller").build())
+                    .addController(SimpleControllerWrapper.builder().build())
                     .build())
             .build();
 

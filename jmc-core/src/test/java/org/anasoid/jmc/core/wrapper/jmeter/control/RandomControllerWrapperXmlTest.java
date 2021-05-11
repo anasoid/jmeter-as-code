@@ -27,8 +27,7 @@ import org.junit.jupiter.api.Test;
 
 class RandomControllerWrapperXmlTest extends AbstractJmcTest {
 
-  private static final String PARENT_PATH =
-      "org/anasoid/jmc/core/wrapper/jmeter/control";
+  private static final String PARENT_PATH = "org/anasoid/jmc/core/wrapper/jmeter/control";
 
   private static final String NODE_NAME = "RandomController";
 
@@ -43,14 +42,9 @@ class RandomControllerWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addThread(
                 ThreadGroupWrapper.builder()
-                    .withName("Thread Group")
-                    .addController(
-                        RandomControllerWrapper.builder()
-                            .withName("Random Controller")
-                            .build())
+                    .addController(RandomControllerWrapper.builder().build())
                     .build())
             .build();
 
@@ -62,15 +56,10 @@ class RandomControllerWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addThread(
                 ThreadGroupWrapper.builder()
-                    .withName("Thread Group")
                     .addController(
-                        RandomControllerWrapper.builder()
-                            .withName("Random Controller")
-                            .withIgnoreSubController(true)
-                            .build())
+                        RandomControllerWrapper.builder().withIgnoreSubController(true).build())
                     .build())
             .build();
 

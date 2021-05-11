@@ -22,6 +22,7 @@ import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.anasoid.jmc.core.xstream.annotations.JmcProperty;
 import org.apache.jmeter.sampler.DebugSampler;
 import org.apache.jmeter.testbeans.gui.TestBeanGUI;
@@ -32,6 +33,7 @@ import org.apache.jmeter.testbeans.gui.TestBeanGUI;
  * @see DebugSampler
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@JmcDefaultName("Debug Sampler")
 @SuppressWarnings("PMD.RedundantFieldInitializer")
 public class DebugSamplerWrapper extends AbstractSamplerWrapper<DebugSampler, TestBeanGUI> {
 

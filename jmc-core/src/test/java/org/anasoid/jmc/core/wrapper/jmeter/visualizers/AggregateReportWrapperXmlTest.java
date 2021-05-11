@@ -24,18 +24,14 @@ import org.junit.jupiter.api.Test;
  */
 
 class AggregateReportWrapperXmlTest extends AbstractJmcTest {
-  private static final String PARENT_PATH =
-      "org/anasoid/jmc/core/wrapper/jmeter/visualizers";
+  private static final String PARENT_PATH = "org/anasoid/jmc/core/wrapper/jmeter/visualizers";
 
   private static final String NODE_NAME = "ResultCollector";
 
   @Test
   void testDefault() throws IOException {
     TestPlanWrapper testPlanWrapper =
-        TestPlanWrapper.builder()
-            .withName("Test Plan")
-            .addListener(AggregateReportWrapper.builder().withName("Aggregate Report").build())
-            .build();
+        TestPlanWrapper.builder().addListener(AggregateReportWrapper.builder().build()).build();
 
     checkWrapper(testPlanWrapper, PARENT_PATH + "/aggregateReport.default.jmx", NODE_NAME);
   }
@@ -44,10 +40,8 @@ class AggregateReportWrapperXmlTest extends AbstractJmcTest {
   void testDefaultAllTrue() throws IOException {
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addListener(
                 AggregateReportWrapper.builder()
-                    .withName("Aggregate Report")
                     .withLogSuccess(true)
                     .withSaveConfiguration(
                         SampleSaveConfigurationWrapper.builder()
@@ -90,10 +84,8 @@ class AggregateReportWrapperXmlTest extends AbstractJmcTest {
   void testInverseAllFalse() throws IOException {
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addListener(
                 AggregateReportWrapper.builder()
-                    .withName("Aggregate Report")
                     .withLogError(true)
                     .withFilename("/result.jtl")
                     .withSaveHeaders(false)

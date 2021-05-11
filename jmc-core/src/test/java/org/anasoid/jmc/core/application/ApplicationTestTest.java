@@ -57,32 +57,6 @@ class ApplicationTestTest {
     Assertions.assertEquals("sub2prepared", child4.getName());
   }
 
-  class ParentPrepareInterceptor implements PrepareInterceptor {
-
-    @Override
-    public boolean support(TestElementWrapper<?> testElementWrapper) {
-      return testElementWrapper instanceof ParentTestElementWrapperTesting
-          || testElementWrapper instanceof ChildTestElementWrapperTesting;
-    }
-
-    @Override
-    public void prepare(TestElementWrapper<?> testElementWrapper) {
-
-      if (testElementWrapper instanceof ParentTestElementWrapperTesting) {
-        ParentTestElementWrapperTesting parent =
-            (ParentTestElementWrapperTesting) testElementWrapper;
-        parent
-            .getChilds()
-            .add(0, SubChildTestingElementWrapperTesting.builder().withName("newnode").build());
-      } else if (testElementWrapper instanceof ChildTestElementWrapperTesting) {
-        ChildTestElementWrapperTesting child = (ChildTestElementWrapperTesting) testElementWrapper;
-        if (child.getTags().contains("toprepare")) {
-          child.setName(child.getName() + "prepared");
-        }
-      }
-    }
-  }
-
   private ParentTestElementWrapperTesting getTestElement() {
 
     // First sub
@@ -117,5 +91,31 @@ class ApplicationTestTest {
             .build();
 
     return parentTestElementWrapperTesting;
+  }
+
+  class ParentPrepareInterceptor implements PrepareInterceptor {
+
+    @Override
+    public boolean support(TestElementWrapper<?> testElementWrapper) {
+      return testElementWrapper instanceof ParentTestElementWrapperTesting
+          || testElementWrapper instanceof ChildTestElementWrapperTesting;
+    }
+
+    @Override
+    public void prepare(TestElementWrapper<?> testElementWrapper) {
+
+      if (testElementWrapper instanceof ParentTestElementWrapperTesting) {
+        ParentTestElementWrapperTesting parent =
+            (ParentTestElementWrapperTesting) testElementWrapper;
+        parent
+            .getChilds()
+            .add(0, SubChildTestingElementWrapperTesting.builder().withName("newnode").build());
+      } else if (testElementWrapper instanceof ChildTestElementWrapperTesting) {
+        ChildTestElementWrapperTesting child = (ChildTestElementWrapperTesting) testElementWrapper;
+        if (child.getTags().contains("toprepare")) {
+          child.setName(child.getName() + "prepared");
+        }
+      }
+    }
   }
 }

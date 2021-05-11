@@ -34,6 +34,7 @@ import org.anasoid.jmc.core.wrapper.jmeter.gui.JMeterGUIWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.samplers.SampleListenerWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.basic.AbstractBasicChildTestElementWrapper;
 import org.anasoid.jmc.core.xstream.annotations.JmcCollection;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.anasoid.jmc.core.xstream.annotations.JmcEmptyAllowed;
 import org.anasoid.jmc.core.xstream.annotations.JmcMandatory;
 import org.anasoid.jmc.core.xstream.annotations.JmcProperty;
@@ -50,10 +51,15 @@ import org.apache.jmeter.visualizers.backend.BackendListenerGui;
  * @see BackendListener
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@JmcDefaultName("Backend Listener")
 public class BackendListenerWrapper extends AbstractBasicChildTestElementWrapper<BackendListener>
     implements JMeterGUIWrapper<BackendListenerGui>,
-    SampleListenerWrapper<BackendListener>,
-    Validator {
+        SampleListenerWrapper<BackendListener>,
+        Validator {
+
+  @XStreamOmitField @Getter private final String className;
+  @XStreamOmitField @Getter private final BackendListenerClient implementation;
+  @XStreamOmitField @Default @Getter private final Map<String, String> arguments = new HashMap<>();
 
   @JmcProperty("QUEUE_SIZE")
   @Getter
@@ -61,10 +67,6 @@ public class BackendListenerWrapper extends AbstractBasicChildTestElementWrapper
   @Default
   @JmcSkipDefault("5000")
   private String queueSize = "5000";
-
-  @XStreamOmitField @Getter private String className;
-
-  @XStreamOmitField @Getter private BackendListenerClient implementation;
 
   @JmcProperty("classname")
   @JmcMandatory
@@ -74,8 +76,6 @@ public class BackendListenerWrapper extends AbstractBasicChildTestElementWrapper
     }
     return implementation.value();
   }
-
-  @XStreamOmitField @Default @Getter private Map<String, String> arguments = new HashMap<>();
 
   @JmcCollection(
       value = Arguments.ARGUMENTS,

@@ -21,6 +21,7 @@ package org.anasoid.jmc.core.wrapper.jmeter.control;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.anasoid.jmc.core.xstream.annotations.JmcMandatory;
 import org.anasoid.jmc.core.xstream.annotations.JmcNullAllowed;
 import org.anasoid.jmc.core.xstream.annotations.JmcProperty;
@@ -33,6 +34,7 @@ import org.apache.jmeter.control.gui.SwitchControllerGui;
  * @see SwitchController
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@JmcDefaultName("Switch Controller")
 public class SwitchControllerWrapper
     extends GenericControllerWrapper<SwitchController, SwitchControllerGui> {
 

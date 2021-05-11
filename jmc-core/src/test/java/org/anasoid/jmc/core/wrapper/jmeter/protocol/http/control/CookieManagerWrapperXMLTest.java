@@ -38,18 +38,12 @@ class CookieManagerWrapperXMLTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addThread(
                 ThreadGroupWrapper.builder()
-                    .withName("Thread Group")
                     .addSampler(
                         HTTPSamplerProxyWrapper.builder()
-                            .withName("HTTP Request")
                             .withPath("")
-                            .addConfig(
-                                CookieManagerWrapper.builder()
-                                    .withName("HTTP Cookie Manager")
-                                    .build())
+                            .addConfig(CookieManagerWrapper.builder().build())
                             .build())
                     .build())
             .build();
@@ -62,17 +56,13 @@ class CookieManagerWrapperXMLTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addThread(
                 ThreadGroupWrapper.builder()
-                    .withName("Thread Group")
                     .addSampler(
                         HTTPSamplerProxyWrapper.builder()
-                            .withName("HTTP Request")
                             .withPath("")
                             .addConfig(
                                 CookieManagerWrapper.builder()
-                                    .withName("HTTP Cookie Manager")
                                     .withClearEachIteration(true)
                                     .withControlledByThreadGroup(true)
                                     .withComment("comment")

@@ -24,11 +24,13 @@ import java.util.Arrays;
 import java.util.List;
 import lombok.Builder.Default;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmc.core.wrapper.jmc.assertions.AssertionField;
 import org.anasoid.jmc.core.wrapper.jmc.assertions.MatchingRule;
 import org.anasoid.jmc.core.wrapper.jmeter.JmeterConstants.JmeterProperty;
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.AbstractScopedAssertionWrapper;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.anasoid.jmc.core.xstream.annotations.JmcMethodAlias;
 import org.anasoid.jmc.core.xstream.annotations.JmcProperty;
 import org.apache.jmeter.assertions.ResponseAssertion;
@@ -41,6 +43,7 @@ import org.apache.jmeter.testelement.property.CollectionProperty;
  * @see ResponseAssertion
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@JmcDefaultName("Response Assertion")
 @SuppressWarnings("PMD.RedundantFieldInitializer")
 public class ResponseAssertionWrapper
     extends AbstractScopedAssertionWrapper<ResponseAssertion, AssertionGui> {
@@ -52,24 +55,28 @@ public class ResponseAssertionWrapper
 
   @JmcProperty("Assertion.custom_message")
   @Getter
+  @Setter
   @Default
   private String customMessage = "";
 
   @JmcProperty("Assertion.assume_success")
   @Getter
+  @Setter
   @Default
   private Boolean ignoreStatus = false;
 
   @JmcProperty("Assertion.test_field")
   @Getter
+  @Setter
   @Default
   private AssertionField fieldToTest = AssertionField.RESPONSE_DATA;
 
-  @Getter @XStreamOmitField @Default private MatchingRule matchingRule = MatchingRule.SUBSTRING;
+  @Getter @Setter @XStreamOmitField @Default
+  private MatchingRule matchingRule = MatchingRule.SUBSTRING;
 
-  @Getter @XStreamOmitField @Default private boolean not = false; // NOSONAR
+  @Getter @Setter @XStreamOmitField @Default private boolean not = false; // NOSONAR
 
-  @Getter @XStreamOmitField @Default private boolean or = false; // NOSONAR
+  @Getter @Setter @XStreamOmitField @Default private boolean or = false; // NOSONAR
 
   @Getter @Default @XStreamOmitField private List<String> patterns = new ArrayList<>();
 
@@ -100,6 +107,16 @@ public class ResponseAssertionWrapper
     return result;
   }
 
+  @Override
+  public Class<?> getGuiClass() {
+    return AssertionGui.class;
+  }
+
+  @Override
+  public Class<?> getTestClass() {
+    return ResponseAssertion.class;
+  }
+
   /** Builder. */
   public abstract static class ResponseAssertionWrapperBuilder<
           C extends ResponseAssertionWrapper, B extends ResponseAssertionWrapperBuilder<C, B>>
@@ -124,15 +141,5 @@ public class ResponseAssertionWrapper
     public B addPattern(String pattern) {
       return addPatterns(Arrays.asList(pattern));
     }
-  }
-
-  @Override
-  public Class<?> getGuiClass() {
-    return AssertionGui.class;
-  }
-
-  @Override
-  public Class<?> getTestClass() {
-    return ResponseAssertion.class;
   }
 }

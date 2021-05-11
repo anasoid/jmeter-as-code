@@ -22,6 +22,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 import lombok.Builder.Default;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.basic.AbstractBasicTestElementWrapper;
 import org.anasoid.jmc.core.xstream.annotations.JmcNullAllowed;
@@ -41,18 +42,20 @@ public abstract class AbstractArgumentWrapper<T extends Argument>
   @XStreamAsAttribute
   @XStreamAlias("name")
   @Getter
-  private String name;
+  private final String name;
 
   @JmcProperty(Argument.VALUE)
   @JmcNullAllowed
-  private @Getter String value;
+  private @Getter final String value;
+
+  @JmcProperty(Argument.DESCRIPTION)
+  private @Getter final String description;
 
   @JmcProperty(Argument.METADATA)
   @Default
-  private @Getter String metadata = "=";
-
-  @JmcProperty(Argument.DESCRIPTION)
-  private @Getter String description;
+  @Setter
+  @Getter
+  private String metadata = "=";
 
   @JmcProperty(Argument.ARG_NAME)
   @JmcSkipDefault("")

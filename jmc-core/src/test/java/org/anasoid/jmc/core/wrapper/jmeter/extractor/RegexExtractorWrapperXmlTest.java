@@ -36,10 +36,8 @@ class RegexExtractorWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addPostProcessor(
                 RegexExtractorWrapper.builder()
-                    .withName("Regular Expression Extractor")
                     .withRefName("var")
                     .withMatchNumber("0")
                     .withTemplate("template")
@@ -57,10 +55,8 @@ class RegexExtractorWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addPostProcessor(
                 RegexExtractorWrapper.builder()
-                    .withName("Regular Expression Extractor")
                     .withRefName("var")
                     .withMatchNumber("0")
                     .withTemplate("template")
@@ -78,7 +74,6 @@ class RegexExtractorWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addPostProcessor(
                 RegexExtractorWrapper.builder()
                     .withName("Regular Expression Extractor inverse")

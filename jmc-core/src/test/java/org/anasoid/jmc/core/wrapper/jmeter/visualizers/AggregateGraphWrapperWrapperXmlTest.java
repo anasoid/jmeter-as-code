@@ -25,8 +25,7 @@ import org.junit.jupiter.api.Test;
  */
 
 class AggregateGraphWrapperWrapperXmlTest extends AbstractJmcTest {
-  private static final String PARENT_PATH =
-      "org/anasoid/jmc/core/wrapper/jmeter/visualizers";
+  private static final String PARENT_PATH = "org/anasoid/jmc/core/wrapper/jmeter/visualizers";
 
   private static final String NODE_NAME = "ResultCollector";
 
@@ -39,11 +38,7 @@ class AggregateGraphWrapperWrapperXmlTest extends AbstractJmcTest {
   @Test
   void testDefault() throws IOException {
     TestPlanWrapper testPlanWrapper =
-        TestPlanWrapper.builder()
-            .withName("Test Plan")
-            .addListener(
-                AggregateGraphWrapper.builder().withName("Aggregate Graph").build())
-            .build();
+        TestPlanWrapper.builder().addListener(AggregateGraphWrapper.builder().build()).build();
 
     checkWrapper(testPlanWrapper, PARENT_PATH + "/aggregateGraph.default.jmx", NODE_NAME);
   }

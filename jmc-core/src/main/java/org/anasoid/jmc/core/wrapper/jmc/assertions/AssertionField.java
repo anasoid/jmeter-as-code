@@ -51,7 +51,7 @@ public enum AssertionField {
 
   public final String value;
 
-  private AssertionField(String value) {
+  AssertionField(String value) {
     this.value = value;
   }
 

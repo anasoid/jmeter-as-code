@@ -33,10 +33,7 @@ class CacheManagerWrapperXMLTest extends AbstractJmcTest {
   void testDefault() throws IOException {
 
     TestPlanWrapper testPlanWrapper =
-        TestPlanWrapper.builder()
-            .withName("Test Plan")
-            .addConfig(CacheManagerWrapper.builder().withName("HTTP Cache Manager").build())
-            .build();
+        TestPlanWrapper.builder().addConfig(CacheManagerWrapper.builder().build()).build();
 
     checkWrapper(testPlanWrapper, PARENT_PATH + "/httpcachemanager.default.jmx", NODE_NAME);
   }
@@ -46,7 +43,6 @@ class CacheManagerWrapperXMLTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addConfig(
                 CacheManagerWrapper.builder()
                     .withName("HTTP Cache Manager Reverse")

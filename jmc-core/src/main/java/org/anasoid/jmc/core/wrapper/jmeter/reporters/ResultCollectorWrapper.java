@@ -56,15 +56,6 @@ public abstract class ResultCollectorWrapper<
 
   @XStreamOmitField @Getter @Setter String filename;
 
-  @JmcProperty("filename")
-  protected String getFilePath() {
-
-    if (filename == null) {
-      return "";
-    }
-    return JmcConfig.getResultRootFolder() + filename;
-  }
-
   @JmcProperty("ResultCollector.error_logging")
   @Getter
   @Setter
@@ -77,6 +68,15 @@ public abstract class ResultCollectorWrapper<
   @Default
   @JmcSkipDefault(ConfigElementWrapper.FALSE)
   boolean logSuccess = false;
+
+  @JmcProperty("filename")
+  protected String getFilePath() {
+
+    if (filename == null) {
+      return "";
+    }
+    return JmcConfig.getResultRootFolder() + filename;
+  }
 
   @JmcMethodAlias(JmeterProperty.OBJECT_PROP)
   protected ObjectProperty getSaveConfig() {

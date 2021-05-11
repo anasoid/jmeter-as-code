@@ -27,8 +27,7 @@ import org.junit.jupiter.api.Test;
 
 class CriticalSectionControllerWrapperXmlTest extends AbstractJmcTest {
 
-  private static final String PARENT_PATH =
-      "org/anasoid/jmc/core/wrapper/jmeter/control";
+  private static final String PARENT_PATH = "org/anasoid/jmc/core/wrapper/jmeter/control";
 
   private static final String NODE_NAME = "CriticalSectionController";
 
@@ -43,13 +42,10 @@ class CriticalSectionControllerWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addThread(
                 ThreadGroupWrapper.builder()
-                    .withName("Thread Group")
                     .addController(
                         CriticalSectionControllerWrapper.builder()
-                            .withName("Critical Section Controller")
                             .withLockName("global_lock")
                             .build())
                     .build())

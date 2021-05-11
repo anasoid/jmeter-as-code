@@ -21,6 +21,7 @@ package org.anasoid.jmc.core.wrapper.jmeter.reporters;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmc.core.wrapper.jmeter.processor.PostProcessorWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.OnErrorTestElementWrapper;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.apache.jmeter.reporters.ResultAction;
 import org.apache.jmeter.reporters.gui.ResultActionGui;
 
@@ -30,6 +31,7 @@ import org.apache.jmeter.reporters.gui.ResultActionGui;
  * @see ResultAction
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@JmcDefaultName("Result Status Action Handler")
 public class ResultActionWrapper extends OnErrorTestElementWrapper<ResultAction, ResultActionGui>
     implements PostProcessorWrapper<ResultAction> {
 

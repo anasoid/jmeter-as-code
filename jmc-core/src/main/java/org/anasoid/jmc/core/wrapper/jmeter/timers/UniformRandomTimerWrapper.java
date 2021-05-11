@@ -20,6 +20,7 @@ package org.anasoid.jmc.core.wrapper.jmeter.timers;
 
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmc.core.wrapper.jmc.Variable;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.apache.jmeter.timers.UniformRandomTimer;
 import org.apache.jmeter.timers.gui.UniformRandomTimerGui;
 
@@ -30,6 +31,7 @@ import org.apache.jmeter.timers.gui.UniformRandomTimerGui;
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 @SuppressWarnings({"PMD.RedundantFieldInitializer", "PMD.AvoidUncheckedExceptionsInSignatures"})
+@JmcDefaultName("Uniform Random Timer")
 public class UniformRandomTimerWrapper
     extends RandomTimerWrapper<UniformRandomTimer, UniformRandomTimerGui> {
 

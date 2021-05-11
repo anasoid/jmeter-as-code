@@ -24,8 +24,7 @@ import org.junit.jupiter.api.Test;
 
 class XPathAssertionWrapperXmlTest extends AbstractJmcTest {
 
-  private static final String PARENT_PATH =
-      "org/anasoid/jmc/core/wrapper/jmeter/assertions";
+  private static final String PARENT_PATH = "org/anasoid/jmc/core/wrapper/jmeter/assertions";
 
   private static final String NODE_NAME = "XPathAssertion";
 
@@ -34,9 +33,7 @@ class XPathAssertionWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
-            .addAssertion(
-                XPathAssertionWrapper.builder().withName("XPath Assertion").withXpath("/").build())
+            .addAssertion(XPathAssertionWrapper.builder().withXpath("/").build())
             .build();
 
     checkWrapper(testPlanWrapper, PARENT_PATH + "/XPathAssertion.default.jmx", NODE_NAME);
@@ -47,10 +44,8 @@ class XPathAssertionWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addAssertion(
                 XPathAssertionWrapper.builder()
-                    .withName("XPath Assertion")
                     .withXpath("tidy")
                     .withUseTidy(true)
                     .withNegate(true)
@@ -65,7 +60,6 @@ class XPathAssertionWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addAssertion(
                 XPathAssertionWrapper.builder()
                     .withName("XPath Assertion inverse")
@@ -86,7 +80,6 @@ class XPathAssertionWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addAssertion(
                 XPathAssertionWrapper.builder()
                     .withName("XPath Assertion inverse")

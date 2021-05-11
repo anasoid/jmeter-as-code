@@ -29,6 +29,7 @@ import lombok.experimental.SuperBuilder;
 import org.anasoid.jmc.core.wrapper.jmeter.config.ConfigElementWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.processor.PostProcessorWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.AbstractScopedTestElementWrapper;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.anasoid.jmc.core.xstream.annotations.JmcMandatory;
 import org.anasoid.jmc.core.xstream.annotations.JmcProperty;
 import org.anasoid.jmc.core.xstream.annotations.JmcSkipDefault;
@@ -42,6 +43,7 @@ import org.apache.jmeter.extractor.gui.XPath2ExtractorGui;
  * @see XPath2Extractor
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@JmcDefaultName("XPath2 Extractor")
 @SuppressWarnings("PMD.RedundantFieldInitializer")
 public class XPath2ExtractorWrapper
     extends AbstractScopedTestElementWrapper<XPath2Extractor, XPath2ExtractorGui>

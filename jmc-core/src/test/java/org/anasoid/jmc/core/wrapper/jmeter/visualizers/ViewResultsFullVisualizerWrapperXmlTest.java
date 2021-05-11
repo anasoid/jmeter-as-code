@@ -25,8 +25,7 @@ import org.junit.jupiter.api.Test;
  */
 
 class ViewResultsFullVisualizerWrapperXmlTest extends AbstractJmcTest {
-  private static final String PARENT_PATH =
-      "org/anasoid/jmc/core/wrapper/jmeter/visualizers";
+  private static final String PARENT_PATH = "org/anasoid/jmc/core/wrapper/jmeter/visualizers";
 
   private static final String NODE_NAME = "ResultCollector";
 
@@ -40,9 +39,7 @@ class ViewResultsFullVisualizerWrapperXmlTest extends AbstractJmcTest {
   void testDefault() throws IOException {
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
-            .addListener(
-                ViewResultsFullVisualizerWrapper.builder().withName("View Results Tree").build())
+            .addListener(ViewResultsFullVisualizerWrapper.builder().build())
             .build();
 
     checkWrapper(testPlanWrapper, PARENT_PATH + "/viewResultsTree.default.jmx", NODE_NAME);

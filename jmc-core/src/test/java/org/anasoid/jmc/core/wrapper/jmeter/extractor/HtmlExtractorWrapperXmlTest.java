@@ -37,10 +37,8 @@ class HtmlExtractorWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addPostProcessor(
                 HtmlExtractorWrapper.builder()
-                    .withName("CSS Selector Extractor")
                     .withQueryExpression("expres")
                     .withRefName("var")
                     .withMatchNumber("0")
@@ -56,10 +54,8 @@ class HtmlExtractorWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addPostProcessor(
                 HtmlExtractorWrapper.builder()
-                    .withName("CSS Selector Extractor")
                     .withQueryExpression("expres")
                     .withRefName("var")
                     .withMatchNumber("0")
@@ -76,7 +72,6 @@ class HtmlExtractorWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addPostProcessor(
                 HtmlExtractorWrapper.builder()
                     .withName("CSS Selector Extractor inverse")

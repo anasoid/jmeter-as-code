@@ -27,8 +27,7 @@ import org.junit.jupiter.api.Test;
 
 class DebugSamplerWrapperXmlTest extends AbstractJmcTest {
 
-  private static final String PARENT_PATH =
-      "org/anasoid/jmc/core/wrapper/jmeter/samplers";
+  private static final String PARENT_PATH = "org/anasoid/jmc/core/wrapper/jmeter/samplers";
 
   private static final String NODE_NAME = "DebugSampler";
 
@@ -43,11 +42,9 @@ class DebugSamplerWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName(DEFAULT_TEST_PLAN)
             .addThread(
                 ThreadGroupWrapper.builder()
-                    .withName(DEFAULT_THREAD_GROUP)
-                    .addSampler(DebugSamplerWrapper.builder().withName("Debug Sampler").build())
+                    .addSampler(DebugSamplerWrapper.builder().build())
                     .build())
             .build();
 
@@ -59,13 +56,10 @@ class DebugSamplerWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName(DEFAULT_TEST_PLAN)
             .addThread(
                 ThreadGroupWrapper.builder()
-                    .withName(DEFAULT_THREAD_GROUP)
                     .addSampler(
                         DebugSamplerWrapper.builder()
-                            .withName("Debug Sampler")
                             .withDisplayJMeterProperties(true)
                             .withDisplaySystemProperties(true)
                             .withDisplayJMeterVariables(false)

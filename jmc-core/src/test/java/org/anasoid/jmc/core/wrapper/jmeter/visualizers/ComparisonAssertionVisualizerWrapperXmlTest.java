@@ -25,8 +25,7 @@ import org.junit.jupiter.api.Test;
  */
 
 class ComparisonAssertionVisualizerWrapperXmlTest extends AbstractJmcTest {
-  private static final String PARENT_PATH =
-      "org/anasoid/jmc/core/wrapper/jmeter/visualizers";
+  private static final String PARENT_PATH = "org/anasoid/jmc/core/wrapper/jmeter/visualizers";
 
   private static final String NODE_NAME = "ResultCollector";
 
@@ -40,11 +39,7 @@ class ComparisonAssertionVisualizerWrapperXmlTest extends AbstractJmcTest {
   void testDefault() throws IOException {
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
-            .addListener(
-                ComparisonAssertionVisualizerWrapper.builder()
-                    .withName("Comparison Assertion Visualizer")
-                    .build())
+            .addListener(ComparisonAssertionVisualizerWrapper.builder().build())
             .build();
 
     checkWrapper(

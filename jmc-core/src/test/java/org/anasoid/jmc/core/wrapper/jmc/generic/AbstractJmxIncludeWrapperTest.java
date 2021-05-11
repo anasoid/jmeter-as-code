@@ -36,8 +36,7 @@ import org.xmlunit.diff.Diff;
 
 class AbstractJmxIncludeWrapperTest extends AbstractJmcTest {
 
-  private static final String PARENT_PATH =
-      "org/anasoid/jmc/core/wrapper/jmeter/jmc/generic";
+  private static final String PARENT_PATH = "org/anasoid/jmc/core/wrapper/jmeter/jmc/generic";
 
   @Test
   void testRegex() throws IOException {
@@ -77,10 +76,8 @@ class AbstractJmxIncludeWrapperTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName(DEFAULT_TEST_PLAN)
             .addThread(
                 ThreadGroupWrapper.builder()
-                    .withName(DEFAULT_THREAD_GROUP)
                     .addSampler(
                         SamplerJmxIncludeWrapper.builder()
                             .withPath(PARENT_PATH + "/node.http.sampler.jmx")
@@ -96,10 +93,8 @@ class AbstractJmxIncludeWrapperTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName(DEFAULT_TEST_PLAN)
             .addThread(
                 ThreadGroupWrapper.builder()
-                    .withName(DEFAULT_THREAD_GROUP)
                     .addSampler(
                         SamplerJmxIncludeWrapper.builder()
                             .withPath(PARENT_PATH + "/node.http.sampler.param.jmx")
@@ -115,10 +110,8 @@ class AbstractJmxIncludeWrapperTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName(DEFAULT_TEST_PLAN)
             .addThread(
                 ThreadGroupWrapper.builder()
-                    .withName(DEFAULT_THREAD_GROUP)
                     .addSampler(ParamSamplerJmxIncludeWrapperTesting.builder().build())
                     .build())
             .build();
@@ -131,10 +124,8 @@ class AbstractJmxIncludeWrapperTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName(DEFAULT_TEST_PLAN)
             .addThread(
                 ThreadGroupWrapper.builder()
-                    .withName(DEFAULT_THREAD_GROUP)
                     .addSampler(
                         ParamSamplerJmxIncludeWrapperTesting.builder()
                             .withPath(PARENT_PATH + "/node.http.sampler.jmx")
@@ -155,10 +146,8 @@ class AbstractJmxIncludeWrapperTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName(DEFAULT_TEST_PLAN)
             .addThread(
                 ThreadGroupWrapper.builder()
-                    .withName(DEFAULT_THREAD_GROUP)
                     .addSampler(
                         SamplerJmxIncludeWrapper.builder()
                             .withPath(PARENT_PATH + "/node.http.sampler.param.jmx")
@@ -174,8 +163,7 @@ class AbstractJmxIncludeWrapperTest extends AbstractJmcTest {
             wrapperContent,
             null,
             Arrays.asList(AttributesFilterManager.getCommentFilter()));
-    Assertions.assertTrue(
-        JmcXmlComparator.hasDifferences(diff), "node  not identical " + diff);
+    Assertions.assertTrue(JmcXmlComparator.hasDifferences(diff), "node  not identical " + diff);
   }
 
   @Test
@@ -183,10 +171,8 @@ class AbstractJmxIncludeWrapperTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName(DEFAULT_TEST_PLAN)
             .addThread(
                 ThreadGroupWrapper.builder()
-                    .withName(DEFAULT_THREAD_GROUP)
                     .addSampler(
                         HTTPSamplerProxyWrapper.builder().withName("first").withPath("").build())
                     .addSampler(
@@ -204,10 +190,8 @@ class AbstractJmxIncludeWrapperTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName(DEFAULT_TEST_PLAN)
             .addThread(
                 ThreadGroupWrapper.builder()
-                    .withName(DEFAULT_THREAD_GROUP)
                     .addSampler(
                         SamplerJmxIncludeWrapper.builder()
                             .withPath(PARENT_PATH + "/node.http.sampler.jmx")

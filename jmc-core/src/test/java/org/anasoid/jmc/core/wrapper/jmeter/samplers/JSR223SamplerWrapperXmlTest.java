@@ -27,8 +27,7 @@ import org.junit.jupiter.api.Test;
 
 class JSR223SamplerWrapperXmlTest extends AbstractJmcTest {
 
-  private static final String PARENT_PATH =
-      "org/anasoid/jmc/core/wrapper/jmeter/samplers";
+  private static final String PARENT_PATH = "org/anasoid/jmc/core/wrapper/jmeter/samplers";
 
   private static final String NODE_NAME = "JSR223Sampler";
 
@@ -43,13 +42,10 @@ class JSR223SamplerWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName(DEFAULT_TEST_PLAN)
             .addThread(
                 ThreadGroupWrapper.builder()
-                    .withName(DEFAULT_THREAD_GROUP)
                     .addSampler(
                         JSR223SamplerWrapper.builder()
-                            .withName("JSR223 Sampler")
                             .withScriptFile(SCRIPT_PATH + "/myscript.special.txt")
                             .build())
                     .build())

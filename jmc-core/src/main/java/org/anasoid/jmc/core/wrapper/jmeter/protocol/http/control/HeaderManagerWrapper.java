@@ -28,6 +28,7 @@ import lombok.experimental.SuperBuilder;
 import org.anasoid.jmc.core.application.validator.annotations.JmcChildrenTypes;
 import org.anasoid.jmc.core.wrapper.jmeter.config.ConfigTestElementWrapper;
 import org.anasoid.jmc.core.xstream.annotations.JmcCollection;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.anasoid.jmc.core.xstream.annotations.JmcEmptyAllowed;
 import org.apache.jmeter.protocol.http.control.HeaderManager;
 import org.apache.jmeter.protocol.http.gui.HeaderPanel;
@@ -39,9 +40,16 @@ import org.apache.jmeter.protocol.http.gui.HeaderPanel;
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 @JmcChildrenTypes(type = {HeaderWrapper.class})
+@JmcDefaultName("HTTP Header Manager")
 public class HeaderManagerWrapper extends ConfigTestElementWrapper<HeaderManager, HeaderPanel> {
 
   @XStreamOmitField private static final long serialVersionUID = 8482403319301067878L;
+
+  @JmcCollection(value = "HeaderManager.headers")
+  @Getter
+  @JmcEmptyAllowed
+  @Default
+  private final List<HeaderWrapper> headers = new ArrayList<>();
 
   @Override
   public Class<?> getGuiClass() {
@@ -52,12 +60,6 @@ public class HeaderManagerWrapper extends ConfigTestElementWrapper<HeaderManager
   public Class<?> getTestClass() {
     return HeaderManager.class;
   }
-
-  @JmcCollection(value = "HeaderManager.headers")
-  @Getter
-  @JmcEmptyAllowed
-  @Default
-  private final List<HeaderWrapper> headers = new ArrayList<>();
 
   /** Builder. */
   @SuppressWarnings({"PMD.TooManyMethods"})

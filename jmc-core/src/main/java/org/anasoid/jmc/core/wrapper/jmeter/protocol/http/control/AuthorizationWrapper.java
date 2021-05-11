@@ -20,6 +20,7 @@ package org.anasoid.jmc.core.wrapper.jmeter.protocol.http.control;
 
 import lombok.Builder.Default;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmc.core.wrapper.jmc.http.client.config.AuthMechanism;
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.basic.AbstractBasicTestElementWrapper;
@@ -39,24 +40,37 @@ import org.apache.jmeter.protocol.http.control.Authorization;
 public class AuthorizationWrapper extends AbstractBasicTestElementWrapper<Authorization> {
 
   @JmcProperty("Authorization.url")
-  private @Getter @JmcNullAllowed String url;
+  @Getter
+  @JmcNullAllowed
+  private final String url;
 
   @JmcProperty("Authorization.username")
-  private @Getter @JmcNullAllowed String username;
+  @Getter
+  @JmcNullAllowed
+  private final String username;
 
   @JmcProperty("Authorization.password")
-  private @Getter @JmcNullAllowed String password;
+  @Getter
+  @JmcNullAllowed
+  private final String password;
 
   @JmcProperty("Authorization.domain")
-  private @Getter @JmcNullAllowed String domain;
+  @Getter
+  @JmcNullAllowed
+  private final String domain;
 
   @JmcProperty("Authorization.realm")
-  private @Getter @JmcNullAllowed String realm;
+  @Getter
+  @JmcNullAllowed
+  private final String realm;
 
   @JmcProperty("Authorization.mechanism")
   @JmcSkipDefault("BASIC")
   @Default
-  private @Getter @JmcNullAllowed AuthMechanism mechanism = AuthMechanism.BASIC;
+  @Getter
+  @Setter
+  @JmcNullAllowed
+  private AuthMechanism mechanism = AuthMechanism.BASIC;
 
   @Override
   public Class<?> getTestClass() {

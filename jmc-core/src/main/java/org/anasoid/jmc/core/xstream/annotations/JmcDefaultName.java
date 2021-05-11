@@ -1,3 +1,5 @@
+package org.anasoid.jmc.core.xstream.annotations;
+
 /*
  * Copyright 2020-2021 the original author or authors.
  *
@@ -13,19 +15,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * @author : anas
- * Date :   06-May-2021
+ * Date :   17-Jan-2021
  */
 
-package org.anasoid.jmc.core.util.converters;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-/** Converter Interface. */
-public interface Converter<S, D> {
-
-  /**
-   * Convert the specified input object into an output object .
-   *
-   * @param source source object.
-   * @return converted object.
-   */
-  D convert(S source);
+/** Annotation used to define te default name. */
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.TYPE)
+@Documented
+public @interface JmcDefaultName {
+  /** The name of Type. */
+  String value();
 }

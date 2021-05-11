@@ -43,13 +43,8 @@ class XPath2ExtractorWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addPostProcessor(
-                XPath2ExtractorWrapper.builder()
-                    .withName("XPath2 Extractor")
-                    .withRefName("var")
-                    .withXpathQuery("query")
-                    .build())
+                XPath2ExtractorWrapper.builder().withRefName("var").withXpathQuery("query").build())
             .build();
 
     checkWrapper(testPlanWrapper, PARENT_PATH + "/xpath2Extractor.default.jmx", NODE_NAME);
@@ -60,7 +55,6 @@ class XPath2ExtractorWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addPostProcessor(
                 XPath2ExtractorWrapper.builder()
                     .withName("XPath2 Extractor inverse")

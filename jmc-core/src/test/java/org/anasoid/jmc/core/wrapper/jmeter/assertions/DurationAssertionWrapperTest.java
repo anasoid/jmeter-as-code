@@ -42,11 +42,8 @@ class DurationAssertionWrapperTest extends AbstractJmcTest {
 
     try {
       DurationAssertionWrapper wrapper =
-          DurationAssertionWrapper.builder()
-              .withName("XPath Extractor")
-              .withDuration(10)
-              .withScope(Scope.VARIABLE)
-              .build();
+          DurationAssertionWrapper.builder().withDuration(10).withScope(Scope.VARIABLE).build();
+
       ApplicationTest applicationTest = ApplicationTestUtilsForTesting.getApplicationTest(wrapper);
       StringWriter wr = new StringWriter(); // NOPMD
       applicationTest.toJmx(wr);

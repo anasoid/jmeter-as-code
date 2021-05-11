@@ -20,6 +20,7 @@ package org.anasoid.jmc.core.wrapper.jmeter.timers;
 
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmc.core.wrapper.jmc.Variable;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.apache.jmeter.timers.GaussianRandomTimer;
 import org.apache.jmeter.timers.gui.GaussianRandomTimerGui;
 
@@ -29,6 +30,7 @@ import org.apache.jmeter.timers.gui.GaussianRandomTimerGui;
  * @see GaussianRandomTimer
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@JmcDefaultName("Gaussian Random Timer")
 @SuppressWarnings({"PMD.RedundantFieldInitializer", "PMD.AvoidUncheckedExceptionsInSignatures"})
 public class GaussianRandomTimerWrapper
     extends RandomTimerWrapper<GaussianRandomTimer, GaussianRandomTimerGui> {

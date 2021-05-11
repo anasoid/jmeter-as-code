@@ -45,18 +45,12 @@ class HeaderManagerWrapperXMLTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addThread(
                 ThreadGroupWrapper.builder()
-                    .withName("Thread Group")
                     .addSampler(
                         HTTPSamplerProxyWrapper.builder()
-                            .withName("HTTP Request")
                             .withPath("")
-                            .addConfig(
-                                HeaderManagerWrapper.builder()
-                                    .withName("HTTP Header Manager")
-                                    .build())
+                            .addConfig(HeaderManagerWrapper.builder().build())
                             .build())
                     .build())
             .build();
@@ -69,19 +63,13 @@ class HeaderManagerWrapperXMLTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addThread(
                 ThreadGroupWrapper.builder()
-                    .withName("Thread Group")
                     .addSampler(
                         HTTPSamplerProxyWrapper.builder()
-                            .withName("HTTP Request")
                             .withPath("")
                             .addConfig(
-                                HeaderManagerWrapper.builder()
-                                    .withName("HTTP Header Manager")
-                                    .addHeader("param", "value")
-                                    .build())
+                                HeaderManagerWrapper.builder().addHeader("param", "value").build())
                             .build())
                     .build())
             .build();

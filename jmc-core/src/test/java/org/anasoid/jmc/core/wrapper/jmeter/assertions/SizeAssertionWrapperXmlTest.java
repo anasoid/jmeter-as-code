@@ -29,8 +29,7 @@ import org.junit.jupiter.api.Test;
 
 class SizeAssertionWrapperXmlTest extends AbstractJmcTest {
 
-  private static final String PARENT_PATH =
-      "org/anasoid/jmc/core/wrapper/jmeter/assertions";
+  private static final String PARENT_PATH = "org/anasoid/jmc/core/wrapper/jmeter/assertions";
 
   private static final String NODE_NAME = "SizeAssertion";
 
@@ -45,9 +44,7 @@ class SizeAssertionWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
-            .addAssertion(
-                SizeAssertionWrapper.builder().withName("Size Assertion").withSize(20).build())
+            .addAssertion(SizeAssertionWrapper.builder().withSize(20).build())
             .build();
 
     checkWrapper(testPlanWrapper, PARENT_PATH + "/sizeAssertion.default.jmx", NODE_NAME);
@@ -58,7 +55,6 @@ class SizeAssertionWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addAssertion(
                 SizeAssertionWrapper.builder()
                     .withName("Size Assertion inverse")

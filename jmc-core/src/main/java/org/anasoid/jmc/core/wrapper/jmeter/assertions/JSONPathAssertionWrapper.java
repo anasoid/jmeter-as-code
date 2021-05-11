@@ -21,6 +21,7 @@ package org.anasoid.jmc.core.wrapper.jmeter.assertions;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.anasoid.jmc.core.xstream.annotations.JmcMandatory;
 import org.anasoid.jmc.core.xstream.annotations.JmcProperty;
 import org.apache.jmeter.assertions.JSONPathAssertion;
@@ -32,6 +33,7 @@ import org.apache.jmeter.assertions.gui.JSONPathAssertionGui;
  * @see JSONPathAssertion
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@JmcDefaultName("JSON Assertion")
 public class JSONPathAssertionWrapper
     extends AbstractJSONPathAssertionWrapper<JSONPathAssertion, JSONPathAssertionGui> {
 

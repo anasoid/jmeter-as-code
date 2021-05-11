@@ -21,6 +21,7 @@ package org.anasoid.jmc.core.wrapper.jmeter.visualizers;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.AssertionWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.util.JSR223TestElementWrapper;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.apache.jmeter.testbeans.gui.TestBeanGUI;
 import org.apache.jmeter.visualizers.JSR223Listener;
 
@@ -30,6 +31,7 @@ import org.apache.jmeter.visualizers.JSR223Listener;
  * @see JSR223Listener
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@JmcDefaultName("JSR223 Listener")
 public class JSR223ListenerWrapper extends JSR223TestElementWrapper<JSR223Listener, TestBeanGUI>
     implements AssertionWrapper<JSR223Listener> {
 

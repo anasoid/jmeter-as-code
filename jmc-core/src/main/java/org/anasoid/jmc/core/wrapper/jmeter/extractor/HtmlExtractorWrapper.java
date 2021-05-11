@@ -25,6 +25,7 @@ import lombok.experimental.SuperBuilder;
 import org.anasoid.jmc.core.wrapper.jmc.validator.Validator;
 import org.anasoid.jmc.core.wrapper.jmeter.processor.PostProcessorWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.AbstractScopedTestElementWrapper;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.anasoid.jmc.core.xstream.annotations.JmcMandatory;
 import org.anasoid.jmc.core.xstream.annotations.JmcNullAllowed;
 import org.anasoid.jmc.core.xstream.annotations.JmcProperty;
@@ -38,6 +39,7 @@ import org.apache.jmeter.extractor.gui.HtmlExtractorGui;
  * @see HtmlExtractor
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@JmcDefaultName("CSS Selector Extractor")
 @SuppressWarnings("PMD.RedundantFieldInitializer")
 public class HtmlExtractorWrapper
     extends AbstractScopedTestElementWrapper<HtmlExtractor, HtmlExtractorGui>
@@ -125,6 +127,16 @@ public class HtmlExtractorWrapper
     }
   }
 
+  @Override
+  public Class<?> getGuiClass() {
+    return HtmlExtractorGui.class;
+  }
+
+  @Override
+  public Class<?> getTestClass() {
+    return HtmlExtractor.class;
+  }
+
   /** enum for extractor_impl. */
   public enum ExtractorImpl {
     JSOUP("JSOUP"),
@@ -132,7 +144,7 @@ public class HtmlExtractorWrapper
 
     public final String value;
 
-    private ExtractorImpl(String value) {
+    ExtractorImpl(String value) {
       this.value = value;
     }
 
@@ -144,15 +156,5 @@ public class HtmlExtractorWrapper
     public String toString() {
       return value;
     }
-  }
-
-  @Override
-  public Class<?> getGuiClass() {
-    return HtmlExtractorGui.class;
-  }
-
-  @Override
-  public Class<?> getTestClass() {
-    return HtmlExtractor.class;
   }
 }

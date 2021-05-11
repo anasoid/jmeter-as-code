@@ -49,24 +49,21 @@ public abstract class AbstractThreadGroupWrapper<
         T extends AbstractThreadGroup, G extends AbstractThreadGroupGui>
     extends AbstractTestElementWrapper<T> implements JMeterGUIWrapper<G>, ThreadWrapper<T> {
 
+  /** the sampler controller. */
+  @JmcProperty(AbstractThreadGroup.MAIN_CONTROLLER)
+  protected @Getter GenericControllerWrapper<?, ?> samplerController;
   /** Action to be taken after a Sampler error. */
   @JmcProperty(AbstractThreadGroup.ON_SAMPLE_ERROR)
   @Builder.Default
   private @Getter @Setter OnSampleError onSampleError = OnSampleError.ON_SAMPLE_ERROR_CONTINUE;
-
   /** Same user on each iteration. */
   @JmcProperty(AbstractThreadGroup.IS_SAME_USER_ON_NEXT_ITERATION)
   @Builder.Default
   private @Getter @Setter Boolean isSameUserOnNextIteration = true;
-
   /** Number of Threads (users). */
   @JmcProperty(value = AbstractThreadGroup.NUM_THREADS)
   @Builder.Default
   private @Getter @Setter String numThreads = "1";
-
-  /** the sampler controller. */
-  @JmcProperty(AbstractThreadGroup.MAIN_CONTROLLER)
-  protected @Getter GenericControllerWrapper<?, ?> samplerController;
 
   /** Builder. */
   @SuppressWarnings("PMD")

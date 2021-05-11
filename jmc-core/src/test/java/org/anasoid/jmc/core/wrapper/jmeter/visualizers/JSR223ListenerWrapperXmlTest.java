@@ -26,8 +26,7 @@ import org.junit.jupiter.api.Test;
 
 class JSR223ListenerWrapperXmlTest extends AbstractJmcTest {
 
-  private static final String PARENT_PATH =
-      "org/anasoid/jmc/core/wrapper/jmeter/visualizers";
+  private static final String PARENT_PATH = "org/anasoid/jmc/core/wrapper/jmeter/visualizers";
 
   private static final String NODE_NAME = "JSR223Listener";
 
@@ -42,10 +41,8 @@ class JSR223ListenerWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addAssertion(
                 JSR223ListenerWrapper.builder()
-                    .withName("JSR223 Listener")
                     .withScriptFile(SCRIPT_PATH + "/myscript.special.txt")
                     .build())
             .build();

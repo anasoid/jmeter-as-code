@@ -31,8 +31,7 @@ import org.junit.jupiter.api.Test;
 
 class AbstractParentJmxIncludeWrapperTest extends AbstractJmcTest {
 
-  private static final String PARENT_PATH =
-      "org/anasoid/jmc/core/wrapper/jmeter/jmc/generic";
+  private static final String PARENT_PATH = "org/anasoid/jmc/core/wrapper/jmeter/jmc/generic";
 
   @Test
   void testRegex() throws IOException {
@@ -74,18 +73,13 @@ class AbstractParentJmxIncludeWrapperTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName(DEFAULT_TEST_PLAN)
             .addThread(
                 ThreadGroupWrapper.builder()
-                    .withName(DEFAULT_THREAD_GROUP)
                     .addSampler(
                         SamplerJmxIncludeWrapper.builder()
                             .withPath(PARENT_PATH + "/node.http.sampler.simple.jmx")
                             .addConfig(
-                                HeaderManagerWrapper.builder()
-                                    .withName("HTTP Header Manager")
-                                    .addHeader("head", "arg")
-                                    .build())
+                                HeaderManagerWrapper.builder().addHeader("head", "arg").build())
                             .build())
                     .build())
             .build();
@@ -97,18 +91,13 @@ class AbstractParentJmxIncludeWrapperTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName(DEFAULT_TEST_PLAN)
             .addThread(
                 ThreadGroupWrapper.builder()
-                    .withName(DEFAULT_THREAD_GROUP)
                     .addSampler(
                         SamplerJmxIncludeWrapper.builder()
                             .withPath(PARENT_PATH + "/node.http.sampler.simple.jmx")
                             .addConfig(
-                                HeaderManagerWrapper.builder()
-                                    .withName("HTTP Header Manager")
-                                    .addHeader("head", "arg")
-                                    .build())
+                                HeaderManagerWrapper.builder().addHeader("head", "arg").build())
                             .build())
                     .addSampler(
                         HTTPSamplerProxyWrapper.builder().withName("first").withPath("").build())
@@ -122,22 +111,14 @@ class AbstractParentJmxIncludeWrapperTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName(DEFAULT_TEST_PLAN)
             .addThread(
                 ThreadGroupWrapper.builder()
-                    .withName(DEFAULT_THREAD_GROUP)
                     .addSampler(
                         SamplerJmxIncludeWrapper.builder()
                             .withPath(PARENT_PATH + "/node.http.sampler.simple.jmx")
                             .addConfig(
-                                HeaderManagerWrapper.builder()
-                                    .withName("HTTP Header Manager")
-                                    .addHeader("head", "arg")
-                                    .build())
-                            .addAssertion(
-                                ResponseAssertionWrapper.builder()
-                                    .withName("Response Assertion")
-                                    .build())
+                                HeaderManagerWrapper.builder().addHeader("head", "arg").build())
+                            .addAssertion(ResponseAssertionWrapper.builder().build())
                             .build())
                     .build())
             .build();
@@ -150,22 +131,14 @@ class AbstractParentJmxIncludeWrapperTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName(DEFAULT_TEST_PLAN)
             .addThread(
                 ThreadGroupWrapper.builder()
-                    .withName(DEFAULT_THREAD_GROUP)
                     .addSampler(
                         SamplerJmxIncludeWrapper.builder()
                             .withPath(PARENT_PATH + "/node.http.sampler.simple.jmx")
-                            .addAssertion(
-                                ResponseAssertionWrapper.builder()
-                                    .withName("Response Assertion")
-                                    .build())
+                            .addAssertion(ResponseAssertionWrapper.builder().build())
                             .addConfig(
-                                HeaderManagerWrapper.builder()
-                                    .withName("HTTP Header Manager")
-                                    .addHeader("head", "arg")
-                                    .build())
+                                HeaderManagerWrapper.builder().addHeader("head", "arg").build())
                             .build())
                     .build())
             .build();

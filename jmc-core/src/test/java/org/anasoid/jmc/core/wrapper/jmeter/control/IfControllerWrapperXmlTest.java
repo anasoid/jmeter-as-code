@@ -27,8 +27,7 @@ import org.junit.jupiter.api.Test;
 
 class IfControllerWrapperXmlTest extends AbstractJmcTest {
 
-  private static final String PARENT_PATH =
-      "org/anasoid/jmc/core/wrapper/jmeter/control";
+  private static final String PARENT_PATH = "org/anasoid/jmc/core/wrapper/jmeter/control";
 
   private static final String NODE_NAME = "IfController";
 
@@ -43,15 +42,9 @@ class IfControllerWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addThread(
                 ThreadGroupWrapper.builder()
-                    .withName("Thread Group")
-                    .addController(
-                        IfControllerWrapper.builder()
-                            .withName("If Controller")
-                            .withCondition("${var}")
-                            .build())
+                    .addController(IfControllerWrapper.builder().withCondition("${var}").build())
                     .build())
             .build();
 
@@ -63,13 +56,10 @@ class IfControllerWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addThread(
                 ThreadGroupWrapper.builder()
-                    .withName("Thread Group")
                     .addController(
                         IfControllerWrapper.builder()
-                            .withName("If Controller")
                             .withCondition("${var}")
                             .withEvaluateAll(true)
                             .withUseExpression(false)

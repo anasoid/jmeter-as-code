@@ -50,7 +50,7 @@ public enum CookiePolicy {
 
   public final String value;
 
-  private CookiePolicy(String value) {
+  CookiePolicy(String value) {
     this.value = value;
   }
 

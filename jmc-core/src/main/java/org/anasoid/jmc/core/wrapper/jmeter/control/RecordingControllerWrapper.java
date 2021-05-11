@@ -19,6 +19,7 @@
 package org.anasoid.jmc.core.wrapper.jmeter.control;
 
 import lombok.experimental.SuperBuilder;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.apache.jmeter.protocol.http.control.RecordingController;
 import org.apache.jmeter.protocol.http.control.gui.RecordController;
 
@@ -28,6 +29,7 @@ import org.apache.jmeter.protocol.http.control.gui.RecordController;
  * @see RecordingControllerWrapper
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@JmcDefaultName("Recording Controller")
 public class RecordingControllerWrapper
     extends GenericControllerWrapper<RecordingController, RecordController> {
 

@@ -20,6 +20,7 @@ package org.anasoid.jmc.core.wrapper.jmeter.visualizers;
 
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmc.core.wrapper.jmeter.reporters.ResultCollectorWrapper;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.apache.jmeter.reporters.ResultCollector;
 import org.apache.jmeter.visualizers.ViewResultsFullVisualizer;
 
@@ -29,6 +30,7 @@ import org.apache.jmeter.visualizers.ViewResultsFullVisualizer;
  * @see ViewResultsFullVisualizer
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@JmcDefaultName("View Results Tree")
 @SuppressWarnings({"PMD.RedundantFieldInitializer", "PMD.TooManyFields"})
 public class ViewResultsFullVisualizerWrapper
     extends ResultCollectorWrapper<ResultCollector, ViewResultsFullVisualizer> {
@@ -37,6 +39,4 @@ public class ViewResultsFullVisualizerWrapper
   public Class<?> getGuiClass() {
     return ViewResultsFullVisualizer.class;
   }
-
-
 }

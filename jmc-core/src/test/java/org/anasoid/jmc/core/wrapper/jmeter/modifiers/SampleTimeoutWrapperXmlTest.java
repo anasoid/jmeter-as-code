@@ -26,8 +26,7 @@ import org.junit.jupiter.api.Test;
 
 class SampleTimeoutWrapperXmlTest extends AbstractJmcTest {
 
-  private static final String PARENT_PATH =
-      "org/anasoid/jmc/core/wrapper/jmeter/modifiers";
+  private static final String PARENT_PATH = "org/anasoid/jmc/core/wrapper/jmeter/modifiers";
 
   private static final String NODE_NAME = "SampleTimeout";
 
@@ -42,12 +41,7 @@ class SampleTimeoutWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
-            .addPreProcessor(
-                SampleTimeoutWrapper.builder()
-                    .withTimeout(20000)
-                    .withName("Sample Timeout")
-                    .build())
+            .addPreProcessor(SampleTimeoutWrapper.builder().withTimeout(20000).build())
             .build();
 
     checkWrapper(testPlanWrapper, PARENT_PATH + "/sampletimeout.default.jmx", NODE_NAME);

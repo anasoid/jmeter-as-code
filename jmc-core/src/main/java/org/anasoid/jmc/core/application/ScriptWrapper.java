@@ -39,6 +39,12 @@ class ScriptWrapper {
   @XStreamAlias("hashTree")
   List<TestElementWrapper<?>> testPlan;
 
+  /** getTestPlan. */
+  protected TestElementWrapper<?> getTestPlan() {
+
+    return testPlan.get(0);
+  }
+
   /**
    * Set main test Plan.
    *
@@ -55,12 +61,6 @@ class ScriptWrapper {
     testPlan = new ArrayList<>();
     testPlan.add(testElement);
     return this;
-  }
-
-  /** getTestPlan. */
-  protected TestElementWrapper<?> getTestPlan() {
-
-    return testPlan.get(0);
   }
 
   public String getVersion() {

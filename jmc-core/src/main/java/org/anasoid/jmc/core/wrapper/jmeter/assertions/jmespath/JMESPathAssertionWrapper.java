@@ -22,6 +22,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmc.core.wrapper.jmeter.assertions.AbstractJSONPathAssertionWrapper;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.anasoid.jmc.core.xstream.annotations.JmcMandatory;
 import org.anasoid.jmc.core.xstream.annotations.JmcProperty;
 import org.apache.jmeter.assertions.jmespath.JMESPathAssertion;
@@ -33,6 +34,7 @@ import org.apache.jmeter.assertions.jmespath.gui.JMESPathAssertionGui;
  * @see JMESPathAssertion
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@JmcDefaultName("JSON JMESPath Assertion")
 public class JMESPathAssertionWrapper
     extends AbstractJSONPathAssertionWrapper<JMESPathAssertion, JMESPathAssertionGui> {
 

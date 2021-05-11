@@ -53,50 +53,45 @@ public class ParentTestElementWrapperTesting extends AbstractTestElementWrapper<
   @XStreamAlias("testname")
   @Getter
   @JmcMandatory
-  private String name;
+  private final String name;
 
   /** Functional Test Mode (i.e. save Response Data and Sampler Data) */
   @JmcProperty("Parent.bb1")
   @Getter
-  private boolean bb1;
+  private final boolean bb1;
 
   @JmcProperty("Parent.ii1")
   @Getter
-  private Integer ii1;
+  private final Integer ii1;
 
   @JmcProperty("Parent.ll1")
   @Getter
-  private Long ll1;
+  private final Long ll1;
 
   @JmcProperty("Parent.defaultLong")
   @Getter
   @JmcSkipDefault("10")
   @Default
-  private Long defaultLong = 10L;
-
-  @JmcProperty("Parent.method")
-  public String getMethod() {
-    return "method";
-  }
+  private final Long defaultLong = 10L;
 
   @Getter
   @XStreamAlias("field")
-  private String field;
+  private final String field;
 
   @JmcProperty("Parent.ff1")
   @Getter
   @Default
-  private Float ff1 = 10F;
+  private final Float ff1 = 10F;
 
   @JmcProperty("Parent.dd1")
   @Getter
   @Default
-  private Double dd1 = 10D;
+  private final Double dd1 = 10D;
 
   @JmcProperty("Parent.child")
   @Getter
   @Default
-  private SubChildTestingElementWrapperTesting child =
+  private final SubChildTestingElementWrapperTesting child =
       SubChildTestingElementWrapperTesting.builder().withEnabled(true).build();
 
   @JmcCollection(
@@ -109,7 +104,12 @@ public class ParentTestElementWrapperTesting extends AbstractTestElementWrapper<
   @Builder.Default
   @Getter
   @JmcEmptyAllowed
-  private List<ArgumentWrapper> arguments = new ArrayList<>();
+  private final List<ArgumentWrapper> arguments = new ArrayList<>();
+
+  @JmcProperty("Parent.method")
+  public String getMethod() {
+    return "method";
+  }
 
   @Override
   public Class<?> getGuiClass() {

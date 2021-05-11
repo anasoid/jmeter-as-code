@@ -34,10 +34,7 @@ class AuthManagerXmlWrapperTest extends AbstractJmcTest {
   void testDefault() throws IOException {
 
     TestPlanWrapper testPlanWrapper =
-        TestPlanWrapper.builder()
-            .withName("Test Plan")
-            .addConfig(AuthManagerWrapper.builder().withName("HTTP Authorization Manager").build())
-            .build();
+        TestPlanWrapper.builder().addConfig(AuthManagerWrapper.builder().build()).build();
 
     checkWrapper(testPlanWrapper, PARENT_PATH + "/authorizationmanager.default.jmx", NODE_NAME);
   }
@@ -47,7 +44,6 @@ class AuthManagerXmlWrapperTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .withName("Test Plan")
             .addConfig(
                 AuthManagerWrapper.builder()
                     .withName("HTTP Authorization Manager inverse")

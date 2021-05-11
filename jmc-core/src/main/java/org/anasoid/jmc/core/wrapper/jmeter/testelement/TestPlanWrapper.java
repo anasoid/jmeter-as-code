@@ -35,6 +35,7 @@ import org.anasoid.jmc.core.wrapper.jmeter.threads.AbstractThreadGroupWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.threads.ThreadWrapper;
 import org.anasoid.jmc.core.wrapper.template.JmcTemplate;
 import org.anasoid.jmc.core.xstream.annotations.JmcCollection;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.anasoid.jmc.core.xstream.annotations.JmcEmptyAllowed;
 import org.anasoid.jmc.core.xstream.annotations.JmcProperty;
 import org.anasoid.jmc.core.xstream.annotations.JmcSkipDefault;
@@ -51,37 +52,9 @@ import org.apache.jmeter.testelement.TestPlan;
 @SuperBuilder(setterPrefix = "with")
 @XStreamAlias("TestPlan")
 @JmcChildrenTypes(type = {AbstractThreadGroupWrapper.class})
+@JmcDefaultName("Test Plan")
 public class TestPlanWrapper extends AbstractTestElementWrapper<TestPlan>
     implements JMeterGUIWrapper<TestPlanGui> {
-
-  /** Functional Test Mode (i.e. save Response Data and Sampler Data) */
-  @JmcProperty("TestPlan.functional_mode")
-  @Getter
-  @Setter
-  private boolean functionalMode;
-
-  /** Run Thread Groups consecutively (i.e. one at a time). */
-  @JmcProperty("TestPlan.serialize_threadgroups")
-  @Getter
-  @Setter
-  private boolean serialized;
-  /** Run tearDown Thread Groups after shutdown of main threads. */
-  @JmcProperty("TestPlan.tearDown_on_shutdown")
-  @JmcSkipDefault("false")
-  @Getter
-  @Setter
-  @Default
-  private boolean tearDownOnShutdown = true;
-
-  /**
-   * Set the classpath for the test plan. If the classpath is made up from more then one path, the
-   * parts must be separated with CLASSPATH_SEPARATOR.
-   */
-  @JmcProperty("TestPlan.user_define_classpath")
-  @Getter
-  @Setter
-  @Default
-  private String testPlanClasspath = "";
 
   @JmcCollection(
       value = Arguments.ARGUMENTS,
@@ -94,7 +67,33 @@ public class TestPlanWrapper extends AbstractTestElementWrapper<TestPlan>
   @Builder.Default
   @Getter
   @JmcEmptyAllowed
-  private List<ArgumentWrapper> arguments = new ArrayList<>();
+  private final List<ArgumentWrapper> arguments = new ArrayList<>();
+  /** Functional Test Mode (i.e. save Response Data and Sampler Data) */
+  @JmcProperty("TestPlan.functional_mode")
+  @Getter
+  @Setter
+  private boolean functionalMode;
+  /** Run Thread Groups consecutively (i.e. one at a time). */
+  @JmcProperty("TestPlan.serialize_threadgroups")
+  @Getter
+  @Setter
+  private boolean serialized;
+  /** Run tearDown Thread Groups after shutdown of main threads. */
+  @JmcProperty("TestPlan.tearDown_on_shutdown")
+  @JmcSkipDefault("false")
+  @Getter
+  @Setter
+  @Default
+  private boolean tearDownOnShutdown = true;
+  /**
+   * Set the classpath for the test plan. If the classpath is made up from more then one path, the
+   * parts must be separated with CLASSPATH_SEPARATOR.
+   */
+  @JmcProperty("TestPlan.user_define_classpath")
+  @Getter
+  @Setter
+  @Default
+  private String testPlanClasspath = "";
 
   @Override
   public Class<?> getGuiClass() {

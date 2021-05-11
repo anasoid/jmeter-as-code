@@ -26,6 +26,7 @@ import org.anasoid.jmc.core.wrapper.jmc.validator.Validator;
 import org.anasoid.jmc.core.wrapper.jmeter.config.ConfigElementWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.AbstractScopedTestElementWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.AssertionWrapper;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.anasoid.jmc.core.xstream.annotations.JmcMandatory;
 import org.anasoid.jmc.core.xstream.annotations.JmcProperty;
 import org.anasoid.jmc.core.xstream.annotations.JmcSkipDefault;
@@ -39,6 +40,7 @@ import org.apache.jmeter.assertions.gui.XPathAssertionGui;
  * @see XPathAssertion
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@JmcDefaultName("XPath Assertion")
 @SuppressWarnings({"PMD.RedundantFieldInitializer", "PMD.AvoidFieldNameMatchingMethodName"})
 public class XPathAssertionWrapper
     extends AbstractScopedTestElementWrapper<XPathAssertion, XPathAssertionGui>
