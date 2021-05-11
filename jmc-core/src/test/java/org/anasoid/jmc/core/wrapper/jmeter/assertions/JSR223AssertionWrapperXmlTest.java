@@ -43,7 +43,6 @@ class JSR223AssertionWrapperXmlTest extends AbstractJmcTest {
         TestPlanWrapper.builder()
             .addAssertion(
                 JSR223AssertionWrapper.builder()
-                    .withName("JSR223 Assertion")
                     .withScriptFile(SCRIPT_PATH + "/myscript.special.txt")
                     .build())
             .build();

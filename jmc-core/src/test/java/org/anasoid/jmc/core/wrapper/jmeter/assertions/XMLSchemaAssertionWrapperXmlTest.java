@@ -41,11 +41,7 @@ class XMLSchemaAssertionWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .addAssertion(
-                XMLSchemaAssertionWrapper.builder()
-                    .withName("XML Schema Assertion")
-                    .withFilename("myfile")
-                    .build())
+            .addAssertion(XMLSchemaAssertionWrapper.builder().withFilename("myfile").build())
             .build();
 
     checkWrapper(testPlanWrapper, PARENT_PATH + "/xmlSchemaAssertion.default.jmx", NODE_NAME);

@@ -42,6 +42,7 @@ import org.apache.jmeter.protocol.http.gui.HeaderPanel;
 public class HeaderManagerWrapper extends ConfigTestElementWrapper<HeaderManager, HeaderPanel> {
 
   @XStreamOmitField private static final long serialVersionUID = 8482403319301067878L;
+
   @JmcCollection(value = "HeaderManager.headers")
   @Getter
   @JmcEmptyAllowed

@@ -41,11 +41,7 @@ class MD5HexAssertionWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .addAssertion(
-                MD5HexAssertionWrapper.builder()
-                    .withName("MD5Hex Assertion")
-                    .withMd5hex("123")
-                    .build())
+            .addAssertion(MD5HexAssertionWrapper.builder().withMd5hex("123").build())
             .build();
 
     checkWrapper(testPlanWrapper, PARENT_PATH + "/md5HexAssertion.default.jmx", NODE_NAME);

@@ -39,11 +39,8 @@ class JMESPathAssertionWrapperTest {
 
     try {
       JMESPathAssertionWrapper wrapper =
-          JMESPathAssertionWrapper.builder()
-              .withName("JSON Extractor")
-              .withJmesPath("path")
-              .withIsRegex(false)
-              .build();
+          JMESPathAssertionWrapper.builder().withJmesPath("path").withIsRegex(false).build();
+
       ApplicationTest applicationTest = ApplicationTestUtilsForTesting.getApplicationTest(wrapper);
       StringWriter wr = new StringWriter(); // NOPMD
       applicationTest.toJmx(wr);
@@ -60,7 +57,6 @@ class JMESPathAssertionWrapperTest {
     try {
       JMESPathAssertionWrapper wrapper =
           JMESPathAssertionWrapper.builder()
-              .withName("JSON Extractor")
               .withJmesPath("path")
               .withExpectedValue("expected")
               .build();
@@ -80,7 +76,6 @@ class JMESPathAssertionWrapperTest {
     try {
       JMESPathAssertionWrapper wrapper =
           JMESPathAssertionWrapper.builder()
-              .withName("JSON Extractor")
               .withJmesPath("path")
               .withAdditionallyAssertValue(true)
               .withExpectNull(true)
@@ -102,7 +97,6 @@ class JMESPathAssertionWrapperTest {
     try {
       JMESPathAssertionWrapper wrapper =
           JMESPathAssertionWrapper.builder()
-              .withName("JSON Extractor")
               .withJmesPath("path")
               .withAdditionallyAssertValue(true)
               .withExpectNull(true)

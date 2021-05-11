@@ -41,11 +41,7 @@ class XPath2AssertionWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .addAssertion(
-                XPath2AssertionWrapper.builder()
-                    .withName("XPath2 Assertion")
-                    .withXpath("/")
-                    .build())
+            .addAssertion(XPath2AssertionWrapper.builder().withXpath("/").build())
             .build();
 
     checkWrapper(testPlanWrapper, PARENT_PATH + "/XPath2Assertion.default.jmx", NODE_NAME);

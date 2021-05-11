@@ -19,7 +19,10 @@
 package org.anasoid.jmc.core.wrapper.jmeter.assertions;
 
 import java.io.IOException;
+import java.io.StringWriter;
 import org.anasoid.jmc.core.AbstractJmcTest;
+import org.anasoid.jmc.core.application.ApplicationTest;
+import org.anasoid.jmc.core.application.ApplicationTestUtilsForTesting;
 import org.anasoid.jmc.core.wrapper.JmcWrapperBuilder;
 import org.anasoid.jmc.core.wrapper.template.AbstractJmcTemplate;
 import org.anasoid.jmc.core.wrapper.test.ParentTestElementWrapperTesting;
@@ -38,18 +41,20 @@ class ResponseAssertionWrapperTest extends AbstractJmcTest {
             .withField("field")
             .addAssertion(new MyAssertion())
             .build();
-
+    ApplicationTest applicationTest =
+        ApplicationTestUtilsForTesting.getApplicationTest(parentTestElementWrapperTesting);
+    StringWriter wr = new StringWriter(); // NOPMD
+    ParentTestElementWrapperTesting wrapper =
+        (ParentTestElementWrapperTesting) applicationTest.toJmx(wr);
     Assertions.assertEquals(
-        "Response Assertion",
-        ((ResponseAssertionWrapper) parentTestElementWrapperTesting.getChilds().get(0)).getName());
+        "Response Assertion", ((ResponseAssertionWrapper) wrapper.getChilds().get(0)).getName());
   }
 
   class MyAssertion extends AbstractJmcTemplate<ResponseAssertionWrapper> {
 
     @Override
     protected JmcWrapperBuilder<ResponseAssertionWrapper> init() {
-      return (JmcWrapperBuilder<ResponseAssertionWrapper>)
-          ResponseAssertionWrapper.builder().withName("Response Assertion");
+      return (JmcWrapperBuilder<ResponseAssertionWrapper>) ResponseAssertionWrapper.builder();
     }
   }
 }

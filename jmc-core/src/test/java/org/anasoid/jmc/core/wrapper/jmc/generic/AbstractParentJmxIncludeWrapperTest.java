@@ -133,10 +133,7 @@ class AbstractParentJmxIncludeWrapperTest extends AbstractJmcTest {
                                     .withName("HTTP Header Manager")
                                     .addHeader("head", "arg")
                                     .build())
-                            .addAssertion(
-                                ResponseAssertionWrapper.builder()
-                                    .withName("Response Assertion")
-                                    .build())
+                            .addAssertion(ResponseAssertionWrapper.builder().build())
                             .build())
                     .build())
             .build();
@@ -156,10 +153,7 @@ class AbstractParentJmxIncludeWrapperTest extends AbstractJmcTest {
                     .addSampler(
                         SamplerJmxIncludeWrapper.builder()
                             .withPath(PARENT_PATH + "/node.http.sampler.simple.jmx")
-                            .addAssertion(
-                                ResponseAssertionWrapper.builder()
-                                    .withName("Response Assertion")
-                                    .build())
+                            .addAssertion(ResponseAssertionWrapper.builder().build())
                             .addConfig(
                                 HeaderManagerWrapper.builder()
                                     .withName("HTTP Header Manager")

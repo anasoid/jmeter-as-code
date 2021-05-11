@@ -44,9 +44,7 @@ class ResponseAssertionXmlWrapperTest extends AbstractJmcTest {
   void testDefault() throws IOException {
 
     TestPlanWrapper testPlanWrapper =
-        TestPlanWrapper.builder()
-            .addAssertion(ResponseAssertionWrapper.builder().withName("Response Assertion").build())
-            .build();
+        TestPlanWrapper.builder().addAssertion(ResponseAssertionWrapper.builder().build()).build();
 
     checkWrapper(testPlanWrapper, PARENT_PATH + "/responseassertion.default.jmx", NODE_NAME);
   }
@@ -58,7 +56,6 @@ class ResponseAssertionXmlWrapperTest extends AbstractJmcTest {
         TestPlanWrapper.builder()
             .addAssertion(
                 ResponseAssertionWrapper.builder()
-                    .withName("Response Assertion")
                     .withFieldToTest(AssertionField.RESPONSE_CODE)
                     .withIgnoreStatus(true)
                     .withMatchingRule(MatchingRule.MATCH)

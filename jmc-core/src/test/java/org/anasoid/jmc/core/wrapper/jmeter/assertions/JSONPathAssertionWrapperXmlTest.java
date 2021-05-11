@@ -41,11 +41,7 @@ class JSONPathAssertionWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .addAssertion(
-                JSONPathAssertionWrapper.builder()
-                    .withName("JSON Assertion")
-                    .withJsonPath("jsonPath")
-                    .build())
+            .addAssertion(JSONPathAssertionWrapper.builder().withJsonPath("jsonPath").build())
             .build();
 
     checkWrapper(testPlanWrapper, PARENT_PATH + "/jsonAssertion.default.jmx", NODE_NAME);

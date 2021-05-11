@@ -73,22 +73,27 @@ public class ParentTestElementWrapperTesting extends AbstractTestElementWrapper<
   @JmcSkipDefault("10")
   @Default
   private Long defaultLong = 10L;
+
   @Getter
   @XStreamAlias("field")
   private String field;
+
   @JmcProperty("Parent.ff1")
   @Getter
   @Default
   private Float ff1 = 10F;
+
   @JmcProperty("Parent.dd1")
   @Getter
   @Default
   private Double dd1 = 10D;
+
   @JmcProperty("Parent.child")
   @Getter
   @Default
   private SubChildTestingElementWrapperTesting child =
       SubChildTestingElementWrapperTesting.builder().withEnabled(true).build();
+
   @JmcCollection(
       value = Arguments.ARGUMENTS,
       withElementProp = true,

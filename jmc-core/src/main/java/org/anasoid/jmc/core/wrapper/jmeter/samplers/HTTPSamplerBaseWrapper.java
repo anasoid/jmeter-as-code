@@ -61,6 +61,7 @@ public abstract class HTTPSamplerBaseWrapper<
 
   @Getter @Default @XStreamOmitField
   private final List<HTTPArgumentWrapper> arguments = new ArrayList<>();
+
   @JmcCollection(
       value = "HTTPFileArgs.files",
       withElementProp = true,
@@ -93,6 +94,7 @@ public abstract class HTTPSamplerBaseWrapper<
   @Setter
   @JmcNullAllowed
   private String protocol;
+
   @JmcProperty(value = HTTPSamplerBase.CONTENT_ENCODING)
   @Getter
   @Setter
@@ -104,6 +106,7 @@ public abstract class HTTPSamplerBaseWrapper<
   @Setter
   @Default
   private HttpMethod method = HttpMethod.GET;
+
   @JmcProperty(HTTPSamplerBase.IMPLEMENTATION)
   @Getter
   @Setter
@@ -190,6 +193,7 @@ public abstract class HTTPSamplerBaseWrapper<
   @Getter
   @Setter
   private Boolean md5;
+
   @JmcProperty(HTTPSamplerBase.POST_BODY_RAW)
   @Getter
   @Setter
@@ -217,6 +221,7 @@ public abstract class HTTPSamplerBaseWrapper<
   @Getter
   @Setter
   private Boolean concurrentDwn;
+
   @JmcProperty(HTTPSamplerBase.IMAGE_PARSER)
   @Getter
   @Setter

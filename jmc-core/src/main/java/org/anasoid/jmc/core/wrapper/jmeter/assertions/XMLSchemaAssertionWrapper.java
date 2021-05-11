@@ -26,6 +26,7 @@ import org.anasoid.jmc.core.config.JmcConfig;
 import org.anasoid.jmc.core.wrapper.jmeter.gui.JMeterGUIWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.AssertionWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.basic.AbstractBasicChildTestElementWrapper;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.anasoid.jmc.core.xstream.annotations.JmcMandatory;
 import org.anasoid.jmc.core.xstream.annotations.JmcProperty;
 import org.apache.jmeter.assertions.XMLSchemaAssertion;
@@ -37,6 +38,7 @@ import org.apache.jmeter.assertions.gui.XMLSchemaAssertionGUI;
  * @see XMLSchemaAssertion
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@JmcDefaultName("XML Schema Assertion")
 public class XMLSchemaAssertionWrapper
     extends AbstractBasicChildTestElementWrapper<XMLSchemaAssertion>
     implements JMeterGUIWrapper<XMLSchemaAssertionGUI>, AssertionWrapper<XMLSchemaAssertion> {

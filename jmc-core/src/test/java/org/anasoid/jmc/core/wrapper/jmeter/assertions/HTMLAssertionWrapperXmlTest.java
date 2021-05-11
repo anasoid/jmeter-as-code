@@ -34,9 +34,7 @@ class HTMLAssertionWrapperXmlTest extends AbstractJmcTest {
   void testDefault() throws IOException {
 
     TestPlanWrapper testPlanWrapper =
-        TestPlanWrapper.builder()
-            .addAssertion(HTMLAssertionWrapper.builder().withName("HTML Assertion").build())
-            .build();
+        TestPlanWrapper.builder().addAssertion(HTMLAssertionWrapper.builder().build()).build();
 
     checkWrapper(testPlanWrapper, PARENT_PATH + "/htmlAssertion.default.jmx", NODE_NAME);
   }
@@ -46,11 +44,7 @@ class HTMLAssertionWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .addAssertion(
-                HTMLAssertionWrapper.builder()
-                    .withName("HTML Assertion")
-                    .withErrorOnly(true)
-                    .build())
+            .addAssertion(HTMLAssertionWrapper.builder().withErrorOnly(true).build())
             .build();
 
     checkWrapper(testPlanWrapper, PARENT_PATH + "/htmlAssertion.erroronly.default.jmx", NODE_NAME);

@@ -55,11 +55,13 @@ public abstract class ResultCollectorWrapper<
       SampleSaveConfigurationWrapper.builder().build();
 
   @XStreamOmitField @Getter @Setter String filename;
+
   @JmcProperty("ResultCollector.error_logging")
   @Getter
   @Setter
   @Default
   boolean logError = false;
+
   @JmcProperty("ResultCollector.success_only_logging")
   @Getter
   @Setter

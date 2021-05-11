@@ -24,6 +24,7 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmc.core.wrapper.jmc.Variable;
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.AbstractScopedAssertionWrapper;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.anasoid.jmc.core.xstream.annotations.JmcMandatory;
 import org.anasoid.jmc.core.xstream.annotations.JmcProperty;
 import org.apache.jmeter.assertions.ResponseAssertion;
@@ -36,6 +37,7 @@ import org.apache.jmeter.assertions.gui.SizeAssertionGui;
  * @see ResponseAssertion
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@JmcDefaultName("Size Assertion")
 @SuppressWarnings("PMD.RedundantFieldInitializer")
 public class SizeAssertionWrapper
     extends AbstractScopedAssertionWrapper<SizeAssertion, SizeAssertionGui> {

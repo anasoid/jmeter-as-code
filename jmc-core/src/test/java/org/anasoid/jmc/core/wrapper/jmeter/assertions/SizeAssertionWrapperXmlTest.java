@@ -44,8 +44,7 @@ class SizeAssertionWrapperXmlTest extends AbstractJmcTest {
 
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
-            .addAssertion(
-                SizeAssertionWrapper.builder().withName("Size Assertion").withSize(20).build())
+            .addAssertion(SizeAssertionWrapper.builder().withSize(20).build())
             .build();
 
     checkWrapper(testPlanWrapper, PARENT_PATH + "/sizeAssertion.default.jmx", NODE_NAME);

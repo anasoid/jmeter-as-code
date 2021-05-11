@@ -22,6 +22,7 @@ import lombok.experimental.SuperBuilder;
 import org.anasoid.jmc.core.wrapper.jmeter.gui.JMeterGUIWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.AssertionWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.basic.AbstractBasicChildTestElementWrapper;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.apache.jmeter.assertions.XMLAssertion;
 import org.apache.jmeter.assertions.gui.XMLAssertionGui;
 
@@ -31,6 +32,7 @@ import org.apache.jmeter.assertions.gui.XMLAssertionGui;
  * @see XMLAssertion
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@JmcDefaultName("XML Assertion")
 public class XMLAssertionWrapper extends AbstractBasicChildTestElementWrapper<XMLAssertion>
     implements JMeterGUIWrapper<XMLAssertionGui>, AssertionWrapper<XMLAssertion> {
 

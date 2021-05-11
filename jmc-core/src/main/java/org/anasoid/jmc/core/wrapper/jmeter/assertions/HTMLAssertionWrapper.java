@@ -28,6 +28,7 @@ import org.anasoid.jmc.core.wrapper.jmc.validator.Validator;
 import org.anasoid.jmc.core.wrapper.jmeter.gui.JMeterGUIWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.AssertionWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.basic.AbstractBasicChildTestElementWrapper;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.anasoid.jmc.core.xstream.annotations.JmcProperty;
 import org.anasoid.jmc.core.xstream.exceptions.ConversionIllegalStateException;
 import org.apache.jmeter.assertions.HTMLAssertion;
@@ -40,6 +41,7 @@ import org.apache.jmeter.assertions.gui.HTMLAssertionGui;
  * @see ResponseAssertion
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@JmcDefaultName("HTML Assertion")
 @SuppressWarnings({"PMD.RedundantFieldInitializer", "PMD.AvoidUncheckedExceptionsInSignatures"})
 public class HTMLAssertionWrapper extends AbstractBasicChildTestElementWrapper<HTMLAssertion>
     implements JMeterGUIWrapper<HTMLAssertionGui>, AssertionWrapper<HTMLAssertion>, Validator {

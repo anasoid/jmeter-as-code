@@ -24,6 +24,7 @@ import lombok.experimental.SuperBuilder;
 import org.anasoid.jmc.core.wrapper.jmeter.gui.JMeterGUIWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.AssertionWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.basic.AbstractBasicChildTestElementWrapper;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.anasoid.jmc.core.xstream.annotations.JmcMandatory;
 import org.anasoid.jmc.core.xstream.annotations.JmcProperty;
 import org.apache.jmeter.assertions.MD5HexAssertion;
@@ -35,6 +36,7 @@ import org.apache.jmeter.assertions.gui.MD5HexAssertionGUI;
  * @see MD5HexAssertion
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@JmcDefaultName("MD5Hex Assertion")
 public class MD5HexAssertionWrapper extends AbstractBasicChildTestElementWrapper<MD5HexAssertion>
     implements JMeterGUIWrapper<MD5HexAssertionGUI>, AssertionWrapper<MD5HexAssertion> {
 

@@ -42,7 +42,6 @@ class XPathAssertionWrapperTest extends AbstractJmcTest {
     try {
       XPathAssertionWrapper wrapper =
           XPathAssertionWrapper.builder()
-              .withName("XPath Extractor")
               .withXpath("query")
               .withUseTidy(true)
               .withWhitespace(true)

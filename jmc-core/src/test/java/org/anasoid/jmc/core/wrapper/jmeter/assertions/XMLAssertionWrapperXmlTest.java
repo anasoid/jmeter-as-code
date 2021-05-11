@@ -40,9 +40,7 @@ class XMLAssertionWrapperXmlTest extends AbstractJmcTest {
   void testDefault() throws IOException {
 
     TestPlanWrapper testPlanWrapper =
-        TestPlanWrapper.builder()
-            .addAssertion(XMLAssertionWrapper.builder().withName("XML Assertion").build())
-            .build();
+        TestPlanWrapper.builder().addAssertion(XMLAssertionWrapper.builder().build()).build();
 
     checkWrapper(testPlanWrapper, PARENT_PATH + "/xmlAssertion.default.jmx", NODE_NAME);
   }

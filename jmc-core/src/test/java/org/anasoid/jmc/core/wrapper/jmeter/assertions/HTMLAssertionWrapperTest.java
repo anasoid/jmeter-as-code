@@ -41,11 +41,8 @@ class HTMLAssertionWrapperTest extends AbstractJmcTest {
 
     try {
       HTMLAssertionWrapper wrapper =
-          HTMLAssertionWrapper.builder()
-              .withName("XPath Extractor")
-              .withErrorOnly(true)
-              .withWarningThreshold(10)
-              .build();
+          HTMLAssertionWrapper.builder().withErrorOnly(true).withWarningThreshold(10).build();
+
       ApplicationTest applicationTest = ApplicationTestUtilsForTesting.getApplicationTest(wrapper);
       StringWriter wr = new StringWriter(); // NOPMD
       applicationTest.toJmx(wr);

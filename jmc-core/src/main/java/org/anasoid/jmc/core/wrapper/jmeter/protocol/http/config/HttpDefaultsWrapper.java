@@ -152,9 +152,11 @@ public class HttpDefaultsWrapper
   @JmcProperty(HTTPSamplerBase.CONCURRENT_DWN)
   @Getter
   private final Boolean concurrentDwn;
+
   @JmcProperty(HTTPSamplerBase.IMAGE_PARSER)
   @Getter
   private final Boolean imageParser;
+
   @Getter @Default @XStreamOmitField
   private final List<HTTPArgumentWrapper> arguments = new ArrayList<>();
   /** Embedded Resources from HTML Files: Concurrent pool for parallel download. */

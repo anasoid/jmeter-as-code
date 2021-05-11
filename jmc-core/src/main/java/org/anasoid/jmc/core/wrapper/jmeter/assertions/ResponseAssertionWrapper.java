@@ -29,6 +29,7 @@ import org.anasoid.jmc.core.wrapper.jmc.assertions.AssertionField;
 import org.anasoid.jmc.core.wrapper.jmc.assertions.MatchingRule;
 import org.anasoid.jmc.core.wrapper.jmeter.JmeterConstants.JmeterProperty;
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.AbstractScopedAssertionWrapper;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.anasoid.jmc.core.xstream.annotations.JmcMethodAlias;
 import org.anasoid.jmc.core.xstream.annotations.JmcProperty;
 import org.apache.jmeter.assertions.ResponseAssertion;
@@ -41,6 +42,7 @@ import org.apache.jmeter.testelement.property.CollectionProperty;
  * @see ResponseAssertion
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@JmcDefaultName("Response Assertion")
 @SuppressWarnings("PMD.RedundantFieldInitializer")
 public class ResponseAssertionWrapper
     extends AbstractScopedAssertionWrapper<ResponseAssertion, AssertionGui> {

@@ -26,6 +26,7 @@ import org.anasoid.jmc.core.wrapper.jmc.validator.Validator;
 import org.anasoid.jmc.core.wrapper.jmeter.config.ConfigElementWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.processor.PostProcessorWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.AbstractScopedTestElementWrapper;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.anasoid.jmc.core.xstream.annotations.JmcMandatory;
 import org.anasoid.jmc.core.xstream.annotations.JmcNullAllowed;
 import org.anasoid.jmc.core.xstream.annotations.JmcProperty;
@@ -45,6 +46,7 @@ import org.apache.jmeter.extractor.gui.XPathExtractorGui;
   "PMD.AvoidFieldNameMatchingMethodName",
   "PMD.AvoidUncheckedExceptionsInSignatures"
 })
+@JmcDefaultName("XPath Extractor")
 public class XPathExtractorWrapper
     extends AbstractScopedTestElementWrapper<XPathExtractor, XPathExtractorGui>
     implements PostProcessorWrapper<XPathExtractor>, Validator {

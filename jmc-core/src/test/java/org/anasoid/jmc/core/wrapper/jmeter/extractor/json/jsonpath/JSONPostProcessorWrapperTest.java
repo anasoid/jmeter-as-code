@@ -41,10 +41,8 @@ class JSONPostProcessorWrapperTest {
 
     try {
       JSONPostProcessorWrapper wrapper =
-          JSONPostProcessorWrapper.builder()
-              .withName("JSON Extractor")
-              .addJsonPathExpr("express")
-              .build();
+          JSONPostProcessorWrapper.builder().addJsonPathExpr("express").build();
+
       ApplicationTest applicationTest = ApplicationTestUtilsForTesting.getApplicationTest(wrapper);
       StringWriter wr = new StringWriter(); // NOPMD
       applicationTest.toJmx(wr);
@@ -61,7 +59,6 @@ class JSONPostProcessorWrapperTest {
     try {
       JSONPostProcessorWrapper wrapper =
           JSONPostProcessorWrapper.builder()
-              .withName("JSON Extractor")
               .addReferenceName(new Variable("var1"))
               .addJsonPathExpr("express1")
               .addReferenceName(new Variable("var2"))
@@ -82,7 +79,6 @@ class JSONPostProcessorWrapperTest {
     try {
       JSONPostProcessorWrapper wrapper =
           JSONPostProcessorWrapper.builder()
-              .withName("JSON Extractor")
               .addReferenceName(new Variable("var1"))
               .addJsonPathExpr("express1")
               .addDefaultValue("d1")

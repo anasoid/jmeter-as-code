@@ -28,6 +28,7 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.AbstractScopedTestElementWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.AssertionWrapper;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.anasoid.jmc.core.xstream.annotations.JmcMandatory;
 import org.anasoid.jmc.core.xstream.annotations.JmcProperty;
 import org.apache.commons.collections.CollectionUtils;
@@ -40,6 +41,7 @@ import org.apache.jmeter.assertions.gui.XPath2AssertionGui;
  * @see XPath2Assertion
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@JmcDefaultName("XPath2 Assertion")
 @SuppressWarnings("PMD.RedundantFieldInitializer")
 public class XPath2AssertionWrapper
     extends AbstractScopedTestElementWrapper<XPath2Assertion, XPath2AssertionGui>

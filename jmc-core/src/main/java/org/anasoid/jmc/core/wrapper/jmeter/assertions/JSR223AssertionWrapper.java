@@ -21,6 +21,7 @@ package org.anasoid.jmc.core.wrapper.jmeter.assertions;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.AssertionWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.util.JSR223TestElementWrapper;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.apache.jmeter.assertions.JSR223Assertion;
 import org.apache.jmeter.testbeans.gui.TestBeanGUI;
 
@@ -30,6 +31,7 @@ import org.apache.jmeter.testbeans.gui.TestBeanGUI;
  * @see JSR223Assertion
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
+@JmcDefaultName("JSR223 Assertion")
 public class JSR223AssertionWrapper extends JSR223TestElementWrapper<JSR223Assertion, TestBeanGUI>
     implements AssertionWrapper<JSR223Assertion> {
 

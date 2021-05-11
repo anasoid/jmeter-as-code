@@ -27,6 +27,7 @@ import org.anasoid.jmc.core.xstream.annotations.JmcParam;
 public class ParamSamplerJmxIncludeWrapperTesting extends SamplerJmxIncludeWrapper {
 
   private static final String PARENT_PATH = "org/anasoid/jmc/core/wrapper/jmeter/jmc/generic";
+
   @JmcParam("path")
   private static String myPath = "mypath";
 

@@ -31,6 +31,7 @@ import org.anasoid.jmc.core.wrapper.jmc.Variable;
 import org.anasoid.jmc.core.wrapper.jmc.validator.Validator;
 import org.anasoid.jmc.core.wrapper.jmeter.processor.PostProcessorWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.AbstractScopedTestElementWrapper;
+import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.anasoid.jmc.core.xstream.annotations.JmcMandatory;
 import org.anasoid.jmc.core.xstream.annotations.JmcNullAllowed;
 import org.anasoid.jmc.core.xstream.annotations.JmcProperty;
@@ -48,6 +49,7 @@ import org.apache.jmeter.extractor.json.jsonpath.gui.JSONPostProcessorGui;
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 @SuppressWarnings("PMD.RedundantFieldInitializer")
+@JmcDefaultName("JSON Extractor")
 public class JSONPostProcessorWrapper
     extends AbstractScopedTestElementWrapper<JSONPostProcessor, JSONPostProcessorGui>
     implements PostProcessorWrapper<JSONPostProcessor>, Validator {

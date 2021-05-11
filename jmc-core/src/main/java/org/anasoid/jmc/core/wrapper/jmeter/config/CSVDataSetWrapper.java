@@ -73,27 +73,32 @@ public class CSVDataSetWrapper extends ConfigTestElementWrapper<CSVDataSet, Test
   @Setter
   @Default
   private String ignoreFirstLine = FALSE;
+
   @JmcProperty("delimiter")
   @Getter
   @Setter
   @Default
   @NonNull
   private String delimiter = ",";
+
   @JmcProperty(value = "recycle", type = BooleanManager.class)
   @Getter
   @Setter
   @Default
   private String recycle = TRUE;
+
   @JmcProperty(value = "stopThread", type = BooleanManager.class)
   @Getter
   @Setter
   @Default
   private String stopThread = FALSE;
+
   @JmcProperty(value = "quotedData", type = BooleanManager.class)
   @Getter
   @Setter
   @Default
   private String quotedData = FALSE;
+
   @JmcProperty("shareMode")
   @Getter
   @Setter

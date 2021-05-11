@@ -37,7 +37,6 @@ class JSONPostProcessorWrapperXmlTest extends AbstractJmcTest {
         TestPlanWrapper.builder()
             .addPostProcessor(
                 JSONPostProcessorWrapper.builder()
-                    .withName("JSON Extractor")
                     .addReferenceName(new Variable("var1"))
                     .addJsonPathExpr("express")
                     .build())
