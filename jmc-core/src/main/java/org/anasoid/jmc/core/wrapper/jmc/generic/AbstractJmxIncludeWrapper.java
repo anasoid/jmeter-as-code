@@ -20,7 +20,6 @@ package org.anasoid.jmc.core.wrapper.jmc.generic;
 
 import com.thoughtworks.xstream.annotations.XStreamConverter;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
-import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -84,7 +83,7 @@ public abstract class AbstractJmxIncludeWrapper<T> implements TestElementWrapper
   }
 
   /** Convert object to Xml. */
-  public String toXml() throws IOException {
+  public String toXml() {
     if (getDefaultPath() != null && !getDefaultPath().equals(path)) {
       throw new ConversionException(
           "Path [" + path + "]+ is provided and  getDefaultPath  for :" + this);

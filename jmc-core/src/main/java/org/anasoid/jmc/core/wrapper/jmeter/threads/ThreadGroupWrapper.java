@@ -47,15 +47,20 @@ public class ThreadGroupWrapper extends AbstractThreadGroupWrapper<ThreadGroup, 
   /** Startup delay (seconds). */
   @JmcProperty(value = ThreadGroup.DELAY)
   @Getter
+  @Setter
   @JmcNullAllowed
-  private final String delay;
+  private String delay;
+
   /** Ramp-up period (seconds). */
   @JmcProperty(value = ThreadGroup.RAMP_TIME)
   @Getter
+  @Setter
   @Builder.Default
-  private final String rampUp = "1";
+  private String rampUp = "1";
+
   /** Number of iterations to use. */
-  @XStreamOmitField private @Builder.Default @Getter final String loops = "1";
+  @XStreamOmitField @Builder.Default @Getter @Setter private String loops = "1";
+
   /**
    * In spite of the name, this is actually used to determine if the loop controller is repeatable.
    * The value is only used in nextIsNull() when the loop end condition has been detected: If
@@ -64,13 +69,15 @@ public class ThreadGroupWrapper extends AbstractThreadGroupWrapper<ThreadGroup, 
    * them. Thread Group sets the value false, so nextIsNull() sets done, and the Thread Group will
    * not be repeated. However, it's not clear that a Thread Group could ever be repeated.
    */
-  @XStreamOmitField private @Builder.Default @Getter final Boolean continueForever = false;
+  @XStreamOmitField @Builder.Default @Getter @Setter private Boolean continueForever = false;
+
   /** Specify Thread lifetime. */
   @JmcProperty(ThreadGroup.SCHEDULER)
   @Default
   @Setter
   @Getter
   private Boolean scheduler = false;
+
   /** Specify Thread lifetime. */
   @JmcProperty(ThreadGroup.DELAYED_START)
   @Default
@@ -78,6 +85,7 @@ public class ThreadGroupWrapper extends AbstractThreadGroupWrapper<ThreadGroup, 
   @Setter
   @JmcSkipDefault("false")
   private Boolean delayedStartup = false;
+
   /** Duration (seconds). */
   @JmcProperty(value = ThreadGroup.DURATION)
   @Getter
