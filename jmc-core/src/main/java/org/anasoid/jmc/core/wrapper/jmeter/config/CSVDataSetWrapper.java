@@ -56,7 +56,9 @@ public class CSVDataSetWrapper extends ConfigTestElementWrapper<CSVDataSet, Test
   @XStreamOmitField private static final long serialVersionUID = -1283066246657871689L;
   @XStreamOmitField @Getter @Default private final List<Variable> variables = new ArrayList<>();
   @XStreamOmitField @Getter @Setter private String filename;
-  @XStreamOmitField @Getter @Setter private String resourceFile;
+
+  /** Include file name from resource folder, use only when executing from source code. */
+  @XStreamOmitField @Getter @Setter @Default boolean asResourceFile = JmcConfig.isDataResource();
 
   @JmcProperty("fileEncoding")
   @Getter
@@ -106,10 +108,10 @@ public class CSVDataSetWrapper extends ConfigTestElementWrapper<CSVDataSet, Test
 
   @JmcProperty("filename")
   protected String getFilePath() {
-    if (resourceFile != null) {
-      URL url = Thread.currentThread().getContextClassLoader().getResource(resourceFile);
+    if (asResourceFile) {
+      URL url = Thread.currentThread().getContextClassLoader().getResource(filename);
       if (url == null) {
-        throw new ConversionException("ResourceFile not found : " + resourceFile);
+        throw new ConversionException("ResourceFile not found : " + filename);
       }
       return url.getFile();
     }

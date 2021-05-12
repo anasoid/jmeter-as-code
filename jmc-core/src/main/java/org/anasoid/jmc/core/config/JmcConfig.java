@@ -65,6 +65,11 @@ public final class JmcConfig {
     return properties.getProperty("jmc.result.root.folder");
   }
 
+  /** Get Data csv fom resource, use only when executing from code source. */
+  public static boolean isDataResource() {
+    return "true".equalsIgnoreCase(properties.getProperty("jmc.data.resource"));
+  }
+
   /** Get Script root folder. */
   public static boolean isScriptResource() {
     return "true".equalsIgnoreCase(properties.getProperty("jmc.script.resource"));
