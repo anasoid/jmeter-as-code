@@ -37,7 +37,8 @@ class CSVDataSetWrapperTest extends AbstractJmcTest {
     CSVDataSetWrapper csvDataSetWrapper =
         CSVDataSetWrapper.builder()
             .addvariable(new Variable("var"))
-            .withResourceFile(PARENT_PATH + "/csv.config.default.jmx")
+            .withAsResourceFile(true)
+            .withFilename(PARENT_PATH + "/csv.config.default.jmx")
             .build();
     ApplicationTest applicationTest =
         ApplicationTestUtilsForTesting.getApplicationTest(csvDataSetWrapper);
@@ -52,7 +53,8 @@ class CSVDataSetWrapperTest extends AbstractJmcTest {
     CSVDataSetWrapper csvDataSetWrapper =
         CSVDataSetWrapper.builder()
             .addvariable(new Variable("var"))
-            .withResourceFile(PARENT_PATH + "/notfound.jmx")
+            .withAsResourceFile(true)
+            .withFilename(PARENT_PATH + "/notfound.jmx")
             .build();
     ApplicationTest applicationTest =
         ApplicationTestUtilsForTesting.getApplicationTest(csvDataSetWrapper);
