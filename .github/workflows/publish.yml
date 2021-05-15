@@ -24,6 +24,10 @@ jobs:
       JMETER_HOME: /home/runner/.jmeter/jmeter
       JMETER_FILE: apache-jmeter-5.4.1
 
+      MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+      MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
+      ORG_GRADLE_PROJECT_signingKey: ${{ secrets.ORG_GRADLE_PROJECT_SIGNINGKEY }}
+      ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.ORG_GRADLE_PROJECT_SIGNINGPASSWORD }}
 
     steps:
 
@@ -80,11 +84,9 @@ jobs:
 
       - name: Publish core
         run: ./gradlew --stacktrace --console=verbose jmc-core:publish
-        env:
-          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-          MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
-          ORG_GRADLE_PROJECT_signingKey: ${{ secrets.ORG_GRADLE_PROJECT_SIGNINGKEY }}
-          ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.ORG_GRADLE_PROJECT_SIGNINGPASSWORD }}
+
+      - name: Publish test
+        run: ./gradlew --stacktrace --console=verbose jmc-test:publish
 
       - name: Publish artifact libs
         uses: actions/upload-artifact@v2
