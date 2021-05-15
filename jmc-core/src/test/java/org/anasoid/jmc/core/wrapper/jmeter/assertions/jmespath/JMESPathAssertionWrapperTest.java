@@ -5,8 +5,8 @@ import java.io.StringWriter;
 import java.lang.reflect.InvocationTargetException;
 import org.anasoid.jmc.core.application.ApplicationTest;
 import org.anasoid.jmc.core.application.ApplicationTestUtilsForTesting;
-import org.anasoid.jmc.core.test.utils.SetterTestUtils;
 import org.anasoid.jmc.core.xstream.exceptions.ConversionIllegalStateException;
+import org.anasoid.jmc.test.utils.SetterTestUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 /*

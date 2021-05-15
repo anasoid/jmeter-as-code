@@ -1,10 +1,3 @@
-package org.anasoid.jmc.core.wrapper.jmeter.protocol.http.control;
-
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import org.anasoid.jmc.test.utils.SetterTestUtils;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 /*
  * Copyright 2020-2021 the original author or authors.
  *
@@ -20,22 +13,31 @@ import org.junit.jupiter.api.Test;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * @author : anas
- * Date :   11-Apr-2021
+ * Date :   14-Feb-2021
  */
 
-class AuthManagerWrapperTest {
+package org.anasoid.jmc.core.wrapper.jmeter.protocol.http.control;
+
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import org.anasoid.jmc.core.AbstractJmcCoreTest;
+import org.anasoid.jmc.test.utils.SetterTestUtils;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
+class CacheManagerWrapperCoreTest extends AbstractJmcCoreTest {
 
   @Test
   void testSetter()
       throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-    SetterTestUtils.testSetter(AuthManagerWrapper.builder());
+    SetterTestUtils.testSetter(CacheManagerWrapper.builder());
   }
 
   @Test
   void testControlledByThread() throws IOException {
 
     try {
-      AuthManagerWrapper.builder()
+      CacheManagerWrapper.builder()
           .withControlledByThread(true)
           .withClearEachIteration(false)
           .build();
@@ -47,10 +49,10 @@ class AuthManagerWrapperTest {
   }
 
   @Test
-  void testControlledByThreadInverse() {
+  void testControlledByThreadInverse() throws IOException {
 
     try {
-      AuthManagerWrapper.builder()
+      CacheManagerWrapper.builder()
           .withClearEachIteration(false)
           .withControlledByThread(true)
           .build();
@@ -62,10 +64,16 @@ class AuthManagerWrapperTest {
   }
 
   @Test
-  void testControlledByThreadSuccess() {
+  void testControlledByThreadSuccess() throws IOException {
 
-    AuthManagerWrapper.builder().withClearEachIteration(true).withControlledByThread(false).build();
+    CacheManagerWrapper.builder()
+        .withClearEachIteration(true)
+        .withControlledByThread(false)
+        .build();
 
-    AuthManagerWrapper.builder().withControlledByThread(false).withClearEachIteration(true).build();
+    CacheManagerWrapper.builder()
+        .withControlledByThread(false)
+        .withClearEachIteration(true)
+        .build();
   }
 }

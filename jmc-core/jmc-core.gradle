@@ -11,6 +11,6 @@ dependencies {
 
     implementation("commons-beanutils:commons-beanutils:$commonsBeanutilsVersion")
     implementation("io.github.classgraph:classgraph:$classgraphVersion")
-
+    testImplementation(project(":jmc-test"))
 
 }
