@@ -1,7 +1,12 @@
-package org.anasoid.jmc.core.wrapper.jmeter.protocol.http.control;
+package org.anasoid.jmc.core.wrapper.jmeter.extractor;
 
 import java.io.IOException;
+import java.io.StringWriter;
 import java.lang.reflect.InvocationTargetException;
+import org.anasoid.jmc.core.AbstractJmcCoreTest;
+import org.anasoid.jmc.core.application.ApplicationTest;
+import org.anasoid.jmc.core.application.ApplicationTestUtilsForTesting;
+import org.anasoid.jmc.core.xstream.exceptions.ConversionIllegalStateException;
 import org.anasoid.jmc.test.utils.SetterTestUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -20,52 +25,30 @@ import org.junit.jupiter.api.Test;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * @author : anas
- * Date :   11-Apr-2021
+ * Date :   28-Apr-2021
  */
 
-class AuthManagerWrapperTest {
+class RegexExtractorWrapperCoreTest extends AbstractJmcCoreTest {
 
   @Test
   void testSetter()
       throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-    SetterTestUtils.testSetter(AuthManagerWrapper.builder());
+    SetterTestUtils.testSetter(RegexExtractorWrapper.builder());
   }
 
   @Test
-  void testControlledByThread() throws IOException {
+  void testEmptyDefaultValue() throws IOException {
 
     try {
-      AuthManagerWrapper.builder()
-          .withControlledByThread(true)
-          .withClearEachIteration(false)
-          .build();
+      RegexExtractorWrapper wrapper =
+          RegexExtractorWrapper.builder().withDefaultValue("d").withDefaultEmpty(true).build();
+      ApplicationTest applicationTest = ApplicationTestUtilsForTesting.getApplicationTest(wrapper);
+      StringWriter wr = new StringWriter(); // NOPMD
+      applicationTest.toJmx(wr);
 
       Assertions.fail();
-    } catch (IllegalStateException e) {
+    } catch (ConversionIllegalStateException e) {
       // Nothing
     }
-  }
-
-  @Test
-  void testControlledByThreadInverse() {
-
-    try {
-      AuthManagerWrapper.builder()
-          .withClearEachIteration(false)
-          .withControlledByThread(true)
-          .build();
-
-      Assertions.fail();
-    } catch (IllegalStateException e) {
-      // Nothing
-    }
-  }
-
-  @Test
-  void testControlledByThreadSuccess() {
-
-    AuthManagerWrapper.builder().withClearEachIteration(true).withControlledByThread(false).build();
-
-    AuthManagerWrapper.builder().withControlledByThread(false).withClearEachIteration(true).build();
   }
 }

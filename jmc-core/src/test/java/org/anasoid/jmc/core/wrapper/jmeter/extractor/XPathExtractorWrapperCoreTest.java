@@ -1,13 +1,12 @@
-package org.anasoid.jmc.core.wrapper.jmeter.extractor.json.jsonpath;
+package org.anasoid.jmc.core.wrapper.jmeter.extractor;
 
 import java.io.IOException;
 import java.io.StringWriter;
 import java.lang.reflect.InvocationTargetException;
+import org.anasoid.jmc.core.AbstractJmcCoreTest;
 import org.anasoid.jmc.core.application.ApplicationTest;
 import org.anasoid.jmc.core.application.ApplicationTestUtilsForTesting;
-import org.anasoid.jmc.core.wrapper.jmc.Variable;
 import org.anasoid.jmc.core.xstream.exceptions.ConversionIllegalStateException;
-import org.anasoid.jmc.core.xstream.exceptions.ConversionMandatoryException;
 import org.anasoid.jmc.test.utils.SetterTestUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -29,39 +28,24 @@ import org.junit.jupiter.api.Test;
  * Date :   29-Apr-2021
  */
 
-class JSONPostProcessorWrapperTest {
+class XPathExtractorWrapperCoreTest extends AbstractJmcCoreTest {
+
   @Test
   void testSetter()
       throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-    SetterTestUtils.testSetter(JSONPostProcessorWrapper.builder());
+    SetterTestUtils.testSetter(XPathExtractorWrapper.builder());
   }
 
   @Test
-  void testMandatoryValue() throws IOException {
+  void testWithTidy() throws IOException {
 
     try {
-      JSONPostProcessorWrapper wrapper =
-          JSONPostProcessorWrapper.builder().addJsonPathExpr("express").build();
-
-      ApplicationTest applicationTest = ApplicationTestUtilsForTesting.getApplicationTest(wrapper);
-      StringWriter wr = new StringWriter(); // NOPMD
-      applicationTest.toJmx(wr);
-
-      Assertions.fail();
-    } catch (ConversionMandatoryException e) {
-      // Nothing
-    }
-  }
-
-  @Test
-  void testCountExpressValue() throws IOException {
-
-    try {
-      JSONPostProcessorWrapper wrapper =
-          JSONPostProcessorWrapper.builder()
-              .addReferenceName(new Variable("var1"))
-              .addJsonPathExpr("express1")
-              .addReferenceName(new Variable("var2"))
+      XPathExtractorWrapper wrapper =
+          XPathExtractorWrapper.builder()
+              .withRefName("var")
+              .withXpathQuery("query")
+              .withUseTidy(true)
+              .withWhitespace(true)
               .build();
       ApplicationTest applicationTest = ApplicationTestUtilsForTesting.getApplicationTest(wrapper);
       StringWriter wr = new StringWriter(); // NOPMD
@@ -74,16 +58,14 @@ class JSONPostProcessorWrapperTest {
   }
 
   @Test
-  void testCountDefaultValue() throws IOException {
+  void testWithoutTidy() throws IOException {
 
     try {
-      JSONPostProcessorWrapper wrapper =
-          JSONPostProcessorWrapper.builder()
-              .addReferenceName(new Variable("var1"))
-              .addJsonPathExpr("express1")
-              .addDefaultValue("d1")
-              .addReferenceName(new Variable("var2"))
-              .addJsonPathExpr("express2")
+      XPathExtractorWrapper wrapper =
+          XPathExtractorWrapper.builder()
+              .withRefName("var")
+              .withXpathQuery("query")
+              .withTidyShowWarnings(true)
               .build();
       ApplicationTest applicationTest = ApplicationTestUtilsForTesting.getApplicationTest(wrapper);
       StringWriter wr = new StringWriter(); // NOPMD

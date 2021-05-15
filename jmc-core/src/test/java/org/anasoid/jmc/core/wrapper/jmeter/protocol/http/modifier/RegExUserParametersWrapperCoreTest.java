@@ -1,12 +1,11 @@
-package org.anasoid.jmc.core.wrapper.jmeter.extractor.json.jsonpath;
+package org.anasoid.jmc.core.wrapper.jmeter.protocol.http.modifier;
 
 import java.io.IOException;
 import java.io.StringWriter;
 import java.lang.reflect.InvocationTargetException;
+import org.anasoid.jmc.core.AbstractJmcCoreTest;
 import org.anasoid.jmc.core.application.ApplicationTest;
 import org.anasoid.jmc.core.application.ApplicationTestUtilsForTesting;
-import org.anasoid.jmc.core.wrapper.jmc.Variable;
-import org.anasoid.jmc.core.xstream.exceptions.ConversionIllegalStateException;
 import org.anasoid.jmc.core.xstream.exceptions.ConversionMandatoryException;
 import org.anasoid.jmc.test.utils.SetterTestUtils;
 import org.junit.jupiter.api.Assertions;
@@ -26,23 +25,26 @@ import org.junit.jupiter.api.Test;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * @author : anas
- * Date :   29-Apr-2021
+ * Date :   24-Apr-2021
  */
 
-class JSONPostProcessorWrapperTest {
+class RegExUserParametersWrapperCoreTest extends AbstractJmcCoreTest {
+
   @Test
   void testSetter()
       throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-    SetterTestUtils.testSetter(JSONPostProcessorWrapper.builder());
+    SetterTestUtils.testSetter(RegExUserParametersWrapper.builder());
   }
 
   @Test
-  void testMandatoryValue() throws IOException {
+  void testFailMandatoryReg() throws IOException {
 
     try {
-      JSONPostProcessorWrapper wrapper =
-          JSONPostProcessorWrapper.builder().addJsonPathExpr("express").build();
-
+      RegExUserParametersWrapper wrapper =
+          RegExUserParametersWrapper.builder()
+              .withRegExParamNamesGrNr("group")
+              .withRegExParamValuesGrNr("value")
+              .build();
       ApplicationTest applicationTest = ApplicationTestUtilsForTesting.getApplicationTest(wrapper);
       StringWriter wr = new StringWriter(); // NOPMD
       applicationTest.toJmx(wr);
@@ -54,43 +56,39 @@ class JSONPostProcessorWrapperTest {
   }
 
   @Test
-  void testCountExpressValue() throws IOException {
+  void testFailMandatoryGroup() throws IOException {
 
     try {
-      JSONPostProcessorWrapper wrapper =
-          JSONPostProcessorWrapper.builder()
-              .addReferenceName(new Variable("var1"))
-              .addJsonPathExpr("express1")
-              .addReferenceName(new Variable("var2"))
+      RegExUserParametersWrapper wrapper =
+          RegExUserParametersWrapper.builder()
+              .withRegExRefName("reg")
+              .withRegExParamValuesGrNr("value")
               .build();
       ApplicationTest applicationTest = ApplicationTestUtilsForTesting.getApplicationTest(wrapper);
       StringWriter wr = new StringWriter(); // NOPMD
       applicationTest.toJmx(wr);
 
       Assertions.fail();
-    } catch (ConversionIllegalStateException e) {
+    } catch (ConversionMandatoryException e) {
       // Nothing
     }
   }
 
   @Test
-  void testCountDefaultValue() throws IOException {
+  void testFailMandatoryValue() throws IOException {
 
     try {
-      JSONPostProcessorWrapper wrapper =
-          JSONPostProcessorWrapper.builder()
-              .addReferenceName(new Variable("var1"))
-              .addJsonPathExpr("express1")
-              .addDefaultValue("d1")
-              .addReferenceName(new Variable("var2"))
-              .addJsonPathExpr("express2")
+      RegExUserParametersWrapper wrapper =
+          RegExUserParametersWrapper.builder()
+              .withRegExRefName("reg")
+              .withRegExParamNamesGrNr("group")
               .build();
       ApplicationTest applicationTest = ApplicationTestUtilsForTesting.getApplicationTest(wrapper);
       StringWriter wr = new StringWriter(); // NOPMD
       applicationTest.toJmx(wr);
 
       Assertions.fail();
-    } catch (ConversionIllegalStateException e) {
+    } catch (ConversionMandatoryException e) {
       // Nothing
     }
   }
