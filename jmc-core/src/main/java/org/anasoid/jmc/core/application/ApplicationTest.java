@@ -28,6 +28,7 @@ import java.io.ObjectOutputStream;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -163,7 +164,9 @@ public class ApplicationTest {
    * @throws IOException – If an I/O error occurs.
    */
   public TestElementWrapper toJmx(File file) throws IOException { // NOSONAR
-    return this.toJmx(Files.newBufferedWriter(Paths.get(file.getPath()), StandardCharsets.UTF_8));
+    Path path = Paths.get(file.getPath());
+    path.toFile().getParentFile().mkdirs();
+    return this.toJmx(Files.newBufferedWriter(path, StandardCharsets.UTF_8));
   }
 
   protected ScriptWrapper createScript() {

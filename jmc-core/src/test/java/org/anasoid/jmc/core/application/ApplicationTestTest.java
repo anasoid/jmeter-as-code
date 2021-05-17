@@ -1,5 +1,6 @@
 package org.anasoid.jmc.core.application;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.Arrays;
@@ -55,6 +56,16 @@ class ApplicationTestTest {
     Assertions.assertEquals("sub1", child2.getName());
     Assertions.assertEquals("sub2prepared", child3.getName());
     Assertions.assertEquals("sub2prepared", child4.getName());
+  }
+
+  @Test
+  void testToJmx() throws IOException {
+
+    ApplicationTest applicationTest = new ApplicationTest(getTestElement());
+
+    String filepath = System.getProperties().getProperty("user.dir") + "/build/jmx/" + "toJmx.jmx";
+    applicationTest.toJmx(new File(filepath));
+    Assertions.assertTrue(new File(filepath).exists());
   }
 
   private ParentTestElementWrapperTesting getTestElement() {
