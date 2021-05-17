@@ -25,6 +25,7 @@ import java.util.List;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
+import org.anasoid.jmc.core.wrapper.jmc.Variable;
 import org.anasoid.jmc.core.xstream.annotations.JmcCollection;
 import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.anasoid.jmc.core.xstream.annotations.JmcEmptyAllowed;
@@ -95,6 +96,17 @@ public class ArgumentsWrapper extends ConfigTestElementWrapper<Arguments, Argume
      */
     public B addArgument(String name, String value) {
       addArgument(ArgumentWrapper.builder().withName(name).withValue(value).build());
+      return self();
+    }
+
+    /**
+     * Add argument, consists of a variable/value pair.
+     *
+     * @param variable variable.
+     * @param value value.
+     */
+    public B addArgument(Variable variable, String value) {
+      addArgument(ArgumentWrapper.builder().withName(variable.getName()).withValue(value).build());
       return self();
     }
 
