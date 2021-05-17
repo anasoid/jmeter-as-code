@@ -140,7 +140,7 @@ public final class JmcConfig {
    * @param key key.
    * @return null or value.
    */
-  public String getProperty(String key) {
+  public static String getProperty(String key) {
 
     return properties.getProperty(key);
   }
@@ -152,7 +152,7 @@ public final class JmcConfig {
    * @param defaultValue defaultValue, return if key not found.
    * @return value or defaultValue.
    */
-  public String getProperty(String key, String defaultValue) {
+  public static String getProperty(String key, String defaultValue) {
     return properties.getProperty(key, defaultValue);
   }
 }

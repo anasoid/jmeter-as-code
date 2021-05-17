@@ -20,7 +20,7 @@ package org.anasoid.jmc.core.application.interceptors;
 
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.TestElementWrapper;
 
-/** Prepare Interceptor to custom test before persistance. */
+/** Prepare Interceptor to custom test before persistence. */
 public interface PrepareInterceptor {
 
   boolean support(TestElementWrapper<?> testElementWrapper);
