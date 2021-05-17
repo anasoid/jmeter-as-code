@@ -45,6 +45,7 @@ import org.anasoid.jmc.core.xstream.annotations.JmcNullAllowed;
 import org.anasoid.jmc.core.xstream.annotations.JmcProperty;
 import org.anasoid.jmc.core.xstream.annotations.JmcSkipDefault;
 import org.anasoid.jmc.core.xstream.exceptions.ConversionException;
+import org.anasoid.jmc.core.xstream.exceptions.ConversionIllegalStateException;
 import org.anasoid.jmc.core.xstream.exceptions.ConversionMandatoryException;
 import org.anasoid.jmc.core.xstream.types.TypeManager;
 import org.slf4j.Logger;
@@ -252,7 +253,7 @@ public final class ConverterBeanUtils {
     if (accessibleObject instanceof Method) {
       return ((Method) accessibleObject).getReturnType();
     }
-    throw new IllegalStateException("Unknown accessibleObject type :" + accessibleObject);
+    throw new ConversionIllegalStateException("Unknown accessibleObject type :" + accessibleObject);
   }
 
   /** get Property Alias (intProp,stringProp,longProp .. ). */
@@ -302,7 +303,7 @@ public final class ConverterBeanUtils {
     } else if (value instanceof TestElementWrapper) {
       return JMeterProperty.ELEMENT.value();
     }
-    throw new IllegalStateException("Unknown properties type for :" + value);
+    throw new ConversionIllegalStateException("Unknown properties type for :" + value);
   }
 
   /** get num value. call value() method if present, else call toString. */

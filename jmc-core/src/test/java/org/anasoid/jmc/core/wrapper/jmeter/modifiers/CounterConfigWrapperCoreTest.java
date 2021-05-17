@@ -55,11 +55,15 @@ class CounterConfigWrapperCoreTest extends AbstractJmcCoreTest {
 
   @Test
   void testIterationUser() {
+    try {
+      CounterConfigWrapper.builder().withResetOnEachIteration(false).withPerUser(true).build();
+      CounterConfigWrapper.builder().withResetOnEachIteration(true).withPerUser(true).build();
 
-    CounterConfigWrapper.builder().withResetOnEachIteration(false).withPerUser(true).build();
-    CounterConfigWrapper.builder().withResetOnEachIteration(true).withPerUser(true).build();
+      CounterConfigWrapper.builder().withPerUser(true).withResetOnEachIteration(false).build();
+      CounterConfigWrapper.builder().withPerUser(true).withResetOnEachIteration(true).build();
 
-    CounterConfigWrapper.builder().withPerUser(true).withResetOnEachIteration(false).build();
-    CounterConfigWrapper.builder().withPerUser(true).withResetOnEachIteration(true).build();
+    } catch (ConversionIllegalStateException e) {
+      Assertions.fail();
+    }
   }
 }

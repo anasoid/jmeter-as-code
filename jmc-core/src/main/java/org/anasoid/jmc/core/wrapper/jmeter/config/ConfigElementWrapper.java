@@ -31,6 +31,6 @@ import org.apache.jmeter.testelement.AbstractTestElement;
 public interface ConfigElementWrapper<T extends AbstractTestElement>
     extends TestElementWrapper<T> { // NOSONAR
 
-  String TRUE = "true";
-  String FALSE = "false";
+  String TRUE = "true"; // NOSONAR
+  String FALSE = "false"; // NOSONAR
 }

@@ -90,11 +90,11 @@ public class SimplePageControllerTemplate extends AbstractSamplerControllerTempl
   }
 
   /** Prepare Main sampler builder. */
-  protected void prepareSamplerBuilder(
+  protected void prepareSamplerBuilder(// NOSONAR
       HTTPSamplerProxyWrapper.HTTPSamplerProxyWrapperBuilder<?, ?> builder) {}
 
   /** Prepare Main sampler wrapper. */
-  protected void prepareSamplerWrapper(HTTPSamplerProxyWrapper samplerProxyWrapper) {}
+  protected void prepareSamplerWrapper(HTTPSamplerProxyWrapper samplerProxyWrapper) {} // NOSONAR
 
   @Override
   protected void initMainSampler(

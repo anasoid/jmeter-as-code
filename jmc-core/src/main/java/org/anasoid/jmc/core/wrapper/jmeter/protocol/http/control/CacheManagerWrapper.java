@@ -27,6 +27,7 @@ import org.anasoid.jmc.core.wrapper.jmeter.config.ConfigTestElementWrapper;
 import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.anasoid.jmc.core.xstream.annotations.JmcProperty;
 import org.anasoid.jmc.core.xstream.annotations.JmcSkipDefault;
+import org.anasoid.jmc.core.xstream.exceptions.ConversionIllegalStateException;
 import org.apache.jmeter.protocol.http.control.CacheManager;
 import org.apache.jmeter.protocol.http.gui.CacheManagerGui;
 
@@ -87,7 +88,7 @@ public class CacheManagerWrapper extends ConfigTestElementWrapper<CacheManager, 
     /** clearEachIteration. */
     public B withClearEachIteration(boolean clearEachIteration) {
       if (this.controlledByThread$value) {
-        throw new IllegalStateException(
+        throw new ConversionIllegalStateException(
             "When using controlledByThread, clearEachIteration should not be used");
       }
       this.clearEachIteration$value = clearEachIteration;
@@ -99,7 +100,7 @@ public class CacheManagerWrapper extends ConfigTestElementWrapper<CacheManager, 
     public B withControlledByThread(boolean controlledByThread) {
 
       if (controlledByThread && this.clearEachIteration$set) {
-        throw new IllegalStateException(
+        throw new ConversionIllegalStateException(
             "When using controlledByThread, clearEachIteration should not be used");
       }
       if (controlledByThread) {

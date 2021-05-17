@@ -47,7 +47,7 @@ public class ThroughputControllerWrapper
   @Setter
   @Default
   @JmcMandatory
-  private ExecutionStyle executionStyle = ExecutionStyle.PercentExecutions;
+  private ExecutionStyle executionStyle = ExecutionStyle.PERCENT_EXECUTIONS;
 
   /**
    * A number. For percent execution mode, a number from 0-100 that indicates the percentage of
@@ -86,8 +86,8 @@ public class ThroughputControllerWrapper
 
   /** enum for Format. */
   public enum ExecutionStyle {
-    PercentExecutions(1),
-    TotalExecutions(0);
+    PERCENT_EXECUTIONS(1),
+    TOTAL_EXECUTIONS(0);
 
     public final Integer value;
 
