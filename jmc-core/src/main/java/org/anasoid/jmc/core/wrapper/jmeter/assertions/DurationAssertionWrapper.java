@@ -75,15 +75,24 @@ public class DurationAssertionWrapper
       extends AbstractScopedAssertionWrapper.AbstractScopedAssertionWrapperBuilder<
           DurationAssertion, DurationAssertionGui, C, B> {
 
+    /**
+     * The maximum number of milliseconds each response is allowed before being marked as failed.
+     */
     public B withDuration(String duration) {
       this.duration = duration;
       return self();
     }
 
+    /**
+     * The maximum number of milliseconds each response is allowed before being marked as failed.
+     */
     public B withDuration(Integer duration) {
       return withDuration(String.valueOf(duration));
     }
 
+    /**
+     * The maximum number of milliseconds each response is allowed before being marked as failed.
+     */
     public B withDuration(Variable duration) {
       return withDuration(String.valueOf(duration.getValue()));
     }
