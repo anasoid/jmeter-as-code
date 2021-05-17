@@ -33,6 +33,7 @@ import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.anasoid.jmc.core.xstream.annotations.JmcEmptyAllowed;
 import org.anasoid.jmc.core.xstream.annotations.JmcProperty;
 import org.anasoid.jmc.core.xstream.annotations.JmcSkipDefault;
+import org.anasoid.jmc.core.xstream.exceptions.ConversionIllegalStateException;
 import org.apache.jmeter.protocol.http.control.AuthManager;
 import org.apache.jmeter.protocol.http.gui.AuthPanel;
 
@@ -86,7 +87,7 @@ public class AuthManagerWrapper extends ConfigTestElementWrapper<AuthManager, Au
     /** clearEachIteration. */
     public B withClearEachIteration(boolean clearEachIteration) {
       if (this.controlledByThread$value) {
-        throw new IllegalStateException(
+        throw new ConversionIllegalStateException(
             "When using controlledByThread, clearEachIteration should not be used");
       }
       this.clearEachIteration$value = clearEachIteration;
@@ -98,7 +99,7 @@ public class AuthManagerWrapper extends ConfigTestElementWrapper<AuthManager, Au
     public B withControlledByThread(boolean controlledByThread) {
 
       if (controlledByThread && this.clearEachIteration$set) {
-        throw new IllegalStateException(
+        throw new ConversionIllegalStateException(
             "When using controlledByThread, clearEachIteration should not be used");
       }
       if (controlledByThread) {

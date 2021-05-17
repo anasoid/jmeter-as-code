@@ -33,6 +33,6 @@ class VariableCoreTest extends AbstractJmcCoreTest {
   @Test
   void testValue() {
     Variable var = new Variable("var");
-    "${var}".equals(var.getValue());
+    Assertions.assertEquals("${var}", var.getValue());
   }
 }

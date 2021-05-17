@@ -21,6 +21,7 @@ package org.anasoid.jmc.core.wrapper.jmeter.protocol.http.control;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import org.anasoid.jmc.core.AbstractJmcCoreTest;
+import org.anasoid.jmc.core.xstream.exceptions.ConversionIllegalStateException;
 import org.anasoid.jmc.test.utils.SetterTestUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -43,7 +44,7 @@ class CacheManagerWrapperCoreTest extends AbstractJmcCoreTest {
           .build();
 
       Assertions.fail();
-    } catch (IllegalStateException e) {
+    } catch (ConversionIllegalStateException e) {
       // Nothing
     }
   }
@@ -58,22 +59,25 @@ class CacheManagerWrapperCoreTest extends AbstractJmcCoreTest {
           .build();
 
       Assertions.fail();
-    } catch (IllegalStateException e) {
+    } catch (ConversionIllegalStateException e) {
       // Nothing
     }
   }
 
   @Test
   void testControlledByThreadSuccess() throws IOException {
+    try {
+      CacheManagerWrapper.builder()
+          .withClearEachIteration(true)
+          .withControlledByThread(false)
+          .build();
 
-    CacheManagerWrapper.builder()
-        .withClearEachIteration(true)
-        .withControlledByThread(false)
-        .build();
-
-    CacheManagerWrapper.builder()
-        .withControlledByThread(false)
-        .withClearEachIteration(true)
-        .build();
+      CacheManagerWrapper.builder()
+          .withControlledByThread(false)
+          .withClearEachIteration(true)
+          .build();
+    } catch (ConversionIllegalStateException e) {
+      Assertions.fail();
+    }
   }
 }
