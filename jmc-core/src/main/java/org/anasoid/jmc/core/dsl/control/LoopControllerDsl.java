@@ -50,4 +50,30 @@ public final class LoopControllerDsl {
 
     return loopControllerBuilder().withName(name);
   }
+
+  /**
+   * Get loopController builder with name.
+   *
+   * @param name name.
+   * @param loops Number of iterations to use.
+   * @return builder.
+   */
+  public static LoopControllerWrapper.LoopControllerWrapperBuilder<?, ?> loopControllerBuilder(
+      String name, String loops) {
+
+    return loopControllerBuilder().withName(name).withLoops(loops);
+  }
+
+  /**
+   * Get loopController builder with name.
+   *
+   * @param name name.
+   * @param loops Number of iterations to use.
+   * @return builder.
+   */
+  public static LoopControllerWrapper.LoopControllerWrapperBuilder<?, ?> loopControllerBuilder(
+      String name, int loops) {
+
+    return loopControllerBuilder().withName(name).withLoops(loops);
+  }
 }
