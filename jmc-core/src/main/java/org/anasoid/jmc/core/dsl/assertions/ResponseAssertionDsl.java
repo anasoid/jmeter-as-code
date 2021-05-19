@@ -79,13 +79,18 @@ public final class ResponseAssertionDsl {
     return httpCode(name, 200);
   }
 
+  /** Get ResponseAssertion builder with name and http status code 200. */
+  public static ResponseAssertionWrapper httpCodeOK() {
+    return httpCode("Assertion 200", 200);
+  }
+
   /**
    * Get ResponseAssertion builder with name and http status code.
    *
    * @param name name.
    * @param text list of text to check present.
    */
-  public static ResponseAssertionWrapper httpResponseContain(String name, String... text) {
+  public static ResponseAssertionWrapper httpResponseContains(String name, String... text) {
 
     return responseAssertion()
         .withName(name)
@@ -100,7 +105,7 @@ public final class ResponseAssertionDsl {
    * @param name name.
    * @param text list of text to check not present.
    */
-  public static ResponseAssertionWrapper httpResponseNotContain(String name, String... text) {
+  public static ResponseAssertionWrapper httpResponseNotContains(String name, String... text) {
 
     return responseAssertion()
         .withName(name)
