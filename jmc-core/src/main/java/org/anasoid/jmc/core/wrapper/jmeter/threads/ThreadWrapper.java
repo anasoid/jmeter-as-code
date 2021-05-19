@@ -20,11 +20,11 @@ package org.anasoid.jmc.core.wrapper.jmeter.threads;
 
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.TestElementWrapper;
 import org.apache.jmeter.config.ConfigElement;
-import org.apache.jmeter.threads.AbstractThreadGroup;
+import org.apache.jmeter.testelement.AbstractTestElement;
 
 /**
  * Wrapper for ConfigElement.
  *
  * @see ConfigElement
  */
-public interface ThreadWrapper<T extends AbstractThreadGroup> extends TestElementWrapper<T> {}
+public interface ThreadWrapper<T extends AbstractTestElement> extends TestElementWrapper<T> {}
