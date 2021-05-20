@@ -10,27 +10,64 @@ An API that give access to full Jmeter feature as code, All designed object in G
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=anasoid_jmeter-as-code&metric=security_rating)](https://sonarcloud.io/dashboard?id=anasoid_jmeter-as-code)
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=anasoid_jmeter-as-code&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=anasoid_jmeter-as-code)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=anasoid_jmeter-as-code&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=anasoid_jmeter-as-code)
-### Usage example
-A build script example:
+
+
+######A basic script example:
+
 ````java
-    TestPlanWrapper testPlanWrapper =
-        TestPlanWrapper.builder()
-            .withName("Test Plan")
-            .addChild(
-                ThreadGroupWrapper.builder()
-                    .withName("Thread Group")
-                    .addSampler(
-                        HTTPSamplerProxyWrapper.builder()
-                            .withName("HTTP Request")
-                            .withDomain("www.anasoid.org")
-                            .withPath("")
-                            .build())
+    TestPlanWrapper testPlan = TestPlanWrapper.builder()
+        .addThread(ThreadGroupWrapper.builder()
+            .addSampler(
+                HTTPSamplerProxyWrapper.builder()
+                    .withName("Home")
+                    .withDomain("https://github.com")
+                    .withProtocol("https")
+                    .withPath("/anasoid")
                     .build())
-            .build();
+            .build())
+        .build();
+
             
   ApplicationTest applicationTest = new ApplicationTest(testPlanWrapper);
  
   applicationTest.run();
   //OR
   applicationTest.toJmx(new File("mytest.jmx"));
+````
+
+A basic script example using template:
+````java
+    TestPlanWrapper testPlan = TestPlanWrapper.builder()
+        .addThread(ThreadGroupWrapper.builder()
+            .addSampler(new HomePage())
+            .build())
+        .build();
+
+    ApplicationTest applicationTest = new ApplicationTest(testPlanWrapper);
+
+    applicationTest.run();
+    //OR
+    applicationTest.toJmx(new File("mytest.jmx"));
+    
+class HomePage extends
+    AbstractJmcTemplate<HTTPSamplerProxyWrapper, HTTPSamplerProxyWrapperBuilder<?, ?>> {
+
+  @Override
+  protected void prepareBuilder(HTTPSamplerProxyWrapperBuilder<?, ?> builder) {
+    super.prepareBuilder(builder);
+    builder.withName("Home")
+        .withDomain("https://github.com")
+        .withProtocol("https")
+        .withPath("/anasoid");
+  }
+
+  @Override
+  protected JmcWrapperBuilder<?> init() {
+    return HTTPSamplerProxyWrapper.builder();
+  }
+}
+
+            
+
+  
 ````
