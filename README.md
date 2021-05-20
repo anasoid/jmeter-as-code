@@ -12,7 +12,7 @@ An API that give access to full Jmeter feature as code, All designed object in G
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=anasoid_jmeter-as-code&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=anasoid_jmeter-as-code)
 
 
-######A basic script example:
+###### A basic script example:
 
 ````java
     TestPlanWrapper testPlan = TestPlanWrapper.builder()
@@ -35,7 +35,7 @@ An API that give access to full Jmeter feature as code, All designed object in G
   applicationTest.toJmx(new File("mytest.jmx"));
 ````
 
-A basic script example using template:
+###### A basic script example using template:
 ````java
     TestPlanWrapper testPlan = TestPlanWrapper.builder()
         .addThread(ThreadGroupWrapper.builder()
