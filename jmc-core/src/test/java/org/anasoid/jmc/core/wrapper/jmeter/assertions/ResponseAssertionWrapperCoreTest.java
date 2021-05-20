@@ -53,8 +53,8 @@ class ResponseAssertionWrapperCoreTest extends AbstractJmcCoreTest {
   class MyAssertion extends AbstractJmcTemplate<ResponseAssertionWrapper> {
 
     @Override
-    protected JmcWrapperBuilder<ResponseAssertionWrapper> init() {
-      return (JmcWrapperBuilder<ResponseAssertionWrapper>) ResponseAssertionWrapper.builder();
+    protected JmcWrapperBuilder<?> init() {
+      return ResponseAssertionWrapper.builder();
     }
   }
 }

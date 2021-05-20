@@ -44,7 +44,7 @@ public class SimplePageTemplate extends AbstractJmcTemplate<HTTPSamplerProxyWrap
    * @param path path.
    */
   public SimplePageTemplate(@NonNull String name, @NonNull String path) {
-    this(name, path,  HttpMethod.GET);
+    this(name, path, HttpMethod.GET);
   }
 
   /**
@@ -88,8 +88,7 @@ public class SimplePageTemplate extends AbstractJmcTemplate<HTTPSamplerProxyWrap
   }
 
   @Override
-  protected JmcWrapperBuilder<HTTPSamplerProxyWrapper> init() {
-    return (JmcWrapperBuilder<HTTPSamplerProxyWrapper>)
-        HttpSamplerDsl.http(name, path).withMethod(method).withDomain(domain);
+  protected JmcWrapperBuilder<?> init() {
+    return HttpSamplerDsl.http(name, path).withMethod(method).withDomain(domain);
   }
 }

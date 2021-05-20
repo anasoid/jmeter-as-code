@@ -74,7 +74,7 @@ class CookieManagerWrapperCoreTest extends AbstractJmcCoreTest {
       applicationTest.toJmx(wr);
       Assertions.fail();
     } catch (ConversionMandatoryException e) {
-      // Nothing
+      // NothingCookieManagerWrapper
     }
   }
 
@@ -103,8 +103,8 @@ class CookieManagerWrapperCoreTest extends AbstractJmcCoreTest {
   class MyConfig extends AbstractJmcTemplate<CookieManagerWrapper> {
 
     @Override
-    protected JmcWrapperBuilder<CookieManagerWrapper> init() {
-      return (JmcWrapperBuilder<CookieManagerWrapper>) CookieManagerWrapper.builder();
+    protected JmcWrapperBuilder<?> init() {
+      return CookieManagerWrapper.builder();
     }
   }
 }

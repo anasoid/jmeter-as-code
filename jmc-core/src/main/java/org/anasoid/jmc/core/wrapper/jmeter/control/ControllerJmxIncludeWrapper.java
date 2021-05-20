@@ -42,7 +42,6 @@ public class ControllerJmxIncludeWrapper extends AbstractParentJmxIncludeWrapper
       extends AbstractParentJmxIncludeWrapper.AbstractParentJmxIncludeWrapperBuilder<
           Controller, C, B> {
 
-
     /** Add sampler. */
     public B addSampler(AbstractSamplerWrapper<?, ?> sampler) { // NOSONAR
       return addSamplers(Arrays.asList(sampler));
@@ -55,10 +54,7 @@ public class ControllerJmxIncludeWrapper extends AbstractParentJmxIncludeWrapper
 
     /** Add samplers as child in tree. */
     public B addSamplers(List<AbstractSamplerWrapper<?, ?>> samplers) { // NOSONAR
-      for (AbstractSamplerWrapper<?, ?> sampler : samplers) {
-        withChild(sampler);
-      }
-      return self();
+      return withChilds(samplers);
     }
 
     /** Add Controller. */
@@ -73,13 +69,7 @@ public class ControllerJmxIncludeWrapper extends AbstractParentJmxIncludeWrapper
 
     /** Add Controllers as child in tree. */
     public B addControllers(List<ControllerWrapper<?>> controllers) { // NOSONAR
-      for (ControllerWrapper<?> controller : controllers) {
-        withChild(controller);
-      }
-      return self();
+      return withChilds(controllers);
     }
-
-
-
   }
 }
