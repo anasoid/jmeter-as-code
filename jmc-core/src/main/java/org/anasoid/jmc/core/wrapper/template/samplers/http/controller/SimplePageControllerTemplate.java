@@ -19,7 +19,6 @@
 package org.anasoid.jmc.core.wrapper.template.samplers.http.controller;
 
 import lombok.NonNull;
-import org.anasoid.jmc.core.wrapper.JmcWrapperBuilder;
 import org.anasoid.jmc.core.wrapper.jmc.samplers.HttpMethod;
 import org.anasoid.jmc.core.wrapper.jmeter.control.RecordingControllerWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.samplers.HTTPSamplerProxyWrapper;
@@ -102,10 +101,13 @@ public class SimplePageControllerTemplate extends AbstractSamplerControllerTempl
     controller.addSampler(createSampler());
   }
 
-  protected AbstractJmcTemplate<HTTPSamplerProxyWrapper> createSampler() {
+  protected AbstractJmcTemplate<
+          HTTPSamplerProxyWrapper, HTTPSamplerProxyWrapper.HTTPSamplerProxyWrapperBuilder>
+      createSampler() {
     return new SimplePageTemplate(name, path, domain, method) {
       @Override
-      protected void prepareBuilder(JmcWrapperBuilder<HTTPSamplerProxyWrapper> builder) {
+      protected void prepareBuilder(
+          HTTPSamplerProxyWrapper.HTTPSamplerProxyWrapperBuilder builder) {
         super.prepareBuilder(builder);
         prepareSamplerBuilder((HTTPSamplerProxyWrapperBuilder<?, ?>) builder);
       }

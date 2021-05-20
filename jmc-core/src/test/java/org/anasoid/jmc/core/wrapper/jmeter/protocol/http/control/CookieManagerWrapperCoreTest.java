@@ -100,7 +100,9 @@ class CookieManagerWrapperCoreTest extends AbstractJmcCoreTest {
         ((CookieManagerWrapper) parentTestElementWrapperTesting.getChilds().get(0)).getName());
   }
 
-  class MyConfig extends AbstractJmcTemplate<CookieManagerWrapper> {
+  class MyConfig
+      extends AbstractJmcTemplate<
+          CookieManagerWrapper, CookieManagerWrapper.CookieManagerWrapperBuilder> {
 
     @Override
     protected JmcWrapperBuilder<?> init() {

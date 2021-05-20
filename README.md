@@ -19,7 +19,7 @@ A build script example:
             .addChild(
                 ThreadGroupWrapper.builder()
                     .withName("Thread Group")
-                    .addChild(
+                    .addSampler(
                         HTTPSamplerProxyWrapper.builder()
                             .withName("HTTP Request")
                             .withDomain("www.anasoid.org")

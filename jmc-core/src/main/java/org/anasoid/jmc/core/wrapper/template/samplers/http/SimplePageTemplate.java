@@ -30,7 +30,9 @@ import org.anasoid.jmc.core.wrapper.template.AbstractJmcTemplate;
  *
  * @see HTTPSamplerProxyWrapper
  */
-public class SimplePageTemplate extends AbstractJmcTemplate<HTTPSamplerProxyWrapper> {
+public class SimplePageTemplate
+    extends AbstractJmcTemplate<
+        HTTPSamplerProxyWrapper, HTTPSamplerProxyWrapper.HTTPSamplerProxyWrapperBuilder> {
 
   private final String name;
   private final String domain;

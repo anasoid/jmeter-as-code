@@ -24,6 +24,7 @@ import org.anasoid.jmc.core.AbstractJmcCoreTest;
 import org.anasoid.jmc.core.application.ApplicationTest;
 import org.anasoid.jmc.core.application.ApplicationTestUtilsForTesting;
 import org.anasoid.jmc.core.wrapper.JmcWrapperBuilder;
+import org.anasoid.jmc.core.wrapper.jmeter.assertions.ResponseAssertionWrapper.ResponseAssertionWrapperBuilder;
 import org.anasoid.jmc.core.wrapper.template.AbstractJmcTemplate;
 import org.anasoid.jmc.core.wrapper.test.ParentTestElementWrapperTesting;
 import org.junit.jupiter.api.Assertions;
@@ -50,7 +51,13 @@ class ResponseAssertionWrapperCoreTest extends AbstractJmcCoreTest {
         "Response Assertion", ((ResponseAssertionWrapper) wrapper.getChilds().get(0)).getName());
   }
 
-  class MyAssertion extends AbstractJmcTemplate<ResponseAssertionWrapper> {
+  class MyAssertion
+      extends AbstractJmcTemplate<ResponseAssertionWrapper, ResponseAssertionWrapperBuilder> {
+
+    @Override
+    protected void prepareBuilder(ResponseAssertionWrapperBuilder builder) {
+      super.prepareBuilder(builder);
+    }
 
     @Override
     protected JmcWrapperBuilder<?> init() {

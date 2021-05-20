@@ -26,7 +26,8 @@ import org.anasoid.jmc.core.wrapper.jmeter.testelement.basic.AbstractBasicTestEl
  *
  * @param <W> testElement.
  */
-public abstract class AbstractJmcTemplate<W extends AbstractBasicTestElementWrapper<?>>
+public abstract class AbstractJmcTemplate<
+        W extends AbstractBasicTestElementWrapper<?>, T extends JmcWrapperBuilder>
     implements JmcTemplate<W> {
 
   /**
@@ -41,7 +42,7 @@ public abstract class AbstractJmcTemplate<W extends AbstractBasicTestElementWrap
    *
    * @param builder input is returned by method init().
    */
-  protected void prepareBuilder(JmcWrapperBuilder<W> builder) {}
+  protected void prepareBuilder(T builder) {}
 
   /**
    * finalize wrapper to custom more attributes.
@@ -52,9 +53,9 @@ public abstract class AbstractJmcTemplate<W extends AbstractBasicTestElementWrap
 
   @Override
   public final W generate() {
-    JmcWrapperBuilder<W> b = (JmcWrapperBuilder<W>) init();
+    T b = (T) init();
     prepareBuilder(b);
-    W result = b.build();
+    W result = (W) b.build();
     prepareWrapper(result);
     return result;
   }

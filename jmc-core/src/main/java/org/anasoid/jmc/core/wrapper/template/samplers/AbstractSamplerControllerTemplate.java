@@ -25,12 +25,8 @@ import org.anasoid.jmc.core.wrapper.template.AbstractJmcTemplate;
 
 /** Abstract controller template that include simper in controller. */
 public abstract class AbstractSamplerControllerTemplate
-    extends AbstractJmcTemplate<RecordingControllerWrapper> {
-
-  @Override
-  protected void prepareBuilder(JmcWrapperBuilder<RecordingControllerWrapper> builder) {
-    super.prepareBuilder(builder);
-  }
+    extends AbstractJmcTemplate<
+        RecordingControllerWrapper, RecordingControllerWrapper.RecordingControllerWrapperBuilder> {
 
   @Override
   protected void prepareWrapper(RecordingControllerWrapper wrapper) {
