@@ -67,16 +67,19 @@ class ThreadGroupWrapperCoreTest extends AbstractJmcCoreTest {
         "controller", ((SimpleControllerWrapper) threadGroupWrapper.getChilds().get(0)).getName());
   }
 
-  class MySampler extends AbstractJmcTemplate<HTTPSamplerProxyWrapper> {
+  class MySampler
+      extends AbstractJmcTemplate<
+          HTTPSamplerProxyWrapper, HTTPSamplerProxyWrapper.HTTPSamplerProxyWrapperBuilder> {
 
     @Override
-    protected JmcWrapperBuilder<HTTPSamplerProxyWrapper> init() {
-      return (JmcWrapperBuilder<HTTPSamplerProxyWrapper>)
-          HTTPSamplerProxyWrapper.builder().withName("sampler");
+    protected JmcWrapperBuilder<?> init() {
+      return HTTPSamplerProxyWrapper.builder().withName("sampler");
     }
   }
 
-  class MyController extends AbstractJmcTemplate<SimpleControllerWrapper> {
+  class MyController
+      extends AbstractJmcTemplate<
+          SimpleControllerWrapper, SimpleControllerWrapper.SimpleControllerWrapperBuilder> {
 
     @Override
     protected JmcWrapperBuilder<?> init() {

@@ -93,7 +93,9 @@ class SimpleControllerDslTest {
         ((SimpleControllerWrapper) simpleControllerWrapper.getChilds().get(0)).getName());
   }
 
-  class MySampler extends AbstractJmcTemplate<HTTPSamplerProxyWrapper> {
+  class MySampler
+      extends AbstractJmcTemplate<
+          HTTPSamplerProxyWrapper, HTTPSamplerProxyWrapper.HTTPSamplerProxyWrapperBuilder> {
 
     @Override
     protected JmcWrapperBuilder<HTTPSamplerProxyWrapper> init() {
@@ -102,7 +104,9 @@ class SimpleControllerDslTest {
     }
   }
 
-  class MyController extends AbstractJmcTemplate<SimpleControllerWrapper> {
+  class MyController
+      extends AbstractJmcTemplate<
+          SimpleControllerWrapper, SimpleControllerWrapper.SimpleControllerWrapperBuilder> {
 
     @Override
     protected JmcWrapperBuilder<?> init() {

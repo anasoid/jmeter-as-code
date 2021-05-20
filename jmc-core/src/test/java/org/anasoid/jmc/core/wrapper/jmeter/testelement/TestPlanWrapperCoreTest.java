@@ -90,7 +90,7 @@ class TestPlanWrapperCoreTest extends AbstractJmcCoreTest {
         "50", ((ThreadGroupWrapper) testPlanWrapper.getChilds().get(0)).getLoops());
   }
 
-  class MyThread extends AbstractJmcTemplate<ThreadGroupWrapper> {
+  class MyThread extends AbstractJmcTemplate<ThreadGroupWrapper, ThreadGroupWrapperBuilder> {
 
     @Override
     protected JmcWrapperBuilder<?> init() {
@@ -98,9 +98,8 @@ class TestPlanWrapperCoreTest extends AbstractJmcCoreTest {
     }
 
     @Override
-    protected void prepareBuilder(JmcWrapperBuilder<ThreadGroupWrapper> builder) {
-      ThreadGroupWrapperBuilder threadGroupWrapperBuilder = (ThreadGroupWrapperBuilder) builder;
-      threadGroupWrapperBuilder.withDelay(100);
+    protected void prepareBuilder(ThreadGroupWrapperBuilder builder) {
+      builder.withDelay(100);
     }
 
     @Override
