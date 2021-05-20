@@ -93,9 +93,8 @@ class TestPlanWrapperCoreTest extends AbstractJmcCoreTest {
   class MyThread extends AbstractJmcTemplate<ThreadGroupWrapper> {
 
     @Override
-    protected JmcWrapperBuilder<ThreadGroupWrapper> init() {
-      return (JmcWrapperBuilder<ThreadGroupWrapper>)
-          ThreadGroupWrapper.builder().withName("thread");
+    protected JmcWrapperBuilder<?> init() {
+      return ThreadGroupWrapper.builder().withName("thread");
     }
 
     @Override

@@ -34,7 +34,7 @@ public abstract class AbstractJmcTemplate<W extends AbstractBasicTestElementWrap
    *
    * @return builder.
    */
-  protected abstract JmcWrapperBuilder<W> init();
+  protected abstract JmcWrapperBuilder<?> init();
 
   /**
    * Prepare build to custom more attributes.
@@ -52,7 +52,7 @@ public abstract class AbstractJmcTemplate<W extends AbstractBasicTestElementWrap
 
   @Override
   public final W generate() {
-    JmcWrapperBuilder<W> b = init();
+    JmcWrapperBuilder<W> b = (JmcWrapperBuilder<W>) init();
     prepareBuilder(b);
     W result = b.build();
     prepareWrapper(result);

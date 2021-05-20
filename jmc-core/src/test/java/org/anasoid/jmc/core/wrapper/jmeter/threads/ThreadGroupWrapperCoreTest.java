@@ -79,9 +79,8 @@ class ThreadGroupWrapperCoreTest extends AbstractJmcCoreTest {
   class MyController extends AbstractJmcTemplate<SimpleControllerWrapper> {
 
     @Override
-    protected JmcWrapperBuilder<SimpleControllerWrapper> init() {
-      return (JmcWrapperBuilder<SimpleControllerWrapper>)
-          SimpleControllerWrapper.builder().withName("controller");
+    protected JmcWrapperBuilder<?> init() {
+      return SimpleControllerWrapper.builder().withName("controller");
     }
   }
 }

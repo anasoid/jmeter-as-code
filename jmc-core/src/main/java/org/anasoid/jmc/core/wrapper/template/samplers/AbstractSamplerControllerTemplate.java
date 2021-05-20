@@ -55,7 +55,7 @@ public abstract class AbstractSamplerControllerTemplate
     initMainSampler(builder);
     afterMainSampler(builder);
 
-    return (JmcWrapperBuilder<RecordingControllerWrapper>) builder;
+    return builder;
   }
 
   /** Init Sampler, and customize it. */
