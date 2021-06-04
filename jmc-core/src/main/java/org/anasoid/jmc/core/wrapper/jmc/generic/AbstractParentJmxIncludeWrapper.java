@@ -66,7 +66,10 @@ public abstract class AbstractParentJmxIncludeWrapper<T> extends AbstractJmxIncl
     if (regexMatcher.find()) {
       result = regexMatcher.group(1);
     } else {
-      throw new ConversionException("Format incorrect for node : " + raw);
+      throw new ConversionException(
+          "If node, has already child in JMX, you can't add child in JMC,"
+              + " Format incorrect for node : "
+              + raw);
     }
     return result;
   }

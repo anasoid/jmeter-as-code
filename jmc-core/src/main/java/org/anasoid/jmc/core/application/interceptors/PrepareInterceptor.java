@@ -23,7 +23,18 @@ import org.anasoid.jmc.core.wrapper.jmeter.testelement.TestElementWrapper;
 /** Prepare Interceptor to custom test before persistence. */
 public interface PrepareInterceptor {
 
+  /**
+   * Check if this interceptor support the node in input.
+   *
+   * @param testElementWrapper node.
+   * @return true if this interceptor support this node.
+   */
   boolean support(TestElementWrapper<?> testElementWrapper);
 
+  /**
+   * prepare the input node.
+   *
+   * @param testElementWrapper node.
+   */
   void prepare(TestElementWrapper<?> testElementWrapper);
 }

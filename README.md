@@ -11,6 +11,9 @@ An API that give access to full Jmeter feature as code, All designed object in G
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=anasoid_jmeter-as-code&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=anasoid_jmeter-as-code)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=anasoid_jmeter-as-code&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=anasoid_jmeter-as-code)
 
+##Where to start
+
+If you are new with **Jmeter as code**, try [examples project](https://github.com/anasoid/jmc-examples)  and see [documentation website](https://jmc.anasoid.org).
 
 ###### A basic script example:
 
