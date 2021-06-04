@@ -18,6 +18,7 @@
 
 package org.anasoid.jmc.core.wrapper.template.samplers;
 
+import java.util.Optional;
 import org.anasoid.jmc.core.wrapper.JmcWrapperBuilder;
 import org.anasoid.jmc.core.wrapper.jmeter.control.RecordingControllerWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.TestElementTreeNodeWrapper;
@@ -32,13 +33,13 @@ public abstract class AbstractSamplerControllerTemplate
   protected void prepareWrapper(RecordingControllerWrapper wrapper) {
     super.prepareWrapper(wrapper);
     if (wrapper.getName() == null) {
-      wrapper.setName(
+
+      Optional<String> firstSampleName =
           wrapper.getChilds().stream()
-                  .filter(c -> c instanceof TestElementTreeNodeWrapper)
-                  .findFirst()
-                  .map(c -> ((TestElementTreeNodeWrapper) c).getName())
-                  .get()
-              + " CTRL");
+              .filter(TestElementTreeNodeWrapper.class::isInstance)
+              .findFirst()
+              .map(c -> ((TestElementTreeNodeWrapper) c).getName());
+      wrapper.setName((firstSampleName.isPresent() ? firstSampleName.get() : "") + " CTRL");
     }
   }
 
