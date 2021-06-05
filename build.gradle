@@ -17,24 +17,16 @@ plugins {
     id "io.spring.dependency-management" version "1.0.11.RELEASE"
     id "org.sonarqube" version "3.1.1"
     id 'jacoco'
-    id 'pl.allegro.tech.build.axion-release' version '1.13.2'
     id "io.freefair.lombok" version "6.0.0-m2"
-
+    id "io.freefair.git-version" version "6.0.0-m2"
 }
 
 
-scmVersion {
-
-
-    branchVersionCreator = [
-            '.*': { version, position -> "$position.branch".replace("/", "~") },
-
-    ]
-}
 
 
 // Apply the java plugin to add support for Java
 apply plugin: 'org.owasp.dependencycheck'
+apply plugin: 'io.freefair.git-version'
 
 
 allprojects {
@@ -42,7 +34,7 @@ allprojects {
     apply plugin: "jacoco"
     apply plugin: 'signing'
 
-    project.version = scmVersion.version
+
 
     group = 'org.anasoid.jmc'
     sourceCompatibility = JavaVersion.VERSION_11
