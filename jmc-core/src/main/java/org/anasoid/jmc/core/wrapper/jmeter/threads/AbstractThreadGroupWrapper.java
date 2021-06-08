@@ -18,21 +18,14 @@
 
 package org.anasoid.jmc.core.wrapper.jmeter.threads;
 
-import java.util.Arrays;
-import java.util.List;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmc.core.application.validator.annotations.JmcChildrenTypes;
 import org.anasoid.jmc.core.wrapper.jmc.Variable;
-import org.anasoid.jmc.core.wrapper.jmc.threads.OnSampleError;
-import org.anasoid.jmc.core.wrapper.jmeter.control.ControllerWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.control.GenericControllerWrapper;
-import org.anasoid.jmc.core.wrapper.jmeter.gui.JMeterGUIWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.samplers.SamplerWrapper;
-import org.anasoid.jmc.core.wrapper.jmeter.testelement.AbstractTestElementWrapper;
-import org.anasoid.jmc.core.wrapper.template.JmcTemplate;
 import org.anasoid.jmc.core.xstream.annotations.JmcProperty;
 import org.apache.jmeter.threads.AbstractThreadGroup;
 import org.apache.jmeter.threads.gui.AbstractThreadGroupGui;
@@ -47,23 +40,17 @@ import org.apache.jmeter.threads.gui.AbstractThreadGroupGui;
 @JmcChildrenTypes(type = {GenericControllerWrapper.class, SamplerWrapper.class})
 public abstract class AbstractThreadGroupWrapper<
         T extends AbstractThreadGroup, G extends AbstractThreadGroupGui>
-    extends AbstractTestElementWrapper<T> implements JMeterGUIWrapper<G>, ThreadWrapper<T> {
+    extends AbstractParentThreadGroupWrapper<T, G> {
 
-  /** the sampler controller. */
-  @JmcProperty(AbstractThreadGroup.MAIN_CONTROLLER)
-  protected @Getter GenericControllerWrapper<?, ?> samplerController;
-  /** Action to be taken after a Sampler error. */
-  @JmcProperty(AbstractThreadGroup.ON_SAMPLE_ERROR)
-  @Builder.Default
-  private @Getter @Setter OnSampleError onSampleError = OnSampleError.ON_SAMPLE_ERROR_CONTINUE;
-  /** Same user on each iteration. */
-  @JmcProperty(AbstractThreadGroup.IS_SAME_USER_ON_NEXT_ITERATION)
-  @Builder.Default
-  private @Getter @Setter Boolean isSameUserOnNextIteration = true;
   /** Number of Threads (users). */
   @JmcProperty(value = AbstractThreadGroup.NUM_THREADS)
   @Builder.Default
   private @Getter @Setter String numThreads = "1";
+
+  /** Same user on each iteration. */
+  @JmcProperty(AbstractThreadGroup.IS_SAME_USER_ON_NEXT_ITERATION)
+  @Builder.Default
+  private @Getter @Setter Boolean isSameUserOnNextIteration = true;
 
   /** Builder. */
   @SuppressWarnings("PMD")
@@ -72,7 +59,7 @@ public abstract class AbstractThreadGroupWrapper<
           G extends AbstractThreadGroupGui,
           C extends AbstractThreadGroupWrapper<T, G>,
           B extends AbstractThreadGroupWrapper.AbstractThreadGroupWrapperBuilder<T, G, C, B>>
-      extends AbstractTestElementWrapper.AbstractTestElementWrapperBuilder<T, C, B> {
+      extends AbstractParentThreadGroupWrapper.AbstractParentThreadGroupWrapperBuilder<T, G, C, B> {
 
     /** set number of Threads. */
     public B withNumThreads(int numThreads) {
@@ -89,41 +76,6 @@ public abstract class AbstractThreadGroupWrapper<
       this.numThreads$value = numThreads;
       this.numThreads$set = true;
       return self();
-    }
-
-    private B withSamplerController(GenericControllerWrapper<?, ?> controller) { // NOSONAR
-      // hide samplerController
-      return self();
-    }
-
-    /** Add sampler. */
-    public B addSampler(SamplerWrapper<?> sampler) { // NOSONAR
-      return addSamplers(Arrays.asList(sampler));
-    }
-
-    /** Add sampler. */
-    public <E extends SamplerWrapper<?>> B addSampler(JmcTemplate<E> template) {
-      return addSampler(template.generate());
-    }
-
-    /** Add samplers as child in tree. */
-    public B addSamplers(List<SamplerWrapper<?>> samplers) { // NOSONAR
-      return withChilds(samplers);
-    }
-
-    /** Add Controller. */
-    public B addController(ControllerWrapper<?> controller) { // NOSONAR
-      return addControllers(Arrays.asList(controller));
-    }
-
-    /** Add Controller. */
-    public <E extends ControllerWrapper<?>> B addController(JmcTemplate<E> template) { // NOSONAR
-      return addController(template.generate());
-    }
-
-    /** Add Controllers as child in tree. */
-    public B addControllers(List<ControllerWrapper<?>> controllers) { // NOSONAR
-      return withChilds(controllers);
     }
   }
 }

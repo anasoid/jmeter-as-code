@@ -232,7 +232,7 @@ public class TestElementConverter implements Converter {
     if (value instanceof TestElementWrapper) {
       TestElementWrapper<?> testElement = (TestElementWrapper) value;
       writer.addAttribute(
-          ConvertConstant.ATTRIBUTE_ELEMENT_TYPE, testElement.getTestClass().getSimpleName());
+          ConvertConstant.ATTRIBUTE_ELEMENT_TYPE, testElement.getTestClassAsString());
     }
     if (value != null) {
       if (value.getClass().isEnum()) {

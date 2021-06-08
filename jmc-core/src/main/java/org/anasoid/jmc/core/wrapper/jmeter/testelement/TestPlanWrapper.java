@@ -31,7 +31,6 @@ import lombok.experimental.SuperBuilder;
 import org.anasoid.jmc.core.application.validator.annotations.JmcChildrenTypes;
 import org.anasoid.jmc.core.wrapper.jmeter.config.ArgumentWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.gui.JMeterGUIWrapper;
-import org.anasoid.jmc.core.wrapper.jmeter.threads.AbstractThreadGroupWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.threads.ThreadWrapper;
 import org.anasoid.jmc.core.wrapper.template.JmcTemplate;
 import org.anasoid.jmc.core.xstream.annotations.JmcCollection;
@@ -51,7 +50,7 @@ import org.apache.jmeter.testelement.TestPlan;
  */
 @SuperBuilder(setterPrefix = "with")
 @XStreamAlias("TestPlan")
-@JmcChildrenTypes(type = {AbstractThreadGroupWrapper.class})
+@JmcChildrenTypes(type = {ThreadWrapper.class})
 @JmcDefaultName("Test Plan")
 public class TestPlanWrapper extends AbstractTestElementWrapper<TestPlan>
     implements JMeterGUIWrapper<TestPlanGui> {

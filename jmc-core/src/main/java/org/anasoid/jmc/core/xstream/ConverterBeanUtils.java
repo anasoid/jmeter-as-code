@@ -69,6 +69,7 @@ public final class ConverterBeanUtils {
    */
   public static List<Method> getMethods(Object source) {
     Map<String, Method> result = new HashMap<>(); // NOPMD
+    Map<String, Method> allMethod = new HashMap<>(); // NOPMD
     Class<?> item = source.getClass();
     for (Class<?> clazz : getSuperClasses(item)) {
       for (Method method : clazz.getDeclaredMethods()) {
@@ -80,12 +81,17 @@ public final class ConverterBeanUtils {
                 || (jmcProperty != null)
                 || (jmcInherited != null)
                 || (jmcCollection != null))
-            && !result.containsKey(method.getName())) {
+            && !result.containsKey(method.getName())
+            && !allMethod.containsKey(method.getName())) {
           if (method.getParameters().length > 0) {
             throw new ConversionException(
                 "Invalid JmcMethodAlias on Method with Parameter : " + method);
           }
           result.put(method.getName(), method);
+        } else {
+          if (method.getParameters().length == 0) {
+            allMethod.put(method.getName(), method);
+          }
         }
       }
     }

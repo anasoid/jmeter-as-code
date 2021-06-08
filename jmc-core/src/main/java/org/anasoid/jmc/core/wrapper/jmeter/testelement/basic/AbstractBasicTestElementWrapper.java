@@ -59,8 +59,33 @@ public abstract class AbstractBasicTestElementWrapper<T extends AbstractTestElem
   @Override
   public String getTestClassAsString() {
     if (getTestClass() != null) {
-      return getTestClass().getSimpleName();
+      boolean full = false;
+      String result;
+      if (isFullClassName() == null) {
+        if (!getTestClass().getName().startsWith("org.apache.jmeter")) {
+          full = true;
+        }
+      } else {
+        full = isFullClassName();
+      }
+      if (full) {
+        result = getTestClass().getName();
+      } else {
+        result = getTestClass().getSimpleName();
+      }
+
+      return result;
     }
+    return null;
+  }
+
+  /**
+   * use full class name or simple class name. null : auto, full if not start with
+   * 'org.apache.jmeter'.
+   *
+   * @return default null.
+   */
+  protected Boolean isFullClassName() {
     return null;
   }
 
@@ -73,11 +98,29 @@ public abstract class AbstractBasicTestElementWrapper<T extends AbstractTestElem
   @JmcMethodAlias("guiclass")
   @JmcAsAttribute
   public String getGuiClassAsString() {
+    String result = null;
+
     if (this instanceof JMeterGUIWrapper) {
       JMeterGUIWrapper<?> gui = (JMeterGUIWrapper) this;
-      return gui.getGuiClass().getSimpleName();
+      if (gui.getGuiClass() == null) {
+        return null;
+      }
+      boolean full = false;
+      if (isFullClassName() == null) {
+        if (!gui.getGuiClass().getName().startsWith("org.apache.jmeter")) {
+          full = true;
+        }
+      } else {
+        full = isFullClassName();
+      }
+
+      if (full) {
+        result = gui.getGuiClass().getName();
+      } else {
+        result = gui.getGuiClass().getSimpleName();
+      }
     }
-    return null;
+    return result;
   }
 
   /** Builder. */
