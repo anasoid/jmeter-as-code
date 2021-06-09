@@ -23,12 +23,11 @@ import com.blazemeter.jmeter.threads.concurrency.ConcurrencyThreadGroupGui;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.anasoid.jmc.jplugins.wrapper.com.blazemeter.jmeter.threads.AbstractDynamicThreadGroupWrapper;
-import org.apache.jmeter.threads.ThreadGroup;
 
 /**
- * Wrapper for ThreadGroup.
+ * Wrapper for ConcurrencyThreadGroup.
  *
- * @see ThreadGroup
+ * @see ConcurrencyThreadGroup
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 @JmcDefaultName("bzm - Concurrency Thread Group")
