@@ -1,8 +1,10 @@
 package org.anasoid.jmc.jplugins.wrapper.com.blazemeter.jmeter.threads.concurrency;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.TestPlanWrapper;
 import org.anasoid.jmc.jplugins.AbstractJmcJmeterPluginTest;
+import org.anasoid.jmc.test.utils.SetterTestUtils;
 import org.junit.jupiter.api.Test;
 /*
  * Copyright 2020-2021 the original author or authors.
@@ -29,6 +31,12 @@ class ConcurrencyThreadGroupWrapperXmlTest extends AbstractJmcJmeterPluginTest {
 
   private static final String NODE_NAME =
       "com.blazemeter.jmeter.threads.concurrency.ConcurrencyThreadGroup";
+
+  @Test
+  void testSetter()
+      throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    SetterTestUtils.testSetter(ConcurrencyThreadGroupWrapper.builder());
+  }
 
   @Test
   void testDefault() throws IOException {
