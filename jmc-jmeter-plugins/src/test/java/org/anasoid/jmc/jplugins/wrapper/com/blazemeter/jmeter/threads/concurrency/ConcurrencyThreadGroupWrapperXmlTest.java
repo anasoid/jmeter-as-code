@@ -45,4 +45,24 @@ class ConcurrencyThreadGroupWrapperXmlTest extends AbstractJmcJmeterPluginTest {
     checkWrapper(
         testPlanWrapper, PARENT_PATH + "/bzmConcurrencyThreadGroup.default.jmx", NODE_NAME);
   }
+
+  @Test
+  void testInverse() throws IOException {
+
+    TestPlanWrapper testPlanWrapper =
+        TestPlanWrapper.builder()
+            .addThread(
+                ConcurrencyThreadGroupWrapper.builder()
+                    .withTargetConcurrency(10)
+                    .withRampUp(20)
+                    .withSteps(5)
+                    .withHold(10)
+                    .withIterations(100)
+                    .withLogFilename("file.log")
+                    .build())
+            .build();
+
+    checkWrapper(
+        testPlanWrapper, PARENT_PATH + "/bzmConcurrencyThreadGroup.inverse.jmx", NODE_NAME);
+  }
 }

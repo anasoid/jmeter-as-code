@@ -166,7 +166,7 @@ public abstract class AbstractDynamicThreadGroupModelWrapper<
 
     /** Target Concurrency . */
     public B withTargetConcurrency(int targetConcurrency) {
-      return withTargetConcurrency(String.valueOf(hold));
+      return withTargetConcurrency(String.valueOf(targetConcurrency));
     }
 
     /** Target Concurrency . */

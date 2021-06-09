@@ -21,7 +21,7 @@ package org.anasoid.jmc.jplugins;
 import org.anasoid.jmc.test.AbstractJmcTest;
 
 /** Abstract Class for tests Jmeter plugins. */
-public class AbstractJmcJmeterPluginTest extends AbstractJmcTest {
+public abstract class AbstractJmcJmeterPluginTest extends AbstractJmcTest {
 
   protected static final String ROOT_PATH = "org/anasoid/jmc/jplugins/wrapper";
 }
