@@ -34,7 +34,9 @@ public enum JMeterProperty {
 
   DOUBLE(JmeterProperty.DOUBLE_PROP),
 
-  ELEMENT(JmeterProperty.ELEMENT_PROP);
+  ELEMENT(JmeterProperty.ELEMENT_PROP),
+
+  COLLECTION(JmeterProperty.COLLECTION_PROP);
 
   public final String value;
 

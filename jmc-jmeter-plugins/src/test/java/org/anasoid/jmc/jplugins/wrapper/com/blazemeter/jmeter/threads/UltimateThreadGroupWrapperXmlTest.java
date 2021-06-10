@@ -1,8 +1,8 @@
-package org.anasoid.jmc.jplugins.wrapper.com.blazemeter.jmeter.threads.concurrency;
+package org.anasoid.jmc.jplugins.wrapper.com.blazemeter.jmeter.threads;
 
-import com.blazemeter.jmeter.threads.concurrency.ConcurrencyThreadGroup;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import kg.apc.jmeter.threads.UltimateThreadGroup;
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.TestPlanWrapper;
 import org.anasoid.jmc.jplugins.AbstractJmcJmeterPluginTest;
 import org.anasoid.jmc.test.utils.SetterTestUtils;
@@ -22,36 +22,31 @@ import org.junit.jupiter.api.Test;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * @author : anas
- * Date :   08-Jun-2021
+ * Date :   09-Jun-2021
  */
 
-class ConcurrencyThreadGroupWrapperXmlTest extends AbstractJmcJmeterPluginTest {
+class UltimateThreadGroupWrapperXmlTest extends AbstractJmcJmeterPluginTest {
+  private static final String PARENT_PATH = ROOT_PATH + "/com/blazemeter/jmeter/threads";
 
-  private static final String PARENT_PATH =
-      ROOT_PATH + "/com/blazemeter/jmeter/threads/concurrency";
-
-  private static final String NODE_NAME = ConcurrencyThreadGroup.class.getName();
+  private static final String NODE_NAME = UltimateThreadGroup.class.getName();
 
   @Test
   void testSetter()
       throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-    SetterTestUtils.testSetter(ConcurrencyThreadGroupWrapper.builder());
+    SetterTestUtils.testSetter(UltimateThreadGroupWrapper.builder());
   }
 
   @Test
   void testDefault() throws IOException {
 
     TestPlanWrapper testPlanWrapper =
-        TestPlanWrapper.builder()
-            .addThread(
-                ConcurrencyThreadGroupWrapper.builder()
-                    .withHold(1)
-                    .withTargetConcurrency(1)
-                    .build())
-            .build();
+        TestPlanWrapper.builder().addThread(UltimateThreadGroupWrapper.builder().build()).build();
 
     checkWrapper(
-        testPlanWrapper, PARENT_PATH + "/bzmConcurrencyThreadGroup.default.jmx", NODE_NAME);
+        testPlanWrapper,
+        PARENT_PATH + "/jp@gcUltimateThreadGroup.default.jmx",
+        NODE_NAME,
+        "LoopController.loops");
   }
 
   @Test
@@ -60,17 +55,17 @@ class ConcurrencyThreadGroupWrapperXmlTest extends AbstractJmcJmeterPluginTest {
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
             .addThread(
-                ConcurrencyThreadGroupWrapper.builder()
-                    .withTargetConcurrency(10)
-                    .withRampUp(20)
-                    .withSteps(5)
-                    .withHold(10)
-                    .withIterations(100)
-                    .withLogFilename("file.log")
+                UltimateThreadGroupWrapper.builder()
+                    .addThreadsSchedule(100, 0, 30, 60, 10)
+                    .addThreadsSchedule(50, 10, 15, 40, 5)
                     .build())
             .build();
 
+    // Ignore first line , name are different from others.
     checkWrapper(
-        testPlanWrapper, PARENT_PATH + "/bzmConcurrencyThreadGroup.inverse.jmx", NODE_NAME);
+        testPlanWrapper,
+        PARENT_PATH + "/jp@gcUltimateThreadGroup.inverse.adapt.jmx",
+        NODE_NAME,
+        "LoopController.loops");
   }
 }

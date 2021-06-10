@@ -30,7 +30,7 @@
         <stringProp name="LogFilename">file.log</stringProp>
         <stringProp name="Iterations">100</stringProp>
         <stringProp name="ConcurrencyLimit">2</stringProp>
-        <stringProp name="Unit">M</stringProp>
+        <stringProp name="Unit">S</stringProp>
       </com.blazemeter.jmeter.threads.arrivals.FreeFormArrivalsThreadGroup>
       <hashTree/>
     </hashTree>

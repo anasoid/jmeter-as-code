@@ -27,17 +27,21 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 import org.anasoid.jmc.core.wrapper.jmc.Variable;
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.TestElementWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.property.JMeterProperty;
 import org.anasoid.jmc.core.xstream.annotations.JmcAsAttribute;
 import org.anasoid.jmc.core.xstream.annotations.JmcCollection;
 import org.anasoid.jmc.core.xstream.annotations.JmcEmptyAllowed;
+import org.anasoid.jmc.core.xstream.annotations.JmcHiddenFields;
 import org.anasoid.jmc.core.xstream.annotations.JmcInherited;
 import org.anasoid.jmc.core.xstream.annotations.JmcMandatory;
 import org.anasoid.jmc.core.xstream.annotations.JmcMethodAlias;
@@ -159,6 +163,34 @@ public final class ConverterBeanUtils {
       }
     }
     return accessibleObject.getAnnotation(annotation);
+  }
+
+  /** get name for field or method. */
+  private static String getName(AccessibleObject accessibleObject) {
+
+    if (accessibleObject instanceof Method) {
+      Method method = (Method) accessibleObject;
+      return method.getName();
+    } else if (accessibleObject instanceof Field) {
+      Field field = (Field) accessibleObject;
+      return field.getName();
+    }
+    return null;
+  }
+
+  private static Set<String> getHiddenFields(Object source) {
+    Set<String> result = new HashSet<>();
+    if (source != null) {
+      Class<?> item = source.getClass();
+      while (item != Object.class) {
+        JmcHiddenFields jmcHiddenFields = item.getAnnotation(JmcHiddenFields.class);
+        if (jmcHiddenFields != null) {
+          result.addAll(Arrays.asList(jmcHiddenFields.value()));
+        }
+        item = item.getSuperclass();
+      }
+    }
+    return result;
   }
 
   /**
@@ -322,6 +354,12 @@ public final class ConverterBeanUtils {
     }
   }
 
+  /** is hidden field. */
+  private static boolean isHiddenField(Object source, AccessibleObject accessibleObject) {
+    Set<String> hiddenFields = getHiddenFields(source);
+    return hiddenFields.contains(getName(accessibleObject));
+  }
+
   /** Should skip field from XML conversion. */
   public static boolean shouldSkip(Object source, AccessibleObject accessibleObject) {
 
@@ -329,6 +367,19 @@ public final class ConverterBeanUtils {
       return true;
     }
     Object value = getValue(accessibleObject, source);
+    // HiddenField
+    if (isHiddenField(source, accessibleObject)) {
+      if (value != null) {
+        throw new ConversionIllegalStateException(
+            "Field ("
+                + accessibleObject.toString()
+                + ") is hidden on "
+                + source.toString()
+                + "and should not be used");
+      }
+      return true;
+    }
+
     if (value == null) {
       if (getAnnotation(accessibleObject, JmcNullAllowed.class) != null) {
         return false;
