@@ -243,6 +243,26 @@ public class ApplicationTest {
     jmeter.run();
   }
 
+  /**
+   * Check test, Parsing by jmeter.
+   *
+   * @throws IOException – If an I/O error occurs.
+   */
+  public void check() throws IOException {
+    if (!testMode) {
+      StandardJMeterEngine jmeter = new StandardJMeterEngine();
+
+      File tmp = File.createTempFile("check_jmeter_", ".jmx");
+      LOG.info("Check tmp file : {}", tmp);
+      this.toJmx(Files.newBufferedWriter(Paths.get(tmp.getPath()), StandardCharsets.UTF_8));
+
+      HashTree testPlanTree = SaveService.loadTree(tmp);
+
+      // Run Test Plan
+      jmeter.configure(testPlanTree);
+    }
+  }
+
   private XStream getXstream() {
     return new JmcXstream();
   }

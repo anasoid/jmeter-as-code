@@ -100,6 +100,7 @@ public abstract class AbstractJmcTest {
 
     applicationTest.toJmx(tmpPath.toFile());
 
+    applicationTest.check();
     String wrapperContent = Files.readString(tmpPath);
 
     return wrapperContent;
