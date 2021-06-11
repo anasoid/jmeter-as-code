@@ -1,4 +1,5 @@
 package org.anasoid.jmc.core.xstream.annotations;
+
 /*
  * Copyright 2020-2021 the original author or authors.
  *
@@ -14,19 +15,24 @@ package org.anasoid.jmc.core.xstream.annotations;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * @author : anas
- * Date :   22-Feb-2021
+ * Date :   17-Jan-2021
  */
 
-import static java.lang.annotation.ElementType.FIELD;
-import static java.lang.annotation.ElementType.METHOD;
-
 import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-/** Inherit JMC Annotation from Parents. */
+/**
+ * Hide Fields, usefull when exending from class, and some field are not used in subclasses. Hidden
+ * fields should be null and will not be serialized.
+ */
 @Retention(RetentionPolicy.RUNTIME)
-@Target({FIELD, METHOD})
+@Target(ElementType.TYPE)
 @Documented
-public @interface JmcInherited {}
+public @interface JmcHiddenFields {
+
+  /** list fields to be hidden. */
+  String[] value();
+}

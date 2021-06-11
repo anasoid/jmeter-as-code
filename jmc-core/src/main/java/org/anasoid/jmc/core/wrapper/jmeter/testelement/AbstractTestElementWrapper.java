@@ -58,5 +58,5 @@ public abstract class AbstractTestElementWrapper<T extends AbstractTestElement>
   private String comment = "";
 
   /** enabled. */
-  @XStreamAsAttribute @Builder.Default @Getter @Setter private boolean enabled = true;
+  @XStreamAsAttribute @Builder.Default @Getter @Setter private Boolean enabled = true;
 }

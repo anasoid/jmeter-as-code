@@ -53,6 +53,7 @@ public class JmcXstream extends XStream {
     this.processAnnotations(clazzArray);
     this.registerConverter(new StringPropertyConverter());
     this.alias(JMeterProperty.STRING.value, StringProperty.class);
+    this.alias(JMeterProperty.COLLECTION.value, CollectionProperty.class);
     this.registerConverter(new MultiPropertyConverter(this.getMapper()));
 
     this.registerConverter(new SampleSaveConfigurationConverter(this.getMapper()));

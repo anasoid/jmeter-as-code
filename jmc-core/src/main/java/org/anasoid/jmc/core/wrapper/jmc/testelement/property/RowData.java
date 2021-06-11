@@ -1,4 +1,3 @@
-package org.anasoid.jmc.core.xstream.annotations;
 /*
  * Copyright 2020-2021 the original author or authors.
  *
@@ -14,19 +13,23 @@ package org.anasoid.jmc.core.xstream.annotations;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * @author : anas
- * Date :   22-Feb-2021
+ * Date :   09-Jun-2021
  */
 
-import static java.lang.annotation.ElementType.FIELD;
-import static java.lang.annotation.ElementType.METHOD;
+package org.anasoid.jmc.core.wrapper.jmc.testelement.property;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.io.Serializable;
+import java.util.List;
+import org.apache.jmeter.testelement.property.CollectionProperty;
 
-/** Inherit JMC Annotation from Parents. */
-@Retention(RetentionPolicy.RUNTIME)
-@Target({FIELD, METHOD})
-@Documented
-public @interface JmcInherited {}
+/**
+ * Represent line on table , to be converted to collectionProperty {@link
+ * org.apache.jmeter.testelement.property.CollectionProperty}.
+ */
+public interface RowData extends Serializable {
+
+  /** return object as list. */
+  CollectionProperty asProperty();
+
+  List<String> asList();
+}

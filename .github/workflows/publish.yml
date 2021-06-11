@@ -90,14 +90,28 @@ jobs:
       - name: Publish core
         run: ./gradlew --stacktrace --console=verbose jmc-core:publish
 
+      - name: Publish  jmeter-plugins
+        run: ./gradlew --stacktrace --console=verbose jmc-jmeter-plugins:publish
+
       - name: Publish test
         run: ./gradlew --stacktrace --console=verbose jmc-test:publish
 
       - name: Publish artifact libs
         uses: actions/upload-artifact@v2
         with:
-          name: jmc-core
+          name: jmc-core artifacts
           path: 'jmc-core/build/libs/**'
 
+      - name: Publish artifact libs
+        uses: actions/upload-artifact@v2
+        with:
+          name: jmc-jmeter-plugins artifacts
+          path: 'jmc-jmeter-plugins/build/libs/**'
+
+      - name: Publish artifact libs
+        uses: actions/upload-artifact@v2
+        with:
+          name: jmc-test artifacts
+          path: 'jmc-test/build/libs/**'
 
 
