@@ -42,7 +42,7 @@ import org.apache.jmeter.testelement.property.CollectionProperty;
 @JmcHiddenFields({"rampUp", "steps", "hold"})
 public class FreeFormArrivalsThreadGroupWrapper extends ArrivalsThreadGroupWrapper {
 
-  @Getter @XStreamOmitField List<Line> schedule;
+  @Getter @XStreamOmitField private List<Line> schedule;
 
   @JmcMethodAlias("collectionProp")
   protected CollectionProperty schedules() {

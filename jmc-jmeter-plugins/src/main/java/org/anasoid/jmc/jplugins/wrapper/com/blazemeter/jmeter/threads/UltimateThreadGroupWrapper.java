@@ -44,7 +44,7 @@ import org.apache.jmeter.testelement.property.CollectionProperty;
 public class UltimateThreadGroupWrapper
     extends AbstractSimpleThreadGroupWrapper<UltimateThreadGroup, UltimateThreadGroupGui> {
 
-  @Getter @XStreamOmitField List<Line> threadsSchedule;
+  @Getter @XStreamOmitField private List<Line> threadsSchedule;
 
   @JmcMethodAlias("collectionProp")
   protected CollectionProperty schedules() {
