@@ -14,7 +14,8 @@ import org.anasoid.jmc.core.wrapper.jmc.Variable;
   "PMD.TooManyMethods",
   "PMD.UseObjectForClearerAPI",
   "PMD.ExcessivePublicCount",
-  "PMD.ExcessiveClassLength"
+  "PMD.ExcessiveClassLength",
+  "PMD.GodClass"
 })
 public final class JmeterFunctions {
 
@@ -205,7 +206,7 @@ public final class JmeterFunctions {
    * @param targetDateFormat The new date format.
    */
   public static String dateTimeConvert(@NonNull String source, String targetDateFormat) {
-    return dateTimeConvert(source, null, targetDateFormat, null);
+    return dateTimeConvert(source, targetDateFormat, (Variable) null);
   }
 
   /**
@@ -256,11 +257,11 @@ public final class JmeterFunctions {
    * The char function returns the result of evaluating a list of numbers as Unicode characters. See
    * also __unescape(), below.
    *
-   * @param in The decimal number (or hex number, if prefixed by 0x, or octal, if prefixed by 0) to
-   *     be converted to a Unicode character..
+   * @param input The decimal number (or hex number, if prefixed by 0x, or octal, if prefixed by 0)
+   *     to be converted to a Unicode character..
    */
-  public static String chars(String... in) {
-    return FunctionsUtils.function("char", in);
+  public static String chars(String... input) {
+    return FunctionsUtils.function("char", (Object[]) input);
   }
 
   /**
@@ -386,9 +387,8 @@ public final class JmeterFunctions {
    * @return sum.
    */
   public static String intSum(Variable variable, String... values) {
-    List<Object> params = new ArrayList<>();
+    List<Object> params = new ArrayList<>(Arrays.asList(values));
     params.add(variable);
-    params.addAll(Arrays.asList(values));
     return FunctionsUtils.function("intSum", params.toArray());
   }
 
@@ -409,11 +409,14 @@ public final class JmeterFunctions {
    * @param variable A reference name for reusing the value computed by this function.
    * @return sum.
    */
-  public static String intSum(Variable variable, int... values) {
-    List<Object> params = new ArrayList<>();
-    params.add(variable);
-    params.addAll(Arrays.asList(values));
-    return FunctionsUtils.function("intSum", params.toArray());
+  public static String intSum(Variable variable, Integer... values) {
+    String[] itemsArray = new String[values.length];
+    return intSum(
+        variable,
+        Arrays.stream(values)
+            .map(Object::toString)
+            .collect(Collectors.toList())
+            .toArray(itemsArray));
   }
 
   /**
@@ -422,7 +425,7 @@ public final class JmeterFunctions {
    * @param values value to be logged.
    * @return sum.
    */
-  public static String intSum(int... values) {
+  public static String intSum(Integer... values) {
     return intSum(null, values);
   }
 
@@ -485,16 +488,30 @@ public final class JmeterFunctions {
   }
 
   /**
+   * Log Level. The OUT and ERR log level names are used to direct the output to System.out and
+   * System.err respectively. In this case, the output is always printed - it does not depend on the
+   * current log setting.
+   */
+  public enum LogLevel {
+    OUT,
+    ERR,
+    DEBUG,
+    INFO,
+    WARN,
+    ERROR
+  }
+
+  /**
    * The log function logs a message, and returns its input string.
    *
    * @param input String to be logged.
-   * @param logLevel String to be logged.
+   * @param logLevel OUT, ERR, DEBUG, INFO (default), WARN or ERROR
    * @param throwable If non-empty, creates a Throwable to pass to the logger.
    * @param comment If present, it is displayed in the string. Useful for identifying what is being
    *     logged.
    * @return logged text.
    */
-  public static String log(String input, String logLevel, String throwable, String comment) {
+  public static String log(String input, LogLevel logLevel, String throwable, String comment) {
     return FunctionsUtils.function("log", input, logLevel, throwable, comment);
   }
 
@@ -506,7 +523,7 @@ public final class JmeterFunctions {
    * @param comment If present, it is displayed in the string. Useful for identifying what is being
    *     logged.
    */
-  public static String log(String input, String logLevel, String comment) {
+  public static String log(String input, LogLevel logLevel, String comment) {
     return log(input, logLevel, null, comment);
   }
 
@@ -516,7 +533,7 @@ public final class JmeterFunctions {
    * @param input String to be logged.
    * @param logLevel String to be logged. logged.
    */
-  public static String log(String input, String logLevel) {
+  public static String log(String input, LogLevel logLevel) {
     return log(input, logLevel, null);
   }
 
@@ -572,9 +589,8 @@ public final class JmeterFunctions {
    * @return sum.
    */
   public static String longSum(Variable variable, String... values) {
-    List<Object> params = new ArrayList<>();
+    List<Object> params = new ArrayList<>(Arrays.asList(values));
     params.add(variable);
-    params.addAll(Arrays.asList(values));
     return FunctionsUtils.function("longSum", params.toArray());
   }
 
@@ -600,10 +616,13 @@ public final class JmeterFunctions {
    * @return sum.
    */
   public static String longSum(Variable variable, Long... values) {
-    List<Object> params = new ArrayList<>();
-    params.add(variable);
-    params.addAll(Arrays.asList(values));
-    return FunctionsUtils.function("longSum", params.toArray());
+    String[] itemsArray = new String[values.length];
+    return longSum(
+        variable,
+        Arrays.stream(values)
+            .map(Object::toString)
+            .collect(Collectors.toList())
+            .toArray(itemsArray));
   }
 
   /**
@@ -802,7 +821,7 @@ public final class JmeterFunctions {
    */
   public static String randomDate(
       String format, String startDate, @NonNull String endDate, String locale) {
-    return randomDate(format, startDate, endDate, locale);
+    return randomDate(format, startDate, endDate, locale, null);
   }
 
   /**
@@ -814,7 +833,7 @@ public final class JmeterFunctions {
    * @param endDate The end date.
    */
   public static String randomDate(String format, String startDate, @NonNull String endDate) {
-    return randomDate(format, startDate, endDate);
+    return randomDate(format, startDate, endDate, null);
   }
 
   /**
@@ -938,16 +957,17 @@ public final class JmeterFunctions {
    * function is the empty string, so the function call can be used anywhere functions are valid.
    *
    * @param input String to split, A delimited string, e.g. "a|b|c".
-   * @param variable A reference name for reusing the value computed by this function.
+   * @param variableName A reference name for reusing the value computed by this function.
    * @param separator The delimiter character, e.g. |. If omitted, , is used. Note that , would need
    *     to be specified as \,.
    */
   @SuppressWarnings("PMD.AvoidReassigningParameters")
-  public static String split(@NonNull String input, @NonNull Variable variable, String separator) {
+  public static String split(
+      @NonNull String input, @NonNull String variableName, String separator) {
     if (separator != null) {
       separator = separator.replace(",", "\\,");
     }
-    return FunctionsUtils.function("split", input, variable, separator);
+    return FunctionsUtils.function("split", input, variableName, separator);
   }
 
   /**
@@ -955,11 +975,11 @@ public final class JmeterFunctions {
    * function is the empty string, so the function call can be used anywhere functions are valid.
    *
    * @param input String to split, A delimited string, e.g. "a|b|c".
-   * @param variable A reference name for reusing the value computed by this function.
+   * @param variableName A reference name for reusing the value computed by this function.
    */
-  public static String split(@NonNull String input, @NonNull Variable variable) {
+  public static String split(@NonNull String input, @NonNull String variableName) {
 
-    return FunctionsUtils.function("split", input, variable, null);
+    return split(input, variableName, null);
   }
 
   /**
@@ -1016,6 +1036,19 @@ public final class JmeterFunctions {
   }
 
   /**
+   * The StringFromFile function can be used to read strings from a text file. This is useful for
+   * running tests that require lots of variable data. For example when testing a banking
+   * application, 100s or 1000s of different account numbers might be required.
+   *
+   * @param file Path to the file name. (The path can be relative to the JMeter launch directory) If
+   *     using * optional sequence numbers, the path name should be suitable for passing to
+   *     DecimalFormat.
+   */
+  public static String stringFromFile(@NonNull String file) {
+    return stringFromFile(file, null, (String) null, (String) null);
+  }
+
+  /**
    * The __StringToFile function can be used to write a string to a file. Each time it is called it
    * writes a string to file appending or overwriting.
    *
@@ -1032,7 +1065,8 @@ public final class JmeterFunctions {
     return FunctionsUtils.function(
         "StringToFile",
         file,
-        append == null ? "" : append.toString().toUpperCase(Locale.ROOT),
+        input,
+        append == null ? "" : append.toString().toLowerCase(Locale.ROOT),
         encoding);
   }
 
