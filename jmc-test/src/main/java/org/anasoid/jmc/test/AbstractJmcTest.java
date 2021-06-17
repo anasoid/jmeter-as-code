@@ -27,17 +27,28 @@ import javax.xml.transform.Source;
 import org.anasoid.jmc.core.application.ApplicationTest;
 import org.anasoid.jmc.core.util.FileUtils;
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.TestPlanWrapper;
+import org.anasoid.jmc.test.log.LogMonitor;
 import org.anasoid.jmc.test.utils.xmlunit.JmcXmlComparator;
 import org.anasoid.jmc.test.utils.xmlunit.filter.AttributesFilterManager;
 import org.anasoid.jmc.test.utils.xmlunit.filter.JmcXmlFilterAttr;
 import org.anasoid.jmc.test.utils.xmlunit.filter.JmcXmlFilterNode;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.xmlunit.builder.Input;
 import org.xmlunit.diff.Diff;
 
 /** Abstract Class for tests. */
 @SuppressWarnings("PMD.AbstractClassWithoutAbstractMethod")
 public abstract class AbstractJmcTest {
+
+  @BeforeEach
+  void beforeEach() {
+    LogMonitor.reset();
+  }
+
+  @AfterAll
+  static void afterAll() {}
 
   protected Source getSource(String content) {
     return Input.fromString(content).build();
@@ -101,9 +112,26 @@ public abstract class AbstractJmcTest {
     applicationTest.toJmx(tmpPath.toFile());
 
     applicationTest.check();
-    String wrapperContent = Files.readString(tmpPath);
+    return Files.readString(tmpPath);
+  }
 
-    return wrapperContent;
+  /**
+   * return ApplicationTest.
+   *
+   * @return ApplicationTest.
+   */
+  protected ApplicationTest toApplicationTest(TestPlanWrapper testPlanWrapper, String tmpFilename)
+      throws IOException {
+
+    ApplicationTest applicationTest = new ApplicationTest(testPlanWrapper);
+    Path tmpPath = Files.createTempFile(tmpFilename, ".jmx");
+
+    applicationTest.toJmx(tmpPath.toFile());
+    String content = Files.readString(tmpPath);
+    println("content :" + content);
+    applicationTest.check();
+
+    return applicationTest;
   }
 
   /**
@@ -112,7 +140,7 @@ public abstract class AbstractJmcTest {
    * @param resource resource path.
    * @return file content as string.
    */
-  protected String readFile(String resource) throws IOException {
+  protected String readFile(String resource) {
     return FileUtils.readResource(resource);
   }
 

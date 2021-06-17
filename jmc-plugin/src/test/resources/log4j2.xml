@@ -16,7 +16,7 @@
   ~ limitations under the License.
   -->
 
-<Configuration status="WARN">
+<Configuration status="WARN" packages="org.anasoid.jmc.test.log">
 
   <Appenders>
 
@@ -26,8 +26,7 @@
     <Console name="STDOUT" target="SYSTEM_OUT">
       <PatternLayout pattern="%d %p %c{1.}: %m%n"/>
     </Console>
-
-
+    <Monitor name="monitor"/>
 
   </Appenders>
 
@@ -36,6 +35,7 @@
     <Root level="info">
       <AppenderRef ref="log-file"/>
       <AppenderRef ref="STDOUT"/>
+      <AppenderRef ref="monitor"/>
     </Root>
 
     <Logger name="org.anasoid.jmc" level="debug"/>
