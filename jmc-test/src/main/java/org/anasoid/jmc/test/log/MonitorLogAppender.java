@@ -55,7 +55,7 @@ public class MonitorLogAppender extends AbstractAppender {
             event.getLoggerName(),
             event.getMessage().getFormattedMessage(),
             event.getLevel(),
-            event.getMessage().getThrowable()));
+            event.getThrown()));
   }
 
   /** Constructor by plugin. */

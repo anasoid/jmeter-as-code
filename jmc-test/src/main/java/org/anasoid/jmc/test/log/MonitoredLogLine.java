@@ -26,13 +26,13 @@ public class MonitoredLogLine {
   private final String loggerName;
   private final String message;
   private final Level level;
-  private final Throwable throwable;
+  private final Throwable thrown;
 
-  protected MonitoredLogLine(String loggerName, String message, Level level, Throwable throwable) {
+  protected MonitoredLogLine(String loggerName, String message, Level level, Throwable thrown) {
     this.loggerName = loggerName;
     this.message = message;
     this.level = level;
-    this.throwable = throwable;
+    this.thrown = thrown;
   }
 
   public String getLoggerName() {
@@ -47,8 +47,8 @@ public class MonitoredLogLine {
     return level;
   }
 
-  public Throwable getThrowable() {
-    return throwable;
+  public Throwable getThrown() {
+    return thrown;
   }
 
   @Override
@@ -62,8 +62,8 @@ public class MonitoredLogLine {
         + '\''
         + ", level="
         + level
-        + ", throwable="
-        + throwable
+        + ", thrown="
+        + thrown
         + '}';
   }
 }
