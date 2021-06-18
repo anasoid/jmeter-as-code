@@ -1,8 +1,11 @@
 package org.anasoid.jmc.plugins.wrapper.java.extractor;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+import lombok.Builder.Default;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmc.core.application.ApplicationTest;
 import org.anasoid.jmc.core.wrapper.jmeter.samplers.DebugSamplerWrapper;
@@ -40,7 +43,7 @@ import org.slf4j.LoggerFactory;
 class AbstractJavaPostProcessorWrapperTest extends AbstractJmcPluginJavaTest {
   private static final Logger LOG = LoggerFactory.getLogger(AbstractJmcTest.class);
 
-  @Test
+  // @Test
   void testDefault() throws IOException {
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
@@ -51,12 +54,92 @@ class AbstractJavaPostProcessorWrapperTest extends AbstractJmcPluginJavaTest {
                     .withNumThreads(1)
                     .addSampler(DebugSamplerWrapper.builder().build())
                     .build())
-            .addPostProcessor(TestJavaPostProcessorWrapper.builder().build())
+            .addPostProcessor(
+                TestJavaPostProcessorWrapper.builder().withName("testDefault").build())
             .build();
     ApplicationTest applicationTest = toApplicationTest(testPlanWrapper, "javaPost");
     applicationTest.run();
     Assertions.assertEquals(
         0, LogMonitor.getErrors().size(), "Errors : " + LogMonitor.getErrors().toString());
+  }
+
+  @Test
+  void testWithField() throws IOException {
+    TestPlanWrapper testPlanWrapper =
+        TestPlanWrapper.builder()
+            .addThread(
+                ThreadGroupWrapper.builder()
+                    .withLoops(2)
+                    .withDuration(1)
+                    .withNumThreads(1)
+                    .addSampler(DebugSamplerWrapper.builder().build())
+                    .build())
+            .addPostProcessor(
+                TestJavaPostProcessorWrapperWithField.builder().withName("testWithField").build())
+            .build();
+    ApplicationTest applicationTest = toApplicationTest(testPlanWrapper, "javaPost");
+    applicationTest.run();
+    Assertions.assertEquals(
+        1, LogMonitor.getErrors().size(), "Errors : " + LogMonitor.getErrors().toString());
+    Assertions.assertEquals(
+        "increment",
+        LogMonitor.getErrors().get(0).getMessage(),
+        "Errors : " + LogMonitor.getErrors().toString());
+  }
+
+  @Test
+  void testWithFieldInit() throws IOException {
+    TestPlanWrapper testPlanWrapper =
+        TestPlanWrapper.builder()
+            .addThread(
+                ThreadGroupWrapper.builder()
+                    .withLoops(2)
+                    .withDuration(1)
+                    .withNumThreads(1)
+                    .addSampler(DebugSamplerWrapper.builder().build())
+                    .build())
+            .addPostProcessor(
+                TestJavaPostProcessorWrapperWithField.builder()
+                    .withIncrement(100)
+                    .withName("testWithField100")
+                    .build())
+            .build();
+    ApplicationTest applicationTest = toApplicationTest(testPlanWrapper, "javaPost");
+    applicationTest.run();
+    Assertions.assertEquals(
+        1, LogMonitor.getErrors().size(), "Errors : " + LogMonitor.getErrors().toString());
+    Assertions.assertEquals(
+        "increment",
+        LogMonitor.getErrors().get(0).getMessage(),
+        "Errors : " + LogMonitor.getErrors().toString());
+  }
+
+  @Test
+  void testParameters() throws IOException {
+    TestPlanWrapper testPlanWrapper =
+        TestPlanWrapper.builder()
+            .addThread(
+                ThreadGroupWrapper.builder()
+                    .withLoops(1)
+                    .withDuration(1)
+                    .withNumThreads(1)
+                    .addSampler(DebugSamplerWrapper.builder().build())
+                    .build())
+            .addPostProcessor(
+                TestJavaPostProcessorWrapperWithField.builder()
+                    .addParameter("me", "you")
+                    .addParameter("me1", "you1")
+                    .withName("testWithParameters")
+                    .build())
+            .build();
+    ApplicationTest applicationTest = toApplicationTest(testPlanWrapper, "javaPost");
+    applicationTest.run();
+    Assertions.assertEquals(
+        1, LogMonitor.getErrors().size(), "Errors : " + LogMonitor.getErrors().toString());
+    Assertions.assertEquals(
+        "me",
+        LogMonitor.getErrors().get(0).getMessage(),
+        "Errors : " + LogMonitor.getErrors().toString());
   }
 
   @SuperBuilder(setterPrefix = "with", toBuilder = true)
@@ -72,7 +155,43 @@ class AbstractJavaPostProcessorWrapperTest extends AbstractJmcPluginJavaTest {
         Logger log,
         Sampler sampler,
         SampleResult prev) {
+
       log.info("TestJavaPostProcessorWrapper : ######################ME#####################");
+      Assertions.assertNotNull(label);
+      Assertions.assertNotNull(ctx);
+      Assertions.assertNotNull(vars);
+      Assertions.assertNotNull(props);
+      Assertions.assertNotNull(parameters);
+      Assertions.assertNotNull(log);
+      Assertions.assertNotNull(sampler);
+      Assertions.assertNotNull(prev);
+    }
+  }
+
+  @SuperBuilder(setterPrefix = "with", toBuilder = true)
+  static class TestJavaPostProcessorWrapperWithField extends AbstractJavaPostProcessorWrapper {
+
+    private int increment;
+    @XStreamOmitField @Default private Map myMap = new HashMap();
+
+    @Override
+    public void execute(
+        String label,
+        JMeterContext ctx,
+        JMeterVariables vars,
+        Properties props,
+        Map<String, String> parameters,
+        Logger log,
+        Sampler sampler,
+        SampleResult prev) {
+
+      increment++;
+      if (increment == 2 || increment == 102) {
+        log.error("increment");
+      }
+      if (parameters.size() > 0) {
+        log.error(parameters.keySet().iterator().next());
+      }
     }
   }
 }

@@ -18,11 +18,24 @@
 
 package org.anasoid.jmc.plugins.wrapper.java;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import lombok.Builder.Default;
+import lombok.Getter;
 import lombok.experimental.SuperBuilder;
+import org.anasoid.jmc.core.wrapper.jmeter.config.ArgumentWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.gui.JMeterGUIWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.basic.AbstractBasicChildTestElementWrapper;
+import org.anasoid.jmc.core.xstream.annotations.JmcCollection;
+import org.anasoid.jmc.core.xstream.annotations.JmcEmptyAllowed;
+import org.anasoid.jmc.core.xstream.annotations.JmcOmitField;
 import org.anasoid.jmc.core.xstream.annotations.JmcProperty;
 import org.anasoid.jmc.plugins.component.java.JavaTestElement;
+import org.apache.jmeter.config.Arguments;
+import org.apache.jmeter.config.gui.ArgumentsPanel;
 import org.apache.jmeter.testbeans.gui.TestBeanGUI;
 
 /**
@@ -34,6 +47,23 @@ import org.apache.jmeter.testbeans.gui.TestBeanGUI;
 public abstract class AbstractJavaTestElementWrapper<T extends JavaTestElement>
     extends AbstractBasicChildTestElementWrapper<T> implements JMeterGUIWrapper<TestBeanGUI> {
 
+  @JmcOmitField @Default @Getter private Map<String, String> parameters = new HashMap<>();
+
+  @JmcCollection(
+      value = Arguments.ARGUMENTS,
+      withElementProp = true,
+      name = "parameters",
+      elementType = Arguments.class,
+      guiclass = ArgumentsPanel.class,
+      testclass = Arguments.class)
+  @JmcEmptyAllowed
+  protected List<ArgumentWrapper> parametersProp() {
+
+    return parameters.entrySet().stream()
+        .map(c -> ArgumentWrapper.builder().withName(c.getKey()).withValue(c.getValue()).build())
+        .collect(Collectors.toList());
+  }
+
   @JmcProperty("executorClass")
   protected String getExecutorClass() {
     return this.getClass().getName();
@@ -42,5 +72,43 @@ public abstract class AbstractJavaTestElementWrapper<T extends JavaTestElement>
   @Override
   public Class<?> getGuiClass() {
     return TestBeanGUI.class;
+  }
+
+  /** builder. */
+  public abstract static class AbstractJavaTestElementWrapperBuilder<
+          T extends JavaTestElement,
+          C extends AbstractJavaTestElementWrapper<T>,
+          B extends AbstractJavaTestElementWrapperBuilder<T, C, B>>
+      extends AbstractBasicChildTestElementWrapper.AbstractBasicChildTestElementWrapperBuilder<
+          T, C, B> {
+
+    protected B withParameters(Map<String, String> parameters) {
+      this.parameters$value = parameters;
+      this.parameters$set = true;
+      return self();
+    }
+
+    /**
+     * Add list of parameters as Map.
+     *
+     * @param parameters map of parameters.
+     */
+    public B addParameters(Map<String, String> parameters) {
+      if (!parameters$set) {
+        withParameters(new HashMap<>());
+      }
+      parameters$value.putAll(parameters);
+      return self();
+    }
+
+    /**
+     * Add argument, consists of a name/value pair, default metadata is '='.
+     *
+     * @param name name.
+     * @param value value.
+     */
+    public B addParameter(String name, String value) {
+      return addParameters(Collections.singletonMap(name, value));
+    }
   }
 }

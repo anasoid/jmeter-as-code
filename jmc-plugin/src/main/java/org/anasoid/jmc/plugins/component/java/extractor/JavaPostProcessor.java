@@ -18,18 +18,10 @@
 
 package org.anasoid.jmc.plugins.component.java.extractor;
 
-import java.util.HashMap;
-import java.util.Properties;
 import org.anasoid.jmc.plugins.component.java.JavaTestElement;
 import org.apache.jmeter.gui.GUIMenuSortOrder;
 import org.apache.jmeter.processor.PostProcessor;
-import org.apache.jmeter.samplers.SampleResult;
-import org.apache.jmeter.samplers.Sampler;
 import org.apache.jmeter.testbeans.TestBean;
-import org.apache.jmeter.threads.JMeterContext;
-import org.apache.jmeter.threads.JMeterContextService;
-import org.apache.jmeter.threads.JMeterVariables;
-import org.apache.jmeter.util.JMeterUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -47,15 +39,15 @@ public class JavaPostProcessor extends JavaTestElement<JavaPostProcessorExecutor
   public void process() {
     log.info("Executing {}", getExecutor().getClass());
 
-    JavaPostProcessorExecutor executor = getExecutor();
-    String label = getName();
-    JMeterContext ctx = JMeterContextService.getContext();
-    JMeterVariables vars = ctx.getVariables();
-    Properties props = JMeterUtils.getJMeterProperties();
-    final Logger elementLogger =
-        LoggerFactory.getLogger(executor.getClass().getName() + "." + getName());
-    Sampler sampler = ctx.getCurrentSampler();
-    SampleResult prev = ctx.getPreviousResult();
-    executor.execute(label, ctx, vars, props, new HashMap<>(), elementLogger, sampler, prev);
+    getExecutor()
+        .execute(
+            getLabel(),
+            getJMeterContext(),
+            getJMeterVariables(),
+            getJMeterProperties(),
+            getParameters(),
+            getExecutorLogger(),
+            getCurrentSampler(),
+            getPreviousResult());
   }
 }
