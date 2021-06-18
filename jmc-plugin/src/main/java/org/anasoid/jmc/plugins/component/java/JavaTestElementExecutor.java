@@ -18,11 +18,10 @@
 
 package org.anasoid.jmc.plugins.component.java;
 
+import java.io.Serializable;
+
 /**
- * Main Interface for Java JavaTestElementExecutor.
- * Each subclass will have it own executor signature method.
+ * Main Interface for Java JavaTestElementExecutor. Each subclass will have it own executor
+ * signature method.
  */
-public interface JavaTestElementExecutor {
-
-
-}
+public interface JavaTestElementExecutor extends Serializable {}
