@@ -22,6 +22,7 @@ import lombok.experimental.SuperBuilder;
 import org.anasoid.jmc.core.wrapper.jmeter.processor.PostProcessorWrapper;
 import org.anasoid.jmc.plugins.component.java.extractor.JavaPostProcessor;
 import org.anasoid.jmc.plugins.component.java.extractor.JavaPostProcessorExecutor;
+import org.anasoid.jmc.plugins.component.java.extractor.JavaPostProcessorGui;
 import org.anasoid.jmc.plugins.wrapper.java.AbstractJavaTestElementWrapper;
 
 /** Base class for JavaPostProcessor Wrapper. */
@@ -33,5 +34,10 @@ public abstract class AbstractJavaPostProcessorWrapper
   @Override
   public Class<?> getTestClass() {
     return JavaPostProcessor.class;
+  }
+
+  @Override
+  public Class<?> getGuiClass() {
+    return JavaPostProcessorGui.class;
   }
 }

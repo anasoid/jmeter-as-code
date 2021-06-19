@@ -18,22 +18,24 @@
 
 package org.anasoid.jmc.plugins.component.java.extractor;
 
-import org.anasoid.jmc.plugins.component.java.JavaTestElement;
-import org.apache.jmeter.gui.GUIMenuSortOrder;
+import org.anasoid.jmc.plugins.component.java.AbstractJavaTestElement;
 import org.apache.jmeter.processor.PostProcessor;
 import org.apache.jmeter.testbeans.TestBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /** Java Post Processor. */
-@GUIMenuSortOrder(5)
 @SuppressWarnings("PMD.MoreThanOneLogger")
-public class JavaPostProcessor extends JavaTestElement<JavaPostProcessorExecutor>
+public class JavaPostProcessor extends AbstractJavaTestElement<JavaPostProcessorExecutor>
     implements Cloneable, PostProcessor, TestBean {
 
   private static final long serialVersionUID = 8119460180648610163L;
 
   private static final Logger log = LoggerFactory.getLogger(JavaPostProcessor.class);
+
+  public JavaPostProcessor() {
+    super();
+  }
 
   @Override
   public void process() {

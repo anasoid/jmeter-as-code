@@ -44,13 +44,44 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /** Base class for Java TestElement. */
-public abstract class JavaTestElement<T extends JavaTestElementExecutor>
+public abstract class AbstractJavaTestElement<T extends JavaTestElementExecutor>
     extends AbstractTestElement {
+
+  public static final String PARAMETERS = "parameters";
+
+  public static final String EXECUTOR_CLASS = "executorClass";
 
   private static final long serialVersionUID = -3117849471442160201L;
 
-  private String getExecutorClass() {
-    return getPropertyAsString("executorClass");
+  public String getExecutorClass() {
+    return getPropertyAsString(EXECUTOR_CLASS);
+  }
+
+  public void setExecutorClass(String clazz) {
+    setProperty(EXECUTOR_CLASS, clazz);
+  }
+
+  protected AbstractJavaTestElement() {
+    setArguments(new Arguments());
+  }
+
+  /**
+   * Set the arguments (parameters) for the BackendListenerClient to be executed with.
+   *
+   * @param args the new arguments. These replace any existing arguments.
+   */
+  public void setArguments(Arguments args) {
+
+    setProperty(new TestElementProperty(PARAMETERS, args));
+  }
+
+  /**
+   * Get the arguments (parameters) for the BackendListenerClient to be executed with.
+   *
+   * @return the arguments
+   */
+  public Arguments getArguments() {
+    return (Arguments) getProperty(PARAMETERS).getObjectValue();
   }
 
   private T executor;
@@ -163,7 +194,7 @@ public abstract class JavaTestElement<T extends JavaTestElementExecutor>
   protected Map<String, String> getParameters() {
 
     Map<String, String> result = new HashMap<>();
-    JMeterProperty property = getProperty("parameters");
+    JMeterProperty property = getProperty(PARAMETERS);
     if (property.getObjectValue() instanceof Arguments) {
       Arguments arguments = (Arguments) property.getObjectValue();
       Iterator iterator = arguments.iterator();

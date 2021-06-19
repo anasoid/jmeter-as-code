@@ -33,7 +33,7 @@ import org.anasoid.jmc.core.xstream.annotations.JmcCollection;
 import org.anasoid.jmc.core.xstream.annotations.JmcEmptyAllowed;
 import org.anasoid.jmc.core.xstream.annotations.JmcOmitField;
 import org.anasoid.jmc.core.xstream.annotations.JmcProperty;
-import org.anasoid.jmc.plugins.component.java.JavaTestElement;
+import org.anasoid.jmc.plugins.component.java.AbstractJavaTestElement;
 import org.apache.jmeter.config.Arguments;
 import org.apache.jmeter.config.gui.ArgumentsPanel;
 import org.apache.jmeter.testbeans.gui.TestBeanGUI;
@@ -44,7 +44,7 @@ import org.apache.jmeter.testbeans.gui.TestBeanGUI;
  * @param <T> JmeterTestElement implementation.
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
-public abstract class AbstractJavaTestElementWrapper<T extends JavaTestElement>
+public abstract class AbstractJavaTestElementWrapper<T extends AbstractJavaTestElement>
     extends AbstractBasicChildTestElementWrapper<T> implements JMeterGUIWrapper<TestBeanGUI> {
 
   @JmcOmitField @Default @Getter private Map<String, String> parameters = new HashMap<>();
@@ -76,7 +76,7 @@ public abstract class AbstractJavaTestElementWrapper<T extends JavaTestElement>
 
   /** builder. */
   public abstract static class AbstractJavaTestElementWrapperBuilder<
-          T extends JavaTestElement,
+          T extends AbstractJavaTestElement,
           C extends AbstractJavaTestElementWrapper<T>,
           B extends AbstractJavaTestElementWrapperBuilder<T, C, B>>
       extends AbstractBasicChildTestElementWrapper.AbstractBasicChildTestElementWrapperBuilder<

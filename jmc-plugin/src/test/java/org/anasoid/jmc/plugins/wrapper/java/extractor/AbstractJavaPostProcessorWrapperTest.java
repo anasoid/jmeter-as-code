@@ -143,7 +143,7 @@ class AbstractJavaPostProcessorWrapperTest extends AbstractJmcPluginJavaTest {
   }
 
   @SuperBuilder(setterPrefix = "with", toBuilder = true)
-  static class TestJavaPostProcessorWrapper extends AbstractJavaPostProcessorWrapper {
+  public static class TestJavaPostProcessorWrapper extends AbstractJavaPostProcessorWrapper {
 
     @Override
     public void execute(

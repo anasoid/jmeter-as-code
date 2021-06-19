@@ -8,7 +8,9 @@
     PMD Basic Configuration
   </description>
 
-  <rule ref="category/java/bestpractices.xml"/>
+  <rule ref="category/java/bestpractices.xml">
+    <exclude name="GuardLogStatement"/>
+  </rule>
 
   <rule ref="category/java/design.xml">
     <exclude name="DataClass"/>
