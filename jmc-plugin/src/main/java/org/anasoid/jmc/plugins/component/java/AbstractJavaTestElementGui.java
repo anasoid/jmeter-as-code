@@ -141,7 +141,7 @@ public abstract class AbstractJavaTestElementGui extends AbstractJMeterGuiCompon
       // interface.
       possibleClasses =
           ClassFinder.findClassesThatExtend(
-              JMeterUtils.getSearchPaths(), new Class[] {getExecutorClass()}, true);
+              JMeterUtils.getSearchPaths(), new Class[] {getExecutorClass()});
 
     } catch (Exception e) {
       log.debug("Exception getting interfaces.", e);

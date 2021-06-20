@@ -12,6 +12,8 @@ import org.anasoid.jmc.core.wrapper.jmeter.samplers.DebugSamplerWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.TestPlanWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.threads.ThreadGroupWrapper;
 import org.anasoid.jmc.plugins.wrapper.java.AbstractJmcPluginJavaTest;
+import org.anasoid.jmc.plugins.wrapper.java.extractor.executor.TestJavaPostProcessorWrapper;
+import org.anasoid.jmc.plugins.wrapper.java.extractor.executor.TestJavaPostProcessorWrapperWithField;
 import org.anasoid.jmc.test.AbstractJmcTest;
 import org.anasoid.jmc.test.log.LogMonitor;
 import org.apache.jmeter.samplers.SampleResult;
@@ -140,58 +142,5 @@ class AbstractJavaPostProcessorWrapperTest extends AbstractJmcPluginJavaTest {
         "me",
         LogMonitor.getErrors().get(0).getMessage(),
         "Errors : " + LogMonitor.getErrors().toString());
-  }
-
-  @SuperBuilder(setterPrefix = "with", toBuilder = true)
-  public static class TestJavaPostProcessorWrapper extends AbstractJavaPostProcessorWrapper {
-
-    @Override
-    public void execute(
-        String label,
-        JMeterContext ctx,
-        JMeterVariables vars,
-        Properties props,
-        Map<String, String> parameters,
-        Logger log,
-        Sampler sampler,
-        SampleResult prev) {
-
-      log.info("TestJavaPostProcessorWrapper : ######################ME#####################");
-      Assertions.assertNotNull(label);
-      Assertions.assertNotNull(ctx);
-      Assertions.assertNotNull(vars);
-      Assertions.assertNotNull(props);
-      Assertions.assertNotNull(parameters);
-      Assertions.assertNotNull(log);
-      Assertions.assertNotNull(sampler);
-      Assertions.assertNotNull(prev);
-    }
-  }
-
-  @SuperBuilder(setterPrefix = "with", toBuilder = true)
-  static class TestJavaPostProcessorWrapperWithField extends AbstractJavaPostProcessorWrapper {
-
-    private int increment;
-    @XStreamOmitField @Default private Map myMap = new HashMap();
-
-    @Override
-    public void execute(
-        String label,
-        JMeterContext ctx,
-        JMeterVariables vars,
-        Properties props,
-        Map<String, String> parameters,
-        Logger log,
-        Sampler sampler,
-        SampleResult prev) {
-
-      increment++;
-      if (increment == 2 || increment == 102) {
-        log.error("increment");
-      }
-      if (parameters.size() > 0) {
-        log.error(parameters.keySet().iterator().next());
-      }
-    }
   }
 }
