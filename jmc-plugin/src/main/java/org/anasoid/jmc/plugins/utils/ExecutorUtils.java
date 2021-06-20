@@ -4,6 +4,7 @@ import com.thoughtworks.xstream.converters.ConversionException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -11,6 +12,9 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 import org.anasoid.jmc.plugins.component.java.JavaTestElementExecutor;
+import org.apache.jmeter.testelement.TestElement;
+import org.apache.jmeter.testelement.property.JMeterProperty;
+import org.apache.jmeter.testelement.property.PropertyIterator;
 
 /**
  * Executor utils, Helper to get instance of JavaTestElementExecutor from class name.
@@ -20,6 +24,23 @@ import org.anasoid.jmc.plugins.component.java.JavaTestElementExecutor;
 public final class ExecutorUtils {
 
   private ExecutorUtils() {}
+
+  /**
+   * get {@link JavaTestElementExecutor} instance.
+   *
+   * @param className className of {@link JavaTestElementExecutor}
+   * @param testElement testElement to initialize value.
+   * @return JavaTestElementExecutor instance.
+   */
+  public static JavaTestElementExecutor getExecutor(String className, TestElement testElement) {
+    HashMap<String, Object> values = new HashMap<>();
+    PropertyIterator propertyIterator = testElement.propertyIterator();
+    while (propertyIterator.hasNext()) {
+      JMeterProperty property = propertyIterator.next();
+      values.put(property.getName(), property.getObjectValue());
+    }
+    return getExecutor(className, values);
+  }
 
   /**
    * get {@link JavaTestElementExecutor} instance.

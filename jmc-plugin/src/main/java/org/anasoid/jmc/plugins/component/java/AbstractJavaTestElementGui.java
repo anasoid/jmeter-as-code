@@ -32,16 +32,15 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
+import org.anasoid.jmc.plugins.utils.ExecutorUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.jmeter.config.Argument;
 import org.apache.jmeter.config.Arguments;
 import org.apache.jmeter.config.gui.ArgumentsPanel;
 import org.apache.jmeter.gui.AbstractJMeterGuiComponent;
 import org.apache.jmeter.gui.util.HorizontalPanel;
 import org.apache.jmeter.gui.util.MenuFactory;
 import org.apache.jmeter.testelement.TestElement;
-import org.apache.jmeter.testelement.property.JMeterProperty;
 import org.apache.jmeter.util.JMeterUtils;
 import org.apache.jorphan.reflect.ClassFinder;
 import org.slf4j.Logger;
@@ -104,8 +103,6 @@ public abstract class AbstractJavaTestElementGui extends AbstractJMeterGuiCompon
     }
   }
 
-
-
   @Override
   public void modifyTestElement(TestElement config) {
     configureTestElement(config);
@@ -133,6 +130,9 @@ public abstract class AbstractJavaTestElementGui extends AbstractJMeterGuiCompon
     } catch (Exception e) {
       log.debug("Exception getting interfaces.", e);
     }
+    if (possibleClasses.isEmpty()) {
+      throw new IllegalStateException("No executor Found for : " + getExecutorClass());
+    }
 
     final JLabel label = new JLabel("Executor ");
 
@@ -157,75 +157,45 @@ public abstract class AbstractJavaTestElementGui extends AbstractJMeterGuiCompon
    * @param event the ActionEvent to be handled
    */
   @Override
-  @SuppressWarnings("PMD.AvoidCatchingGenericException")
   public void actionPerformed(ActionEvent event) {
     if (event.getSource() == classnameCombo) { // NOPMD
 
       String newClassName = ((String) classnameCombo.getSelectedItem()).trim();
-      try {
-        // BackendListenerClient client = createBackendListenerClient(newClassName);
-        // BackendListenerClient oldClient = createBackendListenerClient(className);
-
-        Arguments currArgs = new Arguments();
-        argsPanel.modifyTestElement(currArgs);
-        Map<String, String> currArgsMap = currArgs.getArgumentsAsMap();
-        Map<String, String> userArgMap = new HashMap<>();
-        userArgMap.putAll(currArgsMap);
-        Arguments defaultArgs = extractDefaultArguments(userArgMap, new Arguments());
-        Arguments newArgs = copyDefaultArguments(currArgsMap, defaultArgs);
-        userArgMap.forEach(newArgs::addArgument);
-
-        className = newClassName;
-        argsPanel.configure(newArgs);
-      } catch (Exception e) {
-        log.error("Error getting argument list for {}", newClassName, e);
-      }
+      changeExecutor(newClassName);
     }
   }
 
-  @SuppressWarnings("PMD.AvoidDeeplyNestedIfStmts")
-  private Arguments copyDefaultArguments(Map<String, String> currArgsMap, Arguments defaultArgs) {
-    Arguments newArgs = new Arguments();
-    if (defaultArgs != null) {
-      for (JMeterProperty jmeterProperty : defaultArgs.getArguments()) {
-        Argument arg = (Argument) jmeterProperty.getObjectValue();
-        String name = arg.getName();
-        String value = arg.getValue();
+  @SuppressWarnings("PMD.AvoidCatchingGenericException")
+  private void changeExecutor(String executorClass) {
 
-        // If a user has set parameters in one test, and then
-        // selects a different test which supports the same
-        // parameters, those parameters should have the same
-        // values that they did in the original test.
-        if (currArgsMap.containsKey(name)) {
-          String newVal = currArgsMap.get(name);
-          if (StringUtils.isNotBlank(newVal)) {
-            value = newVal;
-          }
-        }
-        newArgs.addArgument(name, value);
-      }
-    }
-    return newArgs;
-  }
-
-  private Arguments extractDefaultArguments(
-      Map<String, String> userArgMap, Arguments currentUserArguments) {
-    Arguments defaultArgs = new Arguments();
     try {
 
-      // defaultArgs = client.getDefaultParameters();
-      if (currentUserArguments != null) {
-        userArgMap.keySet().removeAll(currentUserArguments.getArgumentsAsMap().keySet());
-      }
-    } catch (AbstractMethodError e) {
-      log.warn(
-          "BackendListenerClient doesn't implement "
-              + "getDefaultParameters.  Default parameters won't "
-              + "be shown.  Please update your client class");
+      Arguments currArgs = new Arguments();
+      argsPanel.modifyTestElement(currArgs);
+      Map<String, String> currArgsMap = currArgs.getArgumentsAsMap();
+      Arguments defaultArgs = extractDefaultArguments(currArgsMap, executorClass);
+
+      className = executorClass;
+      argsPanel.configure(defaultArgs);
+    } catch (Exception e) {
+      log.error("Error getting argument list for {}", executorClass, e);
     }
-    return defaultArgs;
   }
 
+  private Arguments extractDefaultArguments(Map<String, String> userArgMap, String executorClass) {
+    Arguments defaultArgs = new Arguments();
+    JavaTestElementExecutor executor = ExecutorUtils.getExecutor(executorClass, new HashMap<>());
+    List<String> parametersKey = executor.getParametersKey();
+    if (parametersKey == null) {
+      return defaultArgs;
+    }
+
+    for (String key : parametersKey) {
+      defaultArgs.addArgument(key, userArgMap.get(key));
+    }
+
+    return defaultArgs;
+  }
 
   /**
    * Create a panel containing components allowing the user to provide arguments to be passed to the
@@ -250,6 +220,7 @@ public abstract class AbstractJavaTestElementGui extends AbstractJMeterGuiCompon
     if (StringUtils.isNotBlank(className)) {
       if (checkContainsClassName(classnameCombo.getModel(), className)) {
         classnameCombo.setSelectedItem(className);
+        changeExecutor(className);
       } else {
         log.error(
             "Error setting class: '{}' in  JavaTestElement: {}, check for a missing jar in"

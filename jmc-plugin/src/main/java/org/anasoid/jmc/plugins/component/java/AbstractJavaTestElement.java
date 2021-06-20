@@ -28,7 +28,6 @@ import org.apache.jmeter.samplers.SampleResult;
 import org.apache.jmeter.samplers.Sampler;
 import org.apache.jmeter.testelement.AbstractTestElement;
 import org.apache.jmeter.testelement.property.JMeterProperty;
-import org.apache.jmeter.testelement.property.PropertyIterator;
 import org.apache.jmeter.testelement.property.TestElementProperty;
 import org.apache.jmeter.threads.JMeterContext;
 import org.apache.jmeter.threads.JMeterContextService;
@@ -87,14 +86,7 @@ public abstract class AbstractJavaTestElement<T extends JavaTestElementExecutor>
 
     synchronized (this) {
       if (executor == null) {
-
-        HashMap<String, Object> values = new HashMap<>();
-        PropertyIterator propertyIterator = this.propertyIterator();
-        while (propertyIterator.hasNext()) {
-          JMeterProperty property = propertyIterator.next();
-          values.put(property.getName(), property.getObjectValue());
-        }
-        executor = (T) ExecutorUtils.getExecutor(getExecutorClass(), values);
+        executor = (T) ExecutorUtils.getExecutor(getExecutorClass(), this);
       }
     }
     return executor;
