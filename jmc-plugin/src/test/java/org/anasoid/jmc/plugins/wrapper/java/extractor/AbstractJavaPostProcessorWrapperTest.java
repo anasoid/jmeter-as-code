@@ -1,25 +1,16 @@
 package org.anasoid.jmc.plugins.wrapper.java.extractor;
 
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
-import lombok.Builder.Default;
-import lombok.experimental.SuperBuilder;
 import org.anasoid.jmc.core.application.ApplicationTest;
 import org.anasoid.jmc.core.wrapper.jmeter.samplers.DebugSamplerWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.TestPlanWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.threads.ThreadGroupWrapper;
+import org.anasoid.jmc.core.xstream.exceptions.ConversionIllegalStateException;
 import org.anasoid.jmc.plugins.wrapper.java.AbstractJmcPluginJavaTest;
 import org.anasoid.jmc.plugins.wrapper.java.extractor.executor.TestJavaPostProcessorWrapper;
 import org.anasoid.jmc.plugins.wrapper.java.extractor.executor.TestJavaPostProcessorWrapperWithField;
 import org.anasoid.jmc.test.AbstractJmcTest;
 import org.anasoid.jmc.test.log.LogMonitor;
-import org.apache.jmeter.samplers.SampleResult;
-import org.apache.jmeter.samplers.Sampler;
-import org.apache.jmeter.threads.JMeterContext;
-import org.apache.jmeter.threads.JMeterVariables;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -106,7 +97,7 @@ class AbstractJavaPostProcessorWrapperTest extends AbstractJmcPluginJavaTest {
                     .withName("testWithField100")
                     .build())
             .build();
-    ApplicationTest applicationTest = toApplicationTest(testPlanWrapper, "javaPost");
+    ApplicationTest applicationTest = toApplicationTest(testPlanWrapper, "testWithFieldInit");
     applicationTest.run();
     Assertions.assertEquals(
         1, LogMonitor.getErrors().size(), "Errors : " + LogMonitor.getErrors().toString());
@@ -142,5 +133,31 @@ class AbstractJavaPostProcessorWrapperTest extends AbstractJmcPluginJavaTest {
         "me",
         LogMonitor.getErrors().get(0).getMessage(),
         "Errors : " + LogMonitor.getErrors().toString());
+  }
+
+  @Test
+  void testParametersInvalid() throws IOException {
+    TestPlanWrapper testPlanWrapper =
+        TestPlanWrapper.builder()
+            .addThread(
+                ThreadGroupWrapper.builder()
+                    .withLoops(1)
+                    .withDuration(1)
+                    .withNumThreads(1)
+                    .addSampler(DebugSamplerWrapper.builder().build())
+                    .build())
+            .addPostProcessor(
+                TestJavaPostProcessorWrapperWithField.builder()
+                    .addParameter("me", "you")
+                    .addParameter("key", "you1")
+                    .withName("testWithParameters")
+                    .build())
+            .build();
+    try {
+      ApplicationTest applicationTest = toApplicationTest(testPlanWrapper, "javaPost");
+      Assertions.fail();
+    } catch (ConversionIllegalStateException e) {
+      // Success
+    }
   }
 }

@@ -1,7 +1,9 @@
 package org.anasoid.jmc.plugins.wrapper.java.extractor.executor;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import lombok.Builder.Default;
@@ -38,5 +40,10 @@ public class TestJavaPostProcessorWrapperWithField extends AbstractJavaPostProce
     if (parameters.size() > 0) {
       log.error(parameters.keySet().iterator().next());
     }
+  }
+
+  @Override
+  public List<String> getParametersKey() {
+    return Arrays.asList("me", "me1", "me2");
   }
 }

@@ -22,8 +22,6 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -59,13 +57,13 @@ public abstract class AbstractJavaTestElementGui extends AbstractJMeterGuiCompon
   /** Logging. */
   private static final Logger log = LoggerFactory.getLogger(AbstractJavaTestElementGui.class);
 
-  /** A combo box allowing the user to choose a backend class. */
+  /** A combo box allowing the user to choose a Executor class. */
   private JComboBox<String> classnameCombo;
 
   /** A panel allowing the user to set arguments for this test. */
   private ArgumentsPanel argsPanel;
 
-  /** The current className of the Backend listener. * */
+  /** The current className of the Executor. * */
   private String className;
 
   /** Create a new AbstractJavaTestElementGui as a standalone component. */
@@ -106,18 +104,7 @@ public abstract class AbstractJavaTestElementGui extends AbstractJMeterGuiCompon
     }
   }
 
-  /**
-   * This is the list of menu categories this gui component will be available under. This
-   * implementation returns {@link org.apache.jmeter.gui.util.MenuFactory#LISTENERS}, which is
-   * appropriate for most visualizer components.
-   *
-   * @return a Collection of Strings, where each element is one of the constants defined in
-   *     MenuFactory
-   */
-  @Override
-  public Collection<String> getMenuCategories() {
-    return Arrays.asList(MenuFactory.POST_PROCESSORS);
-  }
+
 
   @Override
   public void modifyTestElement(TestElement config) {
@@ -147,7 +134,7 @@ public abstract class AbstractJavaTestElementGui extends AbstractJMeterGuiCompon
       log.debug("Exception getting interfaces.", e);
     }
 
-    final JLabel label = new JLabel(JMeterUtils.getResString("backend_listener_classname"));
+    final JLabel label = new JLabel("Executor ");
 
     classnameCombo = new JComboBox<>(possibleClasses.toArray(ArrayUtils.EMPTY_STRING_ARRAY));
     classnameCombo.addActionListener(this);
@@ -225,6 +212,7 @@ public abstract class AbstractJavaTestElementGui extends AbstractJMeterGuiCompon
       Map<String, String> userArgMap, Arguments currentUserArguments) {
     Arguments defaultArgs = new Arguments();
     try {
+
       // defaultArgs = client.getDefaultParameters();
       if (currentUserArguments != null) {
         userArgMap.keySet().removeAll(currentUserArguments.getArgumentsAsMap().keySet());
@@ -238,16 +226,7 @@ public abstract class AbstractJavaTestElementGui extends AbstractJMeterGuiCompon
     return defaultArgs;
   }
 
-  /*
-    private BackendListenerClient createBackendListenerClient(String newClassName)
-        throws ReflectiveOperationException {
-      return Class.forName(newClassName, true, Thread.currentThread().getContextClassLoader())
-          .asSubclass(BackendListenerClient.class)
-          .getDeclaredConstructor()
-          .newInstance();
-    }
 
-  */
   /**
    * Create a panel containing components allowing the user to provide arguments to be passed to the
    * test class instance.

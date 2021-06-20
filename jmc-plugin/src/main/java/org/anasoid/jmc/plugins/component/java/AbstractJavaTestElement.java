@@ -18,17 +18,11 @@
 
 package org.anasoid.jmc.plugins.component.java;
 
-import com.thoughtworks.xstream.converters.ConversionException;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
-import java.util.stream.Collectors;
+import org.anasoid.jmc.plugins.utils.ExecutorUtils;
 import org.apache.jmeter.config.Arguments;
 import org.apache.jmeter.samplers.SampleResult;
 import org.apache.jmeter.samplers.Sampler;
@@ -87,80 +81,23 @@ public abstract class AbstractJavaTestElement<T extends JavaTestElementExecutor>
   private T executor;
 
   protected T getExecutor() {
-
-    try {
-      synchronized (this) {
-        if (executor == null) {
-          Class<?> wrapper = Class.forName(getExecutorClass());
-          Method builderMethod = wrapper.getDeclaredMethod("builder");
-          builderMethod.setAccessible(true); // NOSONAR
-          Object builder = builderMethod.invoke(null);
-          setFields(builder);
-          Method buildMethod = builder.getClass().getDeclaredMethod("build");
-          buildMethod.setAccessible(true); // NOSONAR
-          executor = (T) buildMethod.invoke(builder);
-        }
-      }
+    if (executor != null) {
       return executor;
-    } catch (ClassNotFoundException
-        | NoSuchMethodException
-        | IllegalAccessException
-        | InvocationTargetException e) {
-      throw new ConversionException("Loading executor ", e);
-    }
-  }
-
-  private void setFields(Object builder) {
-    PropertyIterator propertyIterator = this.propertyIterator();
-    while (propertyIterator.hasNext()) {
-      JMeterProperty property = propertyIterator.next();
-      setValue(builder, property);
-    }
-  }
-
-  /**
-   * get All field with setter annotation.
-   *
-   * @return list all field.
-   */
-  private String getWithMethod(String fieldName) {
-    return "with" + fieldName.substring(0, 1).toUpperCase(Locale.ROOT) + fieldName.substring(1);
-  }
-
-  /**
-   * get All field with setter annotation.
-   *
-   * @return list all field.
-   */
-  @SuppressWarnings("PMD.EmptyCatchBlock")
-  private void setValue(Object source, JMeterProperty property) {
-
-    Method[] methods = source.getClass().getMethods();
-    String methodName = getWithMethod(property.getName());
-    List<Method> methodList =
-        Arrays.stream(methods)
-            .filter(m -> m.getName().equals(methodName))
-            .collect(Collectors.toList());
-
-    if (methodList.isEmpty()) {
-      return;
     }
 
-    Method methodFound = null;
-    for (Method method : methodList) {
-      try {
-        method.invoke(source, property.getObjectValue());
-        methodFound = method;
-        break;
-      } catch (IllegalAccessException | InvocationTargetException e) {
-        // Nothing
+    synchronized (this) {
+      if (executor == null) {
+
+        HashMap<String, Object> values = new HashMap<>();
+        PropertyIterator propertyIterator = this.propertyIterator();
+        while (propertyIterator.hasNext()) {
+          JMeterProperty property = propertyIterator.next();
+          values.put(property.getName(), property.getObjectValue());
+        }
+        executor = (T) ExecutorUtils.getExecutor(getExecutorClass(), values);
       }
     }
-
-    if (methodFound == null) {
-      throw new IllegalStateException(
-          "No Mapping property found for : " + property + " on " + this.getName());
-    }
+    return executor;
   }
 
   protected String getLabel() {

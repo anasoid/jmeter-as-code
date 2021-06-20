@@ -18,6 +18,8 @@
 
 package org.anasoid.jmc.plugins.component.java.extractor;
 
+import java.util.Arrays;
+import java.util.Collection;
 import org.anasoid.jmc.plugins.component.java.AbstractJavaTestElementGui;
 import org.anasoid.jmc.plugins.wrapper.java.extractor.AbstractJavaPostProcessorWrapper;
 import org.apache.jmeter.gui.GUIMenuSortOrder;
@@ -28,7 +30,7 @@ import org.apache.jmeter.testelement.TestElement;
 /** JavaPostProcessor Gui. */
 @GUIMenuSortOrder(5)
 @TestElementMetadata(
-    labelResource = "java_postproessor",
+    labelResource = "java_postprocessor",
     actionGroups = MenuFactory.POST_PROCESSORS)
 public class JavaPostProcessorGui extends AbstractJavaTestElementGui {
 
@@ -47,5 +49,18 @@ public class JavaPostProcessorGui extends AbstractJavaTestElementGui {
     JavaPostProcessor config = new JavaPostProcessor();
     modifyTestElement(config);
     return config;
+  }
+
+  /**
+   * This is the list of menu categories this gui component will be available under. This
+   * implementation returns {@link org.apache.jmeter.gui.util.MenuFactory#LISTENERS}, which is
+   * appropriate for most visualizer components.
+   *
+   * @return a Collection of Strings, where each element is one of the constants defined in
+   *     MenuFactory
+   */
+  @Override
+  public Collection<String> getMenuCategories() {
+    return Arrays.asList(MenuFactory.POST_PROCESSORS);
   }
 }

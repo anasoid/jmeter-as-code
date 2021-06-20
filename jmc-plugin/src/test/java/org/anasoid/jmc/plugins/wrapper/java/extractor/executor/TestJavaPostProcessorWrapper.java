@@ -1,5 +1,6 @@
 package org.anasoid.jmc.plugins.wrapper.java.extractor.executor;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import lombok.experimental.SuperBuilder;
@@ -35,5 +36,10 @@ public class TestJavaPostProcessorWrapper extends AbstractJavaPostProcessorWrapp
     Assertions.assertNotNull(log);
     Assertions.assertNotNull(sampler);
     Assertions.assertNotNull(prev);
+  }
+
+  @Override
+  public List<String> getParametersKey() {
+    return null;
   }
 }

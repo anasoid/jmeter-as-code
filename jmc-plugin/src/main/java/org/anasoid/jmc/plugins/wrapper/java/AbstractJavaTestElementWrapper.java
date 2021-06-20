@@ -26,6 +26,7 @@ import java.util.stream.Collectors;
 import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
+import org.anasoid.jmc.core.wrapper.jmc.validator.Validator;
 import org.anasoid.jmc.core.wrapper.jmeter.config.ArgumentWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.gui.JMeterGUIWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.basic.AbstractBasicChildTestElementWrapper;
@@ -33,7 +34,9 @@ import org.anasoid.jmc.core.xstream.annotations.JmcCollection;
 import org.anasoid.jmc.core.xstream.annotations.JmcEmptyAllowed;
 import org.anasoid.jmc.core.xstream.annotations.JmcOmitField;
 import org.anasoid.jmc.core.xstream.annotations.JmcProperty;
+import org.anasoid.jmc.core.xstream.exceptions.ConversionIllegalStateException;
 import org.anasoid.jmc.plugins.component.java.AbstractJavaTestElement;
+import org.anasoid.jmc.plugins.component.java.JavaTestElementExecutor;
 import org.apache.jmeter.config.Arguments;
 import org.apache.jmeter.config.gui.ArgumentsPanel;
 import org.apache.jmeter.testbeans.gui.TestBeanGUI;
@@ -45,7 +48,8 @@ import org.apache.jmeter.testbeans.gui.TestBeanGUI;
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 public abstract class AbstractJavaTestElementWrapper<T extends AbstractJavaTestElement>
-    extends AbstractBasicChildTestElementWrapper<T> implements JMeterGUIWrapper<TestBeanGUI> {
+    extends AbstractBasicChildTestElementWrapper<T>
+    implements JMeterGUIWrapper<TestBeanGUI>, Validator, JavaTestElementExecutor {
 
   @JmcOmitField @Default @Getter private Map<String, String> parameters = new HashMap<>();
 
@@ -70,8 +74,17 @@ public abstract class AbstractJavaTestElementWrapper<T extends AbstractJavaTestE
   }
 
   @Override
-  public Class<?> getGuiClass() {
-    return TestBeanGUI.class;
+  @SuppressWarnings("PMD.AvoidUncheckedExceptionsInSignatures")
+  public void validate() throws ConversionIllegalStateException {
+    if (this.getParametersKey() != null) {
+      List<String> notValidKeys =
+          this.getParameters().keySet().stream()
+              .filter(c -> !getParametersKey().contains(c))
+              .collect(Collectors.toList());
+      if (!notValidKeys.isEmpty()) {
+        throw new ConversionIllegalStateException("Not Valid Parameters  : " + notValidKeys);
+      }
+    }
   }
 
   /** builder. */

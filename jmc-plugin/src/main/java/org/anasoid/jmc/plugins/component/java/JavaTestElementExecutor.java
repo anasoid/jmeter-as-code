@@ -19,9 +19,18 @@
 package org.anasoid.jmc.plugins.component.java;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Main Interface for Java JavaTestElementExecutor. Each subclass will have it own executor
  * signature method.
  */
-public interface JavaTestElementExecutor extends Serializable {}
+public interface JavaTestElementExecutor extends Serializable {
+
+  /**
+   * get Valid Parameters key.
+   *
+   * @return list of valid parameters, null to not check validity.
+   */
+  List<String> getParametersKey();
+}
