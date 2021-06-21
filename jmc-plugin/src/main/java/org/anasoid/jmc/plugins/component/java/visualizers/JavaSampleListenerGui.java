@@ -21,7 +21,6 @@ package org.anasoid.jmc.plugins.component.java.visualizers;
 import java.util.Arrays;
 import java.util.Collection;
 import org.anasoid.jmc.plugins.component.java.AbstractJavaTestElementGui;
-import org.anasoid.jmc.plugins.wrapper.java.visualizers.AbstractJavaSampleListenerWrapper;
 import org.apache.jmeter.gui.util.MenuFactory;
 
 /** JavaListener Gui. */
@@ -33,8 +32,8 @@ public class JavaSampleListenerGui extends AbstractJavaTestElementGui {
   }
 
   @Override
-  protected Class<AbstractJavaSampleListenerWrapper> getExecutorClass() {
-    return AbstractJavaSampleListenerWrapper.class;
+  protected Class<JavaSampleListenerExecutor> getExecutorClass() {
+    return JavaSampleListenerExecutor.class;
   }
 
   @Override

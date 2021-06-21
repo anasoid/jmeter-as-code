@@ -21,7 +21,6 @@ package org.anasoid.jmc.plugins.component.java.extractor;
 import java.util.Arrays;
 import java.util.Collection;
 import org.anasoid.jmc.plugins.component.java.AbstractJavaTestElementGui;
-import org.anasoid.jmc.plugins.wrapper.java.extractor.AbstractJavaPostProcessorWrapper;
 import org.apache.jmeter.gui.util.MenuFactory;
 
 /** JavaPostProcessor Gui. */
@@ -33,8 +32,8 @@ public class JavaPostProcessorGui extends AbstractJavaTestElementGui {
   }
 
   @Override
-  protected Class<AbstractJavaPostProcessorWrapper> getExecutorClass() {
-    return AbstractJavaPostProcessorWrapper.class;
+  protected Class<JavaPostProcessorExecutor> getExecutorClass() {
+    return JavaPostProcessorExecutor.class;
   }
 
   @Override

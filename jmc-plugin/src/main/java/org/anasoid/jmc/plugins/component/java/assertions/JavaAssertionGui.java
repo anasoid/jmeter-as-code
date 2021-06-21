@@ -21,7 +21,6 @@ package org.anasoid.jmc.plugins.component.java.assertions;
 import java.util.Arrays;
 import java.util.Collection;
 import org.anasoid.jmc.plugins.component.java.AbstractJavaTestElementGui;
-import org.anasoid.jmc.plugins.wrapper.java.assertions.AbstractJavaAssertionWrapper;
 import org.apache.jmeter.gui.util.MenuFactory;
 
 /** JavaAssertion Gui. */
@@ -33,8 +32,8 @@ public class JavaAssertionGui extends AbstractJavaTestElementGui {
   }
 
   @Override
-  protected Class<AbstractJavaAssertionWrapper> getExecutorClass() {
-    return AbstractJavaAssertionWrapper.class;
+  protected Class<JavaAssertionExecutor> getExecutorClass() {
+    return JavaAssertionExecutor.class;
   }
 
   @Override

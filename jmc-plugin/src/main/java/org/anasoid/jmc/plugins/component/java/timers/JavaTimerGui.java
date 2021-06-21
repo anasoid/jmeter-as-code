@@ -21,7 +21,6 @@ package org.anasoid.jmc.plugins.component.java.timers;
 import java.util.Arrays;
 import java.util.Collection;
 import org.anasoid.jmc.plugins.component.java.AbstractJavaTestElementGui;
-import org.anasoid.jmc.plugins.wrapper.java.timers.AbstractJavaTimerWrapper;
 import org.apache.jmeter.gui.util.MenuFactory;
 
 /** JavaTimer Gui. */
@@ -33,8 +32,8 @@ public class JavaTimerGui extends AbstractJavaTestElementGui {
   }
 
   @Override
-  protected Class<AbstractJavaTimerWrapper> getExecutorClass() {
-    return AbstractJavaTimerWrapper.class;
+  protected Class<JavaTimerExecutor> getExecutorClass() {
+    return JavaTimerExecutor.class;
   }
 
   @Override
