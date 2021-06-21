@@ -94,7 +94,7 @@ public abstract class AbstractJavaTestElementGui<T extends AbstractJavaTestEleme
   /** Create a new AbstractJavaTestElementGui as a standalone component. */
   protected AbstractJavaTestElementGui() {
     super();
-    initGui();
+    initialize();
   }
 
   @Override
@@ -116,7 +116,7 @@ public abstract class AbstractJavaTestElementGui<T extends AbstractJavaTestEleme
   }
 
   /** Initialize the GUI components and layout. */
-  private void initGui() { // called from ctor, so must not be overridable
+  private void initialize() { // called from ctor, so must not be overridable
     setLayout(new BorderLayout(0, 5));
 
     setBorder(makeBorder());
