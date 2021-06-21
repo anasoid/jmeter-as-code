@@ -19,9 +19,11 @@
 package org.anasoid.jmc.plugins.component.java;
 
 import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -32,6 +34,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
+import org.anasoid.jmc.plugins.config.gui.ReadOnlyArgumentsPanel;
 import org.anasoid.jmc.plugins.utils.ExecutorUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -41,6 +44,8 @@ import org.apache.jmeter.gui.AbstractJMeterGuiComponent;
 import org.apache.jmeter.gui.util.HorizontalPanel;
 import org.apache.jmeter.gui.util.MenuFactory;
 import org.apache.jmeter.testelement.TestElement;
+import org.apache.jmeter.testelement.property.JMeterProperty;
+import org.apache.jmeter.testelement.property.PropertyIterator;
 import org.apache.jmeter.util.JMeterUtils;
 import org.apache.jorphan.reflect.ClassFinder;
 import org.slf4j.Logger;
@@ -52,7 +57,15 @@ public abstract class AbstractJavaTestElementGui extends AbstractJMeterGuiCompon
     implements ActionListener {
 
   private static final long serialVersionUID = 1L;
-
+  private static final List<String> IGNORED_ATTRIBUTES =
+      Arrays.asList(
+          "parameters",
+          "TestElement.gui_class",
+          "TestElement.test_class",
+          "TestElement.name",
+          "TestElement.enabled",
+          "executorClass",
+          "TestPlan.comments");
   /** Logging. */
   private static final Logger log = LoggerFactory.getLogger(AbstractJavaTestElementGui.class);
 
@@ -61,6 +74,9 @@ public abstract class AbstractJavaTestElementGui extends AbstractJMeterGuiCompon
 
   /** A panel allowing the user to set arguments for this test. */
   private ArgumentsPanel argsPanel;
+
+  /** A attributePanel allowing the user to see attribute. */
+  private ArgumentsPanel attributePanel;
 
   /** The current className of the Executor. * */
   private String className;
@@ -92,10 +108,15 @@ public abstract class AbstractJavaTestElementGui extends AbstractJMeterGuiCompon
     add(makeTitlePanel(), BorderLayout.NORTH);
 
     JPanel classnameRequestPanel = new JPanel(new BorderLayout(0, 5));
-    classnameRequestPanel.add(createClassnamePanel(), BorderLayout.NORTH);
-    classnameRequestPanel.add(createParameterPanel(), BorderLayout.CENTER);
-
     add(classnameRequestPanel, BorderLayout.CENTER);
+
+    classnameRequestPanel.add(createClassnamePanel(), BorderLayout.NORTH);
+
+    JPanel paramAttributePanel = new JPanel(new GridLayout(2, 1));
+    classnameRequestPanel.add(paramAttributePanel, BorderLayout.CENTER);
+    paramAttributePanel.add(createParameterPanel());
+    paramAttributePanel.add(createAttributePanel());
+
     if (classnameCombo.getSelectedItem() != null) {
       className = ((String) classnameCombo.getSelectedItem()).trim();
     } else {
@@ -197,6 +218,20 @@ public abstract class AbstractJavaTestElementGui extends AbstractJMeterGuiCompon
     return defaultArgs;
   }
 
+  private Arguments extractAttributeArguments(AbstractJavaTestElement<?> testElement) {
+    Arguments defaultArgs = new Arguments();
+
+    PropertyIterator propertyIterator = testElement.propertyIterator();
+    while (propertyIterator.hasNext()) {
+      JMeterProperty property = propertyIterator.next();
+      if (!IGNORED_ATTRIBUTES.contains(property.getName())) {
+        defaultArgs.addArgument(property.getName(), property.getStringValue());
+      }
+    }
+
+    return defaultArgs;
+  }
+
   /**
    * Create a panel containing components allowing the user to provide arguments to be passed to the
    * test class instance.
@@ -206,7 +241,22 @@ public abstract class AbstractJavaTestElementGui extends AbstractJMeterGuiCompon
   private JPanel createParameterPanel() {
     argsPanel =
         new ArgumentsPanel(JMeterUtils.getResString("backend_listener_paramtable")); // $NON-NLS-1$
+
     return argsPanel;
+  }
+
+  /**
+   * Create a panel containing components allowing the user to provide arguments to be passed to the
+   * test class instance.
+   *
+   * @return a panel containing the relevant components
+   */
+  private JPanel createAttributePanel() {
+    attributePanel =
+        new ReadOnlyArgumentsPanel(
+            "Attributes", JMeterUtils.getPropDefault("jmc.java.gui.attribute.disabled", true));
+
+    return attributePanel;
   }
 
   @Override
@@ -216,6 +266,7 @@ public abstract class AbstractJavaTestElementGui extends AbstractJMeterGuiCompon
     argsPanel.configure(
         (Arguments) config.getProperty(AbstractJavaTestElement.PARAMETERS).getObjectValue());
 
+    attributePanel.configure(extractAttributeArguments((AbstractJavaTestElement<?>) config));
     className = config.getPropertyAsString(AbstractJavaTestElement.EXECUTOR_CLASS);
     if (StringUtils.isNotBlank(className)) {
       if (checkContainsClassName(classnameCombo.getModel(), className)) {
@@ -256,6 +307,7 @@ public abstract class AbstractJavaTestElementGui extends AbstractJMeterGuiCompon
   public void clearGui() {
     super.clearGui();
     argsPanel.clearGui();
+    attributePanel.clearGui();
     if (classnameCombo.getItemCount() > 0) {
       classnameCombo.setSelectedIndex(0);
     }
