@@ -16,23 +16,21 @@
  * Date :   14-Jun-2021
  */
 
-package org.anasoid.jmc.plugins.component.java.visualizers;
+package org.anasoid.jmc.plugins.component.java.timers;
 
 import org.anasoid.jmc.plugins.component.java.AbstractJavaTestElement;
-import org.apache.jmeter.samplers.SampleEvent;
-import org.apache.jmeter.samplers.SampleListener;
+import org.apache.jmeter.timers.Timer;
 
-/** Java Sample Listener. */
+/** Java Post Processor. */
 @SuppressWarnings("PMD.MoreThanOneLogger")
-public class JavaSampleListener extends AbstractJavaTestElement<JavaSampleListenerExecutor>
-    implements Cloneable, SampleListener {
+public class JavaTimer extends AbstractJavaTestElement<JavaTimerExecutor>
+    implements Cloneable, Timer {
 
   private static final long serialVersionUID = 8119460180648610163L;
 
   @Override
-  public void sampleOccurred(SampleEvent e) {
-
-    getExecutor()
+  public long delay() {
+    return getExecutor()
         .execute(
             getLabel(),
             getJMeterContext(),
@@ -40,18 +38,6 @@ public class JavaSampleListener extends AbstractJavaTestElement<JavaSampleListen
             getJMeterProperties(),
             getParameters(),
             getExecutorLogger(),
-            getCurrentSampler(),
-            e.getResult(),
-            e);
-  }
-
-  @Override
-  public void sampleStarted(SampleEvent e) {
-    // NOOP
-  }
-
-  @Override
-  public void sampleStopped(SampleEvent e) {
-    // NOOP
+            getCurrentSampler());
   }
 }

@@ -20,8 +20,6 @@ package org.anasoid.jmc.plugins.component.java.processor;
 
 import org.anasoid.jmc.plugins.component.java.AbstractJavaTestElement;
 import org.apache.jmeter.processor.PreProcessor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /** Java Post Processor. */
 @SuppressWarnings("PMD.MoreThanOneLogger")
@@ -30,15 +28,8 @@ public class JavaPreProcessor extends AbstractJavaTestElement<JavaPreProcessorEx
 
   private static final long serialVersionUID = 8119460180648610163L;
 
-  private static final Logger log = LoggerFactory.getLogger(JavaPreProcessor.class);
-
-  public JavaPreProcessor() {
-    super();
-  }
-
   @Override
   public void process() {
-    log.info("Executing {}", getExecutor().getClass());
 
     getExecutor()
         .execute(
