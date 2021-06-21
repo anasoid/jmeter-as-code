@@ -20,14 +20,13 @@ package org.anasoid.jmc.plugins.component.java.extractor;
 
 import org.anasoid.jmc.plugins.component.java.AbstractJavaTestElement;
 import org.apache.jmeter.processor.PostProcessor;
-import org.apache.jmeter.testbeans.TestBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /** Java Post Processor. */
 @SuppressWarnings("PMD.MoreThanOneLogger")
 public class JavaPostProcessor extends AbstractJavaTestElement<JavaPostProcessorExecutor>
-    implements Cloneable, PostProcessor, TestBean {
+    implements Cloneable, PostProcessor {
 
   private static final long serialVersionUID = 8119460180648610163L;
 

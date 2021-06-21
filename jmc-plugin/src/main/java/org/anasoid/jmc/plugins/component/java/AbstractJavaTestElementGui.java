@@ -22,6 +22,7 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -53,8 +54,28 @@ import org.slf4j.LoggerFactory;
 
 /** base gui class for JavaTestElement. */
 @SuppressWarnings({"PMD.TooManyMethods", "PMD.ExcessiveImports"})
-public abstract class AbstractJavaTestElementGui extends AbstractJMeterGuiComponent
-    implements ActionListener {
+public abstract class AbstractJavaTestElementGui<T extends AbstractJavaTestElement>
+    extends AbstractJMeterGuiComponent implements ActionListener {
+
+  protected abstract Class<T> getTestClass();
+
+  protected AbstractJavaTestElement getTestElementInstance() {
+    try {
+      return getTestClass().getDeclaredConstructor().newInstance();
+    } catch (InstantiationException
+        | NoSuchMethodException
+        | IllegalAccessException
+        | InvocationTargetException e) {
+      throw new IllegalStateException(e);
+    }
+  }
+
+  @Override
+  public TestElement createTestElement() {
+    AbstractJavaTestElement config = getTestElementInstance();
+    modifyTestElement(config);
+    return config;
+  }
 
   private static final long serialVersionUID = 1L;
   private static final List<String> IGNORED_ATTRIBUTES =
@@ -89,7 +110,12 @@ public abstract class AbstractJavaTestElementGui extends AbstractJMeterGuiCompon
 
   @Override
   public String getLabelResource() {
-    return "java_test_element";
+    return getClass().getCanonicalName();
+  }
+
+  @Override
+  public String getStaticLabel() {
+    return "@JMC " + getTestClass().getSimpleName();
   }
 
   /** get Executor class type. */
@@ -239,8 +265,7 @@ public abstract class AbstractJavaTestElementGui extends AbstractJMeterGuiCompon
    * @return a panel containing the relevant components
    */
   private JPanel createParameterPanel() {
-    argsPanel =
-        new ArgumentsPanel(JMeterUtils.getResString("backend_listener_paramtable")); // $NON-NLS-1$
+    argsPanel = new ArgumentsPanel("Parameters");
 
     return argsPanel;
   }
@@ -300,9 +325,6 @@ public abstract class AbstractJavaTestElementGui extends AbstractJMeterGuiCompon
     return set.contains(className);
   }
 
-  /* (non-Javadoc)
-   * @see org.apache.jmeter.gui.AbstractJMeterGuiComponent#clearGui()
-   */
   @Override
   public void clearGui() {
     super.clearGui();
