@@ -16,18 +16,20 @@
  * Date :   15-Jun-2021
  */
 
-package org.anasoid.jmc.plugins.component.java.processor;
+package org.anasoid.jmc.plugins.component.java.visualizers;
 
 import java.util.Map;
 import java.util.Properties;
 import org.anasoid.jmc.plugins.component.java.JavaTestElementExecutor;
+import org.apache.jmeter.samplers.SampleEvent;
+import org.apache.jmeter.samplers.SampleResult;
 import org.apache.jmeter.samplers.Sampler;
 import org.apache.jmeter.threads.JMeterContext;
 import org.apache.jmeter.threads.JMeterVariables;
 import org.slf4j.Logger;
 
-/** JavaPreProcessor Executor. */
-public interface JavaPreProcessorExecutor extends JavaTestElementExecutor {
+/** Sample Listener Executor. */
+public interface JavaSampleListenerExecutor extends JavaTestElementExecutor {
 
   /**
    * Main executor method.
@@ -39,6 +41,8 @@ public interface JavaPreProcessorExecutor extends JavaTestElementExecutor {
    * @param parameters Parameters to pass to the Executor.
    * @param log can be used to write to the log file.
    * @param sampler gives access to the current sampler.
+   * @param sampleResult gives access to the previous SampleResult .
+   * @param sampleEvent gives access to the SampleEvent.
    */
   void execute(
       String label,
@@ -47,5 +51,7 @@ public interface JavaPreProcessorExecutor extends JavaTestElementExecutor {
       Properties props,
       Map<String, String> parameters,
       Logger log,
-      Sampler sampler);
+      Sampler sampler,
+      SampleResult sampleResult,
+      SampleEvent sampleEvent);
 }

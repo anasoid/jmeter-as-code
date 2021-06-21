@@ -30,7 +30,19 @@ import org.slf4j.Logger;
 /** JavaPostProcessor Executor. */
 public interface JavaPostProcessorExecutor extends JavaTestElementExecutor {
 
-  void execute(// NOSONAR
+  /**
+   * Main executor method.
+   *
+   * @param label Descriptive name for this element that is shown in the tree.
+   * @param ctx gives access to the context.
+   * @param vars gives read/write access to variables.
+   * @param props gives read/write access to properties.
+   * @param parameters Parameters to pass to the Executor.
+   * @param log can be used to write to the log file.
+   * @param sampler gives access to the current sampler.
+   * @param prev gives access to the previous SampleResult (if any).
+   */
+  void execute(
       String label,
       JMeterContext ctx,
       JMeterVariables vars,
