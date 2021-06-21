@@ -11,7 +11,9 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
+import org.anasoid.jmc.plugins.component.java.AbstractJavaTestElement;
 import org.anasoid.jmc.plugins.component.java.JavaTestElementExecutor;
+import org.apache.jmeter.config.Arguments;
 import org.apache.jmeter.testelement.TestElement;
 import org.apache.jmeter.testelement.property.JMeterProperty;
 import org.apache.jmeter.testelement.property.PropertyIterator;
@@ -23,7 +25,37 @@ import org.apache.jmeter.testelement.property.PropertyIterator;
  */
 public final class ExecutorUtils {
 
+  private static final List<String> IGNORED_ATTRIBUTES =
+      Arrays.asList(
+          "parameters",
+          "TestElement.gui_class",
+          "TestElement.test_class",
+          "TestElement.name",
+          "TestElement.enabled",
+          "executorClass",
+          "TestPlan.comments");
+
   private ExecutorUtils() {}
+
+  /**
+   * Extract attribute Properties.
+   *
+   * @param testElement testElement.
+   * @return filtered properties , converted to arguments
+   */
+  public static Arguments extractAttributeArguments(AbstractJavaTestElement<?> testElement) {
+    Arguments defaultArgs = new Arguments();
+
+    PropertyIterator propertyIterator = testElement.propertyIterator();
+    while (propertyIterator.hasNext()) {
+      JMeterProperty property = propertyIterator.next();
+      if (!IGNORED_ATTRIBUTES.contains(property.getName())) {
+        defaultArgs.addArgument(property.getName(), property.getStringValue());
+      }
+    }
+
+    return defaultArgs;
+  }
 
   /**
    * get {@link JavaTestElementExecutor} instance.

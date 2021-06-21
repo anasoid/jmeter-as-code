@@ -32,6 +32,8 @@ import org.anasoid.jmc.test.utils.xmlunit.JmcXmlComparator;
 import org.anasoid.jmc.test.utils.xmlunit.filter.AttributesFilterManager;
 import org.anasoid.jmc.test.utils.xmlunit.filter.JmcXmlFilterAttr;
 import org.anasoid.jmc.test.utils.xmlunit.filter.JmcXmlFilterNode;
+import org.apache.jmeter.save.SaveService;
+import org.apache.jorphan.collections.HashTree;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -132,6 +134,25 @@ public abstract class AbstractJmcTest {
     applicationTest.check();
 
     return applicationTest;
+  }
+
+  /**
+   * return ApplicationTest.
+   *
+   * @return ApplicationTest.
+   */
+  protected HashTree toHashTree(TestPlanWrapper testPlanWrapper, String tmpFilename)
+      throws IOException {
+
+    ApplicationTest applicationTest = new ApplicationTest(testPlanWrapper);
+    Path tmpPath = Files.createTempFile(tmpFilename, ".jmx");
+
+    applicationTest.toJmx(tmpPath.toFile());
+    String content = Files.readString(tmpPath);
+    println("content :" + content);
+    applicationTest.check();
+
+    return SaveService.loadTree(tmpPath.toFile());
   }
 
   /**

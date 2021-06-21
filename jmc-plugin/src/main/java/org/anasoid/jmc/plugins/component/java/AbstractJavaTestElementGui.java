@@ -24,7 +24,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -45,8 +44,6 @@ import org.apache.jmeter.gui.AbstractJMeterGuiComponent;
 import org.apache.jmeter.gui.util.HorizontalPanel;
 import org.apache.jmeter.gui.util.MenuFactory;
 import org.apache.jmeter.testelement.TestElement;
-import org.apache.jmeter.testelement.property.JMeterProperty;
-import org.apache.jmeter.testelement.property.PropertyIterator;
 import org.apache.jmeter.util.JMeterUtils;
 import org.apache.jorphan.reflect.ClassFinder;
 import org.slf4j.Logger;
@@ -78,15 +75,7 @@ public abstract class AbstractJavaTestElementGui<T extends AbstractJavaTestEleme
   }
 
   private static final long serialVersionUID = 1L;
-  private static final List<String> IGNORED_ATTRIBUTES =
-      Arrays.asList(
-          "parameters",
-          "TestElement.gui_class",
-          "TestElement.test_class",
-          "TestElement.name",
-          "TestElement.enabled",
-          "executorClass",
-          "TestPlan.comments");
+
   /** Logging. */
   private static final Logger log = LoggerFactory.getLogger(AbstractJavaTestElementGui.class);
 
@@ -244,20 +233,6 @@ public abstract class AbstractJavaTestElementGui<T extends AbstractJavaTestEleme
     return defaultArgs;
   }
 
-  private Arguments extractAttributeArguments(AbstractJavaTestElement<?> testElement) {
-    Arguments defaultArgs = new Arguments();
-
-    PropertyIterator propertyIterator = testElement.propertyIterator();
-    while (propertyIterator.hasNext()) {
-      JMeterProperty property = propertyIterator.next();
-      if (!IGNORED_ATTRIBUTES.contains(property.getName())) {
-        defaultArgs.addArgument(property.getName(), property.getStringValue());
-      }
-    }
-
-    return defaultArgs;
-  }
-
   /**
    * Create a panel containing components allowing the user to provide arguments to be passed to the
    * test class instance.
@@ -291,7 +266,8 @@ public abstract class AbstractJavaTestElementGui<T extends AbstractJavaTestEleme
     argsPanel.configure(
         (Arguments) config.getProperty(AbstractJavaTestElement.PARAMETERS).getObjectValue());
 
-    attributePanel.configure(extractAttributeArguments((AbstractJavaTestElement<?>) config));
+    attributePanel.configure(
+        ExecutorUtils.extractAttributeArguments((AbstractJavaTestElement<?>) config));
     className = config.getPropertyAsString(AbstractJavaTestElement.EXECUTOR_CLASS);
     if (StringUtils.isNotBlank(className)) {
       if (checkContainsClassName(classnameCombo.getModel(), className)) {
