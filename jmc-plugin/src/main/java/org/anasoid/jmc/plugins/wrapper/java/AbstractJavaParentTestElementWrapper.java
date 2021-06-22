@@ -28,7 +28,7 @@ import lombok.experimental.SuperBuilder;
 import org.anasoid.jmc.core.wrapper.jmc.validator.Validator;
 import org.anasoid.jmc.core.wrapper.jmeter.config.ArgumentWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.gui.JMeterGUIWrapper;
-import org.anasoid.jmc.core.wrapper.jmeter.testelement.basic.AbstractBasicChildTestElementWrapper;
+import org.anasoid.jmc.core.wrapper.jmeter.testelement.AbstractTestElementWrapper;
 import org.anasoid.jmc.core.xstream.annotations.JmcCollection;
 import org.anasoid.jmc.core.xstream.annotations.JmcEmptyAllowed;
 import org.anasoid.jmc.core.xstream.annotations.JmcOmitField;
@@ -47,8 +47,8 @@ import org.apache.jmeter.testbeans.gui.TestBeanGUI;
  * @param <T> JmeterTestElement implementation.
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
-public abstract class AbstractJavaTestElementWrapper<T extends AbstractJavaTestElement>
-    extends AbstractBasicChildTestElementWrapper<T>
+public abstract class AbstractJavaParentTestElementWrapper<T extends AbstractJavaTestElement>
+    extends AbstractTestElementWrapper<T>
     implements JMeterGUIWrapper<TestBeanGUI>, Validator, JavaTestElementExecutor {
 
   @JmcOmitField @Default @Getter private Map<String, String> parameters = new HashMap<>();
@@ -78,12 +78,11 @@ public abstract class AbstractJavaTestElementWrapper<T extends AbstractJavaTestE
   }
 
   /** builder. */
-  public abstract static class AbstractJavaTestElementWrapperBuilder<
+  public abstract static class AbstractJavaParentTestElementWrapperBuilder<
           T extends AbstractJavaTestElement,
-          C extends AbstractJavaTestElementWrapper<T>,
-          B extends AbstractJavaTestElementWrapperBuilder<T, C, B>>
-      extends AbstractBasicChildTestElementWrapper.AbstractBasicChildTestElementWrapperBuilder<
-          T, C, B> {
+          C extends AbstractJavaParentTestElementWrapper<T>,
+          B extends AbstractJavaParentTestElementWrapperBuilder<T, C, B>>
+      extends AbstractTestElementWrapperBuilder<T, C, B> {
 
     protected B withParameters(Map<String, String> parameters) {
       this.parameters$value = parameters;

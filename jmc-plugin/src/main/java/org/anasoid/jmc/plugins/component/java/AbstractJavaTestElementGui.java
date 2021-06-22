@@ -33,7 +33,6 @@ import javax.swing.ComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
 import org.anasoid.jmc.plugins.config.gui.ReadOnlyArgumentsPanel;
 import org.anasoid.jmc.plugins.utils.ExecutorUtils;
 import org.apache.commons.lang3.ArrayUtils;
@@ -42,7 +41,6 @@ import org.apache.jmeter.config.Arguments;
 import org.apache.jmeter.config.gui.ArgumentsPanel;
 import org.apache.jmeter.gui.AbstractJMeterGuiComponent;
 import org.apache.jmeter.gui.util.HorizontalPanel;
-import org.apache.jmeter.gui.util.MenuFactory;
 import org.apache.jmeter.testelement.TestElement;
 import org.apache.jmeter.util.JMeterUtils;
 import org.apache.jorphan.reflect.ClassFinder;
@@ -109,11 +107,6 @@ public abstract class AbstractJavaTestElementGui<T extends AbstractJavaTestEleme
 
   /** get Executor class type. */
   protected abstract <T extends JavaTestElementExecutor> Class<T> getExecutorClass();
-
-  @Override
-  public JPopupMenu createPopupMenu() {
-    return MenuFactory.getDefaultVisualizerMenu();
-  }
 
   /** Initialize the GUI components and layout. */
   private void initialize() { // called from ctor, so must not be overridable

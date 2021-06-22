@@ -16,7 +16,7 @@
  * Date :   18-Jun-2021
  */
 
-package org.anasoid.jmc.plugins.component.java.processor;
+package org.anasoid.jmc.plugins.component.java.sampler;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -24,26 +24,26 @@ import javax.swing.JPopupMenu;
 import org.anasoid.jmc.plugins.component.java.AbstractJavaTestElementGui;
 import org.apache.jmeter.gui.util.MenuFactory;
 
-/** JavaPreProcessor Gui. */
-public class JavaPreProcessorGui extends AbstractJavaTestElementGui {
+/** JavaSampler Gui. */
+public class JavaSamplerGui extends AbstractJavaTestElementGui {
 
   @Override
   protected Class getTestClass() {
-    return JavaPreProcessor.class;
+    return JavaSampler.class;
   }
 
   @Override
-  protected Class<JavaPreProcessorExecutor> getExecutorClass() {
-    return JavaPreProcessorExecutor.class;
-  }
-
-  @Override
-  public JPopupMenu createPopupMenu() {
-    return MenuFactory.getDefaultExtractorMenu();
+  protected Class<JavaSamplerExecutor> getExecutorClass() {
+    return JavaSamplerExecutor.class;
   }
 
   @Override
   public Collection<String> getMenuCategories() {
-    return Arrays.asList(MenuFactory.PRE_PROCESSORS);
+    return Arrays.asList(MenuFactory.SAMPLERS);
+  }
+
+  @Override
+  public JPopupMenu createPopupMenu() {
+    return MenuFactory.getDefaultSamplerMenu();
   }
 }

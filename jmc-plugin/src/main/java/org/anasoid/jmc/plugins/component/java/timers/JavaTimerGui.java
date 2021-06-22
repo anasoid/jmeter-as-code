@@ -20,6 +20,7 @@ package org.anasoid.jmc.plugins.component.java.timers;
 
 import java.util.Arrays;
 import java.util.Collection;
+import javax.swing.JPopupMenu;
 import org.anasoid.jmc.plugins.component.java.AbstractJavaTestElementGui;
 import org.apache.jmeter.gui.util.MenuFactory;
 
@@ -34,6 +35,11 @@ public class JavaTimerGui extends AbstractJavaTestElementGui {
   @Override
   protected Class<JavaTimerExecutor> getExecutorClass() {
     return JavaTimerExecutor.class;
+  }
+
+  @Override
+  public JPopupMenu createPopupMenu() {
+    return MenuFactory.getDefaultTimerMenu();
   }
 
   @Override

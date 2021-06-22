@@ -20,6 +20,7 @@ package org.anasoid.jmc.plugins.component.java.assertions;
 
 import java.util.Arrays;
 import java.util.Collection;
+import javax.swing.JPopupMenu;
 import org.anasoid.jmc.plugins.component.java.AbstractJavaTestElementGui;
 import org.apache.jmeter.gui.util.MenuFactory;
 
@@ -34,6 +35,11 @@ public class JavaAssertionGui extends AbstractJavaTestElementGui {
   @Override
   protected Class<JavaAssertionExecutor> getExecutorClass() {
     return JavaAssertionExecutor.class;
+  }
+
+  @Override
+  public JPopupMenu createPopupMenu() {
+    return MenuFactory.getDefaultAssertionMenu();
   }
 
   @Override
