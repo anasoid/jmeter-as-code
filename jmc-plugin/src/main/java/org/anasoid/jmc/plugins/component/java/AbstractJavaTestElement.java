@@ -27,6 +27,7 @@ import org.apache.jmeter.config.Arguments;
 import org.apache.jmeter.samplers.SampleResult;
 import org.apache.jmeter.samplers.Sampler;
 import org.apache.jmeter.testelement.AbstractTestElement;
+import org.apache.jmeter.testelement.TestStateListener;
 import org.apache.jmeter.testelement.property.JMeterProperty;
 import org.apache.jmeter.testelement.property.TestElementProperty;
 import org.apache.jmeter.threads.JMeterContext;
@@ -38,7 +39,7 @@ import org.slf4j.LoggerFactory;
 
 /** Base class for Java TestElement. */
 public abstract class AbstractJavaTestElement<T extends JavaTestElementExecutor>
-    extends AbstractTestElement {
+    extends AbstractTestElement implements TestStateListener {
 
   public static final String PARAMETERS = "parameters";
 
@@ -133,5 +134,25 @@ public abstract class AbstractJavaTestElement<T extends JavaTestElementExecutor>
       }
     }
     return result;
+  }
+
+  @Override
+  public void testStarted() {
+    executor = null;
+  }
+
+  @Override
+  public void testStarted(String host) {
+    executor = null;
+  }
+
+  @Override
+  public void testEnded() {
+    executor = null;
+  }
+
+  @Override
+  public void testEnded(String host) {
+    executor = null;
   }
 }
