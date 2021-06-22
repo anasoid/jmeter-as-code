@@ -26,7 +26,7 @@ import org.apache.jmeter.samplers.SampleResult;
 /** Java Assertion. */
 @SuppressWarnings("PMD.MoreThanOneLogger")
 public class JavaAssertion extends AbstractJavaTestElement<JavaAssertionExecutor>
-    implements Cloneable, Assertion {
+    implements Assertion {
 
   private static final long serialVersionUID = 8119460180648610163L;
 

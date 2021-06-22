@@ -24,7 +24,7 @@ import org.apache.jmeter.processor.PreProcessor;
 /** Java Post Processor. */
 @SuppressWarnings("PMD.MoreThanOneLogger")
 public class JavaPreProcessor extends AbstractJavaTestElement<JavaPreProcessorExecutor>
-    implements Cloneable, PreProcessor {
+    implements PreProcessor {
 
   private static final long serialVersionUID = 8119460180648610163L;
 

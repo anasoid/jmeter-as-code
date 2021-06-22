@@ -25,7 +25,7 @@ import org.apache.jmeter.samplers.SampleListener;
 /** Java Sample Listener. */
 @SuppressWarnings("PMD.MoreThanOneLogger")
 public class JavaSampleListener extends AbstractJavaTestElement<JavaSampleListenerExecutor>
-    implements Cloneable, SampleListener {
+    implements SampleListener {
 
   private static final long serialVersionUID = 8119460180648610163L;
 

@@ -24,7 +24,7 @@ import org.apache.jmeter.processor.PostProcessor;
 /** Java Post Processor. */
 @SuppressWarnings("PMD.MoreThanOneLogger")
 public class JavaPostProcessor extends AbstractJavaTestElement<JavaPostProcessorExecutor>
-    implements Cloneable, PostProcessor {
+    implements PostProcessor {
 
   private static final long serialVersionUID = 8119460180648610163L;
 
