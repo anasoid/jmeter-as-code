@@ -38,6 +38,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /** Base class for Java TestElement. */
+@SuppressWarnings("PMD.JUnit4TestShouldUseTestAnnotation")
 public abstract class AbstractJavaTestElement<T extends JavaTestElementExecutor>
     extends AbstractTestElement implements TestStateListener {
 
@@ -138,21 +139,17 @@ public abstract class AbstractJavaTestElement<T extends JavaTestElementExecutor>
 
   @Override
   public void testStarted() {
-    executor = null;
+    executor = null; // NOPMD - Initialize executor
   }
 
   @Override
-  public void testStarted(String host) {
-    executor = null;
-  }
+  public void testStarted(String host) {}
 
   @Override
   public void testEnded() {
-    executor = null;
+    executor = null; // NOPMD - Initialize executor
   }
 
   @Override
-  public void testEnded(String host) {
-    executor = null;
-  }
+  public void testEnded(String host) {}
 }
