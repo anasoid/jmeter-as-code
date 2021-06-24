@@ -42,7 +42,6 @@ import org.anasoid.jmc.core.xstream.exceptions.ConversionException;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.jmeter.engine.StandardJMeterEngine;
 import org.apache.jmeter.save.SaveService;
-import org.apache.jmeter.util.JMeterUtils;
 import org.apache.jorphan.collections.HashTree;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,8 +50,6 @@ import org.slf4j.LoggerFactory;
 public class ApplicationTest {
 
   private static final Logger LOG = LoggerFactory.getLogger(ApplicationTest.class);
-  private static final String SLASH = System.getProperty("file.separator");
-  private static boolean initialized;
 
   static {
     LOG.info("ApplicationTest Initialization");
@@ -103,37 +100,11 @@ public class ApplicationTest {
   }
 
   private static void init() {
-    String jmeterHomeKey = "JMETER_HOME";
-    String jmeterHomePath = System.getProperty(jmeterHomeKey);
-    if (jmeterHomePath == null) {
-      jmeterHomePath = System.getenv(jmeterHomeKey);
-    }
-    if (jmeterHomePath != null && new File(jmeterHomePath).exists()) {
-      File jmeterHome = new File(jmeterHomePath);
-      File jmeterProperties =
-          new File(jmeterHome.getPath() + SLASH + "bin" + SLASH + "jmeter.properties");
-      if (jmeterProperties.exists()) {
-
-        // JMeter initialization (properties, log levels, locale, etc)
-        JMeterUtils.setJMeterHome(jmeterHome.getPath());
-        // loadJMeterProperties
-        JMeterUtils.getProperties(jmeterProperties.getPath());
-        initialized = true;
-      } else {
-        LOG.error(
-            "Jmeter is not correctly configured, missing jmeter.properties, on : {}",
-            jmeterProperties);
-      }
-    } else {
-      LOG.error(
-          "Jmeter is not correctly configured $JMETER_HOME is not correct : {} , {}",
-          System.getProperty(jmeterHomeKey),
-          System.getenv(jmeterHomeKey));
-    }
+    JMeterHome.init();
   }
 
   private static void isInit() {
-    if (!initialized) {
+    if (!JMeterHome.isInit()) {
       throw new IllegalStateException("Jmeter is not correctly initialized");
     }
   }
