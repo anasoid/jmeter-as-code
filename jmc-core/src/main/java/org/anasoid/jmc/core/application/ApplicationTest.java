@@ -100,11 +100,11 @@ public class ApplicationTest {
   }
 
   private static void init() {
-    JMeterHome.init();
+    JMeterHome.getInstance().init();
   }
 
   private static void isInit() {
-    if (!JMeterHome.isInit()) {
+    if (!JMeterHome.getInstance().isInit()) {
       throw new IllegalStateException("Jmeter is not correctly initialized");
     }
   }

@@ -1,5 +1,7 @@
 package org.anasoid.jmc.core.application;
 
+import static org.mockito.Mockito.doReturn;
+
 import java.util.UUID;
 import org.anasoid.jmc.core.config.JmcConfig;
 import org.junit.jupiter.api.Assertions;
@@ -33,7 +35,7 @@ class JMeterHomeTest {
 
       JmcConfigUtilities.when(() -> JmcConfig.getProperty(JMeterHome.JMETER_HOME_PROPERTY))
           .thenReturn("home1");
-      Assertions.assertEquals("home1", JMeterHome.getJmeterHome());
+      Assertions.assertEquals("home1", JMeterHome.getInstance().getJmeterHome());
     }
   }
 
@@ -44,35 +46,37 @@ class JMeterHomeTest {
 
       JmcConfigUtilities.when(() -> JmcConfig.getProperty(JMeterHome.JMETER_HOME_PROPERTY))
           .thenReturn(null);
-      Assertions.assertNotNull(JMeterHome.getJmeterHome());
+      Assertions.assertNotNull(JMeterHome.getInstance().getJmeterHome());
     }
   }
 
   @Test
   void testisValidJmeterHomeNull() {
 
-    Assertions.assertFalse(JMeterHome.isValidJmeterHome(null));
+    Assertions.assertFalse(JMeterHome.getInstance().isValidJmeterHome(null));
   }
 
   @Test
   void testisValidJmeterHomeFail() {
 
-    Assertions.assertFalse(JMeterHome.isValidJmeterHome(UUID.randomUUID().toString()));
+    Assertions.assertFalse(
+        JMeterHome.getInstance().isValidJmeterHome(UUID.randomUUID().toString()));
   }
 
   @Test
   void testisValidJmeterHomeSuccess() {
 
-    Assertions.assertTrue(JMeterHome.isValidJmeterHome(JMeterHome.getJmeterHome()));
+    Assertions.assertTrue(
+        JMeterHome.getInstance().isValidJmeterHome(JMeterHome.getInstance().getJmeterHome()));
   }
 
   @Test
   void testGetJmeterHomeInitFail() {
 
-    try (MockedStatic<JMeterHome> JMeterHomeUtilities = Mockito.mockStatic(JMeterHome.class)) {
-      JMeterHomeUtilities.when(JMeterHome::getJmeterHome).thenReturn("");
+    JMeterHome jmeterHomeSpy = Mockito.spy(JMeterHome.getInstance());
 
-      Assertions.assertFalse(JMeterHome.init());
-    }
+    doReturn(null).when(jmeterHomeSpy).getJmeterHome();
+
+    Assertions.assertFalse(jmeterHomeSpy.init());
   }
 }

@@ -34,12 +34,24 @@ public final class JMeterHome {
   protected static final String JMETER_HOME = "JMETER_HOME";
   protected static final String JMETER_HOME_PROPERTY = "jmeter.home";
 
-  private static boolean initialized;
+  private boolean initialized;
+
+  private static JMeterHome instance;
 
   private JMeterHome() {}
 
+  /** get instance. */
+  public static JMeterHome getInstance() {
+    synchronized (JMeterHome.class) {
+      if (instance == null) {
+        instance = new JMeterHome();
+      }
+    }
+    return instance;
+  }
+
   /** Init Jmeter Home. */
-  protected static boolean init() {
+  protected boolean init() {
 
     String jmeterHomePath = getJmeterHome();
 
@@ -62,7 +74,7 @@ public final class JMeterHome {
     return initialized;
   }
 
-  protected static boolean isValidJmeterHome(String jmeterHomePath) {
+  protected boolean isValidJmeterHome(String jmeterHomePath) {
     if (jmeterHomePath != null && new File(jmeterHomePath).exists()) {
 
       File jmeterProperties = new File(getJmeterProperties(jmeterHomePath));
@@ -77,7 +89,7 @@ public final class JMeterHome {
     return jmeterHomePath + SLASH + "bin" + SLASH + "jmeter.properties";
   }
 
-  protected static String getJmeterHome() {
+  protected String getJmeterHome() {
     String jmeterHomePath = JmcConfig.getProperty(JMETER_HOME_PROPERTY);
     if (StringUtils.isBlank(jmeterHomePath)) {
       jmeterHomePath = System.getProperty(JMETER_HOME);
@@ -88,18 +100,18 @@ public final class JMeterHome {
     return jmeterHomePath;
   }
 
-  public static void addProperties(Map<String, String> mapProperties) {
-    mapProperties.forEach((k, v) -> JMeterUtils.setProperty(k, v));
+  public void addProperties(Map<String, String> mapProperties) {
+    mapProperties.forEach(JMeterUtils::setProperty);
   }
 
-  private static void loadJmcPropertiesToJmeter() {
+  private void loadJmcPropertiesToJmeter() {
     Map<String, String> jmcProperties = JmcConfig.getPropertyPrefix("jmeter");
     jmcProperties.remove(JMETER_HOME_PROPERTY);
     addProperties(jmcProperties);
   }
 
   /** is Jmeter Home initialized. */
-  protected static boolean isInit() {
+  protected boolean isInit() {
     return initialized;
   }
 }
