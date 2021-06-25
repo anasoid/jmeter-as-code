@@ -130,10 +130,15 @@ public final class JmeterFunctions {
    * @param algorithm The algorithm to be used to encrypt.
    * @param salt Salt to be added to string (after it).
    * @param upper Result will be in lower case by default. Choose true to upper case results.
+   * @param variable A reference name for reusing the value computed by this function.
    */
   public static String digest(
-      @NonNull String input, @NonNull DigestAlgorithm algorithm, String salt, Boolean upper) {
-    return FunctionsUtils.function("digest", algorithm, input, salt, upper);
+      @NonNull String input,
+      @NonNull DigestAlgorithm algorithm,
+      String salt,
+      Boolean upper,
+      Variable variable) {
+    return FunctionsUtils.function("digest", algorithm, input, salt, upper, variable);
   }
 
   /**
@@ -146,7 +151,7 @@ public final class JmeterFunctions {
    */
   public static String digest(
       @NonNull String input, @NonNull DigestAlgorithm algorithm, String salt) {
-    return digest(input, algorithm, salt, null);
+    return digest(input, algorithm, salt, null, null);
   }
 
   /**
@@ -159,7 +164,34 @@ public final class JmeterFunctions {
    */
   public static String digest(
       @NonNull String input, @NonNull DigestAlgorithm algorithm, Boolean upper) {
-    return digest(input, algorithm, null, upper);
+    return digest(input, algorithm, null, upper, null);
+  }
+
+  /**
+   * The digest function returns an encrypted value in the specific hash algorithm with the optional
+   * salt, upper case and variable name.
+   *
+   * @param input The String that will be encrypted
+   * @param algorithm The algorithm to be used to encrypt.
+   * @param variable A reference name for reusing the value computed by this function.
+   */
+  public static String digest(
+      @NonNull String input, @NonNull DigestAlgorithm algorithm, Variable variable) {
+    return digest(input, algorithm, null, null, variable);
+  }
+
+  /**
+   * The digest function returns an encrypted value in the specific hash algorithm with the optional
+   * salt, upper case and variable name.
+   *
+   * @param input The String that will be encrypted
+   * @param algorithm The algorithm to be used to encrypt. * @param salt Salt to be added to string
+   *     (after it).
+   * @param variable A reference name for reusing the value computed by this function.
+   */
+  public static String digest(
+      @NonNull String input, @NonNull DigestAlgorithm algorithm, String salt, Variable variable) {
+    return digest(input, algorithm, salt, null, variable);
   }
 
   /**
@@ -270,7 +302,7 @@ public final class JmeterFunctions {
    * @param input String to escape.
    */
   public static String escapeHtml(String input) {
-    return FunctionsUtils.function(" escapeHtml", input);
+    return FunctionsUtils.function("escapeHtml", input);
   }
 
   /**
@@ -289,7 +321,7 @@ public final class JmeterFunctions {
    * @param variableName A reference name for reusing the value computed by this function.
    */
   public static String escapeOroRegexpChars(String input, Variable variableName) {
-    return FunctionsUtils.function(" escapeOroRegexpChars", input, variableName);
+    return FunctionsUtils.function("escapeOroRegexpChars", input, variableName);
   }
 
   /**
@@ -298,7 +330,7 @@ public final class JmeterFunctions {
    * @param input String to escape.
    */
   public static String escapeXml(String input) {
-    return FunctionsUtils.function(" escapeXml", input);
+    return FunctionsUtils.function("escapeXml", input);
   }
 
   /**
@@ -505,7 +537,7 @@ public final class JmeterFunctions {
    * The log function logs a message, and returns its input string.
    *
    * @param input String to be logged.
-   * @param logLevel OUT, ERR, DEBUG, INFO (default), WARN or ERROR
+   * @param logLevel OUT, ERR, DEBUG, INFO (default), WARN or ERROR.
    * @param throwable If non-empty, creates a Throwable to pass to the logger.
    * @param comment If present, it is displayed in the string. Useful for identifying what is being
    *     logged.
@@ -519,7 +551,7 @@ public final class JmeterFunctions {
    * The log function logs a message, and returns its input string.
    *
    * @param input String to be logged.
-   * @param logLevel String to be logged.
+   * @param logLevel OUT, ERR, DEBUG, INFO (default), WARN or ERROR.
    * @param comment If present, it is displayed in the string. Useful for identifying what is being
    *     logged.
    */
@@ -531,7 +563,7 @@ public final class JmeterFunctions {
    * The log function logs a message, and returns its input string.
    *
    * @param input String to be logged.
-   * @param logLevel String to be logged. logged.
+   * @param logLevel OUT, ERR, DEBUG, INFO (default), WARN or ERROR.
    */
   public static String log(String input, LogLevel logLevel) {
     return log(input, logLevel, null);
@@ -550,11 +582,11 @@ public final class JmeterFunctions {
    * The logn function logs a message, and returns the empty string.
    *
    * @param input String to be logged.
-   * @param logLevel String to be logged.
+   * @param logLevel OUT, ERR, DEBUG, INFO (default), WARN or ERROR.
    * @param throwable If non-empty, creates a Throwable to pass to the logger.
    * @return logged text.
    */
-  public static String logn(String input, String logLevel, String throwable) {
+  public static String logn(String input, LogLevel logLevel, String throwable) {
     return FunctionsUtils.function("logn", input, logLevel, throwable);
   }
 
@@ -562,10 +594,10 @@ public final class JmeterFunctions {
    * The logn function logs a message, and returns the empty string.
    *
    * @param input String to be logged.
-   * @param logLevel String to be logged.
+   * @param logLevel OUT, ERR, DEBUG, INFO (default), WARN or ERROR.
    * @return logged text.
    */
-  public static String logn(String input, String logLevel) {
+  public static String logn(String input, LogLevel logLevel) {
     return logn(input, logLevel, null);
   }
 
@@ -642,7 +674,17 @@ public final class JmeterFunctions {
    * InetAddress.getLocalHost() and passes it to getHostAddress().
    */
   public static String machineIP() {
-    return FunctionsUtils.function("machineIP");
+    return machineIP(null);
+  }
+
+  /**
+   * The machineIP function returns the local IP address. This uses the Java method
+   * InetAddress.getLocalHost() and passes it to getHostAddress().
+   *
+   * @param variable A reference name for reusing the value computed by this function.
+   */
+  public static String machineIP(Variable variable) {
+    return FunctionsUtils.function("machineIP", variable);
   }
 
   /**
@@ -650,7 +692,17 @@ public final class JmeterFunctions {
    * InetAddress.getLocalHost() and passes it to getHostName().
    */
   public static String machineName() {
-    return FunctionsUtils.function("machineName");
+    return machineName(null);
+  }
+
+  /**
+   * The machineName function returns the local host name. This uses the Java method
+   * InetAddress.getLocalHost() and passes it to getHostName().
+   *
+   * @param variable A reference name for reusing the value computed by this function.
+   */
+  public static String machineName(Variable variable) {
+    return FunctionsUtils.function("machineName", variable);
   }
 
   /**
@@ -675,6 +727,16 @@ public final class JmeterFunctions {
    */
   public static String property(@NonNull String propertyName, String defaultValue) {
     return property(propertyName, null, defaultValue);
+  }
+
+  /**
+   * The property function returns the value of a JMeter property. If the property value cannot be
+   * found, and no default has been supplied, it returns the property name.
+   *
+   * @param propertyName he property name to be retrieved.
+   */
+  public static String property(@NonNull String propertyName) {
+    return property(propertyName, null, null);
   }
 
   /**
@@ -925,7 +987,16 @@ public final class JmeterFunctions {
 
   /** The samplerName function returns the name (i.e. label) of the current sampler. */
   public static String samplerName() {
-    return FunctionsUtils.function("samplerName");
+    return samplerName(null);
+  }
+
+  /**
+   * The samplerName function returns the name (i.e. label) of the current sampler.
+   *
+   * @param variable A reference name for reusing the value computed by this function.
+   */
+  public static String samplerName(Variable variable) {
+    return FunctionsUtils.function("samplerName", variable);
   }
 
   /**
@@ -1208,7 +1279,7 @@ public final class JmeterFunctions {
    * @param url String with URL encoded chars to decode.
    */
   public static String urlDecode(String url) {
-    return FunctionsUtils.function(" urldecode", url);
+    return FunctionsUtils.function("urldecode", url);
   }
 
   /**
@@ -1217,7 +1288,7 @@ public final class JmeterFunctions {
    * @param input String containing Java escapes.
    */
   public static String unescape(String input) {
-    return FunctionsUtils.function(" unescape", input);
+    return FunctionsUtils.function("unescape", input);
   }
 
   /**
@@ -1226,7 +1297,7 @@ public final class JmeterFunctions {
    * @param input String to unescape.
    */
   public static String unescapeHtml(String input) {
-    return FunctionsUtils.function(" unescapeHtml", input);
+    return FunctionsUtils.function("unescapeHtml", input);
   }
 
   /**
@@ -1235,7 +1306,7 @@ public final class JmeterFunctions {
    * @param url String to encode in URL encoded chars.
    */
   public static String urlEncode(String url) {
-    return FunctionsUtils.function(" urlencode", url);
+    return FunctionsUtils.function("urlencode", url);
   }
 
   /** The UUID function returns a pseudo random type 4 Universally Unique IDentifier (UUID).. */
