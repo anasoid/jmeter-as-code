@@ -155,7 +155,8 @@ subprojects {
         testImplementation("org.xmlunit:xmlunit-matchers:$xmlunitVersion")
         testImplementation("com.github.tomakehurst:wiremock:$wiremockVersion")
         testImplementation("ru.lanwen.wiremock:wiremock-junit5:$wiremockJunit5Version")
-
+        testImplementation ("org.mockito:mockito-core:$mockitoVersion")
+        testImplementation ("org.mockito:mockito-inline:$mockitoVersion")
     }
 
 

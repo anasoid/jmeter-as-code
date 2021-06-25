@@ -23,6 +23,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 import org.apache.jmeter.save.SaveService;
 import org.apache.jmeter.util.JMeterUtils;
@@ -154,5 +156,20 @@ public final class JmcConfig {
    */
   public static String getProperty(String key, String defaultValue) {
     return properties.getProperty(key, defaultValue);
+  }
+
+  /**
+   * get property from config.
+   *
+   * @param prefix prefix, keys start with "prefix." .
+   * @return null or value.
+   */
+  public static Map<String, String> getPropertyPrefix(String prefix) {
+    Map<String, String> result = new HashMap<>();
+    String fullPrefix = prefix + ".";
+    properties.entrySet().stream()
+        .filter(c -> ((String) c.getKey()).startsWith(fullPrefix))
+        .forEach(c -> result.put((String) c.getKey(), (String) c.getValue()));
+    return result;
   }
 }

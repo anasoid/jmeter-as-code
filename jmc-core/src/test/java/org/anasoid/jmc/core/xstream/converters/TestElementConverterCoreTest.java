@@ -81,8 +81,8 @@ class TestElementConverterCoreTest extends AbstractJmcCoreTest {
     JmcAsserts.get()
         .assertXPathPropString(content, elementPropPath, "child.onSampleError", "continue");
     JmcAsserts.get().assertXPathPropString(content, elementPropPath, "subChild.method", "me");
-    JmcAsserts.get().assertXPathValue(content, elementPropPath + "/fieldChild", "super");
-    JmcAsserts.get().assertXPathValue(content, elementPropPath + "/onSampleError2", "stoptest");
+    JmcAsserts.get().assertXPathPropString(content, elementPropPath, "fieldChild", "super");
+    JmcAsserts.get().assertXPathPropString(content, elementPropPath, "onSampleError2", "stoptest");
   }
 
   @Test

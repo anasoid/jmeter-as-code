@@ -46,6 +46,7 @@ import org.anasoid.jmc.core.xstream.annotations.JmcInherited;
 import org.anasoid.jmc.core.xstream.annotations.JmcMandatory;
 import org.anasoid.jmc.core.xstream.annotations.JmcMethodAlias;
 import org.anasoid.jmc.core.xstream.annotations.JmcNullAllowed;
+import org.anasoid.jmc.core.xstream.annotations.JmcOmitField;
 import org.anasoid.jmc.core.xstream.annotations.JmcProperty;
 import org.anasoid.jmc.core.xstream.annotations.JmcSkipDefault;
 import org.anasoid.jmc.core.xstream.exceptions.ConversionException;
@@ -126,7 +127,32 @@ public final class ConverterBeanUtils {
 
     JmcProperty annotation = getAnnotation(accessibleObject, JmcProperty.class);
 
-    return (annotation != null);
+    return (annotation != null || isAtomic(accessibleObject));
+  }
+
+  /** is field is atomic. */
+  public static boolean isAtomic(AccessibleObject accessibleObject) {
+
+    boolean result = false;
+
+    if (accessibleObject instanceof Field) {
+      Field field = (Field) accessibleObject;
+      Class<?> clazz = field.getType();
+
+      if (clazz == int.class
+          || clazz == Integer.class
+          || clazz == String.class
+          || clazz == Long.class
+          || clazz == Boolean.class
+          || clazz == boolean.class
+          || clazz == Float.class
+          || clazz == Double.class
+          || clazz.isEnum()) {
+        result = true;
+      }
+    }
+
+    return result;
   }
 
   /** is field/method will be converted as property. */
@@ -282,7 +308,7 @@ public final class ConverterBeanUtils {
 
     JmcProperty jmcProperty = getAnnotation(accessibleObject, JmcProperty.class);
 
-    if (jmcProperty.type() != Void.class) {
+    if (jmcProperty != null && jmcProperty.type() != Void.class) {
       return jmcProperty.type();
     }
     if (accessibleObject instanceof Field) {
@@ -317,7 +343,7 @@ public final class ConverterBeanUtils {
       }
     }
 
-    if (ppClazz == Integer.class) {
+    if (ppClazz == Integer.class || ppClazz == int.class) {
       return JMeterProperty.INTEGER.value();
     } else if (ppClazz == String.class) {
       return JMeterProperty.STRING.value();
@@ -361,9 +387,11 @@ public final class ConverterBeanUtils {
   }
 
   /** Should skip field from XML conversion. */
+  @SuppressWarnings("PMD.NPathComplexity")
   public static boolean shouldSkip(Object source, AccessibleObject accessibleObject) {
 
-    if (getAnnotation(accessibleObject, XStreamOmitField.class) != null) {
+    if (getAnnotation(accessibleObject, XStreamOmitField.class) != null
+        || getAnnotation(accessibleObject, JmcOmitField.class) != null) {
       return true;
     }
     Object value = getValue(accessibleObject, source);
