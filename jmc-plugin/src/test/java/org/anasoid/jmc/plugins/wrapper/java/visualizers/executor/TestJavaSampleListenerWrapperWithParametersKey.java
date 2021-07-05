@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import lombok.experimental.SuperBuilder;
-import org.anasoid.jmc.plugins.wrapper.java.visualizers.AbstractJavaSampleListenerWrapper;
+import org.anasoid.jmc.plugins.wrapper.java.visualizers.AbstractJavaListenerWrapper;
 import org.apache.jmeter.samplers.SampleEvent;
 import org.apache.jmeter.samplers.SampleResult;
 import org.apache.jmeter.samplers.Sampler;
@@ -17,7 +17,7 @@ import org.slf4j.Logger;
 /** test class. */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 public class TestJavaSampleListenerWrapperWithParametersKey
-    extends AbstractJavaSampleListenerWrapper {
+    extends AbstractJavaListenerWrapper {
 
   @Override
   public void execute(

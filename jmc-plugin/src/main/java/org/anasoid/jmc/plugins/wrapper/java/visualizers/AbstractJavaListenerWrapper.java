@@ -27,7 +27,7 @@ import org.anasoid.jmc.plugins.wrapper.java.AbstractJavaTestElementWrapper;
 
 /** Base class for JavaListener Wrapper. */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
-public abstract class AbstractJavaSampleListenerWrapper
+public abstract class AbstractJavaListenerWrapper
     extends AbstractJavaTestElementWrapper<JavaSampleListener>
     implements SampleListenerWrapper<JavaSampleListener>, JavaSampleListenerExecutor {
 
