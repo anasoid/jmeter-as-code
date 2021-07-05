@@ -93,6 +93,9 @@ jobs:
       - name: Publish  jmeter-plugins
         run: ./gradlew --stacktrace --console=verbose jmc-jmeter-plugins:publish
 
+      - name: Publish  jmc-plugin
+        run: ./gradlew --stacktrace --console=verbose jmc-plugin:publish
+
       - name: Publish test
         run: ./gradlew --stacktrace --console=verbose jmc-test:publish
 
