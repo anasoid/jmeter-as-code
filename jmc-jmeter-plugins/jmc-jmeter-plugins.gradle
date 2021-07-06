@@ -17,4 +17,17 @@ dependencies {
         exclude group: 'org.apache.jmeter', module: 'bom'
     }
 
+    //3 Basic Graphs
+    //https://jmeter-plugins.org/?search=jpgc-graphs-basic
+    implementation("kg.apc:jmeter-plugins-graphs-basic:$jpgcgraphsbasicVersion") {
+        exclude group: 'org.apache.jmeter', module: 'bom'
+    }
+
+    //5 Additional Graphs
+    //https://jmeter-plugins.org/?search=jpgc-graphs-additional
+    implementation("kg.apc:jmeter-plugins-graphs-additional:$jpgcgraphsadditionalVersion") {
+        exclude group: 'org.apache.jmeter', module: 'bom'
+    }
+
+
 }

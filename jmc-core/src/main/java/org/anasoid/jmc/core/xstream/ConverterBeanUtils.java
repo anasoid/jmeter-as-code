@@ -347,15 +347,15 @@ public final class ConverterBeanUtils {
       return JMeterProperty.INTEGER.value();
     } else if (ppClazz == String.class) {
       return JMeterProperty.STRING.value();
-    } else if (ppClazz == Long.class) {
+    } else if (ppClazz == Long.class || ppClazz == long.class) {
       return JMeterProperty.LONG.value();
     } else if (ppClazz == Boolean.class || ppClazz == boolean.class) {
       return JMeterProperty.BOOL.value();
 
-    } else if (ppClazz == Float.class) {
+    } else if (ppClazz == Float.class || ppClazz == float.class) {
       return JMeterProperty.FLOAT.value();
 
-    } else if (ppClazz == Double.class) {
+    } else if (ppClazz == Double.class || ppClazz == double.class) {
       return JMeterProperty.DOUBLE.value();
 
     } else if (ppClazz == Variable.class) {
