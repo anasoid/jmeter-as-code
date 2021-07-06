@@ -1,7 +1,5 @@
 package org.anasoid.jmc.jplugins.wrapper.kg.apc.jmeter.vizualizers;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import kg.apc.jmeter.vizualizers.CorrectedResultCollector;
