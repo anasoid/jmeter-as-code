@@ -23,6 +23,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -77,12 +78,10 @@ public final class SetterTestUtils {
    * @return list all field.
    */
   private static Method toBuildMethod(Object source) {
-    Map<String, Field> result = new HashMap<>(); // NOPMD
     Class<?> clazz = source.getClass();
     for (Class<?> sclazz : ConverterBeanUtils.getSuperClasses(clazz)) {
       try {
-        Method method = sclazz.getDeclaredMethod("toBuilder");
-        return method;
+        return sclazz.getDeclaredMethod("toBuilder");
       } catch (NoSuchMethodException e) {
         // Nothing
       }
@@ -143,14 +142,15 @@ public final class SetterTestUtils {
   }
 
   /** test all setter. */
-  public static void testSetter(AbstractBasicTestElementWrapperBuilder testElementBuilder)
+  public static void testSetter(
+      AbstractBasicTestElementWrapperBuilder testElementBuilder, String... ignoreFields)
       throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
     testElementBuilder.toString();
-    testSetter(testElementBuilder.build());
+    testSetter(testElementBuilder.build(), ignoreFields);
   }
 
   /** test all setter. */
-  private static void testSetter(TestElementWrapper testElement)
+  private static void testSetter(TestElementWrapper testElement, String... ignoreFields)
       throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
     // Coverage toString
     testElement.toString();
@@ -162,16 +162,20 @@ public final class SetterTestUtils {
     List<Field> fields = SetterTestUtils.getSetterFields(testElement);
     Random rnd = new Random(999999);
     for (Field field : fields) {
+      if (Arrays.stream(ignoreFields)
+          .anyMatch(c -> c.equalsIgnoreCase(field.getName()))) {
+        continue;
+      }
       Method method = getSetterMethod(testElement, field);
       Object value;
 
-      if (field.getType() == Integer.class) {
+      if (field.getType() == Integer.class || field.getType() == int.class) {
         value = rnd.nextInt();
         method.invoke(testElement, value);
-      } else if (field.getType() == Long.class) {
+      } else if (field.getType() == Long.class || field.getType() == long.class) {
         value = rnd.nextLong();
         method.invoke(testElement, value);
-      } else if (field.getType() == Float.class) {
+      } else if (field.getType() == Float.class || field.getType() == float.class) {
         value = rnd.nextFloat();
         method.invoke(testElement, value);
       } else if (field.getType() == Boolean.class || field.getType() == boolean.class) {
