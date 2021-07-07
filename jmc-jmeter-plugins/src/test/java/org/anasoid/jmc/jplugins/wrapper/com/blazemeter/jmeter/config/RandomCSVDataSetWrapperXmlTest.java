@@ -27,7 +27,7 @@ import org.anasoid.jmc.jplugins.AbstractJmcJmeterPluginTest;
 import org.anasoid.jmc.test.utils.SetterTestUtils;
 import org.junit.jupiter.api.Test;
 
-class RandomRandomCSVDataSetWrapperXmlTest extends AbstractJmcJmeterPluginTest {
+class RandomCSVDataSetWrapperXmlTest extends AbstractJmcJmeterPluginTest {
 
   private static final String PARENT_PATH = ROOT_PATH + "/com/blazemeter/jmeter/config";
 
