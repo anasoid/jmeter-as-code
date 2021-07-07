@@ -35,4 +35,9 @@ dependencies {
         exclude group: 'org.apache.jmeter', module: 'bom'
     }
 
+    //Set Variables Action
+    //https://jmeter-plugins.org/?search=jpgc-prmctl
+    implementation("kg.apc:jmeter-plugins-prmctl:$jpprmctlVersion") {
+        exclude group: 'org.apache.jmeter', module: 'bom'
+    }
 }
