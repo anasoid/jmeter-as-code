@@ -1,4 +1,5 @@
 package org.anasoid.jmc.core.application.validator.annotations;
+
 /*
  * Copyright 2020-2021 the original author or authors.
  *

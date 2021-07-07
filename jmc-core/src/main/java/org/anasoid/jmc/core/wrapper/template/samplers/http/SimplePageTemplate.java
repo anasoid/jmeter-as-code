@@ -34,10 +34,10 @@ public class SimplePageTemplate
     extends AbstractJmcTemplate<
         HTTPSamplerProxyWrapper, HTTPSamplerProxyWrapper.HTTPSamplerProxyWrapperBuilder> {
 
-  private final String name;
-  private final String domain;
-  private final String path;
-  private final HttpMethod method;
+  protected final String name;
+  protected final String domain;
+  protected final String path;
+  protected final HttpMethod method;
 
   /**
    * Constructor.
@@ -89,8 +89,26 @@ public class SimplePageTemplate
     this.method = method;
   }
 
+  protected String getName() {
+    return name;
+  }
+
+  protected String getDomain() {
+    return domain;
+  }
+
+  protected String getPath() {
+    return path;
+  }
+
+  protected HttpMethod getMethod() {
+    return method;
+  }
+
   @Override
   protected JmcWrapperBuilder<?> init() {
-    return HttpSamplerDsl.http(name, path).withMethod(method).withDomain(domain);
+    return HttpSamplerDsl.http(getName(), getPath())
+        .withMethod(getMethod())
+        .withDomain(getDomain());
   }
 }

@@ -128,8 +128,11 @@ public class TestPlanWrapper extends AbstractTestElementWrapper<TestPlan>
       return addThread(template.generate());
     }
 
-    /** Hide Lombok function. */
-    private void withArguments() {} // NOSONAR
+    protected B withArguments(List<ArgumentWrapper> arguments) {
+      this.arguments$value = arguments;
+      this.arguments$set = true;
+      return self();
+    }
 
     /**
      * Add arguments. Each argument consists of a name/value pair, as well as (optional) metadata.
@@ -138,10 +141,9 @@ public class TestPlanWrapper extends AbstractTestElementWrapper<TestPlan>
      */
     public B addArguments(Collection<ArgumentWrapper> arguments) {
       if (!this.arguments$set) {
-        this.arguments$value = new ArrayList<>();
+        withArguments(new ArrayList<>());
       }
       this.arguments$value.addAll(arguments);
-      this.arguments$set = true;
 
       return self();
     }

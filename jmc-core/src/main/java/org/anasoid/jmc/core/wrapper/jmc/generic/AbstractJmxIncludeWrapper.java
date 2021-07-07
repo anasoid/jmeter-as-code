@@ -153,6 +153,7 @@ public abstract class AbstractJmxIncludeWrapper<T> implements TestElementWrapper
    * @return list all field.
    */
   @SneakyThrows
+  @SuppressWarnings("PMD.CognitiveComplexity")
   private Map<String, String> getFieldParam() {
     Map<String, String> result = new HashMap<>(); // NOPMD
     Class<?> clazz = this.getClass();

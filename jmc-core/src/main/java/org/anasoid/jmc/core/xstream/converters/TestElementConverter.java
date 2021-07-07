@@ -100,6 +100,7 @@ public class TestElementConverter implements Converter {
     }
   }
 
+  @SuppressWarnings("PMD.CognitiveComplexity")
   protected void appendChild(
       Object source,
       HierarchicalStreamWriter writer,
@@ -257,7 +258,7 @@ public class TestElementConverter implements Converter {
     }
   }
 
-  @SuppressWarnings("PMD.NPathComplexity")
+  @SuppressWarnings({"PMD.NPathComplexity", "PMD.CognitiveComplexity"})
   protected void convertCollection(
       Object value,
       AccessibleObject accessibleObject,
