@@ -150,6 +150,7 @@ public final class SetterTestUtils {
   }
 
   /** test all setter. */
+  @SuppressWarnings("PMD.CognitiveComplexity")
   private static void testSetter(TestElementWrapper testElement, String... ignoreFields)
       throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
     // Coverage toString
@@ -162,8 +163,7 @@ public final class SetterTestUtils {
     List<Field> fields = SetterTestUtils.getSetterFields(testElement);
     Random rnd = new Random(999999);
     for (Field field : fields) {
-      if (Arrays.stream(ignoreFields)
-          .anyMatch(c -> c.equalsIgnoreCase(field.getName()))) {
+      if (Arrays.stream(ignoreFields).anyMatch(c -> c.equalsIgnoreCase(field.getName()))) {
         continue;
       }
       Method method = getSetterMethod(testElement, field);

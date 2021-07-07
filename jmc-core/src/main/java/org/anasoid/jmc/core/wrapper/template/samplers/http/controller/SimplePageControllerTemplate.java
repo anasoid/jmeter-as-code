@@ -22,7 +22,6 @@ import lombok.NonNull;
 import org.anasoid.jmc.core.wrapper.jmc.samplers.HttpMethod;
 import org.anasoid.jmc.core.wrapper.jmeter.control.RecordingControllerWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.samplers.HTTPSamplerProxyWrapper;
-import org.anasoid.jmc.core.wrapper.jmeter.samplers.HTTPSamplerProxyWrapper.HTTPSamplerProxyWrapperBuilder;
 import org.anasoid.jmc.core.wrapper.template.AbstractJmcTemplate;
 import org.anasoid.jmc.core.wrapper.template.samplers.AbstractSamplerControllerTemplate;
 import org.anasoid.jmc.core.wrapper.template.samplers.http.SimplePageTemplate;
@@ -33,10 +32,10 @@ import org.anasoid.jmc.core.wrapper.template.samplers.http.SimplePageTemplate;
  */
 public class SimplePageControllerTemplate extends AbstractSamplerControllerTemplate {
 
-  private final String name;
-  private final String domain;
-  private final String path;
-  private final HttpMethod method;
+  protected final String name;
+  protected final String domain;
+  protected final String path;
+  protected final HttpMethod method;
 
   /**
    * Constructor.
@@ -89,7 +88,7 @@ public class SimplePageControllerTemplate extends AbstractSamplerControllerTempl
   }
 
   /** Prepare Main sampler builder. */
-  protected void prepareSamplerBuilder(// NOSONAR
+  protected void prepareSamplerBuilder( // NOSONAR
       HTTPSamplerProxyWrapper.HTTPSamplerProxyWrapperBuilder<?, ?> builder) {}
 
   /** Prepare Main sampler wrapper. */
@@ -104,12 +103,12 @@ public class SimplePageControllerTemplate extends AbstractSamplerControllerTempl
   protected AbstractJmcTemplate<
           HTTPSamplerProxyWrapper, HTTPSamplerProxyWrapper.HTTPSamplerProxyWrapperBuilder>
       createSampler() {
-    return new SimplePageTemplate(name, path, domain, method) {
+    return new SimplePageTemplate(getName(), getPath(), getDomain(), getMethod()) {
       @Override
       protected void prepareBuilder(
           HTTPSamplerProxyWrapper.HTTPSamplerProxyWrapperBuilder builder) {
         super.prepareBuilder(builder);
-        prepareSamplerBuilder((HTTPSamplerProxyWrapperBuilder<?, ?>) builder);
+        prepareSamplerBuilder(builder);
       }
 
       @Override
@@ -118,5 +117,21 @@ public class SimplePageControllerTemplate extends AbstractSamplerControllerTempl
         prepareSamplerWrapper(wrapper);
       }
     };
+  }
+
+  protected String getName() {
+    return name;
+  }
+
+  protected String getDomain() {
+    return domain;
+  }
+
+  protected String getPath() {
+    return path;
+  }
+
+  protected HttpMethod getMethod() {
+    return method;
   }
 }

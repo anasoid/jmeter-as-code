@@ -72,6 +72,7 @@ public final class ConverterBeanUtils {
    * @param source object to be parsed.
    * @return list of methods.
    */
+  @SuppressWarnings("PMD.CognitiveComplexity")
   public static List<Method> getMethods(Object source) {
     Map<String, Method> result = new HashMap<>(); // NOPMD
     Map<String, Method> allMethod = new HashMap<>(); // NOPMD
@@ -156,7 +157,11 @@ public final class ConverterBeanUtils {
   }
 
   /** is field/method will be converted as property. */
-  @SuppressWarnings({"PMD.EmptyCatchBlock", "PMD.AvoidDeeplyNestedIfStmts"})
+  @SuppressWarnings({
+    "PMD.EmptyCatchBlock",
+    "PMD.AvoidDeeplyNestedIfStmts",
+    "PMD.CognitiveComplexity"
+  })
   public static <T extends Annotation> T getAnnotation(
       AccessibleObject accessibleObject, Class<T> annotation) {
 
@@ -321,7 +326,7 @@ public final class ConverterBeanUtils {
   }
 
   /** get Property Alias (intProp,stringProp,longProp .. ). */
-  @SuppressWarnings("PMD.NPathComplexity")
+  @SuppressWarnings({"PMD.NPathComplexity", "PMD.CognitiveComplexity"})
   public static String getPropertyAlias(Object value, Class<?> clazz) {
     Class<?> ppClazz = (clazz == Void.class && value != null) ? value.getClass() : clazz;
     if ((value != null) && (value.getClass().isEnum())) {
