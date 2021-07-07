@@ -108,6 +108,9 @@ public class CSVDataSetWrapper extends ConfigTestElementWrapper<CSVDataSet, Test
 
   @JmcProperty("filename")
   protected String getFilePath() {
+    if (filename == null) {
+      return null;
+    }
     if (asResourceFile) {
       URL url = Thread.currentThread().getContextClassLoader().getResource(filename);
       if (url == null) {

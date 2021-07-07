@@ -20,11 +20,9 @@ package org.anasoid.jmc.jplugins.wrapper.com.blazemeter.jmeter.config;
 
 import com.blazemeter.jmeter.RandomCSVDataSetConfig;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import org.anasoid.jmc.core.wrapper.jmc.Variable;
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.TestPlanWrapper;
 import org.anasoid.jmc.jplugins.AbstractJmcJmeterPluginTest;
-import org.anasoid.jmc.test.utils.SetterTestUtils;
 import org.junit.jupiter.api.Test;
 
 class RandomCSVDataSetWrapperXmlTest extends AbstractJmcJmeterPluginTest {
@@ -32,12 +30,6 @@ class RandomCSVDataSetWrapperXmlTest extends AbstractJmcJmeterPluginTest {
   private static final String PARENT_PATH = ROOT_PATH + "/com/blazemeter/jmeter/config";
 
   private static final String NODE_NAME = RandomCSVDataSetConfig.class.getName();
-
-  @Test
-  void testSetter()
-      throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-    SetterTestUtils.testSetter(RandomCSVDataSetWrapper.builder().withFilename("/myfile"));
-  }
 
   @Test
   void testDefault() throws IOException {

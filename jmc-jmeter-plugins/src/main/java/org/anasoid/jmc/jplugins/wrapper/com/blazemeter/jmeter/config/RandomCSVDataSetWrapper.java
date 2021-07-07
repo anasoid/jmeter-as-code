@@ -39,6 +39,7 @@ import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.anasoid.jmc.core.xstream.annotations.JmcProperty;
 import org.anasoid.jmc.core.xstream.exceptions.ConversionException;
 import org.anasoid.jmc.core.xstream.exceptions.ConversionIllegalStateException;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.jmeter.config.CSVDataSet;
 
 /**
@@ -111,6 +112,9 @@ public class RandomCSVDataSetWrapper
 
   @JmcProperty("filename")
   protected String getFilePath() {
+    if (filename == null) {
+      return null;
+    }
     if (asResourceFile) {
       URL url = Thread.currentThread().getContextClassLoader().getResource(filename);
       if (url == null) {
@@ -132,7 +136,7 @@ public class RandomCSVDataSetWrapper
 
   @Override
   public void validate() throws ConversionIllegalStateException { // NOPMD
-    if (getFilePath() == null) {
+    if (StringUtils.isBlank(getFilePath())) {
       throw new ConversionIllegalStateException("Filename not provided");
     }
 
