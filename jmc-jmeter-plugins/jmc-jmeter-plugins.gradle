@@ -29,5 +29,10 @@ dependencies {
         exclude group: 'org.apache.jmeter', module: 'bom'
     }
 
+    //5 Additional Graphs
+    //https://jmeter-plugins.org/?search=jpgc-graphs-additional
+    implementation("com.blazemeter:jmeter-plugins-random-csv-data-set:$jpgcrandomcsvVersion") {
+        exclude group: 'org.apache.jmeter', module: 'bom'
+    }
 
 }
