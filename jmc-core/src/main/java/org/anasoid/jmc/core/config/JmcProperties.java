@@ -23,26 +23,28 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import org.anasoid.jmc.core.xstream.exceptions.ConversionConfigException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /** Jmc properties Containers. */
 class JmcProperties {
 
-  private static final Logger LOG = LoggerFactory.getLogger(JmcConfig.class);
+  private static final Logger LOG = LoggerFactory.getLogger(JmcProperties.class);
   private static final String MAIN_CONFIG_FILE = "org/anasoid/jmc/core/config/jmc.properties";
   private static final String USER_CONFIG_FILE = "jmc-user.properties";
   private static final String SYSTEM_CONFIG_FILES_KEY = "jmc.configs";
   private static final String ENV_CONFIG_FILES_KEY = "JMC_CONFIGS";
   private static final String FILE_SEPARATOR = ":";
 
-  private final Properties properties;
+  private final Map<String, String> properties;
 
   protected JmcProperties() {
     this(null);
@@ -57,51 +59,64 @@ class JmcProperties {
     properties = loadJmcProperties(jmcProperties, params, paths);
   }
 
-  private Properties loadJmcProperties(
-      JmcProperties jmcProperties, Map<String, String> params, String... paths) {
-
-    LOG.info("Loading properties");
-    List<String> files = new ArrayList<>();
-    files.add(MAIN_CONFIG_FILE);
-    files.add(USER_CONFIG_FILE);
-    files.add(System.getProperties().getProperty("user.home") + File.separator + USER_CONFIG_FILE);
-    files.addAll(getJmcFiles(System.getProperties().getProperty(SYSTEM_CONFIG_FILES_KEY)));
-    files.addAll(getJmcFiles(System.getenv(ENV_CONFIG_FILES_KEY)));
-
-    Properties p = new Properties();
-    if (jmcProperties != null) {
-      jmcProperties.properties.entrySet().forEach(c -> p.put(c.getKey(), c.getValue()));
-    }
-    files.forEach(c -> p.putAll(getJmcProperties(c)));
-    p.putAll(System.getProperties());
-    if (paths != null) {
-
-      Arrays.stream(paths).forEach(c -> p.putAll(getJmcProperties(c)));
-    }
-    if (params != null) {
-      params.entrySet().stream().forEach(c -> p.put(c.getKey(), c.getValue()));
-    }
-    return p;
-  }
-
-  private static Properties getJmcProperties(String file) {
+  @SuppressWarnings("PMD.PreserveStackTrace")
+  private static Properties getJmcProperties(String file, boolean quite) {
     Properties p = new Properties();
     try (InputStream is = Files.newInputStream(Paths.get(file))) {
       p.load(is);
       LOG.info("Loading properties file : {}", file);
     } catch (IOException e) {
+      LOG.warn("File : {} Not found try loading resource", file);
       try (InputStream is = ClassLoader.getSystemResourceAsStream(file)) { // $NON-NLS-1$
         if (is == null) {
-          LOG.info("Properties file : {} Not found", file);
-          return p;
+          if (quite) {
+            LOG.info("Properties file : {} Not found", file);
+            return p;
+          } else {
+            throw new ConversionConfigException(
+                MessageFormat.format("Config File not found : {0}", file));
+          }
         }
         p.load(is);
         LOG.info("Loading resource file : {}", file);
       } catch (IOException ex) {
-        LOG.info("Resource file : {} Not found", file);
+        // Not found will return null InputStream.
+        throw new ConversionConfigException(
+            MessageFormat.format("ERROR : Config File not found : {0}", file));
       }
     }
     return p;
+  }
+
+  private Map<String, String> loadJmcProperties(
+      JmcProperties jmcProperties, Map<String, String> params, String... paths) {
+
+    LOG.info("Loading properties");
+    List<String> defaultFiles = new ArrayList<>();
+
+    defaultFiles.add(MAIN_CONFIG_FILE);
+    defaultFiles.add(USER_CONFIG_FILE);
+    defaultFiles.add(
+        System.getProperties().getProperty("user.home") + File.separator + USER_CONFIG_FILE);
+    List<String> files = new ArrayList<>();
+    files.addAll(getJmcFiles(System.getenv(ENV_CONFIG_FILES_KEY)));
+    files.addAll(getJmcFiles(System.getProperties().getProperty(SYSTEM_CONFIG_FILES_KEY)));
+
+    Properties p = new Properties();
+    if (jmcProperties != null) {
+      jmcProperties.properties.entrySet().forEach(c -> p.put(c.getKey(), c.getValue()));
+    }
+    defaultFiles.forEach(c -> p.putAll(getJmcProperties(c, true)));
+    files.forEach(c -> p.putAll(getJmcProperties(c, false)));
+    p.putAll(System.getProperties());
+    if (paths != null) {
+
+      Arrays.stream(paths).forEach(c -> p.putAll(getJmcProperties(c, false)));
+    }
+    if (params != null) {
+      params.entrySet().stream().forEach(c -> p.put(c.getKey(), c.getValue()));
+    }
+    return new HashMap(p);
   }
 
   private static List<String> getJmcFiles(String files) {
@@ -109,7 +124,7 @@ class JmcProperties {
     if (files == null) {
       return results;
     }
-    Arrays.stream(files.split(FILE_SEPARATOR)).forEach(c -> results.add(c));
+    results.addAll(Arrays.asList(files.split(FILE_SEPARATOR)));
     return results;
   }
 
@@ -121,7 +136,7 @@ class JmcProperties {
    */
   protected String getProperty(String key) {
 
-    return properties.getProperty(key);
+    return properties.get(key);
   }
 
   /**
@@ -132,7 +147,8 @@ class JmcProperties {
    * @return value or defaultValue.
    */
   protected String getProperty(String key, String defaultValue) {
-    return properties.getProperty(key, defaultValue);
+    String value = properties.get(key);
+    return value != null ? value : defaultValue;
   }
 
   /**
@@ -142,7 +158,7 @@ class JmcProperties {
    * @param value value.
    */
   protected void setProperty(String key, String value) {
-    properties.setProperty(key, value);
+    properties.put(key, value);
   }
 
   /**
@@ -155,12 +171,8 @@ class JmcProperties {
     Map<String, String> result = new HashMap<>();
     String fullPrefix = prefix + ".";
     properties.entrySet().stream()
-        .filter(c -> ((String) c.getKey()).startsWith(fullPrefix))
-        .forEach(c -> result.put((String) c.getKey(), (String) c.getValue()));
+        .filter(c -> (c.getKey()).startsWith(fullPrefix))
+        .forEach(c -> result.put(c.getKey(), c.getValue()));
     return result;
-  }
-
-  private Properties getProperties() {
-    return properties;
   }
 }

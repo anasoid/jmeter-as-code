@@ -18,12 +18,14 @@
 
 package org.anasoid.jmc.core.config;
 
+import java.text.MessageFormat;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import org.anasoid.jmc.core.xstream.exceptions.ConversionConfigException;
 import org.apache.jmeter.save.SaveService;
 import org.apache.jmeter.util.JMeterUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Jmc Config to have access to all JMC configuration and Jmeter configuration.
@@ -39,9 +41,9 @@ import org.slf4j.LoggerFactory;
  */
 public final class JmcConfig {
 
-  private static final Logger LOG = LoggerFactory.getLogger(JmcConfig.class);
-
   private static final JmcPropertiesManager jmcPropertiesManager = new JmcPropertiesManager();
+
+  private static final List<String> BOOLEAN_LIST = Arrays.asList("true", "false");
 
   private JmcConfig() {}
 
@@ -120,6 +122,93 @@ public final class JmcConfig {
   }
 
   /**
+   * get property from config s boolean.
+   *
+   * @param key key.
+   * @param defaultValue defaultValue, return if key not found.
+   * @return value or defaultValue.
+   */
+  public static Boolean getBoolean(String key, Boolean defaultValue) {
+    String value = getJmcProperties().getProperty(key);
+
+    if (value == null) {
+      return defaultValue;
+    } else {
+      String valueLower = value.trim().toLowerCase(Locale.ROOT);
+      if (BOOLEAN_LIST.contains(valueLower)) {
+        return Boolean.valueOf(valueLower);
+      } else {
+        throw new ConversionConfigException(
+            MessageFormat.format("Can''t parse Boolean ({1}) from key : {0}", key, value));
+      }
+    }
+  }
+
+  /**
+   * get property from config.
+   *
+   * @param key key.
+   * @return value or null.
+   */
+  public static Boolean getBoolean(String key) {
+    return getBoolean(key, null);
+  }
+
+  /**
+   * set boolean value to config.
+   *
+   * @param key key.
+   * @param value value.
+   */
+  public static void setBoolean(String key, Boolean value) {
+    getJmcProperties()
+        .setProperty(key, value == null ? null : value.toString().toLowerCase(Locale.ROOT));
+  }
+
+  /**
+   * get property from config as Integer.
+   *
+   * @param key key.
+   * @param defaultValue defaultValue, return if key not found.
+   * @return value or defaultValue.
+   */
+  public static Integer getInteger(String key, Integer defaultValue) {
+    String value = getJmcProperties().getProperty(key);
+
+    if (value == null) {
+      return defaultValue;
+    } else {
+      try {
+        return Integer.valueOf(value);
+      } catch (NumberFormatException e) {
+
+        throw new ConversionConfigException(
+            MessageFormat.format("Can''t parse integer ({1}) from key : {0}", key, value), e);
+      }
+    }
+  }
+
+  /**
+   * get property from config.
+   *
+   * @param key key.
+   * @return value or null.
+   */
+  public static Integer getInteger(String key) {
+    return getInteger(key, null);
+  }
+
+  /**
+   * set boolean value to config.
+   *
+   * @param key key.
+   * @param value value.
+   */
+  public static void setInteger(String key, Integer value) {
+    getJmcProperties().setProperty(key, value == null ? null : value.toString());
+  }
+
+  /**
    * set property to config.
    *
    * @param key key.
@@ -140,7 +229,7 @@ public final class JmcConfig {
     return getJmcProperties().getPropertyPrefix(prefix);
   }
 
-  public static JmcProperties getJmcProperties() {
+  private static JmcProperties getJmcProperties() {
     return jmcPropertiesManager.getCurrentJmcProperties();
   }
 
@@ -161,15 +250,31 @@ public final class JmcConfig {
     return new JmcPropertiesManager(properties, paths);
   }
 
+  /**
+   * Create local Jmc Config, local config is related to thread. Clone old config and add additional
+   * properties.
+   *
+   * @param paths additional properties files, try to find file on resource than on file system.
+   * @return AutoCloseable to close the local config.
+   */
   public static AutoCloseable createLocalJmcConfig(String... paths) {
     return createLocalJmcConfig(null, paths);
   }
 
-  public static AutoCloseable createLocalJmcConfig(Map<String, String> params, List<String> paths) {
+  /**
+   * Create local Jmc Config, local config is related to thread. Clone old config and add additional
+   * properties.
+   *
+   * @param properties additional properties.
+   * @param paths additional properties files, try to find file on resource than on file system.
+   * @return AutoCloseable to close the local config.
+   */
+  public static AutoCloseable createLocalJmcConfig(
+      Map<String, String> properties, List<String> paths) {
     if (paths == null) {
-      return createLocalJmcConfig();
+      return createLocalJmcConfig(properties);
     } else {
-      return createLocalJmcConfig(params, paths.toArray(new String[0]));
+      return createLocalJmcConfig(properties, paths.toArray(new String[0]));
     }
   }
 }

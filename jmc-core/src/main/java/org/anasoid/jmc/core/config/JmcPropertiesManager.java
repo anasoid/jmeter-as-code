@@ -26,8 +26,9 @@ import org.apache.commons.collections.CollectionUtils;
 /** Jmc properties Containers. */
 class JmcPropertiesManager implements AutoCloseable {
 
-  private static JmcProperties defaultJmcProperties = new JmcProperties();
-  private ThreadLocal<List<JmcProperties>> localJmcPropertiesStack = new ThreadLocal<>();
+  private static final ThreadLocal<List<JmcProperties>> localJmcPropertiesStack =
+      new ThreadLocal<>();
+  private static JmcProperties defaultJmcProperties;
 
   protected JmcPropertiesManager() {
     init(null);
@@ -38,22 +39,24 @@ class JmcPropertiesManager implements AutoCloseable {
   }
 
   /** close all local config, and refresh default. */
-  protected void reset() {
+  protected static void reset() {
     defaultJmcProperties = new JmcProperties();
     localJmcPropertiesStack.set(new ArrayList<>());
   }
 
   private void init(Map<String, String> params, String... paths) {
 
+    if (defaultJmcProperties == null) {
+      defaultJmcProperties = new JmcProperties();
+      return;
+    }
     if (localJmcPropertiesStack.get() == null) {
       localJmcPropertiesStack.set(new ArrayList<>());
     }
-    List<JmcProperties> stack = localJmcPropertiesStack.get();
-    JmcProperties current = defaultJmcProperties;
-    if (stack.size() > 0) {
-      current = stack.get(0);
-    }
-    localJmcPropertiesStack.get().add(0, new JmcProperties(current, params, paths));
+
+    localJmcPropertiesStack
+        .get()
+        .add(0, new JmcProperties(getCurrentJmcProperties(), params, paths));
   }
 
   @Override
@@ -66,7 +69,7 @@ class JmcPropertiesManager implements AutoCloseable {
     }
   }
 
-  JmcProperties getCurrentJmcProperties() {
+  protected final JmcProperties getCurrentJmcProperties() {
     if (CollectionUtils.isNotEmpty(localJmcPropertiesStack.get())) {
       return localJmcPropertiesStack.get().get(0);
     }
