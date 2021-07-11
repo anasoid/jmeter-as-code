@@ -244,4 +244,19 @@ class JmcConfigTest {
       // Success
     }
   }
+
+  @Test
+  void testDoubleCloseLevelFail() throws Exception {
+    JmcConfig.reset();
+
+    AutoCloseable c = JmcConfig.createLocalJmcConfig();
+    AutoCloseable c1 = JmcConfig.createLocalJmcConfig();
+
+    try {
+      c.close();
+      Assertions.fail();
+    } catch (IllegalStateException e) {
+      // Success
+    }
+  }
 }

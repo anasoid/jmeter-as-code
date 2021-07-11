@@ -22,12 +22,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.tuple.MutablePair;
+import org.apache.commons.lang3.tuple.Pair;
 
 /** Jmc properties Containers. */
 class JmcPropertiesManager implements AutoCloseable {
 
-  private static final ThreadLocal<List<JmcProperties>> localJmcPropertiesStack =
-      new ThreadLocal<>();
+  private static final ThreadLocal<List<Pair<JmcPropertiesManager, JmcProperties>>>
+      localJmcPropertiesStack = new ThreadLocal<>();
   private static JmcProperties defaultJmcProperties;
 
   protected JmcPropertiesManager() {
@@ -56,14 +58,22 @@ class JmcPropertiesManager implements AutoCloseable {
 
     localJmcPropertiesStack
         .get()
-        .add(0, new JmcProperties(getCurrentJmcProperties(), params, paths));
+        .add(
+            0,
+            new MutablePair<>(this, new JmcProperties(getCurrentJmcProperties(), params, paths)));
   }
 
   @Override
   public void close() throws Exception {
 
     if (CollectionUtils.isNotEmpty(localJmcPropertiesStack.get())) {
-      localJmcPropertiesStack.get().remove(0);
+      Pair<JmcPropertiesManager, JmcProperties> pair = localJmcPropertiesStack.get().get(0);
+      if (pair.getLeft().equals(this)) {
+        localJmcPropertiesStack.get().remove(0);
+      } else {
+        throw new IllegalStateException("JMC Properties is closed by different level");
+      }
+
     } else {
       throw new IllegalStateException("JMC Properties is already closed");
     }
@@ -71,7 +81,7 @@ class JmcPropertiesManager implements AutoCloseable {
 
   protected final JmcProperties getCurrentJmcProperties() {
     if (CollectionUtils.isNotEmpty(localJmcPropertiesStack.get())) {
-      return localJmcPropertiesStack.get().get(0);
+      return localJmcPropertiesStack.get().get(0).getRight();
     }
     return defaultJmcProperties;
   }
