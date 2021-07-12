@@ -97,6 +97,7 @@ subprojects {
         testLogging {
             events "passed", "skipped", "failed"
         }
+        systemProperty "p", "p1"
         // listen to events in the test execution lifecycle
         beforeTest { descriptor ->
             logger.lifecycle("Running test: " + descriptor)
@@ -154,6 +155,8 @@ subprojects {
         testImplementation("ru.lanwen.wiremock:wiremock-junit5:$wiremockJunit5Version")
         testImplementation("org.mockito:mockito-core:$mockitoVersion")
         testImplementation("org.mockito:mockito-inline:$mockitoVersion")
+        testImplementation("uk.org.webcompere:system-stubs-jupiter:1.2.0")
+
     }
 
 

@@ -18,18 +18,14 @@
 
 package org.anasoid.jmc.core.config;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.HashMap;
+import java.text.MessageFormat;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
 import java.util.Map;
-import java.util.Properties;
+import org.anasoid.jmc.core.xstream.exceptions.ConversionConfigException;
 import org.apache.jmeter.save.SaveService;
 import org.apache.jmeter.util.JMeterUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Jmc Config to have access to all JMC configuration and Jmeter configuration.
@@ -45,36 +41,35 @@ import org.slf4j.LoggerFactory;
  */
 public final class JmcConfig {
 
-  private static final Logger LOG = LoggerFactory.getLogger(JmcConfig.class);
-  private static final String MAIN_CONFIG_FILE = "org/anasoid/jmc/core/config/jmc.properties";
-  private static final String USER_CONFIG_FILE = "jmc-user.properties";
-  private static final Properties properties = loadJmcProperties();
+  private static final JmcPropertiesManager jmcPropertiesManager = new JmcPropertiesManager();
+
+  private static final List<String> BOOLEAN_LIST = Arrays.asList("true", "false");
 
   private JmcConfig() {}
 
   /** Get Data root folder. */
   public static String getDataRootFolder() {
-    return properties.getProperty("jmc.data.root.folder");
+    return getJmcProperties().getProperty("jmc.data.root.folder");
   }
 
   /** Get Script root folder. */
   public static String getScriptRootFolder() {
-    return properties.getProperty("jmc.script.root.folder");
+    return getJmcProperties().getProperty("jmc.script.root.folder");
   }
 
   /** Get Result root folder. */
   public static String getResultRootFolder() {
-    return properties.getProperty("jmc.result.root.folder");
+    return getJmcProperties().getProperty("jmc.result.root.folder");
   }
 
   /** Get Data csv fom resource, use only when executing from code source. */
   public static boolean isDataResource() {
-    return "true".equalsIgnoreCase(properties.getProperty("jmc.data.resource"));
+    return "true".equalsIgnoreCase(getJmcProperties().getProperty("jmc.data.resource"));
   }
 
   /** Get Script root folder. */
   public static boolean isScriptResource() {
-    return "true".equalsIgnoreCase(properties.getProperty("jmc.script.resource"));
+    return "true".equalsIgnoreCase(getJmcProperties().getProperty("jmc.script.resource"));
   }
 
   /**
@@ -101,39 +96,7 @@ public final class JmcConfig {
    * @return the JMeter Properties version string
    */
   public static String getPropertiesVersion() {
-    return properties.getProperty("jmc.jmeter.properties.version");
-  }
-
-  private static Properties loadJmcProperties() {
-    Properties p = new Properties();
-    LOG.info("Loading properties");
-    p.putAll(loadJmcProperties(MAIN_CONFIG_FILE));
-    p.putAll(loadJmcProperties(USER_CONFIG_FILE));
-    p.putAll(
-        loadJmcProperties(
-            System.getProperties().getProperty("user.home") + File.separator + USER_CONFIG_FILE));
-    p.putAll(System.getProperties());
-    return p;
-  }
-
-  private static Properties loadJmcProperties(String file) {
-    Properties p = new Properties();
-    try (InputStream is = Files.newInputStream(Paths.get(file))) {
-      p.load(is);
-      LOG.info("Loading properties file : {}", file);
-    } catch (IOException e) {
-      try (InputStream is = ClassLoader.getSystemResourceAsStream(file)) { // $NON-NLS-1$
-        if (is == null) {
-          LOG.info("Properties file : {} Not found", file);
-          return p;
-        }
-        p.load(is);
-        LOG.info("Loading resource file : {}", file);
-      } catch (IOException ex) {
-        LOG.info("Resource file : {} Not found", file);
-      }
-    }
-    return p;
+    return getJmcProperties().getProperty("jmc.jmeter.properties.version");
   }
 
   /**
@@ -144,7 +107,7 @@ public final class JmcConfig {
    */
   public static String getProperty(String key) {
 
-    return properties.getProperty(key);
+    return getJmcProperties().getProperty(key);
   }
 
   /**
@@ -155,7 +118,104 @@ public final class JmcConfig {
    * @return value or defaultValue.
    */
   public static String getProperty(String key, String defaultValue) {
-    return properties.getProperty(key, defaultValue);
+    return getJmcProperties().getProperty(key, defaultValue);
+  }
+
+  /**
+   * get property from config s boolean.
+   *
+   * @param key key.
+   * @param defaultValue defaultValue, return if key not found.
+   * @return value or defaultValue.
+   */
+  public static Boolean getBoolean(String key, Boolean defaultValue) {
+    String value = getJmcProperties().getProperty(key);
+
+    if (value == null) {
+      return defaultValue;
+    } else {
+      String valueLower = value.trim().toLowerCase(Locale.ROOT);
+      if (BOOLEAN_LIST.contains(valueLower)) {
+        return Boolean.valueOf(valueLower);
+      } else {
+        throw new ConversionConfigException(
+            MessageFormat.format("Can''t parse Boolean ({1}) from key : {0}", key, value));
+      }
+    }
+  }
+
+  /**
+   * get property from config.
+   *
+   * @param key key.
+   * @return value or null.
+   */
+  public static Boolean getBoolean(String key) {
+    return getBoolean(key, null);
+  }
+
+  /**
+   * set boolean value to config.
+   *
+   * @param key key.
+   * @param value value.
+   */
+  public static void setBoolean(String key, Boolean value) {
+    getJmcProperties()
+        .setProperty(key, value == null ? null : value.toString().toLowerCase(Locale.ROOT));
+  }
+
+  /**
+   * get property from config as Integer.
+   *
+   * @param key key.
+   * @param defaultValue defaultValue, return if key not found.
+   * @return value or defaultValue.
+   */
+  public static Integer getInteger(String key, Integer defaultValue) {
+    String value = getJmcProperties().getProperty(key);
+
+    if (value == null) {
+      return defaultValue;
+    } else {
+      try {
+        return Integer.valueOf(value);
+      } catch (NumberFormatException e) {
+
+        throw new ConversionConfigException(
+            MessageFormat.format("Can''t parse integer ({1}) from key : {0}", key, value), e);
+      }
+    }
+  }
+
+  /**
+   * get property from config.
+   *
+   * @param key key.
+   * @return value or null.
+   */
+  public static Integer getInteger(String key) {
+    return getInteger(key, null);
+  }
+
+  /**
+   * set boolean value to config.
+   *
+   * @param key key.
+   * @param value value.
+   */
+  public static void setInteger(String key, Integer value) {
+    getJmcProperties().setProperty(key, value == null ? null : value.toString());
+  }
+
+  /**
+   * set property to config.
+   *
+   * @param key key.
+   * @param value value.
+   */
+  public static void setProperty(String key, String value) {
+    getJmcProperties().setProperty(key, value);
   }
 
   /**
@@ -165,11 +225,56 @@ public final class JmcConfig {
    * @return null or value.
    */
   public static Map<String, String> getPropertyPrefix(String prefix) {
-    Map<String, String> result = new HashMap<>();
-    String fullPrefix = prefix + ".";
-    properties.entrySet().stream()
-        .filter(c -> ((String) c.getKey()).startsWith(fullPrefix))
-        .forEach(c -> result.put((String) c.getKey(), (String) c.getValue()));
-    return result;
+
+    return getJmcProperties().getPropertyPrefix(prefix);
+  }
+
+  private static JmcProperties getJmcProperties() {
+    return jmcPropertiesManager.getCurrentJmcProperties();
+  }
+
+  public static void reset() {
+    jmcPropertiesManager.reset();
+  }
+
+  /**
+   * Create local Jmc Config, local config is related to thread. Clone old config and add additional
+   * properties.
+   *
+   * @param properties additional properties.
+   * @param paths additional properties files, try to find file on resource than on file system.
+   * @return AutoCloseable to close the local config.
+   */
+  public static AutoCloseable createLocalJmcConfig(
+      Map<String, String> properties, String... paths) {
+    return new JmcPropertiesManager(properties, paths);
+  }
+
+  /**
+   * Create local Jmc Config, local config is related to thread. Clone old config and add additional
+   * properties.
+   *
+   * @param paths additional properties files, try to find file on resource than on file system.
+   * @return AutoCloseable to close the local config.
+   */
+  public static AutoCloseable createLocalJmcConfig(String... paths) {
+    return createLocalJmcConfig(null, paths);
+  }
+
+  /**
+   * Create local Jmc Config, local config is related to thread. Clone old config and add additional
+   * properties.
+   *
+   * @param properties additional properties.
+   * @param paths additional properties files, try to find file on resource than on file system.
+   * @return AutoCloseable to close the local config.
+   */
+  public static AutoCloseable createLocalJmcConfig(
+      Map<String, String> properties, List<String> paths) {
+    if (paths == null) {
+      return createLocalJmcConfig(properties);
+    } else {
+      return createLocalJmcConfig(properties, paths.toArray(new String[0]));
+    }
   }
 }
