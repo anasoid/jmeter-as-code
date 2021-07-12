@@ -62,8 +62,7 @@ class JmcConfigTest {
 
   @Test
   void testSysProperty() throws Exception {
-
-    JmcConfig.setProperty("p", "p1");
+    Assertions.assertEquals("p1", JmcConfig.getProperty("p"));
   }
 
   @Test
