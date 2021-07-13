@@ -30,6 +30,8 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmc.core.application.validator.annotations.JmcChildrenTypes;
 import org.anasoid.jmc.core.wrapper.jmeter.config.ArgumentWrapper;
+import org.anasoid.jmc.core.wrapper.jmeter.control.ControllerWrapper;
+import org.anasoid.jmc.core.wrapper.jmeter.control.TestFragmentWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.gui.JMeterGUIWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.threads.ThreadWrapper;
 import org.anasoid.jmc.core.wrapper.template.JmcTemplate;
@@ -50,7 +52,7 @@ import org.apache.jmeter.testelement.TestPlan;
  */
 @SuperBuilder(setterPrefix = "with")
 @XStreamAlias("TestPlan")
-@JmcChildrenTypes(type = {ThreadWrapper.class})
+@JmcChildrenTypes(type = {ThreadWrapper.class, TestFragmentWrapper.class})
 @JmcDefaultName("Test Plan")
 public class TestPlanWrapper extends AbstractTestElementWrapper<TestPlan>
     implements JMeterGUIWrapper<TestPlanGui> {
@@ -113,10 +115,10 @@ public class TestPlanWrapper extends AbstractTestElementWrapper<TestPlan>
     /**
      * Add ThreadGroup as child in tree.
      *
-     * @param child child.
+     * @param thread thread.
      */
-    public B addThread(ThreadWrapper<?> child) { // NOSONAR
-      return super.withChild(child);
+    public B addThread(ThreadWrapper<?> thread) { // NOSONAR
+      return addThreads(Arrays.asList(thread));
     }
 
     /**
@@ -126,6 +128,15 @@ public class TestPlanWrapper extends AbstractTestElementWrapper<TestPlan>
      */
     public <T extends ThreadWrapper<?>> B addThread(JmcTemplate<T> template) {
       return addThread(template.generate());
+    }
+
+    /**
+     * Add ThreadGroup as child in tree.
+     *
+     * @param threads list of threads.
+     */
+    public B addThreads(List<ThreadWrapper<?>> threads) { // NOSONAR
+      return super.withChilds(threads);
     }
 
     protected B withArguments(List<ArgumentWrapper> arguments) {
@@ -166,6 +177,21 @@ public class TestPlanWrapper extends AbstractTestElementWrapper<TestPlan>
      */
     public B addArgument(ArgumentWrapper argument) {
       return addArguments(Arrays.asList(argument));
+    }
+
+    /** Add TestFragment. */
+    public B addTestFragment(TestFragmentWrapper fragment) {
+      return addTestFragments(Arrays.asList(fragment));
+    }
+
+    /** Add TestFragment. */
+    public B addTestFragment(JmcTemplate<TestFragmentWrapper> template) {
+      return addTestFragment(template.generate());
+    }
+
+    /** Add TestFragment as child in tree. */
+    public B addTestFragments(List<TestFragmentWrapper> fragments) {
+      return withChilds(fragments);
     }
   }
 }
