@@ -34,7 +34,8 @@ public interface PrepareInterceptor {
   /**
    * prepare the input node.
    *
+   * @param testPlan parent testPlan.
    * @param testElementWrapper node.
    */
-  void prepare(TestElementWrapper<?> testElementWrapper);
+  void prepare(TestElementWrapper<?> testPlan, TestElementWrapper<?> testElementWrapper);
 }

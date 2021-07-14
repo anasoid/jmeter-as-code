@@ -161,18 +161,21 @@ public class ApplicationTest {
     NodeValidatorManager.validate(script.getTestPlan());
   }
 
-  private void prepare(TestElementWrapper<?> testElement, Set<TestElementWrapper<?>> history) {
+  private void prepare(
+      TestElementWrapper<?> testPlan,
+      TestElementWrapper<?> testElement,
+      Set<TestElementWrapper<?>> history) {
     if (!history.contains(testElement)) {
 
       for (PrepareInterceptor interceptor : prepareInterceptors) {
         if (interceptor.support(testElement)) {
-          interceptor.prepare(testElement);
+          interceptor.prepare(testPlan, testElement);
         }
       }
       history.add(testElement);
       if (CollectionUtils.isNotEmpty(testElement.getChilds())) {
         for (TestElementWrapper<?> childElement : testElement.getChilds()) {
-          prepare(childElement, history);
+          prepare(testPlan, childElement, history);
         }
       }
     }
@@ -181,7 +184,7 @@ public class ApplicationTest {
   protected void prepare(ScriptWrapper script) {
     Set<TestElementWrapper<?>> history = new HashSet<>();
     if (CollectionUtils.isNotEmpty(prepareInterceptors)) {
-      prepare(script.getTestPlan(), history);
+      prepare(script.getTestPlan(), script.getTestPlan(), history);
     }
   }
 
