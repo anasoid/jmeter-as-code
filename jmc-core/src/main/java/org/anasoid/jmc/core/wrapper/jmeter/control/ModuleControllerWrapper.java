@@ -19,32 +19,34 @@
 package org.anasoid.jmc.core.wrapper.jmeter.control;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import org.anasoid.jmc.core.wrapper.jmc.validator.Validator;
 import org.anasoid.jmc.core.wrapper.jmeter.JmeterConstants.JmeterProperty;
 import org.anasoid.jmc.core.wrapper.jmeter.gui.JMeterGUIWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.basic.AbstractBasicChildTestElementWrapper;
 import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.anasoid.jmc.core.xstream.annotations.JmcMethodAlias;
+import org.anasoid.jmc.core.xstream.exceptions.ConversionIllegalStateException;
+import org.anasoid.jmc.core.xstream.exceptions.ConversionMandatoryException;
 import org.apache.jmeter.control.ModuleController;
 import org.apache.jmeter.control.gui.ModuleControllerGui;
 import org.apache.jmeter.testelement.property.CollectionProperty;
-import org.fife.ui.rsyntaxtextarea.folding.LispFoldParser;
 
 /** Wrapper for Module Controller. */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 @JmcDefaultName("Module Controller")
 public class ModuleControllerWrapper extends AbstractBasicChildTestElementWrapper<ModuleController>
-    implements JMeterGUIWrapper<ModuleControllerGui>, ControllerWrapper<ModuleController> {
+    implements JMeterGUIWrapper<ModuleControllerGui>,
+        ControllerWrapper<ModuleController>,
+        Validator {
 
   @XStreamOmitField @Getter @Setter private ControllerWrapper<?> module;
   @XStreamOmitField @Getter @Setter private TestFragmentWrapper rootParent;
 
-  @Getter @Setter private List<String> nodePath;
+  @XStreamOmitField @Setter private List<String> nodePath;
 
   @Override
   public Class<?> getGuiClass() {
@@ -58,10 +60,17 @@ public class ModuleControllerWrapper extends AbstractBasicChildTestElementWrappe
 
   @JmcMethodAlias(JmeterProperty.COLLECTION_PROP)
   protected CollectionProperty getNodePath() {
-    return new CollectionProperty(
-        "ModuleController.node_path", new ArrayList<>(Arrays.asList("Test Plan", "Test Plan")));
+    return new CollectionProperty("ModuleController.node_path", nodePath);
   }
 
+  @Override
+  public void validate() throws ConversionIllegalStateException { // NOPMD
+    if (module == null) {
+      throw new ConversionMandatoryException(this, "module");
+    }
+  }
+
+  /** Builder. */
   public abstract static class ModuleControllerWrapperBuilder<
           C extends ModuleControllerWrapper, B extends ModuleControllerWrapperBuilder<C, B>>
       extends AbstractBasicChildTestElementWrapper.AbstractBasicChildTestElementWrapperBuilder<
@@ -70,7 +79,7 @@ public class ModuleControllerWrapper extends AbstractBasicChildTestElementWrappe
     /**
      * set module.
      *
-     * @param module
+     * @param module target module.
      */
     public B withModule(ControllerWrapper<?> module) {
       this.module = module;
