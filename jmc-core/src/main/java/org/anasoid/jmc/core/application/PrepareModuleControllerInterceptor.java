@@ -32,7 +32,7 @@ class PrepareModuleControllerInterceptor implements PrepareInterceptor {
   public void prepare(TestElementWrapper<?> testPlan, TestElementWrapper<?> testElementWrapper) {
 
     if (!(testPlan instanceof TestPlanWrapper)) {
-      LOG.warn("Module Controller is using in test : " + testPlan);
+      LOG.warn("Module Controller is using in test : {}", testPlan);
       return;
     }
 
@@ -54,14 +54,26 @@ class PrepareModuleControllerInterceptor implements PrepareInterceptor {
 
     List<AbstractTestElementWrapper<?>> target = targets.get(0);
 
-    check(testPlan, target, 0);
+    final int nmFound = check(testPlan, target, 0);
+
     List<String> nodePath = new ArrayList<>();
     nodePath.add("Test Plan");
     nodePath.add(((TestPlanWrapper) testPlan).getName());
     target.forEach(c -> nodePath.add(c.getName()));
+
+    if (nmFound != 1) { // NOPMD
+      throw new ConversionException(
+          "Duplicate module target found ("
+              + nmFound
+              + ") : "
+              + moduleControllerWrapper.getName()
+              + "->"
+              + nodePath);
+    }
     moduleControllerWrapper.setNodePath(nodePath);
   }
 
+  /** Find target. */
   protected List<List<AbstractTestElementWrapper<?>>> findTarget(
       TestPlanWrapper testPlan,
       TestFragmentWrapper testFragment,
@@ -74,7 +86,7 @@ class PrepareModuleControllerInterceptor implements PrepareInterceptor {
     if (parentList.isEmpty()) {
       testElementLists =
           testPlan.getChilds().stream()
-              .filter(c -> c instanceof TestFragmentWrapper)
+              .filter(TestFragmentWrapper.class::isInstance)
               .filter(c -> testFragment == null || c.equals(testFragment))
               .collect(Collectors.toList());
     } else {
@@ -100,11 +112,15 @@ class PrepareModuleControllerInterceptor implements PrepareInterceptor {
     return result;
   }
 
-  protected void check(
+  /**
+   * check.
+   *
+   * @return number of occurrence >1 should be in conflict.
+   */
+  protected int check(
       TestElementWrapper root, List<AbstractTestElementWrapper<?>> target, int level) {
     List<AbstractTestElementWrapper> children;
     AbstractTestElementWrapper node = target.get(level);
-    ControllerWrapper module = (ControllerWrapper) target.get(target.size() - 1);
     if (node.getName() == null) {
       throw new ConversionException("Illegal Name null on :" + node);
     }
@@ -119,15 +135,8 @@ class PrepareModuleControllerInterceptor implements PrepareInterceptor {
                 .collect(Collectors.toList());
 
     if (level + 1 == target.size()) {
-      if (children.size() > 1) { // NOPMD
-        throw new ConversionException("Duplicate module target found : " + children);
-      }
-      if (children.size() == 1 && !module.equals(children.get(0))) {
-        throw new ConversionException("Duplicate names module target found : " + children.get(0));
-      } else {
-        return;
-      }
+      return children.size();
     }
-    children.forEach(c -> check(c, target, level + 1));
+    return children.stream().mapToInt(c -> check(c, target, level + 1)).sum();
   }
 }

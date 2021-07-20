@@ -23,14 +23,11 @@ import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import org.anasoid.jmc.core.wrapper.jmc.validator.Validator;
 import org.anasoid.jmc.core.wrapper.jmeter.JmeterConstants.JmeterProperty;
 import org.anasoid.jmc.core.wrapper.jmeter.gui.JMeterGUIWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.basic.AbstractBasicChildTestElementWrapper;
 import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.anasoid.jmc.core.xstream.annotations.JmcMethodAlias;
-import org.anasoid.jmc.core.xstream.exceptions.ConversionIllegalStateException;
-import org.anasoid.jmc.core.xstream.exceptions.ConversionMandatoryException;
 import org.apache.jmeter.control.ModuleController;
 import org.apache.jmeter.control.gui.ModuleControllerGui;
 import org.apache.jmeter.testelement.property.CollectionProperty;
@@ -39,9 +36,7 @@ import org.apache.jmeter.testelement.property.CollectionProperty;
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 @JmcDefaultName("Module Controller")
 public class ModuleControllerWrapper extends AbstractBasicChildTestElementWrapper<ModuleController>
-    implements JMeterGUIWrapper<ModuleControllerGui>,
-        ControllerWrapper<ModuleController>,
-        Validator {
+    implements JMeterGUIWrapper<ModuleControllerGui>, ControllerWrapper<ModuleController> {
 
   @XStreamOmitField @Getter @Setter private ControllerWrapper<?> module;
   @XStreamOmitField @Getter @Setter private TestFragmentWrapper rootParent;
@@ -61,13 +56,6 @@ public class ModuleControllerWrapper extends AbstractBasicChildTestElementWrappe
   @JmcMethodAlias(JmeterProperty.COLLECTION_PROP)
   protected CollectionProperty getNodePath() {
     return new CollectionProperty("ModuleController.node_path", nodePath);
-  }
-
-  @Override
-  public void validate() throws ConversionIllegalStateException { // NOPMD
-    if (module == null) {
-      throw new ConversionMandatoryException(this, "module");
-    }
   }
 
   /** Builder. */
