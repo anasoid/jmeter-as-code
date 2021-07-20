@@ -31,15 +31,14 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import org.anasoid.jmc.core.application.InitHelper;
 import org.anasoid.jmc.core.wrapper.jmc.Variable;
 import org.anasoid.jmc.core.wrapper.jmc.generic.AbstractJmxIncludeWrapper;
 import org.anasoid.jmc.core.wrapper.jmc.validator.Validator;
-import org.anasoid.jmc.core.wrapper.jmeter.testelement.TestElementTreeNodeWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.TestElementWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.property.JMeterProperty;
 import org.anasoid.jmc.core.xstream.ConverterBeanUtils;
 import org.anasoid.jmc.core.xstream.annotations.JmcCollection;
-import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.anasoid.jmc.core.xstream.annotations.JmcProperty;
 import org.anasoid.jmc.core.xstream.exceptions.ConversionException;
 import org.anasoid.jmc.core.xstream.io.xml.JmcXstreamWriter;
@@ -54,7 +53,7 @@ public class TestElementConverter implements Converter {
   @Override
   public void marshal(Object source, HierarchicalStreamWriter writer, MarshallingContext context) {
 
-    init(source);
+    InitHelper.init(source);
     validate(source);
 
     List<AccessibleObject> allFieldsMethods = new ArrayList<>();
@@ -164,25 +163,6 @@ public class TestElementConverter implements Converter {
         | InvocationTargetException
         | IOException e) {
       throw new ConversionException(e);
-    }
-  }
-
-  protected void init(Object source) {
-
-    if (source instanceof TestElementWrapper) {
-      ((TestElementWrapper) source).init();
-    }
-    JmcDefaultName jmcDefaultName = source.getClass().getAnnotation(JmcDefaultName.class);
-    if (jmcDefaultName != null) {
-      if (source instanceof TestElementTreeNodeWrapper) {
-        TestElementTreeNodeWrapper sourceTreeNode = (TestElementTreeNodeWrapper) source;
-        if (sourceTreeNode.getName() == null) {
-          sourceTreeNode.setName(jmcDefaultName.value());
-        }
-      } else {
-        throw new ConversionException(
-            "JmcDefaultName present on not TestElementTreeNodeWrapper type.");
-      }
     }
   }
 

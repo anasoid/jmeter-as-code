@@ -113,7 +113,7 @@ class ApplicationTestTest {
     }
 
     @Override
-    public void prepare(TestElementWrapper<?> testElementWrapper) {
+    public void prepare(TestElementWrapper<?> testPlan, TestElementWrapper<?> testElementWrapper) {
 
       if (testElementWrapper instanceof ParentTestElementWrapperTesting) {
         ParentTestElementWrapperTesting parent =

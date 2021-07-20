@@ -31,6 +31,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -58,6 +59,10 @@ public class ApplicationTest {
 
   private final TestPlanWrapper testPlanWrapper;
   private final TestElementWrapper<?> testElement;
+  private final List<PrepareInterceptor> defaultPostInterceptors =
+      Arrays.asList(new PrepareModuleControllerInterceptor());
+  private final List<PrepareInterceptor> defaultPreInterceptors =
+      Arrays.asList(new InitInterceptor());
   private final List<PrepareInterceptor> prepareInterceptors;
   private boolean testMode;
 
@@ -81,7 +86,12 @@ public class ApplicationTest {
       TestPlanWrapper testPlanWrapper, List<PrepareInterceptor> prepareInterceptors) {
     this.testPlanWrapper = testPlanWrapper;
     this.testElement = null;
-    this.prepareInterceptors = prepareInterceptors;
+    List<PrepareInterceptor> interceptors = new ArrayList<>(defaultPreInterceptors);
+    if (prepareInterceptors != null) {
+      interceptors.addAll(prepareInterceptors);
+    }
+    interceptors.addAll(defaultPostInterceptors);
+    this.prepareInterceptors = interceptors;
   }
 
   /** Only for Test. */
@@ -90,7 +100,12 @@ public class ApplicationTest {
       TestElementWrapper<?> testElement, List<PrepareInterceptor> prepareInterceptors) {
     this.testElement = testElement;
     this.testPlanWrapper = null;
-    this.prepareInterceptors = prepareInterceptors;
+    List<PrepareInterceptor> interceptors = new ArrayList<>(defaultPreInterceptors);
+    if (prepareInterceptors != null) {
+      interceptors.addAll(prepareInterceptors);
+    }
+    interceptors.addAll(defaultPostInterceptors);
+    this.prepareInterceptors = interceptors;
     testMode = true;
   }
 
@@ -161,27 +176,32 @@ public class ApplicationTest {
     NodeValidatorManager.validate(script.getTestPlan());
   }
 
-  private void prepare(TestElementWrapper<?> testElement, Set<TestElementWrapper<?>> history) {
+  private void prepare(
+      TestElementWrapper<?> testPlan,
+      TestElementWrapper<?> testElement,
+      PrepareInterceptor interceptor,
+      Set<TestElementWrapper<?>> history) {
     if (!history.contains(testElement)) {
 
-      for (PrepareInterceptor interceptor : prepareInterceptors) {
-        if (interceptor.support(testElement)) {
-          interceptor.prepare(testElement);
-        }
+      if (interceptor.support(testElement)) {
+        interceptor.prepare(testPlan, testElement);
       }
+
       history.add(testElement);
       if (CollectionUtils.isNotEmpty(testElement.getChilds())) {
         for (TestElementWrapper<?> childElement : testElement.getChilds()) {
-          prepare(childElement, history);
+          prepare(testPlan, childElement, interceptor, history);
         }
       }
     }
   }
 
   protected void prepare(ScriptWrapper script) {
-    Set<TestElementWrapper<?>> history = new HashSet<>();
-    if (CollectionUtils.isNotEmpty(prepareInterceptors)) {
-      prepare(script.getTestPlan(), history);
+    for (PrepareInterceptor interceptor : prepareInterceptors) {
+      Set<TestElementWrapper<?>> history = new HashSet<>(); // NOPMD
+      if (CollectionUtils.isNotEmpty(prepareInterceptors)) {
+        prepare(script.getTestPlan(), script.getTestPlan(), interceptor, history);
+      }
     }
   }
 
