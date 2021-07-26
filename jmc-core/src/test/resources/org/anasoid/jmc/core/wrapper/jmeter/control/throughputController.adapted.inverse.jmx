@@ -30,6 +30,7 @@
           <intProp name="ThroughputController.style">0</intProp>
           <boolProp name="ThroughputController.perThread">true</boolProp>
           <stringProp name="ThroughputController.maxThroughput">${thr}</stringProp>
+          <stringProp name="ThroughputController.percentThroughput">${thr}</stringProp>
         </ThroughputController>
         <hashTree/>
       </hashTree>

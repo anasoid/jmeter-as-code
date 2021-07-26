@@ -25,6 +25,7 @@ import lombok.experimental.SuperBuilder;
 import org.anasoid.jmc.core.wrapper.jmc.Variable;
 import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.anasoid.jmc.core.xstream.annotations.JmcMandatory;
+import org.anasoid.jmc.core.xstream.annotations.JmcOmitField;
 import org.anasoid.jmc.core.xstream.annotations.JmcProperty;
 import org.anasoid.jmc.core.xstream.types.IntegerManager;
 import org.apache.jmeter.control.ThroughputController;
@@ -55,11 +56,18 @@ public class ThroughputControllerWrapper
    * iterations through the test plan. For total execution mode, the number indicates the total
    * number of times the controller will execute.
    */
+  @Getter @Setter @JmcMandatory @JmcOmitField private String throughput;
+
   @JmcProperty(value = "ThroughputController.maxThroughput", type = IntegerManager.class)
-  @Getter
-  @Setter
-  @JmcMandatory
-  private String maxThroughput;
+  protected String maxThroughput() {
+
+    return throughput;
+  }
+
+  @JmcProperty(value = "ThroughputController.percentThroughput", type = String.class)
+  protected String percentThroughput() {
+    return throughput;
+  }
 
   /**
    * If checked, per user will cause the controller to calculate whether it should execute on a per
@@ -117,8 +125,8 @@ public class ThroughputControllerWrapper
      * iterations through the test plan. For total execution mode, the number indicates the total
      * number of times the controller will execute.
      */
-    public B withMaxThroughput(String maxThroughput) {
-      this.maxThroughput = maxThroughput;
+    public B withThroughput(String throughput) {
+      this.throughput = throughput;
       return self();
     }
 
@@ -128,8 +136,8 @@ public class ThroughputControllerWrapper
      * iterations through the test plan. For total execution mode, the number indicates the total
      * number of times the controller will execute.
      */
-    public B withMaxThroughput(int maxThroughput) {
-      return withMaxThroughput(String.valueOf(maxThroughput));
+    public B withThroughput(int throughput) {
+      return withThroughput(String.valueOf(throughput));
     }
 
     /**
@@ -138,8 +146,8 @@ public class ThroughputControllerWrapper
      * iterations through the test plan. For total execution mode, the number indicates the total
      * number of times the controller will execute.
      */
-    public B withMaxThroughput(Variable maxThroughput) {
-      return withMaxThroughput(String.valueOf(maxThroughput.getValue()));
+    public B withThroughput(Variable throughput) {
+      return withThroughput(String.valueOf(throughput.getValue()));
     }
   }
 }
