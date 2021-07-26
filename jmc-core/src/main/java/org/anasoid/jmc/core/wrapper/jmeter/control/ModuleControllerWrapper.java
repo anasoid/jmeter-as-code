@@ -58,6 +58,23 @@ public class ModuleControllerWrapper extends AbstractTestElementWrapper<ModuleCo
     return new CollectionProperty("ModuleController.node_path", nodePath);
   }
 
+  @Override
+  @SuppressWarnings("PMD.AvoidDeeplyNestedIfStmts")
+  protected void internalInit() {
+    super.internalInit();
+    if (getModule() instanceof AbstractTestElementWrapper) {
+      AbstractTestElementWrapper module = (AbstractTestElementWrapper) getModule();
+      if (module.getName() != null) {
+        if (getName() == null) {
+          setName("MD-> " + module.getName());
+        }
+        if (getComment() == null) {
+          setComment("MD-> " + module.getName());
+        }
+      }
+    }
+  }
+
   /** Builder. */
   public abstract static class ModuleControllerWrapperBuilder<
           C extends ModuleControllerWrapper, B extends ModuleControllerWrapperBuilder<C, B>>
