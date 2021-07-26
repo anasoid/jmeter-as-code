@@ -59,10 +59,9 @@ public class ApplicationTest {
 
   private final TestPlanWrapper testPlanWrapper;
   private final TestElementWrapper<?> testElement;
-  private final List<PrepareInterceptor> defaultPostInterceptors =
-      Arrays.asList(new PrepareModuleControllerInterceptor());
+  private final List<PrepareInterceptor> defaultPostInterceptors = new ArrayList<>();
   private final List<PrepareInterceptor> defaultPreInterceptors =
-      Arrays.asList(new InitInterceptor());
+      Arrays.asList(new InitInterceptor(), new PrepareModuleControllerInterceptor());
   private final List<PrepareInterceptor> prepareInterceptors;
   private boolean testMode;
 
