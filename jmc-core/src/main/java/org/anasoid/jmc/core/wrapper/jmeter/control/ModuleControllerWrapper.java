@@ -25,7 +25,7 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmc.core.wrapper.jmeter.JmeterConstants.JmeterProperty;
 import org.anasoid.jmc.core.wrapper.jmeter.gui.JMeterGUIWrapper;
-import org.anasoid.jmc.core.wrapper.jmeter.testelement.basic.AbstractBasicChildTestElementWrapper;
+import org.anasoid.jmc.core.wrapper.jmeter.testelement.AbstractTestElementWrapper;
 import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.anasoid.jmc.core.xstream.annotations.JmcMethodAlias;
 import org.apache.jmeter.control.ModuleController;
@@ -35,7 +35,7 @@ import org.apache.jmeter.testelement.property.CollectionProperty;
 /** Wrapper for Module Controller. */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 @JmcDefaultName("Module Controller")
-public class ModuleControllerWrapper extends AbstractBasicChildTestElementWrapper<ModuleController>
+public class ModuleControllerWrapper extends AbstractTestElementWrapper<ModuleController>
     implements JMeterGUIWrapper<ModuleControllerGui>, ControllerWrapper<ModuleController> {
 
   @XStreamOmitField @Getter @Setter private ControllerWrapper<?> module;
@@ -61,8 +61,7 @@ public class ModuleControllerWrapper extends AbstractBasicChildTestElementWrappe
   /** Builder. */
   public abstract static class ModuleControllerWrapperBuilder<
           C extends ModuleControllerWrapper, B extends ModuleControllerWrapperBuilder<C, B>>
-      extends AbstractBasicChildTestElementWrapper.AbstractBasicChildTestElementWrapperBuilder<
-          ModuleController, C, B> {
+      extends AbstractTestElementWrapper.AbstractTestElementWrapperBuilder<ModuleController, C, B> {
 
     /**
      * set module.
