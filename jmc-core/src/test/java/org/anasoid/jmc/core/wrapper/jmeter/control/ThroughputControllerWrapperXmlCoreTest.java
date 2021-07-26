@@ -47,7 +47,7 @@ class ThroughputControllerWrapperXmlCoreTest extends AbstractJmcCoreTest {
             .addThread(
                 ThreadGroupWrapper.builder()
                     .addController(
-                        ThroughputControllerWrapper.builder().withMaxThroughput(1).build())
+                        ThroughputControllerWrapper.builder().withThroughput(1).build())
                     .build())
             .build();
 
@@ -64,7 +64,7 @@ class ThroughputControllerWrapperXmlCoreTest extends AbstractJmcCoreTest {
                 ThreadGroupWrapper.builder()
                     .addController(
                         ThroughputControllerWrapper.builder()
-                            .withMaxThroughput(new Variable("thr"))
+                            .withThroughput(new Variable("thr"))
                             .withPerUser(true)
                             .withExecutionStyle(ExecutionStyle.TOTAL_EXECUTIONS)
                             .build())
