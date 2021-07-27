@@ -63,13 +63,13 @@ public class ModuleControllerWrapper extends AbstractTestElementWrapper<ModuleCo
   protected void internalInit() {
     super.internalInit();
     if (getModule() instanceof AbstractTestElementWrapper) {
-      AbstractTestElementWrapper module = (AbstractTestElementWrapper) getModule();
-      if (module.getName() != null) {
+      AbstractTestElementWrapper currentModule = (AbstractTestElementWrapper) getModule();
+      if (currentModule.getName() != null) {
         if (getName() == null) {
-          setName("MD-> " + module.getName());
+          setName("MD-> " + currentModule.getName());
         }
         if (getComment() == null) {
-          setComment("MD-> " + module.getName());
+          setComment("MD-> " + currentModule.getName());
         }
       }
     }
