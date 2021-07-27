@@ -5,6 +5,8 @@ import org.anasoid.jmc.core.AbstractJmcCoreTest;
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.TestPlanWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.threads.ThreadGroupWrapper;
 import org.anasoid.jmc.core.xstream.exceptions.ConversionException;
+import org.apache.jmeter.control.ModuleController;
+import org.apache.jorphan.collections.HashTree;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 /*
@@ -115,5 +117,31 @@ class ModuleControllerWrapperTest extends AbstractJmcCoreTest {
     } catch (ConversionException e) {
       Assertions.assertTrue(e.getMessage().contains("Module target not found for"));
     }
+  }
+
+  @Test
+  void testName() throws IOException {
+
+    SimpleControllerWrapper s1 = SimpleControllerWrapper.builder().withName("s1").build();
+    TestFragmentWrapper t1 = TestFragmentWrapper.builder().withName("t1").addController(s1).build();
+    ;
+    TestPlanWrapper testPlanWrapper =
+        TestPlanWrapper.builder()
+            .addThread(
+                ThreadGroupWrapper.builder()
+                    .addController(ModuleControllerWrapper.builder().withModule(s1).build())
+                    .build())
+            .addTestFragment(t1)
+            .build();
+
+    HashTree applicationTest = toHashTree(testPlanWrapper, "MD");
+    ModuleController moduleController =
+        (ModuleController)
+            applicationTest
+                .get(applicationTest.getArray()[0])
+                .get(applicationTest.get(applicationTest.getArray()[0]).getArray()[0])
+                .getArray()[0];
+
+    Assertions.assertEquals("MD-> s1", moduleController.getName());
   }
 }

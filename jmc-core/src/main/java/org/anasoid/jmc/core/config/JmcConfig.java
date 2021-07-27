@@ -234,7 +234,7 @@ public final class JmcConfig {
   }
 
   public static void reset() {
-    jmcPropertiesManager.reset();
+    JmcPropertiesManager.reset();
   }
 
   /**
