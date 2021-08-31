@@ -20,7 +20,7 @@ package org.anasoid.jmc.core.wrapper.template.samplers.http.controller;
 
 import lombok.NonNull;
 import org.anasoid.jmc.core.wrapper.jmc.samplers.HttpMethod;
-import org.anasoid.jmc.core.wrapper.jmeter.control.RecordingControllerWrapper;
+import org.anasoid.jmc.core.wrapper.jmeter.control.GenericControllerWrapper.GenericControllerWrapperBuilder;
 import org.anasoid.jmc.core.wrapper.jmeter.samplers.HTTPSamplerProxyWrapper;
 import org.anasoid.jmc.core.wrapper.template.AbstractJmcTemplate;
 import org.anasoid.jmc.core.wrapper.template.samplers.AbstractSamplerControllerTemplate;
@@ -95,8 +95,7 @@ public class SimplePageControllerTemplate extends AbstractSamplerControllerTempl
   protected void prepareSamplerWrapper(HTTPSamplerProxyWrapper samplerProxyWrapper) {} // NOSONAR
 
   @Override
-  protected void initMainSampler(
-      RecordingControllerWrapper.RecordingControllerWrapperBuilder controller) {
+  protected void initMainSampler(GenericControllerWrapperBuilder controller) {
     controller.addSampler(createSampler());
   }
 

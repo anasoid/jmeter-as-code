@@ -2,7 +2,7 @@ package org.anasoid.jmc.core.wrapper.template.samplers.http.controller;
 
 import org.anasoid.jmc.core.AbstractJmcCoreTest;
 import org.anasoid.jmc.core.wrapper.jmc.samplers.HttpMethod;
-import org.anasoid.jmc.core.wrapper.jmeter.control.RecordingControllerWrapper;
+import org.anasoid.jmc.core.wrapper.jmeter.control.GenericControllerWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.samplers.HTTPSamplerProxyWrapper;
 import org.anasoid.jmc.core.wrapper.template.JmcTemplate;
 import org.junit.jupiter.api.Assertions;
@@ -34,9 +34,9 @@ class SimplePageControllerTemplateTest extends AbstractJmcCoreTest {
   @Test
   void testParam() {
 
-    JmcTemplate<RecordingControllerWrapper> simplePageControllerTemplate =
+    JmcTemplate<GenericControllerWrapper<?, ?>> simplePageControllerTemplate =
         new SimplePageControllerTemplate(NAME, PATH, DOMAIN, HttpMethod.POST);
-    RecordingControllerWrapper controller = simplePageControllerTemplate.generate();
+    GenericControllerWrapper<?, ?> controller = simplePageControllerTemplate.generate();
     HTTPSamplerProxyWrapper sampler =
         (HTTPSamplerProxyWrapper) simplePageControllerTemplate.generate().getChilds().get(0);
 
@@ -50,9 +50,9 @@ class SimplePageControllerTemplateTest extends AbstractJmcCoreTest {
   @Test
   void testMinParam() {
 
-    JmcTemplate<RecordingControllerWrapper> simplePageControllerTemplate =
+    JmcTemplate<GenericControllerWrapper<?, ?>> simplePageControllerTemplate =
         new SimplePageControllerTemplate(NAME, PATH);
-    RecordingControllerWrapper controller = simplePageControllerTemplate.generate();
+    GenericControllerWrapper<?, ?> controller = simplePageControllerTemplate.generate();
     HTTPSamplerProxyWrapper sampler =
         (HTTPSamplerProxyWrapper) simplePageControllerTemplate.generate().getChilds().get(0);
 
@@ -66,9 +66,9 @@ class SimplePageControllerTemplateTest extends AbstractJmcCoreTest {
   @Test
   void testThreeParam() {
 
-    JmcTemplate<RecordingControllerWrapper> simplePageControllerTemplate =
+    JmcTemplate<GenericControllerWrapper<?, ?>> simplePageControllerTemplate =
         new SimplePageControllerTemplate(NAME, PATH, DOMAIN);
-    RecordingControllerWrapper controller = simplePageControllerTemplate.generate();
+    GenericControllerWrapper<?, ?> controller = simplePageControllerTemplate.generate();
     HTTPSamplerProxyWrapper sampler =
         (HTTPSamplerProxyWrapper) simplePageControllerTemplate.generate().getChilds().get(0);
 
