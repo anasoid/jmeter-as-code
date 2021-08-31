@@ -20,6 +20,8 @@ package org.anasoid.jmc.core.wrapper.template.samplers;
 
 import java.util.Optional;
 import org.anasoid.jmc.core.wrapper.JmcWrapperBuilder;
+import org.anasoid.jmc.core.wrapper.jmeter.control.GenericControllerWrapper;
+import org.anasoid.jmc.core.wrapper.jmeter.control.GenericControllerWrapper.GenericControllerWrapperBuilder;
 import org.anasoid.jmc.core.wrapper.jmeter.control.RecordingControllerWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.TestElementTreeNodeWrapper;
 import org.anasoid.jmc.core.wrapper.template.AbstractJmcTemplate;
@@ -27,10 +29,10 @@ import org.anasoid.jmc.core.wrapper.template.AbstractJmcTemplate;
 /** Abstract controller template that include simper in controller. */
 public abstract class AbstractSamplerControllerTemplate
     extends AbstractJmcTemplate<
-        RecordingControllerWrapper, RecordingControllerWrapper.RecordingControllerWrapperBuilder> {
+        GenericControllerWrapper<?, ?>, GenericControllerWrapper.GenericControllerWrapperBuilder> {
 
   @Override
-  protected void prepareWrapper(RecordingControllerWrapper wrapper) {
+  protected void prepareWrapper(GenericControllerWrapper wrapper) {
     super.prepareWrapper(wrapper);
     if (wrapper.getName() == null) {
 
@@ -44,9 +46,8 @@ public abstract class AbstractSamplerControllerTemplate
   }
 
   @Override
-  protected JmcWrapperBuilder<RecordingControllerWrapper> init() {
-    RecordingControllerWrapper.RecordingControllerWrapperBuilder builder =
-        RecordingControllerWrapper.builder();
+  protected JmcWrapperBuilder<GenericControllerWrapperBuilder> init() {
+    GenericControllerWrapperBuilder builder = createMainController();
 
     beforeMainSampler(builder);
     initMainSampler(builder);
@@ -55,23 +56,30 @@ public abstract class AbstractSamplerControllerTemplate
     return builder;
   }
 
+  /**
+   * Create Main Controller.
+   *
+   * @return main controller.
+   */
+  protected GenericControllerWrapperBuilder createMainController() {
+
+    return RecordingControllerWrapper.builder();
+  }
+
   /** Init Sampler, and customize it. */
-  protected abstract void initMainSampler(
-      RecordingControllerWrapper.RecordingControllerWrapperBuilder controller);
+  protected abstract void initMainSampler(GenericControllerWrapperBuilder controller);
 
   /**
    * Before Add Main sampler.
    *
    * @param controller main controller.
    */
-  protected void beforeMainSampler(
-      RecordingControllerWrapper.RecordingControllerWrapperBuilder controller) {}
+  protected void beforeMainSampler(GenericControllerWrapperBuilder controller) {}
 
   /**
    * After Add Main sampler.
    *
    * @param controller main controller.
    */
-  protected void afterMainSampler(
-      RecordingControllerWrapper.RecordingControllerWrapperBuilder controller) {}
+  protected void afterMainSampler(GenericControllerWrapperBuilder controller) {}
 }
