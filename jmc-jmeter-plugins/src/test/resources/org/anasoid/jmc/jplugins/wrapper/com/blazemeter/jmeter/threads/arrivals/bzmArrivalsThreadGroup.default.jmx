@@ -22,7 +22,7 @@
         <stringProp name="LogFilename"></stringProp>
         <stringProp name="Iterations"></stringProp>
         <stringProp name="ConcurrencyLimit"></stringProp>
-        <stringProp name="Unit">S</stringProp>
+        <stringProp name="Unit">M</stringProp>
       </com.blazemeter.jmeter.threads.arrivals.ArrivalsThreadGroup>
       <hashTree/>
     </hashTree>
