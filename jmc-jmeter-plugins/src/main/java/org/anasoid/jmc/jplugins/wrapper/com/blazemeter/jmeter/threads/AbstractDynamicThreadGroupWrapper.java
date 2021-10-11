@@ -19,6 +19,9 @@
 package org.anasoid.jmc.jplugins.wrapper.com.blazemeter.jmeter.threads;
 
 import com.blazemeter.jmeter.threads.AbstractDynamicThreadGroup;
+import lombok.Builder.Default;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmc.core.xstream.annotations.JmcProperty;
 import org.anasoid.jmc.jplugins.wrapper.com.blazemeter.jmeter.control.VirtualUserControllerWrapper;
@@ -35,7 +38,10 @@ public abstract class AbstractDynamicThreadGroupWrapper<
     extends AbstractDynamicThreadGroupModelWrapper<F, G> {
 
   @JmcProperty(value = AbstractDynamicThreadGroup.UNIT)
-  public static final String UNIT = "S";
+  @Getter
+  @Setter
+  @Default
+  public UNIT unit = UNIT.MINUTE;
 
   @Override
   public void internalInit() {
@@ -43,5 +49,24 @@ public abstract class AbstractDynamicThreadGroupWrapper<
 
     samplerController =
         VirtualUserControllerWrapper.builder().withName(null).withEnabled(null).build();
+  }
+
+  /** enum for unit second or minute. */
+  public enum UNIT {
+    /** Minute. */
+    MINUTE("M"),
+    /** Second. */
+    SECOND("S");
+
+    public final String value;
+
+    UNIT(String value) {
+      this.value = value;
+    }
+
+    @Override
+    public String toString() {
+      return value;
+    }
   }
 }

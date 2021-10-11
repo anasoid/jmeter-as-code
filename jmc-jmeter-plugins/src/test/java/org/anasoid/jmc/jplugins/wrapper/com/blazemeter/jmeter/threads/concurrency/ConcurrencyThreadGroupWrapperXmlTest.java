@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.TestPlanWrapper;
 import org.anasoid.jmc.jplugins.AbstractJmcJmeterPluginTest;
+import org.anasoid.jmc.jplugins.wrapper.com.blazemeter.jmeter.threads.AbstractDynamicThreadGroupWrapper.UNIT;
 import org.anasoid.jmc.test.utils.SetterTestUtils;
 import org.junit.jupiter.api.Test;
 /*
@@ -66,6 +67,7 @@ class ConcurrencyThreadGroupWrapperXmlTest extends AbstractJmcJmeterPluginTest {
                     .withSteps(5)
                     .withHold(10)
                     .withIterations(100)
+                    .withUnit(UNIT.SECOND)
                     .withLogFilename("file.log")
                     .build())
             .build();

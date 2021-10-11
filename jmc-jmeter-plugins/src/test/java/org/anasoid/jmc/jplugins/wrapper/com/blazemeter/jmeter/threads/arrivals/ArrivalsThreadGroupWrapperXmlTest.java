@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.TestPlanWrapper;
 import org.anasoid.jmc.jplugins.AbstractJmcJmeterPluginTest;
+import org.anasoid.jmc.jplugins.wrapper.com.blazemeter.jmeter.threads.AbstractDynamicThreadGroupWrapper.UNIT;
 import org.anasoid.jmc.test.utils.SetterTestUtils;
 import org.junit.jupiter.api.Test;
 /*
@@ -27,8 +28,7 @@ import org.junit.jupiter.api.Test;
 
 class ArrivalsThreadGroupWrapperXmlTest extends AbstractJmcJmeterPluginTest {
 
-  private static final String PARENT_PATH =
-      ROOT_PATH + "/com/blazemeter/jmeter/threads/arrivals";
+  private static final String PARENT_PATH = ROOT_PATH + "/com/blazemeter/jmeter/threads/arrivals";
 
   private static final String NODE_NAME = ArrivalsThreadGroup.class.getName();
 
@@ -64,6 +64,7 @@ class ArrivalsThreadGroupWrapperXmlTest extends AbstractJmcJmeterPluginTest {
                     .withIterations(100)
                     .withLogFilename("file.log")
                     .withConcurrencyLimit(4)
+                    .withUnit(UNIT.SECOND)
                     .build())
             .build();
 

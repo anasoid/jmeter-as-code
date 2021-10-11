@@ -4,6 +4,7 @@ import com.blazemeter.jmeter.threads.arrivals.FreeFormArrivalsThreadGroup;
 import java.io.IOException;
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.TestPlanWrapper;
 import org.anasoid.jmc.jplugins.AbstractJmcJmeterPluginTest;
+import org.anasoid.jmc.jplugins.wrapper.com.blazemeter.jmeter.threads.AbstractDynamicThreadGroupWrapper.UNIT;
 import org.junit.jupiter.api.Test;
 /*
  * Copyright 2020-2021 the original author or authors.
@@ -51,6 +52,7 @@ class FreeFormArrivalsThreadGroupWrapperXmlTest extends AbstractJmcJmeterPluginT
                     .withIterations(100)
                     .withLogFilename("file.log")
                     .withConcurrencyLimit(2)
+                    .withUnit(UNIT.SECOND)
                     .addSchedule(1, 10, 60)
                     .addSchedule(2, 20, 30)
                     .build())
