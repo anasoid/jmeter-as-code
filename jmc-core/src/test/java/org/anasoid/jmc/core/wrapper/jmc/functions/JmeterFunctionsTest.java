@@ -179,9 +179,9 @@ class JmeterFunctionsTest {
 
   @Test
   void property() {
-    Assertions.assertEquals("${__property(me,,)}", JmeterFunctions.property("me"));
+    Assertions.assertEquals("${__P(me,)}", JmeterFunctions.property("me"));
     Assertions.assertEquals(
-        "${__property(me,,default)}", JmeterFunctions.property("me", "default"));
+        "${__P(me,default)}", JmeterFunctions.property("me", "default"));
     Assertions.assertEquals(
         "${__property(me,var,default)}",
         JmeterFunctions.property("me", new Variable("var"), "default"));
