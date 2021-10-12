@@ -715,7 +715,11 @@ public final class JmeterFunctions {
    */
   public static String property(
       @NonNull String propertyName, Variable variableName, String defaultValue) {
-    return FunctionsUtils.function("property", propertyName, variableName, defaultValue);
+    if (variableName == null) {
+      return FunctionsUtils.function("P", propertyName, defaultValue);
+    } else {
+      return FunctionsUtils.function("property", propertyName, variableName, defaultValue);
+    }
   }
 
   /**
