@@ -29,8 +29,8 @@ dependencies {
         exclude group: 'org.apache.jmeter', module: 'bom'
     }
 
-    //5 Additional Graphs
-    //https://jmeter-plugins.org/?search=jpgc-graphs-additional
+    //Random CSV
+    //https://github.com/Blazemeter/jmeter-bzm-plugins/blob/master/random-csv-data-set/RandomCSVDataSetConfig.md
     implementation("com.blazemeter:jmeter-plugins-random-csv-data-set:$jpgcrandomcsvVersion") {
         exclude group: 'org.apache.jmeter', module: 'bom'
     }
@@ -38,6 +38,12 @@ dependencies {
     //Set Variables Action
     //https://jmeter-plugins.org/?search=jpgc-prmctl
     implementation("kg.apc:jmeter-plugins-prmctl:$jpprmctlVersion") {
+        exclude group: 'org.apache.jmeter', module: 'bom'
+    }
+
+    //Set Variables Action
+    //https://jmeter-plugins.org/?search=jpgc-prmctl
+    implementation("kg.apc:jmeter-plugins-synthesis:$synthesisVersion") {
         exclude group: 'org.apache.jmeter', module: 'bom'
     }
 }
