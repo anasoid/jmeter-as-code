@@ -103,7 +103,11 @@ subprojects {
             logger.lifecycle("Running test: " + descriptor)
         }
     }
-
+    tasks.whenTaskAdded {task ->
+        if(task.name.equals("distZip") || task.name.equals("distTar")) {
+            task.enabled = false
+        }
+    }
 
     dependencies {
 
