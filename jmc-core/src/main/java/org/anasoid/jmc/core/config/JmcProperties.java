@@ -42,7 +42,7 @@ class JmcProperties {
   private static final String USER_CONFIG_FILE = "jmc-user.properties";
   private static final String SYSTEM_CONFIG_FILES_KEY = "jmc.configs";
   private static final String ENV_CONFIG_FILES_KEY = "JMC_CONFIGS";
-  private static final String FILE_SEPARATOR = ":";
+  private static final String FILE_SEPARATOR = ";";
 
   private final Map<String, String> properties;
 

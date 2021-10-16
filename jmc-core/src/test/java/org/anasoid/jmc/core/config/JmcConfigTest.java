@@ -71,13 +71,13 @@ class JmcConfigTest {
     new EnvironmentVariables(
             "JMC_CONFIGS",
             "org/anasoid/jmc/core/config/JmcConfigTest.env"
-                + ":org/anasoid/jmc/core/config/JmcConfigTest1.env")
+                + ";org/anasoid/jmc/core/config/JmcConfigTest1.env")
         .execute(
             () -> {
               new SystemProperties(
                       "jmc.configs",
                       "org/anasoid/jmc/core/config/JmcConfigTest.sys.prop"
-                          + ":org/anasoid/jmc/core/config/JmcConfigTest1.sys.prop")
+                          + ";org/anasoid/jmc/core/config/JmcConfigTest1.sys.prop")
                   .execute(
                       () -> {
                         Assertions.assertNotNull(System.getProperty("jmc.configs"));
