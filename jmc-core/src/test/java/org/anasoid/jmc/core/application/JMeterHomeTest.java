@@ -2,7 +2,6 @@ package org.anasoid.jmc.core.application;
 
 import static org.mockito.Mockito.doReturn;
 
-import java.util.UUID;
 import org.anasoid.jmc.core.config.JmcConfig;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -60,14 +59,7 @@ class JMeterHomeTest {
   void testisValidJmeterHomeFail() {
 
     Assertions.assertFalse(
-        JMeterHome.getInstance().isValidJmeterHome(UUID.randomUUID().toString()));
-  }
-
-  @Test
-  void testisValidJmeterHomeSuccess() {
-
-    Assertions.assertTrue(
-        JMeterHome.getInstance().isValidJmeterHome(JMeterHome.getInstance().getJmeterHome()));
+        JMeterHome.getInstance().isValidJmeterHome(System.getProperty("java.io.tmpdir")));
   }
 
   @Test
@@ -77,6 +69,7 @@ class JMeterHomeTest {
 
     doReturn(null).when(jmeterHomeSpy).getJmeterHome();
 
-    Assertions.assertFalse(jmeterHomeSpy.init());
+    // Using temporary JMC home.
+    Assertions.assertTrue(jmeterHomeSpy.init());
   }
 }
