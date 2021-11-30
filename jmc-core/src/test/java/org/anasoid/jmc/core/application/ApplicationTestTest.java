@@ -42,15 +42,15 @@ class ApplicationTestTest {
 
     TestElementWrapper result = applicationTest.toJmx(wr);
 
-    Assertions.assertEquals(4, result.getChilds().size());
+    Assertions.assertEquals(4, result.getChildren().size());
     ChildTestElementWrapperTesting child1 =
-        (ChildTestElementWrapperTesting) result.getChilds().get(0);
+        (ChildTestElementWrapperTesting) result.getChildren().get(0);
     ChildTestElementWrapperTesting child2 =
-        (ChildTestElementWrapperTesting) result.getChilds().get(1);
+        (ChildTestElementWrapperTesting) result.getChildren().get(1);
     ChildTestElementWrapperTesting child3 =
-        (ChildTestElementWrapperTesting) result.getChilds().get(2);
+        (ChildTestElementWrapperTesting) result.getChildren().get(2);
     ChildTestElementWrapperTesting child4 =
-        (ChildTestElementWrapperTesting) result.getChilds().get(3);
+        (ChildTestElementWrapperTesting) result.getChildren().get(3);
 
     Assertions.assertEquals("newnode", child1.getName());
     Assertions.assertEquals("sub1", child2.getName());
@@ -119,7 +119,7 @@ class ApplicationTestTest {
         ParentTestElementWrapperTesting parent =
             (ParentTestElementWrapperTesting) testElementWrapper;
         parent
-            .getChilds()
+            .getChildren()
             .add(0, SubChildTestingElementWrapperTesting.builder().withName("newnode").build());
       } else if (testElementWrapper instanceof ChildTestElementWrapperTesting) {
         ChildTestElementWrapperTesting child = (ChildTestElementWrapperTesting) testElementWrapper;

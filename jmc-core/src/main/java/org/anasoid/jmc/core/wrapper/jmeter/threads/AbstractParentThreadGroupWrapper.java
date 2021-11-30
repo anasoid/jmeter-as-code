@@ -86,7 +86,7 @@ public abstract class AbstractParentThreadGroupWrapper<
 
     /** Add samplers as child in tree. */
     public B addSamplers(List<SamplerWrapper<?>> samplers) { // NOSONAR
-      return withChilds(samplers);
+      return withChildren(samplers);
     }
 
     /** Add Controller. */
@@ -101,7 +101,7 @@ public abstract class AbstractParentThreadGroupWrapper<
 
     /** Add Controllers as child in tree. */
     public B addControllers(List<ControllerWrapper<?>> controllers) { // NOSONAR
-      return withChilds(controllers);
+      return withChildren(controllers);
     }
   }
 }

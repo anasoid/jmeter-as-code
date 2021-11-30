@@ -49,7 +49,7 @@ public class ChildrenTypeValidator implements NodeValidator {
   @SuppressWarnings("PMD.AvoidUncheckedExceptionsInSignatures")
   public void validate(TestElementWrapper testElementWrapper)
       throws ConversionIllegalStateException {
-    List<TestElementWrapper<?>> children = testElementWrapper.getChilds();
+    List<TestElementWrapper<?>> children = testElementWrapper.getChildren();
     Set<Class<?>> types = getTypes(testElementWrapper);
     if (children != null && !types.isEmpty()) {
 

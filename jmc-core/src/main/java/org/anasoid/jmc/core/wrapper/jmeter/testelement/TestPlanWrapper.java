@@ -136,7 +136,7 @@ public class TestPlanWrapper extends AbstractTestElementWrapper<TestPlan>
      * @param threads list of threads.
      */
     public B addThreads(List<ThreadWrapper<?>> threads) { // NOSONAR
-      return super.withChilds(threads);
+      return super.withChildren(threads);
     }
 
     protected B withArguments(List<ArgumentWrapper> arguments) {
@@ -191,7 +191,7 @@ public class TestPlanWrapper extends AbstractTestElementWrapper<TestPlan>
 
     /** Add TestFragment as child in tree. */
     public B addTestFragments(List<TestFragmentWrapper> fragments) {
-      return withChilds(fragments);
+      return withChildren(fragments);
     }
   }
 }

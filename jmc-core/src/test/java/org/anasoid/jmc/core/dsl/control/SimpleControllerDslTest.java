@@ -49,7 +49,7 @@ class SimpleControllerDslTest {
 
     Assertions.assertEquals(
         "sampler",
-        ((HTTPSamplerProxyWrapper) simpleControllerWrapper.getChilds().get(0)).getName());
+        ((HTTPSamplerProxyWrapper) simpleControllerWrapper.getChildren().get(0)).getName());
   }
 
   @Test
@@ -61,7 +61,7 @@ class SimpleControllerDslTest {
 
     Assertions.assertEquals(
         "sampler",
-        ((HTTPSamplerProxyWrapper) simpleControllerWrapper.getChilds().get(0)).getName());
+        ((HTTPSamplerProxyWrapper) simpleControllerWrapper.getChildren().get(0)).getName());
   }
 
   @Test
@@ -75,7 +75,8 @@ class SimpleControllerDslTest {
             .build();
 
     Assertions.assertEquals(
-        "child", ((SimpleControllerWrapper) simpleControllerWrapper.getChilds().get(0)).getName());
+        "child",
+        ((SimpleControllerWrapper) simpleControllerWrapper.getChildren().get(0)).getName());
   }
 
   @Test
@@ -90,7 +91,7 @@ class SimpleControllerDslTest {
 
     Assertions.assertEquals(
         "controller",
-        ((SimpleControllerWrapper) simpleControllerWrapper.getChilds().get(0)).getName());
+        ((SimpleControllerWrapper) simpleControllerWrapper.getChildren().get(0)).getName());
   }
 
   class MySampler

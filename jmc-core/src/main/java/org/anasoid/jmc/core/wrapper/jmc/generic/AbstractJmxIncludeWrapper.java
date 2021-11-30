@@ -200,7 +200,7 @@ public abstract class AbstractJmxIncludeWrapper<T> implements TestElementWrapper
   }
 
   @Override
-  public List<TestElementWrapper<?>> getChilds() {
+  public List<TestElementWrapper<?>> getChildren() {
     return null;
   }
 

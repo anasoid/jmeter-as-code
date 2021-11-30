@@ -48,7 +48,7 @@ class ResponseAssertionWrapperCoreTest extends AbstractJmcCoreTest {
     ParentTestElementWrapperTesting wrapper =
         (ParentTestElementWrapperTesting) applicationTest.toJmx(wr);
     Assertions.assertEquals(
-        "Response Assertion", ((ResponseAssertionWrapper) wrapper.getChilds().get(0)).getName());
+        "Response Assertion", ((ResponseAssertionWrapper) wrapper.getChildren().get(0)).getName());
   }
 
   class MyAssertion

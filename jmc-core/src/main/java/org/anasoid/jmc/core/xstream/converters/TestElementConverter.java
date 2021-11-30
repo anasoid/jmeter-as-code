@@ -126,14 +126,14 @@ public class TestElementConverter implements Converter {
     }
     if (source instanceof TestElementWrapper) {
 
-      List<TestElementWrapper<?>> childs = ((TestElementWrapper) source).getChilds();
+      List<TestElementWrapper<?>> children = ((TestElementWrapper) source).getChildren();
       if (closeFirst) {
         writer.endNode();
       }
       writer.startNode("hashTree");
-      if (childs != null) {
+      if (children != null) {
         int i = 0;
-        for (TestElementWrapper<?> child : childs) {
+        for (TestElementWrapper<?> child : children) {
 
           if (child instanceof AbstractJmxIncludeWrapper) {
             include((AbstractJmxIncludeWrapper) child, writer, context, i);
@@ -168,7 +168,7 @@ public class TestElementConverter implements Converter {
         }
         jmcXstreamWriter.writeRaw("\n");
         jmcXstreamWriter.writeRaw(result);
-        if (CollectionUtils.isNotEmpty(includeWrapper.getChilds())) {
+        if (CollectionUtils.isNotEmpty(includeWrapper.getChildren())) {
           appendChild(includeWrapper, writer, context, false);
         }
       }

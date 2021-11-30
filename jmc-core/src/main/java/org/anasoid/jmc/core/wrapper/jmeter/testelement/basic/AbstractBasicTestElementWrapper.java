@@ -90,7 +90,7 @@ public abstract class AbstractBasicTestElementWrapper<T extends AbstractTestElem
   }
 
   @Override
-  public List<TestElementWrapper<?>> getChilds() {
+  public List<TestElementWrapper<?>> getChildren() {
     return null;
   }
 
