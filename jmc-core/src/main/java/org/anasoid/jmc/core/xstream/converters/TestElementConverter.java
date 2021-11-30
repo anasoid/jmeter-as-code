@@ -41,6 +41,7 @@ import org.anasoid.jmc.core.xstream.ConverterBeanUtils;
 import org.anasoid.jmc.core.xstream.annotations.JmcCollection;
 import org.anasoid.jmc.core.xstream.annotations.JmcProperty;
 import org.anasoid.jmc.core.xstream.exceptions.ConversionException;
+import org.anasoid.jmc.core.xstream.exceptions.ConversionExceptionHelper;
 import org.anasoid.jmc.core.xstream.io.xml.JmcXstreamWriter;
 import org.apache.commons.collections.CollectionUtils;
 
@@ -53,27 +54,41 @@ public class TestElementConverter implements Converter {
   @Override
   public void marshal(Object source, HierarchicalStreamWriter writer, MarshallingContext context) {
 
-    InitHelper.init(source);
-    validate(source);
+    AccessibleObject currentField = null;
+    try {
+      InitHelper.init(source);
+      validate(source);
 
-    List<AccessibleObject> allFieldsMethods = new ArrayList<>();
-    allFieldsMethods.addAll(ConverterBeanUtils.getFields(source));
-    allFieldsMethods.addAll(ConverterBeanUtils.getMethods(source));
+      List<AccessibleObject> allFieldsMethods = new ArrayList<>();
+      allFieldsMethods.addAll(ConverterBeanUtils.getFields(source));
+      allFieldsMethods.addAll(ConverterBeanUtils.getMethods(source));
 
-    List<AccessibleObject> attributes = ConverterBeanUtils.getAttributeOnly(allFieldsMethods);
-    List<AccessibleObject> nonAttributes = new ArrayList<>(allFieldsMethods);
-    nonAttributes.removeAll(attributes);
+      List<AccessibleObject> attributes = ConverterBeanUtils.getAttributeOnly(allFieldsMethods);
+      List<AccessibleObject> nonAttributes = new ArrayList<>(allFieldsMethods);
+      nonAttributes.removeAll(attributes);
 
-    // first convert attributes
-    for (AccessibleObject accessibleObject : attributes) {
-      convertField(source, accessibleObject, writer, context);
+      // first convert attributes
+      for (AccessibleObject accessibleObject : attributes) {
+        currentField = accessibleObject;
+        convertField(source, accessibleObject, writer, context);
+      }
+      // second convert non attributes
+      for (AccessibleObject accessibleObject : nonAttributes) {
+        currentField = accessibleObject;
+        convertField(source, accessibleObject, writer, context);
+      }
+      currentField = null; // NOPMD clean currentField.
+
+      appendChild(source, writer, context, true);
+    } catch (ConversionException e) {
+      ConversionExceptionHelper.setNode(e, source);
+      ConversionExceptionHelper.setField(e, currentField);
+      throw e;
+    } catch (Exception e) { // NOPMD - add inf to exception.
+      ConversionException ce = new ConversionException(e, source);
+      ConversionExceptionHelper.setField(ce, currentField);
+      throw ce;
     }
-    // second convert non attributes
-    for (AccessibleObject accessibleObject : nonAttributes) {
-      convertField(source, accessibleObject, writer, context);
-    }
-
-    appendChild(source, writer, context, true);
   }
 
   /** Convert field/method. */
