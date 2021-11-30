@@ -105,6 +105,7 @@ public final class JMeterHome {
           if ("/bin".startsWith(parent)) {
             Path targetPath = binDir.toPath().resolve(configBinDir.relativize(p).toString());
             Files.copy(p, targetPath);
+            targetPath.toFile().deleteOnExit();
           }
         }
       }
