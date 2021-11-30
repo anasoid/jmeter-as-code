@@ -39,17 +39,6 @@ class JMeterHomeTest {
   }
 
   @Test
-  void testGetJmeterHomeSystem() {
-
-    try (MockedStatic<JmcConfig> JmcConfigUtilities = Mockito.mockStatic(JmcConfig.class)) {
-
-      JmcConfigUtilities.when(() -> JmcConfig.getProperty(JMeterHome.JMETER_HOME_PROPERTY))
-          .thenReturn(null);
-      Assertions.assertNotNull(JMeterHome.getInstance().getJmeterHome());
-    }
-  }
-
-  @Test
   void testisValidJmeterHomeNull() {
 
     Assertions.assertFalse(JMeterHome.getInstance().isValidJmeterHome(null));
