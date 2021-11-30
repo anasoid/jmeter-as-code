@@ -25,18 +25,18 @@ jobs:
           path: |
             ~/.gradle/caches
             ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-main-V2-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('gradle.properties') }}
+          key: ${{ runner.os }}-gradle-main-V3-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('gradle.properties') }}
           restore-keys: |
-            ${{ runner.os }}-gradle-main-V2
+            ${{ runner.os }}-gradle-main-V3
 
       - name: Cache Sonar
         uses: actions/cache@v2
         with:
           path: |
             ~/.sonar
-          key: ${{ runner.os }}-sonar-V2-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('gradle.properties') }}
+          key: ${{ runner.os }}-sonar-V3-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('gradle.properties') }}
           restore-keys: |
-            ${{ runner.os }}-sonar-V2
+            ${{ runner.os }}-sonar-V3
 
 
 
