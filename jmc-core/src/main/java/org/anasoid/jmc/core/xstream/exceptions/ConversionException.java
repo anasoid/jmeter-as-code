@@ -26,8 +26,8 @@ import java.lang.reflect.Method;
 public class ConversionException extends RuntimeException {
 
   static final long serialVersionUID = -7034897186545466939L;
-  private Object node;
-  private AccessibleObject field;
+  private transient Object node;
+  private transient AccessibleObject field;
 
   public ConversionException(String message) {
     super(message);
