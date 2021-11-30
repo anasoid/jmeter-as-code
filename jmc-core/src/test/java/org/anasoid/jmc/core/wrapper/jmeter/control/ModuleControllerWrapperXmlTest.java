@@ -27,4 +27,24 @@ class ModuleControllerWrapperXmlTest extends AbstractJmcCoreTest {
 
     checkWrapper(testPlanWrapper, PARENT_PATH + "/moduleController.default.jmx", NODE_NAME);
   }
+
+  @Test
+  void testDefaultName() throws IOException {
+
+    SimpleControllerWrapper s1 = SimpleControllerWrapper.builder().build();
+    TestPlanWrapper testPlanWrapper =
+        TestPlanWrapper.builder()
+            .addThread(
+                ThreadGroupWrapper.builder()
+                    .addController(
+                        ModuleControllerWrapper.builder()
+                            .withName("Module Controller")
+                            .withModule("Simple Controller")
+                            .build())
+                    .build())
+            .addTestFragment(TestFragmentWrapper.builder().addController(s1).build())
+            .build();
+
+    checkWrapper(testPlanWrapper, PARENT_PATH + "/moduleController.default.jmx", NODE_NAME);
+  }
 }

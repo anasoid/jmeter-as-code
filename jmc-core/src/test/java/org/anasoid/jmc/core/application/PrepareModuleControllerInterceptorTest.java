@@ -36,6 +36,7 @@ class PrepareModuleControllerInterceptorTest {
 
     TestFragmentWrapper testFragmentWrapper =
         TestFragmentWrapper.builder()
+            .withName("Test Fragment")
             .addController(RecordingControllerWrapper.builder().addController(c1).build())
             .addController(c2)
             .build();
@@ -49,7 +50,7 @@ class PrepareModuleControllerInterceptorTest {
         new PrepareModuleControllerInterceptor();
     List<List<AbstractTestElementWrapper<?>>> result =
         prepareModuleControllerInterceptor.findTarget(
-            testPlanWrapper, testFragmentWrapper, c1, new ArrayList<>());
+            testPlanWrapper, testFragmentWrapper, c1.getName(), new ArrayList<>());
 
     Assertions.assertFalse(result.isEmpty());
   }
