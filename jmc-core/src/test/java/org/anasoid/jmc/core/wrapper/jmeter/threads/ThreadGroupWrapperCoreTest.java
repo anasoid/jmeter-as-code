@@ -53,7 +53,7 @@ class ThreadGroupWrapperCoreTest extends AbstractJmcCoreTest {
         ThreadGroupWrapper.builder().withName("Parent").addSampler(new MySampler()).build();
 
     Assertions.assertEquals(
-        "sampler", ((HTTPSamplerProxyWrapper) threadGroupWrapper.getChilds().get(0)).getName());
+        "sampler", ((HTTPSamplerProxyWrapper) threadGroupWrapper.getChildren().get(0)).getName());
   }
 
   @Test
@@ -64,7 +64,8 @@ class ThreadGroupWrapperCoreTest extends AbstractJmcCoreTest {
         ThreadGroupWrapper.builder().withName("Parent").addController(new MyController()).build();
 
     Assertions.assertEquals(
-        "controller", ((SimpleControllerWrapper) threadGroupWrapper.getChilds().get(0)).getName());
+        "controller",
+        ((SimpleControllerWrapper) threadGroupWrapper.getChildren().get(0)).getName());
   }
 
   class MySampler

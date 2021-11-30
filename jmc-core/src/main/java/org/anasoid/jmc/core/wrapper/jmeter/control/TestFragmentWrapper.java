@@ -53,7 +53,7 @@ public class TestFragmentWrapper extends AbstractTestElementWrapper<TestFragment
 
     /** Add Controllers as child in tree. */
     public B addControllers(List<ControllerWrapper<?>> controllers) { // NOSONAR
-      return withChilds(controllers);
+      return withChildren(controllers);
     }
   }
 }

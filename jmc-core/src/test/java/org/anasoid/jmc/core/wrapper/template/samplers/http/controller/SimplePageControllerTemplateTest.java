@@ -38,7 +38,7 @@ class SimplePageControllerTemplateTest extends AbstractJmcCoreTest {
         new SimplePageControllerTemplate(NAME, PATH, DOMAIN, HttpMethod.POST);
     GenericControllerWrapper<?, ?> controller = simplePageControllerTemplate.generate();
     HTTPSamplerProxyWrapper sampler =
-        (HTTPSamplerProxyWrapper) simplePageControllerTemplate.generate().getChilds().get(0);
+        (HTTPSamplerProxyWrapper) simplePageControllerTemplate.generate().getChildren().get(0);
 
     Assertions.assertEquals(NAME + " CTRL", controller.getName());
     Assertions.assertEquals(NAME, sampler.getName());
@@ -54,7 +54,7 @@ class SimplePageControllerTemplateTest extends AbstractJmcCoreTest {
         new SimplePageControllerTemplate(NAME, PATH);
     GenericControllerWrapper<?, ?> controller = simplePageControllerTemplate.generate();
     HTTPSamplerProxyWrapper sampler =
-        (HTTPSamplerProxyWrapper) simplePageControllerTemplate.generate().getChilds().get(0);
+        (HTTPSamplerProxyWrapper) simplePageControllerTemplate.generate().getChildren().get(0);
 
     Assertions.assertEquals(NAME + " CTRL", controller.getName());
     Assertions.assertEquals(NAME, sampler.getName());
@@ -70,7 +70,7 @@ class SimplePageControllerTemplateTest extends AbstractJmcCoreTest {
         new SimplePageControllerTemplate(NAME, PATH, DOMAIN);
     GenericControllerWrapper<?, ?> controller = simplePageControllerTemplate.generate();
     HTTPSamplerProxyWrapper sampler =
-        (HTTPSamplerProxyWrapper) simplePageControllerTemplate.generate().getChilds().get(0);
+        (HTTPSamplerProxyWrapper) simplePageControllerTemplate.generate().getChildren().get(0);
 
     Assertions.assertEquals(NAME + " CTRL", controller.getName());
     Assertions.assertEquals(NAME, sampler.getName());

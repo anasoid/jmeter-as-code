@@ -57,7 +57,7 @@ public class ThreadGroupJmxIncludeWrapper
 
     /** Add samplers as child in tree. */
     public B addSamplers(List<AbstractSamplerWrapper<?, ?>> samplers) { // NOSONAR
-      return withChilds(samplers);
+      return withChildren(samplers);
     }
 
     /** Add Controller. */
@@ -72,7 +72,7 @@ public class ThreadGroupJmxIncludeWrapper
 
     /** Add Controllers as child in tree. */
     public B addControllers(List<ControllerWrapper<?>> controllers) { // NOSONAR
-      return withChilds(controllers);
+      return withChildren(controllers);
     }
   }
 }

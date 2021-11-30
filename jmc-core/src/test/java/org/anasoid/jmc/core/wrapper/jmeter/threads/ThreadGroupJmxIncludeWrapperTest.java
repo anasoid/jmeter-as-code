@@ -44,7 +44,7 @@ class ThreadGroupJmxIncludeWrapperTest extends AbstractJmcCoreTest {
     StringWriter wr = new StringWriter(); // NOPMD
     wrapper = (ThreadGroupJmxIncludeWrapper) applicationTest.toJmx(wr);
     Assertions.assertEquals(
-        "ctrl", ((ForeachControllerWrapper) wrapper.getChilds().get(0)).getName());
+        "ctrl", ((ForeachControllerWrapper) wrapper.getChildren().get(0)).getName());
   }
 
   @Test
@@ -58,7 +58,7 @@ class ThreadGroupJmxIncludeWrapperTest extends AbstractJmcCoreTest {
     StringWriter wr = new StringWriter(); // NOPMD
     wrapper = (ThreadGroupJmxIncludeWrapper) applicationTest.toJmx(wr);
     Assertions.assertTrue(
-        ((GenericControllerWrapper) wrapper.getChilds().get(0)).getName().startsWith("page"));
+        ((GenericControllerWrapper) wrapper.getChildren().get(0)).getName().startsWith("page"));
   }
 
   @Test
@@ -72,7 +72,7 @@ class ThreadGroupJmxIncludeWrapperTest extends AbstractJmcCoreTest {
     StringWriter wr = new StringWriter(); // NOPMD
     wrapper = (ThreadGroupJmxIncludeWrapper) applicationTest.toJmx(wr);
     Assertions.assertEquals(
-        "sampler", ((DebugSamplerWrapper) wrapper.getChilds().get(0)).getName());
+        "sampler", ((DebugSamplerWrapper) wrapper.getChildren().get(0)).getName());
   }
 
   @Test
@@ -86,6 +86,6 @@ class ThreadGroupJmxIncludeWrapperTest extends AbstractJmcCoreTest {
     StringWriter wr = new StringWriter(); // NOPMD
     wrapper = (ThreadGroupJmxIncludeWrapper) applicationTest.toJmx(wr);
     Assertions.assertTrue(
-        ((AbstractSamplerWrapper) wrapper.getChilds().get(0)).getName().startsWith("page"));
+        ((AbstractSamplerWrapper) wrapper.getChildren().get(0)).getName().startsWith("page"));
   }
 }

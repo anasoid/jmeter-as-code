@@ -37,7 +37,7 @@ public abstract class AbstractSamplerControllerTemplate
     if (wrapper.getName() == null) {
 
       Optional<String> firstSampleName =
-          wrapper.getChilds().stream()
+          wrapper.getChildren().stream()
               .filter(TestElementTreeNodeWrapper.class::isInstance)
               .findFirst()
               .map(c -> ((TestElementTreeNodeWrapper) c).getName());

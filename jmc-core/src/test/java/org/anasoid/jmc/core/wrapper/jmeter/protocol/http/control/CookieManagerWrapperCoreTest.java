@@ -97,7 +97,7 @@ class CookieManagerWrapperCoreTest extends AbstractJmcCoreTest {
 
     Assertions.assertEquals(
         "HTTP Cookie Manager",
-        ((CookieManagerWrapper) parentTestElementWrapperTesting.getChilds().get(0)).getName());
+        ((CookieManagerWrapper) parentTestElementWrapperTesting.getChildren().get(0)).getName());
   }
 
   class MyConfig

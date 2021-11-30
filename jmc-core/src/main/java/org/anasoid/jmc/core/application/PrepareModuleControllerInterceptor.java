@@ -88,7 +88,7 @@ class PrepareModuleControllerInterceptor implements PrepareInterceptor {
 
     if (parentList.isEmpty()) {
       testElementLists =
-          testPlan.getChilds().stream()
+          testPlan.getChildren().stream()
               .filter(TestFragmentWrapper.class::isInstance)
               .filter(
                   c ->
@@ -98,7 +98,7 @@ class PrepareModuleControllerInterceptor implements PrepareInterceptor {
               .collect(Collectors.toList());
     } else {
       testElementLists =
-          parentList.get(parentList.size() - 1).getChilds().stream()
+          parentList.get(parentList.size() - 1).getChildren().stream()
               .filter(
                   c -> c instanceof ControllerWrapper && !(c instanceof ModuleControllerWrapper))
               .collect(Collectors.toList());

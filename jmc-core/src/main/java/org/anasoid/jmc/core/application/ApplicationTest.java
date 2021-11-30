@@ -187,8 +187,8 @@ public class ApplicationTest {
       }
 
       history.add(testElement);
-      if (CollectionUtils.isNotEmpty(testElement.getChilds())) {
-        for (TestElementWrapper<?> childElement : testElement.getChilds()) {
+      if (CollectionUtils.isNotEmpty(testElement.getChildren())) {
+        for (TestElementWrapper<?> childElement : testElement.getChildren()) {
           prepare(testPlan, childElement, interceptor, history);
         }
       }

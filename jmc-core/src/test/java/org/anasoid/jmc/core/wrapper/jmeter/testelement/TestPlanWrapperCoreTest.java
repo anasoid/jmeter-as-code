@@ -83,11 +83,11 @@ class TestPlanWrapperCoreTest extends AbstractJmcCoreTest {
         TestPlanWrapper.builder().withName("Parent").addThread(new MyThread()).build();
 
     Assertions.assertEquals(
-        "thread", ((ThreadGroupWrapper) testPlanWrapper.getChilds().get(0)).getName());
+        "thread", ((ThreadGroupWrapper) testPlanWrapper.getChildren().get(0)).getName());
     Assertions.assertEquals(
-        "100", ((ThreadGroupWrapper) testPlanWrapper.getChilds().get(0)).getDelay());
+        "100", ((ThreadGroupWrapper) testPlanWrapper.getChildren().get(0)).getDelay());
     Assertions.assertEquals(
-        "50", ((ThreadGroupWrapper) testPlanWrapper.getChilds().get(0)).getLoops());
+        "50", ((ThreadGroupWrapper) testPlanWrapper.getChildren().get(0)).getLoops());
   }
 
   class MyThread extends AbstractJmcTemplate<ThreadGroupWrapper, ThreadGroupWrapperBuilder> {

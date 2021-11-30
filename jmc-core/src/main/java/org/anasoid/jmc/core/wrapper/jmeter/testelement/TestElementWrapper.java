@@ -43,7 +43,7 @@ public interface TestElementWrapper<T> extends Serializable {
    *
    * @return list of child.
    */
-  List<TestElementWrapper<?>> getChilds();
+  List<TestElementWrapper<?>> getChildren();
 
   /**
    * Get Tags. set of tags to categorize eleemnt, this field are not part of Jmeter and will not be
