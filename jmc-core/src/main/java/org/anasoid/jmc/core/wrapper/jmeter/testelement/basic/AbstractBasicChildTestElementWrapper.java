@@ -54,4 +54,17 @@ public abstract class AbstractBasicChildTestElementWrapper<T extends AbstractTes
 
   /** enabled. */
   @XStreamAsAttribute @Builder.Default @Getter @Setter private boolean enabled = true;
+
+  @Override
+  public String toString() {
+    return this.getClass().getSimpleName()
+        + "{"
+        + "name='"
+        + name
+        + '\''
+        + ", comment='"
+        + comment
+        + '\''
+        + '}';
+  }
 }
