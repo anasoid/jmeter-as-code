@@ -39,6 +39,7 @@ public class ModuleControllerWrapper extends AbstractTestElementWrapper<ModuleCo
     implements JMeterGUIWrapper<ModuleControllerGui>, ControllerWrapper<ModuleController> {
 
   @XStreamOmitField @Getter @Setter private ControllerWrapper<?> module;
+  @XStreamOmitField @Getter @Setter private String moduleName;
   @XStreamOmitField @Getter @Setter private TestFragmentWrapper rootParent;
 
   @XStreamOmitField @Setter private List<String> nodePath;
@@ -62,15 +63,17 @@ public class ModuleControllerWrapper extends AbstractTestElementWrapper<ModuleCo
   @SuppressWarnings("PMD.AvoidDeeplyNestedIfStmts")
   protected void internalInit() {
     super.internalInit();
+    String nameTarget = moduleName;
     if (getModule() instanceof AbstractTestElementWrapper) {
       AbstractTestElementWrapper currentModule = (AbstractTestElementWrapper) getModule();
-      if (currentModule.getName() != null) {
-        if (getName() == null) {
-          setName("MD-> " + currentModule.getName());
-        }
-        if (getComment() == null) {
-          setComment("MD-> " + currentModule.getName());
-        }
+      nameTarget = currentModule.getName();
+    }
+    if (nameTarget != null) {
+      if (getName() == null) {
+        setName("MD-> " + nameTarget);
+      }
+      if (getComment() == null) {
+        setComment("MD-> " + nameTarget);
       }
     }
   }
@@ -79,6 +82,34 @@ public class ModuleControllerWrapper extends AbstractTestElementWrapper<ModuleCo
   public abstract static class ModuleControllerWrapperBuilder<
           C extends ModuleControllerWrapper, B extends ModuleControllerWrapperBuilder<C, B>>
       extends AbstractTestElementWrapper.AbstractTestElementWrapperBuilder<ModuleController, C, B> {
+
+    /** hide lombock method. */
+    private B withModuleName(String moduleName) { // NOPMD - hide lombok generate method
+      this.moduleName = moduleName;
+      return self();
+    }
+
+    /**
+     * set target module name.
+     *
+     * @param moduleName target module.
+     */
+    public B withModule(String moduleName) {
+      this.moduleName = moduleName;
+      return self();
+    }
+
+    /**
+     * set module with root parent.
+     *
+     * @param rootParent rootParent root parent of module, can be not direct parent.
+     * @param moduleName target module.
+     */
+    public B withModule(TestFragmentWrapper rootParent, String moduleName) {
+      withModule(moduleName);
+      withRootParent(rootParent);
+      return self();
+    }
 
     /**
      * set module.

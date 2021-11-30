@@ -53,6 +53,30 @@ class ModuleControllerWrapperTest extends AbstractJmcCoreTest {
   }
 
   @Test
+  void testDuplicateByName() throws IOException {
+
+    SimpleControllerWrapper s1 = SimpleControllerWrapper.builder().withName("s").build();
+    SimpleControllerWrapper s2 = SimpleControllerWrapper.builder().withName("s").build();
+    TestFragmentWrapper t1 = TestFragmentWrapper.builder().addController(s1).build();
+    TestFragmentWrapper t2 = TestFragmentWrapper.builder().addController(s2).build();
+    TestPlanWrapper testPlanWrapper =
+        TestPlanWrapper.builder()
+            .addThread(
+                ThreadGroupWrapper.builder()
+                    .addController(ModuleControllerWrapper.builder().withModule(s1).build())
+                    .build())
+            .addTestFragment(t1)
+            .addTestFragment(t2)
+            .build();
+    try {
+      toApplicationTest(testPlanWrapper, "MD");
+      Assertions.fail();
+    } catch (ConversionException e) {
+      Assertions.assertTrue(e.getMessage().contains("Ambiguous target"));
+    }
+  }
+
+  @Test
   void testDuplicateFailNameRootId() throws IOException {
 
     SimpleControllerWrapper s1 = SimpleControllerWrapper.builder().build();
@@ -72,7 +96,36 @@ class ModuleControllerWrapperTest extends AbstractJmcCoreTest {
       toApplicationTest(testPlanWrapper, "MD");
       Assertions.fail();
     } catch (ConversionException e) {
-      Assertions.assertTrue(e.getMessage().contains("Duplicate module target found (2)"));
+      Assertions.assertTrue(e.getMessage().contains("Ambiguous target for "));
+    }
+  }
+
+  @Test
+  void testUseNameAndReferenceIdFail() throws IOException {
+
+    SimpleControllerWrapper s1 = SimpleControllerWrapper.builder().build();
+    TestFragmentWrapper t1 = TestFragmentWrapper.builder().addController(s1).build();
+    TestFragmentWrapper t2 = TestFragmentWrapper.builder().addController(s1).build();
+    TestPlanWrapper testPlanWrapper =
+        TestPlanWrapper.builder()
+            .addThread(
+                ThreadGroupWrapper.builder()
+                    .addController(
+                        ModuleControllerWrapper.builder()
+                            .withModule(t1, s1)
+                            .withModule("target")
+                            .build())
+                    .build())
+            .addTestFragment(t1)
+            .addTestFragment(t2)
+            .build();
+
+    try {
+      toApplicationTest(testPlanWrapper, "MD");
+      Assertions.fail();
+    } catch (ConversionException e) {
+      Assertions.assertTrue(
+          e.getMessage().contains("Module target can be set by name or by reference "));
     }
   }
 
@@ -87,6 +140,25 @@ class ModuleControllerWrapperTest extends AbstractJmcCoreTest {
             .addThread(
                 ThreadGroupWrapper.builder()
                     .addController(ModuleControllerWrapper.builder().withModule(t1, s1).build())
+                    .build())
+            .addTestFragment(t1)
+            .addTestFragment(t2)
+            .build();
+
+    toApplicationTest(testPlanWrapper, "MD");
+  }
+
+  @Test
+  void testDuplicateSuccessRootIdByName() throws IOException {
+
+    SimpleControllerWrapper s1 = SimpleControllerWrapper.builder().withName("s").build();
+    TestFragmentWrapper t1 = TestFragmentWrapper.builder().withName("t1").addController(s1).build();
+    TestFragmentWrapper t2 = TestFragmentWrapper.builder().withName("t2").addController(s1).build();
+    TestPlanWrapper testPlanWrapper =
+        TestPlanWrapper.builder()
+            .addThread(
+                ThreadGroupWrapper.builder()
+                    .addController(ModuleControllerWrapper.builder().withModule(t1, "s").build())
                     .build())
             .addTestFragment(t1)
             .addTestFragment(t2)
@@ -115,7 +187,7 @@ class ModuleControllerWrapperTest extends AbstractJmcCoreTest {
       toApplicationTest(testPlanWrapper, "MD");
       Assertions.fail();
     } catch (ConversionException e) {
-      Assertions.assertTrue(e.getMessage().contains("Module target not found for"));
+      Assertions.assertTrue(e.getMessage().contains("Module target can't be empty"));
     }
   }
 
