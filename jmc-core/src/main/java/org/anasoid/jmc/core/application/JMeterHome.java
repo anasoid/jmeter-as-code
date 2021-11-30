@@ -19,6 +19,13 @@
 package org.anasoid.jmc.core.application;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.file.FileSystem;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Collections;
 import java.util.Map;
 import org.anasoid.jmc.core.config.JmcConfig;
 import org.apache.commons.lang3.StringUtils;
@@ -55,8 +62,16 @@ public final class JMeterHome {
 
     String jmeterHomePath = getJmeterHome();
 
+    if (StringUtils.isBlank(jmeterHomePath)) {
+      LOG.info(
+          "Jmeter is not configured by env variable {} or system variable {}",
+          JMETER_HOME,
+          JMETER_HOME_PROPERTY);
+      jmeterHomePath = initLocalJmeter();
+    }
     if (isValidJmeterHome(jmeterHomePath)) {
       // JMeter initialization (properties, log levels, locale, etc)
+      LOG.info("Jmeter Home used from {}", jmeterHomePath);
       JMeterUtils.setJMeterHome(new File(jmeterHomePath).getPath());
       // loadJMeterProperties
       JMeterUtils.getProperties(new File(getJmeterProperties(jmeterHomePath)).getPath());
@@ -72,6 +87,32 @@ public final class JMeterHome {
     }
 
     return initialized;
+  }
+
+  @SuppressWarnings("PMD.AvoidThrowingRawExceptionTypes")
+  private String initLocalJmeter() {
+    try {
+      File homeDir = Files.createTempDirectory("jmc").toFile();
+      LOG.info("Creating temporary Jmeter home at : {}", homeDir.getPath());
+
+      File binDir = new File(homeDir, "bin");
+      try (FileSystem fs =
+          FileSystems.newFileSystem(
+              getClass().getResource("/bin/jmeter.properties").toURI(), Collections.emptyMap())) {
+        Path configBinDir = fs.getPath("/bin");
+        for (Path p : (Iterable<Path>) Files.walk(configBinDir)::iterator) {
+          String parent = p.getParent().toString();
+          if ("/bin".startsWith(parent)) {
+            Path targetPath = binDir.toPath().resolve(configBinDir.relativize(p).toString());
+            Files.copy(p, targetPath);
+          }
+        }
+      }
+
+      return homeDir.getPath();
+    } catch (IOException | URISyntaxException e) {
+      throw new RuntimeException(e);
+    }
   }
 
   protected boolean isValidJmeterHome(String jmeterHomePath) {

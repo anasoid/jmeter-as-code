@@ -21,9 +21,6 @@ jobs:
 
     runs-on: ubuntu-20.04
     env:
-      JMETER_HOME: /home/runner/.jmeter/jmeter
-      JMETER_FILE: apache-jmeter-5.4.1
-
       MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
       MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
       ORG_GRADLE_PROJECT_signingKey: ${{ secrets.ORG_GRADLE_PROJECT_SIGNINGKEY }}
@@ -62,24 +59,12 @@ jobs:
 
 
 
-      - name: Cache Jmeter
-        uses: actions/cache@v2
-        with:
-          path: |
-            ~/.jmeter
-          key: jmeter2-$JMETER_FILE
 
       - name: printenv
         run: printenv
 
       - name: Java version
         run: java -version
-
-      - name: chmod  download-jmeter
-        run: chmod +x ~/work/jmeter-as-code/jmeter-as-code/.github/scripts/download-jmeter.sh
-
-      - name: Download Jmeter
-        run: ~/work/jmeter-as-code/jmeter-as-code/.github/scripts/download-jmeter.sh
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
