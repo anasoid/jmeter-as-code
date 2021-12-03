@@ -3,14 +3,24 @@ package org.anasoid.jmc.core.application;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Arrays;
+import org.anasoid.jmc.core.AbstractJmcCoreTest;
 import org.anasoid.jmc.core.application.interceptors.PrepareInterceptor;
 import org.anasoid.jmc.core.wrapper.jmeter.config.ArgumentWrapper;
+import org.anasoid.jmc.core.wrapper.jmeter.control.ModuleControllerWrapper;
+import org.anasoid.jmc.core.wrapper.jmeter.control.SimpleControllerWrapper;
+import org.anasoid.jmc.core.wrapper.jmeter.control.TestFragmentWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.TestElementWrapper;
+import org.anasoid.jmc.core.wrapper.jmeter.testelement.TestPlanWrapper;
+import org.anasoid.jmc.core.wrapper.jmeter.threads.ThreadGroupWrapper;
 import org.anasoid.jmc.core.wrapper.test.ChildTestElementWrapperTesting;
 import org.anasoid.jmc.core.wrapper.test.ParentTestElementWrapperTesting;
 import org.anasoid.jmc.core.wrapper.test.SubChildTestingElementWrapperTesting;
+import org.anasoid.jmc.core.xstream.exceptions.ConversionException;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 /*
  * Copyright 2020-2021 the original author or authors.
@@ -30,7 +40,7 @@ import org.junit.jupiter.api.Test;
  * Date :   23-Mar-2021
  */
 
-class ApplicationTestTest {
+class ApplicationTestTest extends AbstractJmcCoreTest {
 
   @Test
   void testChild() throws IOException {
@@ -104,6 +114,7 @@ class ApplicationTestTest {
     return parentTestElementWrapperTesting;
   }
 
+  @Nested
   class ParentPrepareInterceptor implements PrepareInterceptor {
 
     @Override
@@ -127,6 +138,107 @@ class ApplicationTestTest {
           child.setName(child.getName() + "prepared");
         }
       }
+    }
+
+    @Test
+    void testErrorMessageContainSource() throws IOException {
+
+      SimpleControllerWrapper s1 = SimpleControllerWrapper.builder().build();
+      TestFragmentWrapper t1 = TestFragmentWrapper.builder().addController(s1).build();
+      TestFragmentWrapper t2 = TestFragmentWrapper.builder().addController(s1).build();
+      TestPlanWrapper testPlanWrapper =
+          TestPlanWrapper.builder()
+              .addThread(
+                  ThreadGroupWrapper.builder()
+                      .addController(ModuleControllerWrapper.builder().withModule(s1).build())
+                      .build())
+              .addTestFragment(t1)
+              .addTestFragment(t2)
+              .build();
+      try {
+        toApplicationTest(testPlanWrapper, "MD");
+        Assertions.fail();
+      } catch (ConversionException e) {
+        Assertions.assertTrue(e.getMessage().contains("Ambiguous target"));
+      }
+    }
+  }
+
+  @Test
+  void testErrorConversionMessageContainSource() throws IOException {
+    SimpleControllerWrapper c1 = SimpleControllerWrapper.builder().withName("c1").build();
+    SimpleControllerWrapper c2 = SimpleControllerWrapper.builder().withName("c2").build();
+
+    TestPlanWrapper testPlanWrapper =
+        TestPlanWrapper.builder()
+            .addTestFragment(
+                TestFragmentWrapper.builder().addController(c1).addController(c2).build())
+            .build();
+
+    ApplicationTest applicationTest =
+        new ApplicationTest(
+            testPlanWrapper,
+            Arrays.asList(
+                new PrepareInterceptor() {
+                  @Override
+                  public boolean support(TestElementWrapper<?> testElementWrapper) {
+                    return testElementWrapper instanceof SimpleControllerWrapper
+                        && "c2".equals(((SimpleControllerWrapper) testElementWrapper).getName());
+                  }
+
+                  @Override
+                  public void prepare(
+                      TestElementWrapper<?> testPlan, TestElementWrapper<?> testElementWrapper) {
+                    throw new ConversionException("invalid name");
+                  }
+                }));
+    Path tmpPath = Files.createTempFile("jmc", ".jmx");
+
+    try {
+      applicationTest.toJmx(tmpPath.toFile());
+
+      Assertions.fail();
+    } catch (ConversionException e) {
+      Assertions.assertTrue(e.toString().contains("c2"));
+    }
+  }
+
+  @Test
+  void testErrorRawMessageContainSource() throws IOException {
+    SimpleControllerWrapper c1 = SimpleControllerWrapper.builder().withName("c1").build();
+    SimpleControllerWrapper c2 = SimpleControllerWrapper.builder().withName("c2").build();
+
+    TestPlanWrapper testPlanWrapper =
+        TestPlanWrapper.builder()
+            .addTestFragment(
+                TestFragmentWrapper.builder().addController(c1).addController(c2).build())
+            .build();
+
+    ApplicationTest applicationTest =
+        new ApplicationTest(
+            testPlanWrapper,
+            Arrays.asList(
+                new PrepareInterceptor() {
+                  @Override
+                  public boolean support(TestElementWrapper<?> testElementWrapper) {
+                    return testElementWrapper instanceof SimpleControllerWrapper
+                        && "c2".equals(((SimpleControllerWrapper) testElementWrapper).getName());
+                  }
+
+                  @Override
+                  public void prepare(
+                      TestElementWrapper<?> testPlan, TestElementWrapper<?> testElementWrapper) {
+                    throw new NullPointerException("invalid name");
+                  }
+                }));
+    Path tmpPath = Files.createTempFile("jmc", ".jmx");
+
+    try {
+      applicationTest.toJmx(tmpPath.toFile());
+
+      Assertions.fail();
+    } catch (ConversionException e) {
+      Assertions.assertTrue(e.toString().contains("c2"));
     }
   }
 }

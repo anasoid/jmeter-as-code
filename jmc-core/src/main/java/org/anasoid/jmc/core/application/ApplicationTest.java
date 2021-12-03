@@ -40,6 +40,7 @@ import org.anasoid.jmc.core.application.validator.NodeValidatorManager;
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.TestElementWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.TestPlanWrapper;
 import org.anasoid.jmc.core.xstream.exceptions.ConversionException;
+import org.anasoid.jmc.core.xstream.exceptions.ConversionExceptionHelper;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.jmeter.engine.StandardJMeterEngine;
 import org.apache.jmeter.save.SaveService;
@@ -175,6 +176,7 @@ public class ApplicationTest {
     NodeValidatorManager.validate(script.getTestPlan());
   }
 
+  @SuppressWarnings("PMD.CognitiveComplexity")
   private void prepare(
       TestElementWrapper<?> testPlan,
       TestElementWrapper<?> testElement,
@@ -183,7 +185,14 @@ public class ApplicationTest {
     if (!history.contains(testElement)) {
 
       if (interceptor.support(testElement)) {
-        interceptor.prepare(testPlan, testElement);
+        try {
+          interceptor.prepare(testPlan, testElement);
+        } catch (ConversionException e) {
+          ConversionExceptionHelper.setNode(e, testElement);
+          throw e;
+        } catch (Exception e) { // NOPMD - add inf to exception.
+          throw new ConversionException(e, testElement);
+        }
       }
 
       history.add(testElement);
