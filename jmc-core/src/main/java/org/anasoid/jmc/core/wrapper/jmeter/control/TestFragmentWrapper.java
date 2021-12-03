@@ -1,5 +1,6 @@
 package org.anasoid.jmc.core.wrapper.jmeter.control;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import java.util.Arrays;
 import java.util.List;
 import lombok.experimental.SuperBuilder;
@@ -16,9 +17,11 @@ import org.apache.jmeter.control.gui.TestFragmentControllerGui;
  * @see TestFragmentController
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
-@JmcDefaultName("Test Fragment")
+@JmcDefaultName(TestFragmentWrapper.DEFAULT_NAME)
 public class TestFragmentWrapper extends AbstractTestElementWrapper<TestFragmentController>
     implements JMeterGUIWrapper<TestFragmentControllerGui> {
+
+  @XStreamOmitField public static final String DEFAULT_NAME = "Test Fragment";
 
   @Override
   public Boolean getEnabled() {
