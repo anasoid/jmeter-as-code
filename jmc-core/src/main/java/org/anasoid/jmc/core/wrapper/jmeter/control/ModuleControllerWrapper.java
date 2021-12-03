@@ -19,6 +19,7 @@
 package org.anasoid.jmc.core.wrapper.jmeter.control;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import java.util.Arrays;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
@@ -28,6 +29,8 @@ import org.anasoid.jmc.core.wrapper.jmeter.gui.JMeterGUIWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.AbstractTestElementWrapper;
 import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.anasoid.jmc.core.xstream.annotations.JmcMethodAlias;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.ListUtils;
 import org.apache.jmeter.control.ModuleController;
 import org.apache.jmeter.control.gui.ModuleControllerGui;
 import org.apache.jmeter.testelement.property.CollectionProperty;
@@ -39,8 +42,8 @@ public class ModuleControllerWrapper extends AbstractTestElementWrapper<ModuleCo
     implements JMeterGUIWrapper<ModuleControllerGui>, ControllerWrapper<ModuleController> {
 
   @XStreamOmitField @Getter @Setter private ControllerWrapper<?> module;
-  @XStreamOmitField @Getter @Setter private String moduleName;
-  @XStreamOmitField @Getter @Setter private TestFragmentWrapper rootParent;
+  @XStreamOmitField @Getter @Setter private List<String> path;
+  @XStreamOmitField @Getter @Setter private String rootParent;
 
   @XStreamOmitField @Setter private List<String> nodePath;
 
@@ -63,7 +66,7 @@ public class ModuleControllerWrapper extends AbstractTestElementWrapper<ModuleCo
   @SuppressWarnings("PMD.AvoidDeeplyNestedIfStmts")
   protected void internalInit() {
     super.internalInit();
-    String nameTarget = moduleName;
+    String nameTarget = CollectionUtils.isNotEmpty(path) ? path.get(path.size() - 1) : null;
     if (getModule() instanceof AbstractTestElementWrapper) {
       AbstractTestElementWrapper currentModule = (AbstractTestElementWrapper) getModule();
       nameTarget = currentModule.getName();
@@ -83,19 +86,13 @@ public class ModuleControllerWrapper extends AbstractTestElementWrapper<ModuleCo
           C extends ModuleControllerWrapper, B extends ModuleControllerWrapperBuilder<C, B>>
       extends AbstractTestElementWrapper.AbstractTestElementWrapperBuilder<ModuleController, C, B> {
 
-    /** hide lombock method. */
-    private B withModuleName(String moduleName) { // NOPMD - hide lombok generate method
-      this.moduleName = moduleName;
+    private B withPath(List<String> path) {
+      this.path = path;
       return self();
     }
 
-    /**
-     * set target module name.
-     *
-     * @param moduleName target module.
-     */
-    public B withModule(String moduleName) {
-      this.moduleName = moduleName;
+    private B withNodePath(List<String> nodePath) { // NOPMD - Hide Lombock generated method.
+      this.nodePath = nodePath;
       return self();
     }
 
@@ -103,12 +100,52 @@ public class ModuleControllerWrapper extends AbstractTestElementWrapper<ModuleCo
      * set module with root parent.
      *
      * @param rootParent rootParent root parent of module, can be not direct parent.
-     * @param moduleName target module.
+     * @param path node names to target node.
      */
-    public B withModule(TestFragmentWrapper rootParent, String moduleName) {
-      withModule(moduleName);
+    public B withModule(String rootParent, List<String> path) {
+      withPath(path);
       withRootParent(rootParent);
       return self();
+    }
+
+    /**
+     * set module with root parent.
+     *
+     * @param rootParent rootParent root parent of module, can be not direct parent.
+     * @param path node names to target node.
+     */
+    public B withModule(TestFragmentWrapper rootParent, List<String> path) {
+      String name = rootParent.getName();
+      if (name == null) {
+        name = TestFragmentWrapper.DEFAULT_NAME;
+      }
+      return withModule(name, path);
+    }
+
+    /**
+     * set module with root parent.
+     *
+     * @param rootParent rootParent root parent of module, can be not direct parent.
+     * @param path node names to target node.
+     */
+    public B withModule(String rootParent, String firstNode, String... path) {
+      return withModule(
+          rootParent, (List<String>) ListUtils.sum(Arrays.asList(firstNode), Arrays.asList(path)));
+    }
+
+    /**
+     * set module with root parent.
+     *
+     * @param rootParent rootParent root parent of module, can be not direct parent.
+     * @param path node names to target node.
+     */
+    public B withModule(TestFragmentWrapper rootParent, String firstNode, String... path) {
+      String name = rootParent.getName();
+      if (name == null) {
+        name = TestFragmentWrapper.DEFAULT_NAME;
+      }
+      return withModule(
+          name, (List<String>) ListUtils.sum(Arrays.asList(firstNode), Arrays.asList(path)));
     }
 
     /**
@@ -128,12 +165,26 @@ public class ModuleControllerWrapper extends AbstractTestElementWrapper<ModuleCo
      * @param module module.
      */
     public B withModule(TestFragmentWrapper rootParent, ControllerWrapper<?> module) {
+      String name = rootParent.getName();
+      if (name == null) {
+        name = TestFragmentWrapper.DEFAULT_NAME;
+      }
+      return withModule(name, module);
+    }
+
+    /**
+     * set module with root parent.
+     *
+     * @param rootParent rootParent root parent of module, can be not direct parent.
+     * @param module module.
+     */
+    public B withModule(String rootParent, ControllerWrapper<?> module) {
       withModule(module);
       withRootParent(rootParent);
       return self();
     }
 
-    protected B withRootParent(TestFragmentWrapper rootParent) {
+    protected B withRootParent(String rootParent) {
       this.rootParent = rootParent;
       return self();
     }

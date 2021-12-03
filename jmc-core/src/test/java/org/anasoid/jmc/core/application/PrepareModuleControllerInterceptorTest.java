@@ -50,7 +50,7 @@ class PrepareModuleControllerInterceptorTest {
         new PrepareModuleControllerInterceptor();
     List<List<AbstractTestElementWrapper<?>>> result =
         prepareModuleControllerInterceptor.findTarget(
-            testPlanWrapper, testFragmentWrapper, c1.getName(), new ArrayList<>());
+            testPlanWrapper, testFragmentWrapper.getName(), c1, null, new ArrayList<>());
 
     Assertions.assertFalse(result.isEmpty());
   }

@@ -72,7 +72,7 @@ class ModuleControllerWrapperTest extends AbstractJmcCoreTest {
       toApplicationTest(testPlanWrapper, "MD");
       Assertions.fail();
     } catch (ConversionException e) {
-      Assertions.assertTrue(e.getMessage().contains("Ambiguous target"));
+      Assertions.assertTrue(e.getMessage().contains("Duplicate module target"));
     }
   }
 
@@ -104,8 +104,8 @@ class ModuleControllerWrapperTest extends AbstractJmcCoreTest {
   void testUseNameAndReferenceIdFail() throws IOException {
 
     SimpleControllerWrapper s1 = SimpleControllerWrapper.builder().build();
-    TestFragmentWrapper t1 = TestFragmentWrapper.builder().addController(s1).build();
-    TestFragmentWrapper t2 = TestFragmentWrapper.builder().addController(s1).build();
+    TestFragmentWrapper t1 = TestFragmentWrapper.builder().withName("t1").addController(s1).build();
+    TestFragmentWrapper t2 = TestFragmentWrapper.builder().withName("t2").addController(s1).build();
     TestPlanWrapper testPlanWrapper =
         TestPlanWrapper.builder()
             .addThread(
@@ -113,7 +113,7 @@ class ModuleControllerWrapperTest extends AbstractJmcCoreTest {
                     .addController(
                         ModuleControllerWrapper.builder()
                             .withModule(t1, s1)
-                            .withModule("target")
+                            .withModule(t1.getName(), "target")
                             .build())
                     .build())
             .addTestFragment(t1)
@@ -158,7 +158,8 @@ class ModuleControllerWrapperTest extends AbstractJmcCoreTest {
         TestPlanWrapper.builder()
             .addThread(
                 ThreadGroupWrapper.builder()
-                    .addController(ModuleControllerWrapper.builder().withModule(t1, "s").build())
+                    .addController(
+                        ModuleControllerWrapper.builder().withModule(t1.getName(), "s").build())
                     .build())
             .addTestFragment(t1)
             .addTestFragment(t2)
@@ -215,5 +216,147 @@ class ModuleControllerWrapperTest extends AbstractJmcCoreTest {
                 .getArray()[0];
 
     Assertions.assertEquals("MD-> s1", moduleController.getName());
+  }
+
+  @Test
+  void testDuplicateReferenceNameSuccess() throws IOException {
+
+    SimpleControllerWrapper s1 = SimpleControllerWrapper.builder().withName("s").build();
+    SimpleControllerWrapper s2 = SimpleControllerWrapper.builder().withName("s").build();
+    SimpleControllerWrapper p2 =
+        SimpleControllerWrapper.builder().withName("p2").addController(s2).build();
+    TestFragmentWrapper t1 =
+        TestFragmentWrapper.builder().withName("t1").addController(s1).addController(p2).build();
+    TestPlanWrapper testPlanWrapper =
+        TestPlanWrapper.builder()
+            .addThread(
+                ThreadGroupWrapper.builder()
+                    .addController(ModuleControllerWrapper.builder().withModule(t1, s1).build())
+                    .build())
+            .addTestFragment(t1)
+            .build();
+
+    toApplicationTest(testPlanWrapper, "MD");
+  }
+
+  @Test
+  void testThreadGroupSuccess() throws IOException {
+
+    SimpleControllerWrapper s1 = SimpleControllerWrapper.builder().withName("s").build();
+    SimpleControllerWrapper s2 = SimpleControllerWrapper.builder().withName("s").build();
+    SimpleControllerWrapper p2 =
+        SimpleControllerWrapper.builder().withName("p2").addController(s2).build();
+    ThreadGroupWrapper g1 =
+        ThreadGroupWrapper.builder().withName("g1").addController(s1).addController(p2).build();
+    TestPlanWrapper testPlanWrapper =
+        TestPlanWrapper.builder()
+            .addThread(
+                ThreadGroupWrapper.builder()
+                    .addController(
+                        ModuleControllerWrapper.builder().withModule(g1.getName(), s1).build())
+                    .build())
+            .addThread(g1)
+            .build();
+
+    toApplicationTest(testPlanWrapper, "MD");
+  }
+
+  @Test
+  void testDuplicateNameFail() throws IOException {
+
+    SimpleControllerWrapper s1 = SimpleControllerWrapper.builder().withName("s").build();
+    SimpleControllerWrapper s2 = SimpleControllerWrapper.builder().withName("s").build();
+
+    TestFragmentWrapper t1 =
+        TestFragmentWrapper.builder().withName("t1").addController(s1).addController(s2).build();
+    TestPlanWrapper testPlanWrapper =
+        TestPlanWrapper.builder()
+            .addThread(
+                ThreadGroupWrapper.builder()
+                    .addController(ModuleControllerWrapper.builder().withModule(t1, "s").build())
+                    .build())
+            .addTestFragment(t1)
+            .build();
+    try {
+      toApplicationTest(testPlanWrapper, "MD");
+      Assertions.fail();
+    } catch (ConversionException e) {
+      Assertions.assertTrue(e.getMessage().contains("Ambiguous target for "));
+    }
+  }
+
+  @Test
+  void testDuplicateNamePathFail() throws IOException {
+
+    SimpleControllerWrapper s1 = SimpleControllerWrapper.builder().withName("s").build();
+    SimpleControllerWrapper s2 = SimpleControllerWrapper.builder().withName("s").build();
+    SimpleControllerWrapper p =
+        SimpleControllerWrapper.builder().withName("p").addController(s1).addController(s2).build();
+    TestFragmentWrapper t1 = TestFragmentWrapper.builder().withName("t1").addController(p).build();
+    TestPlanWrapper testPlanWrapper =
+        TestPlanWrapper.builder()
+            .addThread(
+                ThreadGroupWrapper.builder()
+                    .addController(
+                        ModuleControllerWrapper.builder().withModule(t1, "p", "s").build())
+                    .build())
+            .addTestFragment(t1)
+            .build();
+    try {
+      toApplicationTest(testPlanWrapper, "MD");
+      Assertions.fail();
+    } catch (ConversionException e) {
+      Assertions.assertTrue(e.getMessage().contains("Ambiguous target for "));
+    }
+  }
+
+  @Test
+  void testNotFoundFail() throws IOException {
+
+    SimpleControllerWrapper s1 = SimpleControllerWrapper.builder().withName("s").build();
+    SimpleControllerWrapper s2 = SimpleControllerWrapper.builder().withName("s").build();
+    SimpleControllerWrapper p =
+        SimpleControllerWrapper.builder().withName("p").addController(s1).addController(s2).build();
+    TestFragmentWrapper t1 = TestFragmentWrapper.builder().withName("t1").addController(p).build();
+    TestPlanWrapper testPlanWrapper =
+        TestPlanWrapper.builder()
+            .addThread(
+                ThreadGroupWrapper.builder()
+                    .addController(
+                        ModuleControllerWrapper.builder().withModule("notfound", "p", "s").build())
+                    .build())
+            .addTestFragment(t1)
+            .build();
+    try {
+      toApplicationTest(testPlanWrapper, "MD");
+      Assertions.fail();
+    } catch (ConversionException e) {
+      Assertions.assertTrue(e.getMessage().contains("Module target not found for"));
+    }
+  }
+
+  @Test
+  void testNotFountPath2Fail() throws IOException {
+
+    SimpleControllerWrapper s1 = SimpleControllerWrapper.builder().withName("s1").build();
+    SimpleControllerWrapper s2 = SimpleControllerWrapper.builder().withName("s2").build();
+    SimpleControllerWrapper p =
+        SimpleControllerWrapper.builder().withName("p").addController(s1).addController(s2).build();
+    TestFragmentWrapper t1 = TestFragmentWrapper.builder().withName("t1").addController(p).build();
+    TestPlanWrapper testPlanWrapper =
+        TestPlanWrapper.builder()
+            .addThread(
+                ThreadGroupWrapper.builder()
+                    .addController(
+                        ModuleControllerWrapper.builder().withModule(t1, "p", "s").build())
+                    .build())
+            .addTestFragment(t1)
+            .build();
+    try {
+      toApplicationTest(testPlanWrapper, "MD");
+      Assertions.fail();
+    } catch (ConversionException e) {
+      Assertions.assertTrue(e.getMessage().contains("Module target not found for"));
+    }
   }
 }
