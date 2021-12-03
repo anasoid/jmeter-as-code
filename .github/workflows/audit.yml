@@ -26,9 +26,9 @@ jobs:
             ~/.gradle/caches
             ~/.gradle/wrapper
             ~/.gradle/dependency-check-data
-          key: ${{ runner.os }}-gradle-audit-V3-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('gradle.properties') }}
+          key: ${{ runner.os }}-gradle-audit-v4-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('gradle.properties') }}
           restore-keys: |
-            ${{ runner.os }}-gradle-audit-V3
+            ${{ runner.os }}-gradle-audit-v4
 
 
 
