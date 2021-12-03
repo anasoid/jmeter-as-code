@@ -91,10 +91,7 @@ public class ModuleControllerWrapper extends AbstractTestElementWrapper<ModuleCo
       return self();
     }
 
-    private B withNodePath(List<String> nodePath) { // NOPMD - Hide Lombock generated method.
-      this.nodePath = nodePath;
-      return self();
-    }
+    private void withNodePath(List<String> nodePath) {} // NOPMD - Hide Lombock generated method.
 
     /**
      * set module with root parent.
