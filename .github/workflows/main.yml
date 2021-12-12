@@ -25,18 +25,18 @@ jobs:
           path: |
             ~/.gradle/caches
             ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-main-v4-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('gradle.properties') }}
+          key: ${{ runner.os }}-gradle-main-v5-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('gradle.properties') }}
           restore-keys: |
-            ${{ runner.os }}-gradle-main-v4
+            ${{ runner.os }}-gradle-main-v5
 
       - name: Cache Sonar
         uses: actions/cache@v2
         with:
           path: |
             ~/.sonar
-          key: ${{ runner.os }}-sonar-v4-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('gradle.properties') }}
+          key: ${{ runner.os }}-sonar-v5-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('gradle.properties') }}
           restore-keys: |
-            ${{ runner.os }}-sonar-v4
+            ${{ runner.os }}-sonar-v5
 
 
 
@@ -52,6 +52,9 @@ jobs:
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
+
+      - name: Update Dependencies with Gradle
+        run: ./gradlew --stacktrace --console=verbose dependencyUpdates -Drevision=release -DoutputFormatter=plain,html
 
       - name: Build with Gradle
         run: ./gradlew --stacktrace --console=verbose -x test build

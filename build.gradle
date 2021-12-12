@@ -7,7 +7,7 @@ buildscript {
 
     }
     dependencies {
-        classpath 'org.owasp:dependency-check-gradle:6.2.2'
+        classpath 'org.owasp:dependency-check-gradle:6.5.0.1'
 
     }
 }
@@ -17,8 +17,9 @@ plugins {
     id "io.spring.dependency-management" version "1.0.11.RELEASE"
     id "org.sonarqube" version "3.3"
     id 'jacoco'
-    id "io.freefair.lombok" version "6.1.0-m3"
-    id "io.freefair.git-version" version "6.1.0-m3"
+    id "io.freefair.lombok" version "6.3.0"
+    id "io.freefair.git-version" version "6.3.0"
+    id "com.github.ben-manes.versions" version "0.39.0"
 }
 
 
@@ -135,11 +136,11 @@ subprojects {
         implementation("com.thoughtworks.xstream:xstream:1.4.15")
 
         //LOMBOCK
-        compileOnly 'org.projectlombok:lombok:1.18.20'
-        annotationProcessor 'org.projectlombok:lombok:1.18.20'
+        compileOnly 'org.projectlombok:lombok:1.18.22'
+        annotationProcessor 'org.projectlombok:lombok:1.18.22'
 
-        testCompileOnly 'org.projectlombok:lombok:1.18.20'
-        testAnnotationProcessor 'org.projectlombok:lombok:1.18.20'
+        testCompileOnly 'org.projectlombok:lombok:1.18.22'
+        testAnnotationProcessor 'org.projectlombok:lombok:1.18.22'
 
 
         //Apache common
@@ -190,6 +191,11 @@ task codeCoverageReport(type: JacocoReport) {
 
 test {
     finalizedBy codeCoverageReport // report is always generated after tests run
+}
+
+tasks.named("dependencyUpdates").configure {
+    checkConstraints = true
+    outputDir = "build/reports/dependencyUpdates"
 }
 
 // always run the tests before generating the report
