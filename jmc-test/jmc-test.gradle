@@ -22,6 +22,6 @@ dependencies {
 
     implementation("org.xmlunit:xmlunit-core:$xmlunitVersion")
     implementation("org.xmlunit:xmlunit-matchers:$xmlunitVersion")
-    implementation("com.github.tomakehurst:wiremock:$wiremockVersion")
+    implementation("com.github.tomakehurst:wiremock-jre8:$wiremockVersion")
     implementation("ru.lanwen.wiremock:wiremock-junit5:$wiremockJunit5Version")
 }
