@@ -77,7 +77,15 @@ public class JmcXstream extends XStream {
                   "ApacheJMeter_*-*.jar",
                   "groovy-*.jar",
                   "commons-*.jar",
-                  "wiremock-*.jar")
+                  "wiremock-*.jar",
+                  "guava-*.jar",
+                  "assertj-core-*.jar",
+                  "Saxon-*.jar",
+                  "saxon-*.jar",
+                  "serializer-*.jar",
+                  "xalan-*.jar",
+                  "byte-buddy-*.jar",
+                  "darklaf-*.jar")
               .scan()) {
         ClassInfoList classInfoList =
             scanResult.getSubclasses(AbstractTestElementWrapper.class.getName());

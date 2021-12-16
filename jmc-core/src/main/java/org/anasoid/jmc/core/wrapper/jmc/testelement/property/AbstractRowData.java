@@ -46,6 +46,7 @@ public abstract class AbstractRowData implements RowData {
   }
 
   @Override
+  @SuppressWarnings("PMD.ReturnEmptyCollectionRatherThanNull")
   public List<String> asList() {
     return null;
   }

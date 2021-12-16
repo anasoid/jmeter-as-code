@@ -249,6 +249,7 @@ public final class ConverterBeanUtils {
   }
 
   /** get value of field or Method. */
+  @SuppressWarnings("PMD.AvoidAccessibilityAlteration")
   public static Object getValue(AccessibleObject field, Object source) {
 
     field.setAccessible(true); // NOSONAR

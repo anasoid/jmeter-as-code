@@ -81,6 +81,7 @@ public final class ExecutorUtils {
    * @param values fields values.
    * @return JavaTestElementExecutor instance.
    */
+  @SuppressWarnings("PMD.AvoidAccessibilityAlteration")
   public static JavaTestElementExecutor getExecutor(String className, Map<String, Object> values) {
 
     try {
