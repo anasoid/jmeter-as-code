@@ -150,7 +150,7 @@ public final class SetterTestUtils {
   }
 
   /** test all setter. */
-  @SuppressWarnings("PMD.CognitiveComplexity")
+  @SuppressWarnings({"PMD.CognitiveComplexity", "PMD.AvoidAccessibilityAlteration"})
   private static void testSetter(TestElementWrapper testElement, String... ignoreFields)
       throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
     // Coverage toString

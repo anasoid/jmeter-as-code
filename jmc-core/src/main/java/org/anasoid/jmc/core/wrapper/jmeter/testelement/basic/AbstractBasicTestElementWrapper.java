@@ -90,6 +90,7 @@ public abstract class AbstractBasicTestElementWrapper<T extends AbstractTestElem
   }
 
   @Override
+  @SuppressWarnings("PMD.ReturnEmptyCollectionRatherThanNull")
   public List<TestElementWrapper<?>> getChildren() {
     return null;
   }
