@@ -25,6 +25,7 @@ import java.util.Collection;
 import java.util.List;
 import lombok.Builder.Default;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.anasoid.jmc.core.wrapper.jmc.Variable;
 import org.anasoid.jmc.core.wrapper.jmc.samplers.Implementation;
@@ -60,103 +61,124 @@ public class HttpDefaultsWrapper
   /** Server Name or IP. */
   @JmcProperty(HTTPSamplerBase.DOMAIN)
   @Getter
+  @Setter
   @JmcNullAllowed
   private final String domain;
   /** Path. */
   @JmcProperty(HTTPSamplerBase.PATH)
   @Getter
+  @Setter
   @JmcNullAllowed
   private final String path;
 
   /** Port Number. */
   @JmcProperty(value = HTTPSamplerBase.PORT)
   @Getter
+  @Setter
   @JmcNullAllowed
   private final String port;
 
   /** Protocol [http]. */
   @JmcProperty(value = HTTPSamplerBase.PROTOCOL)
   @Getter
+  @Setter
   @JmcNullAllowed
   private final String protocol;
 
   @JmcProperty(value = HTTPSamplerBase.CONTENT_ENCODING)
   @Getter
+  @Setter
   @JmcNullAllowed
   private final String contentEncoding;
 
   @JmcProperty(HTTPSamplerBase.IMPLEMENTATION)
   @Getter
+  @Setter
   private final Implementation implementation;
 
   /** Source Address Type. */
   @JmcProperty(value = HTTPSamplerBase.IP_SOURCE_TYPE)
   @Getter
+  @Setter
   @JmcSkipDefault("0")
   private final IpSourceType ipSourceType;
 
   /** Source IP Address. */
   @JmcProperty(HTTPSamplerBase.IP_SOURCE)
   @Getter
+  @Setter
   private final String ipSource;
 
   /** Proxy scheme. */
   @JmcProperty(HTTPSamplerBase.PROXYSCHEME)
   @Getter
+  @Setter
   private final String proxyScheme;
   /** Proxy host. */
   @JmcProperty(HTTPSamplerBase.PROXYHOST)
   @Getter
+  @Setter
   private final String proxyHost;
 
   @JmcProperty(value = HTTPSamplerBase.PROXYPORT)
   @Getter
+  @Setter
   private final String proxyPort;
   /** Proxy user. */
   @JmcProperty(HTTPSamplerBase.PROXYUSER)
   @Getter
+  @Setter
   private final String proxyUser;
 
   /** Proxy pass. */
   @JmcProperty(HTTPSamplerBase.PROXYPASS)
   @Getter
+  @Setter
   private final String proxyPass;
 
   /** Connect Timeouts (milliseconds). */
   @JmcProperty(value = HTTPSamplerBase.CONNECT_TIMEOUT)
   @Getter
+  @Setter
   @JmcNullAllowed
   private final String connectTimeout;
 
   /** Response Timeouts (milliseconds). */
   @JmcProperty(value = HTTPSamplerBase.RESPONSE_TIMEOUT)
   @Getter
+  @Setter
   @JmcNullAllowed
   private final String responseTimeout;
 
   /** Save response as MD5 hash. */
   @JmcProperty(HTTPSamplerBase.MD5)
   @Getter
+  @Setter
   private final Boolean md5;
 
   @JmcProperty(HTTPSamplerBase.POST_BODY_RAW)
   @Getter
+  @Setter
   private final Boolean postBodyRaw;
   /** Embedded Resources from HTML Files: URLs must match. */
   @JmcProperty(value = HTTPSamplerBase.EMBEDDED_URL_RE)
   @Getter
+  @Setter
   private final String embeddedUrlRE;
   /** Embedded Resources from HTML Files: URLs must not match. */
   @JmcProperty(HTTPSamplerBase.EMBEDDED_URL_EXCLUDE_RE)
   @Getter
+  @Setter
   private final String embeddedUrlExcludeRE;
   /** Embedded Resources from HTML Files: Parallel downloads. */
   @JmcProperty(HTTPSamplerBase.CONCURRENT_DWN)
   @Getter
+  @Setter
   private final Boolean concurrentDwn;
 
   @JmcProperty(HTTPSamplerBase.IMAGE_PARSER)
   @Getter
+  @Setter
   private final Boolean imageParser;
 
   @Getter @Default @XStreamOmitField

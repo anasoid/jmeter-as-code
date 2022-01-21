@@ -28,12 +28,11 @@ import lombok.experimental.SuperBuilder;
 import org.anasoid.jmc.core.wrapper.jmeter.control.GenericControllerWrapper;
 import org.anasoid.jmc.core.xstream.annotations.JmcDefaultName;
 import org.anasoid.jmc.core.xstream.annotations.JmcProperty;
-import org.apache.jmeter.config.CSVDataSet;
 
 /**
- * Wrapper for CSVDataSet.
+ * Wrapper for ParallelSamplerWrapper.
  *
- * @see CSVDataSet
+ * @see ParallelSamplerWrapper
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 @JmcDefaultName("bzm - Parallel Controller")
