@@ -26,8 +26,9 @@ import org.anasoid.jmc.core.wrapper.jmeter.gui.JMeterGUIWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.samplers.AbstractSamplerWrapper;
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.AbstractTestElementWrapper;
 import org.anasoid.jmc.core.wrapper.template.JmcTemplate;
-import org.apache.jmeter.control.GenericController;
+import org.apache.jmeter.control.Controller;
 import org.apache.jmeter.control.gui.AbstractControllerGui;
+import org.apache.jmeter.testelement.AbstractTestElement;
 
 /**
  * Wrapper for AbstractTestElementWrapper.
@@ -38,13 +39,13 @@ import org.apache.jmeter.control.gui.AbstractControllerGui;
 @SuppressWarnings("PMD.AbstractClassWithoutAnyMethod")
 @JmcChildrenTypes(type = {AbstractSamplerWrapper.class})
 public abstract class GenericControllerWrapper<
-        T extends GenericController, G extends AbstractControllerGui>
+        T extends AbstractTestElement & Controller, G extends AbstractControllerGui>
     extends AbstractTestElementWrapper<T> implements JMeterGUIWrapper<G>, ControllerWrapper<T> {
 
   /** Builder. */
   @SuppressWarnings("PMD.UselessOverridingMethod")
   public abstract static class GenericControllerWrapperBuilder<
-          T extends GenericController,
+          T extends AbstractTestElement & Controller,
           G extends AbstractControllerGui,
           C extends GenericControllerWrapper<T, G>,
           B extends GenericControllerWrapperBuilder<T, G, C, B>>

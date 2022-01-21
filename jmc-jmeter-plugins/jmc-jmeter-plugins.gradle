@@ -42,8 +42,14 @@ dependencies {
     }
 
     //Set Variables Action
-    //https://jmeter-plugins.org/?search=jpgc-prmctl
+    //https://jmeter-plugins.org/?search=jpgc-synthesis
     implementation("kg.apc:jmeter-plugins-synthesis:$synthesisVersion") {
+        exclude group: 'org.apache.jmeter', module: 'bom'
+    }
+
+    //Set Variables Action
+    //https://jmeter-plugins.org/?search=bzm-parallel
+    implementation("com.blazemeter:jmeter-parallel:$jmeterParallelVersion") {
         exclude group: 'org.apache.jmeter', module: 'bom'
     }
 }
