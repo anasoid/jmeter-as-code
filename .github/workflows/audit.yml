@@ -28,9 +28,6 @@ jobs:
             ~/.gradle/wrapper
             ~/.gradle/dependency-check-data
           key: ${{ runner.os }}-gradle-audit-v7-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('gradle.properties') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-audit-v5
-
 
 
       - name: Grant execute permission for gradlew
