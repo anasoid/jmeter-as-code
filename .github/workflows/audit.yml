@@ -27,17 +27,14 @@ jobs:
             ~/.gradle/caches
             ~/.gradle/wrapper
             ~/.gradle/dependency-check-data
-          key: ${{ runner.os }}-gradle-audit-v5-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('gradle.properties') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-audit-v5
-
+          key: ${{ runner.os }}-gradle-audit-v7-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('gradle.properties') }}
 
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
       - name: dependencyCheck
-        run: ./gradlew --console=verbose dependencyCheckAggregate
+        run: ./gradlew  --stacktrace --console=verbose dependencyCheckAggregate
 
 
       - name: Publish artifact Test Report
