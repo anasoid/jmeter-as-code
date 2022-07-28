@@ -139,7 +139,7 @@ public class HTMLAssertionWrapper extends AbstractBasicChildTestElementWrapper<H
     STRICT("strict"),
     LOOSE("loose");
 
-    public final String value;
+    private final String value;
 
     Doctype(String value) {
       this.value = value;

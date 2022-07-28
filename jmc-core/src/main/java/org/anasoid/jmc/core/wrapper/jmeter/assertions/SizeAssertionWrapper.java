@@ -117,7 +117,7 @@ public class SizeAssertionWrapper
     RESPONSE_CODE("SizeAssertion.response_code"),
     RESPONSE_MESSAGE("SizeAssertion.response_message");
 
-    public final String value;
+    private final String value;
 
     FieldtoTest(String value) {
       this.value = value;

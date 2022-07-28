@@ -38,7 +38,7 @@ public enum JMeterProperty {
 
   COLLECTION(JmeterProperty.COLLECTION_PROP);
 
-  public final String value;
+  private final String value;
 
   JMeterProperty(String value) {
     this.value = value;

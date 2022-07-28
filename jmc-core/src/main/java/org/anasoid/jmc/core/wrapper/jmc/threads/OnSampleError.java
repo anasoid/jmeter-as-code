@@ -46,7 +46,7 @@ public enum OnSampleError {
    */
   ON_SAMPLE_ERROR_STOPTEST_NOW("stoptestnow");
 
-  public final String value;
+  private final String value;
 
   OnSampleError(String value) {
     this.value = value;

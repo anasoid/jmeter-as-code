@@ -48,7 +48,7 @@ public enum CookiePolicy {
   /** RFC2965. */
   RFC2965("rfc2965");
 
-  public final String value;
+  private final String value;
 
   CookiePolicy(String value) {
     this.value = value;
