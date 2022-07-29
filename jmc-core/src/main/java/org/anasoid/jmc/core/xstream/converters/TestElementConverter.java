@@ -262,7 +262,7 @@ public class TestElementConverter implements Converter {
     JmcCollection annotation =
         ConverterBeanUtils.getAnnotation(accessibleObject, JmcCollection.class);
     if (annotation.withElementProp()) {
-      writer.startNode(JMeterProperty.ELEMENT.value());
+      writer.startNode(JMeterProperty.ELEMENT.getValue());
       if (!annotation.name().isBlank()) {
         writer.addAttribute("name", annotation.name());
       }
@@ -294,7 +294,7 @@ public class TestElementConverter implements Converter {
     Collection<?> values = (Collection) value;
     if (values != null) {
       for (Object object : values) {
-        writer.startNode(JMeterProperty.ELEMENT.value());
+        writer.startNode(JMeterProperty.ELEMENT.getValue());
 
         if (object instanceof TestElementWrapper) {
           TestElementWrapper<?> testElement = (TestElementWrapper) object;

@@ -104,7 +104,7 @@ public class CSVDataSetWrapper extends ConfigTestElementWrapper<CSVDataSet, Test
   @Getter
   @Setter
   @Default
-  private String shareMode = ShareMode.SHARE_ALL.value();
+  private String shareMode = ShareMode.SHARE_ALL.getValue();
 
   @JmcProperty("filename")
   protected String getFilePath() {

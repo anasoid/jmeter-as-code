@@ -155,7 +155,7 @@ public final class JmcAsserts {
    * @param value value to be checked.
    */
   public void assertXPathPropString(String content, String xpath, String name, String value) {
-    assertXPathProp(content, xpath, JMeterProperty.STRING.value(), name, value);
+    assertXPathProp(content, xpath, JMeterProperty.STRING.getValue(), name, value);
   }
 
   /**
@@ -166,7 +166,7 @@ public final class JmcAsserts {
    * @param value value to be checked.
    */
   public void assertXPathPropInt(String content, String xpath, String name, String value) {
-    assertXPathProp(content, xpath, JMeterProperty.INTEGER.value(), name, value);
+    assertXPathProp(content, xpath, JMeterProperty.INTEGER.getValue(), name, value);
   }
 
   /**
@@ -177,7 +177,7 @@ public final class JmcAsserts {
    * @param value value to be checked.
    */
   public void assertXPathPropBool(String content, String xpath, String name, String value) {
-    assertXPathProp(content, xpath, JMeterProperty.BOOL.value(), name, value);
+    assertXPathProp(content, xpath, JMeterProperty.BOOL.getValue(), name, value);
   }
 
   /**
@@ -188,7 +188,7 @@ public final class JmcAsserts {
    * @param value value to be checked.
    */
   public void assertXPathPropLong(String content, String xpath, String name, String value) {
-    assertXPathProp(content, xpath, JMeterProperty.LONG.value(), name, value);
+    assertXPathProp(content, xpath, JMeterProperty.LONG.getValue(), name, value);
   }
 
   /**
@@ -199,7 +199,7 @@ public final class JmcAsserts {
    * @param value value to be checked.
    */
   public void assertXPathPropFloat(String content, String xpath, String name, String value) {
-    assertXPathProp(content, xpath, JMeterProperty.FLOAT.value(), name, value);
+    assertXPathProp(content, xpath, JMeterProperty.FLOAT.getValue(), name, value);
   }
 
   /**
@@ -210,7 +210,7 @@ public final class JmcAsserts {
    * @param value value to be checked.
    */
   public void assertXPathPropDouble(String content, String xpath, String name, String value) {
-    assertXPathProp(content, xpath, JMeterProperty.DOUBLE.value(), name, value);
+    assertXPathProp(content, xpath, JMeterProperty.DOUBLE.getValue(), name, value);
   }
 
   public void assertXPathProp(
@@ -225,7 +225,7 @@ public final class JmcAsserts {
    * @param name attribute name value to be filtred by.
    */
   public void assertHasXPathPropInt(String content, String xpath, String name) {
-    assertHasXPathProp(content, xpath, JMeterProperty.INTEGER.value(), name);
+    assertHasXPathProp(content, xpath, JMeterProperty.INTEGER.getValue(), name);
   }
 
   /**
@@ -235,7 +235,7 @@ public final class JmcAsserts {
    * @param name attribute name value to be filtred by.
    */
   public void assertHasXPathPropLong(String content, String xpath, String name) {
-    assertHasXPathProp(content, xpath, JMeterProperty.LONG.value(), name);
+    assertHasXPathProp(content, xpath, JMeterProperty.LONG.getValue(), name);
   }
 
   /**
@@ -245,7 +245,7 @@ public final class JmcAsserts {
    * @param name attribute name value to be filtred by.
    */
   public void assertNotHasXPathPropLong(String content, String xpath, String name) {
-    assertNotHasXPathProp(content, xpath, JMeterProperty.LONG.value(), name);
+    assertNotHasXPathProp(content, xpath, JMeterProperty.LONG.getValue(), name);
   }
 
   /**

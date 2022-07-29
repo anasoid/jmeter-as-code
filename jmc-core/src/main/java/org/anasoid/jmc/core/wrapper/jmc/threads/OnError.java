@@ -56,7 +56,7 @@ public enum OnError {
     this.value = value;
   }
 
-  public String value() {
+  public String getValue() {
     return value;
   }
 

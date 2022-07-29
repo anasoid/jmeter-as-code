@@ -116,13 +116,13 @@ public class HTMLAssertionWrapper extends AbstractBasicChildTestElementWrapper<H
     XHTML(1L),
     XML(2L);
 
-    public final Long value;
+    private final Long value;
 
     Format(Long value) {
       this.value = value;
     }
 
-    public Long value() {
+    public Long getValue() {
       return value;
     }
 
@@ -145,7 +145,7 @@ public class HTMLAssertionWrapper extends AbstractBasicChildTestElementWrapper<H
       this.value = value;
     }
 
-    public String value() {
+    public String getValue() {
       return value;
     }
 

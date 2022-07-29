@@ -242,6 +242,7 @@ public abstract class HTTPSamplerBaseWrapper<
       testname = "User Defined Variables")
   @JmcMethodAlias("arguments")
   @JmcEmptyAllowed
+  @SuppressWarnings("PMD.ReturnEmptyCollectionRatherThanNull")
   protected final List<HTTPArgumentWrapper> getArgumentsUser() {
     if (!Boolean.TRUE.equals(postBodyRaw)) {
       return arguments;
@@ -263,6 +264,7 @@ public abstract class HTTPSamplerBaseWrapper<
       enabled = false)
   @JmcMethodAlias("arguments")
   @JmcEmptyAllowed
+  @SuppressWarnings("PMD.ReturnEmptyCollectionRatherThanNull")
   protected final List<HTTPArgumentWrapper> getArgumentsBody() {
     if (Boolean.TRUE.equals(postBodyRaw)) {
       return arguments;

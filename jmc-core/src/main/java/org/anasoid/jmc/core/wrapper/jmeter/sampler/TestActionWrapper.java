@@ -94,13 +94,13 @@ public class TestActionWrapper extends AbstractSamplerWrapper<TestAction, TestAc
     CURRENT_THREAD(0),
     ALL_THREAD(2);
 
-    public final Integer value;
+    private final Integer value;
 
     Target(Integer value) {
       this.value = value;
     }
 
-    public Integer value() {
+    public Integer getValue() {
       return value;
     }
 
@@ -122,13 +122,13 @@ public class TestActionWrapper extends AbstractSamplerWrapper<TestAction, TestAc
     /** Break Current Loop. */
     BREAK_CURRENT_LOOP(5);
 
-    public final Integer value;
+    private final Integer value;
 
     Action(Integer value) {
       this.value = value;
     }
 
-    public Integer value() {
+    public Integer getValue() {
       return value;
     }
 

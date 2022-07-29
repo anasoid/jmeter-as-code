@@ -204,6 +204,7 @@ public class HttpDefaultsWrapper
       testname = "User Defined Variables")
   @JmcMethodAlias("arguments")
   @JmcEmptyAllowed
+  @SuppressWarnings("PMD.ReturnEmptyCollectionRatherThanNull")
   protected final List<HTTPArgumentWrapper> getArgumentsUser() {
     if (!Boolean.TRUE.equals(postBodyRaw)) {
       return arguments;
@@ -225,6 +226,7 @@ public class HttpDefaultsWrapper
       enabled = false)
   @JmcMethodAlias("arguments")
   @JmcEmptyAllowed
+  @SuppressWarnings("PMD.ReturnEmptyCollectionRatherThanNull")
   protected final List<HTTPArgumentWrapper> getArgumentsBody() {
     if (Boolean.TRUE.equals(postBodyRaw)) {
       return arguments;

@@ -88,7 +88,7 @@ public class ResponseAssertionWrapper
 
   @JmcProperty("Assertion.test_type")
   protected Integer testType() {
-    int result = matchingRule.value;
+    int result = matchingRule.getValue();
     if (isNot()) {
       result = result | NOT;
       if (isOr()) {

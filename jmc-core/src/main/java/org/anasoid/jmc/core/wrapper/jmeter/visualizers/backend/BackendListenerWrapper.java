@@ -74,7 +74,7 @@ public class BackendListenerWrapper extends AbstractBasicChildTestElementWrapper
     if (className != null) {
       return className;
     }
-    return implementation.value();
+    return implementation.getValue();
   }
 
   @JmcCollection(
@@ -88,7 +88,7 @@ public class BackendListenerWrapper extends AbstractBasicChildTestElementWrapper
   protected List<ArgumentWrapper> argumentsProp() {
     Map<String, String> argumentsMap = new HashMap<>();
     if (implementation != null) {
-      argumentsMap.putAll(implementation.defaultValue());
+      argumentsMap.putAll(implementation.getDefaultValue());
     }
     argumentsMap.putAll(getArguments());
 

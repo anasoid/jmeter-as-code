@@ -350,28 +350,28 @@ public final class ConverterBeanUtils {
     }
 
     if (ppClazz == Integer.class || ppClazz == int.class) {
-      return JMeterProperty.INTEGER.value();
+      return JMeterProperty.INTEGER.getValue();
     } else if (ppClazz == String.class) {
-      return JMeterProperty.STRING.value();
+      return JMeterProperty.STRING.getValue();
     } else if (ppClazz == Long.class || ppClazz == long.class) {
-      return JMeterProperty.LONG.value();
+      return JMeterProperty.LONG.getValue();
     } else if (ppClazz == Boolean.class || ppClazz == boolean.class) {
-      return JMeterProperty.BOOL.value();
+      return JMeterProperty.BOOL.getValue();
 
     } else if (ppClazz == Float.class || ppClazz == float.class) {
-      return JMeterProperty.FLOAT.value();
+      return JMeterProperty.FLOAT.getValue();
 
     } else if (ppClazz == Double.class || ppClazz == double.class) {
-      return JMeterProperty.DOUBLE.value();
+      return JMeterProperty.DOUBLE.getValue();
 
     } else if (ppClazz == Variable.class) {
-      return JMeterProperty.STRING.value();
+      return JMeterProperty.STRING.getValue();
 
     } else if (ppClazz.isEnum()) {
-      return JMeterProperty.STRING.value();
+      return JMeterProperty.STRING.getValue();
 
     } else if (value instanceof TestElementWrapper) {
-      return JMeterProperty.ELEMENT.value();
+      return JMeterProperty.ELEMENT.getValue();
     }
     throw new ConversionIllegalStateException("Unknown properties type for :" + value);
   }
@@ -380,7 +380,7 @@ public final class ConverterBeanUtils {
   public static Object getEnumValue(Object object) {
 
     try {
-      return object.getClass().getMethod("value").invoke(object);
+      return object.getClass().getMethod("getValue").invoke(object);
     } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
       return object.toString();
     }

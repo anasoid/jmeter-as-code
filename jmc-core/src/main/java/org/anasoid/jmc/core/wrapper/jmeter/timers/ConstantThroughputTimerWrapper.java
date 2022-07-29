@@ -95,13 +95,13 @@ public class ConstantThroughputTimerWrapper
      */
     AllActiveThreadsInCurrentThreadGroup_Shared(4);
 
-    public final Integer value;
+    private final Integer value;
 
     CalcMode(Integer value) {
       this.value = value;
     }
 
-    public Integer value() {
+    public Integer getValue() {
       return value;
     }
 

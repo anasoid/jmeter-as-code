@@ -33,13 +33,13 @@ public enum IpSourceType {
   DEVICE_IPV4(2), // NOSONAR
   DEVICE_IPV6(3); // NOSONAR
 
-  public final Integer value;
+  private final Integer value;
 
   IpSourceType(Integer value) {
     this.value = value;
   }
 
-  public Integer value() {
+  public Integer getValue() {
     return value;
   }
 

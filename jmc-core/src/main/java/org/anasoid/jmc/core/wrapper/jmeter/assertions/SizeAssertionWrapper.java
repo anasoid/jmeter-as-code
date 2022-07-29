@@ -93,13 +93,13 @@ public class SizeAssertionWrapper
     /** &lt;= . */
     LESS_THAN_EQUAL(6);
 
-    public final Integer value;
+    private final Integer value;
 
     Operator(Integer value) {
       this.value = value;
     }
 
-    public Integer value() {
+    public Integer getValue() {
       return value;
     }
 
@@ -123,7 +123,7 @@ public class SizeAssertionWrapper
       this.value = value;
     }
 
-    public String value() {
+    public String getValue() {
       return value;
     }
 

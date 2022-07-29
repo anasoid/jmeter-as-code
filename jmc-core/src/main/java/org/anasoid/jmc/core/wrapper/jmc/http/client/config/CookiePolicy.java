@@ -54,7 +54,7 @@ public enum CookiePolicy {
     this.value = value;
   }
 
-  public String value() {
+  public String getValue() {
     return value;
   }
 
