@@ -33,13 +33,13 @@ public enum Scope {
   /** Use Jmeter Variable. */
   VARIABLE("variable");
 
-  public final String value;
+  private final String value;
 
   Scope(String value) {
     this.value = value;
   }
 
-  public String value() {
+  public String getValue() {
     return value;
   }
 

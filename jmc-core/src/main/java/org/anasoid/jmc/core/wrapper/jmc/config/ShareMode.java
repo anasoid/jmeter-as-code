@@ -30,13 +30,13 @@ public enum ShareMode {
   /** each file is opened separately for each thread. */
   SHARE_THREAD("shareMode.thread");
 
-  public final String value;
+  private final String value;
 
   ShareMode(String value) {
     this.value = value;
   }
 
-  public String value() {
+  public String getValue() {
     return value;
   }
 

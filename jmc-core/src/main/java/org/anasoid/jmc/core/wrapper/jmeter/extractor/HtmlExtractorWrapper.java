@@ -142,13 +142,13 @@ public class HtmlExtractorWrapper
     JSOUP("JSOUP"),
     JODD("JODD");
 
-    public final String value;
+    private final String value;
 
     ExtractorImpl(String value) {
       this.value = value;
     }
 
-    public String value() {
+    public String getValue() {
       return value;
     }
 

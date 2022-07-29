@@ -47,13 +47,13 @@ public enum FieldToCheck {
   /** Response message : ex ok. */
   MESSAGE("message");
 
-  public final String value;
+  private final String value;
 
   FieldToCheck(String value) {
     this.value = value;
   }
 
-  public String value() {
+  public String getValue() {
     return value;
   }
 

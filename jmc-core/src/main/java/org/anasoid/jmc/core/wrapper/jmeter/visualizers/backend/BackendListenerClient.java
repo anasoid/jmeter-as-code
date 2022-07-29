@@ -78,11 +78,11 @@ public enum BackendListenerClient {
     this.defaultValue = defaultValue;
   }
 
-  public String value() {
+  public String getValue() {
     return value;
   }
 
-  public Map<String, String> defaultValue() {
+  public Map<String, String> getDefaultValue() {
     return defaultValue;
   }
 

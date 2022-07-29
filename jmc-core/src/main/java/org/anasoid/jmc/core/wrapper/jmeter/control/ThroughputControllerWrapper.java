@@ -97,13 +97,13 @@ public class ThroughputControllerWrapper
     PERCENT_EXECUTIONS(1),
     TOTAL_EXECUTIONS(0);
 
-    public final Integer value;
+    private final Integer value;
 
     ExecutionStyle(Integer value) {
       this.value = value;
     }
 
-    public Integer value() {
+    public Integer getValue() {
       return value;
     }
 

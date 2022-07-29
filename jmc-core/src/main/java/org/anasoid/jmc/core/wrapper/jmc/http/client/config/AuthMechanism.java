@@ -34,13 +34,13 @@ public enum AuthMechanism {
   DIGEST("DIGEST"),
   KERBEROS("KERBEROS");
 
-  public final String value;
+  private final String value;
 
   AuthMechanism(String value) {
     this.value = value;
   }
 
-  public String value() {
+  public String getValue() {
     return value;
   }
 

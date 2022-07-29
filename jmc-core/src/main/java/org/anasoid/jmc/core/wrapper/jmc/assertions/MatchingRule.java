@@ -33,13 +33,13 @@ public enum MatchingRule {
   /** true if the text contains the pattern string (case-sensitive). */
   SUBSTRING(1 << 4);
 
-  public final int value;
+  private final int value;
 
   MatchingRule(int value) {
     this.value = value;
   }
 
-  public int value() {
+  public int getValue() {
     return value;
   }
 

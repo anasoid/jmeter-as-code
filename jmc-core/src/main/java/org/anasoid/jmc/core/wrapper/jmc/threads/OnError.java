@@ -50,13 +50,13 @@ public enum OnError {
 
   ON_ERROR_BREAK_CURRENT_LOOP("6");
 
-  public final String value;
+  private final String value;
 
   OnError(String value) {
     this.value = value;
   }
 
-  public String value() {
+  public String getValue() {
     return value;
   }
 

@@ -93,13 +93,13 @@ public class SizeAssertionWrapper
     /** &lt;= . */
     LESS_THAN_EQUAL(6);
 
-    public final Integer value;
+    private final Integer value;
 
     Operator(Integer value) {
       this.value = value;
     }
 
-    public Integer value() {
+    public Integer getValue() {
       return value;
     }
 
@@ -117,13 +117,13 @@ public class SizeAssertionWrapper
     RESPONSE_CODE("SizeAssertion.response_code"),
     RESPONSE_MESSAGE("SizeAssertion.response_message");
 
-    public final String value;
+    private final String value;
 
     FieldtoTest(String value) {
       this.value = value;
     }
 
-    public String value() {
+    public String getValue() {
       return value;
     }
 

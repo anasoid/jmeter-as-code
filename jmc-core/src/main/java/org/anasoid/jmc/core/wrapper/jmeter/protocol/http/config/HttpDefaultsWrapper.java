@@ -63,131 +63,132 @@ public class HttpDefaultsWrapper
   @Getter
   @Setter
   @JmcNullAllowed
-  private final String domain;
+  private String domain;
   /** Path. */
   @JmcProperty(HTTPSamplerBase.PATH)
   @Getter
   @Setter
   @JmcNullAllowed
-  private final String path;
+  private String path;
 
   /** Port Number. */
   @JmcProperty(value = HTTPSamplerBase.PORT)
   @Getter
   @Setter
   @JmcNullAllowed
-  private final String port;
+  private String port;
 
   /** Protocol [http]. */
   @JmcProperty(value = HTTPSamplerBase.PROTOCOL)
   @Getter
   @Setter
   @JmcNullAllowed
-  private final String protocol;
+  private String protocol;
 
   @JmcProperty(value = HTTPSamplerBase.CONTENT_ENCODING)
   @Getter
   @Setter
   @JmcNullAllowed
-  private final String contentEncoding;
+  private String contentEncoding;
 
   @JmcProperty(HTTPSamplerBase.IMPLEMENTATION)
   @Getter
   @Setter
-  private final Implementation implementation;
+  private Implementation implementation;
 
   /** Source Address Type. */
   @JmcProperty(value = HTTPSamplerBase.IP_SOURCE_TYPE)
   @Getter
   @Setter
   @JmcSkipDefault("0")
-  private final IpSourceType ipSourceType;
+  private IpSourceType ipSourceType;
 
   /** Source IP Address. */
   @JmcProperty(HTTPSamplerBase.IP_SOURCE)
   @Getter
   @Setter
-  private final String ipSource;
+  private String ipSource;
 
   /** Proxy scheme. */
   @JmcProperty(HTTPSamplerBase.PROXYSCHEME)
   @Getter
   @Setter
-  private final String proxyScheme;
+  private String proxyScheme;
   /** Proxy host. */
   @JmcProperty(HTTPSamplerBase.PROXYHOST)
   @Getter
   @Setter
-  private final String proxyHost;
+  private String proxyHost;
 
   @JmcProperty(value = HTTPSamplerBase.PROXYPORT)
   @Getter
   @Setter
-  private final String proxyPort;
+  private String proxyPort;
   /** Proxy user. */
   @JmcProperty(HTTPSamplerBase.PROXYUSER)
   @Getter
   @Setter
-  private final String proxyUser;
+  private String proxyUser;
 
   /** Proxy pass. */
   @JmcProperty(HTTPSamplerBase.PROXYPASS)
   @Getter
   @Setter
-  private final String proxyPass;
+  private String proxyPass;
 
   /** Connect Timeouts (milliseconds). */
   @JmcProperty(value = HTTPSamplerBase.CONNECT_TIMEOUT)
   @Getter
   @Setter
   @JmcNullAllowed
-  private final String connectTimeout;
+  private String connectTimeout;
 
   /** Response Timeouts (milliseconds). */
   @JmcProperty(value = HTTPSamplerBase.RESPONSE_TIMEOUT)
   @Getter
   @Setter
   @JmcNullAllowed
-  private final String responseTimeout;
+  private String responseTimeout;
 
   /** Save response as MD5 hash. */
   @JmcProperty(HTTPSamplerBase.MD5)
   @Getter
   @Setter
-  private final Boolean md5;
+  private Boolean md5;
 
   @JmcProperty(HTTPSamplerBase.POST_BODY_RAW)
   @Getter
   @Setter
-  private final Boolean postBodyRaw;
+  private Boolean postBodyRaw;
   /** Embedded Resources from HTML Files: URLs must match. */
   @JmcProperty(value = HTTPSamplerBase.EMBEDDED_URL_RE)
   @Getter
   @Setter
-  private final String embeddedUrlRE;
+  private String embeddedUrlRE;
   /** Embedded Resources from HTML Files: URLs must not match. */
   @JmcProperty(HTTPSamplerBase.EMBEDDED_URL_EXCLUDE_RE)
   @Getter
   @Setter
-  private final String embeddedUrlExcludeRE;
+  private String embeddedUrlExcludeRE;
   /** Embedded Resources from HTML Files: Parallel downloads. */
   @JmcProperty(HTTPSamplerBase.CONCURRENT_DWN)
   @Getter
   @Setter
-  private final Boolean concurrentDwn;
+  private Boolean concurrentDwn;
 
   @JmcProperty(HTTPSamplerBase.IMAGE_PARSER)
   @Getter
   @Setter
-  private final Boolean imageParser;
+  private Boolean imageParser;
 
   @Getter @Default @XStreamOmitField
   private final List<HTTPArgumentWrapper> arguments = new ArrayList<>();
+
   /** Embedded Resources from HTML Files: Concurrent pool for parallel download. */
   @JmcProperty(value = HTTPSamplerBase.CONCURRENT_POOL)
   @Default
   @Getter
-  private final String concurrentPool = String.valueOf(HTTPSamplerBase.CONCURRENT_POOL_SIZE);
+  private String concurrentPool = String.valueOf(HTTPSamplerBase.CONCURRENT_POOL_SIZE);
 
   /**
    * Arguments format when User Defined Variables.
@@ -204,6 +205,7 @@ public class HttpDefaultsWrapper
       testname = "User Defined Variables")
   @JmcMethodAlias("arguments")
   @JmcEmptyAllowed
+  @SuppressWarnings("PMD.ReturnEmptyCollectionRatherThanNull")
   protected final List<HTTPArgumentWrapper> getArgumentsUser() {
     if (!Boolean.TRUE.equals(postBodyRaw)) {
       return arguments;
@@ -225,6 +227,7 @@ public class HttpDefaultsWrapper
       enabled = false)
   @JmcMethodAlias("arguments")
   @JmcEmptyAllowed
+  @SuppressWarnings("PMD.ReturnEmptyCollectionRatherThanNull")
   protected final List<HTTPArgumentWrapper> getArgumentsBody() {
     if (Boolean.TRUE.equals(postBodyRaw)) {
       return arguments;

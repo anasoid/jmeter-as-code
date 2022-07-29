@@ -58,7 +58,7 @@ public abstract class AbstractDynamicThreadGroupWrapper<
     /** Second. */
     SECOND("S");
 
-    public final String value;
+    private final String value;
 
     UNIT(String value) {
       this.value = value;

@@ -56,7 +56,7 @@ public abstract class ScriptingTestElementParentWrapper<
   @JmcProperty(value = "scriptLanguage")
   @Getter
   @Default
-  private final String scriptLanguage = ScriptLanguage.GROOVY.value();
+  private final String scriptLanguage = ScriptLanguage.GROOVY.getValue();
 
   @XStreamOmitField @Getter private final String scriptFile;
 
@@ -112,7 +112,7 @@ public abstract class ScriptingTestElementParentWrapper<
 
     /** The JSR223 language to be used. */
     public B withScriptLanguage(ScriptLanguage scriptLanguage) {
-      return this.withScriptLanguage(scriptLanguage.value());
+      return this.withScriptLanguage(scriptLanguage.getValue());
     }
 
     protected B withParameters(List<String> parameters) {

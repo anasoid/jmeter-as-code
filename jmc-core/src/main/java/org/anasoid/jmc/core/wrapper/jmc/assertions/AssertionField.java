@@ -49,13 +49,13 @@ public enum AssertionField {
   /** Document (text) - the extract text from various type of documents via Apache Tika. */
   RESPONSE_DATA_AS_DOCUMENT("response_data_as_document");
 
-  public final String value;
+  private final String value;
 
   AssertionField(String value) {
     this.value = value;
   }
 
-  public String value() {
+  public String getValue() {
     return value;
   }
 
