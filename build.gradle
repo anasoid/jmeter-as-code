@@ -89,7 +89,7 @@ subprojects {
 
         reports {
             html.required = true
-            xml.required = true
+            xml.required = false
             csv.required = false
         }
         onlyIf = {
