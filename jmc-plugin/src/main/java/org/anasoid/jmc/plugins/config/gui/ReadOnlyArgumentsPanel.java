@@ -31,6 +31,14 @@ public class ReadOnlyArgumentsPanel extends ArgumentsPanel {
   /**
    * Create a new ReadOnly ArgumentsPanel.
    *
+   */
+  public ReadOnlyArgumentsPanel() {
+    this("");
+  }
+
+  /**
+   * Create a new ReadOnly ArgumentsPanel.
+   *
    * @param label text for label
    */
   public ReadOnlyArgumentsPanel(String label) {
@@ -40,7 +48,7 @@ public class ReadOnlyArgumentsPanel extends ArgumentsPanel {
   /**
    * Create a new ReadOnlyArgumentsPanel.
    *
-   * @param label text for label
+   * @param label   text for label
    * @param disable readonly or not ?.
    */
   public ReadOnlyArgumentsPanel(String label, boolean disable) {
