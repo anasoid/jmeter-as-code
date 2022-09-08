@@ -178,7 +178,7 @@ public abstract class AbstractJavaTestElementGui<T extends AbstractJavaTestEleme
       log.debug("Exception getting interfaces.", e);
     }
     if (possibleClasses.isEmpty()) {
-      log.info("No executor Found for : " + getExecutorClass());
+      log.info("No executor Found for : {}", getExecutorClass());
     }
 
     final JLabel label = new JLabel("Executor ");
