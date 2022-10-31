@@ -24,6 +24,7 @@ import java.util.Map;
 import java.util.Properties;
 import org.anasoid.jmc.plugins.utils.ExecutorUtils;
 import org.apache.jmeter.config.Arguments;
+import org.apache.jmeter.engine.util.NoThreadClone;
 import org.apache.jmeter.samplers.SampleResult;
 import org.apache.jmeter.samplers.Sampler;
 import org.apache.jmeter.testelement.AbstractTestElement;
@@ -37,10 +38,12 @@ import org.apache.jmeter.util.JMeterUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/** Base class for Java TestElement. */
+/**
+ * Base class for Java TestElement.
+ */
 @SuppressWarnings("PMD.JUnit4TestShouldUseTestAnnotation")
 public abstract class AbstractJavaTestElement<T extends JavaTestElementExecutor>
-    extends AbstractTestElement implements TestStateListener {
+    extends AbstractTestElement implements TestStateListener, NoThreadClone {
 
   public static final String PARAMETERS = "parameters";
 
@@ -111,7 +114,7 @@ public abstract class AbstractJavaTestElement<T extends JavaTestElementExecutor>
   }
 
   protected Logger getExecutorLogger() {
-    return LoggerFactory.getLogger(getExecutor().getClass().getName() + "." + getName());
+    return LoggerFactory.getLogger(getExecutorClass() + "." + getName());
   }
 
   protected Sampler getCurrentSampler() {
@@ -140,16 +143,22 @@ public abstract class AbstractJavaTestElement<T extends JavaTestElementExecutor>
   @Override
   public void testStarted() {
     executor = null; // NOPMD - Initialize executor
+    getExecutor().onStartTest();
   }
 
   @Override
-  public void testStarted(String host) {}
+  public void testStarted(String host) {
+    testStarted();
+  }
 
   @Override
   public void testEnded() {
+    getExecutor().onEndTest();
     executor = null; // NOPMD - Initialize executor
   }
 
   @Override
-  public void testEnded(String host) {}
+  public void testEnded(String host) {
+    testEnded();
+  }
 }

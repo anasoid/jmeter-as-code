@@ -33,4 +33,14 @@ public interface JavaTestElementExecutor extends Serializable {
    * @return list of valid parameters, null to not check validity.
    */
   List<String> getParametersKey();
+
+  /**
+   * Executed on Start Test.
+   */
+  default void onStartTest() {}
+
+  /**
+   * Executed on End Test.
+   */
+  default void onEndTest() {}
 }
