@@ -9,6 +9,7 @@ import org.anasoid.jmc.plugins.component.java.sampler.JavaSampler;
 import org.anasoid.jmc.plugins.utils.ExecutorUtils;
 import org.anasoid.jmc.plugins.wrapper.java.AbstractJmcPluginJavaTest;
 import org.anasoid.jmc.plugins.wrapper.java.sampler.executor.TestJavaPostProcessorCheckWrapper;
+import org.anasoid.jmc.plugins.wrapper.java.sampler.executor.TestJavaSamplerOnStartEndWrapper;
 import org.anasoid.jmc.plugins.wrapper.java.sampler.executor.TestJavaSamplerWrapper;
 import org.anasoid.jmc.plugins.wrapper.java.sampler.executor.TestJavaSamplerWrapperWithField;
 import org.anasoid.jmc.test.log.LogMonitor;
@@ -37,6 +38,7 @@ import org.slf4j.LoggerFactory;
  */
 
 class AbstractJavaSamplerWrapperTest extends AbstractJmcPluginJavaTest {
+
   private static final Logger LOG = LoggerFactory.getLogger(AbstractJavaSamplerWrapperTest.class);
 
   // @Test
@@ -224,5 +226,59 @@ class AbstractJavaSamplerWrapperTest extends AbstractJmcPluginJavaTest {
             .findFirst()
             .isPresent(),
         "Errors : " + LogMonitor.getLogs().toString());
+  }
+
+  @Test
+  void testOnStartOnEnd() throws IOException {
+    TestJavaSamplerOnStartEndWrapper.initialize();
+    TestPlanWrapper testPlanWrapper =
+        TestPlanWrapper.builder()
+            .addThread(
+                ThreadGroupWrapper.builder()
+                    .withLoops(2)
+                    .withDuration(1)
+                    .withNumThreads(2)
+                    .addSampler(
+                        TestJavaSamplerOnStartEndWrapper.builder()
+                            .withName("testOnStartOnEnd")
+                            .build())
+                    .build())
+            .build();
+    ApplicationTest applicationTest = toApplicationTest(testPlanWrapper, "testOnStartOnEnd");
+    applicationTest.run();
+    Assertions.assertTrue(
+        TestJavaSamplerOnStartEndWrapper.ON_END);
+    Assertions.assertTrue(
+        TestJavaSamplerOnStartEndWrapper.ON_START);
+  }
+
+  @Test
+  void testOnStartOnEndMulti() throws IOException {
+    TestJavaSamplerOnStartEndWrapper.initialize();
+    TestPlanWrapper testPlanWrapper =
+        TestPlanWrapper.builder()
+            .addThread(
+                ThreadGroupWrapper.builder()
+                    .withLoops(2)
+                    .withDuration(1)
+                    .withNumThreads(2)
+                    .addSampler(
+                        TestJavaSamplerOnStartEndWrapper.builder()
+                            .withName("testOnStartOnEnd1")
+                            .withNumberInstance(2)
+                            .build())
+                    .addSampler(
+                        TestJavaSamplerOnStartEndWrapper.builder()
+                            .withName("testOnStartOnEnd2")
+                            .withNumberInstance(2)
+                            .build())
+                    .build())
+            .build();
+    ApplicationTest applicationTest = toApplicationTest(testPlanWrapper, "testOnStartOnEnd");
+    applicationTest.run();
+    Assertions.assertTrue(
+        TestJavaSamplerOnStartEndWrapper.ON_END);
+    Assertions.assertTrue(
+        TestJavaSamplerOnStartEndWrapper.ON_START);
   }
 }
