@@ -26,7 +26,7 @@ jobs:
           path: |
             ~/.gradle/caches
             ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-main-v5-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('gradle.properties') }}
+          key: ${{ runner.os }}-gradle-main-v5-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('gradle.properties') }}-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
           restore-keys: |
             ${{ runner.os }}-gradle-main-v5
 
@@ -35,7 +35,7 @@ jobs:
         with:
           path: |
             ~/.sonar
-          key: ${{ runner.os }}-sonar-v5-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('gradle.properties') }}
+          key: ${{ runner.os }}-sonar-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('gradle.properties') }}-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
           restore-keys: |
             ${{ runner.os }}-sonar-v5
 
