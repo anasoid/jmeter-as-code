@@ -205,6 +205,7 @@ tasks.named("dependencyUpdates").configure {
 // always run the tests before generating the report
 codeCoverageReport.dependsOn {
     subprojects*.test
+    subprojects*.delombok
 }
 
 
