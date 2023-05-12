@@ -71,7 +71,7 @@ subprojects {
     checkstyle {
 
         configFile = rootProject.file('config/checkstyle/google_checks.xml')
-        toolVersion "10.9.3"
+        toolVersion "10.11.0"
         ignoreFailures = false
         maxErrors = 0
         maxWarnings = 0
