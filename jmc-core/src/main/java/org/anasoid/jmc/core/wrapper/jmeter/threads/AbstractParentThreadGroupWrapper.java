@@ -49,7 +49,7 @@ public abstract class AbstractParentThreadGroupWrapper<
     extends AbstractTestElementWrapper<T> implements JMeterGUIWrapper<G>, ThreadWrapper<T> {
 
   /** the sampler controller. */
-  @JmcProperty(AbstractThreadGroup.MAIN_CONTROLLER)
+  @JmcProperty("ThreadGroup.main_controller")
   protected @Getter GenericControllerWrapper<?, ?> samplerController;
 
   /** Action to be taken after a Sampler error. */

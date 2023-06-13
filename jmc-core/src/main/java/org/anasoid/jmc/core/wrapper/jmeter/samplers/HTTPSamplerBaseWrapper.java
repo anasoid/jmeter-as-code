@@ -160,7 +160,7 @@ public abstract class HTTPSamplerBaseWrapper<
   @JmcNullAllowed
   private String responseTimeout;
   /** Follow redirects. */
-  @JmcProperty(HTTPSamplerBase.FOLLOW_REDIRECTS)
+  @JmcProperty("HTTPSampler.follow_redirects")
   @Getter
   @Setter
   @Default
@@ -172,19 +172,19 @@ public abstract class HTTPSamplerBaseWrapper<
   @Default
   private Boolean autoRedirects = Boolean.FALSE;
   /** Use KeepAlive. */
-  @JmcProperty(HTTPSamplerBase.USE_KEEPALIVE)
+  @JmcProperty("HTTPSampler.use_keepalive")
   @Getter
   @Setter
   @Default
   private Boolean useKeepAlive = Boolean.TRUE;
   /** Use multipart/form-data. */
-  @JmcProperty(HTTPSamplerBase.DO_MULTIPART_POST)
+  @JmcProperty("HTTPSampler.DO_MULTIPART_POST")
   @Getter
   @Setter
   @Default
   private Boolean doMultipartPost = Boolean.FALSE;
   /** Browser-compatible headers. */
-  @JmcProperty(HTTPSamplerBase.BROWSER_COMPATIBLE_MULTIPART)
+  @JmcProperty("HTTPSampler.BROWSER_COMPATIBLE_MULTIPART")
   @Getter
   @Setter
   private Boolean doBrowserCompatibleMultipart;
