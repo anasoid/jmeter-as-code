@@ -43,12 +43,12 @@ public abstract class AbstractThreadGroupWrapper<
     extends AbstractParentThreadGroupWrapper<T, G> {
 
   /** Number of Threads (users). */
-  @JmcProperty(value = AbstractThreadGroup.NUM_THREADS)
+  @JmcProperty(value = "ThreadGroup.num_threads")
   @Builder.Default
   private @Getter @Setter String numThreads = "1";
 
   /** Same user on each iteration. */
-  @JmcProperty(AbstractThreadGroup.IS_SAME_USER_ON_NEXT_ITERATION)
+  @JmcProperty("ThreadGroup.same_user_on_next_iteration")
   @Builder.Default
   private @Getter @Setter Boolean isSameUserOnNextIteration = true;
 

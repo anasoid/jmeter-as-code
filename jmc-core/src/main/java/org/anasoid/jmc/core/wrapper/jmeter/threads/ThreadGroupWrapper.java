@@ -45,14 +45,14 @@ public class ThreadGroupWrapper extends AbstractThreadGroupWrapper<ThreadGroup, 
 
   @XStreamOmitField private static final long serialVersionUID = -5025050304929170782L;
   /** Startup delay (seconds). */
-  @JmcProperty(value = ThreadGroup.DELAY)
+  @JmcProperty(value = "ThreadGroup.delay")
   @Getter
   @Setter
   @JmcNullAllowed
   private String delay;
 
   /** Ramp-up period (seconds). */
-  @JmcProperty(value = ThreadGroup.RAMP_TIME)
+  @JmcProperty(value = "ThreadGroup.ramp_time")
   @Getter
   @Setter
   @Builder.Default
@@ -72,14 +72,14 @@ public class ThreadGroupWrapper extends AbstractThreadGroupWrapper<ThreadGroup, 
   @XStreamOmitField @Builder.Default @Getter @Setter private Boolean continueForever = false;
 
   /** Specify Thread lifetime. */
-  @JmcProperty(ThreadGroup.SCHEDULER)
+  @JmcProperty("ThreadGroup.scheduler")
   @Default
   @Setter
   @Getter
   private Boolean scheduler = false;
 
   /** Specify Thread lifetime. */
-  @JmcProperty(ThreadGroup.DELAYED_START)
+  @JmcProperty("ThreadGroup.delayedStart")
   @Default
   @Getter
   @Setter
@@ -87,7 +87,7 @@ public class ThreadGroupWrapper extends AbstractThreadGroupWrapper<ThreadGroup, 
   private Boolean delayedStartup = false;
 
   /** Duration (seconds). */
-  @JmcProperty(value = ThreadGroup.DURATION)
+  @JmcProperty(value = "ThreadGroup.duration")
   @Getter
   @Setter
   @JmcNullAllowed
