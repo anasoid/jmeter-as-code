@@ -7,7 +7,7 @@ buildscript {
 
     }
     dependencies {
-        classpath 'org.owasp:dependency-check-gradle:9.0.6'
+        classpath 'org.owasp:dependency-check-gradle:9.0.7'
 
     }
 }
