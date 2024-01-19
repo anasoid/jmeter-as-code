@@ -37,7 +37,7 @@ allprojects {
 
     group = 'org.anasoid.jmc'
     sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_17
 
 
     repositories {
