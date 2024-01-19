@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-22.04
 
     env:
-      JMETER_VERSION: 5.6.3-SNAPSHOT
+      JMETER_VERSION: 5.6.4-SNAPSHOT
 
     steps:
       - name: Checkout
