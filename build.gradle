@@ -36,9 +36,10 @@ allprojects {
 
 
     group = 'org.anasoid.jmc'
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_17
-
+    java {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_17
+    }
 
     repositories {
         mavenCentral()
@@ -148,12 +149,11 @@ subprojects {
 
 
         //Test
-        testImplementation("org.junit.jupiter:junit-jupiter-api:$junitVersion")
-        testImplementation("org.junit.jupiter:junit-jupiter-params:$junitVersion")
+        testImplementation "org.junit.jupiter:junit-jupiter:$junitVersion"
+        testRuntimeOnly "org.junit.platform:junit-platform-launcher"
         testImplementation("commons-io:commons-io:$commonsIoVersion")
         testImplementation("org.assertj:assertj-core:$assertjCore")
 
-        testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junitVersion")
 
         testImplementation("org.xmlunit:xmlunit-core:$xmlunitVersion")
         testImplementation("org.xmlunit:xmlunit-matchers:$xmlunitVersion")
@@ -187,9 +187,6 @@ task codeCoverageReport(type: JacocoReport) {
     }
 }
 
-test {
-    finalizedBy codeCoverageReport // report is always generated after tests run
-}
 
 tasks.named("dependencyUpdates").configure {
     checkConstraints = true
