@@ -7,7 +7,7 @@ buildscript {
 
     }
     dependencies {
-        classpath 'org.owasp:dependency-check-gradle:9.0.10'
+        classpath 'org.owasp:dependency-check-gradle:9.1.0'
 
     }
 }
@@ -49,7 +49,7 @@ allprojects {
     }
 
     jacoco {
-        toolVersion = '0.8.11'
+        toolVersion = '0.8.12'
     }
 
 
@@ -72,7 +72,7 @@ subprojects {
     checkstyle {
 
         configFile = rootProject.file('config/checkstyle/google_checks.xml')
-        toolVersion "10.14.2"
+        toolVersion "10.15.0"
         ignoreFailures = false
         maxErrors = 0
         maxWarnings = 0
