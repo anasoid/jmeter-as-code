@@ -51,6 +51,7 @@ public class ReadOnlyArgumentsPanel extends ArgumentsPanel {
    * @param label   text for label
    * @param disable readonly or not ?.
    */
+  @SuppressWarnings("PMD.ConstructorCallsOverridableMethod")
   public ReadOnlyArgumentsPanel(String label, boolean disable) {
     super(label, null, false, false, null, disable);
     if (disable) {

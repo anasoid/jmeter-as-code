@@ -59,6 +59,7 @@ public abstract class AbstractJavaTestElement<T extends JavaTestElementExecutor>
     setProperty(EXECUTOR_CLASS, clazz);
   }
 
+  @SuppressWarnings("PMD.ConstructorCallsOverridableMethod")
   protected AbstractJavaTestElement() {
     setArguments(new Arguments());
   }

@@ -57,7 +57,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /** Convert wrapper to Jmeter CLasses utils. */
-@SuppressWarnings({"PMD.GodClass", "PMD.ExcessiveImports"})
+@SuppressWarnings({"PMD.GodClass", "PMD.ExcessiveImports", "PMD.TooManyMethods"})
 public final class ConverterBeanUtils {
 
   private static final Logger LOG = LoggerFactory.getLogger(ConverterBeanUtils.class);
@@ -393,7 +393,7 @@ public final class ConverterBeanUtils {
   }
 
   /** Should skip field from XML conversion. */
-  @SuppressWarnings("PMD.NPathComplexity")
+  @SuppressWarnings({"PMD.NPathComplexity", "PMD.SimplifyBooleanReturns"})
   public static boolean shouldSkip(Object source, AccessibleObject accessibleObject) {
 
     if (getAnnotation(accessibleObject, XStreamOmitField.class) != null

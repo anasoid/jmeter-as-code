@@ -51,7 +51,7 @@ public abstract class AbstractJavaTestElementWrapper<T extends AbstractJavaTestE
     extends AbstractBasicChildTestElementWrapper<T>
     implements JMeterGUIWrapper<TestBeanGUI>, Validator, JavaTestElementExecutor {
 
-  @JmcOmitField @Default @Getter private Map<String, String> parameters = new HashMap<>();
+  @JmcOmitField @Default @Getter private final Map<String, String> parameters = new HashMap<>();
 
   @JmcCollection(
       value = Arguments.ARGUMENTS,

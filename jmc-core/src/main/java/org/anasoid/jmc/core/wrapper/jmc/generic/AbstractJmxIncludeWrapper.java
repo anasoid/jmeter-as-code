@@ -21,6 +21,7 @@ package org.anasoid.jmc.core.wrapper.jmc.generic;
 import com.thoughtworks.xstream.annotations.XStreamConverter;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import java.lang.reflect.Field;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -52,13 +53,13 @@ public abstract class AbstractJmxIncludeWrapper<T> implements TestElementWrapper
               + "</hashTree>[\\s]*</jmeterTestPlan>",
           Pattern.DOTALL);
 
-  @SuppressWarnings("PMD.UnusedAssignment")
+  @SuppressWarnings({"PMD.UnusedAssignment", "PMD.ImmutableField"})
   @XStreamOmitField
   private Set<String> tags = new HashSet<>();
 
   private boolean isInitialized;
 
-  @SuppressWarnings("PMD.UnusedAssignment")
+  @SuppressWarnings({"PMD.UnusedAssignment", "PMD.ImmutableField"})
   private String path = getDefaultPath();
 
   private Map<String, String> params = new HashMap<>(); // NOPMD
@@ -249,9 +250,7 @@ public abstract class AbstractJmxIncludeWrapper<T> implements TestElementWrapper
         this.tagsValue = new HashSet<>();
         this.tagsSet = true;
       }
-      for (String tag : tags) {
-        this.tagsValue.add(tag);
-      }
+      this.tagsValue.addAll(Arrays.asList(tags));
       return self();
     }
 

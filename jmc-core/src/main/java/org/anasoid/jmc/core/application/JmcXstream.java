@@ -20,6 +20,7 @@ package org.anasoid.jmc.core.application;
 
 import com.thoughtworks.xstream.XStream;
 import io.github.classgraph.ClassGraph;
+import io.github.classgraph.ClassInfo;
 import io.github.classgraph.ClassInfoList;
 import io.github.classgraph.ScanResult;
 import java.util.ArrayList;
@@ -41,6 +42,7 @@ public class JmcXstream extends XStream {
   private static List<Class<?>> listClazz;
 
   /** constructor. */
+  @SuppressWarnings("PMD.ConstructorCallsOverridableMethod")
   public JmcXstream() {
     super(new JmcXppDriver());
     this.setMode(XStream.NO_REFERENCES);
@@ -87,7 +89,7 @@ public class JmcXstream extends XStream {
                   "byte-buddy-*.jar",
                   "darklaf-*.jar")
               .scan()) {
-        ClassInfoList classInfoList =
+        List<ClassInfo> classInfoList =
             scanResult.getSubclasses(AbstractTestElementWrapper.class.getName());
         listClazz = classInfoList.stream().map(c -> c.loadClass(true)).collect(Collectors.toList());
       }

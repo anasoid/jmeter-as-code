@@ -188,6 +188,7 @@ public class HttpDefaultsWrapper
   @JmcProperty(value = HTTPSamplerBase.CONCURRENT_POOL)
   @Default
   @Getter
+  @SuppressWarnings({"PMD.ImmutableField"})
   private String concurrentPool = String.valueOf(HTTPSamplerBase.CONCURRENT_POOL_SIZE);
 
   /**

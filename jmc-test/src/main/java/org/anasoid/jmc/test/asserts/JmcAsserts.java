@@ -27,7 +27,8 @@ import org.anasoid.jmc.core.wrapper.jmeter.testelement.property.JMeterProperty;
 import org.xmlunit.matchers.EvaluateXPathMatcher;
 
 /** Groupings asserts used for Xml and non Xml validations. */
-@SuppressWarnings({"PMD.TooManyMethods", "PMD.UseObjectForClearerAPI"})
+@SuppressWarnings({"PMD.TooManyMethods", "PMD.UseObjectForClearerAPI",
+    "PMD.JUnitAssertionsShouldIncludeMessage"})
 public final class JmcAsserts {
 
   private static JmcAsserts instance;

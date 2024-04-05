@@ -41,6 +41,8 @@ public final class JMeterHome {
   protected static final String JMETER_HOME = "JMETER_HOME";
   protected static final String JMETER_HOME_PROPERTY = "jmeter.home";
 
+  protected static final String JMETER_BIN_PATH = "/bin";
+
   private boolean initialized;
 
   private static JMeterHome instance;
@@ -99,10 +101,10 @@ public final class JMeterHome {
       try (FileSystem fs =
           FileSystems.newFileSystem(
               getClass().getResource("/bin/jmeter.properties").toURI(), Collections.emptyMap())) {
-        Path configBinDir = fs.getPath("/bin");
+        Path configBinDir = fs.getPath(JMETER_BIN_PATH);
         for (Path p : (Iterable<Path>) Files.walk(configBinDir)::iterator) {
           String parent = p.getParent().toString();
-          if ("/bin".startsWith(parent)) {
+          if (JMETER_BIN_PATH.startsWith(parent)) {
             Path targetPath = binDir.toPath().resolve(configBinDir.relativize(p).toString());
             Files.copy(p, targetPath);
             targetPath.toFile().deleteOnExit();

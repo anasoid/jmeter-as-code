@@ -41,7 +41,7 @@ import org.xmlunit.builder.Input;
 import org.xmlunit.diff.Diff;
 
 /** Abstract Class for tests. */
-@SuppressWarnings("PMD.AbstractClassWithoutAbstractMethod")
+@SuppressWarnings({"PMD.AbstractClassWithoutAbstractMethod", "PMD.TooManyMethods"})
 public abstract class AbstractJmcTest {
 
   @BeforeEach
@@ -141,6 +141,7 @@ public abstract class AbstractJmcTest {
    *
    * @return ApplicationTest.
    */
+  @SuppressWarnings({"PMD.TooManyMethods", "PMD.LooseCoupling"})
   protected HashTree toHashTree(TestPlanWrapper testPlanWrapper, String tmpFilename)
       throws IOException {
 
