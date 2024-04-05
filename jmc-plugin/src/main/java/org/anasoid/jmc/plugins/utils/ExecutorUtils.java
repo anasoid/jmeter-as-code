@@ -65,7 +65,7 @@ public final class ExecutorUtils {
    * @return JavaTestElementExecutor instance.
    */
   public static JavaTestElementExecutor getExecutor(String className, TestElement testElement) {
-    HashMap<String, Object> values = new HashMap<>();
+    Map<String, Object> values = new HashMap<>();
     PropertyIterator propertyIterator = testElement.propertyIterator();
     while (propertyIterator.hasNext()) {
       JMeterProperty property = propertyIterator.next();

@@ -42,7 +42,7 @@ public class ParallelHTTPSamplerWrapper
     if (urls != null) {
       urls.forEach(
           s -> {
-            ArrayList<StringProperty> row = new ArrayList<>();
+            List<StringProperty> row = new ArrayList<>();
             row.add(new StringProperty(Integer.toString(s.hashCode()), s));
             rows.addItem(row);
           });
@@ -54,12 +54,14 @@ public class ParallelHTTPSamplerWrapper
   @JmcProperty(HTTPSamplerBase.IMAGE_PARSER)
   @Getter
   @Default
+  @SuppressWarnings({"PMD.ImmutableField"})
   private Boolean imageParser = true;
 
   /** read only concurrentDwn. */
   @JmcProperty(HTTPSamplerBase.CONCURRENT_DWN)
   @Getter
   @Default
+  @SuppressWarnings({"PMD.ImmutableField"})
   private Boolean concurrentDwn = true;
 
   /** read only arguments. */

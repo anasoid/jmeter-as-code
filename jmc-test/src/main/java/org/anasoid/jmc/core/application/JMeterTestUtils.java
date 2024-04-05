@@ -42,7 +42,7 @@ public final class JMeterTestUtils {
    * @param value value.
    */
   public static void addProperty(String key, String value) {
-    HashMap map = new HashMap();
+    Map map = new HashMap();
     map.put(key, value);
     addProperties(map);
   }

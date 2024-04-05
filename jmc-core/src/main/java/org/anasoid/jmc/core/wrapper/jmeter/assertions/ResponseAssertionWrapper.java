@@ -78,6 +78,7 @@ public class ResponseAssertionWrapper
 
   @Getter @Setter @XStreamOmitField @Default private boolean or = false; // NOSONAR
 
+  @SuppressWarnings({"PMD.ImmutableField"})
   @Getter @Default @XStreamOmitField private List<String> patterns = new ArrayList<>();
 
   // @JmcProperty("Assertion.test_strings")

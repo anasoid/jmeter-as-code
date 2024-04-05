@@ -235,7 +235,7 @@ public class ApplicationTest {
     LOG.info("Run tmp file : {}", tmp);
     this.toJmx(Files.newBufferedWriter(Paths.get(tmp.getPath()), StandardCharsets.UTF_8));
 
-    HashTree testPlanTree = SaveService.loadTree(tmp);
+    HashTree testPlanTree = SaveService.loadTree(tmp); // NOPMD
 
     // Run Test Plan
     jmeter.configure(testPlanTree);
@@ -255,7 +255,7 @@ public class ApplicationTest {
       LOG.info("Check tmp file : {}", tmp);
       this.toJmx(Files.newBufferedWriter(Paths.get(tmp.getPath()), StandardCharsets.UTF_8));
 
-      HashTree testPlanTree = SaveService.loadTree(tmp);
+      HashTree testPlanTree = SaveService.loadTree(tmp); // NOPMD
 
       // Run Test Plan
       jmeter.configure(testPlanTree);

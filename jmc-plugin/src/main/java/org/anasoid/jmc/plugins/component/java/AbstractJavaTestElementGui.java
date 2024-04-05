@@ -99,11 +99,12 @@ public abstract class AbstractJavaTestElementGui<T extends AbstractJavaTestEleme
   /**
    * The current className of the Executor. *
    */
-  private String className;
+  private String className; // NOPMD
 
   /**
    * Create a new AbstractJavaTestElementGui as a standalone component.
    */
+  @SuppressWarnings("PMD.ConstructorCallsOverridableMethod")
   protected AbstractJavaTestElementGui() {
     super();
     initialize();

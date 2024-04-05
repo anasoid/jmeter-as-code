@@ -204,7 +204,7 @@ public final class SetterTestUtils {
         throw new AssertionError("Type not found for :" + field);
       }
       field.setAccessible(true);
-      Assertions.assertEquals(value, field.get(testElement));
+      Assertions.assertEquals(value, field.get(testElement), "field not match");
     }
 
     testGetter(testElement);

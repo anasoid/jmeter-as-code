@@ -40,6 +40,7 @@ public class RuntimeControllerWrapper extends GenericControllerWrapper<RunTime, 
   @JmcProperty("RunTime.seconds")
   @Getter
   @Default
+  @SuppressWarnings({"PMD.ImmutableField"})
   private String seconds = "1";
 
   @Override

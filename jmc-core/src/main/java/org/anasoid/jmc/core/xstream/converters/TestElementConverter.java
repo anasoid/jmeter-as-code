@@ -223,7 +223,7 @@ public class TestElementConverter implements Converter {
 
     boolean changed = false;
     if (!inElementConversion) {
-      inElementConversion = true;
+      inElementConversion = true; //NOPMD
       changed = true;
     }
 
@@ -286,7 +286,7 @@ public class TestElementConverter implements Converter {
     writer.startNode("collectionProp");
     boolean changed = false;
     if (!inElementConversion) {
-      inElementConversion = true;
+      inElementConversion = true; //NOPMD
       changed = true;
     }
     writer.addAttribute("name", annotation.value());

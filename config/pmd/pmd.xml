@@ -17,7 +17,7 @@
     <exclude name="LawOfDemeter"/>
     <exclude name="LoosePackageCoupling"/>
     <exclude name="AbstractClassWithoutAnyMethod"/>
-
+    <exclude name="CouplingBetweenObjects"/>
 
     <!-- Duplicate from sonar -->
     <exclude name="ExcessiveParameterList"/>
@@ -35,13 +35,11 @@
   <rule ref="category/java/security.xml"/>
 
   <rule ref="category/java/errorprone.xml">
-    <exclude name="BeanMembersShouldSerialize"/>
-    <exclude name="DataflowAnomalyAnalysis"/>
     <exclude name="UseLocaleWithCaseConversions"/>
     <exclude name="MissingSerialVersionUID"/>
+    <exclude name="TestClassWithoutTestCases" />
 
-    <!-- Duplicate from sonar -->
-    <exclude name="ReturnEmptyArrayRatherThanNull"/>
+
   </rule>
 
 </ruleset>
