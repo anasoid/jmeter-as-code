@@ -29,7 +29,8 @@
 
     <exclude name="UseConcurrentHashMap"/>
     <exclude name="AvoidSynchronizedAtMethodLevel"/>
-
+    <exclude name="AvoidSynchronizedStatement"/>
+   
   </rule>
   <rule ref="category/java/performance.xml"/>
 
