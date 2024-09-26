@@ -95,7 +95,7 @@ public abstract class AbstractBasicTestElementWrapper<T extends AbstractTestElem
     return null;
   }
 
-  /** Test Class used by Jmeter TestElement.TEST_CLASS @See TestElement */
+  /** Test Class used by Jmeter TestElement.TEST_CLASS @See TestElement. */
   @JmcMethodAlias("guiclass")
   @JmcAsAttribute
   public String getGuiClassAsString() {
