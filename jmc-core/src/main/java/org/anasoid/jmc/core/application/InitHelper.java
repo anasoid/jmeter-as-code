@@ -28,7 +28,7 @@ public final class InitHelper {
 
   private InitHelper() {}
 
-  /** init Test Element (Internal).s */
+  /** init Test Element (Internal). */
   public static void init(Object source) {
 
     if (source instanceof TestElementWrapper) {
