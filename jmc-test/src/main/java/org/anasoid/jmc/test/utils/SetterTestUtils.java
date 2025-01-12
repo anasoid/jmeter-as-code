@@ -37,7 +37,7 @@ import org.junit.jupiter.api.Assertions;
 
 /** Utils to test @setter to have also coverage on Setter. */
 @SuppressWarnings({
-  "PMD.JUnit4TestShouldUseTestAnnotation",
+  "PMD.UnitTestShouldUseTestAnnotation",
   "PMD.EmptyCatchBlock",
   "PMD.AvoidInstantiatingObjectsInLoops"
 })

@@ -25,7 +25,7 @@ import org.anasoid.jmc.core.wrapper.jmeter.testelement.TestPlanWrapper;
  *
  * @see TestPlanWrapper
  */
-@SuppressWarnings("PMD.JUnit4TestShouldUseTestAnnotation")
+@SuppressWarnings("PMD.UnitTestShouldUseTestAnnotation")
 public final class TestPlanDsl {
 
   private TestPlanDsl() {}
