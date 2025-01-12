@@ -28,7 +28,7 @@ import org.xmlunit.matchers.EvaluateXPathMatcher;
 
 /** Groupings asserts used for Xml and non Xml validations. */
 @SuppressWarnings({"PMD.TooManyMethods", "PMD.UseObjectForClearerAPI",
-    "PMD.JUnitAssertionsShouldIncludeMessage"})
+    "PMD.UnitTestAssertionsShouldIncludeMessage"})
 public final class JmcAsserts {
 
   private static JmcAsserts instance;

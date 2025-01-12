@@ -41,7 +41,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Base class for Java TestElement.
  */
-@SuppressWarnings("PMD.JUnit4TestShouldUseTestAnnotation")
+@SuppressWarnings("PMD.UnitTestShouldUseTestAnnotation")
 public abstract class AbstractJavaTestElement<T extends JavaTestElementExecutor>
     extends AbstractTestElement implements TestStateListener, NoThreadClone {
 
