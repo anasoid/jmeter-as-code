@@ -16,7 +16,7 @@ buildscript {
 // 3rd party plugin repositories can be configured in settings.gradle
 plugins {
     id "io.spring.dependency-management" version "1.1.7"
-    id "org.sonarqube" version "6.2.0.5505"
+    id "org.sonarqube" version "6.3.1.5724"
     id 'jacoco'
     id "io.freefair.lombok" version "8.14.2"
     id "io.freefair.git-version" version "8.14.2"
