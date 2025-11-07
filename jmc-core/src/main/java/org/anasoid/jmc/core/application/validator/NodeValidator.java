@@ -22,6 +22,7 @@ import org.anasoid.jmc.core.wrapper.jmeter.testelement.TestElementWrapper;
 import org.anasoid.jmc.core.xstream.exceptions.ConversionIllegalStateException;
 
 /** Interface to implement node(TestElementWrapper) validation. */
+@FunctionalInterface
 public interface NodeValidator {
 
   /** Validate Test element. */

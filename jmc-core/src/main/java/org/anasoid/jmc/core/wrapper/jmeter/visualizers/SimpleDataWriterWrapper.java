@@ -31,7 +31,6 @@ import org.apache.jmeter.visualizers.SimpleDataWriter;
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 @JmcDefaultName("Simple Data Writer")
-@SuppressWarnings({"PMD.RedundantFieldInitializer", "PMD.TooManyFields"})
 public class SimpleDataWriterWrapper
     extends ResultCollectorWrapper<ResultCollector, SimpleDataWriter> {
 

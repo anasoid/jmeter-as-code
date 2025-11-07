@@ -31,7 +31,6 @@ import org.apache.jmeter.visualizers.TableVisualizer;
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 @JmcDefaultName("View Results in Table")
-@SuppressWarnings({"PMD.RedundantFieldInitializer", "PMD.TooManyFields"})
 public class TableVisualizerWrapper
     extends ResultCollectorWrapper<ResultCollector, TableVisualizer> {
 

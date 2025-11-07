@@ -42,7 +42,7 @@ class CSVDataSetWrapperCoreTest extends AbstractJmcCoreTest {
             .build();
     ApplicationTest applicationTest =
         ApplicationTestUtilsForTesting.getApplicationTest(csvDataSetWrapper);
-    StringWriter wr = new StringWriter(); // NOPMD
+    StringWriter wr = new StringWriter();
     csvDataSetWrapper = (CSVDataSetWrapper) applicationTest.toJmx(wr);
     Assertions.assertTrue(csvDataSetWrapper.getFilePath().endsWith("/csv.config.default.jmx"));
   }
@@ -58,7 +58,7 @@ class CSVDataSetWrapperCoreTest extends AbstractJmcCoreTest {
             .build();
     ApplicationTest applicationTest =
         ApplicationTestUtilsForTesting.getApplicationTest(csvDataSetWrapper);
-    StringWriter wr = new StringWriter(); // NOPMD
+    StringWriter wr = new StringWriter();
     try {
       applicationTest.toJmx(wr);
       Assertions.fail();

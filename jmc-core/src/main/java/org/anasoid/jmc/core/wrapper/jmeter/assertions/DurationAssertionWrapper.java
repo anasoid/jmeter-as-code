@@ -39,7 +39,7 @@ import org.apache.jmeter.assertions.gui.DurationAssertionGui;
  * @see ResponseAssertion
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
-@SuppressWarnings({"PMD.RedundantFieldInitializer", "PMD.AvoidUncheckedExceptionsInSignatures"})
+@SuppressWarnings({"PMD.AvoidUncheckedExceptionsInSignatures"})
 @JmcDefaultName("Duration Assertion")
 public class DurationAssertionWrapper
     extends AbstractScopedAssertionWrapper<DurationAssertion, DurationAssertionGui>

@@ -107,7 +107,6 @@ public class TestPlanWrapper extends AbstractTestElementWrapper<TestPlan>
   }
 
   /** Builder. */
-  @SuppressWarnings("PMD.UselessOverridingMethod")
   public abstract static class TestPlanWrapperBuilder<
           C extends TestPlanWrapper, B extends TestPlanWrapperBuilder<C, B>>
       extends AbstractTestElementWrapper.AbstractTestElementWrapperBuilder<TestPlan, C, B> {

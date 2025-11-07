@@ -14,17 +14,18 @@ import org.anasoid.jmc.core.wrapper.jmc.Variable;
   "PMD.TooManyMethods",
   "PMD.UseObjectForClearerAPI",
   "PMD.ExcessivePublicCount",
-  "PMD.ExcessiveClassLength",
-  "PMD.GodClass"
 })
 public final class JmeterFunctions {
 
   /** Alpha characters. */
   public static final String ALPHA = "abcdefghijklmnopqrstuvwxyz";
+
   /** Upper alpha characters. */
   public static final String ALPHA_UPPER = ALPHA.toUpperCase(Locale.ROOT);
+
   /** Numeric characters. */
   public static final String NUMERIC = "0123456789";
+
   /** Alpha Numeric characters. */
   public static final String ALPHA_NUMERIC = ALPHA + NUMERIC;
 

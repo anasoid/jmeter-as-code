@@ -48,7 +48,7 @@ class ApplicationTestTest extends AbstractJmcCoreTest {
     ApplicationTest applicationTest =
         new ApplicationTest(getTestElement(), Arrays.asList(new ParentPrepareInterceptor()));
 
-    StringWriter wr = new StringWriter(); // NOPMD
+    StringWriter wr = new StringWriter();
 
     TestElementWrapper result = applicationTest.toJmx(wr);
 

@@ -23,7 +23,6 @@ import org.apache.jmeter.samplers.SampleEvent;
 import org.apache.jmeter.samplers.SampleListener;
 
 /** Java Sample Listener. */
-@SuppressWarnings("PMD.MoreThanOneLogger")
 public class JavaSampleListener extends AbstractJavaTestElement<JavaSampleListenerExecutor>
     implements SampleListener {
 

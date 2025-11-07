@@ -47,7 +47,7 @@ class XPathAssertionWrapperCoreTest extends AbstractJmcCoreTest {
               .withWhitespace(true)
               .build();
       ApplicationTest applicationTest = ApplicationTestUtilsForTesting.getApplicationTest(wrapper);
-      StringWriter wr = new StringWriter(); // NOPMD
+      StringWriter wr = new StringWriter();
       applicationTest.toJmx(wr);
 
       Assertions.fail();
@@ -63,7 +63,7 @@ class XPathAssertionWrapperCoreTest extends AbstractJmcCoreTest {
       XPathAssertionWrapper wrapper =
           XPathAssertionWrapper.builder().withXpath("query").withTidyShowWarnings(true).build();
       ApplicationTest applicationTest = ApplicationTestUtilsForTesting.getApplicationTest(wrapper);
-      StringWriter wr = new StringWriter(); // NOPMD
+      StringWriter wr = new StringWriter();
       applicationTest.toJmx(wr);
 
       Assertions.fail();

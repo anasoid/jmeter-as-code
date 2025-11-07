@@ -25,6 +25,7 @@ import java.util.List;
  * Main Interface for Java JavaTestElementExecutor. Each subclass will have it own executor
  * signature method.
  */
+@FunctionalInterface
 public interface JavaTestElementExecutor extends Serializable {
 
   /**
@@ -34,13 +35,9 @@ public interface JavaTestElementExecutor extends Serializable {
    */
   List<String> getParametersKey();
 
-  /**
-   * Executed on Start Test.
-   */
+  /** Executed on Start Test. */
   default void onStartTest() {}
 
-  /**
-   * Executed on End Test.
-   */
+  /** Executed on End Test. */
   default void onEndTest() {}
 }

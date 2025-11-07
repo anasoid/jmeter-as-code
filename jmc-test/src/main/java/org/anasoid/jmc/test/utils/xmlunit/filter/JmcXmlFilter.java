@@ -25,6 +25,7 @@ import org.w3c.dom.Node;
  *
  * @param <T> Nde or attribute;
  */
+@FunctionalInterface
 interface JmcXmlFilter<T extends Node> {
   boolean filter(T t);
 }

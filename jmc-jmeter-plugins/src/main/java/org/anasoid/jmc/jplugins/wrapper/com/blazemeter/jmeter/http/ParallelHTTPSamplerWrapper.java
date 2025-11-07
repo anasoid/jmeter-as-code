@@ -27,7 +27,6 @@ import org.apache.jmeter.testelement.property.StringProperty;
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 @JmcDefaultName("jp@gc - Parallel HTTP Requests")
-@SuppressWarnings("PMD.RedundantFieldInitializer")
 public class ParallelHTTPSamplerWrapper
     extends AbstractSamplerWrapper<ParallelHTTPSampler, ParallelHTTPSamplerGui> {
 

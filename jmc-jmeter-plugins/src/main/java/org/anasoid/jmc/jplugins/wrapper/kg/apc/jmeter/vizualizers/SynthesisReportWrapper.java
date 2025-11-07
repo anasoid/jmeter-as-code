@@ -35,11 +35,11 @@ public class SynthesisReportWrapper extends CorrectedResultCollectorWrapper<Synt
 
   /** Tobe generated in XML not used in this class. */
   @JmcProperty(value = AbstractGraphPanelVisualizer.INTERVAL_PROPERTY, type = Long.class)
-  private static final Integer INTERVAL_PROPERTY = 500; // NOPMD
+  private static final Integer INTERVAL_PROPERTY = 500;
 
   /** Tobe generated in XML not used in this class. */
   @JmcProperty(value = AbstractGraphPanelVisualizer.GRAPH_AGGREGATED)
-  private static final boolean GRAPH_AGGREGATED = false; // NOPMD
+  private static final boolean GRAPH_AGGREGATED = false;
 
   @Override
   public Class<?> getGuiClass() {

@@ -47,10 +47,8 @@ import org.apache.jorphan.reflect.ClassFinder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * base gui class for JavaTestElement.
- */
-@SuppressWarnings({"PMD.TooManyMethods", "PMD.ExcessiveImports"})
+/** base gui class for JavaTestElement. */
+@SuppressWarnings({"PMD.TooManyMethods"})
 public abstract class AbstractJavaTestElementGui<T extends AbstractJavaTestElement>
     extends AbstractJMeterGuiComponent implements ActionListener {
 
@@ -60,9 +58,9 @@ public abstract class AbstractJavaTestElementGui<T extends AbstractJavaTestEleme
     try {
       return getTestClass().getDeclaredConstructor().newInstance();
     } catch (InstantiationException
-             | NoSuchMethodException
-             | IllegalAccessException
-             | InvocationTargetException e) {
+        | NoSuchMethodException
+        | IllegalAccessException
+        | InvocationTargetException e) {
       throw new IllegalStateException(e);
     }
   }
@@ -76,34 +74,22 @@ public abstract class AbstractJavaTestElementGui<T extends AbstractJavaTestEleme
 
   private static final long serialVersionUID = 1L;
 
-  /**
-   * Logging.
-   */
+  /** Logging. */
   private static final Logger log = LoggerFactory.getLogger(AbstractJavaTestElementGui.class);
 
-  /**
-   * A combo box allowing the user to choose a Executor class.
-   */
+  /** A combo box allowing the user to choose a Executor class. */
   private JComboBox<String> classnameCombo;
 
-  /**
-   * A panel allowing the user to set arguments for this test.
-   */
+  /** A panel allowing the user to set arguments for this test. */
   private ArgumentsPanel argsPanel;
 
-  /**
-   * A attributePanel allowing the user to see attribute.
-   */
+  /** A attributePanel allowing the user to see attribute. */
   private ArgumentsPanel attributePanel;
 
-  /**
-   * The current className of the Executor. *
-   */
+  /** The current className of the Executor. * */
   private String className; // NOPMD
 
-  /**
-   * Create a new AbstractJavaTestElementGui as a standalone component.
-   */
+  /** Create a new AbstractJavaTestElementGui as a standalone component. */
   @SuppressWarnings("PMD.ConstructorCallsOverridableMethod")
   protected AbstractJavaTestElementGui() {
     super();
@@ -120,14 +106,10 @@ public abstract class AbstractJavaTestElementGui<T extends AbstractJavaTestEleme
     return "@JMC " + getTestClass().getSimpleName();
   }
 
-  /**
-   * get Executor class type.
-   */
+  /** get Executor class type. */
   protected abstract <T extends JavaTestElementExecutor> Class<T> getExecutorClass();
 
-  /**
-   * Initialize the GUI components and layout.
-   */
+  /** Initialize the GUI components and layout. */
   private void initialize() { // called from ctor, so must not be overridable
     setLayout(new BorderLayout(0, 5));
 
@@ -173,7 +155,7 @@ public abstract class AbstractJavaTestElementGui<T extends AbstractJavaTestEleme
       // interface.
       possibleClasses =
           ClassFinder.findClassesThatExtend(
-              JMeterUtils.getSearchPaths(), new Class[]{getExecutorClass()});
+              JMeterUtils.getSearchPaths(), new Class[] {getExecutorClass()});
 
     } catch (Exception e) {
       log.debug("Exception getting interfaces.", e);
@@ -300,7 +282,7 @@ public abstract class AbstractJavaTestElementGui<T extends AbstractJavaTestEleme
   /**
    * Check combo contains className.
    *
-   * @param model     ComboBoxModel
+   * @param model ComboBoxModel
    * @param className String class name
    * @return boolean true if model contains className
    */

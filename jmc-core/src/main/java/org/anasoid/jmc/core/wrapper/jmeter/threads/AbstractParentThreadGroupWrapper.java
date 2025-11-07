@@ -42,7 +42,6 @@ import org.apache.jmeter.threads.gui.AbstractThreadGroupGui;
  * @see AbstractThreadGroup
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
-@SuppressWarnings("PMD.AbstractClassWithoutAnyMethod")
 @JmcChildrenTypes(type = {GenericControllerWrapper.class, SamplerWrapper.class})
 public abstract class AbstractParentThreadGroupWrapper<
         T extends AbstractThreadGroup, G extends AbstractThreadGroupGui>
@@ -56,8 +55,6 @@ public abstract class AbstractParentThreadGroupWrapper<
   @JmcProperty(AbstractThreadGroup.ON_SAMPLE_ERROR)
   @Builder.Default
   private @Getter @Setter OnSampleError onSampleError = OnSampleError.ON_SAMPLE_ERROR_CONTINUE;
-
-
 
   /** Builder. */
   @SuppressWarnings("PMD")

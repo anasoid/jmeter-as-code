@@ -43,7 +43,7 @@ class FreeFormArrivalsThreadGroupWrapperTest extends AbstractJmcJmeterPluginTest
         FreeFormArrivalsThreadGroupWrapper.builder().build();
 
     ApplicationTest applicationTest = ApplicationTestUtilsForTesting.getApplicationTest(wrapper);
-    StringWriter wr = new StringWriter(); // NOPMD
+    StringWriter wr = new StringWriter();
     applicationTest.toJmx(wr);
   }
 
@@ -55,7 +55,7 @@ class FreeFormArrivalsThreadGroupWrapperTest extends AbstractJmcJmeterPluginTest
           FreeFormArrivalsThreadGroupWrapper.builder().withHold(1).build();
 
       ApplicationTest applicationTest = ApplicationTestUtilsForTesting.getApplicationTest(wrapper);
-      StringWriter wr = new StringWriter(); // NOPMD
+      StringWriter wr = new StringWriter();
       applicationTest.toJmx(wr);
 
       Assertions.fail();
@@ -72,7 +72,7 @@ class FreeFormArrivalsThreadGroupWrapperTest extends AbstractJmcJmeterPluginTest
           FreeFormArrivalsThreadGroupWrapper.builder().withRampUp(1).build();
 
       ApplicationTest applicationTest = ApplicationTestUtilsForTesting.getApplicationTest(wrapper);
-      StringWriter wr = new StringWriter(); // NOPMD
+      StringWriter wr = new StringWriter();
       applicationTest.toJmx(wr);
 
       Assertions.fail();
@@ -89,7 +89,7 @@ class FreeFormArrivalsThreadGroupWrapperTest extends AbstractJmcJmeterPluginTest
           FreeFormArrivalsThreadGroupWrapper.builder().withSteps(1).build();
 
       ApplicationTest applicationTest = ApplicationTestUtilsForTesting.getApplicationTest(wrapper);
-      StringWriter wr = new StringWriter(); // NOPMD
+      StringWriter wr = new StringWriter();
       applicationTest.toJmx(wr);
 
       Assertions.fail();

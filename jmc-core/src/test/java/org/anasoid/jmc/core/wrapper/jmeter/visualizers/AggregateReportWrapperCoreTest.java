@@ -43,7 +43,7 @@ class AggregateReportWrapperCoreTest extends AbstractJmcCoreTest {
       AggregateReportWrapper wrapper =
           AggregateReportWrapper.builder().withLogSuccess(true).withLogError(true).build();
       ApplicationTest applicationTest = ApplicationTestUtilsForTesting.getApplicationTest(wrapper);
-      StringWriter wr = new StringWriter(); // NOPMD
+      StringWriter wr = new StringWriter();
       applicationTest.toJmx(wr);
 
       Assertions.fail();

@@ -32,7 +32,6 @@ import org.apache.jmeter.util.JSR223TestElement;
  * @see JSR223TestElementWrapper
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
-@SuppressWarnings("PMD.AbstractClassWithoutAnyMethod")
 public abstract class JSR223TestElementWrapper<
         T extends JSR223TestElement, G extends AbstractJMeterGuiComponent>
     extends ScriptingTestElementWrapper<T, G> {

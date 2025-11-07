@@ -39,7 +39,7 @@ class ControllerJmxIncludeWrapperTest extends AbstractJmcCoreTest {
             .addController(ForeachControllerWrapper.builder().withName("ctrl").build())
             .build();
     ApplicationTest applicationTest = ApplicationTestUtilsForTesting.getApplicationTest(wrapper);
-    StringWriter wr = new StringWriter(); // NOPMD
+    StringWriter wr = new StringWriter();
     wrapper = (ControllerJmxIncludeWrapper) applicationTest.toJmx(wr);
     Assertions.assertEquals(
         "ctrl", ((ForeachControllerWrapper) wrapper.getChildren().get(0)).getName());
@@ -53,7 +53,7 @@ class ControllerJmxIncludeWrapperTest extends AbstractJmcCoreTest {
             .addController(new SimplePageControllerTemplate("page", "/"))
             .build();
     ApplicationTest applicationTest = ApplicationTestUtilsForTesting.getApplicationTest(wrapper);
-    StringWriter wr = new StringWriter(); // NOPMD
+    StringWriter wr = new StringWriter();
     wrapper = (ControllerJmxIncludeWrapper) applicationTest.toJmx(wr);
     Assertions.assertTrue(
         ((GenericControllerWrapper) wrapper.getChildren().get(0)).getName().startsWith("page"));
@@ -67,7 +67,7 @@ class ControllerJmxIncludeWrapperTest extends AbstractJmcCoreTest {
             .addSampler(DebugSamplerWrapper.builder().withName("sampler").build())
             .build();
     ApplicationTest applicationTest = ApplicationTestUtilsForTesting.getApplicationTest(wrapper);
-    StringWriter wr = new StringWriter(); // NOPMD
+    StringWriter wr = new StringWriter();
     wrapper = (ControllerJmxIncludeWrapper) applicationTest.toJmx(wr);
     Assertions.assertEquals(
         "sampler", ((DebugSamplerWrapper) wrapper.getChildren().get(0)).getName());
@@ -81,7 +81,7 @@ class ControllerJmxIncludeWrapperTest extends AbstractJmcCoreTest {
             .addSampler(new SimplePageTemplate("page", "/"))
             .build();
     ApplicationTest applicationTest = ApplicationTestUtilsForTesting.getApplicationTest(wrapper);
-    StringWriter wr = new StringWriter(); // NOPMD
+    StringWriter wr = new StringWriter();
     wrapper = (ControllerJmxIncludeWrapper) applicationTest.toJmx(wr);
     Assertions.assertTrue(
         ((AbstractSamplerWrapper) wrapper.getChildren().get(0)).getName().startsWith("page"));

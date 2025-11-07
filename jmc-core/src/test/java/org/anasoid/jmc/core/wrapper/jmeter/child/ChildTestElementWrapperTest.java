@@ -23,7 +23,6 @@ import org.anasoid.jmc.core.wrapper.test.SubChildTestingElementWrapperTesting;
 import org.junit.jupiter.api.Test;
 
 /** Test child on AbstractTestElementWrapper. */
-@SuppressWarnings("PMD.JUnitTestsShouldIncludeAssert")
 class ChildTestElementWrapperTest {
 
   @Test

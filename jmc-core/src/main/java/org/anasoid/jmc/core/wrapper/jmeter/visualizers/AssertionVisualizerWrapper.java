@@ -31,7 +31,6 @@ import org.apache.jmeter.visualizers.AssertionVisualizer;
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 @JmcDefaultName("Assertion Results")
-@SuppressWarnings({"PMD.RedundantFieldInitializer", "PMD.TooManyFields"})
 public class AssertionVisualizerWrapper
     extends ResultCollectorWrapper<ResultCollector, AssertionVisualizer> {
 

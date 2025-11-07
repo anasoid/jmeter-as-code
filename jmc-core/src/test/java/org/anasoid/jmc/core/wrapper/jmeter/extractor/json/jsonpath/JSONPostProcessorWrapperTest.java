@@ -44,7 +44,7 @@ class JSONPostProcessorWrapperTest {
           JSONPostProcessorWrapper.builder().addJsonPathExpr("express").build();
 
       ApplicationTest applicationTest = ApplicationTestUtilsForTesting.getApplicationTest(wrapper);
-      StringWriter wr = new StringWriter(); // NOPMD
+      StringWriter wr = new StringWriter();
       applicationTest.toJmx(wr);
 
       Assertions.fail();
@@ -64,7 +64,7 @@ class JSONPostProcessorWrapperTest {
               .addReferenceName(new Variable("var2"))
               .build();
       ApplicationTest applicationTest = ApplicationTestUtilsForTesting.getApplicationTest(wrapper);
-      StringWriter wr = new StringWriter(); // NOPMD
+      StringWriter wr = new StringWriter();
       applicationTest.toJmx(wr);
 
       Assertions.fail();
@@ -86,7 +86,7 @@ class JSONPostProcessorWrapperTest {
               .addJsonPathExpr("express2")
               .build();
       ApplicationTest applicationTest = ApplicationTestUtilsForTesting.getApplicationTest(wrapper);
-      StringWriter wr = new StringWriter(); // NOPMD
+      StringWriter wr = new StringWriter();
       applicationTest.toJmx(wr);
 
       Assertions.fail();

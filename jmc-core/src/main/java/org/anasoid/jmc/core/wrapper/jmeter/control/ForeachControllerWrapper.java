@@ -35,7 +35,6 @@ import org.apache.jmeter.control.gui.ForeachControlPanel;
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 @JmcDefaultName("ForEach Controller")
-@SuppressWarnings("PMD.RedundantFieldInitializer")
 public class ForeachControllerWrapper
     extends GenericControllerWrapper<ForeachController, ForeachControlPanel> {
 

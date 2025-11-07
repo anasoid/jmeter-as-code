@@ -30,7 +30,6 @@ import org.apache.jmeter.samplers.AbstractSampler;
  * @see AbstractSampler
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
-@SuppressWarnings("PMD.AbstractClassWithoutAnyMethod")
 public abstract class AbstractSamplerWrapper<
         T extends AbstractSampler, G extends AbstractJMeterGuiComponent>
     extends AbstractTestElementWrapper<T> implements JMeterGUIWrapper<G>, SamplerWrapper<T> {

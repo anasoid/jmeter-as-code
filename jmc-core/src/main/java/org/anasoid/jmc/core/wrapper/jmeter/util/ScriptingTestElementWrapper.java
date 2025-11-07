@@ -42,7 +42,6 @@ import org.apache.jmeter.util.ScriptingTestElement;
  * @see ScriptingTestElement
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
-@SuppressWarnings({"PMD.AbstractClassWithoutAnyMethod", "PMD.AvoidUncheckedExceptionsInSignatures"})
 public abstract class ScriptingTestElementWrapper<
         T extends ScriptingTestElement, G extends AbstractJMeterGuiComponent>
     extends AbstractBasicChildTestElementWrapper<T> implements JMeterGUIWrapper<G>, Validator {
@@ -64,7 +63,7 @@ public abstract class ScriptingTestElementWrapper<
   private final boolean scriptFileResource = JmcConfig.isScriptResource();
 
   @Override
-  public void validate() throws ConversionIllegalStateException {
+  public void validate() {
     if (scriptFile == null) {
       throw new ConversionIllegalStateException("ScriptFile is mandatory");
     }

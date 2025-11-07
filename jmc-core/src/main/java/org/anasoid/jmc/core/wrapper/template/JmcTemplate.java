@@ -21,6 +21,7 @@ package org.anasoid.jmc.core.wrapper.template;
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.TestElementWrapper;
 
 /** Template to generate pre-configured test element. */
+@FunctionalInterface
 public interface JmcTemplate<W extends TestElementWrapper<?>> {
 
   /**

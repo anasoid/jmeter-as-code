@@ -106,7 +106,7 @@ class PrepareModuleControllerInterceptor implements PrepareInterceptor {
         getFilteredTestElement(testPlan, parentName, parentList);
 
     for (TestElementWrapper currentElement : testElementLists) {
-      List<TestElementWrapper<?>> currentList = new ArrayList<>(parentList); // NOPMD
+      List<TestElementWrapper<?>> currentList = new ArrayList<>(parentList);
       currentList.add(currentElement);
       boolean end = false;
       List<String> nextPath = null;
@@ -118,8 +118,7 @@ class PrepareModuleControllerInterceptor implements PrepareInterceptor {
             end = true;
           }
         } else {
-          if (path.get(0)
-              .equals(((AbstractTestElementWrapper) currentElement).getName())) { // NOPMD
+          if (path.get(0).equals(((AbstractTestElementWrapper) currentElement).getName())) {
             if (path.size() == 1) {
               result.add(ListUtils.sum(currentList, Arrays.asList(currentElement)));
               end = true;

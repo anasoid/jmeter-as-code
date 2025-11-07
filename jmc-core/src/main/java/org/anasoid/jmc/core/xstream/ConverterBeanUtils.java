@@ -57,7 +57,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /** Convert wrapper to Jmeter CLasses utils. */
-@SuppressWarnings({"PMD.GodClass", "PMD.ExcessiveImports", "PMD.TooManyMethods"})
+@SuppressWarnings({"PMD.GodClass", "PMD.TooManyMethods"})
 public final class ConverterBeanUtils {
 
   private static final Logger LOG = LoggerFactory.getLogger(ConverterBeanUtils.class);
@@ -74,8 +74,8 @@ public final class ConverterBeanUtils {
    */
   @SuppressWarnings("PMD.CognitiveComplexity")
   public static List<Method> getMethods(Object source) {
-    Map<String, Method> result = new HashMap<>(); // NOPMD
-    Map<String, Method> allMethod = new HashMap<>(); // NOPMD
+    Map<String, Method> result = new HashMap<>();
+    Map<String, Method> allMethod = new HashMap<>();
     Class<?> item = source.getClass();
     for (Class<?> clazz : getSuperClasses(item)) {
       for (Method method : clazz.getDeclaredMethods()) {
@@ -111,7 +111,7 @@ public final class ConverterBeanUtils {
    * @return list all field.
    */
   public static List<Field> getFields(Object source) {
-    Map<String, Field> result = new HashMap<>(); // NOPMD
+    Map<String, Field> result = new HashMap<>();
     Class<?> clazz = source.getClass();
     for (Class<?> sclazz : getSuperClasses(clazz)) {
       for (Field field : sclazz.getDeclaredFields()) {
@@ -157,11 +157,7 @@ public final class ConverterBeanUtils {
   }
 
   /** is field/method will be converted as property. */
-  @SuppressWarnings({
-    "PMD.EmptyCatchBlock",
-    "PMD.AvoidDeeplyNestedIfStmts",
-    "PMD.CognitiveComplexity"
-  })
+  @SuppressWarnings({"PMD.EmptyCatchBlock", "PMD.CognitiveComplexity"})
   public static <T extends Annotation> T getAnnotation(
       AccessibleObject accessibleObject, Class<T> annotation) {
 
@@ -327,7 +323,7 @@ public final class ConverterBeanUtils {
   }
 
   /** get Property Alias (intProp,stringProp,longProp .. ). */
-  @SuppressWarnings({"PMD.NPathComplexity", "PMD.CognitiveComplexity"})
+  @SuppressWarnings({"PMD.CognitiveComplexity"})
   public static String getPropertyAlias(Object value, Class<?> clazz) {
     Class<?> ppClazz = (clazz == Void.class && value != null) ? value.getClass() : clazz;
     if ((value != null) && (value.getClass().isEnum())) {
@@ -393,7 +389,7 @@ public final class ConverterBeanUtils {
   }
 
   /** Should skip field from XML conversion. */
-  @SuppressWarnings({"PMD.NPathComplexity", "PMD.SimplifyBooleanReturns"})
+  @SuppressWarnings("PMD.SimplifyBooleanReturns")
   public static boolean shouldSkip(Object source, AccessibleObject accessibleObject) {
 
     if (getAnnotation(accessibleObject, XStreamOmitField.class) != null

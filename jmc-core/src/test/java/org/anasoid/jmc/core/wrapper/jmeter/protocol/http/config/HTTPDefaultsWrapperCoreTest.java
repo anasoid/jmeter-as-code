@@ -84,7 +84,7 @@ class HTTPDefaultsWrapperCoreTest extends AbstractJmcCoreTest {
     HttpDefaultsWrapper httpconfig =
         HttpDefaultsWrapper.builder().withPath("").addArgument(ARG, VAL).build();
     ApplicationTest applicationTest = ApplicationTestUtilsForTesting.getApplicationTest(httpconfig);
-    StringWriter wr = new StringWriter(); // NOPMD
+    StringWriter wr = new StringWriter();
     HttpDefaultsWrapper httpSamplerAfter = (HttpDefaultsWrapper) applicationTest.toJmx(wr);
     HTTPArgumentWrapper argument = httpSamplerAfter.getArguments().get(0);
     Assertions.assertEquals(ARG, argument.getName());

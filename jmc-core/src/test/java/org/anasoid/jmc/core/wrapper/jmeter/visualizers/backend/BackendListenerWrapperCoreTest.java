@@ -42,7 +42,7 @@ class BackendListenerWrapperCoreTest extends AbstractJmcCoreTest {
     try {
       BackendListenerWrapper wrapper = BackendListenerWrapper.builder().build();
       ApplicationTest applicationTest = ApplicationTestUtilsForTesting.getApplicationTest(wrapper);
-      StringWriter wr = new StringWriter(); // NOPMD
+      StringWriter wr = new StringWriter();
       applicationTest.toJmx(wr);
 
       Assertions.fail();

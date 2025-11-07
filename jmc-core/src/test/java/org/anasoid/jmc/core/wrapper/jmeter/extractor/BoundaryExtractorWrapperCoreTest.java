@@ -44,7 +44,7 @@ class BoundaryExtractorWrapperCoreTest extends AbstractJmcCoreTest {
           BoundaryExtractorWrapper.builder().withDefaultValue("d").withDefaultEmpty(true).build();
       ApplicationTest applicationTest =
           ApplicationTestUtilsForTesting.getApplicationTest(boundaryExtractorWrapper);
-      StringWriter wr = new StringWriter(); // NOPMD
+      StringWriter wr = new StringWriter();
       applicationTest.toJmx(wr);
 
       Assertions.fail();

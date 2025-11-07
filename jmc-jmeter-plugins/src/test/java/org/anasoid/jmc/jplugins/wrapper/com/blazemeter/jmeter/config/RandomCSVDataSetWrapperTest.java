@@ -44,7 +44,7 @@ class RandomCSVDataSetWrapperTest extends AbstractJmcJmeterPluginTest {
       RandomCSVDataSetWrapper wrapper =
           RandomCSVDataSetWrapper.builder().withFilename("/myfile").build();
       ApplicationTest applicationTest = ApplicationTestUtilsForTesting.getApplicationTest(wrapper);
-      StringWriter wr = new StringWriter(); // NOPMD
+      StringWriter wr = new StringWriter();
       applicationTest.toJmx(wr);
 
       Assertions.fail();
@@ -60,7 +60,7 @@ class RandomCSVDataSetWrapperTest extends AbstractJmcJmeterPluginTest {
       RandomCSVDataSetWrapper wrapper =
           RandomCSVDataSetWrapper.builder().addvariable(new Variable("var")).build();
       ApplicationTest applicationTest = ApplicationTestUtilsForTesting.getApplicationTest(wrapper);
-      StringWriter wr = new StringWriter(); // NOPMD
+      StringWriter wr = new StringWriter();
       applicationTest.toJmx(wr);
 
       Assertions.fail();
@@ -78,7 +78,7 @@ class RandomCSVDataSetWrapperTest extends AbstractJmcJmeterPluginTest {
             .withFilename("/myfile")
             .build();
     ApplicationTest applicationTest = ApplicationTestUtilsForTesting.getApplicationTest(wrapper);
-    StringWriter wr = new StringWriter(); // NOPMD
+    StringWriter wr = new StringWriter();
     applicationTest.toJmx(wr);
   }
 }

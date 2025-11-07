@@ -38,7 +38,6 @@ import org.apache.jmeter.assertions.gui.SizeAssertionGui;
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 @JmcDefaultName("Size Assertion")
-@SuppressWarnings("PMD.RedundantFieldInitializer")
 public class SizeAssertionWrapper
     extends AbstractScopedAssertionWrapper<SizeAssertion, SizeAssertionGui> {
 

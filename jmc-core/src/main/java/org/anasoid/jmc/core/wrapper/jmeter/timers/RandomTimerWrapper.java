@@ -32,7 +32,7 @@ import org.apache.jmeter.timers.gui.AbstractRandomTimerGui;
  * @see RandomTimer
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
-@SuppressWarnings({"PMD.RedundantFieldInitializer", "PMD.AvoidUncheckedExceptionsInSignatures"})
+
 public abstract class RandomTimerWrapper<G extends RandomTimer, F extends AbstractRandomTimerGui>
     extends AbstractConstantTimerWrapper<G, F> {
 

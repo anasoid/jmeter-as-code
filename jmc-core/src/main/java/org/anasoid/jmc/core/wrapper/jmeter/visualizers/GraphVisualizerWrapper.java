@@ -31,7 +31,6 @@ import org.apache.jmeter.visualizers.GraphVisualizer;
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 @JmcDefaultName("Graph Results")
-@SuppressWarnings({"PMD.RedundantFieldInitializer", "PMD.TooManyFields"})
 public class GraphVisualizerWrapper
     extends ResultCollectorWrapper<ResultCollector, GraphVisualizer> {
 

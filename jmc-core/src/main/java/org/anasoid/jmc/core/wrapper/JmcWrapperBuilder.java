@@ -26,6 +26,7 @@ import org.anasoid.jmc.core.wrapper.template.JmcTemplate;
  * @see JmcTemplate
  * @param <T> wrapper type.
  */
+@SuppressWarnings("PMD.ImplicitFunctionalInterface")
 public interface JmcWrapperBuilder<T> {
 
   /** build Wrapper. */

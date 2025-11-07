@@ -26,7 +26,7 @@ public class IntegerManager extends TypeManager {
     if (value == null) {
       return String.class;
     }
-    if (value.trim().startsWith("$")) { // NOPMD
+    if (value.trim().startsWith("$")) {
       return String.class;
     }
 

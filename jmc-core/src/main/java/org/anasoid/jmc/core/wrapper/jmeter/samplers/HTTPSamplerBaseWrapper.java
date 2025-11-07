@@ -54,7 +54,7 @@ import org.apache.jmeter.samplers.gui.AbstractSamplerGui;
  * @see HTTPSamplerBase
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
-@SuppressWarnings({"PMD.TooManyFields", "PMD.AbstractClassWithoutAnyMethod"})
+@SuppressWarnings({"PMD.TooManyFields"})
 public abstract class HTTPSamplerBaseWrapper<
         T extends HTTPSamplerBase, G extends AbstractSamplerGui>
     extends AbstractSamplerWrapper<T, G> {
@@ -70,24 +70,28 @@ public abstract class HTTPSamplerBaseWrapper<
       enabled = false)
   @Getter
   private final List<HTTPFileArgWrapper> filesArguments;
+
   /** Server Name or IP. */
   @JmcProperty(HTTPSamplerBase.DOMAIN)
   @Getter
   @Setter
   @JmcNullAllowed
   private String domain;
+
   /** Path. */
   @JmcProperty(HTTPSamplerBase.PATH)
   @JmcMandatory
   @Getter
   @Setter
   private String path;
+
   /** Port Number. */
   @JmcProperty(value = HTTPSamplerBase.PORT)
   @Getter
   @Setter
   @JmcNullAllowed
   private String port;
+
   /** Protocol [http]. */
   @JmcProperty(value = HTTPSamplerBase.PROTOCOL)
   @Getter
@@ -100,6 +104,7 @@ public abstract class HTTPSamplerBaseWrapper<
   @Setter
   @JmcNullAllowed
   private String contentEncoding;
+
   /** HTTP Method. */
   @JmcProperty(HTTPSamplerBase.METHOD)
   @Getter
@@ -111,83 +116,98 @@ public abstract class HTTPSamplerBaseWrapper<
   @Getter
   @Setter
   private Implementation implementation;
+
   /** Source Address Type. */
   @JmcProperty(value = HTTPSamplerBase.IP_SOURCE_TYPE)
   @Getter
   @Setter
   @JmcSkipDefault("0")
   private IpSourceType ipSourceType;
+
   /** Source IP Address. */
   @JmcProperty(HTTPSamplerBase.IP_SOURCE)
   @Getter
   @Setter
   private String ipSource;
+
   /** Proxy scheme. */
   @JmcProperty(HTTPSamplerBase.PROXYSCHEME)
   @Getter
   @Setter
   private String proxyScheme;
+
   /** Proxy host. */
   @JmcProperty(HTTPSamplerBase.PROXYHOST)
   @Getter
   @Setter
   private String proxyHost;
+
   /** Proxy Port. */
   @JmcProperty(value = HTTPSamplerBase.PROXYPORT)
   @Getter
   @Setter
   private String proxyPort;
+
   /** Proxy user. */
   @JmcProperty(HTTPSamplerBase.PROXYUSER)
   @Getter
   @Setter
   private String proxyUser;
+
   /** Proxy pass. */
   @JmcProperty(HTTPSamplerBase.PROXYPASS)
   @Getter
   @Setter
   private String proxyPass;
+
   /** Connect Timeouts (milliseconds). */
   @JmcProperty(value = HTTPSamplerBase.CONNECT_TIMEOUT)
   @Getter
   @Setter
   @JmcNullAllowed
   private String connectTimeout;
+
   /** Response Timeouts (milliseconds). */
   @JmcProperty(value = HTTPSamplerBase.RESPONSE_TIMEOUT)
   @Getter
   @Setter
   @JmcNullAllowed
   private String responseTimeout;
+
   /** Follow redirects. */
   @JmcProperty("HTTPSampler.follow_redirects")
   @Getter
   @Setter
   @Default
   private Boolean followRedirects = Boolean.TRUE;
+
   /** Redirect Automatically. */
   @JmcProperty(HTTPSamplerBase.AUTO_REDIRECTS)
   @Getter
   @Setter
   @Default
   private Boolean autoRedirects = Boolean.FALSE;
+
   /** Use KeepAlive. */
   @JmcProperty("HTTPSampler.use_keepalive")
   @Getter
   @Setter
   @Default
   private Boolean useKeepAlive = Boolean.TRUE;
+
   /** Use multipart/form-data. */
   @JmcProperty("HTTPSampler.DO_MULTIPART_POST")
   @Getter
   @Setter
   @Default
   private Boolean doMultipartPost = Boolean.FALSE;
+
   /** Browser-compatible headers. */
   @JmcProperty("HTTPSampler.BROWSER_COMPATIBLE_MULTIPART")
   @Getter
   @Setter
   private Boolean doBrowserCompatibleMultipart;
+
   /** Save response as MD5 hash. */
   @JmcProperty(HTTPSamplerBase.MD5)
   @Getter
@@ -198,6 +218,7 @@ public abstract class HTTPSamplerBaseWrapper<
   @Getter
   @Setter
   private Boolean postBodyRaw;
+
   /** Embedded Resources from HTML Files: Concurrent pool for parallel download. */
   @JmcProperty(value = HTTPSamplerBase.CONCURRENT_POOL)
   @Default
@@ -205,17 +226,20 @@ public abstract class HTTPSamplerBaseWrapper<
   @Setter
   @JmcSkipDefault("6")
   private String concurrentPool = String.valueOf(HTTPSamplerBase.CONCURRENT_POOL_SIZE);
+
   /** Embedded Resources from HTML Files: URLs must match. */
   @JmcProperty(value = HTTPSamplerBase.EMBEDDED_URL_RE)
   @Getter
   @Setter
   @JmcNullAllowed
   private String embeddedUrlRE;
+
   /** Embedded Resources from HTML Files: URLs must not match. */
   @JmcProperty(HTTPSamplerBase.EMBEDDED_URL_EXCLUDE_RE)
   @Getter
   @Setter
   private String embeddedUrlExcludeRE;
+
   /** Embedded Resources from HTML Files: Parallel downloads. */
   @JmcProperty(HTTPSamplerBase.CONCURRENT_DWN)
   @Getter
@@ -274,7 +298,7 @@ public abstract class HTTPSamplerBaseWrapper<
   }
 
   /** Builder. */
-  @SuppressWarnings({"PMD.AccessorMethodGeneration", "PMD.TooManyMethods"})
+  @SuppressWarnings({"PMD.TooManyMethods"})
   public abstract static class HTTPSamplerBaseWrapperBuilder<
           T extends HTTPSamplerBase,
           G extends AbstractSamplerGui,
@@ -408,7 +432,7 @@ public abstract class HTTPSamplerBaseWrapper<
     }
 
     /** hide method , generated by Lombok. */
-    @SuppressWarnings("PMD.UnusedFormalParameter")
+
     private B withFilesArguments(List<HTTPFileArgWrapper> filesArguments) {
       this.filesArguments = filesArguments;
       return self();
@@ -439,7 +463,6 @@ public abstract class HTTPSamplerBaseWrapper<
     }
 
     /** hide method , generated by Lombok. */
-    @SuppressWarnings("PMD.UnusedFormalParameter")
     private void withArguments(List<HTTPArgumentWrapper> arguments) {
       this.arguments$value = arguments;
       this.arguments$set = true;

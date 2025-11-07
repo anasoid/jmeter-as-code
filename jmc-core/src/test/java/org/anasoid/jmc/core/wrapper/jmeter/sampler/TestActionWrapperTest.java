@@ -45,7 +45,7 @@ class TestActionWrapperTest extends AbstractJmcCoreTest {
       TestActionWrapper wrapper =
           TestActionWrapper.builder().withDuration(10).withAction(Action.STOP).build();
       ApplicationTest applicationTest = ApplicationTestUtilsForTesting.getApplicationTest(wrapper);
-      StringWriter wr = new StringWriter(); // NOPMD
+      StringWriter wr = new StringWriter();
       applicationTest.toJmx(wr);
 
       Assertions.fail();
@@ -60,7 +60,7 @@ class TestActionWrapperTest extends AbstractJmcCoreTest {
     try {
       TestActionWrapper wrapper = TestActionWrapper.builder().withTarget(Target.ALL_THREAD).build();
       ApplicationTest applicationTest = ApplicationTestUtilsForTesting.getApplicationTest(wrapper);
-      StringWriter wr = new StringWriter(); // NOPMD
+      StringWriter wr = new StringWriter();
       applicationTest.toJmx(wr);
 
       Assertions.fail();

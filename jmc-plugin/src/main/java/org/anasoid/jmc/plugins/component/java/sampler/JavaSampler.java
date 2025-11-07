@@ -24,7 +24,6 @@ import org.apache.jmeter.samplers.SampleResult;
 import org.apache.jmeter.samplers.Sampler;
 
 /** Java Post Processor. */
-@SuppressWarnings("PMD.MoreThanOneLogger")
 public class JavaSampler extends AbstractJavaTestElement<JavaSamplerExecutor> implements Sampler {
 
   private static final long serialVersionUID = 8119460180648610163L;

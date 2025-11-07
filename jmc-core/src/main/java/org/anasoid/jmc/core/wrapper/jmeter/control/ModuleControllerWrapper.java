@@ -63,7 +63,6 @@ public class ModuleControllerWrapper extends AbstractTestElementWrapper<ModuleCo
   }
 
   @Override
-  @SuppressWarnings("PMD.AvoidDeeplyNestedIfStmts")
   protected void internalInit() {
     super.internalInit();
     String nameTarget = CollectionUtils.isNotEmpty(path) ? path.get(path.size() - 1) : null;

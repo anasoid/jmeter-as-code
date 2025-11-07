@@ -36,7 +36,6 @@ import org.apache.jmeter.threads.gui.AbstractThreadGroupGui;
  * @see AbstractThreadGroup
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
-@SuppressWarnings("PMD.AbstractClassWithoutAnyMethod")
 @JmcChildrenTypes(type = {GenericControllerWrapper.class, SamplerWrapper.class})
 public abstract class AbstractThreadGroupWrapper<
         T extends AbstractThreadGroup, G extends AbstractThreadGroupGui>
@@ -53,7 +52,6 @@ public abstract class AbstractThreadGroupWrapper<
   private @Getter @Setter Boolean isSameUserOnNextIteration = true;
 
   /** Builder. */
-  @SuppressWarnings("PMD")
   public abstract static class AbstractThreadGroupWrapperBuilder<
           T extends AbstractThreadGroup,
           G extends AbstractThreadGroupGui,

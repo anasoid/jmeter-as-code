@@ -21,7 +21,6 @@ package org.anasoid.jmc.core;
 import org.anasoid.jmc.test.AbstractJmcTest;
 
 /** Abstract Class for tests. */
-@SuppressWarnings("PMD.AbstractClassWithoutAbstractMethod")
 public abstract class AbstractJmcCoreTest extends AbstractJmcTest {
 
   public static final String SCRIPT_PATH = "org/anasoid/jmc/core/wrapper/jmeter/script";
