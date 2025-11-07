@@ -20,7 +20,7 @@ plugins {
     id 'jacoco'
     id "io.freefair.lombok" version "8.14.2"
     id "io.freefair.git-version" version "8.14.2"
-    id "com.github.ben-manes.versions" version "0.52.0"
+    id "com.github.ben-manes.versions" version "0.53.0"
 }
 
 
