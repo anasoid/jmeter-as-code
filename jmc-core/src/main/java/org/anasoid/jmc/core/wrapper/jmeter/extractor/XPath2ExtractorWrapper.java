@@ -62,7 +62,7 @@ public class XPath2ExtractorWrapper
   private String xpathQuery;
 
   /**
-   * If the XPath Path query leads to many results, you can choose which one(s) to extract as
+   * If the XPath Path query leads to many results, you can choose which one(s) to extract as.
    * Variables:
    *
    * <p>0: means random (default value) -1 means extract all results, they will be named as

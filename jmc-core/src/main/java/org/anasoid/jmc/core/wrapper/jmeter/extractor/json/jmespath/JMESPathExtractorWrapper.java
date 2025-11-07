@@ -56,7 +56,7 @@ public class JMESPathExtractorWrapper
   private String refName;
 
   /**
-   * If the JMESPath query leads to many results, you can choose which one(s) to extract as
+   * If the JMESPath query leads to many results, you can choose which one(s) to extract as.
    * Variables:
    *
    * <p>0: means random -1 means extract all results (default value), they will be named as
