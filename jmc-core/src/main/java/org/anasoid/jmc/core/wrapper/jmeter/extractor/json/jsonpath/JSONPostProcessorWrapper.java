@@ -56,13 +56,15 @@ public class JSONPostProcessorWrapper
 
   /** JSON-PATH expressions (must match number of variables). */
   @XStreamOmitField @Getter @Setter private List<String> jsonPathExprs;
+
   /**
    * Semi-colon separated names of variables that will contain the results of JSON-PATH expressions
    * (must match number of JSON-PATH expressions).
    */
   @XStreamOmitField @Getter @Setter private List<Variable> referenceNames;
+
   /**
-   * If the JSON Path query leads to many results, you can choose which one(s) to extract as
+   * If the JSON Path query leads to many results, you can choose which one(s) to extract as .
    * Variables:
    *
    * <p>0: means random (Default Value) -1 means extract all results, they will be named as
@@ -75,11 +77,13 @@ public class JSONPostProcessorWrapper
   @Setter
   @JmcNullAllowed
   private String matchNumber;
+
   /**
    * Semi-colon separated default values if JSON-PATH expressions do not return any result(must
    * match number of variables).
    */
   @XStreamOmitField @Getter @Setter private List<String> defaultValues;
+
   /**
    * Default value returned when no match found. It is also returned if the node has no value and
    * the fragment option is not selected.

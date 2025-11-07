@@ -66,10 +66,10 @@ public class XPathExtractorWrapper
   private String xpathQuery;
 
   /**
-   * If the XPath Path query leads to many results, you can choose which one(s) to extract as
+   * If the XPath Path query leads to many results, you can choose which one(s) to extract as.
    * Variables:
    *
-   * <p>0: means random -1 means extract all results (default value), they will be named as
+   * <p>0: means random -1 means extract all results (default value), they will be named as .
    * &#x3C;variable name&#x3E;_N (where N goes from 1 to Number of results) X: means extract the Xth
    * result. If this Xth is greater than number of matches, then nothing is returned. Default value
    * will be used
