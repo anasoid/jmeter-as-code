@@ -52,7 +52,7 @@ public final class SetterTestUtils {
    * @return list all field.
    */
   private static List<Field> getSetterFields(Object source) {
-    Map<String, Field> result = new HashMap<>(); // NOPMD
+    Map<String, Field> result = new HashMap<>();
     Class<?> clazz = source.getClass();
     for (Class<?> sclazz : ConverterBeanUtils.getSuperClasses(clazz)) {
       for (Field field : sclazz.getDeclaredFields()) {
@@ -96,7 +96,7 @@ public final class SetterTestUtils {
    * @return list all field.
    */
   private static List<Field> getGetterFields(Object source) {
-    Map<String, Field> result = new HashMap<>(); // NOPMD
+    Map<String, Field> result = new HashMap<>();
     Class<?> clazz = source.getClass();
     for (Class<?> sclazz : ConverterBeanUtils.getSuperClasses(clazz)) {
       for (Field field : sclazz.getDeclaredFields()) {
@@ -142,6 +142,7 @@ public final class SetterTestUtils {
   }
 
   /** test all setter. */
+  @SuppressWarnings({"PMD.UselessPureMethodCall"})
   public static void testSetter(
       AbstractBasicTestElementWrapperBuilder testElementBuilder, String... ignoreFields)
       throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
@@ -150,7 +151,11 @@ public final class SetterTestUtils {
   }
 
   /** test all setter. */
-  @SuppressWarnings({"PMD.CognitiveComplexity", "PMD.AvoidAccessibilityAlteration"})
+  @SuppressWarnings({
+    "PMD.CognitiveComplexity",
+    "PMD.AvoidAccessibilityAlteration",
+    "PMD.UselessPureMethodCall"
+  })
   private static void testSetter(TestElementWrapper testElement, String... ignoreFields)
       throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
     // Coverage toString

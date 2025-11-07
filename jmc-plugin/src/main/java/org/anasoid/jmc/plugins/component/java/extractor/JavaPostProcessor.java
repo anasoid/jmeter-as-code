@@ -22,7 +22,6 @@ import org.anasoid.jmc.plugins.component.java.AbstractJavaTestElement;
 import org.apache.jmeter.processor.PostProcessor;
 
 /** Java Post Processor. */
-@SuppressWarnings("PMD.MoreThanOneLogger")
 public class JavaPostProcessor extends AbstractJavaTestElement<JavaPostProcessorExecutor>
     implements PostProcessor {
 

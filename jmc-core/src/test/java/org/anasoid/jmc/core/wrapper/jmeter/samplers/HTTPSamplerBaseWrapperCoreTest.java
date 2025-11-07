@@ -52,7 +52,7 @@ class HTTPSamplerBaseWrapperCoreTest extends AbstractJmcCoreTest {
         HTTPSamplerProxyWrapper.builder().withName("param").withPath("").build();
     ApplicationTest applicationTest =
         ApplicationTestUtilsForTesting.getApplicationTest(httpSampler);
-    StringWriter wr = new StringWriter(); // NOPMD
+    StringWriter wr = new StringWriter();
     HTTPSamplerProxyWrapper httpSamplerAfter = (HTTPSamplerProxyWrapper) applicationTest.toJmx(wr);
     Assertions.assertTrue(httpSamplerAfter.getFollowRedirects());
 
@@ -84,7 +84,7 @@ class HTTPSamplerBaseWrapperCoreTest extends AbstractJmcCoreTest {
             .build();
     ApplicationTest applicationTest =
         ApplicationTestUtilsForTesting.getApplicationTest(httpSampler);
-    StringWriter wr = new StringWriter(); // NOPMD
+    StringWriter wr = new StringWriter();
     HTTPSamplerProxyWrapper httpSamplerAfter = (HTTPSamplerProxyWrapper) applicationTest.toJmx(wr);
     Assertions.assertFalse(httpSamplerAfter.getFollowRedirects());
   }
@@ -154,7 +154,7 @@ class HTTPSamplerBaseWrapperCoreTest extends AbstractJmcCoreTest {
         HTTPSamplerProxyWrapper.builder().withPath("").addArgument(ARG, VAL).build();
     ApplicationTest applicationTest =
         ApplicationTestUtilsForTesting.getApplicationTest(httpsampler);
-    StringWriter wr = new StringWriter(); // NOPMD
+    StringWriter wr = new StringWriter();
     HTTPSamplerProxyWrapper httpSamplerAfter = (HTTPSamplerProxyWrapper) applicationTest.toJmx(wr);
     HTTPArgumentWrapper argument = httpSamplerAfter.getArguments().get(0);
     Assertions.assertEquals(ARG, argument.getName());

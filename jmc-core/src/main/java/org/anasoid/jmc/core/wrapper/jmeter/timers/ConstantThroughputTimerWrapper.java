@@ -37,7 +37,7 @@ import org.apache.jmeter.timers.ConstantThroughputTimer;
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 @JmcDefaultName("Constant Throughput Timer")
-@SuppressWarnings({"PMD.RedundantFieldInitializer", "PMD.AvoidUncheckedExceptionsInSignatures"})
+
 public class ConstantThroughputTimerWrapper
     extends AbstractBasicChildTestElementWrapper<ConstantThroughputTimer>
     implements JMeterGUIWrapper<TestBeanGUI>, TimerWrapper<ConstantThroughputTimer> {

@@ -30,7 +30,6 @@ import org.anasoid.jmc.core.xstream.converters.TestElementConverter;
 
 @XStreamAlias("jmeterTestPlan")
 @XStreamConverter(TestElementConverter.class)
-@SuppressWarnings("PMD.FinalFieldCouldBeStatic")
 class ScriptWrapper {
 
   @XStreamAsAttribute private final String version = JmcConfig.getVersion(); // NOSONAR

@@ -36,7 +36,7 @@ public final class FileUtils {
    * @return file content as string.
    */
   public static String readResource(String resource) {
-    URL url = Thread.currentThread().getContextClassLoader().getResource(resource); // NOPMD
+    URL url = Thread.currentThread().getContextClassLoader().getResource(resource);
     if (url == null) {
       throw new ConversionException("Resource not found : " + resource);
     }

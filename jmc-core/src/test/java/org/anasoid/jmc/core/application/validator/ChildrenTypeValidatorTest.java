@@ -49,11 +49,11 @@ class ChildrenTypeValidatorTest {
     ApplicationTest applicationTest =
         ApplicationTestUtilsForTesting.getApplicationTest(parentTestElementWrapperTesting);
 
-    StringWriter wr = new StringWriter(); // NOPMD
+    StringWriter wr = new StringWriter();
 
     applicationTest.toJmx(wr);
     parentTestElementWrapperTesting.getChildren().add(ThreadGroupWrapper.builder().build());
-    wr = new StringWriter(); // NOPMD
+    wr = new StringWriter();
     applicationTest =
         ApplicationTestUtilsForTesting.getApplicationTest(parentTestElementWrapperTesting);
     try {

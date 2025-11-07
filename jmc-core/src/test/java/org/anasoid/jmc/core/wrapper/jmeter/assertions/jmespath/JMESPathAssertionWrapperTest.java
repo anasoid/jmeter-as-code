@@ -9,6 +9,7 @@ import org.anasoid.jmc.core.xstream.exceptions.ConversionIllegalStateException;
 import org.anasoid.jmc.test.utils.SetterTestUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
 /*
  * Copyright 2020-2021 the original author or authors.
  *
@@ -42,7 +43,7 @@ class JMESPathAssertionWrapperTest {
           JMESPathAssertionWrapper.builder().withJmesPath("path").withIsRegex(false).build();
 
       ApplicationTest applicationTest = ApplicationTestUtilsForTesting.getApplicationTest(wrapper);
-      StringWriter wr = new StringWriter(); // NOPMD
+      StringWriter wr = new StringWriter();
       applicationTest.toJmx(wr);
 
       Assertions.fail();
@@ -61,7 +62,7 @@ class JMESPathAssertionWrapperTest {
               .withExpectedValue("expected")
               .build();
       ApplicationTest applicationTest = ApplicationTestUtilsForTesting.getApplicationTest(wrapper);
-      StringWriter wr = new StringWriter(); // NOPMD
+      StringWriter wr = new StringWriter();
       applicationTest.toJmx(wr);
 
       Assertions.fail();
@@ -82,7 +83,7 @@ class JMESPathAssertionWrapperTest {
               .withIsRegex(false)
               .build();
       ApplicationTest applicationTest = ApplicationTestUtilsForTesting.getApplicationTest(wrapper);
-      StringWriter wr = new StringWriter(); // NOPMD
+      StringWriter wr = new StringWriter();
       applicationTest.toJmx(wr);
 
       Assertions.fail();
@@ -103,7 +104,7 @@ class JMESPathAssertionWrapperTest {
               .withExpectedValue("expected")
               .build();
       ApplicationTest applicationTest = ApplicationTestUtilsForTesting.getApplicationTest(wrapper);
-      StringWriter wr = new StringWriter(); // NOPMD
+      StringWriter wr = new StringWriter(); 
       applicationTest.toJmx(wr);
 
       Assertions.fail();

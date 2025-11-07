@@ -44,7 +44,7 @@ class ResponseAssertionWrapperCoreTest extends AbstractJmcCoreTest {
             .build();
     ApplicationTest applicationTest =
         ApplicationTestUtilsForTesting.getApplicationTest(parentTestElementWrapperTesting);
-    StringWriter wr = new StringWriter(); // NOPMD
+    StringWriter wr = new StringWriter();
     ParentTestElementWrapperTesting wrapper =
         (ParentTestElementWrapperTesting) applicationTest.toJmx(wr);
     Assertions.assertEquals(

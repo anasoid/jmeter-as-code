@@ -24,7 +24,6 @@ import org.apache.jmeter.assertions.AssertionResult;
 import org.apache.jmeter.samplers.SampleResult;
 
 /** Java Assertion. */
-@SuppressWarnings("PMD.MoreThanOneLogger")
 public class JavaAssertion extends AbstractJavaTestElement<JavaAssertionExecutor>
     implements Assertion {
 

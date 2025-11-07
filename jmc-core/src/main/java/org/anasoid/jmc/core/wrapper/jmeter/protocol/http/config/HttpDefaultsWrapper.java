@@ -64,6 +64,7 @@ public class HttpDefaultsWrapper
   @Setter
   @JmcNullAllowed
   private String domain;
+
   /** Path. */
   @JmcProperty(HTTPSamplerBase.PATH)
   @Getter
@@ -114,6 +115,7 @@ public class HttpDefaultsWrapper
   @Getter
   @Setter
   private String proxyScheme;
+
   /** Proxy host. */
   @JmcProperty(HTTPSamplerBase.PROXYHOST)
   @Getter
@@ -124,6 +126,7 @@ public class HttpDefaultsWrapper
   @Getter
   @Setter
   private String proxyPort;
+
   /** Proxy user. */
   @JmcProperty(HTTPSamplerBase.PROXYUSER)
   @Getter
@@ -160,16 +163,19 @@ public class HttpDefaultsWrapper
   @Getter
   @Setter
   private Boolean postBodyRaw;
+
   /** Embedded Resources from HTML Files: URLs must match. */
   @JmcProperty(value = HTTPSamplerBase.EMBEDDED_URL_RE)
   @Getter
   @Setter
   private String embeddedUrlRE;
+
   /** Embedded Resources from HTML Files: URLs must not match. */
   @JmcProperty(HTTPSamplerBase.EMBEDDED_URL_EXCLUDE_RE)
   @Getter
   @Setter
   private String embeddedUrlExcludeRE;
+
   /** Embedded Resources from HTML Files: Parallel downloads. */
   @JmcProperty(HTTPSamplerBase.CONCURRENT_DWN)
   @Getter
@@ -248,7 +254,7 @@ public class HttpDefaultsWrapper
   }
 
   /** Builder. */
-  @SuppressWarnings({"PMD.AccessorMethodGeneration", "PMD.TooManyMethods"})
+  @SuppressWarnings({"PMD.TooManyMethods"})
   public abstract static class HttpDefaultsWrapperBuilder<
           C extends HttpDefaultsWrapper, B extends HttpDefaultsWrapperBuilder<C, B>>
       extends ConfigTestElementWrapper.ConfigTestElementWrapperBuilder<

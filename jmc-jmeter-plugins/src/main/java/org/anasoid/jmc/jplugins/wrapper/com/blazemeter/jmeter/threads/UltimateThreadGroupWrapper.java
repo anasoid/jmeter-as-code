@@ -40,7 +40,6 @@ import org.apache.jmeter.testelement.property.CollectionProperty;
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 @JmcDefaultName("jp@gc - Ultimate Thread Group")
 @JmcHiddenFields({"numThreads", "isSameUserOnNextIteration"})
-@SuppressWarnings("PMD.AbstractClassWithoutAnyMethod")
 public class UltimateThreadGroupWrapper
     extends AbstractSimpleThreadGroupWrapper<UltimateThreadGroup, UltimateThreadGroupGui> {
 

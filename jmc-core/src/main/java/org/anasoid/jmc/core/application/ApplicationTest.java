@@ -81,7 +81,6 @@ public class ApplicationTest {
    * @param testPlanWrapper test plan.
    * @param prepareInterceptors interceptors.
    */
-  @SuppressWarnings("PMD.NullAssignment")
   public ApplicationTest(
       TestPlanWrapper testPlanWrapper, List<PrepareInterceptor> prepareInterceptors) {
     this.testPlanWrapper = testPlanWrapper;
@@ -95,7 +94,6 @@ public class ApplicationTest {
   }
 
   /** Only for Test. */
-  @SuppressWarnings("PMD.NullAssignment")
   protected ApplicationTest(
       TestElementWrapper<?> testElement, List<PrepareInterceptor> prepareInterceptors) {
     this.testElement = testElement;

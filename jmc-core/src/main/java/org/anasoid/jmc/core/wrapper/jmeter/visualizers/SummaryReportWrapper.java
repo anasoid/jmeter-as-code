@@ -37,7 +37,7 @@ import org.apache.jmeter.visualizers.SummaryReport;
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 @JmcDefaultName("Summary Report")
-@SuppressWarnings({"PMD.RedundantFieldInitializer", "PMD.TooManyFields"})
+@SuppressWarnings({"PMD.RedundantFieldInitializer"})
 public class SummaryReportWrapper extends ResultCollectorWrapper<ResultCollector, SummaryReport> {
 
   @JmcProperty("useGroupName")

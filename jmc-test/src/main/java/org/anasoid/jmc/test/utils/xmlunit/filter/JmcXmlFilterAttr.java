@@ -21,4 +21,5 @@ package org.anasoid.jmc.test.utils.xmlunit.filter;
 import org.w3c.dom.Attr;
 
 /** Interface for implementation , to filter attribute to be ignored during XML test comparison. */
+@FunctionalInterface
 public interface JmcXmlFilterAttr extends JmcXmlFilter<Attr> {}

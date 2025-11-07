@@ -31,7 +31,6 @@ import org.apache.jmeter.visualizers.ComparisonVisualizer;
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 @JmcDefaultName("Comparison Assertion Visualizer")
-@SuppressWarnings({"PMD.RedundantFieldInitializer", "PMD.TooManyFields"})
 public class ComparisonAssertionVisualizerWrapper
     extends ResultCollectorWrapper<ResultCollector, ComparisonVisualizer> {
 

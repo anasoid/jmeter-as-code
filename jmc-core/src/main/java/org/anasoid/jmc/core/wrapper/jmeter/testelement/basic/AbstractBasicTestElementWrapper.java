@@ -125,7 +125,6 @@ public abstract class AbstractBasicTestElementWrapper<T extends AbstractTestElem
   }
 
   /** Builder. */
-  @SuppressWarnings("PMD.AbstractClassWithoutAbstractMethod")
   public abstract static class AbstractBasicTestElementWrapperBuilder<
           T extends AbstractTestElement,
           C extends AbstractBasicTestElementWrapper<T>,

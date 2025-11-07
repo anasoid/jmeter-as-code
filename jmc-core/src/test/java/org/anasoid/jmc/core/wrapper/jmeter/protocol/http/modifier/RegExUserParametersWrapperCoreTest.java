@@ -46,7 +46,7 @@ class RegExUserParametersWrapperCoreTest extends AbstractJmcCoreTest {
               .withRegExParamValuesGrNr("value")
               .build();
       ApplicationTest applicationTest = ApplicationTestUtilsForTesting.getApplicationTest(wrapper);
-      StringWriter wr = new StringWriter(); // NOPMD
+      StringWriter wr = new StringWriter();
       applicationTest.toJmx(wr);
 
       Assertions.fail();
@@ -65,7 +65,7 @@ class RegExUserParametersWrapperCoreTest extends AbstractJmcCoreTest {
               .withRegExParamValuesGrNr("value")
               .build();
       ApplicationTest applicationTest = ApplicationTestUtilsForTesting.getApplicationTest(wrapper);
-      StringWriter wr = new StringWriter(); // NOPMD
+      StringWriter wr = new StringWriter();
       applicationTest.toJmx(wr);
 
       Assertions.fail();
@@ -84,7 +84,7 @@ class RegExUserParametersWrapperCoreTest extends AbstractJmcCoreTest {
               .withRegExParamNamesGrNr("group")
               .build();
       ApplicationTest applicationTest = ApplicationTestUtilsForTesting.getApplicationTest(wrapper);
-      StringWriter wr = new StringWriter(); // NOPMD
+      StringWriter wr = new StringWriter();
       applicationTest.toJmx(wr);
 
       Assertions.fail();

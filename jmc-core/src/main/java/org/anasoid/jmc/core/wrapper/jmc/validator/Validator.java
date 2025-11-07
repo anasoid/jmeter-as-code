@@ -21,6 +21,7 @@ package org.anasoid.jmc.core.wrapper.jmc.validator;
 import org.anasoid.jmc.core.xstream.exceptions.ConversionIllegalStateException;
 
 /** Validate test element wrapper before conversion. */
+@FunctionalInterface
 public interface Validator {
 
   /** Validate Test element. */

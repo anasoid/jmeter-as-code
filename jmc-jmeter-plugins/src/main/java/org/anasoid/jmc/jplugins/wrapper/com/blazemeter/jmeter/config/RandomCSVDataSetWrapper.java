@@ -156,7 +156,6 @@ public class RandomCSVDataSetWrapper
   }
 
   /** Builder. */
-  @SuppressWarnings("PMD.AvoidThrowingNullPointerException")
   public abstract static class RandomCSVDataSetWrapperBuilder<
           C extends RandomCSVDataSetWrapper,
           B extends RandomCSVDataSetWrapper.RandomCSVDataSetWrapperBuilder<C, B>>

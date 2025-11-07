@@ -31,7 +31,6 @@ import org.apache.jmeter.timers.gui.PoissonRandomTimerGui;
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 @JmcDefaultName("Poisson Random Timer")
-@SuppressWarnings({"PMD.RedundantFieldInitializer", "PMD.AvoidUncheckedExceptionsInSignatures"})
 public class PoissonRandomTimerWrapper
     extends RandomTimerWrapper<PoissonRandomTimer, PoissonRandomTimerGui> {
 

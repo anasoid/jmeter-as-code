@@ -26,7 +26,7 @@ public class BooleanManager extends TypeManager {
     if (value == null) {
       return Boolean.class;
     }
-    if ("true".equalsIgnoreCase(value) || "false".equalsIgnoreCase(value)) { // NOPMD
+    if ("true".equalsIgnoreCase(value) || "false".equalsIgnoreCase(value)) {
       return Boolean.class;
     }
 

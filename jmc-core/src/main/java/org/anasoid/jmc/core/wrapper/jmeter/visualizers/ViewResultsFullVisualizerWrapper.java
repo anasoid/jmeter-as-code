@@ -31,7 +31,6 @@ import org.apache.jmeter.visualizers.ViewResultsFullVisualizer;
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 @JmcDefaultName("View Results Tree")
-@SuppressWarnings({"PMD.RedundantFieldInitializer", "PMD.TooManyFields"})
 public class ViewResultsFullVisualizerWrapper
     extends ResultCollectorWrapper<ResultCollector, ViewResultsFullVisualizer> {
 

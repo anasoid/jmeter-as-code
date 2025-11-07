@@ -31,7 +31,6 @@ import org.apache.jmeter.control.gui.AbstractControllerGui;
 
 /** Wrapper for testing. abstract child Element. */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
-@SuppressWarnings("PMD.AbstractClassWithoutAnyMethod")
 public abstract class ChildTestElementWrapperTesting<
         T extends GenericController, G extends AbstractControllerGui>
     extends AbstractTestElementWrapper<T> implements JMeterGUIWrapper<G> {

@@ -43,7 +43,7 @@ class RegexExtractorWrapperCoreTest extends AbstractJmcCoreTest {
       RegexExtractorWrapper wrapper =
           RegexExtractorWrapper.builder().withDefaultValue("d").withDefaultEmpty(true).build();
       ApplicationTest applicationTest = ApplicationTestUtilsForTesting.getApplicationTest(wrapper);
-      StringWriter wr = new StringWriter(); // NOPMD
+      StringWriter wr = new StringWriter();
       applicationTest.toJmx(wr);
 
       Assertions.fail();

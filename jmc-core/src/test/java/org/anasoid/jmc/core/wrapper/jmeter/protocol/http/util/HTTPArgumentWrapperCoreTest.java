@@ -47,7 +47,7 @@ class HTTPArgumentWrapperCoreTest extends AbstractJmcCoreTest {
             .build();
     ApplicationTest applicationTest =
         ApplicationTestUtilsForTesting.getApplicationTest(httpargument);
-    StringWriter wr = new StringWriter(); // NOPMD
+    StringWriter wr = new StringWriter();
     HTTPArgumentWrapper httpargumentAfter = (HTTPArgumentWrapper) applicationTest.toJmx(wr);
     Assertions.assertTrue(httpargumentAfter.getUseEquals());
   }

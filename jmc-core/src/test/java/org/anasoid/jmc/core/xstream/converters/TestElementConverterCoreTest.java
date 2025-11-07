@@ -41,7 +41,7 @@ class TestElementConverterCoreTest extends AbstractJmcCoreTest {
   void testProp() throws IOException {
 
     ApplicationTest applicationTest = DataTesting.getDefautApplicationTest();
-    StringWriter wr = new StringWriter(); // NOPMD
+    StringWriter wr = new StringWriter();
     applicationTest.toJmx(wr);
     String content = wr.toString();
     println("content :" + content);
@@ -59,7 +59,7 @@ class TestElementConverterCoreTest extends AbstractJmcCoreTest {
   void testCollection() throws IOException {
 
     ApplicationTest applicationTest = DataTesting.getDefautApplicationTest();
-    StringWriter wr = new StringWriter(); // NOPMD
+    StringWriter wr = new StringWriter();
     applicationTest.toJmx(wr);
     String content = wr.toString();
     String elementPropPath = "/parent/elementProp[@name='Parent.arguments']";
@@ -72,7 +72,7 @@ class TestElementConverterCoreTest extends AbstractJmcCoreTest {
   void testAttribute() throws IOException {
 
     ApplicationTest applicationTest = DataTesting.getDefautApplicationTest();
-    StringWriter wr = new StringWriter(); // NOPMD
+    StringWriter wr = new StringWriter();
     applicationTest.toJmx(wr);
     String content = wr.toString();
     String elementPropPath = "/parent/elementProp[@name='Parent.child']";
@@ -89,7 +89,7 @@ class TestElementConverterCoreTest extends AbstractJmcCoreTest {
   void firstTest() throws IOException {
 
     ApplicationTest applicationTest = DataTesting.getDefautApplicationTest();
-    StringWriter wr = new StringWriter(); // NOPMD
+    StringWriter wr = new StringWriter();
     applicationTest.toJmx(wr);
     String content = wr.toString();
     println("content :" + content);
@@ -110,7 +110,7 @@ class TestElementConverterCoreTest extends AbstractJmcCoreTest {
 
     ApplicationTest applicationTest =
         ApplicationTestUtilsForTesting.getApplicationTest(parentTestElementWrapperTesting);
-    StringWriter wr = new StringWriter(); // NOPMD
+    StringWriter wr = new StringWriter();
     applicationTest.toJmx(wr);
     String content = wr.toString();
     println("content :" + content);
@@ -119,7 +119,7 @@ class TestElementConverterCoreTest extends AbstractJmcCoreTest {
     ApplicationTest applicationTest2 =
         ApplicationTestUtilsForTesting.getApplicationTest(
             parentTestElementWrapperTesting.toBuilder().withDefaultLong(20L).build());
-    StringWriter wr2 = new StringWriter(); // NOPMD
+    StringWriter wr2 = new StringWriter();
     applicationTest2.toJmx(wr2);
     String content2 = wr2.toString();
     println("content2 :" + content2);
@@ -135,7 +135,7 @@ class TestElementConverterCoreTest extends AbstractJmcCoreTest {
 
     ApplicationTest applicationTest =
         ApplicationTestUtilsForTesting.getApplicationTest(parentTestElementWrapperTesting);
-    StringWriter wr = new StringWriter(); // NOPMD
+    StringWriter wr = new StringWriter();
     try {
       applicationTest.toJmx(wr);
       Assertions.fail("Should fail need mandatory field name");

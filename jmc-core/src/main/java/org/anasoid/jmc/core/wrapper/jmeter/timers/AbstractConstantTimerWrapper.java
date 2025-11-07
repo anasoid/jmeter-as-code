@@ -35,7 +35,6 @@ import org.apache.jmeter.timers.gui.AbstractTimerGui;
  * @see ConstantTimer
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
-@SuppressWarnings({"PMD.RedundantFieldInitializer", "PMD.AvoidUncheckedExceptionsInSignatures"})
 public abstract class AbstractConstantTimerWrapper<
         G extends ConstantTimer, F extends AbstractTimerGui>
     extends AbstractBasicChildTestElementWrapper<G>

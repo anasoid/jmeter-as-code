@@ -44,7 +44,7 @@ class HTMLAssertionWrapperCoreTest extends AbstractJmcCoreTest {
           HTMLAssertionWrapper.builder().withErrorOnly(true).withWarningThreshold(10).build();
 
       ApplicationTest applicationTest = ApplicationTestUtilsForTesting.getApplicationTest(wrapper);
-      StringWriter wr = new StringWriter(); // NOPMD
+      StringWriter wr = new StringWriter();
       applicationTest.toJmx(wr);
 
       Assertions.fail();

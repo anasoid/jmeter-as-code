@@ -31,7 +31,6 @@ import org.apache.jmeter.timers.gui.GaussianRandomTimerGui;
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 @JmcDefaultName("Gaussian Random Timer")
-@SuppressWarnings({"PMD.RedundantFieldInitializer", "PMD.AvoidUncheckedExceptionsInSignatures"})
 public class GaussianRandomTimerWrapper
     extends RandomTimerWrapper<GaussianRandomTimer, GaussianRandomTimerGui> {
 

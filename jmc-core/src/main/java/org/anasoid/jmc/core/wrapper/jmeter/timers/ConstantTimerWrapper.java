@@ -30,7 +30,6 @@ import org.apache.jmeter.timers.gui.ConstantTimerGui;
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 @JmcDefaultName("Constant Timer")
-@SuppressWarnings({"PMD.RedundantFieldInitializer", "PMD.AvoidUncheckedExceptionsInSignatures"})
 public class ConstantTimerWrapper
     extends AbstractConstantTimerWrapper<ConstantTimer, ConstantTimerGui> {
 

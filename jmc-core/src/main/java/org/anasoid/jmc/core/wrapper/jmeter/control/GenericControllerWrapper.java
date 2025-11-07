@@ -36,14 +36,12 @@ import org.apache.jmeter.testelement.AbstractTestElement;
  * @see AbstractTestElementWrapper
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
-@SuppressWarnings("PMD.AbstractClassWithoutAnyMethod")
 @JmcChildrenTypes(type = {AbstractSamplerWrapper.class})
 public abstract class GenericControllerWrapper<
         T extends AbstractTestElement & Controller, G extends AbstractControllerGui>
     extends AbstractTestElementWrapper<T> implements JMeterGUIWrapper<G>, ControllerWrapper<T> {
 
   /** Builder. */
-  @SuppressWarnings("PMD.UselessOverridingMethod")
   public abstract static class GenericControllerWrapperBuilder<
           T extends AbstractTestElement & Controller,
           G extends AbstractControllerGui,

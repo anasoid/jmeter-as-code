@@ -30,7 +30,6 @@ import org.apache.jmeter.timers.gui.UniformRandomTimerGui;
  * @see UniformRandomTimer
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
-@SuppressWarnings({"PMD.RedundantFieldInitializer", "PMD.AvoidUncheckedExceptionsInSignatures"})
 @JmcDefaultName("Uniform Random Timer")
 public class UniformRandomTimerWrapper
     extends RandomTimerWrapper<UniformRandomTimer, UniformRandomTimerGui> {

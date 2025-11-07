@@ -37,7 +37,7 @@ import org.apache.jmeter.visualizers.StatVisualizer;
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 @JmcDefaultName("Aggregate Report")
-@SuppressWarnings({"PMD.RedundantFieldInitializer", "PMD.TooManyFields"})
+@SuppressWarnings({"PMD.RedundantFieldInitializer"})
 public class AggregateReportWrapper
     extends ResultCollectorWrapper<ResultCollector, StatVisualizer> {
 

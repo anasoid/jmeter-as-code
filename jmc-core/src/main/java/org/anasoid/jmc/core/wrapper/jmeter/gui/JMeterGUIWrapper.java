@@ -21,6 +21,7 @@ package org.anasoid.jmc.core.wrapper.jmeter.gui;
 import org.apache.jmeter.gui.JMeterGUIComponent;
 
 /** Gui WRAPPER. */
+@SuppressWarnings("PMD.ImplicitFunctionalInterface")
 public interface JMeterGUIWrapper<G extends JMeterGUIComponent> {
   /** Gui Test Class used by Jmeter TestElement.GUI_CLASS @See TestElement. */
   Class<?> getGuiClass();

@@ -31,7 +31,6 @@ import org.apache.jmeter.threads.gui.AbstractThreadGroupGui;
  * @see AbstractSimpleThreadGroup
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
-@SuppressWarnings("PMD.AbstractClassWithoutAnyMethod")
 public abstract class AbstractSimpleThreadGroupWrapper<
         F extends AbstractSimpleThreadGroup, G extends AbstractThreadGroupGui>
     extends AbstractThreadGroupWrapper<F, G> {

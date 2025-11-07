@@ -65,6 +65,7 @@ public class CSVDataSetWrapper extends ConfigTestElementWrapper<CSVDataSet, Test
   @Setter
   @JmcNullAllowed
   private String fileEncoding;
+
   /**
    * Ignore first line of CSV file, it will only be used if Variable Names is not empty, if Variable
    * Names is empty the first line must contain the headers.
@@ -152,7 +153,6 @@ public class CSVDataSetWrapper extends ConfigTestElementWrapper<CSVDataSet, Test
   }
 
   /** Builder. */
-  @SuppressWarnings("PMD.AvoidThrowingNullPointerException")
   public abstract static class CSVDataSetWrapperBuilder<
           C extends CSVDataSetWrapper, B extends CSVDataSetWrapperBuilder<C, B>>
       extends ConfigTestElementWrapper.ConfigTestElementWrapperBuilder<

@@ -22,7 +22,6 @@ import org.anasoid.jmc.plugins.component.java.AbstractJavaTestElement;
 import org.apache.jmeter.processor.PreProcessor;
 
 /** Java Post Processor. */
-@SuppressWarnings("PMD.MoreThanOneLogger")
 public class JavaPreProcessor extends AbstractJavaTestElement<JavaPreProcessorExecutor>
     implements PreProcessor {
 

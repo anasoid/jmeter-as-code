@@ -19,6 +19,7 @@
 package org.anasoid.jmc.core.util.converters;
 
 /** Converter Interface. */
+@FunctionalInterface
 public interface Converter<S, D> {
 
   /**

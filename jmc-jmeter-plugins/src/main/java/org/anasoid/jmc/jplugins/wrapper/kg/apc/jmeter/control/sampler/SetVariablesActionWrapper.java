@@ -69,7 +69,6 @@ public class SetVariablesActionWrapper
   }
 
   /** Builder. */
-  @SuppressWarnings("PMD.UselessOverridingMethod")
   public abstract static class SetVariablesActionWrapperBuilder<
           C extends SetVariablesActionWrapper,
           B extends SetVariablesActionWrapper.SetVariablesActionWrapperBuilder<C, B>>

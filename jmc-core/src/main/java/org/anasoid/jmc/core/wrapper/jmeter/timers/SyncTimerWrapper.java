@@ -39,7 +39,6 @@ import org.apache.jmeter.timers.SyncTimer;
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 @JmcDefaultName("Synchronizing Timer")
-@SuppressWarnings({"PMD.RedundantFieldInitializer", "PMD.AvoidUncheckedExceptionsInSignatures"})
 public class SyncTimerWrapper extends AbstractBasicChildTestElementWrapper<SyncTimer>
     implements JMeterGUIWrapper<TestBeanGUI>, TimerWrapper<SyncTimer> {
 

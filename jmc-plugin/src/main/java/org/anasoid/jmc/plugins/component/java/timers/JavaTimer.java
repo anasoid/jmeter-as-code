@@ -22,7 +22,6 @@ import org.anasoid.jmc.plugins.component.java.AbstractJavaTestElement;
 import org.apache.jmeter.timers.Timer;
 
 /** Java Post Processor. */
-@SuppressWarnings("PMD.MoreThanOneLogger")
 public class JavaTimer extends AbstractJavaTestElement<JavaTimerExecutor> implements Timer {
 
   private static final long serialVersionUID = 8119460180648610163L;

@@ -141,7 +141,7 @@ public abstract class AbstractJmcTest {
    *
    * @return ApplicationTest.
    */
-  @SuppressWarnings({"PMD.TooManyMethods", "PMD.LooseCoupling"})
+  @SuppressWarnings({"PMD.LooseCoupling"})
   protected HashTree toHashTree(TestPlanWrapper testPlanWrapper, String tmpFilename)
       throws IOException {
 

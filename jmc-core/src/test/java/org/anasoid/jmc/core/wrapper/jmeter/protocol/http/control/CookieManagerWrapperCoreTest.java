@@ -50,7 +50,7 @@ class CookieManagerWrapperCoreTest extends AbstractJmcCoreTest {
 
     ApplicationTest applicationTest =
         ApplicationTestUtilsForTesting.getApplicationTest(cookieManagerWrapper);
-    StringWriter wr = new StringWriter(); // NOPMD
+    StringWriter wr = new StringWriter();
     try {
       applicationTest.toJmx(wr);
       Assertions.fail();
@@ -69,7 +69,7 @@ class CookieManagerWrapperCoreTest extends AbstractJmcCoreTest {
 
     ApplicationTest applicationTest =
         ApplicationTestUtilsForTesting.getApplicationTest(cookieManagerWrapper);
-    StringWriter wr = new StringWriter(); // NOPMD
+    StringWriter wr = new StringWriter();
     try {
       applicationTest.toJmx(wr);
       Assertions.fail();
@@ -91,7 +91,7 @@ class CookieManagerWrapperCoreTest extends AbstractJmcCoreTest {
 
     ApplicationTest applicationTest =
         ApplicationTestUtilsForTesting.getApplicationTest(parentTestElementWrapperTesting);
-    StringWriter wr = new StringWriter(); // NOPMD
+    StringWriter wr = new StringWriter();
 
     parentTestElementWrapperTesting = (ParentTestElementWrapperTesting) applicationTest.toJmx(wr);
 

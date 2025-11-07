@@ -31,7 +31,6 @@ import org.anasoid.jmc.core.xstream.exceptions.ConversionIllegalStateException;
 public class ChildrenTypeValidator implements NodeValidator {
 
   /** is field/method will be converted as property. */
-  @SuppressWarnings({"PMD.EmptyCatchBlock", "PMD.AvoidDeeplyNestedIfStmts"})
   public static Set<Class<?>> getTypes(TestElementWrapper<?> testElementWrapper) {
     Set<Class<?>> result = new HashSet<>();
     Class<?> item = testElementWrapper.getClass();

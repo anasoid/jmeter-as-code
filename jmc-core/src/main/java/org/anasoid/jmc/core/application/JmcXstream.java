@@ -64,7 +64,7 @@ public class JmcXstream extends XStream {
     this.addImplicitCollection(CollectionProperty.class, "value");
   }
 
-  @SuppressWarnings("PMD.AvoidSynchronizedAtMethodLevel")
+
   private static synchronized List<Class<?>> getProcessClazz() {
     if (listClazz == null) {
       try (ScanResult scanResult =

@@ -31,7 +31,7 @@ import org.apache.jmeter.visualizers.StatGraphVisualizer;
  */
 @SuperBuilder(setterPrefix = "with", toBuilder = true)
 @JmcDefaultName("Aggregate Graph")
-@SuppressWarnings({"PMD.RedundantFieldInitializer", "PMD.TooManyFields"})
+
 public class AggregateGraphWrapper
     extends ResultCollectorWrapper<ResultCollector, StatGraphVisualizer> {
 

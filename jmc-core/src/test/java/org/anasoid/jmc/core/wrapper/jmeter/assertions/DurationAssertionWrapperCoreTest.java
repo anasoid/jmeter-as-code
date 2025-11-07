@@ -45,7 +45,7 @@ class DurationAssertionWrapperCoreTest extends AbstractJmcCoreTest {
           DurationAssertionWrapper.builder().withDuration(10).withScope(Scope.VARIABLE).build();
 
       ApplicationTest applicationTest = ApplicationTestUtilsForTesting.getApplicationTest(wrapper);
-      StringWriter wr = new StringWriter(); // NOPMD
+      StringWriter wr = new StringWriter();
       applicationTest.toJmx(wr);
 
       Assertions.fail();

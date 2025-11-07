@@ -42,7 +42,7 @@ class URLRewritingModifierWrapperCoreTest extends AbstractJmcCoreTest {
     try {
       URLRewritingModifierWrapper wrapper = URLRewritingModifierWrapper.builder().build();
       ApplicationTest applicationTest = ApplicationTestUtilsForTesting.getApplicationTest(wrapper);
-      StringWriter wr = new StringWriter(); // NOPMD
+      StringWriter wr = new StringWriter();
       applicationTest.toJmx(wr);
 
       Assertions.fail();
