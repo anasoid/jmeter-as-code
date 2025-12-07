@@ -19,7 +19,7 @@ plugins {
     id "org.sonarqube" version "7.0.1.6134"
     id 'jacoco'
     id "io.freefair.lombok" version "9.1.0"
-    id "io.freefair.git-version" version "9.0.0"
+    id "io.freefair.git-version" version "9.1.0"
     id "com.github.ben-manes.versions" version "0.53.0"
 }
 
