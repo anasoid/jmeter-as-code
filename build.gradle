@@ -79,7 +79,7 @@ subprojects {
 
     }
     pmd {
-        toolVersion = "7.18.0"
+        toolVersion = "7.19.0"
         consoleOutput = true
         sourceSets = [sourceSets.main]
         ruleSetFiles = files("${rootProject.projectDir}/config/pmd/pmd.xml")
