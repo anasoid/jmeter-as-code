@@ -35,6 +35,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import org.anasoid.jmc.core.application.interceptors.PrepareInterceptor;
 import org.anasoid.jmc.core.application.validator.NodeValidatorManager;
 import org.anasoid.jmc.core.wrapper.jmeter.testelement.TestElementWrapper;
@@ -51,6 +52,7 @@ import org.slf4j.LoggerFactory;
 /** Main application for Test. */
 public class ApplicationTest {
 
+  @XStreamOmitField
   private static final Logger LOG = LoggerFactory.getLogger(ApplicationTest.class);
 
   static {
